@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".root", ".root", "{0EA6F4A0-3F7B-446B-9ACD-9FFFF7C2E0B3}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		Directory.Build.props = Directory.Build.props
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{45CCED50-B3CD-4A9A-A664-67F881D7F019}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0BEA25FB-CD38-4C71-B002-F72F966A2824}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnumUtilities.Abstractions", "src\EnumUtilities.Abstractions\EnumUtilities.Abstractions.csproj", "{CDB2A8F3-2510-4F74-8632-428BC339E16D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnumUtilities", "src\EnumUtilities\EnumUtilities.csproj", "{02B0B1F0-42E6-43C3-B9C2-F06A089AD1F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnumUtilities.Tests", "tests\EnumUtilities.Tests\EnumUtilities.Tests.csproj", "{D73C6363-E8BA-4CE0-A687-DA61AD5F8747}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnumUtilities.IntegrationTests", "tests\EnumUtilities.IntegrationTests\EnumUtilities.IntegrationTests.csproj", "{D5E9BDFD-6048-402B-8406-44347B898B9C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{02B0B1F0-42E6-43C3-B9C2-F06A089AD1F5} = {45CCED50-B3CD-4A9A-A664-67F881D7F019}
+		{CDB2A8F3-2510-4F74-8632-428BC339E16D} = {45CCED50-B3CD-4A9A-A664-67F881D7F019}
+		{D73C6363-E8BA-4CE0-A687-DA61AD5F8747} = {0BEA25FB-CD38-4C71-B002-F72F966A2824}
+		{D5E9BDFD-6048-402B-8406-44347B898B9C} = {0BEA25FB-CD38-4C71-B002-F72F966A2824}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{02B0B1F0-42E6-43C3-B9C2-F06A089AD1F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02B0B1F0-42E6-43C3-B9C2-F06A089AD1F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02B0B1F0-42E6-43C3-B9C2-F06A089AD1F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02B0B1F0-42E6-43C3-B9C2-F06A089AD1F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDB2A8F3-2510-4F74-8632-428BC339E16D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDB2A8F3-2510-4F74-8632-428BC339E16D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDB2A8F3-2510-4F74-8632-428BC339E16D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDB2A8F3-2510-4F74-8632-428BC339E16D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D73C6363-E8BA-4CE0-A687-DA61AD5F8747}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D73C6363-E8BA-4CE0-A687-DA61AD5F8747}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D73C6363-E8BA-4CE0-A687-DA61AD5F8747}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D73C6363-E8BA-4CE0-A687-DA61AD5F8747}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5E9BDFD-6048-402B-8406-44347B898B9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5E9BDFD-6048-402B-8406-44347B898B9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5E9BDFD-6048-402B-8406-44347B898B9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5E9BDFD-6048-402B-8406-44347B898B9C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
