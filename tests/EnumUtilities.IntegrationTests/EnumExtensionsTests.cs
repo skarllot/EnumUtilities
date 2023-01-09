@@ -12,8 +12,8 @@ public class EnumExtensionsTests
     [InlineData((Colours)0)]
     public void FastToStringIsSameAsToStringUsingFlagEnum(Colours value)
     {
-        var expected = value.ToString();
-        var actual = value.ToStringFast();
+        string expected = value.ToString();
+        string actual = value.ToStringFast();
 
         Assert.Equal(expected, actual);
     }
@@ -28,8 +28,8 @@ public class EnumExtensionsTests
     [InlineData((HumanStates)100)]
     public void FastToStringIsSameAsToString(HumanStates value)
     {
-        var expected = value.ToString();
-        var actual = value.ToStringFast();
+        string expected = value.ToString();
+        string actual = value.ToStringFast();
 
         Assert.Equal(expected, actual);
     }
@@ -40,23 +40,16 @@ public class EnumExtensionsTests
     [InlineData(HumanStates.Sleeping)]
     [InlineData(HumanStates.Eating)]
     [InlineData(HumanStates.Dead)]
-    public void IsDefinedReturnsTrueWhenDefined(HumanStates value)
-    {
-        bool isDefined = value.IsDefined();
-
-        Assert.True(isDefined);
-    }
-
-    [Theory]
     [InlineData((HumanStates)0)]
     [InlineData((HumanStates)(-1))]
     [InlineData((HumanStates)10)]
     [InlineData((HumanStates)(-10))]
     [InlineData((HumanStates)100)]
-    public void IsDefinedReturnsFalseWhenNotDefined(HumanStates value)
+    public void IsDefinedIsSameAsEnumIsDefined(HumanStates value)
     {
-        bool isDefined = value.IsDefined();
+        bool expected = Enum.IsDefined(value);
+        bool actual = value.IsDefined();
 
-        Assert.False(isDefined);
+        Assert.Equal(expected, actual);
     }
 }
