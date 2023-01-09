@@ -69,10 +69,15 @@ public partial class EnumUtilitiesGenerator
 
             foreach (var member in enumMembers)
             {
-                if (member is IFieldSymbol { ConstantValue: not null } field)
+                if (member is not IFieldSymbol { ConstantValue: not null } field)
                 {
-                    enumValues.Add(new EnumValue(member.Name, field.ConstantValue));
+                    continue;
                 }
+
+                GetAttributes(field, out string? enumMemberValue, out string? displayValue);
+
+                enumValues.Add(
+                    new EnumValue(member.Name, field.ConstantValue.ToString(), enumMemberValue, displayValue));
             }
 
             if (enumValues.Count == 0)
@@ -89,6 +94,35 @@ public partial class EnumUtilitiesGenerator
         }
 
         return typesToGenerate;
+    }
+
+    private static void GetAttributes(ISymbol fieldSymbol, out string? enumMemberValue, out string? displayValue)
+    {
+        enumMemberValue = null;
+        displayValue = null;
+
+        foreach (var attribute in fieldSymbol.GetAttributes())
+        {
+            enumMemberValue ??= GetNamedArgument(attribute, "EnumMemberAttribute", "Value");
+            displayValue ??= GetNamedArgument(attribute, "DisplayAttribute", "Name");
+        }
+    }
+
+    private static string? GetNamedArgument(AttributeData attribute, string attributeName, string argName)
+    {
+        if (attribute.AttributeClass?.Name != attributeName)
+        {
+            return null;
+        }
+
+        foreach (var namedArgument in attribute.NamedArguments)
+        {
+            if (namedArgument.Key == argName &&
+                namedArgument.Value.Value?.ToString() is { } v)
+                return v;
+        }
+
+        return null;
     }
 
     private static void AddExtensionsSource(EnumToGenerate type, SourceProductionContext context)

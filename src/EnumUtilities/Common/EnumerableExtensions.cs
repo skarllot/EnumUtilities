@@ -1,4 +1,4 @@
-﻿namespace Raiqub.Generators.EnumUtilities;
+﻿namespace Raiqub.Generators.EnumUtilities.Common;
 
 public static class EnumerableExtensions
 {

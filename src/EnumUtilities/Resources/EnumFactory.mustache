@@ -59,6 +59,50 @@ namespace {{.}}
                     return false;
             }
         }
+{{#HasSerializationValue}}
+
+        public static bool TryParseFromEnumMemberValue(
+            [NotNullWhen(true)] string? enumMemberValue,
+            StringComparison comparisonType,
+            out {{Name}} result)
+        {
+            switch (enumMemberValue)
+            {
+{{#Values}}
+                case { } s when s.Equals({{#SerializationValue}}"{{.}}"{{/SerializationValue}}{{^SerializationValue}}nameof({{Name}}.{{MemberName}}){{/SerializationValue}}, comparisonType):
+                    result = {{Name}}.{{MemberName}};
+                    return true;
+{{/Values}}
+                default:
+                    result = default;
+                    return false;
+            }
+        }
+
+        public static bool TryParseFromEnumMemberValueIgnoreCase(
+            [NotNullWhen(true)] string? enumMemberValue,
+            out {{Name}} result)
+        {
+            return TryParseFromEnumMemberValue(enumMemberValue, StringComparison.OrdinalIgnoreCase, out result);
+        }
+
+        public static bool TryParseFromEnumMemberValue(
+            [NotNullWhen(true)] string? enumMemberValue,
+            out {{Name}} result)
+        {
+            switch (enumMemberValue)
+            {
+{{#Values}}
+                case {{#SerializationValue}}"{{.}}"{{/SerializationValue}}{{^SerializationValue}}nameof({{Name}}.{{MemberName}}){{/SerializationValue}}:
+                    result = {{Name}}.{{MemberName}};
+                    return true;
+{{/Values}}
+                default:
+                    result = default;
+                    return false;
+            }
+        }
+{{/HasSerializationValue}}
 
         public static {{Name}}[] GetValues()
         {

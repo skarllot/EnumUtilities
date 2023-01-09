@@ -30,6 +30,19 @@ namespace {{.}}
         {
             return {{Name}}Validation.IsDefined(value);
         }
+{{#HasSerializationValue}}
+
+        public static string ToEnumMemberValue(this {{Name}} value)
+        {
+            return value switch
+            {
+{{#UniqueValues}}
+                {{Name}}.{{MemberName}} => {{#SerializationValue}}"{{.}}"{{/SerializationValue}}{{^SerializationValue}}nameof({{Name}}.{{MemberName}}){{/SerializationValue}},
+{{/UniqueValues}}
+                _ => value.ToString()
+            };
+        }
+{{/HasSerializationValue}}
     }
 {{#Namespace}}
 }
