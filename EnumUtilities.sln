@@ -19,8 +19,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnumUtilities.Abstractions"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnumUtilities", "src\EnumUtilities\EnumUtilities.csproj", "{02B0B1F0-42E6-43C3-B9C2-F06A089AD1F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnumUtilities.Tests", "tests\EnumUtilities.Tests\EnumUtilities.Tests.csproj", "{D73C6363-E8BA-4CE0-A687-DA61AD5F8747}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnumUtilities.IntegrationTests", "tests\EnumUtilities.IntegrationTests\EnumUtilities.IntegrationTests.csproj", "{D5E9BDFD-6048-402B-8406-44347B898B9C}"
 EndProject
 Global
@@ -34,7 +32,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{02B0B1F0-42E6-43C3-B9C2-F06A089AD1F5} = {45CCED50-B3CD-4A9A-A664-67F881D7F019}
 		{CDB2A8F3-2510-4F74-8632-428BC339E16D} = {45CCED50-B3CD-4A9A-A664-67F881D7F019}
-		{D73C6363-E8BA-4CE0-A687-DA61AD5F8747} = {0BEA25FB-CD38-4C71-B002-F72F966A2824}
 		{D5E9BDFD-6048-402B-8406-44347B898B9C} = {0BEA25FB-CD38-4C71-B002-F72F966A2824}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
@@ -46,10 +43,6 @@ Global
 		{CDB2A8F3-2510-4F74-8632-428BC339E16D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CDB2A8F3-2510-4F74-8632-428BC339E16D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CDB2A8F3-2510-4F74-8632-428BC339E16D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D73C6363-E8BA-4CE0-A687-DA61AD5F8747}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D73C6363-E8BA-4CE0-A687-DA61AD5F8747}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D73C6363-E8BA-4CE0-A687-DA61AD5F8747}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D73C6363-E8BA-4CE0-A687-DA61AD5F8747}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D5E9BDFD-6048-402B-8406-44347B898B9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D5E9BDFD-6048-402B-8406-44347B898B9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5E9BDFD-6048-402B-8406-44347B898B9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
