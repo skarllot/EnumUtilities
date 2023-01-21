@@ -12,7 +12,7 @@ namespace Raiqub.Generators.EnumUtilities;
 
 public partial class EnumUtilitiesGenerator
 {
-    private static readonly StubbleVisitorRenderer Stubble = new StubbleBuilder().Build();
+    private static readonly StubbleVisitorRenderer _stubble = new StubbleBuilder().Build();
 
     private static void Emit(
         SourceProductionContext context,
@@ -64,21 +64,11 @@ public partial class EnumUtilitiesGenerator
                 continue;
             }
 
-            var enumMembers = typeSymbol.GetMembers();
-            var enumValues = new List<EnumValue>(enumMembers.Length);
-
-            foreach (var member in enumMembers)
-            {
-                if (member is not IFieldSymbol { ConstantValue: not null } field)
-                {
-                    continue;
-                }
-
-                GetAttributes(field, out string? enumMemberValue, out string? displayValue);
-
-                enumValues.Add(
-                    new EnumValue(member.Name, field.ConstantValue.ToString(), enumMemberValue, displayValue));
-            }
+            var enumValues = typeSymbol
+                .GetMembers()
+                .Select(EnumValue.FromSymbol)
+                .WhereNotNull()
+                .ToList();
 
             if (enumValues.Count == 0)
             {
@@ -96,53 +86,24 @@ public partial class EnumUtilitiesGenerator
         return typesToGenerate;
     }
 
-    private static void GetAttributes(ISymbol fieldSymbol, out string? enumMemberValue, out string? displayValue)
-    {
-        enumMemberValue = null;
-        displayValue = null;
-
-        foreach (var attribute in fieldSymbol.GetAttributes())
-        {
-            enumMemberValue ??= GetNamedArgument(attribute, "EnumMemberAttribute", "Value");
-            displayValue ??= GetNamedArgument(attribute, "DisplayAttribute", "Name");
-        }
-    }
-
-    private static string? GetNamedArgument(AttributeData attribute, string attributeName, string argName)
-    {
-        if (attribute.AttributeClass?.Name != attributeName)
-        {
-            return null;
-        }
-
-        foreach (var namedArgument in attribute.NamedArguments)
-        {
-            if (namedArgument.Key == argName &&
-                namedArgument.Value.Value?.ToString() is { } v)
-                return v;
-        }
-
-        return null;
-    }
-
     private static void AddExtensionsSource(EnumToGenerate type, SourceProductionContext context)
     {
-        string filename = type.Name + "Extensions.g.cs";
-        string fileContent = Stubble.Render(ResourceProvider.EnumExtensions, type);
+        string filename = type.Namespace + "." + type.Name + "Extensions.g.cs";
+        string fileContent = _stubble.Render(ResourceProvider.EnumExtensions, type);
         context.AddSource(filename, SourceText.From(fileContent, Encoding.UTF8));
     }
 
     private static void AddFactorySource(EnumToGenerate type, SourceProductionContext context)
     {
-        string filename = type.Name + "Factory.g.cs";
-        string fileContent = Stubble.Render(ResourceProvider.EnumFactory, type);
+        string filename = type.Namespace + "." + type.Name + "Factory.g.cs";
+        string fileContent = _stubble.Render(ResourceProvider.EnumFactory, type);
         context.AddSource(filename, SourceText.From(fileContent, Encoding.UTF8));
     }
 
     private static void AddValidationSource(EnumToGenerate type, SourceProductionContext context)
     {
-        string filename = type.Name + "Validation.g.cs";
-        string fileContent = Stubble.Render(ResourceProvider.EnumValidation, type);
+        string filename = type.Namespace + "." + type.Name + "Validation.g.cs";
+        string fileContent = _stubble.Render(ResourceProvider.EnumValidation, type);
         context.AddSource(filename, SourceText.From(fileContent, Encoding.UTF8));
     }
 }

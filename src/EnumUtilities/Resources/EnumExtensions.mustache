@@ -43,6 +43,56 @@ namespace {{.}}
             };
         }
 {{/HasSerializationValue}}
+{{#HasDescription}}
+
+        public static string? GetDescription(this {{Name}} value)
+        {
+            return value switch
+            {
+{{#UniqueValues}}{{#Description}}
+                {{Name}}.{{MemberName}} => "{{.}}",
+{{/Description}}{{/UniqueValues}}
+                _ => null
+            };
+        }
+{{/HasDescription}}
+{{#HasDisplayName}}
+
+        public static string GetDisplayShortName(this {{Name}} value)
+        {
+            return value switch
+            {
+{{#UniqueValues}}{{#Display.ShortName}}
+                {{Name}}.{{MemberName}} => {{#Display.ResourceShortName}}{{.}}{{/Display.ResourceShortName}}{{^Display.ResourceShortName}}"{{Display.ShortName}}"{{/Display.ResourceShortName}},
+{{/Display.ShortName}}{{/UniqueValues}}
+                _ => GetDisplayName(value)
+            };
+        }
+
+        public static string GetDisplayName(this {{Name}} value)
+        {
+            return value switch
+            {
+{{#UniqueValues}}
+                {{Name}}.{{MemberName}} => {{#Display.ResourceName}}{{.}}{{/Display.ResourceName}}{{^Display.ResourceName}}{{#Display.Name}}"{{.}}"{{/Display.Name}}{{^Display.Name}}nameof({{Name}}.{{MemberName}}){{/Display.Name}}{{/Display.ResourceName}},
+{{/UniqueValues}}
+                _ => value.ToString()
+            };
+        }
+{{/HasDisplayName}}
+{{#HasDisplayDescription}}
+
+        public static string? GetDescription(this {{Name}} value)
+        {
+            return value switch
+            {
+{{#UniqueValues}}{{#Display.Description}}
+                {{Name}}.{{MemberName}} => {{#Display.ResourceDescription}}{{.}}{{/Display.ResourceDescription}}{{^Display.ResourceDescription}}"{{Display.Description}}"{{/Display.ResourceDescription}},
+{{/Display.Description}}{{/UniqueValues}}
+                _ => null
+            };
+        }
+{{/HasDisplayDescription}}
     }
 {{#Namespace}}
 }

@@ -78,22 +78,55 @@ namespace {{.}}
                     return false;
             }
         }
+{{/HasSerializationValue}}
+{{#HasDescription}}
 
-        public static bool TryParseFromEnumMemberValueIgnoreCase(
-            [NotNullWhen(true)] string? enumMemberValue,
+        public static bool TryCreateFromDescription(
+            [NotNullWhen(true)] string? description,
+            StringComparison comparisonType,
             out {{Name}} result)
         {
-            return TryParseFromEnumMemberValue(enumMemberValue, StringComparison.OrdinalIgnoreCase, out result);
+            switch (description)
+            {
+{{#Values}}{{#Description}}
+                case { } s when s.Equals("{{.}}", comparisonType):
+                    result = {{Name}}.{{MemberName}};
+                    return true;
+{{/Description}}{{/Values}}
+                default:
+                    result = default;
+                    return false;
+            }
+        }
+{{/HasDescription}}
+{{#HasDisplayName}}
+
+        public static bool TryCreateFromDisplayShortName(
+            [NotNullWhen(true)] string? displayShortName,
+            StringComparison comparisonType,
+            out {{Name}} result)
+        {
+            switch (displayShortName)
+            {
+{{#Values}}{{#Display.ShortName}}
+                case { } s when s.Equals({{#Display.ResourceShortName}}{{.}}{{/Display.ResourceShortName}}{{^Display.ResourceShortName}}"{{Display.ShortName}}"{{/Display.ResourceShortName}}, comparisonType):
+                    result = {{Name}}.{{MemberName}};
+                    return true;
+{{/Display.ShortName}}{{/Values}}
+                default:
+                    return TryCreateFromDisplayName(displayShortName, comparisonType, out result);
+            }
         }
 
-        public static bool TryParseFromEnumMemberValue(
-            [NotNullWhen(true)] string? enumMemberValue,
+        public static bool TryCreateFromDisplayName(
+            [NotNullWhen(true)] string? displayName,
+            StringComparison comparisonType,
             out {{Name}} result)
         {
-            switch (enumMemberValue)
+            switch (displayName)
             {
 {{#Values}}
-                case {{#SerializationValue}}"{{.}}"{{/SerializationValue}}{{^SerializationValue}}nameof({{Name}}.{{MemberName}}){{/SerializationValue}}:
+                case { } s when s.Equals({{#Display.ResourceName}}{{.}}{{/Display.ResourceName}}{{^Display.ResourceName}}{{#Display.Name}}"{{.}}"{{/Display.Name}}{{^Display.Name}}nameof({{Name}}.{{MemberName}}){{/Display.Name}}{{/Display.ResourceName}}, comparisonType):
                     result = {{Name}}.{{MemberName}};
                     return true;
 {{/Values}}
@@ -102,7 +135,27 @@ namespace {{.}}
                     return false;
             }
         }
-{{/HasSerializationValue}}
+{{/HasDisplayName}}
+{{#HasDisplayDescription}}
+
+        public static bool TryCreateFromDescription(
+            [NotNullWhen(true)] string? description,
+            StringComparison comparisonType,
+            out {{Name}} result)
+        {
+            switch (description)
+            {
+{{#Values}}{{#Display.Description}}
+                case { } s when s.Equals({{#Display.ResourceDescription}}{{.}}{{/Display.ResourceDescription}}{{^Display.ResourceDescription}}"{{Display.Description}}"{{/Display.ResourceDescription}}, comparisonType):
+                    result = {{Name}}.{{MemberName}};
+                    return true;
+{{/Display.Description}}{{/Values}}
+                default:
+                    result = default;
+                    return false;
+            }
+        }
+{{/HasDisplayDescription}}
 
         public static {{Name}}[] GetValues()
         {

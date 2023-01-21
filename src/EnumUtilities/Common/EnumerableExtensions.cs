@@ -14,4 +14,9 @@ public static class EnumerableExtensions
                 yield return item;
         }
     }
+
+    public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T?> source)
+    {
+        return source.Where(static it => it is not null)!;
+    }
 }

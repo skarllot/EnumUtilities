@@ -43,4 +43,27 @@ public static class CodeAnalysisExtensions
 
         return nameSpace;
     }
+
+    public static AttributeData? WhereClassNameIs(this AttributeData attribute, string name)
+    {
+        return attribute.AttributeClass?.Name == name
+            ? attribute
+            : null;
+    }
+
+    public static object? GetConstructorArgument(this AttributeData attribute, int position)
+    {
+        return attribute.ConstructorArguments[position].Value;
+    }
+
+    public static object? GetNamedArgument(this AttributeData attribute, string argName)
+    {
+        foreach (var namedArgument in attribute.NamedArguments)
+        {
+            if (namedArgument.Key == argName)
+                return namedArgument.Value.Value;
+        }
+
+        return null;
+    }
 }

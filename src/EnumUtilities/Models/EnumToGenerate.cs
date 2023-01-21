@@ -10,6 +10,18 @@ public sealed record EnumToGenerate(string Namespace, string Name, string Underl
     public bool HasSerializationValue =>
         Values.Any(static it => it.SerializationValue != null);
 
-    public bool HasDisplayValue =>
-        Values.Any(static it => it.DisplayValue != null);
+    public bool HasDescription =>
+        Values.Any(static it => it.Description != null);
+
+    public bool HasDisplayName => Values.Any(
+        static it => it.Display?.Name != null || it.Display?.ShortName != null);
+
+    public bool HasDisplayDescription =>
+        Values.Any(static it => it.Display?.Description != null);
+
+    public bool HasDisplayPrompt =>
+        Values.Any(static it => it.Display?.Prompt != null);
+
+    public bool HasDisplayGroupName =>
+        Values.Any(static it => it.Display?.GroupName != null);
 }
