@@ -7,6 +7,7 @@ using System;
 
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public static partial class PaymentMethodExtensions
     {
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>

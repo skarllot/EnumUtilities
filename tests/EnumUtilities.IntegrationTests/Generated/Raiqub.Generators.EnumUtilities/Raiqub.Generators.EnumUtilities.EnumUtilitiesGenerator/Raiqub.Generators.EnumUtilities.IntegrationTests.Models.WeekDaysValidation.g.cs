@@ -8,8 +8,11 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public static partial class WeekDaysValidation
     {
+        /// <summary>Returns a boolean telling whether the value of <see cref="WeekDays"/> instance exists in the enumeration.</summary>
+        /// <returns><c>true</c> if the value of <see cref="WeekDays"/> instance exists in the enumeration; <c>false</c> otherwise.</returns>
         public static bool IsDefined(WeekDays value)
         {
             return value switch

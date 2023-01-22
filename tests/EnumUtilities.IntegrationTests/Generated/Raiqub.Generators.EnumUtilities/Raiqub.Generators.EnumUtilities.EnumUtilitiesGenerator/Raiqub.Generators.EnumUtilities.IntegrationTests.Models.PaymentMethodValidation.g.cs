@@ -8,8 +8,11 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public static partial class PaymentMethodValidation
     {
+        /// <summary>Returns a boolean telling whether the value of <see cref="PaymentMethod"/> instance exists in the enumeration.</summary>
+        /// <returns><c>true</c> if the value of <see cref="PaymentMethod"/> instance exists in the enumeration; <c>false</c> otherwise.</returns>
         public static bool IsDefined(PaymentMethod value)
         {
             return value switch
