@@ -54,34 +54,14 @@ public partial class EnumUtilitiesGenerator
             return typesToGenerate;
         }
 
-        foreach (var type in types)
-        {
-            cancellationToken.ThrowIfCancellationRequested();
-
-            var semanticModel = compilation.GetSemanticModel(type.SyntaxTree);
-            if (semanticModel.GetDeclaredSymbol(type) is not INamedTypeSymbol typeSymbol)
-            {
-                continue;
-            }
-
-            var enumValues = typeSymbol
-                .GetMembers()
-                .Select(EnumValue.FromSymbol)
-                .WhereNotNull()
-                .ToList();
-
-            if (enumValues.Count == 0)
-            {
-                continue;
-            }
-
-            typesToGenerate.Add(
-                new EnumToGenerate(
-                    type.GetNamespace(),
-                    typeSymbol.Name,
-                    typeSymbol.EnumUnderlyingType?.Name ?? "int",
-                    enumValues));
-        }
+        typesToGenerate.AddRange(
+            types
+                .Select(
+                    t => compilation
+                        .GetSemanticModel(t.SyntaxTree)
+                        .GetDeclaredSymbol(t, cancellationToken)
+                        .Map(EnumToGenerate.FromSymbol))
+                .WhereNotNull());
 
         return typesToGenerate;
     }

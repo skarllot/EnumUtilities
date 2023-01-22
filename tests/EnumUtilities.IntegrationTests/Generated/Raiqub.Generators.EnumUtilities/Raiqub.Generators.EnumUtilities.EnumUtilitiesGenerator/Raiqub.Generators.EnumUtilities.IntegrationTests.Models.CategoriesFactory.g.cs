@@ -112,20 +112,20 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         private static bool TryParseNumeric(
             string name,
             StringComparison comparisonType,
-            out Byte result)
+            out byte result)
         {
             switch (comparisonType)
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return Byte.TryParse(name, NumberStyles.Integer, NumberFormatInfo.CurrentInfo, out result);
+                    return byte.TryParse(name, NumberStyles.Integer, NumberFormatInfo.CurrentInfo, out result);
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
                 case StringComparison.Ordinal:
                 case StringComparison.OrdinalIgnoreCase:
-                    return Byte.TryParse(name, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out result);
+                    return byte.TryParse(name, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out result);
                 default:
-                    return Byte.TryParse(name, out result);
+                    return byte.TryParse(name, out result);
             }
         }
     }
