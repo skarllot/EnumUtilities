@@ -3,6 +3,7 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
@@ -24,12 +25,11 @@ namespace {{.}}
                     result = {{Name}}.{{MemberName}};
                     return true;
 {{/Values}}
-                case { } s when {{UnderlyingType}}.TryParse(s, out var val):
+                case { } s when TryParseNumeric(s, comparisonType, out var val):
                     result = ({{Name}})val;
                     return true;
                 default:
-                    result = default;
-                    return false;
+                    return Enum.TryParse(name, out result);
             }
         }
 
@@ -51,12 +51,11 @@ namespace {{.}}
                     result = {{Name}}.{{MemberName}};
                     return true;
 {{/Values}}
-                case { } s when {{UnderlyingType}}.TryParse(s, out var val):
+                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out var val):
                     result = ({{Name}})val;
                     return true;
                 default:
-                    result = default;
-                    return false;
+                    return Enum.TryParse(name, out result);
             }
         }
 {{#HasSerializationValue}}
@@ -175,6 +174,26 @@ namespace {{.}}
                 nameof({{Name}}.{{MemberName}}),
 {{/Values}}
             };
+        }
+
+        private static bool TryParseNumeric(
+            string name,
+            StringComparison comparisonType,
+            out {{UnderlyingType}} result)
+        {
+            switch (comparisonType)
+            {
+                case StringComparison.CurrentCulture:
+                case StringComparison.CurrentCultureIgnoreCase:
+                    return {{UnderlyingType}}.TryParse(name, NumberStyles.Integer, NumberFormatInfo.CurrentInfo, out result);
+                case StringComparison.InvariantCulture:
+                case StringComparison.InvariantCultureIgnoreCase:
+                case StringComparison.Ordinal:
+                case StringComparison.OrdinalIgnoreCase:
+                    return {{UnderlyingType}}.TryParse(name, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out result);
+                default:
+                    return {{UnderlyingType}}.TryParse(name, out result);
+            }
         }
     }
 {{#Namespace}}

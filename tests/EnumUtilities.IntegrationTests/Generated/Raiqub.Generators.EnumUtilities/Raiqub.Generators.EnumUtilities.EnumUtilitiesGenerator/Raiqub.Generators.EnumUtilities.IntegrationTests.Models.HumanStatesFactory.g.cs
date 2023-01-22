@@ -3,6 +3,7 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
@@ -35,12 +36,11 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 case { } s when s.Equals(nameof(HumanStates.Relaxing), comparisonType):
                     result = HumanStates.Relaxing;
                     return true;
-                case { } s when Int32.TryParse(s, out var val):
+                case { } s when TryParseNumeric(s, comparisonType, out var val):
                     result = (HumanStates)val;
                     return true;
                 default:
-                    result = default;
-                    return false;
+                    return Enum.TryParse(name, out result);
             }
         }
 
@@ -75,12 +75,11 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 case nameof(HumanStates.Relaxing):
                     result = HumanStates.Relaxing;
                     return true;
-                case { } s when Int32.TryParse(s, out var val):
+                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out var val):
                     result = (HumanStates)val;
                     return true;
                 default:
-                    result = default;
-                    return false;
+                    return Enum.TryParse(name, out result);
             }
         }
 
@@ -107,6 +106,26 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 nameof(HumanStates.Dead),
                 nameof(HumanStates.Relaxing),
             };
+        }
+
+        private static bool TryParseNumeric(
+            string name,
+            StringComparison comparisonType,
+            out Int32 result)
+        {
+            switch (comparisonType)
+            {
+                case StringComparison.CurrentCulture:
+                case StringComparison.CurrentCultureIgnoreCase:
+                    return Int32.TryParse(name, NumberStyles.Integer, NumberFormatInfo.CurrentInfo, out result);
+                case StringComparison.InvariantCulture:
+                case StringComparison.InvariantCultureIgnoreCase:
+                case StringComparison.Ordinal:
+                case StringComparison.OrdinalIgnoreCase:
+                    return Int32.TryParse(name, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out result);
+                default:
+                    return Int32.TryParse(name, out result);
+            }
         }
     }
 }
