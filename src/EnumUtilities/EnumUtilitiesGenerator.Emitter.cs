@@ -46,24 +46,20 @@ public partial class EnumUtilitiesGenerator
         ImmutableArray<EnumDeclarationSyntax> types,
         CancellationToken cancellationToken)
     {
-        var typesToGenerate = new List<EnumToGenerate>();
-
         var enumGeneratorAttribute = compilation.GetTypeByMetadataName(EnumGeneratorAttributeName);
         if (enumGeneratorAttribute is null)
         {
-            return typesToGenerate;
+            return new List<EnumToGenerate>();
         }
 
-        typesToGenerate.AddRange(
-            types
-                .Select(
-                    t => compilation
-                        .GetSemanticModel(t.SyntaxTree)
-                        .GetDeclaredSymbol(t, cancellationToken)
-                        .Map(EnumToGenerate.FromSymbol))
-                .WhereNotNull());
-
-        return typesToGenerate;
+        return types
+            .Select(
+                t => compilation
+                    .GetSemanticModel(t.SyntaxTree)
+                    .GetDeclaredSymbol(t, cancellationToken)
+                    .Map(EnumToGenerate.FromSymbol))
+            .WhereNotNull()
+            .ToList();
     }
 
     private static void AddExtensionsSource(EnumToGenerate type, SourceProductionContext context)
