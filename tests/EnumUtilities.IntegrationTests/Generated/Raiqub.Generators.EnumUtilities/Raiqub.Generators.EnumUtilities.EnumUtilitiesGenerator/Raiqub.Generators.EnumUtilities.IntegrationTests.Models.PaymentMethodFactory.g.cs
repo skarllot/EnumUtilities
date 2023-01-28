@@ -9,7 +9,7 @@ using System.Globalization;
 
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+    [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public static partial class PaymentMethodFactory
     {
         /// <summary>

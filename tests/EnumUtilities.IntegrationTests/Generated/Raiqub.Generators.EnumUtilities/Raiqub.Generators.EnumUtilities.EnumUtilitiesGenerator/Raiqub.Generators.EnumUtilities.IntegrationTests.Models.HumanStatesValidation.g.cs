@@ -8,7 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+    [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public static partial class HumanStatesValidation
     {
         /// <summary>Returns a boolean telling whether the value of <see cref="HumanStates"/> instance exists in the enumeration.</summary>
