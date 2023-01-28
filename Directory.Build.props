@@ -23,7 +23,8 @@
         <PackageProjectUrl>https://github.com/skarllot/EnumUtilities</PackageProjectUrl>
         <PackageTags>
             generator;source;enum;enumeration;reflection;attribute;tostring;isdefined;enummember;description;display;
-            shortname;parse;tryparse;ignorecase;stringcomparison;factory;extension;validation;codegen;fast
+            shortname;resourcetype;resource;parse;tryparse;ignorecase;stringcomparison;factory;extension;validation;
+            codegen;fast
         </PackageTags>
     </PropertyGroup>
 
