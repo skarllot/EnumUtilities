@@ -5,14 +5,14 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 using Raiqub.Generators.EnumUtilities.Common;
 using Raiqub.Generators.EnumUtilities.Models;
-using Stubble.Core;
-using Stubble.Core.Builders;
 
 namespace Raiqub.Generators.EnumUtilities;
 
 public partial class EnumUtilitiesGenerator
 {
-    private static readonly StubbleVisitorRenderer _stubble = new StubbleBuilder().Build();
+    private static readonly FastStubbleRenderer _enumExtensionsStubble = new(ResourceProvider.EnumExtensions);
+    private static readonly FastStubbleRenderer _enumFactoryStubble = new(ResourceProvider.EnumFactory);
+    private static readonly FastStubbleRenderer _enumValidationStubble = new(ResourceProvider.EnumValidation);
 
     private static void Emit(
         SourceProductionContext context,
@@ -65,21 +65,21 @@ public partial class EnumUtilitiesGenerator
     private static void AddExtensionsSource(EnumToGenerate type, SourceProductionContext context)
     {
         string filename = type.Namespace + "." + type.Name + "Extensions.g.cs";
-        string fileContent = _stubble.Render(ResourceProvider.EnumExtensions, type);
+        string fileContent = _enumExtensionsStubble.Render(type);
         context.AddSource(filename, SourceText.From(fileContent, Encoding.UTF8));
     }
 
     private static void AddFactorySource(EnumToGenerate type, SourceProductionContext context)
     {
         string filename = type.Namespace + "." + type.Name + "Factory.g.cs";
-        string fileContent = _stubble.Render(ResourceProvider.EnumFactory, type);
+        string fileContent = _enumFactoryStubble.Render(type);
         context.AddSource(filename, SourceText.From(fileContent, Encoding.UTF8));
     }
 
     private static void AddValidationSource(EnumToGenerate type, SourceProductionContext context)
     {
         string filename = type.Namespace + "." + type.Name + "Validation.g.cs";
-        string fileContent = _stubble.Render(ResourceProvider.EnumValidation, type);
+        string fileContent = _enumValidationStubble.Render(type);
         context.AddSource(filename, SourceText.From(fileContent, Encoding.UTF8));
     }
 }
