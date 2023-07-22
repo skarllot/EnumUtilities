@@ -3,7 +3,7 @@ using Raiqub.Generators.EnumUtilities.Common;
 
 namespace Raiqub.Generators.EnumUtilities;
 
-[Generator]
+[Generator(LanguageNames.CSharp)]
 public partial class EnumUtilitiesGenerator : IIncrementalGenerator
 {
     public void Initialize(IncrementalGeneratorInitializationContext context)
