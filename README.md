@@ -40,7 +40,7 @@ public enum Categories
 }
 ```
 
-This will generate 3 classes with the follwing methods:
+This will generate 3 classes with the following methods:
 - [CategoriesExtensions](./tests/EnumUtilities.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Raiqub.Generators.EnumUtilities.IntegrationTests.Models.CategoriesExtensions.g.cs)
   - ToStringFast(this Categories)
   - IsDefined(this Categories)
