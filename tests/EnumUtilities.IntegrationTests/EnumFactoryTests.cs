@@ -1,4 +1,5 @@
-﻿using Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
+﻿using System.Diagnostics.CodeAnalysis;
+using Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
 
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests;
 
@@ -18,5 +19,23 @@ public class EnumFactoryTests
         
         Assert.Equal(expectedSuccess, actualSuccess);
         Assert.Equal(expectedResult, actualResult);
+    }
+
+    [Fact]
+    public void GetValuesIsSameAsEnumGetValues()
+    {
+        var expectedValues = Enum.GetValues<Categories>();
+        var actualValues = CategoriesFactory.GetValues();
+
+        Assert.Equal(expectedValues, actualValues);
+    }
+
+    [Fact]
+    public void GetNamesIsSameAsEnumGetNames()
+    {
+        string[] expectedValues = Enum.GetNames<Categories>();
+        string[] actualValues = CategoriesFactory.GetNames();
+
+        Assert.Equal(expectedValues, actualValues);
     }
 }

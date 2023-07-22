@@ -48,6 +48,9 @@ This will generate 3 classes with the following methods:
   - TryParse(string?, StringComparison, out Categories)
   - TryParseIgnoreCase(string?, out Categories)
   - TryParse(string?, out Categories)
+  - TryParse(string?, StringComparison)
+  - TryParseIgnoreCase(string?)
+  - TryParse(string?)
   - GetValues()
   - GetNames()
 - [CategoriesValidation](./tests/EnumUtilities.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Raiqub.Generators.EnumUtilities.IntegrationTests.Models.CategoriesValidation.g.cs)
@@ -83,6 +86,9 @@ This will generate the following methods:
   - ToEnumMemberValue(this PaymentMethod)
 - [PaymentMethodFactory](./tests/EnumUtilities.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Raiqub.Generators.EnumUtilities.IntegrationTests.Models.PaymentMethodFactory.g.cs)
   - TryParseFromEnumMemberValue(string?, StringComparison, out PaymentMethod)
+  - TryParseFromEnumMemberValue(string?, out PaymentMethod)
+  - TryParseFromEnumMemberValue(string?, StringComparison)
+  - TryParseFromEnumMemberValue(string?)
 
 ### [DescriptionAttribute](https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.descriptionattribute)
 
@@ -105,6 +111,9 @@ This will generate the following methods:
   - GetDescription(this PaymentMethod)
 - [PaymentMethodFactory](./tests/EnumUtilities.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Raiqub.Generators.EnumUtilities.IntegrationTests.Models.PaymentMethodFactory.g.cs)
   - TryCreateFromDescription(string?, StringComparison, out PaymentMethod)
+  - TryCreateFromDescription(string?, out PaymentMethod)
+  - TryCreateFromDescription(string?, StringComparison)
+  - TryCreateFromDescription(string?)
 
 ### [DisplayAttribute](https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations.displayattribute)
 
@@ -144,8 +153,17 @@ This will generate the following methods:
   - GetDescription(this WeekDays)
 - [WeekDaysFactory](./tests/EnumUtilities.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Raiqub.Generators.EnumUtilities.IntegrationTests.Models.WeekDaysFactory.g.cs)
   - TryCreateFromDisplayShortName(string?, StringComparison, out WeekDays)
+  - TryCreateFromDisplayShortName(string?, out WeekDays)
+  - TryCreateFromDisplayShortName(string?, StringComparison)
+  - TryCreateFromDisplayShortName(string?)
   - TryCreateFromDisplayName(string?, StringComparison, out WeekDays)
+  - TryCreateFromDisplayName(string?, out WeekDays)
+  - TryCreateFromDisplayName(string?, StringComparison)
+  - TryCreateFromDisplayName(string?)
   - TryCreateFromDescription(string?, StringComparison, out WeekDays)
+  - TryCreateFromDescription(string?, out WeekDays)
+  - TryCreateFromDescription(string?, StringComparison)
+  - TryCreateFromDescription(string?)
 
 ## Contributing
 

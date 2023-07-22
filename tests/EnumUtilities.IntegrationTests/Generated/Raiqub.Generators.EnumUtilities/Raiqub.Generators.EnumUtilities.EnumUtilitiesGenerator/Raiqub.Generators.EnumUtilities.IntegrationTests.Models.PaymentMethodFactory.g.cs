@@ -44,30 +44,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 case { } s when s.Equals(nameof(PaymentMethod.Cheque), comparisonType):
                     result = PaymentMethod.Cheque;
                     return true;
-                case { } s when TryParseNumeric(s, comparisonType, out var val):
+                case { } s when TryParseNumeric(s, comparisonType, out int val):
                     result = (PaymentMethod)val;
                     return true;
                 default:
                     return Enum.TryParse(name, out result);
             }
-        }
-
-        /// <summary>
-        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
-        /// </summary>
-        /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
-        /// <param name="result">
-        /// When this method returns, result contains an object of type PaymentMethod whose value is represented by value
-        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-        /// underlying type of PaymentMethod. Note that this value need not be a member of the PaymentMethod enumeration.
-        /// </param>
-        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-        public static bool TryParseIgnoreCase(
-            [NotNullWhen(true)] string? name,
-            out PaymentMethod result)
-        {
-            return TryParse(name, StringComparison.OrdinalIgnoreCase, out result);
         }
 
         /// <summary>
@@ -99,7 +81,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 case nameof(PaymentMethod.Cheque):
                     result = PaymentMethod.Cheque;
                     return true;
-                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out var val):
+                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out int val):
                     result = (PaymentMethod)val;
                     return true;
                 default:
@@ -107,6 +89,81 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             }
         }
 
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type PaymentMethod whose value is represented by value
+        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+        /// underlying type of PaymentMethod. Note that this value need not be a member of the PaymentMethod enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        public static bool TryParseIgnoreCase(
+            [NotNullWhen(true)] string? name,
+            out PaymentMethod result)
+        {
+            return TryParse(name, StringComparison.OrdinalIgnoreCase, out result);
+        }
+
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object.
+        /// </summary>
+        /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
+        /// <returns>
+        /// Contains an object of type PaymentMethod whose value is represented by value if the parse operation succeeds.
+        /// If the parse operation fails, result contains <c>null</c> value.
+        /// </returns>
+        public static PaymentMethod? TryParse(string? name)
+        {
+            return TryParse(name, out PaymentMethod result) ? result : null;
+        }
+
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object.
+        /// </summary>
+        /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
+        /// <returns>
+        /// Contains an object of type PaymentMethod whose value is represented by value if the parse operation succeeds.
+        /// If the parse operation fails, result contains <c>null</c> value.
+        /// </returns>
+        public static PaymentMethod? TryParseIgnoreCase(string? name)
+        {
+            return TryParse(name, StringComparison.OrdinalIgnoreCase, out PaymentMethod result) ? result : null;
+        }
+
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object.
+        /// </summary>
+        /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
+        /// <returns>
+        /// Contains an object of type PaymentMethod whose value is represented by value if the parse operation succeeds.
+        /// If the parse operation fails, result contains <c>null</c> value.
+        /// </returns>
+        /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
+        public static PaymentMethod? TryParse(string? name, StringComparison comparisonType)
+        {
+            return TryParse(name, comparisonType, out PaymentMethod result) ? result : null;
+        }
+
+        /// <summary>
+        /// Converts the string representation of the value associated with one enumerated constant to
+        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="enumMemberValue">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
+        /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type PaymentMethod whose value is represented by value
+        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+        /// underlying type of PaymentMethod. Note that this value need not be a member of the PaymentMethod enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
         public static bool TryParseFromEnumMemberValue(
             [NotNullWhen(true)] string? enumMemberValue,
             StringComparison comparisonType,
@@ -132,6 +189,52 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             }
         }
 
+        /// <summary>
+        /// Converts the string representation of the value associated with one enumerated constant to
+        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="enumMemberValue">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type PaymentMethod whose value is represented by value
+        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+        /// underlying type of PaymentMethod. Note that this value need not be a member of the PaymentMethod enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        public static bool TryParseFromEnumMemberValue([NotNullWhen(true)] string? enumMemberValue, out PaymentMethod result)
+        {
+            return TryParseFromEnumMemberValue(enumMemberValue, StringComparison.Ordinal, out result);
+        }
+
+        /// <summary>
+        /// Converts the string representation of the value associated with one enumerated constant to
+        /// an equivalent enumerated object.
+        /// </summary>
+        /// <param name="enumMemberValue">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
+        /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
+        /// <returns>
+        /// Contains an object of type PaymentMethod whose value is represented by value if the parse operation succeeds.
+        /// If the parse operation fails, result contains a null value.
+        /// </returns>
+        /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
+        public static PaymentMethod? TryParseFromEnumMemberValue(string? enumMemberValue, StringComparison comparisonType)
+        {
+            return TryParseFromEnumMemberValue(enumMemberValue, comparisonType, out PaymentMethod result) ? result : null;
+        }
+
+        /// <summary>
+        /// Converts the string representation of the value associated with one enumerated constant to
+        /// an equivalent enumerated object.
+        /// </summary>
+        /// <param name="enumMemberValue">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
+        /// <returns>
+        /// Contains an object of type PaymentMethod whose value is represented by value if the parse operation succeeds.
+        /// If the parse operation fails, result contains a null value.
+        /// </returns>
+        public static PaymentMethod? TryParseFromEnumMemberValue(string? enumMemberValue)
+        {
+            return TryParseFromEnumMemberValue(enumMemberValue, StringComparison.Ordinal, out PaymentMethod result) ? result : null;
+        }
+
         public static bool TryCreateFromDescription(
             [NotNullWhen(true)] string? description,
             StringComparison comparisonType,
@@ -148,6 +251,21 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             }
         }
 
+        public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, out PaymentMethod result)
+        {
+            return TryCreateFromDescription(description, StringComparison.Ordinal, out result);
+        }
+
+        public static PaymentMethod? TryCreateFromDescription(string? description, StringComparison comparisonType)
+        {
+            return TryCreateFromDescription(description, comparisonType, out PaymentMethod result) ? result : null;
+        }
+
+        public static PaymentMethod? TryCreateFromDescription(string? description)
+        {
+            return TryCreateFromDescription(description, StringComparison.Ordinal, out PaymentMethod result) ? result : null;
+        }
+
         public static bool TryCreateFromDisplayShortName(
             [NotNullWhen(true)] string? displayShortName,
             StringComparison comparisonType,
@@ -158,6 +276,21 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 default:
                     return TryCreateFromDisplayName(displayShortName, comparisonType, out result);
             }
+        }
+
+        public static bool TryCreateFromDisplayShortName([NotNullWhen(true)] string? displayShortName, out PaymentMethod result)
+        {
+            return TryCreateFromDisplayShortName(displayShortName, StringComparison.Ordinal, out result);
+        }
+
+        public static PaymentMethod? TryCreateFromDisplayShortName(string? displayShortName, StringComparison comparisonType)
+        {
+            return TryCreateFromDisplayShortName(displayShortName, comparisonType, out PaymentMethod result) ? result : null;
+        }
+
+        public static PaymentMethod? TryCreateFromDisplayShortName(string? displayShortName)
+        {
+            return TryCreateFromDisplayShortName(displayShortName, StringComparison.Ordinal, out PaymentMethod result) ? result : null;
         }
 
         public static bool TryCreateFromDisplayName(
@@ -185,6 +318,23 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             }
         }
 
+        public static bool TryCreateFromDisplayName([NotNullWhen(true)] string? displayName, out PaymentMethod result)
+        {
+            return TryCreateFromDisplayName(displayName, StringComparison.Ordinal, out result);
+        }
+
+        public static PaymentMethod? TryCreateFromDisplayName(string? displayName, StringComparison comparisonType)
+        {
+            return TryCreateFromDisplayName(displayName, comparisonType, out PaymentMethod result) ? result : null;
+        }
+
+        public static PaymentMethod? TryCreateFromDisplayName(string? displayName)
+        {
+            return TryCreateFromDisplayName(displayName, StringComparison.Ordinal, out PaymentMethod result) ? result : null;
+        }
+
+        /// <summary>Retrieves an array of the values of the constants in the PaymentMethod enumeration.</summary>
+        /// <returns>An array that contains the values of the constants in PaymentMethod.</returns>
         public static PaymentMethod[] GetValues()
         {
             return new[]
@@ -196,6 +346,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             };
         }
 
+        /// <summary>Retrieves an array of the names of the constants in PaymentMethod enumeration.</summary>
+        /// <returns>A string array of the names of the constants in PaymentMethod.</returns>
         public static string[] GetNames()
         {
             return new[]

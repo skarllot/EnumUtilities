@@ -53,30 +53,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 case { } s when s.Equals(nameof(WeekDays.Sunday), comparisonType):
                     result = WeekDays.Sunday;
                     return true;
-                case { } s when TryParseNumeric(s, comparisonType, out var val):
+                case { } s when TryParseNumeric(s, comparisonType, out int val):
                     result = (WeekDays)val;
                     return true;
                 default:
                     return Enum.TryParse(name, out result);
             }
-        }
-
-        /// <summary>
-        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
-        /// </summary>
-        /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
-        /// <param name="result">
-        /// When this method returns, result contains an object of type WeekDays whose value is represented by value
-        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-        /// underlying type of WeekDays. Note that this value need not be a member of the WeekDays enumeration.
-        /// </param>
-        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-        public static bool TryParseIgnoreCase(
-            [NotNullWhen(true)] string? name,
-            out WeekDays result)
-        {
-            return TryParse(name, StringComparison.OrdinalIgnoreCase, out result);
         }
 
         /// <summary>
@@ -117,12 +99,74 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 case nameof(WeekDays.Sunday):
                     result = WeekDays.Sunday;
                     return true;
-                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out var val):
+                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out int val):
                     result = (WeekDays)val;
                     return true;
                 default:
                     return Enum.TryParse(name, out result);
             }
+        }
+
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type WeekDays whose value is represented by value
+        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+        /// underlying type of WeekDays. Note that this value need not be a member of the WeekDays enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        public static bool TryParseIgnoreCase(
+            [NotNullWhen(true)] string? name,
+            out WeekDays result)
+        {
+            return TryParse(name, StringComparison.OrdinalIgnoreCase, out result);
+        }
+
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object.
+        /// </summary>
+        /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
+        /// <returns>
+        /// Contains an object of type WeekDays whose value is represented by value if the parse operation succeeds.
+        /// If the parse operation fails, result contains <c>null</c> value.
+        /// </returns>
+        public static WeekDays? TryParse(string? name)
+        {
+            return TryParse(name, out WeekDays result) ? result : null;
+        }
+
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object.
+        /// </summary>
+        /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
+        /// <returns>
+        /// Contains an object of type WeekDays whose value is represented by value if the parse operation succeeds.
+        /// If the parse operation fails, result contains <c>null</c> value.
+        /// </returns>
+        public static WeekDays? TryParseIgnoreCase(string? name)
+        {
+            return TryParse(name, StringComparison.OrdinalIgnoreCase, out WeekDays result) ? result : null;
+        }
+
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object.
+        /// </summary>
+        /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
+        /// <returns>
+        /// Contains an object of type WeekDays whose value is represented by value if the parse operation succeeds.
+        /// If the parse operation fails, result contains <c>null</c> value.
+        /// </returns>
+        /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
+        public static WeekDays? TryParse(string? name, StringComparison comparisonType)
+        {
+            return TryParse(name, comparisonType, out WeekDays result) ? result : null;
         }
 
         public static bool TryCreateFromDisplayShortName(
@@ -147,6 +191,21 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 default:
                     return TryCreateFromDisplayName(displayShortName, comparisonType, out result);
             }
+        }
+
+        public static bool TryCreateFromDisplayShortName([NotNullWhen(true)] string? displayShortName, out WeekDays result)
+        {
+            return TryCreateFromDisplayShortName(displayShortName, StringComparison.Ordinal, out result);
+        }
+
+        public static WeekDays? TryCreateFromDisplayShortName(string? displayShortName, StringComparison comparisonType)
+        {
+            return TryCreateFromDisplayShortName(displayShortName, comparisonType, out WeekDays result) ? result : null;
+        }
+
+        public static WeekDays? TryCreateFromDisplayShortName(string? displayShortName)
+        {
+            return TryCreateFromDisplayShortName(displayShortName, StringComparison.Ordinal, out WeekDays result) ? result : null;
         }
 
         public static bool TryCreateFromDisplayName(
@@ -183,6 +242,21 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             }
         }
 
+        public static bool TryCreateFromDisplayName([NotNullWhen(true)] string? displayName, out WeekDays result)
+        {
+            return TryCreateFromDisplayName(displayName, StringComparison.Ordinal, out result);
+        }
+
+        public static WeekDays? TryCreateFromDisplayName(string? displayName, StringComparison comparisonType)
+        {
+            return TryCreateFromDisplayName(displayName, comparisonType, out WeekDays result) ? result : null;
+        }
+
+        public static WeekDays? TryCreateFromDisplayName(string? displayName)
+        {
+            return TryCreateFromDisplayName(displayName, StringComparison.Ordinal, out WeekDays result) ? result : null;
+        }
+
         public static bool TryCreateFromDescription(
             [NotNullWhen(true)] string? description,
             StringComparison comparisonType,
@@ -205,6 +279,23 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             }
         }
 
+        public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, out WeekDays result)
+        {
+            return TryCreateFromDescription(description, StringComparison.Ordinal, out result);
+        }
+
+        public static WeekDays? TryCreateFromDescription(string? description, StringComparison comparisonType)
+        {
+            return TryCreateFromDescription(description, comparisonType, out WeekDays result) ? result : null;
+        }
+
+        public static WeekDays? TryCreateFromDescription(string? description)
+        {
+            return TryCreateFromDescription(description, StringComparison.Ordinal, out WeekDays result) ? result : null;
+        }
+
+        /// <summary>Retrieves an array of the values of the constants in the WeekDays enumeration.</summary>
+        /// <returns>An array that contains the values of the constants in WeekDays.</returns>
         public static WeekDays[] GetValues()
         {
             return new[]
@@ -219,6 +310,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             };
         }
 
+        /// <summary>Retrieves an array of the names of the constants in WeekDays enumeration.</summary>
+        /// <returns>A string array of the names of the constants in WeekDays.</returns>
         public static string[] GetNames()
         {
             return new[]

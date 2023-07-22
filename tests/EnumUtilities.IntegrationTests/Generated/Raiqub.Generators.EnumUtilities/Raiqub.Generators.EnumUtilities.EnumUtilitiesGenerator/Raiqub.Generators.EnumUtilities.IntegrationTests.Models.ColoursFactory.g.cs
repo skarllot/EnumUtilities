@@ -41,30 +41,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 case { } s when s.Equals(nameof(Colours.Green), comparisonType):
                     result = Colours.Green;
                     return true;
-                case { } s when TryParseNumeric(s, comparisonType, out var val):
+                case { } s when TryParseNumeric(s, comparisonType, out int val):
                     result = (Colours)val;
                     return true;
                 default:
                     return Enum.TryParse(name, out result);
             }
-        }
-
-        /// <summary>
-        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
-        /// </summary>
-        /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
-        /// <param name="result">
-        /// When this method returns, result contains an object of type Colours whose value is represented by value
-        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-        /// underlying type of Colours. Note that this value need not be a member of the Colours enumeration.
-        /// </param>
-        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-        public static bool TryParseIgnoreCase(
-            [NotNullWhen(true)] string? name,
-            out Colours result)
-        {
-            return TryParse(name, StringComparison.OrdinalIgnoreCase, out result);
         }
 
         /// <summary>
@@ -93,7 +75,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 case nameof(Colours.Green):
                     result = Colours.Green;
                     return true;
-                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out var val):
+                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out int val):
                     result = (Colours)val;
                     return true;
                 default:
@@ -101,6 +83,70 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             }
         }
 
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type Colours whose value is represented by value
+        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+        /// underlying type of Colours. Note that this value need not be a member of the Colours enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        public static bool TryParseIgnoreCase(
+            [NotNullWhen(true)] string? name,
+            out Colours result)
+        {
+            return TryParse(name, StringComparison.OrdinalIgnoreCase, out result);
+        }
+
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object.
+        /// </summary>
+        /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
+        /// <returns>
+        /// Contains an object of type Colours whose value is represented by value if the parse operation succeeds.
+        /// If the parse operation fails, result contains <c>null</c> value.
+        /// </returns>
+        public static Colours? TryParse(string? name)
+        {
+            return TryParse(name, out Colours result) ? result : null;
+        }
+
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object.
+        /// </summary>
+        /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
+        /// <returns>
+        /// Contains an object of type Colours whose value is represented by value if the parse operation succeeds.
+        /// If the parse operation fails, result contains <c>null</c> value.
+        /// </returns>
+        public static Colours? TryParseIgnoreCase(string? name)
+        {
+            return TryParse(name, StringComparison.OrdinalIgnoreCase, out Colours result) ? result : null;
+        }
+
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object.
+        /// </summary>
+        /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
+        /// <returns>
+        /// Contains an object of type Colours whose value is represented by value if the parse operation succeeds.
+        /// If the parse operation fails, result contains <c>null</c> value.
+        /// </returns>
+        /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
+        public static Colours? TryParse(string? name, StringComparison comparisonType)
+        {
+            return TryParse(name, comparisonType, out Colours result) ? result : null;
+        }
+
+        /// <summary>Retrieves an array of the values of the constants in the Colours enumeration.</summary>
+        /// <returns>An array that contains the values of the constants in Colours.</returns>
         public static Colours[] GetValues()
         {
             return new[]
@@ -111,6 +157,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             };
         }
 
+        /// <summary>Retrieves an array of the names of the constants in Colours enumeration.</summary>
+        /// <returns>A string array of the names of the constants in Colours.</returns>
         public static string[] GetNames()
         {
             return new[]

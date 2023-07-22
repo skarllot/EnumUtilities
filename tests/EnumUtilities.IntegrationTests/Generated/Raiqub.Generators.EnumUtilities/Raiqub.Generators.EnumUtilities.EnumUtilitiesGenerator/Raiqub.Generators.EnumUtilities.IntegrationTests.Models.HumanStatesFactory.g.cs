@@ -50,30 +50,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 case { } s when s.Equals(nameof(HumanStates.Relaxing), comparisonType):
                     result = HumanStates.Relaxing;
                     return true;
-                case { } s when TryParseNumeric(s, comparisonType, out var val):
+                case { } s when TryParseNumeric(s, comparisonType, out int val):
                     result = (HumanStates)val;
                     return true;
                 default:
                     return Enum.TryParse(name, out result);
             }
-        }
-
-        /// <summary>
-        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
-        /// </summary>
-        /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
-        /// <param name="result">
-        /// When this method returns, result contains an object of type HumanStates whose value is represented by value
-        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-        /// underlying type of HumanStates. Note that this value need not be a member of the HumanStates enumeration.
-        /// </param>
-        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-        public static bool TryParseIgnoreCase(
-            [NotNullWhen(true)] string? name,
-            out HumanStates result)
-        {
-            return TryParse(name, StringComparison.OrdinalIgnoreCase, out result);
         }
 
         /// <summary>
@@ -111,7 +93,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 case nameof(HumanStates.Relaxing):
                     result = HumanStates.Relaxing;
                     return true;
-                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out var val):
+                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out int val):
                     result = (HumanStates)val;
                     return true;
                 default:
@@ -119,6 +101,70 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             }
         }
 
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type HumanStates whose value is represented by value
+        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+        /// underlying type of HumanStates. Note that this value need not be a member of the HumanStates enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        public static bool TryParseIgnoreCase(
+            [NotNullWhen(true)] string? name,
+            out HumanStates result)
+        {
+            return TryParse(name, StringComparison.OrdinalIgnoreCase, out result);
+        }
+
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object.
+        /// </summary>
+        /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
+        /// <returns>
+        /// Contains an object of type HumanStates whose value is represented by value if the parse operation succeeds.
+        /// If the parse operation fails, result contains <c>null</c> value.
+        /// </returns>
+        public static HumanStates? TryParse(string? name)
+        {
+            return TryParse(name, out HumanStates result) ? result : null;
+        }
+
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object.
+        /// </summary>
+        /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
+        /// <returns>
+        /// Contains an object of type HumanStates whose value is represented by value if the parse operation succeeds.
+        /// If the parse operation fails, result contains <c>null</c> value.
+        /// </returns>
+        public static HumanStates? TryParseIgnoreCase(string? name)
+        {
+            return TryParse(name, StringComparison.OrdinalIgnoreCase, out HumanStates result) ? result : null;
+        }
+
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object.
+        /// </summary>
+        /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
+        /// <returns>
+        /// Contains an object of type HumanStates whose value is represented by value if the parse operation succeeds.
+        /// If the parse operation fails, result contains <c>null</c> value.
+        /// </returns>
+        /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
+        public static HumanStates? TryParse(string? name, StringComparison comparisonType)
+        {
+            return TryParse(name, comparisonType, out HumanStates result) ? result : null;
+        }
+
+        /// <summary>Retrieves an array of the values of the constants in the HumanStates enumeration.</summary>
+        /// <returns>An array that contains the values of the constants in HumanStates.</returns>
         public static HumanStates[] GetValues()
         {
             return new[]
@@ -131,6 +177,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             };
         }
 
+        /// <summary>Retrieves an array of the names of the constants in HumanStates enumeration.</summary>
+        /// <returns>A string array of the names of the constants in HumanStates.</returns>
         public static string[] GetNames()
         {
             return new[]
