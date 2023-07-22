@@ -13,12 +13,12 @@
     <ItemGroup>
         <PackageReference Include="IsExternalInit" Version="1.0.3" PrivateAssets="all" />
         <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.3" PrivateAssets="all" />
-        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.0.1" PrivateAssets="all" />
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.1.0" PrivateAssets="all" />
         <PackageReference Include="Stubble.Core" Version="1.10.8" PrivateAssets="all" GeneratePathProperty="true" />
     </ItemGroup>
 
     <ItemGroup>
-        <None Include="../../README.md" Pack="true" PackagePath="" />
+        <None Include="$(SolutionDir)README.md" Pack="true" PackagePath="" />
         <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
         <None Include="$(OutputPath)\Raiqub.Generators.EnumUtilities.Abstractions.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
         <None Include="$(OutputPath)\Raiqub.Generators.EnumUtilities.Abstractions.dll" Pack="true" PackagePath="lib/netstandard2.0" Visible="true" />
