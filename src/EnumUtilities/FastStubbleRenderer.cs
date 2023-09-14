@@ -12,8 +12,6 @@ public class FastStubbleRenderer
     private static readonly RendererSettings _settings = new RendererSettingsBuilder().BuildSettings();
 
     private readonly MustacheTemplate _enumExtensionsTemplate;
-    private readonly StringBuilder _stringBuilder;
-    private readonly StringRender _renderer;
 
     public FastStubbleRenderer(string template)
     {
@@ -21,18 +19,16 @@ public class FastStubbleRenderer
             template,
             _settings.DefaultTags,
             pipeline: _settings.ParserPipeline);
-
-        _stringBuilder = new StringBuilder();
-        var writer = new StringWriter(_stringBuilder);
-        _renderer = new StringRender(writer, _settings.RendererPipeline, _settings.MaxRecursionDepth);
     }
 
     public string Render(object view)
     {
-        _stringBuilder.Clear();
+        var sb = new StringBuilder();
+        var writer = new StringWriter(sb);
+        var renderer = new StringRender(writer, _settings.RendererPipeline, _settings.MaxRecursionDepth);
 
-        _renderer.Render(_enumExtensionsTemplate, new Context(view, _settings, _settings.RenderSettings));
+        renderer.Render(_enumExtensionsTemplate, new Context(view, _settings, _settings.RenderSettings));
 
-        return _stringBuilder.ToString();
+        return sb.ToString();
     }
 }
