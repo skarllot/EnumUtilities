@@ -9,22 +9,52 @@ on:
   pull_request:
     branches: [ "main" ]
 
+env:
+  DOTNET_GENERATE_ASPNET_CERTIFICATE: false
+  DOTNET_NOLOGO: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+
+permissions:
+  contents: read
+
 jobs:
   build:
 
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - name: 🛡️ Harden Runner
+      uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
+      with:
+        egress-policy: audit
+
+    - name: 🛒 Checkout
+      uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
       with:
         fetch-depth: 0
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
+
+    - name: 🧰 Setup .NET
+      uses: actions/setup-dotnet@4d6c8fcf3c8f7a60068d26b594648e99df24cee3 # v4.0.0
       with:
-        dotnet-version: 6.0.x
-    - name: Restore dependencies
+        dotnet-version: 8.0.x
+
+    - name: 🗃️ Setup NuGet cache
+      uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3.3.2
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj', '**/*.props') }}
+        restore-keys: ${{ runner.os }}-nuget-
+
+    - name: 📥 Restore dependencies
       run: dotnet restore
-    - name: Build
+
+    - name: 🏗️ Build
       run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+
+    - name: ✅ Test
+      run: dotnet test --no-build --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+
+    - name: ☂️ Upload coverage reports to Codecov
+      uses: codecov/codecov-action@eaaf4bedf32dbdc6b720b63067d99c4d77d6047d # v3.1.4
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

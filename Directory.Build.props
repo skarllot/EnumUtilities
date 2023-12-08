@@ -5,7 +5,7 @@
         <AssemblyName>$(RootNamespace)</AssemblyName>
         <SolutionDir Condition="'$(SolutionDir)' == ''">$(MSBuildThisFileDirectory)</SolutionDir>
         <PackageOutputPath>$(SolutionDir)artifacts</PackageOutputPath>
-        <LangVersion>10</LangVersion>
+        <LangVersion>12</LangVersion>
         <Nullable>enable</Nullable>
         <ImplicitUsings>true</ImplicitUsings>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>

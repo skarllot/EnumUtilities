@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 📚 Documentation
+    url: https://github.com/skarllot/EnumUtilities#guide
+    about: Read our documentation.
+  - name: ⭐ Sponsor Raiqub Enum Utilities
+    url: https://www.buymeacoffee.com/skarllot
+    about: Help the continued development.
+  - name: 💬 Ask on Github Discussions
+    url: https://github.com/skarllot/EnumUtilities/discussions
+    about: The best place for asking general purpose questions.

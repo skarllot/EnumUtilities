@@ -1,0 +1,74 @@
+name: 🐞 Bug report
+description: Something not behaving as expected?
+title: '[Bug]: '
+labels: ['bug']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please check for an existing issue and our documentation at [README file](https://github.com/skarllot/EnumUtilities#guide) before submitting a bug report.
+  - type: textarea
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Expected behavior
+      description: A clear and concise description of what you expected to happen.
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: Actual behavior
+      description: What actually happens.
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: Steps to reproduce
+      description: |
+        Please include minimal steps to reproduce the problem if possible. E.g.: the smallest possible code snippet; or a small project, with steps to run it.
+        Always include text as text rather than screenshots so code can easily be copied and will show up in searches.
+        Stack Overflow has a great article about [how to create a minimal, reproducible example](https://stackoverflow.com/help/minimal-reproducible-example).
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: Exception(s) (if any)
+      description: Include any exception(s) and stack trace(s) you get when facing this issue.
+      placeholder:
+    validations:
+      required: false
+  - type: input
+    id: package-name
+    attributes:
+      label: Package Name
+      description: Which package are you using?
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Package version
+      description: |
+        Which version of Raiqub.EnumUtilities are you facing the issue with?
+    validations:
+      required: false
+  - type: input
+    attributes:
+      label: .NET Version
+      description: |
+        Run `dotnet --version` to get the .NET SDK version you're using.
+        Alternatively, which target framework(s) (e.g. `net6.0`) does the project you're using Raiqub.EnumUtilities in target?
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: Anything else?
+      description: |
+        Links? References? Anything that will give us more context about the issue you are encountering is useful.
+
+        💡Tip: You can attach images or log files by clicking this area to highlight it and then dragging files in.
+    validations:
+      required: false
