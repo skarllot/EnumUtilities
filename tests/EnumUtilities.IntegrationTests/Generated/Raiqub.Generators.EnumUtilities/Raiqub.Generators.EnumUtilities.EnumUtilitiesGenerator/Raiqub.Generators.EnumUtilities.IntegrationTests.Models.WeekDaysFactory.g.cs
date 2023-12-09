@@ -10,6 +10,7 @@ using System.Globalization;
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.2.0.0")]
     public static partial class WeekDaysFactory
     {
         /// <summary>

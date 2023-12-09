@@ -18,7 +18,6 @@
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.20" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
-    <PackageReference Include="Stubble.Core" Version="1.10.8" PrivateAssets="all" GeneratePathProperty="true" />
     <PackageReference Include="xunit" Version="2.6.2" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.5.4" PrivateAssets="all" />
     <PackageReference Include="coverlet.collector" Version="6.0.0" PrivateAssets="all" />
@@ -28,10 +27,6 @@
     <Compile Remove="$(CompilerGeneratedFilesOutputPath)/**/*.cs" />
     <ProjectReference Include="..\..\src\EnumUtilities.Abstractions\EnumUtilities.Abstractions.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="true" />
     <ProjectReference Include="..\..\src\EnumUtilities\EnumUtilities.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Analyzer Include="$(PkgStubble_Core)\lib\netstandard2.0\*.dll" />
   </ItemGroup>
 
   <ItemGroup>

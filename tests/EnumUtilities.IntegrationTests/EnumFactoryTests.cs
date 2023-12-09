@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
+﻿using Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
 
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests;
 
@@ -16,7 +15,7 @@ public class EnumFactoryTests
     {
         bool expectedSuccess = Enum.TryParse(value, out Colours expectedResult);
         bool actualSuccess = ColoursFactory.TryParse(value, out var actualResult);
-        
+
         Assert.Equal(expectedSuccess, actualSuccess);
         Assert.Equal(expectedResult, actualResult);
     }

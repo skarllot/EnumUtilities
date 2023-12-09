@@ -12,10 +12,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="IsExternalInit" Version="1.0.3" PrivateAssets="all" />
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4" PrivateAssets="all" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.3.1" PrivateAssets="all" />
-    <PackageReference Include="Stubble.Core" Version="1.10.8" PrivateAssets="all" GeneratePathProperty="true" />
+    <PackageReference Include="Polyfill" Version="1.33.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
@@ -23,12 +25,39 @@
     <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
     <None Include="$(OutputPath)\Raiqub.Generators.EnumUtilities.Abstractions.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
     <None Include="$(OutputPath)\Raiqub.Generators.EnumUtilities.Abstractions.dll" Pack="true" PackagePath="lib/netstandard2.0" Visible="true" />
-    <None Include="$(PkgStubble_Core)\lib\netstandard2.0\*.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Resources\*.mustache" />
-    <EmbeddedResource Include="Resources\*.mustache" />
+    <None Update="CodeWriters\EnumExtensionsWriter.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>EnumExtensionsWriter.cs</LastGenOutput>
+    </None>
+    <None Update="CodeWriters\EnumFactoryWriter.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>EnumFactoryWriter.cs</LastGenOutput>
+    </None>
+    <None Update="CodeWriters\EnumValidationWriter.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>EnumValidationWriter.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="CodeWriters\EnumExtensionsWriter.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnumExtensionsWriter.tt</DependentUpon>
+    </Compile>
+    <Compile Update="CodeWriters\EnumFactoryWriter.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnumFactoryWriter.tt</DependentUpon>
+    </Compile>
+    <Compile Update="CodeWriters\EnumValidationWriter.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnumValidationWriter.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

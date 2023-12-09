@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="TemplateDataLanguageMappings">
-    <file url="file://$PROJECT_DIR$/src/EnumUtilities/Resources/EnumExtensions.mustache" dialect="C#" />
-    <file url="file://$PROJECT_DIR$/src/EnumUtilities/Resources/EnumFactory.mustache" dialect="C#" />
-    <file url="file://$PROJECT_DIR$/src/EnumUtilities/Resources/EnumValidation.mustache" dialect="C#" />
     <file url="file://$PROJECT_DIR$/src/EnumUtilities/Resources/EnumValueConverter.mustache" dialect="C#" />
   </component>
 </project>

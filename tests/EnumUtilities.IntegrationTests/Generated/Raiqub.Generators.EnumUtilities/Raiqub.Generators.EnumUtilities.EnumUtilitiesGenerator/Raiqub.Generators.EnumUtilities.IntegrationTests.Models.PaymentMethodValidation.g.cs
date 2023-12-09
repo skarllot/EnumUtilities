@@ -9,6 +9,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.2.0.0")]
     public static partial class PaymentMethodValidation
     {
         /// <summary>Returns a boolean telling whether the value of <see cref="PaymentMethod"/> instance exists in the enumeration.</summary>
