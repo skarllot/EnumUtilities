@@ -49,56 +49,57 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             
             #line 19 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
 
+        PushIndent();
     }
 
             
             #line default
             #line hidden
-            this.Write("    [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]\r\n    [global::System.CodeDom.Compiler.GeneratedCodeAttribute(\"");
+            this.Write("[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]\r\n[global::System.CodeDom.Compiler.GeneratedCodeAttribute(\"");
             
-            #line 23 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
+            #line 24 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(CurrentAssemblyName.Name));
             
             #line default
             #line hidden
             this.Write("\", \"");
             
-            #line 23 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
+            #line 24 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Append($"{CurrentAssemblyName.Version}")));
             
             #line default
             #line hidden
-            this.Write("\")]\r\n    public static partial class ");
+            this.Write("\")]\r\npublic static partial class ");
             
-            #line 24 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
+            #line 25 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("Validation\r\n    {\r\n        /// <summary>Returns a boolean telling whether the value of <see cref=\"");
-            
-            #line 26 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("\"/> instance exists in the enumeration.</summary>\r\n        /// <returns><c>true</c> if the value of <see cref=\"");
+            this.Write("Validation\r\n{\r\n    /// <summary>Returns a boolean telling whether the value of <see cref=\"");
             
             #line 27 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("\"/> instance exists in the enumeration; <c>false</c> otherwise.</returns>\r\n        public static bool IsDefined(");
+            this.Write("\"/> instance exists in the enumeration.</summary>\r\n    /// <returns><c>true</c> if the value of <see cref=\"");
             
             #line 28 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write(" value)\r\n        {\r\n            return value switch\r\n            {\r\n");
+            this.Write("\"/> instance exists in the enumeration; <c>false</c> otherwise.</returns>\r\n    public static bool IsDefined(");
             
-            #line 32 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
+            #line 29 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write(" value)\r\n    {\r\n        return value switch\r\n        {\r\n");
+            
+            #line 33 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
 
     foreach (var curr in Model.UniqueValues)
     {
@@ -106,32 +107,32 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             
             #line default
             #line hidden
-            this.Write("                ");
+            this.Write("            ");
             
-            #line 36 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
+            #line 37 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 36 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
+            #line 37 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
             
             #line default
             #line hidden
             this.Write(" => true,\r\n");
             
-            #line 37 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
+            #line 38 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
 
     }
 
             
             #line default
             #line hidden
-            this.Write("                _ => false\r\n            };\r\n        }\r\n\r\n        public static bool IsDefined(\r\n            [NotNullWhen(true)] string? name,\r\n            StringComparison comparisonType)\r\n        {\r\n            return name switch\r\n            {\r\n");
+            this.Write("            _ => false\r\n        };\r\n    }\r\n\r\n    public static bool IsDefined(\r\n        [NotNullWhen(true)] string? name,\r\n        StringComparison comparisonType)\r\n    {\r\n        return name switch\r\n        {\r\n");
             
-            #line 50 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
+            #line 51 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
 
     foreach (var curr in Model.Values)
     {
@@ -139,32 +140,32 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             
             #line default
             #line hidden
-            this.Write("                { } s when s.Equals(nameof(");
+            this.Write("            { } s when s.Equals(nameof(");
             
-            #line 54 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
+            #line 55 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 54 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
+            #line 55 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
             
             #line default
             #line hidden
             this.Write("), comparisonType) => true,\r\n");
             
-            #line 55 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
+            #line 56 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
 
     }
 
             
             #line default
             #line hidden
-            this.Write("                _ => false\r\n            };\r\n        }\r\n\r\n        public static bool IsDefinedIgnoreCase([NotNullWhen(true)] string? name)\r\n        {\r\n            return IsDefined(name, StringComparison.OrdinalIgnoreCase);\r\n        }\r\n\r\n        public static bool IsDefined([NotNullWhen(true)] string? name)\r\n        {\r\n            return name switch\r\n            {\r\n");
+            this.Write("            _ => false\r\n        };\r\n    }\r\n\r\n    public static bool IsDefinedIgnoreCase([NotNullWhen(true)] string? name)\r\n    {\r\n        return IsDefined(name, StringComparison.OrdinalIgnoreCase);\r\n    }\r\n\r\n    public static bool IsDefined([NotNullWhen(true)] string? name)\r\n    {\r\n        return name switch\r\n        {\r\n");
             
-            #line 71 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
+            #line 72 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
 
     foreach (var curr in Model.Values)
     {
@@ -172,42 +173,43 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             
             #line default
             #line hidden
-            this.Write("                nameof(");
+            this.Write("            nameof(");
             
-            #line 75 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
+            #line 76 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 75 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
+            #line 76 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
             
             #line default
             #line hidden
             this.Write(") => true,\r\n");
             
-            #line 76 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
+            #line 77 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
 
     }
 
             
             #line default
             #line hidden
-            this.Write("                _ => false\r\n            };\r\n        }\r\n    }\r\n");
+            this.Write("            _ => false\r\n        };\r\n    }\r\n}\r\n");
             
-            #line 83 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
+            #line 84 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
 
     if (!string.IsNullOrEmpty(Model.Namespace))
     {
+        PopIndent();
 
             
             #line default
             #line hidden
             this.Write("}\r\n");
             
-            #line 88 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
+            #line 90 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
 
     }
 
@@ -217,7 +219,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 91 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
+        #line 93 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumValidationWriter.tt"
 
     public EnumValidationWriter(StringBuilder builder) : base(builder)
     {
