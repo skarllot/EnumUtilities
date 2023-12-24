@@ -232,9 +232,9 @@ public abstract class CodeWriterBase
     }
 
     [InterpolatedStringHandler]
-    protected readonly struct WriteInterpolatedStringHandler
+    protected struct WriteInterpolatedStringHandler
     {
-        private readonly AppendInterpolatedStringHandler _handler;
+        private AppendInterpolatedStringHandler _handler;
 
         public WriteInterpolatedStringHandler(int literalLength, int formattedCount, CodeWriterBase codeWriter)
         {
