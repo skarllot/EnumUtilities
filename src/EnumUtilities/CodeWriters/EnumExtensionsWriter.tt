@@ -16,41 +16,42 @@ using System;
 namespace <#= Model.Namespace #>
 {
 <#
+        PushIndent();
     }
 #>
-    [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("<#= CurrentAssemblyName.Name #>", "<#= Append($"{CurrentAssemblyName.Version}") #>")]
-    public static partial class <#= Model.Name #>Extensions
-    {
+[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+[global::System.CodeDom.Compiler.GeneratedCodeAttribute("<#= CurrentAssemblyName.Name #>", "<#= Append($"{CurrentAssemblyName.Version}") #>")]
+public static partial class <#= Model.Name #>Extensions
+{
 <#
     /* -----------------------------------------------------------------------------------------------------------------
      * DEFAULT
      * -------------------------------------------------------------------------------------------------------------- */
 #>
-        /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
-        /// <returns>The string representation of the value of this instance.</returns>
-        public static string ToStringFast(this <#= Model.Name #> value)
+    /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
+    /// <returns>The string representation of the value of this instance.</returns>
+    public static string ToStringFast(this <#= Model.Name #> value)
+    {
+        return value switch
         {
-            return value switch
-            {
 <#
     foreach (var curr in Model.UniqueValues)
     {
 #>
-                <#= Model.Name #>.<#= curr.MemberName #> => nameof(<#= Model.Name #>.<#= curr.MemberName #>),
+            <#= Model.Name #>.<#= curr.MemberName #> => nameof(<#= Model.Name #>.<#= curr.MemberName #>),
 <#
     }
 #>
-                _ => value.ToString()
-            };
-        }
+            _ => value.ToString()
+        };
+    }
 
-        /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
-        /// <returns><c>true</c> if the value of this instance exists in the enumeration; <c>false</c> otherwise.</returns>
-        public static bool IsDefined(this <#= Model.Name #> value)
-        {
-            return <#= Model.Name #>Validation.IsDefined(value);
-        }
+    /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
+    /// <returns><c>true</c> if the value of this instance exists in the enumeration; <c>false</c> otherwise.</returns>
+    public static bool IsDefined(this <#= Model.Name #> value)
+    {
+        return <#= Model.Name #>Validation.IsDefined(value);
+    }
 <#
     /* -----------------------------------------------------------------------------------------------------------------
      * ENUM MEMBER ATTRIBUTE
@@ -59,23 +60,23 @@ namespace <#= Model.Namespace #>
     {
 #>
 
-        public static string ToEnumMemberValue(this <#= Model.Name #> value)
+    public static string ToEnumMemberValue(this <#= Model.Name #> value)
+    {
+        return value switch
         {
-            return value switch
-            {
 <#
         foreach (var curr in Model.UniqueValues)
         {
 #>
-                <#= Model.Name #>.<#= curr.MemberName #> => <#= curr.SerializationValue != null
-                                                                    ? Append($"\"{curr.SerializationValue}\"")
-                                                                    : Append($"nameof({Model.Name}.{curr.MemberName})") #>,
+            <#= Model.Name #>.<#= curr.MemberName #> => <#= curr.SerializationValue != null
+                                                                ? Append($"\"{curr.SerializationValue}\"")
+                                                                : Append($"nameof({Model.Name}.{curr.MemberName})") #>,
 <#
         }
 #>
-                _ => value.ToString()
-            };
-        }
+            _ => value.ToString()
+        };
+    }
 <#
     }
 #>
@@ -87,21 +88,21 @@ namespace <#= Model.Namespace #>
     {
 #>
 
-        public static string? GetDescription(this <#= Model.Name #> value)
+    public static string? GetDescription(this <#= Model.Name #> value)
+    {
+        return value switch
         {
-            return value switch
-            {
 <#
         foreach (var curr in Model.UniqueValues.Where(x => x.Description != null))
         {
 #>
-                <#= Model.Name #>.<#= curr.MemberName #> => "<#= curr.Description #>",
+            <#= Model.Name #>.<#= curr.MemberName #> => "<#= curr.Description #>",
 <#
         }
 #>
-                _ => null
-            };
-        }
+            _ => null
+        };
+    }
 <#
     }
 #>
@@ -113,33 +114,33 @@ namespace <#= Model.Namespace #>
     {
 #>
 
-        public static string GetDisplayShortName(this <#= Model.Name #> value)
+    public static string GetDisplayShortName(this <#= Model.Name #> value)
+    {
+        return value switch
         {
-            return value switch
-            {
 <#
         foreach (var curr in Model.UniqueValues.Where(x => x.Display?.ShortName != null))
         {
 #>
-                <#= Model.Name #>.<#= curr.MemberName #> => <#= curr.Display!.ResourceShortName != null
-                                                                    ? Append(curr.Display.ResourceShortName)
-                                                                    : Append($"\"{curr.Display.ShortName}\"") #>,
+            <#= Model.Name #>.<#= curr.MemberName #> => <#= curr.Display!.ResourceShortName != null
+                                                                ? Append(curr.Display.ResourceShortName)
+                                                                : Append($"\"{curr.Display.ShortName}\"") #>,
 <#
         }
 #>
-                _ => GetDisplayName(value)
-            };
-        }
+            _ => GetDisplayName(value)
+        };
+    }
 
-        public static string GetDisplayName(this <#= Model.Name #> value)
+    public static string GetDisplayName(this <#= Model.Name #> value)
+    {
+        return value switch
         {
-            return value switch
-            {
 <#
         foreach (var curr in Model.UniqueValues)
         {
 #>
-                <#= Model.Name #>.<#= curr.MemberName #> => <#=
+            <#= Model.Name #>.<#= curr.MemberName #> => <#=
                     curr.Display?.ResourceName != null
                         ? Append(curr.Display.ResourceName)
                         : curr.Display?.Name != null
@@ -148,9 +149,9 @@ namespace <#= Model.Namespace #>
 <#
         }
 #>
-                _ => value.ToString()
-            };
-        }
+            _ => value.ToString()
+        };
+    }
 <#
     }
 #>
@@ -159,31 +160,32 @@ namespace <#= Model.Namespace #>
     {
 #>
 
-        public static string? GetDescription(this <#= Model.Name #> value)
+    public static string? GetDescription(this <#= Model.Name #> value)
+    {
+        return value switch
         {
-            return value switch
-            {
 <#
         foreach (var curr in Model.UniqueValues.Where(x => x.Display?.Description != null))
         {
 #>
-                <#= Model.Name #>.<#= curr.MemberName #> => <#=
+            <#= Model.Name #>.<#= curr.MemberName #> => <#=
                     curr.Display!.ResourceDescription != null
                         ? Append(curr.Display.ResourceDescription)
                         : Append($"\"{curr.Display.Description}\"") #>,
 <#
         }
 #>
-                _ => null
-            };
-        }
+            _ => null
+        };
+    }
 <#
     }
 #>
-    }
+}
 <#
     if (!string.IsNullOrEmpty(Model.Namespace))
     {
+        PopIndent();
 #>
 }
 <#

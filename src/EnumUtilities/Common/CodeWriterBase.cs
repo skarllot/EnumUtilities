@@ -9,13 +9,23 @@ namespace Raiqub.Generators.EnumUtilities.Common;
 /// <summary>Represents the base class for code writers.</summary>
 public abstract class CodeWriterBase
 {
+    private const char IndentationChar = ' ';
+    private const int CharsPerIndentation = 4;
+
     private readonly StringBuilder _builder;
+    private readonly int _charsPerIndentation;
+    private int _indentation;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CodeWriterBase"/> class with a <see cref="StringBuilder"/>.
+    /// Initializes a new instance of the CodeWriterBase class with a StringBuilder.
     /// </summary>
-    /// <param name="builder">The <see cref="StringBuilder"/> object used for building the template.</param>
-    protected CodeWriterBase(StringBuilder builder) => _builder = builder;
+    /// <param name="builder">The StringBuilder object used for building the template.</param>
+    /// <param name="charsPerIndentation">The number of characters per indentation level.</param>
+    protected CodeWriterBase(StringBuilder builder, int charsPerIndentation = CharsPerIndentation)
+    {
+        _builder = builder;
+        _charsPerIndentation = charsPerIndentation;
+    }
 
     /// <summary>Gets the name of the current assembly.</summary>
     protected static AssemblyName CurrentAssemblyName { get; } = typeof(CodeWriterBase).Assembly.GetName();
@@ -46,6 +56,7 @@ public abstract class CodeWriterBase
     public void GenerateCompilationSource(SourceProductionContext context)
     {
         _builder.Clear();
+        ClearIndent();
         context.AddSource(GetFileName(), SourceText.From(TransformText(), Encoding.UTF8));
     }
 
@@ -54,9 +65,34 @@ public abstract class CodeWriterBase
     protected void Write(string? textToAppend)
     {
         if (string.IsNullOrEmpty(textToAppend))
+        {
             return;
+        }
 
-        _builder.Append(textToAppend);
+        if (_indentation == 0)
+        {
+            _builder.Append(textToAppend);
+            return;
+        }
+
+        bool endsWithNewline = _builder.Length > 0 && _builder[^1] == '\n';
+        bool isFinalLine;
+        var remainingText = textToAppend.AsSpan();
+        while (true)
+        {
+            var nextLine = GetNextLine(ref remainingText, out isFinalLine);
+
+            if (endsWithNewline && nextLine.Length > 0)
+                WriteIndentation();
+
+            _builder.Append(nextLine);
+
+            if (isFinalLine)
+                return;
+
+            _builder.AppendLine();
+            endsWithNewline = true;
+        }
     }
 
     /// <summary>Writes the specified interpolated string directly into the generated output.</summary>
@@ -74,6 +110,12 @@ public abstract class CodeWriterBase
     {
         // Text was already been written using interpolated string handler
         // Nothing to do
+    }
+
+    /// <summary>Appends a new line into the generated output.</summary>
+    public void WriteLine()
+    {
+        _builder.AppendLine();
     }
 
     /// <summary>Write text directly into the generated output and appends a new line.</summary>
@@ -107,6 +149,69 @@ public abstract class CodeWriterBase
     {
         // Text is written using interpolated string handler by compiler generated code
         return default;
+    }
+
+    /// <summary>Increase the indent.</summary>
+    protected void PushIndent()
+    {
+        _indentation++;
+    }
+
+    /// <summary>Remove the last indent that was added with <see cref="PushIndent"/>.</summary>
+    protected void PopIndent()
+    {
+        if (_indentation <= 0)
+        {
+            Throw();
+            static void Throw() => throw new InvalidOperationException("Indentation is already zeroed");
+        }
+
+        _indentation--;
+    }
+
+    /// <summary>Remove any indentation.</summary>
+    protected void ClearIndent()
+    {
+        _indentation = 0;
+    }
+
+    private void WriteIndentation()
+    {
+        _builder.Append(IndentationChar, _charsPerIndentation * _indentation);
+    }
+
+    private static ReadOnlySpan<char> GetNextLine(ref ReadOnlySpan<char> remainingText, out bool isFinalLine)
+    {
+        if (remainingText.IsEmpty)
+        {
+            isFinalLine = true;
+            return default;
+        }
+
+        ReadOnlySpan<char> next;
+        ReadOnlySpan<char> rest;
+
+        int lineLength = remainingText.IndexOf('\n');
+        if (lineLength == -1)
+        {
+            lineLength = remainingText.Length;
+            isFinalLine = true;
+            rest = default;
+        }
+        else
+        {
+            rest = remainingText.Slice(lineLength + 1);
+            isFinalLine = false;
+        }
+
+        if ((uint)lineLength > 0 && remainingText[lineLength - 1] == '\r')
+        {
+            lineLength--;
+        }
+
+        next = remainingText.Slice(0, lineLength);
+        remainingText = rest;
+        return next;
     }
 
     protected readonly struct None;
