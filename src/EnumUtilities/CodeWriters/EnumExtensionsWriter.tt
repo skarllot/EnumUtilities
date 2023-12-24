@@ -21,7 +21,7 @@ namespace <#= Model.Namespace #>
 #>
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("<#= CurrentAssemblyName.Name #>", "<#= Append($"{CurrentAssemblyName.Version}") #>")]
-public static partial class <#= Model.Name #>Extensions
+<#= Model.IsPublic ? "public" : "internal" #> static partial class <#= Model.Name #>Extensions
 {
 <#
     /* -----------------------------------------------------------------------------------------------------------------

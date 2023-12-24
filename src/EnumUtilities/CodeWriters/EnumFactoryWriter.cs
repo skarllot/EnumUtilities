@@ -69,7 +69,14 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             
             #line default
             #line hidden
-            this.Write("\")]\r\npublic static partial class ");
+            this.Write("\")]\r\n");
+            
+            #line 26 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.IsPublic ? "public" : "internal"));
+            
+            #line default
+            #line hidden
+            this.Write(" static partial class ");
             
             #line 26 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));

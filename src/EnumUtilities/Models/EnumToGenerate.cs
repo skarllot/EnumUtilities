@@ -3,7 +3,7 @@ using Raiqub.Generators.EnumUtilities.Common;
 
 namespace Raiqub.Generators.EnumUtilities.Models;
 
-public sealed record EnumToGenerate(string Namespace, string Name, string UnderlyingType, List<EnumValue> Values)
+public sealed record EnumToGenerate(string Namespace, bool IsPublic, string Name, string UnderlyingType, List<EnumValue> Values)
 {
     public IEnumerable<EnumValue> UniqueValues =>
         Values.DistinctBy(static it => it.MemberValue, StringComparer.Ordinal);
@@ -42,6 +42,7 @@ public sealed record EnumToGenerate(string Namespace, string Name, string Underl
 
         return new EnumToGenerate(
             typeSymbol.ContainingNamespace?.ToString() ?? "Global",
+            typeSymbol.DeclaredAccessibility == Accessibility.Public,
             typeSymbol.Name,
             typeSymbol.EnumUnderlyingType?.GetNumericCSharpKeyword() ?? "int",
             enumValues);

@@ -22,7 +22,7 @@ namespace <#= Model.Namespace #>
 #>
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("<#= CurrentAssemblyName.Name #>", "<#= Append($"{CurrentAssemblyName.Version}") #>")]
-public static partial class <#= Model.Name #>Validation
+<#= Model.IsPublic ? "public" : "internal" #> static partial class <#= Model.Name #>Validation
 {
     /// <summary>Returns a boolean telling whether the value of <see cref="<#= Model.Name #>"/> instance exists in the enumeration.</summary>
     /// <returns><c>true</c> if the value of <see cref="<#= Model.Name #>"/> instance exists in the enumeration; <c>false</c> otherwise.</returns>
