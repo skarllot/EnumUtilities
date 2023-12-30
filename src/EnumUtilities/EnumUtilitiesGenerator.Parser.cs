@@ -1,4 +1,5 @@
 ﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Raiqub.Generators.EnumUtilities;
@@ -9,7 +10,8 @@ public partial class EnumUtilitiesGenerator
 
     private static bool IsSyntaxTargetForGeneration(SyntaxNode node, CancellationToken cancellationToken)
     {
-        return node is EnumDeclarationSyntax { AttributeLists.Count: > 0 };
+        return node is EnumDeclarationSyntax { AttributeLists.Count: > 0 } enumNode &&
+               !enumNode.Modifiers.Any(SyntaxKind.PrivateKeyword);
     }
 
     private static EnumDeclarationSyntax? GetSemanticTargetForGeneration(

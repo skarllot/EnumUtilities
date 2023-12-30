@@ -12,10 +12,8 @@ using System;
 <#
     if (!string.IsNullOrEmpty(Model.Namespace))
     {
-#>
-namespace <#= Model.Namespace #>
-{
-<#
+        WriteLine($"namespace {Model.Namespace}");
+        WriteLine("{");
         PushIndent();
     }
 #>
@@ -30,7 +28,7 @@ namespace <#= Model.Namespace #>
 #>
     /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
     /// <returns>The string representation of the value of this instance.</returns>
-    public static string ToStringFast(this <#= Model.Name #> value)
+    public static string ToStringFast(this <#= Model.RefName #> value)
     {
         return value switch
         {
@@ -38,7 +36,7 @@ namespace <#= Model.Namespace #>
     foreach (var curr in Model.UniqueValues)
     {
 #>
-            <#= Model.Name #>.<#= curr.MemberName #> => nameof(<#= Model.Name #>.<#= curr.MemberName #>),
+            <#= Model.RefName #>.<#= curr.MemberName #> => nameof(<#= Model.RefName #>.<#= curr.MemberName #>),
 <#
     }
 #>
@@ -48,7 +46,7 @@ namespace <#= Model.Namespace #>
 
     /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
     /// <returns><c>true</c> if the value of this instance exists in the enumeration; <c>false</c> otherwise.</returns>
-    public static bool IsDefined(this <#= Model.Name #> value)
+    public static bool IsDefined(this <#= Model.RefName #> value)
     {
         return <#= Model.Name #>Validation.IsDefined(value);
     }
@@ -60,7 +58,7 @@ namespace <#= Model.Namespace #>
     {
 #>
 
-    public static string ToEnumMemberValue(this <#= Model.Name #> value)
+    public static string ToEnumMemberValue(this <#= Model.RefName #> value)
     {
         return value switch
         {
@@ -68,9 +66,10 @@ namespace <#= Model.Namespace #>
         foreach (var curr in Model.UniqueValues)
         {
 #>
-            <#= Model.Name #>.<#= curr.MemberName #> => <#= curr.SerializationValue != null
-                                                                ? Append($"\"{curr.SerializationValue}\"")
-                                                                : Append($"nameof({Model.Name}.{curr.MemberName})") #>,
+            <#= Model.RefName #>.<#= curr.MemberName #> => <#=
+                    curr.SerializationValue != null
+                        ? Append($"\"{curr.SerializationValue}\"")
+                        : Append($"nameof({Model.RefName}.{curr.MemberName})") #>,
 <#
         }
 #>
@@ -88,7 +87,7 @@ namespace <#= Model.Namespace #>
     {
 #>
 
-    public static string? GetDescription(this <#= Model.Name #> value)
+    public static string? GetDescription(this <#= Model.RefName #> value)
     {
         return value switch
         {
@@ -96,7 +95,7 @@ namespace <#= Model.Namespace #>
         foreach (var curr in Model.UniqueValues.Where(x => x.Description != null))
         {
 #>
-            <#= Model.Name #>.<#= curr.MemberName #> => "<#= curr.Description #>",
+            <#= Model.RefName #>.<#= curr.MemberName #> => "<#= curr.Description #>",
 <#
         }
 #>
@@ -114,7 +113,7 @@ namespace <#= Model.Namespace #>
     {
 #>
 
-    public static string GetDisplayShortName(this <#= Model.Name #> value)
+    public static string GetDisplayShortName(this <#= Model.RefName #> value)
     {
         return value switch
         {
@@ -122,9 +121,9 @@ namespace <#= Model.Namespace #>
         foreach (var curr in Model.UniqueValues.Where(x => x.Display?.ShortName != null))
         {
 #>
-            <#= Model.Name #>.<#= curr.MemberName #> => <#= curr.Display!.ResourceShortName != null
-                                                                ? Append(curr.Display.ResourceShortName)
-                                                                : Append($"\"{curr.Display.ShortName}\"") #>,
+            <#= Model.RefName #>.<#= curr.MemberName #> => <#= curr.Display!.ResourceShortName != null
+                                                                   ? Append(curr.Display.ResourceShortName)
+                                                                   : Append($"\"{curr.Display.ShortName}\"") #>,
 <#
         }
 #>
@@ -132,7 +131,7 @@ namespace <#= Model.Namespace #>
         };
     }
 
-    public static string GetDisplayName(this <#= Model.Name #> value)
+    public static string GetDisplayName(this <#= Model.RefName #> value)
     {
         return value switch
         {
@@ -140,12 +139,12 @@ namespace <#= Model.Namespace #>
         foreach (var curr in Model.UniqueValues)
         {
 #>
-            <#= Model.Name #>.<#= curr.MemberName #> => <#=
+            <#= Model.RefName #>.<#= curr.MemberName #> => <#=
                     curr.Display?.ResourceName != null
                         ? Append(curr.Display.ResourceName)
                         : curr.Display?.Name != null
                             ? Append($"\"{curr.Display.Name}\"")
-                            : Append($"nameof({Model.Name}.{curr.MemberName})") #>,
+                            : Append($"nameof({Model.RefName}.{curr.MemberName})") #>,
 <#
         }
 #>
@@ -160,7 +159,7 @@ namespace <#= Model.Namespace #>
     {
 #>
 
-    public static string? GetDescription(this <#= Model.Name #> value)
+    public static string? GetDescription(this <#= Model.RefName #> value)
     {
         return value switch
         {
@@ -168,7 +167,7 @@ namespace <#= Model.Namespace #>
         foreach (var curr in Model.UniqueValues.Where(x => x.Display?.Description != null))
         {
 #>
-            <#= Model.Name #>.<#= curr.MemberName #> => <#=
+            <#= Model.RefName #>.<#= curr.MemberName #> => <#=
                     curr.Display!.ResourceDescription != null
                         ? Append(curr.Display.ResourceDescription)
                         : Append($"\"{curr.Display.Description}\"") #>,
@@ -186,9 +185,7 @@ namespace <#= Model.Namespace #>
     if (!string.IsNullOrEmpty(Model.Namespace))
     {
         PopIndent();
-#>
-}
-<#
+        WriteLine("}");
     }
 #>
 <#+
@@ -196,5 +193,5 @@ namespace <#= Model.Namespace #>
     {
     }
 
-    public override string GetFileName() => $"{Model.Namespace}.{Model.Name}Extensions.g.cs";
+    public override string GetFileName() => $"{Model.Namespace ?? "_"}.{Model.Name}Extensions.g.cs";
 #>

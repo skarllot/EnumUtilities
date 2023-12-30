@@ -11,9 +11,9 @@ public static class CodeAnalysisExtensions
         return source.Where(static it => it is not null)!;
     }
 
-    public static string GetNamespace(this BaseTypeDeclarationSyntax syntax)
+    public static string? GetNamespace(this BaseTypeDeclarationSyntax syntax)
     {
-        var nameSpace = string.Empty;
+        string? nameSpace = null;
         var potentialNamespaceParent = syntax.Parent;
 
         while (potentialNamespaceParent != null &&
@@ -27,7 +27,7 @@ public static class CodeAnalysisExtensions
         {
             nameSpace = namespaceParent.Name.ToString();
 
-            // Keep moving "out" of the namespace declarations until we 
+            // Keep moving "out" of the namespace declarations until we
             // run out of nested namespace declarations
             while (true)
             {

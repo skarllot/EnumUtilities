@@ -34,21 +34,8 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
 
     if (!string.IsNullOrEmpty(Model.Namespace))
     {
-
-            
-            #line default
-            #line hidden
-            this.Write("namespace ");
-            
-            #line 18 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Namespace));
-            
-            #line default
-            #line hidden
-            this.Write("\r\n{\r\n");
-            
-            #line 20 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-
+        WriteLine($"namespace {Model.Namespace}");
+        WriteLine("{");
         PushIndent();
     }
 
@@ -57,35 +44,35 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]\r\n[global::System.CodeDom.Compiler.GeneratedCodeAttribute(\"");
             
-            #line 25 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 23 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(CurrentAssemblyName.Name));
             
             #line default
             #line hidden
             this.Write("\", \"");
             
-            #line 25 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 23 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Append($"{CurrentAssemblyName.Version}")));
             
             #line default
             #line hidden
             this.Write("\")]\r\n");
             
-            #line 26 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 24 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.IsPublic ? "public" : "internal"));
             
             #line default
             #line hidden
             this.Write(" static partial class ");
             
-            #line 26 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 24 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write("Factory\r\n{\r\n");
             
-            #line 28 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 26 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
 
     /* -----------------------------------------------------------------------------------------------------------------
      * DEFAULT
@@ -96,35 +83,35 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("    /// <summary>\r\n    /// Converts the string representation of the name or numeric value of one or more enumerated constants to\r\n    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.\r\n    /// </summary>\r\n    /// <param name=\"name\">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>\r\n    /// <param name=\"comparisonType\">One of the enumeration values that specifies how the strings will be compared.</param>\r\n    /// <param name=\"result\">\r\n    /// When this method returns, result contains an object of type ");
             
-            #line 40 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 38 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(" whose value is represented by value\r\n    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the\r\n    /// underlying type of ");
             
-            #line 42 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 40 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(". Note that this value need not be a member of the ");
             
-            #line 42 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 40 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(" enumeration.\r\n    /// </param>\r\n    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>\r\n    /// <exception cref=\"ArgumentException\"><paramref name=\"comparisonType\"/> is not a <see cref=\"StringComparison\"/> value.</exception>\r\n    public static bool TryParse(\r\n        [NotNullWhen(true)] string? name,\r\n        StringComparison comparisonType,\r\n        out ");
             
-            #line 49 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 47 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(" result)\r\n    {\r\n        switch (name)\r\n        {\r\n");
             
-            #line 53 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 51 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
 
     foreach (var curr in Model.Values)
     {
@@ -134,35 +121,35 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("            case { } s when s.Equals(nameof(");
             
-            #line 57 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 55 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 57 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 55 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
             
             #line default
             #line hidden
             this.Write("), comparisonType):\r\n                result = ");
             
-            #line 58 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 56 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 58 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 56 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
             
             #line default
             #line hidden
             this.Write(";\r\n                return true;\r\n");
             
-            #line 60 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 58 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
 
     }
 
@@ -171,49 +158,49 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("            case { } s when TryParseNumeric(s, comparisonType, out ");
             
-            #line 63 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 61 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
             
             #line default
             #line hidden
             this.Write(" val):\r\n                result = (");
             
-            #line 64 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 62 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(")val;\r\n                return true;\r\n            default:\r\n                return Enum.TryParse(name, out result);\r\n        }\r\n    }\r\n\r\n    /// <summary>\r\n    /// Converts the string representation of the name or numeric value of one or more enumerated constants to\r\n    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.\r\n    /// </summary>\r\n    /// <param name=\"name\">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>\r\n    /// <param name=\"result\">\r\n    /// When this method returns, result contains an object of type ");
             
-            #line 77 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 75 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(" whose value is represented by value\r\n    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the\r\n    /// underlying type of ");
             
-            #line 79 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 77 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(". Note that this value need not be a member of the ");
             
-            #line 79 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 77 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(" enumeration.\r\n    /// </param>\r\n    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>\r\n    public static bool TryParse(\r\n        [NotNullWhen(true)] string? name,\r\n        out ");
             
-            #line 84 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 82 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(" result)\r\n    {\r\n        switch (name)\r\n        {\r\n");
             
-            #line 88 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 86 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
 
     foreach (var curr in Model.Values)
     {
@@ -223,35 +210,35 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("            case nameof(");
             
-            #line 92 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 90 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 92 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 90 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
             
             #line default
             #line hidden
             this.Write("):\r\n                result = ");
             
-            #line 93 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 91 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 93 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 91 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
             
             #line default
             #line hidden
             this.Write(";\r\n                return true;\r\n");
             
-            #line 95 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 93 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
 
     }
 
@@ -260,112 +247,112 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("            case { } s when TryParseNumeric(s, StringComparison.Ordinal, out ");
             
-            #line 98 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 96 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
             
             #line default
             #line hidden
             this.Write(" val):\r\n                result = (");
             
-            #line 99 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 97 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(")val;\r\n                return true;\r\n            default:\r\n                return Enum.TryParse(name, out result);\r\n        }\r\n    }\r\n\r\n    /// <summary>\r\n    /// Converts the string representation of the name or numeric value of one or more enumerated constants to\r\n    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.\r\n    /// </summary>\r\n    /// <param name=\"name\">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>\r\n    /// <param name=\"result\">\r\n    /// When this method returns, result contains an object of type ");
             
-            #line 112 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 110 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(" whose value is represented by value\r\n    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the\r\n    /// underlying type of ");
             
-            #line 114 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 112 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(". Note that this value need not be a member of the ");
             
-            #line 114 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 112 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(" enumeration.\r\n    /// </param>\r\n    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>\r\n    public static bool TryParseIgnoreCase(\r\n        [NotNullWhen(true)] string? name,\r\n        out ");
             
-            #line 119 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 117 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(" result)\r\n    {\r\n        return TryParse(name, StringComparison.OrdinalIgnoreCase, out result);\r\n    }\r\n\r\n    /// <summary>\r\n    /// Converts the string representation of the name or numeric value of one or more enumerated constants to\r\n    /// an equivalent enumerated object.\r\n    /// </summary>\r\n    /// <param name=\"name\">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>\r\n    /// <returns>\r\n    /// Contains an object of type ");
             
-            #line 130 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 128 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(" whose value is represented by value if the parse operation succeeds.\r\n    /// If the parse operation fails, result contains <c>null</c> value.\r\n    /// </returns>\r\n    public static ");
             
-            #line 133 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 131 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write("? TryParse(string? name)\r\n    {\r\n        return TryParse(name, out ");
             
-            #line 135 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 133 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(" result) ? result : null;\r\n    }\r\n\r\n    /// <summary>\r\n    /// Converts the string representation of the name or numeric value of one or more enumerated constants to\r\n    /// an equivalent enumerated object.\r\n    /// </summary>\r\n    /// <param name=\"name\">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>\r\n    /// <returns>\r\n    /// Contains an object of type ");
             
-            #line 144 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 142 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(" whose value is represented by value if the parse operation succeeds.\r\n    /// If the parse operation fails, result contains <c>null</c> value.\r\n    /// </returns>\r\n    public static ");
             
-            #line 147 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 145 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write("? TryParseIgnoreCase(string? name)\r\n    {\r\n        return TryParse(name, StringComparison.OrdinalIgnoreCase, out ");
             
-            #line 149 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 147 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(" result) ? result : null;\r\n    }\r\n\r\n    /// <summary>\r\n    /// Converts the string representation of the name or numeric value of one or more enumerated constants to\r\n    /// an equivalent enumerated object.\r\n    /// </summary>\r\n    /// <param name=\"name\">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>\r\n    /// <param name=\"comparisonType\">One of the enumeration values that specifies how the strings will be compared.</param>\r\n    /// <returns>\r\n    /// Contains an object of type ");
             
-            #line 159 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 157 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(" whose value is represented by value if the parse operation succeeds.\r\n    /// If the parse operation fails, result contains <c>null</c> value.\r\n    /// </returns>\r\n    /// <exception cref=\"ArgumentException\"><paramref name=\"comparisonType\"/> is not a <see cref=\"StringComparison\"/> value.</exception>\r\n    public static ");
             
-            #line 163 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 161 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write("? TryParse(string? name, StringComparison comparisonType)\r\n    {\r\n        return TryParse(name, comparisonType, out ");
             
-            #line 165 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 163 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(" result) ? result : null;\r\n    }\r\n");
             
-            #line 167 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 165 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
 
     /* -----------------------------------------------------------------------------------------------------------------
      * ENUM MEMBER ATTRIBUTE
@@ -378,35 +365,35 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("\r\n    /// <summary>\r\n    /// Converts the string representation of the value associated with one enumerated constant to\r\n    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.\r\n    /// </summary>\r\n    /// <param name=\"enumMemberValue\">The value as defined with <see cref=\"System.Runtime.Serialization.EnumMemberAttribute\"/>.</param>\r\n    /// <param name=\"comparisonType\">One of the enumeration values that specifies how the strings will be compared.</param>\r\n    /// <param name=\"result\">\r\n    /// When this method returns, result contains an object of type ");
             
-            #line 182 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 180 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(" whose value is represented by value\r\n    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the\r\n    /// underlying type of ");
             
-            #line 184 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 182 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(". Note that this value need not be a member of the ");
             
-            #line 184 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 182 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(" enumeration.\r\n    /// </param>\r\n    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>\r\n    /// <exception cref=\"ArgumentException\"><paramref name=\"comparisonType\"/> is not a <see cref=\"StringComparison\"/> value.</exception>\r\n    public static bool TryParseFromEnumMemberValue(\r\n        [NotNullWhen(true)] string? enumMemberValue,\r\n        StringComparison comparisonType,\r\n        out ");
             
-            #line 191 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 189 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(" result)\r\n    {\r\n        switch (enumMemberValue)\r\n        {\r\n");
             
-            #line 195 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 193 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
 
         foreach (var curr in Model.Values)
         {
@@ -416,30 +403,30 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("            case { } s when s.Equals(");
             
-            #line 199 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 197 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(curr.SerializationValue != null
                         ? Append($"\"{curr.SerializationValue}\"")
-                        : Append($"nameof({Model.Name}.{curr.MemberName})")));
+                        : Append($"nameof({Model.RefName}.{curr.MemberName})")));
             
             #line default
             #line hidden
             this.Write(", comparisonType):\r\n                result = ");
             
-            #line 203 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 201 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 203 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 201 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
             
             #line default
             #line hidden
             this.Write(";\r\n                return true;\r\n");
             
-            #line 205 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 203 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
 
         }
 
@@ -448,77 +435,77 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("            default:\r\n                result = default;\r\n                return false;\r\n        }\r\n    }\r\n\r\n    /// <summary>\r\n    /// Converts the string representation of the value associated with one enumerated constant to\r\n    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.\r\n    /// </summary>\r\n    /// <param name=\"enumMemberValue\">The value as defined with <see cref=\"System.Runtime.Serialization.EnumMemberAttribute\"/>.</param>\r\n    /// <param name=\"result\">\r\n    /// When this method returns, result contains an object of type ");
             
-            #line 220 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 218 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(" whose value is represented by value\r\n    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the\r\n    /// underlying type of ");
             
-            #line 222 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 220 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(". Note that this value need not be a member of the ");
             
-            #line 222 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 220 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(" enumeration.\r\n    /// </param>\r\n    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>\r\n    public static bool TryParseFromEnumMemberValue([NotNullWhen(true)] string? enumMemberValue, out ");
             
-            #line 225 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 223 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(" result)\r\n    {\r\n        return TryParseFromEnumMemberValue(enumMemberValue, StringComparison.Ordinal, out result);\r\n    }\r\n\r\n    /// <summary>\r\n    /// Converts the string representation of the value associated with one enumerated constant to\r\n    /// an equivalent enumerated object.\r\n    /// </summary>\r\n    /// <param name=\"enumMemberValue\">The value as defined with <see cref=\"System.Runtime.Serialization.EnumMemberAttribute\"/>.</param>\r\n    /// <param name=\"comparisonType\">One of the enumeration values that specifies how the strings will be compared.</param>\r\n    /// <returns>\r\n    /// Contains an object of type ");
             
-            #line 237 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 235 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(" whose value is represented by value if the parse operation succeeds.\r\n    /// If the parse operation fails, result contains a null value.\r\n    /// </returns>\r\n    /// <exception cref=\"ArgumentException\"><paramref name=\"comparisonType\"/> is not a <see cref=\"StringComparison\"/> value.</exception>\r\n    public static ");
             
-            #line 241 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 239 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write("? TryParseFromEnumMemberValue(string? enumMemberValue, StringComparison comparisonType)\r\n    {\r\n        return TryParseFromEnumMemberValue(enumMemberValue, comparisonType, out ");
             
-            #line 243 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 241 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(" result) ? result : null;\r\n    }\r\n\r\n    /// <summary>\r\n    /// Converts the string representation of the value associated with one enumerated constant to\r\n    /// an equivalent enumerated object.\r\n    /// </summary>\r\n    /// <param name=\"enumMemberValue\">The value as defined with <see cref=\"System.Runtime.Serialization.EnumMemberAttribute\"/>.</param>\r\n    /// <returns>\r\n    /// Contains an object of type ");
             
-            #line 252 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 250 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(" whose value is represented by value if the parse operation succeeds.\r\n    /// If the parse operation fails, result contains a null value.\r\n    /// </returns>\r\n    public static ");
             
-            #line 255 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 253 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write("? TryParseFromEnumMemberValue(string? enumMemberValue)\r\n    {\r\n        return TryParseFromEnumMemberValue(enumMemberValue, StringComparison.Ordinal, out ");
             
-            #line 257 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 255 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(" result) ? result : null;\r\n    }\r\n");
             
-            #line 259 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 257 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
 
     }
 
@@ -526,7 +513,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line default
             #line hidden
             
-            #line 262 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 260 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
 
     /* -----------------------------------------------------------------------------------------------------------------
      * DESCRIPTION ATTRIBUTE
@@ -539,14 +526,14 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("\r\n    public static bool TryCreateFromDescription(\r\n        [NotNullWhen(true)] string? description,\r\n        StringComparison comparisonType,\r\n        out ");
             
-            #line 273 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 271 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(" result)\r\n    {\r\n        switch (description)\r\n        {\r\n");
             
-            #line 277 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 275 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
 
         foreach (var curr in Model.Values.Where(x => x.Description != null))
         {
@@ -556,28 +543,28 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("            case { } s when s.Equals(\"");
             
-            #line 281 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 279 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(curr.Description));
             
             #line default
             #line hidden
             this.Write("\", comparisonType):\r\n                result = ");
             
-            #line 282 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 280 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 282 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 280 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
             
             #line default
             #line hidden
             this.Write(";\r\n                return true;\r\n");
             
-            #line 284 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 282 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
 
         }
 
@@ -586,42 +573,42 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("            default:\r\n                result = default;\r\n                return false;\r\n        }\r\n    }\r\n\r\n    public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, out ");
             
-            #line 293 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 291 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(" result)\r\n    {\r\n        return TryCreateFromDescription(description, StringComparison.Ordinal, out result);\r\n    }\r\n\r\n    public static ");
             
-            #line 298 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 296 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write("? TryCreateFromDescription(string? description, StringComparison comparisonType)\r\n    {\r\n        return TryCreateFromDescription(description, comparisonType, out ");
             
-            #line 300 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 298 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(" result) ? result : null;\r\n    }\r\n\r\n    public static ");
             
-            #line 303 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 301 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write("? TryCreateFromDescription(string? description)\r\n    {\r\n        return TryCreateFromDescription(description, StringComparison.Ordinal, out ");
             
-            #line 305 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 303 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(" result) ? result : null;\r\n    }\r\n");
             
-            #line 307 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 305 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
 
     }
 
@@ -629,7 +616,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line default
             #line hidden
             
-            #line 310 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 308 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
 
     /* -----------------------------------------------------------------------------------------------------------------
      * DISPLAY ATTRIBUTE
@@ -642,14 +629,14 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("\r\n    public static bool TryCreateFromDisplayShortName(\r\n        [NotNullWhen(true)] string? displayShortName,\r\n        StringComparison comparisonType,\r\n        out ");
             
-            #line 321 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 319 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(" result)\r\n    {\r\n        switch (displayShortName)\r\n        {\r\n");
             
-            #line 325 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 323 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
 
         foreach (var curr in Model.Values.Where(x => x.Display?.ShortName != null))
         {
@@ -659,7 +646,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("            case { } s when s.Equals(");
             
-            #line 329 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 327 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(curr.Display!.ResourceShortName != null
                         ? Append(curr.Display.ResourceShortName)
                         : Append($"\"{curr.Display.ShortName}\"")));
@@ -668,21 +655,21 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write(", comparisonType):\r\n                result = ");
             
-            #line 333 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 331 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 333 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 331 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
             
             #line default
             #line hidden
             this.Write(";\r\n                return true;\r\n");
             
-            #line 335 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 333 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
 
         }
 
@@ -691,49 +678,49 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("            default:\r\n                return TryCreateFromDisplayName(displayShortName, comparisonType, out result);\r\n        }\r\n    }\r\n\r\n    public static bool TryCreateFromDisplayShortName([NotNullWhen(true)] string? displayShortName, out ");
             
-            #line 343 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 341 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(" result)\r\n    {\r\n        return TryCreateFromDisplayShortName(displayShortName, StringComparison.Ordinal, out result);\r\n    }\r\n\r\n    public static ");
             
-            #line 348 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 346 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write("? TryCreateFromDisplayShortName(string? displayShortName, StringComparison comparisonType)\r\n    {\r\n        return TryCreateFromDisplayShortName(displayShortName, comparisonType, out ");
             
-            #line 350 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 348 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(" result) ? result : null;\r\n    }\r\n\r\n    public static ");
             
-            #line 353 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 351 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write("? TryCreateFromDisplayShortName(string? displayShortName)\r\n    {\r\n        return TryCreateFromDisplayShortName(displayShortName, StringComparison.Ordinal, out ");
             
-            #line 355 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 353 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(" result) ? result : null;\r\n    }\r\n\r\n    public static bool TryCreateFromDisplayName(\r\n        [NotNullWhen(true)] string? displayName,\r\n        StringComparison comparisonType,\r\n        out ");
             
-            #line 361 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 359 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(" result)\r\n    {\r\n        switch (displayName)\r\n        {\r\n");
             
-            #line 365 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 363 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
 
         foreach (var curr in Model.Values)
         {
@@ -743,32 +730,32 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("            case { } s when s.Equals(");
             
-            #line 369 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 367 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(curr.Display?.ResourceName != null
                         ? Append(curr.Display.ResourceName)
                         : curr.Display?.Name != null
                             ? Append($"\"{curr.Display.Name}\"")
-                            : Append($"nameof({Model.Name}.{curr.MemberName})")));
+                            : Append($"nameof({Model.RefName}.{curr.MemberName})")));
             
             #line default
             #line hidden
             this.Write(", comparisonType):\r\n                result = ");
             
-            #line 375 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 373 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 375 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 373 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
             
             #line default
             #line hidden
             this.Write(";\r\n                return true;\r\n");
             
-            #line 377 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 375 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
 
         }
 
@@ -777,42 +764,42 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("            default:\r\n                result = default;\r\n                return false;\r\n        }\r\n    }\r\n\r\n    public static bool TryCreateFromDisplayName([NotNullWhen(true)] string? displayName, out ");
             
-            #line 386 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 384 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(" result)\r\n    {\r\n        return TryCreateFromDisplayName(displayName, StringComparison.Ordinal, out result);\r\n    }\r\n\r\n    public static ");
             
-            #line 391 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 389 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write("? TryCreateFromDisplayName(string? displayName, StringComparison comparisonType)\r\n    {\r\n        return TryCreateFromDisplayName(displayName, comparisonType, out ");
             
-            #line 393 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 391 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(" result) ? result : null;\r\n    }\r\n\r\n    public static ");
             
-            #line 396 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 394 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write("? TryCreateFromDisplayName(string? displayName)\r\n    {\r\n        return TryCreateFromDisplayName(displayName, StringComparison.Ordinal, out ");
             
-            #line 398 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 396 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(" result) ? result : null;\r\n    }\r\n");
             
-            #line 400 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 398 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
 
     }
 
@@ -820,7 +807,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line default
             #line hidden
             
-            #line 403 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 401 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
 
     if (Model.HasDisplayDescription)
     {
@@ -830,14 +817,14 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("\r\n    public static bool TryCreateFromDescription(\r\n        [NotNullWhen(true)] string? description,\r\n        StringComparison comparisonType,\r\n        out ");
             
-            #line 411 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 409 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(" result)\r\n    {\r\n        switch (description)\r\n        {\r\n");
             
-            #line 415 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 413 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
 
         foreach (var curr in Model.Values.Where(x => x.Display?.Description != null))
         {
@@ -847,7 +834,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("            case { } s when s.Equals(");
             
-            #line 419 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 417 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(curr.Display!.ResourceDescription != null
                         ? Append(curr.Display.ResourceDescription)
                         : Append($"\"{curr.Display.Description}\"")));
@@ -856,21 +843,21 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write(", comparisonType):\r\n                result = ");
             
-            #line 423 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 421 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 423 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 421 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
             
             #line default
             #line hidden
             this.Write(";\r\n                return true;\r\n");
             
-            #line 425 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 423 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
 
         }
 
@@ -879,42 +866,42 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("            default:\r\n                result = default;\r\n                return false;\r\n        }\r\n    }\r\n\r\n    public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, out ");
             
-            #line 434 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 432 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(" result)\r\n    {\r\n        return TryCreateFromDescription(description, StringComparison.Ordinal, out result);\r\n    }\r\n\r\n    public static ");
             
-            #line 439 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 437 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write("? TryCreateFromDescription(string? description, StringComparison comparisonType)\r\n    {\r\n        return TryCreateFromDescription(description, comparisonType, out ");
             
-            #line 441 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 439 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(" result) ? result : null;\r\n    }\r\n\r\n    public static ");
             
-            #line 444 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 442 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write("? TryCreateFromDescription(string? description)\r\n    {\r\n        return TryCreateFromDescription(description, StringComparison.Ordinal, out ");
             
-            #line 446 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 444 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(" result) ? result : null;\r\n    }\r\n");
             
-            #line 448 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 446 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
 
     }
 
@@ -922,7 +909,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line default
             #line hidden
             
-            #line 451 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 449 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
 
     /* -----------------------------------------------------------------------------------------------------------------
      * MISCELLANEOUS
@@ -933,28 +920,28 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("\r\n    /// <summary>Retrieves an array of the values of the constants in the ");
             
-            #line 457 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 455 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(" enumeration.</summary>\r\n    /// <returns>An array that contains the values of the constants in ");
             
-            #line 458 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 456 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(".</returns>\r\n    public static ");
             
-            #line 459 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 457 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write("[] GetValues()\r\n    {\r\n        return new[]\r\n        {\r\n");
             
-            #line 463 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 461 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
 
     foreach (var curr in Model.UniqueValues)
     {
@@ -964,21 +951,21 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("            ");
             
-            #line 467 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 465 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 467 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 465 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
             
             #line default
             #line hidden
             this.Write(",\r\n");
             
-            #line 468 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 466 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
 
     }
 
@@ -987,21 +974,21 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("        };\r\n    }\r\n\r\n    /// <summary>Retrieves an array of the names of the constants in ");
             
-            #line 474 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 472 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(" enumeration.</summary>\r\n    /// <returns>A string array of the names of the constants in ");
             
-            #line 475 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 473 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(".</returns>\r\n    public static string[] GetNames()\r\n    {\r\n        return new[]\r\n        {\r\n");
             
-            #line 480 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 478 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
 
     foreach (var curr in Model.Values)
     {
@@ -1011,21 +998,21 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("            nameof(");
             
-            #line 484 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 482 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 484 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 482 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
             
             #line default
             #line hidden
             this.Write("),\r\n");
             
-            #line 485 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 483 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
 
     }
 
@@ -1034,47 +1021,40 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("        };\r\n    }\r\n\r\n    private static bool TryParseNumeric(\r\n        string name,\r\n        StringComparison comparisonType,\r\n        out ");
             
-            #line 494 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 492 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
             
             #line default
             #line hidden
             this.Write(" result)\r\n    {\r\n        switch (comparisonType)\r\n        {\r\n            case StringComparison.CurrentCulture:\r\n            case StringComparison.CurrentCultureIgnoreCase:\r\n                return ");
             
-            #line 500 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 498 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
             
             #line default
             #line hidden
             this.Write(".TryParse(name, NumberStyles.Integer, NumberFormatInfo.CurrentInfo, out result);\r\n            case StringComparison.InvariantCulture:\r\n            case StringComparison.InvariantCultureIgnoreCase:\r\n            case StringComparison.Ordinal:\r\n            case StringComparison.OrdinalIgnoreCase:\r\n                return ");
             
-            #line 505 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 503 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
             
             #line default
             #line hidden
             this.Write(".TryParse(name, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out result);\r\n            default:\r\n                return ");
             
-            #line 507 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 505 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
             
             #line default
             #line hidden
             this.Write(".TryParse(name, out result);\r\n        }\r\n    }\r\n}\r\n");
             
-            #line 511 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+            #line 509 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
 
     if (!string.IsNullOrEmpty(Model.Namespace))
     {
         PopIndent();
-
-            
-            #line default
-            #line hidden
-            this.Write("}\r\n");
-            
-            #line 517 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
-
+        WriteLine("}");
     }
 
             
@@ -1083,13 +1063,13 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 520 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
+        #line 516 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumFactoryWriter.tt"
 
     public EnumFactoryWriter(StringBuilder builder) : base(builder)
     {
     }
 
-    public override string GetFileName() => $"{Model.Namespace}.{Model.Name}Factory.g.cs";
+    public override string GetFileName() => $"{Model.Namespace ?? "_"}.{Model.Name}Factory.g.cs";
 
         
         #line default

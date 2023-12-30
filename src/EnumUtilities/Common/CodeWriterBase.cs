@@ -64,7 +64,12 @@ public abstract class CodeWriterBase
     /// <param name="textToAppend">The text to be appended to the generated output.</param>
     protected void Write(string? textToAppend)
     {
-        if (string.IsNullOrEmpty(textToAppend))
+        Write(textToAppend.AsSpan());
+    }
+
+    protected void Write(ReadOnlySpan<char> textToAppend)
+    {
+        if (textToAppend.IsEmpty)
         {
             return;
         }
@@ -77,7 +82,7 @@ public abstract class CodeWriterBase
 
         bool endsWithNewline = _builder.Length > 0 && _builder[^1] == '\n';
         bool isFinalLine;
-        var remainingText = textToAppend.AsSpan();
+        var remainingText = textToAppend;
         while (true)
         {
             var nextLine = GetNextLine(ref remainingText, out isFinalLine);
@@ -232,63 +237,30 @@ public abstract class CodeWriterBase
     }
 
     [InterpolatedStringHandler]
-    protected struct WriteInterpolatedStringHandler
+    protected readonly struct WriteInterpolatedStringHandler
     {
-        private AppendInterpolatedStringHandler _handler;
+        private readonly CodeWriterBase _codeWriter;
 
         public WriteInterpolatedStringHandler(int literalLength, int formattedCount, CodeWriterBase codeWriter)
         {
-            _handler = new AppendInterpolatedStringHandler(literalLength, formattedCount, codeWriter._builder);
+            _codeWriter = codeWriter;
         }
 
         public void AppendLiteral(string s)
         {
-            _handler.AppendLiteral(s);
+            _codeWriter.Write(s);
         }
 
         public void AppendFormatted<T>(T value)
         {
-            _handler.AppendFormatted(value);
-        }
-
-        public void AppendFormatted<T>(T value, string? format)
-        {
-            _handler.AppendFormatted(value, format);
-        }
-
-        public void AppendFormatted<T>(T value, int alignment)
-        {
-            _handler.AppendFormatted(value, alignment);
-        }
-
-        public void AppendFormatted<T>(T value, int alignment, string? format)
-        {
-            _handler.AppendFormatted(value, alignment, format);
-        }
-
-        public void AppendFormatted(ReadOnlySpan<char> value)
-        {
-            _handler.AppendFormatted(value);
-        }
-
-        public void AppendFormatted(ReadOnlySpan<char> value, int alignment = 0, string? format = null)
-        {
-            _handler.AppendFormatted(value, alignment, format);
+            if (value is not null)
+                _codeWriter.Write(value.ToString());
         }
 
         public void AppendFormatted(string? value)
         {
-            _handler.AppendFormatted(value);
-        }
-
-        public void AppendFormatted(string? value, int alignment = 0, string? format = null)
-        {
-            _handler.AppendFormatted(value, alignment, format);
-        }
-
-        public void AppendFormatted(object? value, int alignment = 0, string? format = null)
-        {
-            _handler.AppendFormatted(value, alignment, format);
+            if (value is not null)
+                _codeWriter.Write(value);
         }
     }
 }
