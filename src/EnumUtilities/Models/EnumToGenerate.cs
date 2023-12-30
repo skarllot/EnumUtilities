@@ -1,4 +1,5 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using System.Collections.Immutable;
+using Microsoft.CodeAnalysis;
 using Raiqub.Generators.EnumUtilities.Common;
 
 namespace Raiqub.Generators.EnumUtilities.Models;
@@ -9,7 +10,9 @@ public sealed record EnumToGenerate(
     bool IsPublic,
     string Name,
     string UnderlyingType,
-    List<EnumValue> Values)
+    List<EnumValue> Values,
+    ImmutableArray<Location> Locations)
+    : ILocalizableSource
 {
     public string RefName { get; } = ContainingType is not null ? $"{ContainingType.Name}.{Name}" : Name;
 
@@ -54,6 +57,8 @@ public sealed record EnumToGenerate(
             return null;
 
         string? ns = typeSymbol.ContainingNamespace?.ToString();
+        if (ns == "<global namespace>")
+            ns = null;
 
         return new EnumToGenerate(
             string.IsNullOrWhiteSpace(ns) ? null : ns,
@@ -61,6 +66,7 @@ public sealed record EnumToGenerate(
             typeSymbol.DeclaredAccessibility == Accessibility.Public,
             typeSymbol.Name,
             typeSymbol.EnumUnderlyingType?.GetNumericCSharpKeyword() ?? "int",
-            enumValues);
+            enumValues,
+            typeSymbol.Locations);
     }
 }

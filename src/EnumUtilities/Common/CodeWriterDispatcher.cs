@@ -28,7 +28,18 @@ public sealed class CodeWriterDispatcher<T>
             foreach (var codeWriter in codeWriters)
             {
                 context.CancellationToken.ThrowIfCancellationRequested();
-                codeWriter.GenerateCompilationSource(context, model);
+                try
+                {
+                    codeWriter.GenerateCompilationSource(context, model);
+                }
+                catch (Exception e)
+                {
+                    context.ReportDiagnostic(
+                        Diagnostic.Create(
+                            DiagnosticDescriptors.UnexpectedErrorGenerating,
+                            model is ILocalizableSource ls ? ls.GetDefaultLocation() : Location.None,
+                            e.ToString().Replace("\n", " ")));
+                }
             }
         }
     }
