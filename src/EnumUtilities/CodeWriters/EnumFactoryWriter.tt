@@ -14,10 +14,8 @@ using System.Globalization;
 <#
     if (!string.IsNullOrEmpty(Model.Namespace))
     {
-#>
-namespace <#= Model.Namespace #>
-{
-<#
+        WriteLine($"namespace {Model.Namespace}");
+        WriteLine("{");
         PushIndent();
     }
 #>
@@ -46,7 +44,7 @@ namespace <#= Model.Namespace #>
     public static bool TryParse(
         [NotNullWhen(true)] string? name,
         StringComparison comparisonType,
-        out <#= Model.Name #> result)
+        out <#= Model.RefName #> result)
     {
         switch (name)
         {
@@ -54,14 +52,14 @@ namespace <#= Model.Namespace #>
     foreach (var curr in Model.Values)
     {
 #>
-            case { } s when s.Equals(nameof(<#= Model.Name #>.<#= curr.MemberName #>), comparisonType):
-                result = <#= Model.Name #>.<#= curr.MemberName #>;
+            case { } s when s.Equals(nameof(<#= Model.RefName #>.<#= curr.MemberName #>), comparisonType):
+                result = <#= Model.RefName #>.<#= curr.MemberName #>;
                 return true;
 <#
     }
 #>
             case { } s when TryParseNumeric(s, comparisonType, out <#= Model.UnderlyingType #> val):
-                result = (<#= Model.Name #>)val;
+                result = (<#= Model.RefName #>)val;
                 return true;
             default:
                 return Enum.TryParse(name, out result);
@@ -81,7 +79,7 @@ namespace <#= Model.Namespace #>
     /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
     public static bool TryParse(
         [NotNullWhen(true)] string? name,
-        out <#= Model.Name #> result)
+        out <#= Model.RefName #> result)
     {
         switch (name)
         {
@@ -89,14 +87,14 @@ namespace <#= Model.Namespace #>
     foreach (var curr in Model.Values)
     {
 #>
-            case nameof(<#= Model.Name #>.<#= curr.MemberName #>):
-                result = <#= Model.Name #>.<#= curr.MemberName #>;
+            case nameof(<#= Model.RefName #>.<#= curr.MemberName #>):
+                result = <#= Model.RefName #>.<#= curr.MemberName #>;
                 return true;
 <#
     }
 #>
             case { } s when TryParseNumeric(s, StringComparison.Ordinal, out <#= Model.UnderlyingType #> val):
-                result = (<#= Model.Name #>)val;
+                result = (<#= Model.RefName #>)val;
                 return true;
             default:
                 return Enum.TryParse(name, out result);
@@ -116,7 +114,7 @@ namespace <#= Model.Namespace #>
     /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
     public static bool TryParseIgnoreCase(
         [NotNullWhen(true)] string? name,
-        out <#= Model.Name #> result)
+        out <#= Model.RefName #> result)
     {
         return TryParse(name, StringComparison.OrdinalIgnoreCase, out result);
     }
@@ -130,9 +128,9 @@ namespace <#= Model.Namespace #>
     /// Contains an object of type <#= Model.Name #> whose value is represented by value if the parse operation succeeds.
     /// If the parse operation fails, result contains <c>null</c> value.
     /// </returns>
-    public static <#= Model.Name #>? TryParse(string? name)
+    public static <#= Model.RefName #>? TryParse(string? name)
     {
-        return TryParse(name, out <#= Model.Name #> result) ? result : null;
+        return TryParse(name, out <#= Model.RefName #> result) ? result : null;
     }
 
     /// <summary>
@@ -144,9 +142,9 @@ namespace <#= Model.Namespace #>
     /// Contains an object of type <#= Model.Name #> whose value is represented by value if the parse operation succeeds.
     /// If the parse operation fails, result contains <c>null</c> value.
     /// </returns>
-    public static <#= Model.Name #>? TryParseIgnoreCase(string? name)
+    public static <#= Model.RefName #>? TryParseIgnoreCase(string? name)
     {
-        return TryParse(name, StringComparison.OrdinalIgnoreCase, out <#= Model.Name #> result) ? result : null;
+        return TryParse(name, StringComparison.OrdinalIgnoreCase, out <#= Model.RefName #> result) ? result : null;
     }
 
     /// <summary>
@@ -160,9 +158,9 @@ namespace <#= Model.Namespace #>
     /// If the parse operation fails, result contains <c>null</c> value.
     /// </returns>
     /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
-    public static <#= Model.Name #>? TryParse(string? name, StringComparison comparisonType)
+    public static <#= Model.RefName #>? TryParse(string? name, StringComparison comparisonType)
     {
-        return TryParse(name, comparisonType, out <#= Model.Name #> result) ? result : null;
+        return TryParse(name, comparisonType, out <#= Model.RefName #> result) ? result : null;
     }
 <#
     /* -----------------------------------------------------------------------------------------------------------------
@@ -188,7 +186,7 @@ namespace <#= Model.Namespace #>
     public static bool TryParseFromEnumMemberValue(
         [NotNullWhen(true)] string? enumMemberValue,
         StringComparison comparisonType,
-        out <#= Model.Name #> result)
+        out <#= Model.RefName #> result)
     {
         switch (enumMemberValue)
         {
@@ -199,8 +197,8 @@ namespace <#= Model.Namespace #>
             case { } s when s.Equals(<#=
                     curr.SerializationValue != null
                         ? Append($"\"{curr.SerializationValue}\"")
-                        : Append($"nameof({Model.Name}.{curr.MemberName})") #>, comparisonType):
-                result = <#= Model.Name #>.<#= curr.MemberName #>;
+                        : Append($"nameof({Model.RefName}.{curr.MemberName})") #>, comparisonType):
+                result = <#= Model.RefName #>.<#= curr.MemberName #>;
                 return true;
 <#
         }
@@ -222,7 +220,7 @@ namespace <#= Model.Namespace #>
     /// underlying type of <#= Model.Name #>. Note that this value need not be a member of the <#= Model.Name #> enumeration.
     /// </param>
     /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-    public static bool TryParseFromEnumMemberValue([NotNullWhen(true)] string? enumMemberValue, out <#= Model.Name #> result)
+    public static bool TryParseFromEnumMemberValue([NotNullWhen(true)] string? enumMemberValue, out <#= Model.RefName #> result)
     {
         return TryParseFromEnumMemberValue(enumMemberValue, StringComparison.Ordinal, out result);
     }
@@ -238,9 +236,9 @@ namespace <#= Model.Namespace #>
     /// If the parse operation fails, result contains a null value.
     /// </returns>
     /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
-    public static <#= Model.Name #>? TryParseFromEnumMemberValue(string? enumMemberValue, StringComparison comparisonType)
+    public static <#= Model.RefName #>? TryParseFromEnumMemberValue(string? enumMemberValue, StringComparison comparisonType)
     {
-        return TryParseFromEnumMemberValue(enumMemberValue, comparisonType, out <#= Model.Name #> result) ? result : null;
+        return TryParseFromEnumMemberValue(enumMemberValue, comparisonType, out <#= Model.RefName #> result) ? result : null;
     }
 
     /// <summary>
@@ -252,9 +250,9 @@ namespace <#= Model.Namespace #>
     /// Contains an object of type <#= Model.Name #> whose value is represented by value if the parse operation succeeds.
     /// If the parse operation fails, result contains a null value.
     /// </returns>
-    public static <#= Model.Name #>? TryParseFromEnumMemberValue(string? enumMemberValue)
+    public static <#= Model.RefName #>? TryParseFromEnumMemberValue(string? enumMemberValue)
     {
-        return TryParseFromEnumMemberValue(enumMemberValue, StringComparison.Ordinal, out <#= Model.Name #> result) ? result : null;
+        return TryParseFromEnumMemberValue(enumMemberValue, StringComparison.Ordinal, out <#= Model.RefName #> result) ? result : null;
     }
 <#
     }
@@ -270,7 +268,7 @@ namespace <#= Model.Namespace #>
     public static bool TryCreateFromDescription(
         [NotNullWhen(true)] string? description,
         StringComparison comparisonType,
-        out <#= Model.Name #> result)
+        out <#= Model.RefName #> result)
     {
         switch (description)
         {
@@ -279,7 +277,7 @@ namespace <#= Model.Namespace #>
         {
 #>
             case { } s when s.Equals("<#= curr.Description #>", comparisonType):
-                result = <#= Model.Name #>.<#= curr.MemberName #>;
+                result = <#= Model.RefName #>.<#= curr.MemberName #>;
                 return true;
 <#
         }
@@ -290,19 +288,19 @@ namespace <#= Model.Namespace #>
         }
     }
 
-    public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, out <#= Model.Name #> result)
+    public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, out <#= Model.RefName #> result)
     {
         return TryCreateFromDescription(description, StringComparison.Ordinal, out result);
     }
 
-    public static <#= Model.Name #>? TryCreateFromDescription(string? description, StringComparison comparisonType)
+    public static <#= Model.RefName #>? TryCreateFromDescription(string? description, StringComparison comparisonType)
     {
-        return TryCreateFromDescription(description, comparisonType, out <#= Model.Name #> result) ? result : null;
+        return TryCreateFromDescription(description, comparisonType, out <#= Model.RefName #> result) ? result : null;
     }
 
-    public static <#= Model.Name #>? TryCreateFromDescription(string? description)
+    public static <#= Model.RefName #>? TryCreateFromDescription(string? description)
     {
-        return TryCreateFromDescription(description, StringComparison.Ordinal, out <#= Model.Name #> result) ? result : null;
+        return TryCreateFromDescription(description, StringComparison.Ordinal, out <#= Model.RefName #> result) ? result : null;
     }
 <#
     }
@@ -318,7 +316,7 @@ namespace <#= Model.Namespace #>
     public static bool TryCreateFromDisplayShortName(
         [NotNullWhen(true)] string? displayShortName,
         StringComparison comparisonType,
-        out <#= Model.Name #> result)
+        out <#= Model.RefName #> result)
     {
         switch (displayShortName)
         {
@@ -330,7 +328,7 @@ namespace <#= Model.Namespace #>
                     curr.Display!.ResourceShortName != null
                         ? Append(curr.Display.ResourceShortName)
                         : Append($"\"{curr.Display.ShortName}\"") #>, comparisonType):
-                result = <#= Model.Name #>.<#= curr.MemberName #>;
+                result = <#= Model.RefName #>.<#= curr.MemberName #>;
                 return true;
 <#
         }
@@ -340,25 +338,25 @@ namespace <#= Model.Namespace #>
         }
     }
 
-    public static bool TryCreateFromDisplayShortName([NotNullWhen(true)] string? displayShortName, out <#= Model.Name #> result)
+    public static bool TryCreateFromDisplayShortName([NotNullWhen(true)] string? displayShortName, out <#= Model.RefName #> result)
     {
         return TryCreateFromDisplayShortName(displayShortName, StringComparison.Ordinal, out result);
     }
 
-    public static <#= Model.Name #>? TryCreateFromDisplayShortName(string? displayShortName, StringComparison comparisonType)
+    public static <#= Model.RefName #>? TryCreateFromDisplayShortName(string? displayShortName, StringComparison comparisonType)
     {
-        return TryCreateFromDisplayShortName(displayShortName, comparisonType, out <#= Model.Name #> result) ? result : null;
+        return TryCreateFromDisplayShortName(displayShortName, comparisonType, out <#= Model.RefName #> result) ? result : null;
     }
 
-    public static <#= Model.Name #>? TryCreateFromDisplayShortName(string? displayShortName)
+    public static <#= Model.RefName #>? TryCreateFromDisplayShortName(string? displayShortName)
     {
-        return TryCreateFromDisplayShortName(displayShortName, StringComparison.Ordinal, out <#= Model.Name #> result) ? result : null;
+        return TryCreateFromDisplayShortName(displayShortName, StringComparison.Ordinal, out <#= Model.RefName #> result) ? result : null;
     }
 
     public static bool TryCreateFromDisplayName(
         [NotNullWhen(true)] string? displayName,
         StringComparison comparisonType,
-        out <#= Model.Name #> result)
+        out <#= Model.RefName #> result)
     {
         switch (displayName)
         {
@@ -371,8 +369,8 @@ namespace <#= Model.Namespace #>
                         ? Append(curr.Display.ResourceName)
                         : curr.Display?.Name != null
                             ? Append($"\"{curr.Display.Name}\"")
-                            : Append($"nameof({Model.Name}.{curr.MemberName})") #>, comparisonType):
-                result = <#= Model.Name #>.<#= curr.MemberName #>;
+                            : Append($"nameof({Model.RefName}.{curr.MemberName})") #>, comparisonType):
+                result = <#= Model.RefName #>.<#= curr.MemberName #>;
                 return true;
 <#
         }
@@ -383,19 +381,19 @@ namespace <#= Model.Namespace #>
         }
     }
 
-    public static bool TryCreateFromDisplayName([NotNullWhen(true)] string? displayName, out <#= Model.Name #> result)
+    public static bool TryCreateFromDisplayName([NotNullWhen(true)] string? displayName, out <#= Model.RefName #> result)
     {
         return TryCreateFromDisplayName(displayName, StringComparison.Ordinal, out result);
     }
 
-    public static <#= Model.Name #>? TryCreateFromDisplayName(string? displayName, StringComparison comparisonType)
+    public static <#= Model.RefName #>? TryCreateFromDisplayName(string? displayName, StringComparison comparisonType)
     {
-        return TryCreateFromDisplayName(displayName, comparisonType, out <#= Model.Name #> result) ? result : null;
+        return TryCreateFromDisplayName(displayName, comparisonType, out <#= Model.RefName #> result) ? result : null;
     }
 
-    public static <#= Model.Name #>? TryCreateFromDisplayName(string? displayName)
+    public static <#= Model.RefName #>? TryCreateFromDisplayName(string? displayName)
     {
-        return TryCreateFromDisplayName(displayName, StringComparison.Ordinal, out <#= Model.Name #> result) ? result : null;
+        return TryCreateFromDisplayName(displayName, StringComparison.Ordinal, out <#= Model.RefName #> result) ? result : null;
     }
 <#
     }
@@ -408,7 +406,7 @@ namespace <#= Model.Namespace #>
     public static bool TryCreateFromDescription(
         [NotNullWhen(true)] string? description,
         StringComparison comparisonType,
-        out <#= Model.Name #> result)
+        out <#= Model.RefName #> result)
     {
         switch (description)
         {
@@ -420,7 +418,7 @@ namespace <#= Model.Namespace #>
                     curr.Display!.ResourceDescription != null
                         ? Append(curr.Display.ResourceDescription)
                         : Append($"\"{curr.Display.Description}\"") #>, comparisonType):
-                result = <#= Model.Name #>.<#= curr.MemberName #>;
+                result = <#= Model.RefName #>.<#= curr.MemberName #>;
                 return true;
 <#
         }
@@ -431,19 +429,19 @@ namespace <#= Model.Namespace #>
         }
     }
 
-    public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, out <#= Model.Name #> result)
+    public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, out <#= Model.RefName #> result)
     {
         return TryCreateFromDescription(description, StringComparison.Ordinal, out result);
     }
 
-    public static <#= Model.Name #>? TryCreateFromDescription(string? description, StringComparison comparisonType)
+    public static <#= Model.RefName #>? TryCreateFromDescription(string? description, StringComparison comparisonType)
     {
-        return TryCreateFromDescription(description, comparisonType, out <#= Model.Name #> result) ? result : null;
+        return TryCreateFromDescription(description, comparisonType, out <#= Model.RefName #> result) ? result : null;
     }
 
-    public static <#= Model.Name #>? TryCreateFromDescription(string? description)
+    public static <#= Model.RefName #>? TryCreateFromDescription(string? description)
     {
-        return TryCreateFromDescription(description, StringComparison.Ordinal, out <#= Model.Name #> result) ? result : null;
+        return TryCreateFromDescription(description, StringComparison.Ordinal, out <#= Model.RefName #> result) ? result : null;
     }
 <#
     }
@@ -456,7 +454,7 @@ namespace <#= Model.Namespace #>
 
     /// <summary>Retrieves an array of the values of the constants in the <#= Model.Name #> enumeration.</summary>
     /// <returns>An array that contains the values of the constants in <#= Model.Name #>.</returns>
-    public static <#= Model.Name #>[] GetValues()
+    public static <#= Model.RefName #>[] GetValues()
     {
         return new[]
         {
@@ -464,7 +462,7 @@ namespace <#= Model.Namespace #>
     foreach (var curr in Model.UniqueValues)
     {
 #>
-            <#= Model.Name #>.<#= curr.MemberName #>,
+            <#= Model.RefName #>.<#= curr.MemberName #>,
 <#
     }
 #>
@@ -481,7 +479,7 @@ namespace <#= Model.Namespace #>
     foreach (var curr in Model.Values)
     {
 #>
-            nameof(<#= Model.Name #>.<#= curr.MemberName #>),
+            nameof(<#= Model.RefName #>.<#= curr.MemberName #>),
 <#
     }
 #>
@@ -512,9 +510,7 @@ namespace <#= Model.Namespace #>
     if (!string.IsNullOrEmpty(Model.Namespace))
     {
         PopIndent();
-#>
-}
-<#
+        WriteLine("}");
     }
 #>
 <#+
@@ -522,5 +518,5 @@ namespace <#= Model.Namespace #>
     {
     }
 
-    public override string GetFileName() => $"{Model.Namespace}.{Model.Name}Factory.g.cs";
+    public override string GetFileName() => $"{Model.Namespace ?? "_"}.{Model.Name}Factory.g.cs";
 #>

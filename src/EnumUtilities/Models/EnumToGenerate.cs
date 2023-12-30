@@ -3,8 +3,16 @@ using Raiqub.Generators.EnumUtilities.Common;
 
 namespace Raiqub.Generators.EnumUtilities.Models;
 
-public sealed record EnumToGenerate(string Namespace, bool IsPublic, string Name, string UnderlyingType, List<EnumValue> Values)
+public sealed record EnumToGenerate(
+    string? Namespace,
+    ContainingType? ContainingType,
+    bool IsPublic,
+    string Name,
+    string UnderlyingType,
+    List<EnumValue> Values)
 {
+    public string RefName { get; } = ContainingType is not null ? $"{ContainingType.Name}.{Name}" : Name;
+
     public IEnumerable<EnumValue> UniqueValues =>
         Values.DistinctBy(static it => it.MemberValue, StringComparer.Ordinal);
 
@@ -28,8 +36,13 @@ public sealed record EnumToGenerate(string Namespace, bool IsPublic, string Name
 
     public static EnumToGenerate? FromSymbol(ISymbol symbol)
     {
-        if (symbol is not INamedTypeSymbol typeSymbol)
+        if (symbol is not INamedTypeSymbol typeSymbol ||
+            typeSymbol.DeclaredAccessibility is not Accessibility.Public and not Accessibility.Internal ||
+            typeSymbol.ContainingType is
+                { DeclaredAccessibility: not Accessibility.Public and not Accessibility.Internal })
+        {
             return null;
+        }
 
         var enumValues = typeSymbol
             .GetMembers()
@@ -40,8 +53,11 @@ public sealed record EnumToGenerate(string Namespace, bool IsPublic, string Name
         if (enumValues.Count == 0)
             return null;
 
+        string? ns = typeSymbol.ContainingNamespace?.ToString();
+
         return new EnumToGenerate(
-            typeSymbol.ContainingNamespace?.ToString() ?? "Global",
+            string.IsNullOrWhiteSpace(ns) ? null : ns,
+            typeSymbol.ContainingType is not null ? ContainingType.FromSymbol(typeSymbol.ContainingType) : null,
             typeSymbol.DeclaredAccessibility == Accessibility.Public,
             typeSymbol.Name,
             typeSymbol.EnumUnderlyingType?.GetNumericCSharpKeyword() ?? "int",

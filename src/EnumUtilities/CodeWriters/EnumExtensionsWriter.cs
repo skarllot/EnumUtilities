@@ -34,21 +34,8 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
 
     if (!string.IsNullOrEmpty(Model.Namespace))
     {
-
-            
-            #line default
-            #line hidden
-            this.Write("namespace ");
-            
-            #line 16 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Namespace));
-            
-            #line default
-            #line hidden
-            this.Write("\r\n{\r\n");
-            
-            #line 18 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
-
+        WriteLine($"namespace {Model.Namespace}");
+        WriteLine("{");
         PushIndent();
     }
 
@@ -57,35 +44,35 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]\r\n[global::System.CodeDom.Compiler.GeneratedCodeAttribute(\"");
             
-            #line 23 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 21 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(CurrentAssemblyName.Name));
             
             #line default
             #line hidden
             this.Write("\", \"");
             
-            #line 23 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 21 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Append($"{CurrentAssemblyName.Version}")));
             
             #line default
             #line hidden
             this.Write("\")]\r\n");
             
-            #line 24 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 22 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.IsPublic ? "public" : "internal"));
             
             #line default
             #line hidden
             this.Write(" static partial class ");
             
-            #line 24 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 22 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write("Extensions\r\n{\r\n");
             
-            #line 26 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 24 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
 
     /* -----------------------------------------------------------------------------------------------------------------
      * DEFAULT
@@ -96,14 +83,14 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("    /// <summary>Converts the value of this instance to its equivalent string representation.</summary>\r\n    /// <returns>The string representation of the value of this instance.</returns>\r\n    public static string ToStringFast(this ");
             
-            #line 33 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 31 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(" value)\r\n    {\r\n        return value switch\r\n        {\r\n");
             
-            #line 37 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 35 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
 
     foreach (var curr in Model.UniqueValues)
     {
@@ -113,35 +100,35 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("            ");
             
-            #line 41 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 39 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 41 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 39 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
             
             #line default
             #line hidden
             this.Write(" => nameof(");
             
-            #line 41 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 39 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 41 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 39 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
             
             #line default
             #line hidden
             this.Write("),\r\n");
             
-            #line 42 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 40 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
 
     }
 
@@ -150,21 +137,21 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("            _ => value.ToString()\r\n        };\r\n    }\r\n\r\n    /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>\r\n    /// <returns><c>true</c> if the value of this instance exists in the enumeration; <c>false</c> otherwise.</returns>\r\n    public static bool IsDefined(this ");
             
-            #line 51 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 49 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(" value)\r\n    {\r\n        return ");
             
-            #line 53 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 51 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write("Validation.IsDefined(value);\r\n    }\r\n");
             
-            #line 55 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 53 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
 
     /* -----------------------------------------------------------------------------------------------------------------
      * ENUM MEMBER ATTRIBUTE
@@ -177,14 +164,14 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("\r\n    public static string ToEnumMemberValue(this ");
             
-            #line 63 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 61 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(" value)\r\n    {\r\n        return value switch\r\n        {\r\n");
             
-            #line 67 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 65 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
 
         foreach (var curr in Model.UniqueValues)
         {
@@ -194,30 +181,30 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("            ");
             
-            #line 71 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 69 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 71 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 69 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
             
             #line default
             #line hidden
             this.Write(" => ");
             
-            #line 71 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 69 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(curr.SerializationValue != null
-                                                                ? Append($"\"{curr.SerializationValue}\"")
-                                                                : Append($"nameof({Model.Name}.{curr.MemberName})")));
+                        ? Append($"\"{curr.SerializationValue}\"")
+                        : Append($"nameof({Model.RefName}.{curr.MemberName})")));
             
             #line default
             #line hidden
             this.Write(",\r\n");
             
-            #line 74 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 73 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
 
         }
 
@@ -226,7 +213,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("            _ => value.ToString()\r\n        };\r\n    }\r\n");
             
-            #line 80 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 79 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
 
     }
 
@@ -234,7 +221,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line default
             #line hidden
             
-            #line 83 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 82 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
 
     /* -----------------------------------------------------------------------------------------------------------------
      * DESCRIPTION ATTRIBUTE
@@ -247,14 +234,14 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("\r\n    public static string? GetDescription(this ");
             
-            #line 91 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 90 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(" value)\r\n    {\r\n        return value switch\r\n        {\r\n");
             
-            #line 95 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 94 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
 
         foreach (var curr in Model.UniqueValues.Where(x => x.Description != null))
         {
@@ -264,28 +251,28 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("            ");
             
-            #line 99 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 98 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 99 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 98 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
             
             #line default
             #line hidden
             this.Write(" => \"");
             
-            #line 99 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 98 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(curr.Description));
             
             #line default
             #line hidden
             this.Write("\",\r\n");
             
-            #line 100 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 99 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
 
         }
 
@@ -294,7 +281,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("            _ => null\r\n        };\r\n    }\r\n");
             
-            #line 106 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 105 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
 
     }
 
@@ -302,7 +289,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line default
             #line hidden
             
-            #line 109 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 108 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
 
     /* -----------------------------------------------------------------------------------------------------------------
      * DISPLAY ATTRIBUTE
@@ -315,14 +302,14 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("\r\n    public static string GetDisplayShortName(this ");
             
-            #line 117 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 116 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(" value)\r\n    {\r\n        return value switch\r\n        {\r\n");
             
-            #line 121 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 120 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
 
         foreach (var curr in Model.UniqueValues.Where(x => x.Display?.ShortName != null))
         {
@@ -332,30 +319,30 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("            ");
             
-            #line 125 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 124 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 125 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 124 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
             
             #line default
             #line hidden
             this.Write(" => ");
             
-            #line 125 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 124 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(curr.Display!.ResourceShortName != null
-                                                                ? Append(curr.Display.ResourceShortName)
-                                                                : Append($"\"{curr.Display.ShortName}\"")));
+                                                                   ? Append(curr.Display.ResourceShortName)
+                                                                   : Append($"\"{curr.Display.ShortName}\"")));
             
             #line default
             #line hidden
             this.Write(",\r\n");
             
-            #line 128 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 127 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
 
         }
 
@@ -364,14 +351,14 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("            _ => GetDisplayName(value)\r\n        };\r\n    }\r\n\r\n    public static string GetDisplayName(this ");
             
-            #line 135 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 134 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(" value)\r\n    {\r\n        return value switch\r\n        {\r\n");
             
-            #line 139 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 138 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
 
         foreach (var curr in Model.UniqueValues)
         {
@@ -381,32 +368,32 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("            ");
             
-            #line 143 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 142 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 143 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 142 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
             
             #line default
             #line hidden
             this.Write(" => ");
             
-            #line 143 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 142 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(curr.Display?.ResourceName != null
                         ? Append(curr.Display.ResourceName)
                         : curr.Display?.Name != null
                             ? Append($"\"{curr.Display.Name}\"")
-                            : Append($"nameof({Model.Name}.{curr.MemberName})")));
+                            : Append($"nameof({Model.RefName}.{curr.MemberName})")));
             
             #line default
             #line hidden
             this.Write(",\r\n");
             
-            #line 149 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 148 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
 
         }
 
@@ -415,7 +402,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("            _ => value.ToString()\r\n        };\r\n    }\r\n");
             
-            #line 155 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 154 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
 
     }
 
@@ -423,7 +410,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line default
             #line hidden
             
-            #line 158 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 157 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
 
     if (Model.HasDisplayDescription)
     {
@@ -433,14 +420,14 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("\r\n    public static string? GetDescription(this ");
             
-            #line 163 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 162 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(" value)\r\n    {\r\n        return value switch\r\n        {\r\n");
             
-            #line 167 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 166 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
 
         foreach (var curr in Model.UniqueValues.Where(x => x.Display?.Description != null))
         {
@@ -450,21 +437,21 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("            ");
             
-            #line 171 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 170 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 171 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 170 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
             
             #line default
             #line hidden
             this.Write(" => ");
             
-            #line 171 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 170 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(curr.Display!.ResourceDescription != null
                         ? Append(curr.Display.ResourceDescription)
                         : Append($"\"{curr.Display.Description}\"")));
@@ -473,7 +460,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write(",\r\n");
             
-            #line 175 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 174 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
 
         }
 
@@ -482,7 +469,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("            _ => null\r\n        };\r\n    }\r\n");
             
-            #line 181 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 180 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
 
     }
 
@@ -491,19 +478,12 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("}\r\n");
             
-            #line 185 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+            #line 184 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
 
     if (!string.IsNullOrEmpty(Model.Namespace))
     {
         PopIndent();
-
-            
-            #line default
-            #line hidden
-            this.Write("}\r\n");
-            
-            #line 191 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
-
+        WriteLine("}");
     }
 
             
@@ -512,13 +492,13 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 194 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
+        #line 191 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumExtensionsWriter.tt"
 
     public EnumExtensionsWriter(StringBuilder builder) : base(builder)
     {
     }
 
-    public override string GetFileName() => $"{Model.Namespace}.{Model.Name}Extensions.g.cs";
+    public override string GetFileName() => $"{Model.Namespace ?? "_"}.{Model.Name}Extensions.g.cs";
 
         
         #line default

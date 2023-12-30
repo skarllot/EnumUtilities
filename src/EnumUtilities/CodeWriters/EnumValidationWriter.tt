@@ -13,10 +13,8 @@ using System.Diagnostics.CodeAnalysis;
 <#
     if (!string.IsNullOrEmpty(Model.Namespace))
     {
-#>
-namespace <#= Model.Namespace #>
-{
-<#
+        WriteLine($"namespace {Model.Namespace}");
+        WriteLine("{");
         PushIndent();
     }
 #>
@@ -26,7 +24,7 @@ namespace <#= Model.Namespace #>
 {
     /// <summary>Returns a boolean telling whether the value of <see cref="<#= Model.Name #>"/> instance exists in the enumeration.</summary>
     /// <returns><c>true</c> if the value of <see cref="<#= Model.Name #>"/> instance exists in the enumeration; <c>false</c> otherwise.</returns>
-    public static bool IsDefined(<#= Model.Name #> value)
+    public static bool IsDefined(<#= Model.RefName #> value)
     {
         return value switch
         {
@@ -34,7 +32,7 @@ namespace <#= Model.Namespace #>
     foreach (var curr in Model.UniqueValues)
     {
 #>
-            <#= Model.Name #>.<#= curr.MemberName #> => true,
+            <#= Model.RefName #>.<#= curr.MemberName #> => true,
 <#
     }
 #>
@@ -52,7 +50,7 @@ namespace <#= Model.Namespace #>
     foreach (var curr in Model.Values)
     {
 #>
-            { } s when s.Equals(nameof(<#= Model.Name #>.<#= curr.MemberName #>), comparisonType) => true,
+            { } s when s.Equals(nameof(<#= Model.RefName #>.<#= curr.MemberName #>), comparisonType) => true,
 <#
     }
 #>
@@ -73,7 +71,7 @@ namespace <#= Model.Namespace #>
     foreach (var curr in Model.Values)
     {
 #>
-            nameof(<#= Model.Name #>.<#= curr.MemberName #>) => true,
+            nameof(<#= Model.RefName #>.<#= curr.MemberName #>) => true,
 <#
     }
 #>
@@ -85,9 +83,7 @@ namespace <#= Model.Namespace #>
     if (!string.IsNullOrEmpty(Model.Namespace))
     {
         PopIndent();
-#>
-}
-<#
+        WriteLine("}");
     }
 #>
 <#+
@@ -95,5 +91,5 @@ namespace <#= Model.Namespace #>
     {
     }
 
-    public override string GetFileName() => $"{Model.Namespace}.{Model.Name}Validation.g.cs";
+    public override string GetFileName() => $"{Model.Namespace ?? "_"}.{Model.Name}Validation.g.cs";
 #>
