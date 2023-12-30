@@ -32,15 +32,15 @@ public partial class EnumUtilitiesGenerator
             return;
         }
 
-        var typesToGenerate = GetTypesToGenerate(compilation, types, context.CancellationToken);
+        var typesToGenerate = GetTypesToGenerate(compilation, context, types);
 
         s_dispatcher.GenerateSources(typesToGenerate, context);
     }
 
     private static List<EnumToGenerate> GetTypesToGenerate(
         Compilation compilation,
-        ImmutableArray<EnumDeclarationSyntax> types,
-        CancellationToken cancellationToken)
+        SourceProductionContext context,
+        ImmutableArray<EnumDeclarationSyntax> types)
     {
         var enumGeneratorAttribute = compilation.GetTypeByMetadataName(EnumGeneratorAttributeName);
         if (enumGeneratorAttribute is null)
@@ -50,10 +50,25 @@ public partial class EnumUtilitiesGenerator
 
         return types
             .Select(
-                t => compilation
-                    .GetSemanticModel(t.SyntaxTree)
-                    .GetDeclaredSymbol(t, cancellationToken)
-                    .Map(EnumToGenerate.FromSymbol))
+                t =>
+                {
+                    try
+                    {
+                        return compilation
+                            .GetSemanticModel(t.SyntaxTree)
+                            .GetDeclaredSymbol(t, context.CancellationToken)
+                            .Map(EnumToGenerate.FromSymbol);
+                    }
+                    catch (Exception e)
+                    {
+                        context.ReportDiagnostic(
+                            Diagnostic.Create(
+                                DiagnosticDescriptors.UnexpectedErrorParsingCode,
+                                t.GetLocation(),
+                                e.ToString().Replace("\n", " ")));
+                        return null;
+                    }
+                })
             .WhereNotNull()
             .ToList();
     }
