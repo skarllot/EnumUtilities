@@ -1,6 +1,10 @@
 # Enum Utilities
 
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/EngRajabi/Enum.Source.Generator/master/LICENSE) [![Nuget](https://img.shields.io/nuget/v/Raiqub.Generators.EnumUtilities)](https://www.nuget.org/packages/Raiqub.Generators.EnumUtilities) [![Nuget](https://img.shields.io/nuget/dt/Raiqub.Generators.EnumUtilities?label=Nuget.org%20Downloads&style=flat-square&color=blue)](https://www.nuget.org/packages/Raiqub.Generators.EnumUtilities)
+[![Build status](https://github.com/skarllot/EnumUtilities/actions/workflows/dotnet.yml/badge.svg?branch=main)](https://github.com/skarllot/EnumUtilities/actions)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/skarllot/EnumUtilities/badge)](https://securityscorecards.dev/viewer/?uri=github.com/skarllot/EnumUtilities)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/EngRajabi/Enum.Source.Generator/master/LICENSE)
+[![Nuget](https://img.shields.io/nuget/v/Raiqub.Generators.EnumUtilities)](https://www.nuget.org/packages/Raiqub.Generators.EnumUtilities)
+[![Nuget](https://img.shields.io/nuget/dt/Raiqub.Generators.EnumUtilities?label=Nuget.org%20Downloads&style=flat-square&color=blue)](https://www.nuget.org/packages/Raiqub.Generators.EnumUtilities)
 
 _A source generator for C# that uses Roslyn to create extensions and parsers for enumerations_
 

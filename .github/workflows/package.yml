@@ -1,9 +1,8 @@
 name: Package
 
 on:
-  push:
-    tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+'
+  release:
+    types: [published]
 
 env:
   DOTNET_GENERATE_ASPNET_CERTIFICATE: false
@@ -32,17 +31,23 @@ jobs:
       - name: 🧰 Setup .NET
         uses: actions/setup-dotnet@4d6c8fcf3c8f7a60068d26b594648e99df24cee3 # v4.0.0
         with:
-          dotnet-version: 8.0.x
+          global-json-file: global.json
 
       - name: 🗃️ Setup NuGet cache
         uses: actions/cache@13aacd865c20de90d75de3b17ebe84f7a17d57d2 # v4.0.0
         with:
           path: ~/.nuget/packages
-          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj', '**/*.props') }}
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
           restore-keys: ${{ runner.os }}-nuget-
 
+      - name: 📥 Restore dependencies
+        run: dotnet restore --locked-mode
+
+      - name: 🏗️ Build
+        run: dotnet build --no-restore -c Release
+
       - name: 📦 Pack
-        run: dotnet pack /p:CI=true /p:PublicRelease=true -c Release
+        run: dotnet pack /p:CI=true /p:PublicRelease=true --no-build -c Release
 
       - name: 🚀 Publish
         run: dotnet nuget push "artifacts/*.nupkg" -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_APIKEY }} --skip-duplicate

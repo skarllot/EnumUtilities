@@ -17,6 +17,7 @@ on:
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [ "main" ]
+    paths: [ "src/**", "tests/**", "docs/**", '.github/workflows/codeql.yml' ]
   schedule:
     - cron: '28 20 * * 1'
 
@@ -40,30 +41,30 @@ jobs:
         language: [ 'csharp' ]
 
     steps:
-    - name: Harden Runner
+    - name: 🛡️ Harden Runner
       uses: step-security/harden-runner@63c24ba6bd7ba022e95695ff85de572c04a18142 # v2.7.0
       with:
         egress-policy: audit
 
-    - name: Checkout repository
+    - name: 🛒 Checkout repository
       uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
       with:
         fetch-depth: 0
 
-    - name: Setup .NET
+    - name: 🧰 Setup .NET
       uses: actions/setup-dotnet@4d6c8fcf3c8f7a60068d26b594648e99df24cee3 # v4.0.0
       with:
-        dotnet-version: 8.0.x
+        global-json-file: global.json
 
-    - name: Setup NuGet cache
+    - name: 🗃️ Setup NuGet cache
       uses: actions/cache@13aacd865c20de90d75de3b17ebe84f7a17d57d2 # v4.0.0
       with:
         path: ~/.nuget/packages
-        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj', '**/*.props') }}
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
         restore-keys: ${{ runner.os }}-nuget-
 
     # Initializes the CodeQL tools for scanning.
-    - name: Initialize CodeQL
+    - name: 🛠️ Initialize CodeQL
       uses: github/codeql-action/init@47b3d888fe66b639e431abf22ebca059152f1eea # v3.24.5
       with:
         languages: ${{ matrix.language }}
@@ -74,10 +75,13 @@ jobs:
         # For more details on CodeQL's query packs, refer to: https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
         # queries: security-extended,security-and-quality
 
-    - name: Build
-      run: dotnet build -c Release
+    - name: 📥 Restore dependencies
+      run: dotnet restore --locked-mode
 
-    - name: Perform CodeQL Analysis
+    - name: 🏗️ Build
+      run: dotnet build --no-restore -c Release
+
+    - name: 🔍 Perform CodeQL Analysis
       uses: github/codeql-action/analyze@47b3d888fe66b639e431abf22ebca059152f1eea # v3.24.5
       with:
         category: "/language:${{matrix.language}}"
