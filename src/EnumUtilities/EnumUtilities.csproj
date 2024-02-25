@@ -4,6 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DefineConstants>$(DefineConstants);AllowUnsafeBlocks</DefineConstants>
@@ -24,6 +25,7 @@
 
   <ItemGroup>
     <None Include="$(SolutionDir)README.md" Pack="true" PackagePath="" />
+    <None Include="$(SolutionDir)logos\logo-128.png" Pack="true" PackagePath="icon.png" />
     <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
     <None Include="$(OutputPath)\Raiqub.Generators.EnumUtilities.Abstractions.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
     <None Include="$(OutputPath)\Raiqub.Generators.EnumUtilities.Abstractions.dll" Pack="true" PackagePath="lib/netstandard2.0" Visible="true" />
