@@ -10,7 +10,7 @@ using System.Globalization;
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.4.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.5.0.0")]
     internal static partial class SeasonFactory
     {
         /// <summary>
@@ -150,6 +150,90 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         public static Season? TryParse(string? name, StringComparison comparisonType)
         {
             return TryParse(name, comparisonType, out Season result) ? result : null;
+        }
+
+        /// <summary>
+        /// Converts the string representation of the value associated with one enumerated constant to
+        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="enumMemberValue">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
+        /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type Season whose value is represented by value
+        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+        /// underlying type of Season. Note that this value need not be a member of the Season enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
+        public static bool TryParseFromEnumMemberValue(
+            [NotNullWhen(true)] string? enumMemberValue,
+            StringComparison comparisonType,
+            out Season result)
+        {
+            switch (enumMemberValue)
+            {
+                case { } s when s.Equals(nameof(Season.Spring), comparisonType):
+                    result = Season.Spring;
+                    return true;
+                case { } s when s.Equals(nameof(Season.Summer), comparisonType):
+                    result = Season.Summer;
+                    return true;
+                case { } s when s.Equals(nameof(Season.Autumn), comparisonType):
+                    result = Season.Autumn;
+                    return true;
+                case { } s when s.Equals("⛄", comparisonType):
+                    result = Season.Winter;
+                    return true;
+                default:
+                    result = default;
+                    return false;
+            }
+        }
+
+        /// <summary>
+        /// Converts the string representation of the value associated with one enumerated constant to
+        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="enumMemberValue">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type Season whose value is represented by value
+        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+        /// underlying type of Season. Note that this value need not be a member of the Season enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        public static bool TryParseFromEnumMemberValue([NotNullWhen(true)] string? enumMemberValue, out Season result)
+        {
+            return TryParseFromEnumMemberValue(enumMemberValue, StringComparison.Ordinal, out result);
+        }
+
+        /// <summary>
+        /// Converts the string representation of the value associated with one enumerated constant to
+        /// an equivalent enumerated object.
+        /// </summary>
+        /// <param name="enumMemberValue">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
+        /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
+        /// <returns>
+        /// Contains an object of type Season whose value is represented by value if the parse operation succeeds.
+        /// If the parse operation fails, result contains a null value.
+        /// </returns>
+        /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
+        public static Season? TryParseFromEnumMemberValue(string? enumMemberValue, StringComparison comparisonType)
+        {
+            return TryParseFromEnumMemberValue(enumMemberValue, comparisonType, out Season result) ? result : null;
+        }
+
+        /// <summary>
+        /// Converts the string representation of the value associated with one enumerated constant to
+        /// an equivalent enumerated object.
+        /// </summary>
+        /// <param name="enumMemberValue">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
+        /// <returns>
+        /// Contains an object of type Season whose value is represented by value if the parse operation succeeds.
+        /// If the parse operation fails, result contains a null value.
+        /// </returns>
+        public static Season? TryParseFromEnumMemberValue(string? enumMemberValue)
+        {
+            return TryParseFromEnumMemberValue(enumMemberValue, StringComparison.Ordinal, out Season result) ? result : null;
         }
 
         /// <summary>Retrieves an array of the values of the constants in the Season enumeration.</summary>

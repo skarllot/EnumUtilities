@@ -67,6 +67,21 @@ public abstract class CodeWriterBase
         Write(textToAppend.AsSpan());
     }
 
+    protected void Write(int number)
+    {
+        if (_indentation == 0)
+        {
+            _builder.Append(number);
+            return;
+        }
+
+        bool endsWithNewline = _builder.Length > 0 && _builder[^1] == '\n';
+        if (endsWithNewline)
+            WriteIndentation();
+
+        _builder.Append(number);
+    }
+
     protected void Write(ReadOnlySpan<char> textToAppend)
     {
         if (textToAppend.IsEmpty)
@@ -229,6 +244,9 @@ public abstract class CodeWriterBase
         public string? ToStringWithCulture(string? value) => value;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public int ToStringWithCulture(int number) => number;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public None ToStringWithCulture(None none)
         {
             // Text was already been written using interpolated string handler
@@ -262,6 +280,11 @@ public abstract class CodeWriterBase
             if (value is not null)
                 _codeWriter.Write(value);
         }
+
+        public void AppendFormatted(int value)
+        {
+            _codeWriter.Write(value);
+        }
     }
 }
 
@@ -275,8 +298,13 @@ public abstract class CodeWriterBase<T> : CodeWriterBase
 
     public void GenerateCompilationSource(SourceProductionContext context, T model)
     {
+        if (!CanGenerateFor(model))
+            return;
+
         Model = model;
         base.GenerateCompilationSource(context);
         Model = default!;
     }
+
+    protected virtual bool CanGenerateFor(T model) => true;
 }

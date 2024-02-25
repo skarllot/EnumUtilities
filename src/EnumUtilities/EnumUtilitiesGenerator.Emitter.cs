@@ -13,7 +13,8 @@ public partial class EnumUtilitiesGenerator
         new(
             sb => new EnumExtensionsWriter(sb),
             sb => new EnumFactoryWriter(sb),
-            sb => new EnumValidationWriter(sb));
+            sb => new EnumValidationWriter(sb),
+            sb => new EnumJsonConverterWriter(sb));
 
     private static void Emit(
         SourceProductionContext context,

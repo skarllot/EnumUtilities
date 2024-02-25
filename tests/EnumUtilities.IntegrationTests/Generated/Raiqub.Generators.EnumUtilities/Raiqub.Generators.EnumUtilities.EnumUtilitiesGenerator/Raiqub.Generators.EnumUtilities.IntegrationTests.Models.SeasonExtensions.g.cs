@@ -8,7 +8,7 @@ using System;
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.4.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.5.0.0")]
     internal static partial class SeasonExtensions
     {
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
@@ -30,6 +30,18 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         public static bool IsDefined(this Season value)
         {
             return SeasonValidation.IsDefined(value);
+        }
+
+        public static string ToEnumMemberValue(this Season value)
+        {
+            return value switch
+            {
+                Season.Spring => nameof(Season.Spring),
+                Season.Summer => nameof(Season.Summer),
+                Season.Autumn => nameof(Season.Autumn),
+                Season.Winter => "⛄",
+                _ => value.ToString()
+            };
         }
     }
 }
