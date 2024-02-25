@@ -1,0 +1,44 @@
+name: Create tag
+
+on:
+  workflow_dispatch:
+
+env:
+  DOTNET_GENERATE_ASPNET_CERTIFICATE: false
+  DOTNET_NOLOGO: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+
+permissions:
+  contents: read
+
+jobs:
+  create-tag:
+    if: github.actor == 'skarllot'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+    - name: 🛡️ Harden Runner
+      uses: step-security/harden-runner@63c24ba6bd7ba022e95695ff85de572c04a18142 # v2.7.0
+      with:
+        egress-policy: audit
+
+    - name: 🛒 Checkout
+      uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      with:
+        fetch-depth: 0
+
+    - name: 🧰 Setup .NET
+      uses: actions/setup-dotnet@4d6c8fcf3c8f7a60068d26b594648e99df24cee3 # v4.0.0
+      with:
+        global-json-file: global.json
+
+    - name: 🛠️ Setup Nerdbank.GitVersioning
+      run: dotnet tool install --tool-path . nbgv
+
+    - name: 🏷️ Tag release
+      run: ./nbgv tag
+
+    - name: 🚀 Push Git tags
+      run: git push --tags
