@@ -7,6 +7,7 @@ namespace Raiqub.Generators.EnumUtilities;
 public partial class EnumUtilitiesGenerator
 {
     private const string EnumGeneratorAttributeName = "Raiqub.Generators.EnumUtilities.EnumGeneratorAttribute";
+    private const string JsonConverterGeneratorAttribute = "Raiqub.Generators.EnumUtilities.JsonConverterGeneratorAttribute";
 
     private static bool IsSyntaxTargetForGeneration(SyntaxNode node, CancellationToken cancellationToken)
     {
@@ -46,7 +47,7 @@ public partial class EnumUtilitiesGenerator
                 var attributeSymbol = ctorSymbol.ContainingType;
                 string attributeName = attributeSymbol.ToDisplayString();
 
-                if (attributeName == EnumGeneratorAttributeName)
+                if (attributeName is EnumGeneratorAttributeName or JsonConverterGeneratorAttribute)
                 {
                     return true;
                 }

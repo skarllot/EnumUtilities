@@ -1,6 +1,7 @@
-﻿namespace Raiqub.Generators.EnumUtilities;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Raiqub.Generators.EnumUtilities;
 
 [AttributeUsage(AttributeTargets.Enum)]
-public sealed class EnumGeneratorAttribute : Attribute
-{
-}
+[ExcludeFromCodeCoverage]
+public sealed class EnumGeneratorAttribute : Attribute;

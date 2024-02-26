@@ -16,6 +16,7 @@ public sealed class EnumValue
     public string? SerializationValue { get; set; }
     public string? Description { get; set; }
     public DisplayAttribute? Display { get; set; }
+    public string? JsonPropertyName { get; set; }
 
     public static EnumValue? FromSymbol(ISymbol symbol)
     {
@@ -37,6 +38,10 @@ public sealed class EnumValue
             result.Display ??= attribute
                 .WhereClassNameIs("DisplayAttribute")
                 .Map(DisplayAttribute.FromAttribute);
+
+            result.JsonPropertyName ??= attribute
+                .WhereClassNameIs("JsonPropertyNameAttribute")
+                ?.GetConstructorArgument(0)?.ToString();
         }
 
         return result;

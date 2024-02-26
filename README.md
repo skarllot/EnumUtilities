@@ -169,6 +169,30 @@ This will generate the following methods:
   - TryCreateFromDescription(string?, StringComparison)
   - TryCreateFromDescription(string?)
 
+### JSON Serialization
+
+Besindes the member name, supports the [EnumMemberAttribute](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.enummemberattribute) and [JsonPropertyNameAttribute](https://docs.microsoft.com/en-us/dotnet/api/system.text.json.serialization.jsonpropertynameattribute) attributes.
+
+Example:
+
+```csharp
+[JsonConverterGenerator]
+[JsonConverter(typeof(SeasonJsonConverter))]
+public enum Season
+{
+    [EnumMember(Value = "\ud83c\udf31")]
+    Spring = 1,
+    [EnumMember(Value = "\u2600\ufe0f")]
+    Summer,
+    [EnumMember(Value = "\ud83c\udf42")]
+    Autumn,
+    [EnumMember(Value = "\u26c4")]
+    Winter
+}
+```
+
+This will generate the following JSON converter: [SeasonJsonConverter](./tests/EnumUtilities.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Raiqub.Generators.EnumUtilities.IntegrationTests.Models.SeasonJsonConverter.g.cs).
+
 ## Contributing
 
 If something is not working for you or if you think that the source file

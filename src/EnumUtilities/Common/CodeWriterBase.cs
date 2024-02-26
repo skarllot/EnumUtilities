@@ -39,6 +39,8 @@ public abstract class CodeWriterBase
         get => ToStringInstanceHelper.Instance;
     }
 
+    private bool EndsWithNewLine => _builder.Length > 0 && _builder[^1] == '\n';
+
     /// <summary>Retrieves the name of the file for the code of current code writer state.</summary>
     /// <returns>The name of the file.</returns>
     public abstract string GetFileName();
@@ -67,6 +69,27 @@ public abstract class CodeWriterBase
         Write(textToAppend.AsSpan());
     }
 
+    /// <summary>Write number directly into the generated output.</summary>
+    /// <param name="number">The number to be appended to the generated output.</param>
+    protected void Write(int? number)
+    {
+        if (number is null)
+        {
+            return;
+        }
+
+        if (_indentation == 0)
+        {
+            _builder.Append(number);
+            return;
+        }
+
+        if (EndsWithNewLine)
+            WriteIndentation();
+
+        _builder.Append(number);
+    }
+
     protected void Write(ReadOnlySpan<char> textToAppend)
     {
         if (textToAppend.IsEmpty)
@@ -80,7 +103,7 @@ public abstract class CodeWriterBase
             return;
         }
 
-        bool endsWithNewline = _builder.Length > 0 && _builder[^1] == '\n';
+        bool endsWithNewline = EndsWithNewLine;
         bool isFinalLine;
         var remainingText = textToAppend;
         while (true)
@@ -131,6 +154,14 @@ public abstract class CodeWriterBase
         _builder.AppendLine();
     }
 
+    /// <summary>Write number directly into the generated output and appends a new line.</summary>
+    /// <param name="number">The number to be written.</param>
+    public void WriteLine(int? number)
+    {
+        Write(number);
+        _builder.AppendLine();
+    }
+
     /// <summary>Writes the specified interpolated string directly into the generated output and appends a new line.</summary>
     /// <param name="handler">The interpolated string to append.</param>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -145,6 +176,14 @@ public abstract class CodeWriterBase
     protected None Append(string? textToAppend)
     {
         Write(textToAppend);
+        return default;
+    }
+
+    /// <summary>Append number directly into the generated output for expression control blocks.</summary>
+    /// <param name="number">The number to be appended to the generated output.</param>
+    protected None Append(int? number)
+    {
+        Write(number);
         return default;
     }
 
@@ -229,6 +268,9 @@ public abstract class CodeWriterBase
         public string? ToStringWithCulture(string? value) => value;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public int? ToStringWithCulture(int? number) => number;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public None ToStringWithCulture(None none)
         {
             // Text was already been written using interpolated string handler
@@ -259,8 +301,12 @@ public abstract class CodeWriterBase
 
         public void AppendFormatted(string? value)
         {
-            if (value is not null)
-                _codeWriter.Write(value);
+            _codeWriter.Write(value);
+        }
+
+        public void AppendFormatted(int? value)
+        {
+            _codeWriter.Write(value);
         }
     }
 }
@@ -275,8 +321,13 @@ public abstract class CodeWriterBase<T> : CodeWriterBase
 
     public void GenerateCompilationSource(SourceProductionContext context, T model)
     {
+        if (!CanGenerateFor(model))
+            return;
+
         Model = model;
         base.GenerateCompilationSource(context);
         Model = default!;
     }
+
+    protected virtual bool CanGenerateFor(T model) => true;
 }
