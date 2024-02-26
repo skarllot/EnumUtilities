@@ -1071,6 +1071,9 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
 
     public override string GetFileName() => $"{Model.Namespace ?? "_"}.{Model.Name}Factory.g.cs";
 
+    protected override bool CanGenerateFor(EnumToGenerate model) =>
+        (model.SelectedGenerators & SelectedGenerators.MainGenerator) != 0;
+
         
         #line default
         #line hidden

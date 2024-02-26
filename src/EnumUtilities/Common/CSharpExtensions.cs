@@ -21,4 +21,22 @@ public static class CSharpExtensions
             _ => typeSymbol.Name
         };
     }
+
+    public static string GetTypeNameFromCSharpKeyword(string keyword)
+    {
+        return keyword switch
+        {
+            "sbyte" => "SByte",
+            "byte" => "Byte",
+            "short" => "Int16",
+            "ushort" => "UInt16",
+            "int" => "Int32",
+            "uint" => "UInt32",
+            "long" => "Int64",
+            "ulong" => "UInt64",
+            "nint" => "IntPtr",
+            "nuint" => "UIntPtr",
+            _ => keyword
+        };
+    }
 }

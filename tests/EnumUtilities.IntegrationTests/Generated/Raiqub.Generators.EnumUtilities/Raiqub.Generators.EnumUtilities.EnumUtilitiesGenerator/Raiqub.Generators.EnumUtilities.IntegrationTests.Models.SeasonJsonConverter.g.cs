@@ -11,31 +11,19 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.5.0.0")]
-    internal sealed class SeasonJsonConverter : JsonConverter<Season>
+    public sealed class SeasonJsonConverter : JsonConverter<Season>
     {
-        private const int MaxValueLength = 6;
+        private const int MaxBytesLength = 12;
+        private const int MaxCharsLength = 2;
 
         public override Season Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-    #if NET7_0_OR_GREATER
-            int length = reader.HasValueSequence ? checked((int)reader.ValueSequence.Length) : reader.ValueSpan.Length;
-            if (length != MaxValueLength)
-                return 0;
+            if (reader.TokenType == JsonTokenType.String)
+                return ReadFromString(ref reader);
+            if (reader.TokenType == JsonTokenType.Number)
+                return ReadFromNumber(ref reader);
 
-            Span<char> name = stackalloc char[MaxValueLength];
-            reader.CopyString(name);
-    #else
-            string? name = reader.GetString();
-    #endif
-
-            return name switch
-            {
-                nameof(Season.Spring) => Season.Spring,
-                nameof(Season.Summer) => Season.Summer,
-                nameof(Season.Autumn) => Season.Autumn,
-                "⛄" => Season.Winter,
-                _ => 0
-            };
+            throw new JsonException();
         }
 
         public override void Write(Utf8JsonWriter writer, Season value, JsonSerializerOptions options)
@@ -43,21 +31,52 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             switch (value)
             {
                 case Season.Spring:
-                    writer.WriteStringValue("Spring"u8);
+                    writer.WriteStringValue("🌱"u8);
                     break;
                 case Season.Summer:
-                    writer.WriteStringValue("Summer"u8);
+                    writer.WriteStringValue("☀️"u8);
                     break;
                 case Season.Autumn:
-                    writer.WriteStringValue("Autumn"u8);
+                    writer.WriteStringValue("🍂"u8);
                     break;
                 case Season.Winter:
                     writer.WriteStringValue("⛄"u8);
                     break;
                 default:
-                    writer.WriteNullValue();
+                    writer.WriteStringValue(value.ToString());
                     break;
             }
+        }
+
+        private Season ReadFromString(ref Utf8JsonReader reader)
+        {
+    #if NET7_0_OR_GREATER
+            int length = reader.HasValueSequence ? checked((int)reader.ValueSequence.Length) : reader.ValueSpan.Length;
+            if (length > MaxBytesLength)
+                throw new JsonException();
+
+            Span<char> name = stackalloc char[MaxBytesLength];
+            int charsWritten = reader.CopyString(name);
+            name = name.Slice(0, charsWritten);
+    #else
+            string? name = reader.GetString();
+    #endif
+
+            return name switch
+            {
+                "🌱" => Season.Spring,
+                "☀️" => Season.Summer,
+                "🍂" => Season.Autumn,
+                "⛄" => Season.Winter,
+                _ => Enum.TryParse(name, out Season result) ? result : throw new JsonException()
+            };
+        }
+
+        private Season ReadFromNumber(ref Utf8JsonReader reader)
+        {
+            return reader.TryGetInt32(out int value)
+                ? (Season)value
+                : throw new JsonException();
         }
     }
 }

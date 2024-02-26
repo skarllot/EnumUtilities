@@ -5,7 +5,8 @@ using Raiqub.Generators.EnumUtilities.Common;
 namespace Raiqub.Generators.EnumUtilities.Models;
 
 public sealed record EnumToGenerate(
-    bool GenerateJsonConverter,
+    SelectedGenerators SelectedGenerators,
+    JsonConverterGeneratorOptions? JsonConverterGeneratorOptions,
     string? Namespace,
     ContainingType? ContainingType,
     bool IsPublic,
@@ -48,8 +49,7 @@ public sealed record EnumToGenerate(
             return null;
         }
 
-        var attributeData = typeSymbol.GetAttributes()
-            .First(x => x.AttributeClass?.Name == nameof(EnumGeneratorAttribute));
+        var attributes = typeSymbol.GetAttributes();
 
         var enumValues = typeSymbol
             .GetMembers()
@@ -65,9 +65,13 @@ public sealed record EnumToGenerate(
             ns = null;
 
         return new EnumToGenerate(
-            attributeData.NamedArguments
-                .FirstOrDefault(x => x.Key == nameof(EnumGeneratorAttribute.GenerateJsonConverter)).Value
-                .Value as bool? == true,
+            (attributes.Any(x => x.AttributeClass?.Name == nameof(EnumGeneratorAttribute))
+                ? SelectedGenerators.MainGenerator
+                : 0) |
+            (attributes.Any(x => x.AttributeClass?.Name == nameof(JsonConverterGeneratorAttribute))
+                ? SelectedGenerators.JsonConverter
+                : 0),
+            JsonConverterGeneratorOptions.FromSymbol(typeSymbol),
             string.IsNullOrWhiteSpace(ns) ? null : ns,
             typeSymbol.ContainingType is not null ? ContainingType.FromSymbol(typeSymbol.ContainingType) : null,
             typeSymbol.DeclaredAccessibility == Accessibility.Public,
