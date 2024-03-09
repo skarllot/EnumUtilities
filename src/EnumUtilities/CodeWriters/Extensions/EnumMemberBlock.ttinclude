@@ -1,0 +1,28 @@
+﻿<#+
+    private void WriteEnumMemberBlock()
+    {
+        if (!Model.HasSerializationValue)
+            return;
+#>
+
+    public static string ToEnumMemberValue(this <#= Model.RefName #> value)
+    {
+        return value switch
+        {
+<#+
+        foreach (var curr in Model.UniqueValues)
+        {
+#>
+            <#= Model.RefName #>.<#= curr.MemberName #> => <#=
+                    curr.SerializationValue != null
+                        ? Append($"\"{curr.SerializationValue}\"")
+                        : Append($"nameof({Model.RefName}.{curr.MemberName})") #>,
+<#+
+        }
+#>
+            _ => value.ToString()
+        };
+    }
+<#+
+    }
+#>

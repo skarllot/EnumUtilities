@@ -1,0 +1,25 @@
+﻿<#+
+    private void WriteDescriptionBlock()
+    {
+        if (!Model.HasDescription)
+            return;
+#>
+
+    public static string? GetDescription(this <#= Model.RefName #> value)
+    {
+        return value switch
+        {
+<#+
+        foreach (var curr in Model.UniqueValues.Where(x => x.Description != null))
+        {
+#>
+            <#= Model.RefName #>.<#= curr.MemberName #> => "<#= curr.Description #>",
+<#+
+        }
+#>
+            _ => null
+        };
+    }
+<#+
+    }
+#>

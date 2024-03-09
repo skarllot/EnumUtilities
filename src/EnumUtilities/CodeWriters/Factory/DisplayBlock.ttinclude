@@ -1,0 +1,141 @@
+﻿<#+
+    private void WriteDisplayBlock()
+    {
+        if (Model.HasDisplayName)
+        {
+#>
+
+    public static bool TryCreateFromDisplayShortName(
+        [NotNullWhen(true)] string? displayShortName,
+        StringComparison comparisonType,
+        out <#= Model.RefName #> result)
+    {
+        switch (displayShortName)
+        {
+<#+
+            foreach (var curr in Model.Values.Where(x => x.Display?.ShortName != null))
+            {
+#>
+            case { } s when s.Equals(<#=
+                        curr.Display!.ResourceShortName != null
+                            ? Append(curr.Display.ResourceShortName)
+                            : Append($"\"{curr.Display.ShortName}\"") #>, comparisonType):
+                result = <#= Model.RefName #>.<#= curr.MemberName #>;
+                return true;
+<#+
+            }
+#>
+            default:
+                return TryCreateFromDisplayName(displayShortName, comparisonType, out result);
+        }
+    }
+
+    public static bool TryCreateFromDisplayShortName([NotNullWhen(true)] string? displayShortName, out <#= Model.RefName #> result)
+    {
+        return TryCreateFromDisplayShortName(displayShortName, StringComparison.Ordinal, out result);
+    }
+
+    public static <#= Model.RefName #>? TryCreateFromDisplayShortName(string? displayShortName, StringComparison comparisonType)
+    {
+        return TryCreateFromDisplayShortName(displayShortName, comparisonType, out <#= Model.RefName #> result) ? result : null;
+    }
+
+    public static <#= Model.RefName #>? TryCreateFromDisplayShortName(string? displayShortName)
+    {
+        return TryCreateFromDisplayShortName(displayShortName, StringComparison.Ordinal, out <#= Model.RefName #> result) ? result : null;
+    }
+
+    public static bool TryCreateFromDisplayName(
+        [NotNullWhen(true)] string? displayName,
+        StringComparison comparisonType,
+        out <#= Model.RefName #> result)
+    {
+        switch (displayName)
+        {
+<#+
+            foreach (var curr in Model.Values)
+            {
+#>
+            case { } s when s.Equals(<#=
+                        curr.Display?.ResourceName != null
+                            ? Append(curr.Display.ResourceName)
+                            : curr.Display?.Name != null
+                                ? Append($"\"{curr.Display.Name}\"")
+                                : Append($"nameof({Model.RefName}.{curr.MemberName})") #>, comparisonType):
+                result = <#= Model.RefName #>.<#= curr.MemberName #>;
+                return true;
+<#+
+            }
+#>
+            default:
+                result = default;
+                return false;
+        }
+    }
+
+    public static bool TryCreateFromDisplayName([NotNullWhen(true)] string? displayName, out <#= Model.RefName #> result)
+    {
+        return TryCreateFromDisplayName(displayName, StringComparison.Ordinal, out result);
+    }
+
+    public static <#= Model.RefName #>? TryCreateFromDisplayName(string? displayName, StringComparison comparisonType)
+    {
+        return TryCreateFromDisplayName(displayName, comparisonType, out <#= Model.RefName #> result) ? result : null;
+    }
+
+    public static <#= Model.RefName #>? TryCreateFromDisplayName(string? displayName)
+    {
+        return TryCreateFromDisplayName(displayName, StringComparison.Ordinal, out <#= Model.RefName #> result) ? result : null;
+    }
+<#+
+        }
+#>
+<#+
+        if (Model.HasDisplayDescription)
+        {
+#>
+
+    public static bool TryCreateFromDescription(
+        [NotNullWhen(true)] string? description,
+        StringComparison comparisonType,
+        out <#= Model.RefName #> result)
+    {
+        switch (description)
+        {
+<#+
+            foreach (var curr in Model.Values.Where(x => x.Display?.Description != null))
+            {
+#>
+            case { } s when s.Equals(<#=
+                        curr.Display!.ResourceDescription != null
+                            ? Append(curr.Display.ResourceDescription)
+                            : Append($"\"{curr.Display.Description}\"") #>, comparisonType):
+                result = <#= Model.RefName #>.<#= curr.MemberName #>;
+                return true;
+<#+
+            }
+#>
+            default:
+                result = default;
+                return false;
+        }
+    }
+
+    public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, out <#= Model.RefName #> result)
+    {
+        return TryCreateFromDescription(description, StringComparison.Ordinal, out result);
+    }
+
+    public static <#= Model.RefName #>? TryCreateFromDescription(string? description, StringComparison comparisonType)
+    {
+        return TryCreateFromDescription(description, comparisonType, out <#= Model.RefName #> result) ? result : null;
+    }
+
+    public static <#= Model.RefName #>? TryCreateFromDescription(string? description)
+    {
+        return TryCreateFromDescription(description, StringComparison.Ordinal, out <#= Model.RefName #> result) ? result : null;
+    }
+<#+
+        }
+    }
+#>

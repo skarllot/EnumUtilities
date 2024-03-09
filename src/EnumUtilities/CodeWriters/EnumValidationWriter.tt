@@ -1,4 +1,4 @@
-﻿<#@ template debug="false" hostspecific="false" language="C#" inherits="CodeWriterBase<EnumToGenerate>" #>
+﻿<#@ template debug="false" linePragmas="false" hostspecific="false" language="C#" inherits="CodeWriterBase<EnumToGenerate>" #>
 <#@ import namespace="Common" #>
 <#@ import namespace="Models" #>
 <#@ import namespace="System.Text" #>

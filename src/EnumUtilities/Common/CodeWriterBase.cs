@@ -97,6 +97,11 @@ public abstract class CodeWriterBase
             return;
         }
 
+        if (_builder.Length == 0)
+        {
+            textToAppend = textToAppend.TrimStart("\r\n".AsSpan());
+        }
+
         if (_indentation == 0)
         {
             _builder.Append(textToAppend);

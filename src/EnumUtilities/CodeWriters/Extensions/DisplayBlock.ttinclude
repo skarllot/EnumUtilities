@@ -1,0 +1,75 @@
+﻿<#+
+    private void WriteDisplayBlock()
+    {
+        if (Model.HasDisplayName)
+        {
+#>
+
+    public static string GetDisplayShortName(this <#= Model.RefName #> value)
+    {
+        return value switch
+        {
+<#+
+            foreach (var curr in Model.UniqueValues.Where(x => x.Display?.ShortName != null))
+            {
+#>
+            <#= Model.RefName #>.<#= curr.MemberName #> => <#= curr.Display!.ResourceShortName != null
+                                                                   ? Append(curr.Display.ResourceShortName)
+                                                                   : Append($"\"{curr.Display.ShortName}\"") #>,
+<#+
+            }
+#>
+            _ => GetDisplayName(value)
+        };
+    }
+
+    public static string GetDisplayName(this <#= Model.RefName #> value)
+    {
+        return value switch
+        {
+<#+
+            foreach (var curr in Model.UniqueValues)
+            {
+#>
+            <#= Model.RefName #>.<#= curr.MemberName #> => <#=
+                        curr.Display?.ResourceName != null
+                            ? Append(curr.Display.ResourceName)
+                            : curr.Display?.Name != null
+                                ? Append($"\"{curr.Display.Name}\"")
+                                : Append($"nameof({Model.RefName}.{curr.MemberName})") #>,
+<#+
+            }
+#>
+            _ => value.ToString()
+        };
+    }
+<#+
+        }
+#>
+<#+
+        if (Model.HasDisplayDescription)
+        {
+#>
+
+    public static string? GetDescription(this <#= Model.RefName #> value)
+    {
+        return value switch
+        {
+<#+
+            foreach (var curr in Model.UniqueValues.Where(x => x.Display?.Description != null))
+            {
+#>
+            <#= Model.RefName #>.<#= curr.MemberName #> => <#=
+                        curr.Display!.ResourceDescription != null
+                            ? Append(curr.Display.ResourceDescription)
+                            : Append($"\"{curr.Display.Description}\"") #>,
+<#+
+            }
+#>
+            _ => null
+        };
+    }
+<#+
+        }
+    }
+#>
