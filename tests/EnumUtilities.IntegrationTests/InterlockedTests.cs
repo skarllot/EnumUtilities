@@ -52,4 +52,74 @@ public class InterlockedTests
         Assert.Equal(HumanStates.Eating, target);
         Assert.Equal(HumanStates.Working, result3);
     }
+
+    [Fact]
+    public void ShouldExchangePaymentMethod()
+    {
+        var target = PaymentMethod.Credit;
+        var result1 = target.InterlockedExchange(PaymentMethod.Cash);
+
+        Assert.Equal(PaymentMethod.Cash, target);
+        Assert.Equal(PaymentMethod.Credit, result1);
+
+        var result2 = target.InterlockedExchange(PaymentMethod.Cheque);
+
+        Assert.Equal(PaymentMethod.Cheque, target);
+        Assert.Equal(PaymentMethod.Cash, result2);
+    }
+
+    [Fact]
+    public void ShouldRead64BitUserRole()
+    {
+        var target = UserRole.SuperUser;
+        var result = target.InterlockedRead();
+
+        Assert.Equal(UserRole.SuperUser, target);
+        Assert.Equal(UserRole.SuperUser, result);
+    }
+
+    [Fact]
+    public void ShouldAddWeekDays()
+    {
+        var target = WeekDays.Monday;
+        var result1 = target.InterlockedAdd(3);
+
+        Assert.Equal(WeekDays.Thursday, target);
+        Assert.Equal(WeekDays.Thursday, result1);
+
+        var result2 = target.InterlockedAdd(-1);
+
+        Assert.Equal(WeekDays.Wednesday, target);
+        Assert.Equal(WeekDays.Wednesday, result2);
+    }
+
+    [Fact]
+    public void ShouldDecrementWeekDays()
+    {
+        var target = WeekDays.Sunday;
+        var result1 = target.InterlockedDecrement();
+
+        Assert.Equal(WeekDays.Saturday, target);
+        Assert.Equal(WeekDays.Saturday, result1);
+
+        var result2 = target.InterlockedDecrement();
+
+        Assert.Equal(WeekDays.Friday, target);
+        Assert.Equal(WeekDays.Friday, result2);
+    }
+
+    [Fact]
+    public void ShouldIncrementWeekDays()
+    {
+        var target = WeekDays.Wednesday;
+        var result1 = target.InterlockedIncrement();
+
+        Assert.Equal(WeekDays.Thursday, target);
+        Assert.Equal(WeekDays.Thursday, result1);
+
+        var result2 = target.InterlockedIncrement();
+
+        Assert.Equal(WeekDays.Friday, target);
+        Assert.Equal(WeekDays.Friday, result2);
+    }
 }
