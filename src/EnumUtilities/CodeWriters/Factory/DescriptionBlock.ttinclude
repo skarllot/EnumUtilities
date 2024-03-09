@@ -1,0 +1,47 @@
+﻿<#+
+    private void WriteDescriptionBlock()
+    {
+        if (!Model.HasDescription)
+            return;
+#>
+
+    public static bool TryCreateFromDescription(
+        [NotNullWhen(true)] string? description,
+        StringComparison comparisonType,
+        out <#= Model.RefName #> result)
+    {
+        switch (description)
+        {
+<#+
+        foreach (var curr in Model.Values.Where(x => x.Description != null))
+        {
+#>
+            case { } s when s.Equals("<#= curr.Description #>", comparisonType):
+                result = <#= Model.RefName #>.<#= curr.MemberName #>;
+                return true;
+<#+
+        }
+#>
+            default:
+                result = default;
+                return false;
+        }
+    }
+
+    public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, out <#= Model.RefName #> result)
+    {
+        return TryCreateFromDescription(description, StringComparison.Ordinal, out result);
+    }
+
+    public static <#= Model.RefName #>? TryCreateFromDescription(string? description, StringComparison comparisonType)
+    {
+        return TryCreateFromDescription(description, comparisonType, out <#= Model.RefName #> result) ? result : null;
+    }
+
+    public static <#= Model.RefName #>? TryCreateFromDescription(string? description)
+    {
+        return TryCreateFromDescription(description, StringComparison.Ordinal, out <#= Model.RefName #> result) ? result : null;
+    }
+<#+
+    }
+#>

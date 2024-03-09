@@ -1,0 +1,31 @@
+﻿<#+
+    private void WriteDefaultBlock()
+    {
+#>
+    /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
+    /// <returns>The string representation of the value of this instance.</returns>
+    public static string ToStringFast(this <#= Model.RefName #> value)
+    {
+        return value switch
+        {
+<#+
+    foreach (var curr in Model.UniqueValues)
+    {
+#>
+            <#= Model.RefName #>.<#= curr.MemberName #> => nameof(<#= Model.RefName #>.<#= curr.MemberName #>),
+<#+
+    }
+#>
+            _ => value.ToString()
+        };
+    }
+
+    /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
+    /// <returns><c>true</c> if the value of this instance exists in the enumeration; <c>false</c> otherwise.</returns>
+    public static bool IsDefined(this <#= Model.RefName #> value)
+    {
+        return <#= Model.Name #>Validation.IsDefined(value);
+    }
+<#+
+        }
+#>

@@ -1,0 +1,61 @@
+﻿<#+
+    private void WriteMiscellaneousBlock()
+    {
+#>
+
+    /// <summary>Retrieves an array of the values of the constants in the <#= Model.Name #> enumeration.</summary>
+    /// <returns>An array that contains the values of the constants in <#= Model.Name #>.</returns>
+    public static <#= Model.RefName #>[] GetValues()
+    {
+        return new[]
+        {
+<#+
+    foreach (var curr in Model.UniqueValues)
+    {
+#>
+            <#= Model.RefName #>.<#= curr.MemberName #>,
+<#+
+    }
+#>
+        };
+    }
+
+    /// <summary>Retrieves an array of the names of the constants in <#= Model.Name #> enumeration.</summary>
+    /// <returns>A string array of the names of the constants in <#= Model.Name #>.</returns>
+    public static string[] GetNames()
+    {
+        return new[]
+        {
+<#+
+    foreach (var curr in Model.Values)
+    {
+#>
+            nameof(<#= Model.RefName #>.<#= curr.MemberName #>),
+<#+
+    }
+#>
+        };
+    }
+
+    private static bool TryParseNumeric(
+        string name,
+        StringComparison comparisonType,
+        out <#= Model.UnderlyingType #> result)
+    {
+        switch (comparisonType)
+        {
+            case StringComparison.CurrentCulture:
+            case StringComparison.CurrentCultureIgnoreCase:
+                return <#= Model.UnderlyingType #>.TryParse(name, NumberStyles.Integer, NumberFormatInfo.CurrentInfo, out result);
+            case StringComparison.InvariantCulture:
+            case StringComparison.InvariantCultureIgnoreCase:
+            case StringComparison.Ordinal:
+            case StringComparison.OrdinalIgnoreCase:
+                return <#= Model.UnderlyingType #>.TryParse(name, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out result);
+            default:
+                return <#= Model.UnderlyingType #>.TryParse(name, out result);
+        }
+    }
+<#+
+    }
+#>
