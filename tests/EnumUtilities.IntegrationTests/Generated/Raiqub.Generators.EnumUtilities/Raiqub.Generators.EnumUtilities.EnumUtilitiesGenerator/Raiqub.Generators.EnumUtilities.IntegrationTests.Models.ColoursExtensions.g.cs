@@ -2,13 +2,15 @@
 #nullable enable
 
 using System;
+using System.Runtime.CompilerServices;
+using System.Threading;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.5.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.6.0.0")]
     public static partial class ColoursExtensions
     {
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
@@ -29,6 +31,53 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         public static bool IsDefined(this Colours value)
         {
             return ColoursValidation.IsDefined(value);
+        }
+
+    #if NET5_0_OR_GREATER
+        /// <summary>Bitwise "ands" two enumerations and replaces the first value with the result, as an atomic operation.</summary>
+        /// <param name="location">A variable containing the first value to be combined.</param>
+        /// <param name="value">The value to be combined with the value at <paramref name="location" />.</param>
+        /// <returns>The original value in <paramref name="location" />.</returns>
+        public static Colours InterlockedAnd(this ref Colours location, Colours value)
+        {
+            ref int locationRaw = ref Unsafe.As<Colours, int>(ref location);
+            int resultRaw = Interlocked.And(ref locationRaw, Unsafe.As<Colours, int>(ref value));
+            return Unsafe.As<int, Colours>(ref resultRaw);
+        }
+
+        /// <summary>Bitwise "ors" two enumerations and replaces the first value with the result, as an atomic operation.</summary>
+        /// <param name="location">A variable containing the first value to be combined.</param>
+        /// <param name="value">The value to be combined with the value at <paramref name="location" />.</param>
+        /// <returns>The original value in <paramref name="location" />.</returns>
+        public static Colours InterlockedOr(this ref Colours location, Colours value)
+        {
+            ref int locationRaw = ref Unsafe.As<Colours, int>(ref location);
+            int resultRaw = Interlocked.Or(ref locationRaw, Unsafe.As<Colours, int>(ref value));
+            return Unsafe.As<int, Colours>(ref resultRaw);
+        }
+    #endif
+
+        /// <summary>Compares two enumerations for equality and, if they are equal, replaces the first value.</summary>
+        /// <param name="location">The destination, whose value is compared with <paramref name="comparand" /> and possibly replaced.</param>
+        /// <param name="value">The value that replaces the destination value if the comparison results in equality.</param>
+        /// <param name="comparand">The value that is compared to the value at <paramref name="location" />.</param>
+        /// <returns>The original value in <paramref name="location" />.</returns>
+        public static Colours InterlockedCompareExchange(this ref Colours location, Colours value, Colours comparand)
+        {
+            ref int locationRaw = ref Unsafe.As<Colours, int>(ref location);
+            int resultRaw = Interlocked.CompareExchange(ref locationRaw, Unsafe.As<Colours, int>(ref value), Unsafe.As<Colours, int>(ref comparand));
+            return Unsafe.As<int, Colours>(ref resultRaw);
+        }
+
+        /// <summary>Sets an enumeration value to a specified value and returns the original value, as an atomic operation.</summary>
+        /// <param name="location">The variable to set to the specified value.</param>
+        /// <param name="value">The value to which the <paramref name="location" /> parameter is set.</param>
+        /// <returns>The original value of <paramref name="location" />.</returns>
+        public static Colours InterlockedExchange(this ref Colours location, Colours value)
+        {
+            ref int locationRaw = ref Unsafe.As<Colours, int>(ref location);
+            int resultRaw = Interlocked.Exchange(ref locationRaw, Unsafe.As<Colours, int>(ref value));
+            return Unsafe.As<int, Colours>(ref resultRaw);
         }
     }
 }
