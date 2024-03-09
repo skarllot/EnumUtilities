@@ -11,7 +11,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.6.0.0")]
-    public static partial class ColoursFactory
+    public static partial class UserRoleFactory
     {
         /// <summary>
         /// Converts the string representation of the name or numeric value of one or more enumerated constants to
@@ -20,30 +20,39 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
         /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
         /// <param name="result">
-        /// When this method returns, result contains an object of type Colours whose value is represented by value
+        /// When this method returns, result contains an object of type UserRole whose value is represented by value
         /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-        /// underlying type of Colours. Note that this value need not be a member of the Colours enumeration.
+        /// underlying type of UserRole. Note that this value need not be a member of the UserRole enumeration.
         /// </param>
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
         /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
         public static bool TryParse(
             [NotNullWhen(true)] string? name,
             StringComparison comparisonType,
-            out Colours result)
+            out UserRole result)
         {
             switch (name)
             {
-                case { } s when s.Equals(nameof(Colours.Red), comparisonType):
-                    result = Colours.Red;
+                case { } s when s.Equals(nameof(UserRole.None), comparisonType):
+                    result = UserRole.None;
                     return true;
-                case { } s when s.Equals(nameof(Colours.Blue), comparisonType):
-                    result = Colours.Blue;
+                case { } s when s.Equals(nameof(UserRole.NormalUser), comparisonType):
+                    result = UserRole.NormalUser;
                     return true;
-                case { } s when s.Equals(nameof(Colours.Green), comparisonType):
-                    result = Colours.Green;
+                case { } s when s.Equals(nameof(UserRole.Custodian), comparisonType):
+                    result = UserRole.Custodian;
                     return true;
-                case { } s when TryParseNumeric(s, comparisonType, out int val):
-                    result = (Colours)val;
+                case { } s when s.Equals(nameof(UserRole.Finance), comparisonType):
+                    result = UserRole.Finance;
+                    return true;
+                case { } s when s.Equals(nameof(UserRole.SuperUser), comparisonType):
+                    result = UserRole.SuperUser;
+                    return true;
+                case { } s when s.Equals(nameof(UserRole.All), comparisonType):
+                    result = UserRole.All;
+                    return true;
+                case { } s when TryParseNumeric(s, comparisonType, out ulong val):
+                    result = (UserRole)val;
                     return true;
                 default:
                     return Enum.TryParse(name, out result);
@@ -56,28 +65,37 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// </summary>
         /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
         /// <param name="result">
-        /// When this method returns, result contains an object of type Colours whose value is represented by value
+        /// When this method returns, result contains an object of type UserRole whose value is represented by value
         /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-        /// underlying type of Colours. Note that this value need not be a member of the Colours enumeration.
+        /// underlying type of UserRole. Note that this value need not be a member of the UserRole enumeration.
         /// </param>
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
         public static bool TryParse(
             [NotNullWhen(true)] string? name,
-            out Colours result)
+            out UserRole result)
         {
             switch (name)
             {
-                case nameof(Colours.Red):
-                    result = Colours.Red;
+                case nameof(UserRole.None):
+                    result = UserRole.None;
                     return true;
-                case nameof(Colours.Blue):
-                    result = Colours.Blue;
+                case nameof(UserRole.NormalUser):
+                    result = UserRole.NormalUser;
                     return true;
-                case nameof(Colours.Green):
-                    result = Colours.Green;
+                case nameof(UserRole.Custodian):
+                    result = UserRole.Custodian;
                     return true;
-                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out int val):
-                    result = (Colours)val;
+                case nameof(UserRole.Finance):
+                    result = UserRole.Finance;
+                    return true;
+                case nameof(UserRole.SuperUser):
+                    result = UserRole.SuperUser;
+                    return true;
+                case nameof(UserRole.All):
+                    result = UserRole.All;
+                    return true;
+                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out ulong val):
+                    result = (UserRole)val;
                     return true;
                 default:
                     return Enum.TryParse(name, out result);
@@ -90,14 +108,14 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// </summary>
         /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
         /// <param name="result">
-        /// When this method returns, result contains an object of type Colours whose value is represented by value
+        /// When this method returns, result contains an object of type UserRole whose value is represented by value
         /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-        /// underlying type of Colours. Note that this value need not be a member of the Colours enumeration.
+        /// underlying type of UserRole. Note that this value need not be a member of the UserRole enumeration.
         /// </param>
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
         public static bool TryParseIgnoreCase(
             [NotNullWhen(true)] string? name,
-            out Colours result)
+            out UserRole result)
         {
             return TryParse(name, StringComparison.OrdinalIgnoreCase, out result);
         }
@@ -108,12 +126,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// </summary>
         /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
         /// <returns>
-        /// Contains an object of type Colours whose value is represented by value if the parse operation succeeds.
+        /// Contains an object of type UserRole whose value is represented by value if the parse operation succeeds.
         /// If the parse operation fails, result contains <c>null</c> value.
         /// </returns>
-        public static Colours? TryParse(string? name)
+        public static UserRole? TryParse(string? name)
         {
-            return TryParse(name, out Colours result) ? result : null;
+            return TryParse(name, out UserRole result) ? result : null;
         }
 
         /// <summary>
@@ -122,12 +140,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// </summary>
         /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
         /// <returns>
-        /// Contains an object of type Colours whose value is represented by value if the parse operation succeeds.
+        /// Contains an object of type UserRole whose value is represented by value if the parse operation succeeds.
         /// If the parse operation fails, result contains <c>null</c> value.
         /// </returns>
-        public static Colours? TryParseIgnoreCase(string? name)
+        public static UserRole? TryParseIgnoreCase(string? name)
         {
-            return TryParse(name, StringComparison.OrdinalIgnoreCase, out Colours result) ? result : null;
+            return TryParse(name, StringComparison.OrdinalIgnoreCase, out UserRole result) ? result : null;
         }
 
         /// <summary>
@@ -137,56 +155,62 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
         /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
         /// <returns>
-        /// Contains an object of type Colours whose value is represented by value if the parse operation succeeds.
+        /// Contains an object of type UserRole whose value is represented by value if the parse operation succeeds.
         /// If the parse operation fails, result contains <c>null</c> value.
         /// </returns>
         /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
-        public static Colours? TryParse(string? name, StringComparison comparisonType)
+        public static UserRole? TryParse(string? name, StringComparison comparisonType)
         {
-            return TryParse(name, comparisonType, out Colours result) ? result : null;
+            return TryParse(name, comparisonType, out UserRole result) ? result : null;
         }
 
-        /// <summary>Retrieves an array of the values of the constants in the Colours enumeration.</summary>
-        /// <returns>An array that contains the values of the constants in Colours.</returns>
-        public static Colours[] GetValues()
+        /// <summary>Retrieves an array of the values of the constants in the UserRole enumeration.</summary>
+        /// <returns>An array that contains the values of the constants in UserRole.</returns>
+        public static UserRole[] GetValues()
         {
             return new[]
             {
-                Colours.Red,
-                Colours.Blue,
-                Colours.Green,
+                UserRole.None,
+                UserRole.NormalUser,
+                UserRole.Custodian,
+                UserRole.Finance,
+                UserRole.SuperUser,
+                UserRole.All,
             };
         }
 
-        /// <summary>Retrieves an array of the names of the constants in Colours enumeration.</summary>
-        /// <returns>A string array of the names of the constants in Colours.</returns>
+        /// <summary>Retrieves an array of the names of the constants in UserRole enumeration.</summary>
+        /// <returns>A string array of the names of the constants in UserRole.</returns>
         public static string[] GetNames()
         {
             return new[]
             {
-                nameof(Colours.Red),
-                nameof(Colours.Blue),
-                nameof(Colours.Green),
+                nameof(UserRole.None),
+                nameof(UserRole.NormalUser),
+                nameof(UserRole.Custodian),
+                nameof(UserRole.Finance),
+                nameof(UserRole.SuperUser),
+                nameof(UserRole.All),
             };
         }
 
         private static bool TryParseNumeric(
             string name,
             StringComparison comparisonType,
-            out int result)
+            out ulong result)
         {
             switch (comparisonType)
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return int.TryParse(name, NumberStyles.Integer, NumberFormatInfo.CurrentInfo, out result);
+                    return ulong.TryParse(name, NumberStyles.Integer, NumberFormatInfo.CurrentInfo, out result);
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
                 case StringComparison.Ordinal:
                 case StringComparison.OrdinalIgnoreCase:
-                    return int.TryParse(name, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out result);
+                    return ulong.TryParse(name, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out result);
                 default:
-                    return int.TryParse(name, out result);
+                    return ulong.TryParse(name, out result);
             }
         }
     }

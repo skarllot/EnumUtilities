@@ -1,0 +1,129 @@
+﻿<#+
+    private void WriteInterlockedBlock()
+    {
+        string? underlyingType = GetInterlockedUnderlyingType();
+        if (underlyingType is null)
+            return;
+
+        if (Model.IsFlags)
+        {
+#>
+
+#if NET5_0_OR_GREATER
+    /// <summary>Bitwise "ands" two enumerations and replaces the first value with the result, as an atomic operation.</summary>
+    /// <param name="location">A variable containing the first value to be combined.</param>
+    /// <param name="value">The value to be combined with the value at <paramref name="location" />.</param>
+    /// <returns>The original value in <paramref name="location" />.</returns>
+    public static <#= Model.RefName #> InterlockedAnd(this ref <#= Model.RefName #> location, <#= Model.RefName #> value)
+    {
+        ref <#= underlyingType #> locationRaw = ref Unsafe.As<<#= Model.RefName #>, <#= underlyingType #>>(ref location);
+        <#= underlyingType #> resultRaw = Interlocked.And(ref locationRaw, Unsafe.As<<#= Model.RefName #>, <#= underlyingType #>>(ref value));
+        return Unsafe.As<<#= underlyingType #>, <#= Model.RefName #>>(ref resultRaw);
+    }
+
+    /// <summary>Bitwise "ors" two enumerations and replaces the first value with the result, as an atomic operation.</summary>
+    /// <param name="location">A variable containing the first value to be combined.</param>
+    /// <param name="value">The value to be combined with the value at <paramref name="location" />.</param>
+    /// <returns>The original value in <paramref name="location" />.</returns>
+    public static <#= Model.RefName #> InterlockedOr(this ref <#= Model.RefName #> location, <#= Model.RefName #> value)
+    {
+        ref <#= underlyingType #> locationRaw = ref Unsafe.As<<#= Model.RefName #>, <#= underlyingType #>>(ref location);
+        <#= underlyingType #> resultRaw = Interlocked.Or(ref locationRaw, Unsafe.As<<#= Model.RefName #>, <#= underlyingType #>>(ref value));
+        return Unsafe.As<<#= underlyingType #>, <#= Model.RefName #>>(ref resultRaw);
+    }
+#endif
+<#+
+        }
+
+        if (!Model.IsFlags)
+        {
+#>
+
+    /// <summary>Adds two enumerations and replaces the first integer with the sum, as an atomic operation.</summary>
+    /// <param name="location">A variable containing the first value to be added.</param>
+    /// <param name="value">The value to be added to the enumeration at <paramref name="location" />.</param>
+    /// <returns>The new value that was stored at <paramref name="location" /> by this operation.</returns>
+    public static <#= Model.RefName #> InterlockedAdd(this ref <#= Model.RefName #> location, <#= underlyingType #> value)
+    {
+        ref <#= underlyingType #> locationRaw = ref Unsafe.As<<#= Model.RefName #>, <#= underlyingType #>>(ref location);
+        <#= underlyingType #> resultRaw = Interlocked.Add(ref locationRaw, value);
+        return Unsafe.As<<#= underlyingType #>, <#= Model.RefName #>>(ref resultRaw);
+    }
+
+    /// <summary>Decrements enumeration and stores the result, as an atomic operation.</summary>
+    /// <param name="location">The variable whose value is to be decremented.</param>
+    /// <returns>The value of the variable immediately after the decrement operation finished.</returns>
+    public static <#= Model.RefName #> InterlockedDecrement(this ref <#= Model.RefName #> location)
+    {
+        ref <#= underlyingType #> locationRaw = ref Unsafe.As<<#= Model.RefName #>, <#= underlyingType #>>(ref location);
+        <#= underlyingType #> resultRaw = Interlocked.Decrement(ref locationRaw);
+        return Unsafe.As<<#= underlyingType #>, <#= Model.RefName #>>(ref resultRaw);
+    }
+
+    /// <summary>Increments enumeration and stores the result, as an atomic operation.</summary>
+    /// <param name="location">The variable whose value is to be incremented.</param>
+    /// <returns>The value of the variable immediately after the increment operation finished.</returns>
+    public static <#= Model.RefName #> InterlockedIncrement(this ref <#= Model.RefName #> location)
+    {
+        ref <#= underlyingType #> locationRaw = ref Unsafe.As<<#= Model.RefName #>, <#= underlyingType #>>(ref location);
+        <#= underlyingType #> resultRaw = Interlocked.Increment(ref locationRaw);
+        return Unsafe.As<<#= underlyingType #>, <#= Model.RefName #>>(ref resultRaw);
+    }
+<#+
+        }
+#>
+
+    /// <summary>Compares two enumerations for equality and, if they are equal, replaces the first value.</summary>
+    /// <param name="location">The destination, whose value is compared with <paramref name="comparand" /> and possibly replaced.</param>
+    /// <param name="value">The value that replaces the destination value if the comparison results in equality.</param>
+    /// <param name="comparand">The value that is compared to the value at <paramref name="location" />.</param>
+    /// <returns>The original value in <paramref name="location" />.</returns>
+    public static <#= Model.RefName #> InterlockedCompareExchange(this ref <#= Model.RefName #> location, <#= Model.RefName #> value, <#= Model.RefName #> comparand)
+    {
+        ref <#= underlyingType #> locationRaw = ref Unsafe.As<<#= Model.RefName #>, <#= underlyingType #>>(ref location);
+        <#= underlyingType #> resultRaw = Interlocked.CompareExchange(ref locationRaw, Unsafe.As<<#= Model.RefName #>, <#= underlyingType #>>(ref value), Unsafe.As<<#= Model.RefName #>, <#= underlyingType #>>(ref comparand));
+        return Unsafe.As<<#= underlyingType #>, <#= Model.RefName #>>(ref resultRaw);
+    }
+
+    /// <summary>Sets an enumeration value to a specified value and returns the original value, as an atomic operation.</summary>
+    /// <param name="location">The variable to set to the specified value.</param>
+    /// <param name="value">The value to which the <paramref name="location" /> parameter is set.</param>
+    /// <returns>The original value of <paramref name="location" />.</returns>
+    public static <#= Model.RefName #> InterlockedExchange(this ref <#= Model.RefName #> location, <#= Model.RefName #> value)
+    {
+        ref <#= underlyingType #> locationRaw = ref Unsafe.As<<#= Model.RefName #>, <#= underlyingType #>>(ref location);
+        <#= underlyingType #> resultRaw = Interlocked.Exchange(ref locationRaw, Unsafe.As<<#= Model.RefName #>, <#= underlyingType #>>(ref value));
+        return Unsafe.As<<#= underlyingType #>, <#= Model.RefName #>>(ref resultRaw);
+    }
+<#+
+        if (underlyingType == "long")
+        {
+#>
+
+    /// <summary>Returns a 64-bit enumeration value, loaded as an atomic operation.</summary>
+    /// <param name="location">The 64-bit enumeration value to be loaded.</param>
+    /// <returns>The loaded value.</returns>
+    public static <#= Model.RefName #> InterlockedRead(this ref <#= Model.RefName #> location)
+    {
+        ref <#= underlyingType #> locationRaw = ref Unsafe.As<<#= Model.RefName #>, <#= underlyingType #>>(ref location);
+        <#= underlyingType #> resultRaw = Interlocked.Read(ref locationRaw);
+        return Unsafe.As<<#= underlyingType #>, <#= Model.RefName #>>(ref resultRaw);
+    }
+<#+
+        }
+    }
+
+    private string? GetInterlockedUnderlyingType()
+    {
+        return Model.UnderlyingType switch
+        {
+            "int" => "int",
+            "long" => "long",
+            "uint" => "int",
+            "ulong" => "long",
+            _ => null
+            };
+    }
+
+    private bool IsInterlockedSupported() => GetInterlockedUnderlyingType() != null;
+#>

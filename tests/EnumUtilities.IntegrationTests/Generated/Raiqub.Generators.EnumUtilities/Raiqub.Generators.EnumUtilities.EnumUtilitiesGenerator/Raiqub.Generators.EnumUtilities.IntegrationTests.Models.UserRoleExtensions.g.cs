@@ -11,26 +11,29 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.6.0.0")]
-    public static partial class ColoursExtensions
+    public static partial class UserRoleExtensions
     {
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
         /// <returns>The string representation of the value of this instance.</returns>
-        public static string ToStringFast(this Colours value)
+        public static string ToStringFast(this UserRole value)
         {
             return value switch
             {
-                Colours.Red => nameof(Colours.Red),
-                Colours.Blue => nameof(Colours.Blue),
-                Colours.Green => nameof(Colours.Green),
+                UserRole.None => nameof(UserRole.None),
+                UserRole.NormalUser => nameof(UserRole.NormalUser),
+                UserRole.Custodian => nameof(UserRole.Custodian),
+                UserRole.Finance => nameof(UserRole.Finance),
+                UserRole.SuperUser => nameof(UserRole.SuperUser),
+                UserRole.All => nameof(UserRole.All),
                 _ => value.ToString()
             };
         }
 
         /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
         /// <returns><c>true</c> if the value of this instance exists in the enumeration; <c>false</c> otherwise.</returns>
-        public static bool IsDefined(this Colours value)
+        public static bool IsDefined(this UserRole value)
         {
-            return ColoursValidation.IsDefined(value);
+            return UserRoleValidation.IsDefined(value);
         }
 
     #if NET5_0_OR_GREATER
@@ -38,22 +41,22 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <param name="location">A variable containing the first value to be combined.</param>
         /// <param name="value">The value to be combined with the value at <paramref name="location" />.</param>
         /// <returns>The original value in <paramref name="location" />.</returns>
-        public static Colours InterlockedAnd(this ref Colours location, Colours value)
+        public static UserRole InterlockedAnd(this ref UserRole location, UserRole value)
         {
-            ref int locationRaw = ref Unsafe.As<Colours, int>(ref location);
-            int resultRaw = Interlocked.And(ref locationRaw, Unsafe.As<Colours, int>(ref value));
-            return Unsafe.As<int, Colours>(ref resultRaw);
+            ref long locationRaw = ref Unsafe.As<UserRole, long>(ref location);
+            long resultRaw = Interlocked.And(ref locationRaw, Unsafe.As<UserRole, long>(ref value));
+            return Unsafe.As<long, UserRole>(ref resultRaw);
         }
 
         /// <summary>Bitwise "ors" two enumerations and replaces the first value with the result, as an atomic operation.</summary>
         /// <param name="location">A variable containing the first value to be combined.</param>
         /// <param name="value">The value to be combined with the value at <paramref name="location" />.</param>
         /// <returns>The original value in <paramref name="location" />.</returns>
-        public static Colours InterlockedOr(this ref Colours location, Colours value)
+        public static UserRole InterlockedOr(this ref UserRole location, UserRole value)
         {
-            ref int locationRaw = ref Unsafe.As<Colours, int>(ref location);
-            int resultRaw = Interlocked.Or(ref locationRaw, Unsafe.As<Colours, int>(ref value));
-            return Unsafe.As<int, Colours>(ref resultRaw);
+            ref long locationRaw = ref Unsafe.As<UserRole, long>(ref location);
+            long resultRaw = Interlocked.Or(ref locationRaw, Unsafe.As<UserRole, long>(ref value));
+            return Unsafe.As<long, UserRole>(ref resultRaw);
         }
     #endif
 
@@ -62,22 +65,32 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <param name="value">The value that replaces the destination value if the comparison results in equality.</param>
         /// <param name="comparand">The value that is compared to the value at <paramref name="location" />.</param>
         /// <returns>The original value in <paramref name="location" />.</returns>
-        public static Colours InterlockedCompareExchange(this ref Colours location, Colours value, Colours comparand)
+        public static UserRole InterlockedCompareExchange(this ref UserRole location, UserRole value, UserRole comparand)
         {
-            ref int locationRaw = ref Unsafe.As<Colours, int>(ref location);
-            int resultRaw = Interlocked.CompareExchange(ref locationRaw, Unsafe.As<Colours, int>(ref value), Unsafe.As<Colours, int>(ref comparand));
-            return Unsafe.As<int, Colours>(ref resultRaw);
+            ref long locationRaw = ref Unsafe.As<UserRole, long>(ref location);
+            long resultRaw = Interlocked.CompareExchange(ref locationRaw, Unsafe.As<UserRole, long>(ref value), Unsafe.As<UserRole, long>(ref comparand));
+            return Unsafe.As<long, UserRole>(ref resultRaw);
         }
 
         /// <summary>Sets an enumeration value to a specified value and returns the original value, as an atomic operation.</summary>
         /// <param name="location">The variable to set to the specified value.</param>
         /// <param name="value">The value to which the <paramref name="location" /> parameter is set.</param>
         /// <returns>The original value of <paramref name="location" />.</returns>
-        public static Colours InterlockedExchange(this ref Colours location, Colours value)
+        public static UserRole InterlockedExchange(this ref UserRole location, UserRole value)
         {
-            ref int locationRaw = ref Unsafe.As<Colours, int>(ref location);
-            int resultRaw = Interlocked.Exchange(ref locationRaw, Unsafe.As<Colours, int>(ref value));
-            return Unsafe.As<int, Colours>(ref resultRaw);
+            ref long locationRaw = ref Unsafe.As<UserRole, long>(ref location);
+            long resultRaw = Interlocked.Exchange(ref locationRaw, Unsafe.As<UserRole, long>(ref value));
+            return Unsafe.As<long, UserRole>(ref resultRaw);
+        }
+
+        /// <summary>Returns a 64-bit enumeration value, loaded as an atomic operation.</summary>
+        /// <param name="location">The 64-bit enumeration value to be loaded.</param>
+        /// <returns>The loaded value.</returns>
+        public static UserRole InterlockedRead(this ref UserRole location)
+        {
+            ref long locationRaw = ref Unsafe.As<UserRole, long>(ref location);
+            long resultRaw = Interlocked.Read(ref locationRaw);
+            return Unsafe.As<long, UserRole>(ref resultRaw);
         }
     }
 }

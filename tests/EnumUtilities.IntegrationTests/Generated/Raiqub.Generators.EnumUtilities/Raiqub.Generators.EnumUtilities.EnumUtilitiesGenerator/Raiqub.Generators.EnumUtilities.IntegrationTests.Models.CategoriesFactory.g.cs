@@ -10,7 +10,7 @@ using System.Globalization;
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.5.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.6.0.0")]
     public static partial class CategoriesFactory
     {
         /// <summary>
@@ -51,7 +51,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 case { } s when s.Equals(nameof(Categories.Fashion), comparisonType):
                     result = Categories.Fashion;
                     return true;
-                case { } s when TryParseNumeric(s, comparisonType, out byte val):
+                case { } s when TryParseNumeric(s, comparisonType, out int val):
                     result = (Categories)val;
                     return true;
                 default:
@@ -94,7 +94,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 case nameof(Categories.Fashion):
                     result = Categories.Fashion;
                     return true;
-                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out byte val):
+                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out int val):
                     result = (Categories)val;
                     return true;
                 default:
@@ -197,20 +197,20 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         private static bool TryParseNumeric(
             string name,
             StringComparison comparisonType,
-            out byte result)
+            out int result)
         {
             switch (comparisonType)
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return byte.TryParse(name, NumberStyles.Integer, NumberFormatInfo.CurrentInfo, out result);
+                    return int.TryParse(name, NumberStyles.Integer, NumberFormatInfo.CurrentInfo, out result);
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
                 case StringComparison.Ordinal:
                 case StringComparison.OrdinalIgnoreCase:
-                    return byte.TryParse(name, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out result);
+                    return int.TryParse(name, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out result);
                 default:
-                    return byte.TryParse(name, out result);
+                    return int.TryParse(name, out result);
             }
         }
     }

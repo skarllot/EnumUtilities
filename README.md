@@ -48,6 +48,11 @@ This will generate 3 classes with the following methods:
 - [CategoriesExtensions](./tests/EnumUtilities.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Raiqub.Generators.EnumUtilities.IntegrationTests.Models.CategoriesExtensions.g.cs)
   - ToStringFast(this Categories)
   - IsDefined(this Categories)
+  - InterlockedAdd(this ref Categories, int)
+  - InterlockedDecrement(this ref Categories)
+  - InterlockedIncrement(this ref Categories)
+  - InterlockedCompareExchange(this ref Categories, Categories, Categories)
+  - InterlockedExchange(this ref Categories, Categories)
 - [CategoriesFactory](./tests/EnumUtilities.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Raiqub.Generators.EnumUtilities.IntegrationTests.Models.CategoriesFactory.g.cs)
   - TryParse(string?, StringComparison, out Categories)
   - TryParseIgnoreCase(string?, out Categories)
@@ -59,6 +64,41 @@ This will generate 3 classes with the following methods:
   - GetNames()
 - [CategoriesValidation](./tests/EnumUtilities.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Raiqub.Generators.EnumUtilities.IntegrationTests.Models.CategoriesValidation.g.cs)
   - IsDefined(Categories)
+  - IsDefined(string?, StringComparison)
+  - IsDefinedIgnoreCase(string?)
+  - IsDefined(string?)
+
+Bit flags enums are supported too:
+```csharp
+[Flags]
+[EnumGenerator]
+public enum Colours
+{
+    Red = 1,
+    Blue = 2,
+    Green = 4,
+}
+```
+
+Then 3 classes will be generated with the following methods:
+- [ColoursExtensions](./tests/EnumUtilities.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Raiqub.Generators.EnumUtilities.IntegrationTests.Models.ColoursExtensions.g.cs)
+  - ToStringFast(this Colours)
+  - IsDefined(this Colours)
+  - InterlockedAnd(this ref Colours, Colours)
+  - InterlockedOr(this ref Colours, Colours)
+  - InterlockedCompareExchange(this ref Colours, Colours, Colours)
+  - InterlockedExchange(this ref Colours, Colours)
+- [ColoursFactory](./tests/EnumUtilities.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Raiqub.Generators.EnumUtilities.IntegrationTests.Models.ColoursFactory.g.cs)
+  - TryParse(string?, StringComparison, out Colours)
+  - TryParse(string?, out Colours)
+  - TryParseIgnoreCase(string?, out Colours)
+  - TryParse(string?)
+  - TryParseIgnoreCase(string?)
+  - TryParse(string?, StringComparison)
+  - GetValues()
+  - GetNames()
+- [ColoursValidation](./tests/EnumUtilities.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Raiqub.Generators.EnumUtilities.IntegrationTests.Models.ColoursValidation.g.cs)
+  - IsDefined(Colours)
   - IsDefined(string?, StringComparison)
   - IsDefinedIgnoreCase(string?)
   - IsDefined(string?)
@@ -171,7 +211,7 @@ This will generate the following methods:
 
 ### JSON Serialization
 
-Besindes the member name, supports the [EnumMemberAttribute](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.enummemberattribute) and [JsonPropertyNameAttribute](https://docs.microsoft.com/en-us/dotnet/api/system.text.json.serialization.jsonpropertynameattribute) attributes.
+Besides the member name, supports the [EnumMemberAttribute](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.enummemberattribute) and [JsonPropertyNameAttribute](https://docs.microsoft.com/en-us/dotnet/api/system.text.json.serialization.jsonpropertynameattribute) attributes.
 
 Example:
 

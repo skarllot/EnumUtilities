@@ -26,7 +26,7 @@
     <PackageTags>
       generator;source;enum;enumeration;reflection;attribute;tostring;isdefined;enummember;description;display;
       shortname;resourcetype;resource;parse;tryparse;ignorecase;stringcomparison;factory;extension;validation;
-      codegen;fast;json;jsonconverter
+      codegen;fast;json;jsonconverter;interlocked;atomic
     </PackageTags>
   </PropertyGroup>
 

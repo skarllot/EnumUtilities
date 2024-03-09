@@ -1,7 +1,7 @@
 ﻿namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
 
-[EnumGenerator]
 [Flags]
+[EnumGenerator]
 public enum Colours
 {
     Red = 1,
