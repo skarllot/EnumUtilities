@@ -1,7 +1,7 @@
 ﻿namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
 
 [EnumGenerator]
-public enum Categories
+public enum SlimCategories : byte
 {
     Electronics,
     Food,

@@ -11,7 +11,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.6.0.0")]
-    public static partial class CategoriesFactory
+    public static partial class SlimCategoriesFactory
     {
         /// <summary>
         /// Converts the string representation of the name or numeric value of one or more enumerated constants to
@@ -20,39 +20,39 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
         /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
         /// <param name="result">
-        /// When this method returns, result contains an object of type Categories whose value is represented by value
+        /// When this method returns, result contains an object of type SlimCategories whose value is represented by value
         /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-        /// underlying type of Categories. Note that this value need not be a member of the Categories enumeration.
+        /// underlying type of SlimCategories. Note that this value need not be a member of the SlimCategories enumeration.
         /// </param>
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
         /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
         public static bool TryParse(
             [NotNullWhen(true)] string? name,
             StringComparison comparisonType,
-            out Categories result)
+            out SlimCategories result)
         {
             switch (name)
             {
-                case { } s when s.Equals(nameof(Categories.Electronics), comparisonType):
-                    result = Categories.Electronics;
+                case { } s when s.Equals(nameof(SlimCategories.Electronics), comparisonType):
+                    result = SlimCategories.Electronics;
                     return true;
-                case { } s when s.Equals(nameof(Categories.Food), comparisonType):
-                    result = Categories.Food;
+                case { } s when s.Equals(nameof(SlimCategories.Food), comparisonType):
+                    result = SlimCategories.Food;
                     return true;
-                case { } s when s.Equals(nameof(Categories.Automotive), comparisonType):
-                    result = Categories.Automotive;
+                case { } s when s.Equals(nameof(SlimCategories.Automotive), comparisonType):
+                    result = SlimCategories.Automotive;
                     return true;
-                case { } s when s.Equals(nameof(Categories.Arts), comparisonType):
-                    result = Categories.Arts;
+                case { } s when s.Equals(nameof(SlimCategories.Arts), comparisonType):
+                    result = SlimCategories.Arts;
                     return true;
-                case { } s when s.Equals(nameof(Categories.BeautyCare), comparisonType):
-                    result = Categories.BeautyCare;
+                case { } s when s.Equals(nameof(SlimCategories.BeautyCare), comparisonType):
+                    result = SlimCategories.BeautyCare;
                     return true;
-                case { } s when s.Equals(nameof(Categories.Fashion), comparisonType):
-                    result = Categories.Fashion;
+                case { } s when s.Equals(nameof(SlimCategories.Fashion), comparisonType):
+                    result = SlimCategories.Fashion;
                     return true;
-                case { } s when TryParseNumeric(s, comparisonType, out int val):
-                    result = (Categories)val;
+                case { } s when TryParseNumeric(s, comparisonType, out byte val):
+                    result = (SlimCategories)val;
                     return true;
                 default:
                     return Enum.TryParse(name, out result);
@@ -65,37 +65,37 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// </summary>
         /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
         /// <param name="result">
-        /// When this method returns, result contains an object of type Categories whose value is represented by value
+        /// When this method returns, result contains an object of type SlimCategories whose value is represented by value
         /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-        /// underlying type of Categories. Note that this value need not be a member of the Categories enumeration.
+        /// underlying type of SlimCategories. Note that this value need not be a member of the SlimCategories enumeration.
         /// </param>
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
         public static bool TryParse(
             [NotNullWhen(true)] string? name,
-            out Categories result)
+            out SlimCategories result)
         {
             switch (name)
             {
-                case nameof(Categories.Electronics):
-                    result = Categories.Electronics;
+                case nameof(SlimCategories.Electronics):
+                    result = SlimCategories.Electronics;
                     return true;
-                case nameof(Categories.Food):
-                    result = Categories.Food;
+                case nameof(SlimCategories.Food):
+                    result = SlimCategories.Food;
                     return true;
-                case nameof(Categories.Automotive):
-                    result = Categories.Automotive;
+                case nameof(SlimCategories.Automotive):
+                    result = SlimCategories.Automotive;
                     return true;
-                case nameof(Categories.Arts):
-                    result = Categories.Arts;
+                case nameof(SlimCategories.Arts):
+                    result = SlimCategories.Arts;
                     return true;
-                case nameof(Categories.BeautyCare):
-                    result = Categories.BeautyCare;
+                case nameof(SlimCategories.BeautyCare):
+                    result = SlimCategories.BeautyCare;
                     return true;
-                case nameof(Categories.Fashion):
-                    result = Categories.Fashion;
+                case nameof(SlimCategories.Fashion):
+                    result = SlimCategories.Fashion;
                     return true;
-                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out int val):
-                    result = (Categories)val;
+                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out byte val):
+                    result = (SlimCategories)val;
                     return true;
                 default:
                     return Enum.TryParse(name, out result);
@@ -108,14 +108,14 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// </summary>
         /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
         /// <param name="result">
-        /// When this method returns, result contains an object of type Categories whose value is represented by value
+        /// When this method returns, result contains an object of type SlimCategories whose value is represented by value
         /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-        /// underlying type of Categories. Note that this value need not be a member of the Categories enumeration.
+        /// underlying type of SlimCategories. Note that this value need not be a member of the SlimCategories enumeration.
         /// </param>
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
         public static bool TryParseIgnoreCase(
             [NotNullWhen(true)] string? name,
-            out Categories result)
+            out SlimCategories result)
         {
             return TryParse(name, StringComparison.OrdinalIgnoreCase, out result);
         }
@@ -126,12 +126,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// </summary>
         /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
         /// <returns>
-        /// Contains an object of type Categories whose value is represented by value if the parse operation succeeds.
+        /// Contains an object of type SlimCategories whose value is represented by value if the parse operation succeeds.
         /// If the parse operation fails, result contains <c>null</c> value.
         /// </returns>
-        public static Categories? TryParse(string? name)
+        public static SlimCategories? TryParse(string? name)
         {
-            return TryParse(name, out Categories result) ? result : null;
+            return TryParse(name, out SlimCategories result) ? result : null;
         }
 
         /// <summary>
@@ -140,12 +140,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// </summary>
         /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
         /// <returns>
-        /// Contains an object of type Categories whose value is represented by value if the parse operation succeeds.
+        /// Contains an object of type SlimCategories whose value is represented by value if the parse operation succeeds.
         /// If the parse operation fails, result contains <c>null</c> value.
         /// </returns>
-        public static Categories? TryParseIgnoreCase(string? name)
+        public static SlimCategories? TryParseIgnoreCase(string? name)
         {
-            return TryParse(name, StringComparison.OrdinalIgnoreCase, out Categories result) ? result : null;
+            return TryParse(name, StringComparison.OrdinalIgnoreCase, out SlimCategories result) ? result : null;
         }
 
         /// <summary>
@@ -155,62 +155,62 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
         /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
         /// <returns>
-        /// Contains an object of type Categories whose value is represented by value if the parse operation succeeds.
+        /// Contains an object of type SlimCategories whose value is represented by value if the parse operation succeeds.
         /// If the parse operation fails, result contains <c>null</c> value.
         /// </returns>
         /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
-        public static Categories? TryParse(string? name, StringComparison comparisonType)
+        public static SlimCategories? TryParse(string? name, StringComparison comparisonType)
         {
-            return TryParse(name, comparisonType, out Categories result) ? result : null;
+            return TryParse(name, comparisonType, out SlimCategories result) ? result : null;
         }
 
-        /// <summary>Retrieves an array of the values of the constants in the Categories enumeration.</summary>
-        /// <returns>An array that contains the values of the constants in Categories.</returns>
-        public static Categories[] GetValues()
+        /// <summary>Retrieves an array of the values of the constants in the SlimCategories enumeration.</summary>
+        /// <returns>An array that contains the values of the constants in SlimCategories.</returns>
+        public static SlimCategories[] GetValues()
         {
             return new[]
             {
-                Categories.Electronics,
-                Categories.Food,
-                Categories.Automotive,
-                Categories.Arts,
-                Categories.BeautyCare,
-                Categories.Fashion,
+                SlimCategories.Electronics,
+                SlimCategories.Food,
+                SlimCategories.Automotive,
+                SlimCategories.Arts,
+                SlimCategories.BeautyCare,
+                SlimCategories.Fashion,
             };
         }
 
-        /// <summary>Retrieves an array of the names of the constants in Categories enumeration.</summary>
-        /// <returns>A string array of the names of the constants in Categories.</returns>
+        /// <summary>Retrieves an array of the names of the constants in SlimCategories enumeration.</summary>
+        /// <returns>A string array of the names of the constants in SlimCategories.</returns>
         public static string[] GetNames()
         {
             return new[]
             {
-                nameof(Categories.Electronics),
-                nameof(Categories.Food),
-                nameof(Categories.Automotive),
-                nameof(Categories.Arts),
-                nameof(Categories.BeautyCare),
-                nameof(Categories.Fashion),
+                nameof(SlimCategories.Electronics),
+                nameof(SlimCategories.Food),
+                nameof(SlimCategories.Automotive),
+                nameof(SlimCategories.Arts),
+                nameof(SlimCategories.BeautyCare),
+                nameof(SlimCategories.Fashion),
             };
         }
 
         private static bool TryParseNumeric(
             string name,
             StringComparison comparisonType,
-            out int result)
+            out byte result)
         {
             switch (comparisonType)
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return int.TryParse(name, NumberStyles.Integer, NumberFormatInfo.CurrentInfo, out result);
+                    return byte.TryParse(name, NumberStyles.Integer, NumberFormatInfo.CurrentInfo, out result);
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
                 case StringComparison.Ordinal:
                 case StringComparison.OrdinalIgnoreCase:
-                    return int.TryParse(name, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out result);
+                    return byte.TryParse(name, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out result);
                 default:
-                    return int.TryParse(name, out result);
+                    return byte.TryParse(name, out result);
             }
         }
     }
