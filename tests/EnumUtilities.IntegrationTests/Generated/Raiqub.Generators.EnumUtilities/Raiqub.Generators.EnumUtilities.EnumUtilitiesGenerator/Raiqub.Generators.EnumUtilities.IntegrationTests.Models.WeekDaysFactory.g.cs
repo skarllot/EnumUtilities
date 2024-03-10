@@ -54,7 +54,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 case { } s when s.Equals(nameof(WeekDays.Sunday), comparisonType):
                     result = WeekDays.Sunday;
                     return true;
-                case { } s when TryParseNumeric(s, comparisonType, out int val):
+                case { } s when TryParseNumeric(s.AsSpan(), out int val):
                     result = (WeekDays)val;
                     return true;
                 default:
@@ -100,7 +100,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 case nameof(WeekDays.Sunday):
                     result = WeekDays.Sunday;
                     return true;
-                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out int val):
+                case { } s when TryParseNumeric(s.AsSpan(), out int val):
                     result = (WeekDays)val;
                     return true;
                 default:
@@ -168,6 +168,237 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         public static WeekDays? TryParse(string? name, StringComparison comparisonType)
         {
             return TryParse(name, comparisonType, out WeekDays result) ? result : null;
+        }
+
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="source">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type WeekDays whose value is represented by value
+        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+        /// underlying type of WeekDays. Note that this value need not be a member of the WeekDays enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        public static bool TryParse(ReadOnlySpan<char> source, out WeekDays result)
+        {
+            switch (source)
+            {
+                case "Monday":
+                    result = WeekDays.Monday;
+                    return true;
+                case "Tuesday":
+                    result = WeekDays.Tuesday;
+                    return true;
+                case "Wednesday":
+                    result = WeekDays.Wednesday;
+                    return true;
+                case "Thursday":
+                    result = WeekDays.Thursday;
+                    return true;
+                case "Friday":
+                    result = WeekDays.Friday;
+                    return true;
+                case "Saturday":
+                    result = WeekDays.Saturday;
+                    return true;
+                case "Sunday":
+                    result = WeekDays.Sunday;
+                    return true;
+                case { } when TryParseNumeric(source, out int number):
+                    result = (WeekDays)number;
+                    return true;
+                default:
+    #if NET6_0_OR_GREATER
+                    return Enum.TryParse(source, out result);
+    #else
+                    return Enum.TryParse(source.ToString(), out result);
+    #endif
+            }
+        }
+
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="source">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="ignoreCase"><c>true</c> to read <paramref name="source"/> in case insensitive mode; <c>false</c> to read value in case sensitive mode.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type WeekDays whose value is represented by value
+        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+        /// underlying type of WeekDays. Note that this value need not be a member of the WeekDays enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        public static bool TryParse(ReadOnlySpan<char> source, bool ignoreCase, out WeekDays result)
+        {
+            if (!ignoreCase)
+            {
+                return TryParse(source, out result);
+            }
+
+            if (source.Equals("Monday", StringComparison.OrdinalIgnoreCase))
+            {
+                result = WeekDays.Monday;
+                return true;
+            }
+
+            if (source.Equals("Tuesday", StringComparison.OrdinalIgnoreCase))
+            {
+                result = WeekDays.Tuesday;
+                return true;
+            }
+
+            if (source.Equals("Wednesday", StringComparison.OrdinalIgnoreCase))
+            {
+                result = WeekDays.Wednesday;
+                return true;
+            }
+
+            if (source.Equals("Thursday", StringComparison.OrdinalIgnoreCase))
+            {
+                result = WeekDays.Thursday;
+                return true;
+            }
+
+            if (source.Equals("Friday", StringComparison.OrdinalIgnoreCase))
+            {
+                result = WeekDays.Friday;
+                return true;
+            }
+
+            if (source.Equals("Saturday", StringComparison.OrdinalIgnoreCase))
+            {
+                result = WeekDays.Saturday;
+                return true;
+            }
+
+            if (source.Equals("Sunday", StringComparison.OrdinalIgnoreCase))
+            {
+                result = WeekDays.Sunday;
+                return true;
+            }
+
+            if (TryParseNumeric(source, out int number))
+            {
+                result = (WeekDays)number;
+                return true;
+            }
+
+    #if NET6_0_OR_GREATER
+            return Enum.TryParse(source, ignoreCase, out result);
+    #else
+            return Enum.TryParse(source.ToString(), ignoreCase, out result);
+    #endif
+        }
+
+        /// <summary>
+        /// Converts the UTF-8 representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="source">The case-sensitive UTF-8 representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type WeekDays whose value is represented by value
+        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+        /// underlying type of WeekDays. Note that this value need not be a member of the WeekDays enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        public static bool TryParseUtf8(ReadOnlySpan<byte> source, out WeekDays result)
+        {
+            if (source == "Monday"u8)
+            {
+                result = WeekDays.Monday;
+                return true;
+            }
+
+            if (source == "Tuesday"u8)
+            {
+                result = WeekDays.Tuesday;
+                return true;
+            }
+
+            if (source == "Wednesday"u8)
+            {
+                result = WeekDays.Wednesday;
+                return true;
+            }
+
+            if (source == "Thursday"u8)
+            {
+                result = WeekDays.Thursday;
+                return true;
+            }
+
+            if (source == "Friday"u8)
+            {
+                result = WeekDays.Friday;
+                return true;
+            }
+
+            if (source == "Saturday"u8)
+            {
+                result = WeekDays.Saturday;
+                return true;
+            }
+
+            if (source == "Sunday"u8)
+            {
+                result = WeekDays.Sunday;
+                return true;
+            }
+
+            if (source == "0"u8)
+            {
+                result = WeekDays.Monday;
+                return true;
+            }
+
+            if (source == "1"u8)
+            {
+                result = WeekDays.Tuesday;
+                return true;
+            }
+
+            if (source == "2"u8)
+            {
+                result = WeekDays.Wednesday;
+                return true;
+            }
+
+            if (source == "3"u8)
+            {
+                result = WeekDays.Thursday;
+                return true;
+            }
+
+            if (source == "4"u8)
+            {
+                result = WeekDays.Friday;
+                return true;
+            }
+
+            if (source == "5"u8)
+            {
+                result = WeekDays.Saturday;
+                return true;
+            }
+
+            if (source == "6"u8)
+            {
+                result = WeekDays.Sunday;
+                return true;
+            }
+
+    #if NET6_0_OR_GREATER
+            int charCount = System.Text.Encoding.UTF8.GetCharCount(source);
+            Span<char> buffer = charCount <= 512
+                ? stackalloc char[512].Slice(0, charCount)
+                : new char[charCount];
+            System.Text.Encoding.UTF8.GetChars(source, buffer);
+            return Enum.TryParse(buffer, out result);
+    #else
+            return Enum.TryParse(System.Text.Encoding.UTF8.GetString(source), out result);
+    #endif
         }
 
         public static bool TryCreateFromDisplayShortName(
@@ -327,24 +558,9 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             };
         }
 
-        private static bool TryParseNumeric(
-            string name,
-            StringComparison comparisonType,
-            out int result)
+        private static bool TryParseNumeric(ReadOnlySpan<char> name, out int result)
         {
-            switch (comparisonType)
-            {
-                case StringComparison.CurrentCulture:
-                case StringComparison.CurrentCultureIgnoreCase:
-                    return int.TryParse(name, NumberStyles.Integer, NumberFormatInfo.CurrentInfo, out result);
-                case StringComparison.InvariantCulture:
-                case StringComparison.InvariantCultureIgnoreCase:
-                case StringComparison.Ordinal:
-                case StringComparison.OrdinalIgnoreCase:
-                    return int.TryParse(name, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out result);
-                default:
-                    return int.TryParse(name, out result);
-            }
+            return int.TryParse(name, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out result);
         }
     }
 }

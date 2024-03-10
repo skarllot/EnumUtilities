@@ -13,6 +13,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.6.0.0")]
     public static partial class CategoriesExtensions
     {
+        /// <summary>Represents the largest possible number of bytes produced by encoding an <see cref="Categories" /> value to UTF-8, based on defined members. This field is constant.</summary>
+        public const int NameMaxBytesLength = 11;
+
+        /// <summary>Represents the largest possible number of characters produced by converting an <see cref="Categories" /> value to string, based on defined members. This field is constant.</summary>
+        public const int NameMaxCharsLength = 11;
+
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
         /// <returns>The string representation of the value of this instance.</returns>
         public static string ToStringFast(this Categories value)
@@ -34,6 +40,119 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         public static bool IsDefined(this Categories value)
         {
             return CategoriesValidation.IsDefined(value);
+        }
+
+        /// <summary>Determines whether one or more bit fields are set in the current instance.</summary>
+        /// <param name="flag">An enumeration value.</param>
+        /// <returns><see langword="true"/> if the bit field or bit fields that are set in flag are also set in the current instance; otherwise, <see langword="false"/>.</returns>
+        public static bool HasFlagFast(this Categories value, Categories flag)
+        {
+            return (value & flag) == flag;
+        }
+
+        /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
+        /// <param name="value">The value to calculate the number of characters.</param>
+        /// <returns>The number of characters produced by converting the specified value to string.</returns>
+        public static int GetStringCount(this Categories value)
+        {
+            return value switch
+            {
+                Categories.Electronics => 11,
+                Categories.Food => 4,
+                Categories.Automotive => 10,
+                Categories.Arts => 4,
+                Categories.BeautyCare => 10,
+                Categories.Fashion => 7,
+                _ => value.ToString().Length
+            };
+        }
+
+        /// <summary>Calculates the number of bytes produced by encoding the specified value to UTF-8.</summary>
+        /// <param name="value">The value to calculate the number of bytes.</param>
+        /// <returns>The number of bytes produced by encoding the specified value to UTF-8.</returns>
+        public static int GetUtf8ByteCount(this Categories value)
+        {
+            return value switch
+            {
+                Categories.Electronics => 11,
+                Categories.Food => 4,
+                Categories.Automotive => 10,
+                Categories.Arts => 4,
+                Categories.BeautyCare => 10,
+                Categories.Fashion => 7,
+                _ => value.ToString().Length
+            };
+        }
+
+        /// <summary>Tries to write the current value as string into the provided span of characters.</summary>
+        /// <param name="value">The value to write to the provided span of characters.</param>
+        /// <param name="destination">The span in which to write current value as a span of characters.</param>
+        /// <param name="charsWritten">When this method returns, contains the number of characters that were written in <paramref name="destination"/>.</param>
+        /// <returns><see langword="true"/> if the writing was successful; otherwise, <see langword="false"/>.</returns>
+        public static bool TryWriteString(this Categories value, Span<char> destination, out int charsWritten)
+        {
+            string result = value switch
+            {
+                Categories.Electronics => "Electronics",
+                Categories.Food => "Food",
+                Categories.Automotive => "Automotive",
+                Categories.Arts => "Arts",
+                Categories.BeautyCare => "BeautyCare",
+                Categories.Fashion => "Fashion",
+                _ => value.ToString()
+            };
+
+            if (result.Length > destination.Length)
+            {
+                charsWritten = 0;
+                return false;
+            }
+
+            result.AsSpan().CopyTo(destination);
+            charsWritten = result.Length;
+            return true;
+        }
+
+        /// <summary>Tries to write the current value as UTF-8 into the provided span of bytes.</summary>
+        /// <param name="value">The value to write to the provided span of bytes.</param>
+        /// <param name="destination">The span in which to write current value as a span of bytes.</param>
+        /// <param name="bytesWritten">When this method returns, contains the number of bytes that were written in <paramref name="destination"/>.</param>
+        /// <returns><see langword="true"/> if the writing was successful; otherwise, <see langword="false"/>.</returns>
+        public static bool TryWriteUtf8Bytes(this Categories value, Span<byte> destination, out int bytesWritten)
+        {
+            var bytes = value switch
+            {
+                Categories.Electronics => "Electronics"u8,
+                Categories.Food => "Food"u8,
+                Categories.Automotive => "Automotive"u8,
+                Categories.Arts => "Arts"u8,
+                Categories.BeautyCare => "BeautyCare"u8,
+                Categories.Fashion => "Fashion"u8,
+                _ => ReadOnlySpan<byte>.Empty
+            };
+
+            if (bytes.IsEmpty)
+            {
+                string str = value.ToString();
+                if (System.Text.Encoding.UTF8.GetByteCount(str) > destination.Length)
+                {
+                    bytesWritten = 0;
+                    return false;
+                }
+
+                bytesWritten = System.Text.Encoding.UTF8.GetBytes(str.AsSpan(), destination);
+                return true;
+            }
+
+            if (bytes.Length > destination.Length)
+            {
+                bytesWritten = 0;
+                return false;
+            }
+
+            bytes.CopyTo(destination);
+            bytesWritten = bytes.Length;
+            return true;
         }
 
         /// <summary>Adds two enumerations and replaces the first integer with the sum, as an atomic operation.</summary>

@@ -1,4 +1,6 @@
 ﻿<#+
+    private const int CharStackallocThreshold = 512;
+
     private void WriteDefaultBlock()
     {
 #>
@@ -23,16 +25,16 @@
         switch (name)
         {
 <#+
-    foreach (var curr in Model.Values)
-    {
+        foreach (var curr in Model.Values)
+        {
 #>
             case { } s when s.Equals(nameof(<#= Model.RefName #>.<#= curr.MemberName #>), comparisonType):
                 result = <#= Model.RefName #>.<#= curr.MemberName #>;
                 return true;
 <#+
-    }
+        }
 #>
-            case { } s when TryParseNumeric(s, comparisonType, out <#= Model.UnderlyingType #> val):
+            case { } s when TryParseNumeric(s.AsSpan(), out <#= Model.UnderlyingType #> val):
                 result = (<#= Model.RefName #>)val;
                 return true;
             default:
@@ -58,16 +60,16 @@
         switch (name)
         {
 <#+
-    foreach (var curr in Model.Values)
-    {
+        foreach (var curr in Model.Values)
+        {
 #>
             case nameof(<#= Model.RefName #>.<#= curr.MemberName #>):
                 result = <#= Model.RefName #>.<#= curr.MemberName #>;
                 return true;
 <#+
-    }
+        }
 #>
-            case { } s when TryParseNumeric(s, StringComparison.Ordinal, out <#= Model.UnderlyingType #> val):
+            case { } s when TryParseNumeric(s.AsSpan(), out <#= Model.UnderlyingType #> val):
                 result = (<#= Model.RefName #>)val;
                 return true;
             default:
@@ -135,6 +137,139 @@
     public static <#= Model.RefName #>? TryParse(string? name, StringComparison comparisonType)
     {
         return TryParse(name, comparisonType, out <#= Model.RefName #> result) ? result : null;
+    }
+
+    /// <summary>
+    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+    /// </summary>
+    /// <param name="source">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
+    /// <param name="result">
+    /// When this method returns, result contains an object of type <#= Model.Name #> whose value is represented by value
+    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+    /// underlying type of <#= Model.Name #>. Note that this value need not be a member of the <#= Model.Name #> enumeration.
+    /// </param>
+    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    public static bool TryParse(ReadOnlySpan<char> source, out <#= Model.RefName #> result)
+    {
+        switch (source)
+        {
+<#+
+        foreach (var curr in Model.Values)
+        {
+#>
+            case "<#= curr.MemberName #>":
+                result = <#= Model.RefName #>.<#= curr.MemberName #>;
+                return true;
+<#+
+        }
+#>
+            case { } when TryParseNumeric(source, out <#= Model.UnderlyingType #> number):
+                result = (<#= Model.RefName #>)number;
+                return true;
+            default:
+#if NET6_0_OR_GREATER
+                return Enum.TryParse(source, out result);
+#else
+                return Enum.TryParse(source.ToString(), out result);
+#endif
+        }
+    }
+
+    /// <summary>
+    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+    /// </summary>
+    /// <param name="source">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
+    /// <param name="ignoreCase"><c>true</c> to read <paramref name="source"/> in case insensitive mode; <c>false</c> to read value in case sensitive mode.</param>
+    /// <param name="result">
+    /// When this method returns, result contains an object of type <#= Model.Name #> whose value is represented by value
+    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+    /// underlying type of <#= Model.Name #>. Note that this value need not be a member of the <#= Model.Name #> enumeration.
+    /// </param>
+    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    public static bool TryParse(ReadOnlySpan<char> source, bool ignoreCase, out <#= Model.RefName #> result)
+    {
+        if (!ignoreCase)
+        {
+            return TryParse(source, out result);
+        }
+<#+
+        foreach (var curr in Model.Values)
+        {
+#>
+
+        if (source.Equals("<#= curr.MemberName #>", StringComparison.OrdinalIgnoreCase))
+        {
+            result = <#= Model.RefName #>.<#= curr.MemberName #>;
+            return true;
+        }
+<#+
+        }
+#>
+
+        if (TryParseNumeric(source, out <#= Model.UnderlyingType #> number))
+        {
+            result = (<#= Model.RefName #>)number;
+            return true;
+        }
+
+#if NET6_0_OR_GREATER
+        return Enum.TryParse(source, ignoreCase, out result);
+#else
+        return Enum.TryParse(source.ToString(), ignoreCase, out result);
+#endif
+    }
+
+    /// <summary>
+    /// Converts the UTF-8 representation of the name or numeric value of one or more enumerated constants to
+    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+    /// </summary>
+    /// <param name="source">The case-sensitive UTF-8 representation of the enumeration name or underlying value to convert.</param>
+    /// <param name="result">
+    /// When this method returns, result contains an object of type <#= Model.Name #> whose value is represented by value
+    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+    /// underlying type of <#= Model.Name #>. Note that this value need not be a member of the <#= Model.Name #> enumeration.
+    /// </param>
+    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    public static bool TryParseUtf8(ReadOnlySpan<byte> source, out <#= Model.RefName #> result)
+    {
+<#+
+        foreach (var (str, name) in Model.Values.Select(x => (x.MemberName, x.MemberName))
+            .Concat(Model.UniqueValues.Select(x => (x.MemberValue, x.MemberName))))
+        {
+#>
+        if (source == "<#= str #>"u8)
+        {
+            result = <#= Model.RefName #>.<#= name #>;
+            return true;
+        }
+
+<#+
+        }
+
+        if (Model.Values.All(x => x.MemberValue != "0"))
+        {
+#>
+        if (source == "0"u8)
+        {
+            result = 0;
+            return true;
+        }
+
+<#+
+        }
+#>
+#if NET6_0_OR_GREATER
+        int charCount = System.Text.Encoding.UTF8.GetCharCount(source);
+        Span<char> buffer = charCount <= <#= CharStackallocThreshold #>
+            ? stackalloc char[<#= CharStackallocThreshold #>].Slice(0, charCount)
+            : new char[charCount];
+        System.Text.Encoding.UTF8.GetChars(source, buffer);
+        return Enum.TryParse(buffer, out result);
+#else
+        return Enum.TryParse(System.Text.Encoding.UTF8.GetString(source), out result);
+#endif
     }
 <#+
     }

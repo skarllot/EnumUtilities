@@ -37,24 +37,9 @@
         };
     }
 
-    private static bool TryParseNumeric(
-        string name,
-        StringComparison comparisonType,
-        out <#= Model.UnderlyingType #> result)
+    private static bool TryParseNumeric(ReadOnlySpan<char> name, out <#= Model.UnderlyingType #> result)
     {
-        switch (comparisonType)
-        {
-            case StringComparison.CurrentCulture:
-            case StringComparison.CurrentCultureIgnoreCase:
-                return <#= Model.UnderlyingType #>.TryParse(name, NumberStyles.Integer, NumberFormatInfo.CurrentInfo, out result);
-            case StringComparison.InvariantCulture:
-            case StringComparison.InvariantCultureIgnoreCase:
-            case StringComparison.Ordinal:
-            case StringComparison.OrdinalIgnoreCase:
-                return <#= Model.UnderlyingType #>.TryParse(name, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out result);
-            default:
-                return <#= Model.UnderlyingType #>.TryParse(name, out result);
-        }
+        return <#= Model.UnderlyingType #>.TryParse(name, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out result);
     }
 <#+
     }

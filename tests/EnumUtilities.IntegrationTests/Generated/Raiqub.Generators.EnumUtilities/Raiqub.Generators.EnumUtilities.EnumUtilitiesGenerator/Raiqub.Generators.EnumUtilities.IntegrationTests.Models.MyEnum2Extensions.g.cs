@@ -13,6 +13,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.6.0.0")]
     internal static partial class MyEnum2Extensions
     {
+        /// <summary>Represents the largest possible number of bytes produced by encoding an <see cref="MyEnum2" /> value to UTF-8, based on defined members. This field is constant.</summary>
+        public const int NameMaxBytesLength = 6;
+
+        /// <summary>Represents the largest possible number of characters produced by converting an <see cref="MyEnum2" /> value to string, based on defined members. This field is constant.</summary>
+        public const int NameMaxCharsLength = 6;
+
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
         /// <returns>The string representation of the value of this instance.</returns>
         public static string ToStringFast(this NestedInClass.MyEnum2 value)
@@ -32,6 +38,111 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         public static bool IsDefined(this NestedInClass.MyEnum2 value)
         {
             return MyEnum2Validation.IsDefined(value);
+        }
+
+        /// <summary>Determines whether one or more bit fields are set in the current instance.</summary>
+        /// <param name="flag">An enumeration value.</param>
+        /// <returns><see langword="true"/> if the bit field or bit fields that are set in flag are also set in the current instance; otherwise, <see langword="false"/>.</returns>
+        public static bool HasFlagFast(this NestedInClass.MyEnum2 value, NestedInClass.MyEnum2 flag)
+        {
+            return (value & flag) == flag;
+        }
+
+        /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
+        /// <param name="value">The value to calculate the number of characters.</param>
+        /// <returns>The number of characters produced by converting the specified value to string.</returns>
+        public static int GetStringCount(this NestedInClass.MyEnum2 value)
+        {
+            return value switch
+            {
+                NestedInClass.MyEnum2.Credit => 6,
+                NestedInClass.MyEnum2.Debit => 5,
+                NestedInClass.MyEnum2.Cash => 4,
+                NestedInClass.MyEnum2.Cheque => 6,
+                _ => value.ToString().Length
+            };
+        }
+
+        /// <summary>Calculates the number of bytes produced by encoding the specified value to UTF-8.</summary>
+        /// <param name="value">The value to calculate the number of bytes.</param>
+        /// <returns>The number of bytes produced by encoding the specified value to UTF-8.</returns>
+        public static int GetUtf8ByteCount(this NestedInClass.MyEnum2 value)
+        {
+            return value switch
+            {
+                NestedInClass.MyEnum2.Credit => 6,
+                NestedInClass.MyEnum2.Debit => 5,
+                NestedInClass.MyEnum2.Cash => 4,
+                NestedInClass.MyEnum2.Cheque => 6,
+                _ => value.ToString().Length
+            };
+        }
+
+        /// <summary>Tries to write the current value as string into the provided span of characters.</summary>
+        /// <param name="value">The value to write to the provided span of characters.</param>
+        /// <param name="destination">The span in which to write current value as a span of characters.</param>
+        /// <param name="charsWritten">When this method returns, contains the number of characters that were written in <paramref name="destination"/>.</param>
+        /// <returns><see langword="true"/> if the writing was successful; otherwise, <see langword="false"/>.</returns>
+        public static bool TryWriteString(this NestedInClass.MyEnum2 value, Span<char> destination, out int charsWritten)
+        {
+            string result = value switch
+            {
+                NestedInClass.MyEnum2.Credit => "Credit",
+                NestedInClass.MyEnum2.Debit => "Debit",
+                NestedInClass.MyEnum2.Cash => "Cash",
+                NestedInClass.MyEnum2.Cheque => "Cheque",
+                _ => value.ToString()
+            };
+
+            if (result.Length > destination.Length)
+            {
+                charsWritten = 0;
+                return false;
+            }
+
+            result.AsSpan().CopyTo(destination);
+            charsWritten = result.Length;
+            return true;
+        }
+
+        /// <summary>Tries to write the current value as UTF-8 into the provided span of bytes.</summary>
+        /// <param name="value">The value to write to the provided span of bytes.</param>
+        /// <param name="destination">The span in which to write current value as a span of bytes.</param>
+        /// <param name="bytesWritten">When this method returns, contains the number of bytes that were written in <paramref name="destination"/>.</param>
+        /// <returns><see langword="true"/> if the writing was successful; otherwise, <see langword="false"/>.</returns>
+        public static bool TryWriteUtf8Bytes(this NestedInClass.MyEnum2 value, Span<byte> destination, out int bytesWritten)
+        {
+            var bytes = value switch
+            {
+                NestedInClass.MyEnum2.Credit => "Credit"u8,
+                NestedInClass.MyEnum2.Debit => "Debit"u8,
+                NestedInClass.MyEnum2.Cash => "Cash"u8,
+                NestedInClass.MyEnum2.Cheque => "Cheque"u8,
+                _ => ReadOnlySpan<byte>.Empty
+            };
+
+            if (bytes.IsEmpty)
+            {
+                string str = value.ToString();
+                if (System.Text.Encoding.UTF8.GetByteCount(str) > destination.Length)
+                {
+                    bytesWritten = 0;
+                    return false;
+                }
+
+                bytesWritten = System.Text.Encoding.UTF8.GetBytes(str.AsSpan(), destination);
+                return true;
+            }
+
+            if (bytes.Length > destination.Length)
+            {
+                bytesWritten = 0;
+                return false;
+            }
+
+            bytes.CopyTo(destination);
+            bytesWritten = bytes.Length;
+            return true;
         }
 
         /// <summary>Adds two enumerations and replaces the first integer with the sum, as an atomic operation.</summary>

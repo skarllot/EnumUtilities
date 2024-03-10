@@ -42,7 +42,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 case { } s when s.Equals(nameof(NestedInClass.MyEnum1.Two), comparisonType):
                     result = NestedInClass.MyEnum1.Two;
                     return true;
-                case { } s when TryParseNumeric(s, comparisonType, out int val):
+                case { } s when TryParseNumeric(s.AsSpan(), out int val):
                     result = (NestedInClass.MyEnum1)val;
                     return true;
                 default:
@@ -76,7 +76,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 case nameof(NestedInClass.MyEnum1.Two):
                     result = NestedInClass.MyEnum1.Two;
                     return true;
-                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out int val):
+                case { } s when TryParseNumeric(s.AsSpan(), out int val):
                     result = (NestedInClass.MyEnum1)val;
                     return true;
                 default:
@@ -146,6 +146,153 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             return TryParse(name, comparisonType, out NestedInClass.MyEnum1 result) ? result : null;
         }
 
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="source">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type MyEnum1 whose value is represented by value
+        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+        /// underlying type of MyEnum1. Note that this value need not be a member of the MyEnum1 enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        public static bool TryParse(ReadOnlySpan<char> source, out NestedInClass.MyEnum1 result)
+        {
+            switch (source)
+            {
+                case "Zero":
+                    result = NestedInClass.MyEnum1.Zero;
+                    return true;
+                case "One":
+                    result = NestedInClass.MyEnum1.One;
+                    return true;
+                case "Two":
+                    result = NestedInClass.MyEnum1.Two;
+                    return true;
+                case { } when TryParseNumeric(source, out int number):
+                    result = (NestedInClass.MyEnum1)number;
+                    return true;
+                default:
+    #if NET6_0_OR_GREATER
+                    return Enum.TryParse(source, out result);
+    #else
+                    return Enum.TryParse(source.ToString(), out result);
+    #endif
+            }
+        }
+
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="source">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="ignoreCase"><c>true</c> to read <paramref name="source"/> in case insensitive mode; <c>false</c> to read value in case sensitive mode.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type MyEnum1 whose value is represented by value
+        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+        /// underlying type of MyEnum1. Note that this value need not be a member of the MyEnum1 enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        public static bool TryParse(ReadOnlySpan<char> source, bool ignoreCase, out NestedInClass.MyEnum1 result)
+        {
+            if (!ignoreCase)
+            {
+                return TryParse(source, out result);
+            }
+
+            if (source.Equals("Zero", StringComparison.OrdinalIgnoreCase))
+            {
+                result = NestedInClass.MyEnum1.Zero;
+                return true;
+            }
+
+            if (source.Equals("One", StringComparison.OrdinalIgnoreCase))
+            {
+                result = NestedInClass.MyEnum1.One;
+                return true;
+            }
+
+            if (source.Equals("Two", StringComparison.OrdinalIgnoreCase))
+            {
+                result = NestedInClass.MyEnum1.Two;
+                return true;
+            }
+
+            if (TryParseNumeric(source, out int number))
+            {
+                result = (NestedInClass.MyEnum1)number;
+                return true;
+            }
+
+    #if NET6_0_OR_GREATER
+            return Enum.TryParse(source, ignoreCase, out result);
+    #else
+            return Enum.TryParse(source.ToString(), ignoreCase, out result);
+    #endif
+        }
+
+        /// <summary>
+        /// Converts the UTF-8 representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="source">The case-sensitive UTF-8 representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type MyEnum1 whose value is represented by value
+        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+        /// underlying type of MyEnum1. Note that this value need not be a member of the MyEnum1 enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        public static bool TryParseUtf8(ReadOnlySpan<byte> source, out NestedInClass.MyEnum1 result)
+        {
+            if (source == "Zero"u8)
+            {
+                result = NestedInClass.MyEnum1.Zero;
+                return true;
+            }
+
+            if (source == "One"u8)
+            {
+                result = NestedInClass.MyEnum1.One;
+                return true;
+            }
+
+            if (source == "Two"u8)
+            {
+                result = NestedInClass.MyEnum1.Two;
+                return true;
+            }
+
+            if (source == "0"u8)
+            {
+                result = NestedInClass.MyEnum1.Zero;
+                return true;
+            }
+
+            if (source == "1"u8)
+            {
+                result = NestedInClass.MyEnum1.One;
+                return true;
+            }
+
+            if (source == "2"u8)
+            {
+                result = NestedInClass.MyEnum1.Two;
+                return true;
+            }
+
+    #if NET6_0_OR_GREATER
+            int charCount = System.Text.Encoding.UTF8.GetCharCount(source);
+            Span<char> buffer = charCount <= 512
+                ? stackalloc char[512].Slice(0, charCount)
+                : new char[charCount];
+            System.Text.Encoding.UTF8.GetChars(source, buffer);
+            return Enum.TryParse(buffer, out result);
+    #else
+            return Enum.TryParse(System.Text.Encoding.UTF8.GetString(source), out result);
+    #endif
+        }
+
         /// <summary>Retrieves an array of the values of the constants in the MyEnum1 enumeration.</summary>
         /// <returns>An array that contains the values of the constants in MyEnum1.</returns>
         public static NestedInClass.MyEnum1[] GetValues()
@@ -170,24 +317,9 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             };
         }
 
-        private static bool TryParseNumeric(
-            string name,
-            StringComparison comparisonType,
-            out int result)
+        private static bool TryParseNumeric(ReadOnlySpan<char> name, out int result)
         {
-            switch (comparisonType)
-            {
-                case StringComparison.CurrentCulture:
-                case StringComparison.CurrentCultureIgnoreCase:
-                    return int.TryParse(name, NumberStyles.Integer, NumberFormatInfo.CurrentInfo, out result);
-                case StringComparison.InvariantCulture:
-                case StringComparison.InvariantCultureIgnoreCase:
-                case StringComparison.Ordinal:
-                case StringComparison.OrdinalIgnoreCase:
-                    return int.TryParse(name, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out result);
-                default:
-                    return int.TryParse(name, out result);
-            }
+            return int.TryParse(name, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out result);
         }
     }
 }

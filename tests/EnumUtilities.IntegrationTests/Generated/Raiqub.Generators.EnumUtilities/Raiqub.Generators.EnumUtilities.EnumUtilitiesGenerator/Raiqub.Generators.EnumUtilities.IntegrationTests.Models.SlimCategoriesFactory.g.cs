@@ -51,7 +51,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 case { } s when s.Equals(nameof(SlimCategories.Fashion), comparisonType):
                     result = SlimCategories.Fashion;
                     return true;
-                case { } s when TryParseNumeric(s, comparisonType, out byte val):
+                case { } s when TryParseNumeric(s.AsSpan(), out byte val):
                     result = (SlimCategories)val;
                     return true;
                 default:
@@ -94,7 +94,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 case nameof(SlimCategories.Fashion):
                     result = SlimCategories.Fashion;
                     return true;
-                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out byte val):
+                case { } s when TryParseNumeric(s.AsSpan(), out byte val):
                     result = (SlimCategories)val;
                     return true;
                 default:
@@ -164,6 +164,216 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             return TryParse(name, comparisonType, out SlimCategories result) ? result : null;
         }
 
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="source">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type SlimCategories whose value is represented by value
+        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+        /// underlying type of SlimCategories. Note that this value need not be a member of the SlimCategories enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        public static bool TryParse(ReadOnlySpan<char> source, out SlimCategories result)
+        {
+            switch (source)
+            {
+                case "Electronics":
+                    result = SlimCategories.Electronics;
+                    return true;
+                case "Food":
+                    result = SlimCategories.Food;
+                    return true;
+                case "Automotive":
+                    result = SlimCategories.Automotive;
+                    return true;
+                case "Arts":
+                    result = SlimCategories.Arts;
+                    return true;
+                case "BeautyCare":
+                    result = SlimCategories.BeautyCare;
+                    return true;
+                case "Fashion":
+                    result = SlimCategories.Fashion;
+                    return true;
+                case { } when TryParseNumeric(source, out byte number):
+                    result = (SlimCategories)number;
+                    return true;
+                default:
+    #if NET6_0_OR_GREATER
+                    return Enum.TryParse(source, out result);
+    #else
+                    return Enum.TryParse(source.ToString(), out result);
+    #endif
+            }
+        }
+
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="source">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="ignoreCase"><c>true</c> to read <paramref name="source"/> in case insensitive mode; <c>false</c> to read value in case sensitive mode.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type SlimCategories whose value is represented by value
+        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+        /// underlying type of SlimCategories. Note that this value need not be a member of the SlimCategories enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        public static bool TryParse(ReadOnlySpan<char> source, bool ignoreCase, out SlimCategories result)
+        {
+            if (!ignoreCase)
+            {
+                return TryParse(source, out result);
+            }
+
+            if (source.Equals("Electronics", StringComparison.OrdinalIgnoreCase))
+            {
+                result = SlimCategories.Electronics;
+                return true;
+            }
+
+            if (source.Equals("Food", StringComparison.OrdinalIgnoreCase))
+            {
+                result = SlimCategories.Food;
+                return true;
+            }
+
+            if (source.Equals("Automotive", StringComparison.OrdinalIgnoreCase))
+            {
+                result = SlimCategories.Automotive;
+                return true;
+            }
+
+            if (source.Equals("Arts", StringComparison.OrdinalIgnoreCase))
+            {
+                result = SlimCategories.Arts;
+                return true;
+            }
+
+            if (source.Equals("BeautyCare", StringComparison.OrdinalIgnoreCase))
+            {
+                result = SlimCategories.BeautyCare;
+                return true;
+            }
+
+            if (source.Equals("Fashion", StringComparison.OrdinalIgnoreCase))
+            {
+                result = SlimCategories.Fashion;
+                return true;
+            }
+
+            if (TryParseNumeric(source, out byte number))
+            {
+                result = (SlimCategories)number;
+                return true;
+            }
+
+    #if NET6_0_OR_GREATER
+            return Enum.TryParse(source, ignoreCase, out result);
+    #else
+            return Enum.TryParse(source.ToString(), ignoreCase, out result);
+    #endif
+        }
+
+        /// <summary>
+        /// Converts the UTF-8 representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="source">The case-sensitive UTF-8 representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type SlimCategories whose value is represented by value
+        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+        /// underlying type of SlimCategories. Note that this value need not be a member of the SlimCategories enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        public static bool TryParseUtf8(ReadOnlySpan<byte> source, out SlimCategories result)
+        {
+            if (source == "Electronics"u8)
+            {
+                result = SlimCategories.Electronics;
+                return true;
+            }
+
+            if (source == "Food"u8)
+            {
+                result = SlimCategories.Food;
+                return true;
+            }
+
+            if (source == "Automotive"u8)
+            {
+                result = SlimCategories.Automotive;
+                return true;
+            }
+
+            if (source == "Arts"u8)
+            {
+                result = SlimCategories.Arts;
+                return true;
+            }
+
+            if (source == "BeautyCare"u8)
+            {
+                result = SlimCategories.BeautyCare;
+                return true;
+            }
+
+            if (source == "Fashion"u8)
+            {
+                result = SlimCategories.Fashion;
+                return true;
+            }
+
+            if (source == "0"u8)
+            {
+                result = SlimCategories.Electronics;
+                return true;
+            }
+
+            if (source == "1"u8)
+            {
+                result = SlimCategories.Food;
+                return true;
+            }
+
+            if (source == "2"u8)
+            {
+                result = SlimCategories.Automotive;
+                return true;
+            }
+
+            if (source == "3"u8)
+            {
+                result = SlimCategories.Arts;
+                return true;
+            }
+
+            if (source == "4"u8)
+            {
+                result = SlimCategories.BeautyCare;
+                return true;
+            }
+
+            if (source == "5"u8)
+            {
+                result = SlimCategories.Fashion;
+                return true;
+            }
+
+    #if NET6_0_OR_GREATER
+            int charCount = System.Text.Encoding.UTF8.GetCharCount(source);
+            Span<char> buffer = charCount <= 512
+                ? stackalloc char[512].Slice(0, charCount)
+                : new char[charCount];
+            System.Text.Encoding.UTF8.GetChars(source, buffer);
+            return Enum.TryParse(buffer, out result);
+    #else
+            return Enum.TryParse(System.Text.Encoding.UTF8.GetString(source), out result);
+    #endif
+        }
+
         /// <summary>Retrieves an array of the values of the constants in the SlimCategories enumeration.</summary>
         /// <returns>An array that contains the values of the constants in SlimCategories.</returns>
         public static SlimCategories[] GetValues()
@@ -194,24 +404,9 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             };
         }
 
-        private static bool TryParseNumeric(
-            string name,
-            StringComparison comparisonType,
-            out byte result)
+        private static bool TryParseNumeric(ReadOnlySpan<char> name, out byte result)
         {
-            switch (comparisonType)
-            {
-                case StringComparison.CurrentCulture:
-                case StringComparison.CurrentCultureIgnoreCase:
-                    return byte.TryParse(name, NumberStyles.Integer, NumberFormatInfo.CurrentInfo, out result);
-                case StringComparison.InvariantCulture:
-                case StringComparison.InvariantCultureIgnoreCase:
-                case StringComparison.Ordinal:
-                case StringComparison.OrdinalIgnoreCase:
-                    return byte.TryParse(name, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out result);
-                default:
-                    return byte.TryParse(name, out result);
-            }
+            return byte.TryParse(name, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out result);
         }
     }
 }

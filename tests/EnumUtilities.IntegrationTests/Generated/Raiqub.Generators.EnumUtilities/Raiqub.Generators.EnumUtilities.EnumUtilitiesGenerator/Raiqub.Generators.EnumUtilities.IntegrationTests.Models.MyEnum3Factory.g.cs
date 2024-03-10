@@ -54,7 +54,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 case { } s when s.Equals(nameof(NestedInClass.MyEnum3.Sunday), comparisonType):
                     result = NestedInClass.MyEnum3.Sunday;
                     return true;
-                case { } s when TryParseNumeric(s, comparisonType, out int val):
+                case { } s when TryParseNumeric(s.AsSpan(), out int val):
                     result = (NestedInClass.MyEnum3)val;
                     return true;
                 default:
@@ -100,7 +100,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 case nameof(NestedInClass.MyEnum3.Sunday):
                     result = NestedInClass.MyEnum3.Sunday;
                     return true;
-                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out int val):
+                case { } s when TryParseNumeric(s.AsSpan(), out int val):
                     result = (NestedInClass.MyEnum3)val;
                     return true;
                 default:
@@ -168,6 +168,237 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         public static NestedInClass.MyEnum3? TryParse(string? name, StringComparison comparisonType)
         {
             return TryParse(name, comparisonType, out NestedInClass.MyEnum3 result) ? result : null;
+        }
+
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="source">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type MyEnum3 whose value is represented by value
+        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+        /// underlying type of MyEnum3. Note that this value need not be a member of the MyEnum3 enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        public static bool TryParse(ReadOnlySpan<char> source, out NestedInClass.MyEnum3 result)
+        {
+            switch (source)
+            {
+                case "Monday":
+                    result = NestedInClass.MyEnum3.Monday;
+                    return true;
+                case "Tuesday":
+                    result = NestedInClass.MyEnum3.Tuesday;
+                    return true;
+                case "Wednesday":
+                    result = NestedInClass.MyEnum3.Wednesday;
+                    return true;
+                case "Thursday":
+                    result = NestedInClass.MyEnum3.Thursday;
+                    return true;
+                case "Friday":
+                    result = NestedInClass.MyEnum3.Friday;
+                    return true;
+                case "Saturday":
+                    result = NestedInClass.MyEnum3.Saturday;
+                    return true;
+                case "Sunday":
+                    result = NestedInClass.MyEnum3.Sunday;
+                    return true;
+                case { } when TryParseNumeric(source, out int number):
+                    result = (NestedInClass.MyEnum3)number;
+                    return true;
+                default:
+    #if NET6_0_OR_GREATER
+                    return Enum.TryParse(source, out result);
+    #else
+                    return Enum.TryParse(source.ToString(), out result);
+    #endif
+            }
+        }
+
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="source">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="ignoreCase"><c>true</c> to read <paramref name="source"/> in case insensitive mode; <c>false</c> to read value in case sensitive mode.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type MyEnum3 whose value is represented by value
+        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+        /// underlying type of MyEnum3. Note that this value need not be a member of the MyEnum3 enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        public static bool TryParse(ReadOnlySpan<char> source, bool ignoreCase, out NestedInClass.MyEnum3 result)
+        {
+            if (!ignoreCase)
+            {
+                return TryParse(source, out result);
+            }
+
+            if (source.Equals("Monday", StringComparison.OrdinalIgnoreCase))
+            {
+                result = NestedInClass.MyEnum3.Monday;
+                return true;
+            }
+
+            if (source.Equals("Tuesday", StringComparison.OrdinalIgnoreCase))
+            {
+                result = NestedInClass.MyEnum3.Tuesday;
+                return true;
+            }
+
+            if (source.Equals("Wednesday", StringComparison.OrdinalIgnoreCase))
+            {
+                result = NestedInClass.MyEnum3.Wednesday;
+                return true;
+            }
+
+            if (source.Equals("Thursday", StringComparison.OrdinalIgnoreCase))
+            {
+                result = NestedInClass.MyEnum3.Thursday;
+                return true;
+            }
+
+            if (source.Equals("Friday", StringComparison.OrdinalIgnoreCase))
+            {
+                result = NestedInClass.MyEnum3.Friday;
+                return true;
+            }
+
+            if (source.Equals("Saturday", StringComparison.OrdinalIgnoreCase))
+            {
+                result = NestedInClass.MyEnum3.Saturday;
+                return true;
+            }
+
+            if (source.Equals("Sunday", StringComparison.OrdinalIgnoreCase))
+            {
+                result = NestedInClass.MyEnum3.Sunday;
+                return true;
+            }
+
+            if (TryParseNumeric(source, out int number))
+            {
+                result = (NestedInClass.MyEnum3)number;
+                return true;
+            }
+
+    #if NET6_0_OR_GREATER
+            return Enum.TryParse(source, ignoreCase, out result);
+    #else
+            return Enum.TryParse(source.ToString(), ignoreCase, out result);
+    #endif
+        }
+
+        /// <summary>
+        /// Converts the UTF-8 representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="source">The case-sensitive UTF-8 representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type MyEnum3 whose value is represented by value
+        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+        /// underlying type of MyEnum3. Note that this value need not be a member of the MyEnum3 enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        public static bool TryParseUtf8(ReadOnlySpan<byte> source, out NestedInClass.MyEnum3 result)
+        {
+            if (source == "Monday"u8)
+            {
+                result = NestedInClass.MyEnum3.Monday;
+                return true;
+            }
+
+            if (source == "Tuesday"u8)
+            {
+                result = NestedInClass.MyEnum3.Tuesday;
+                return true;
+            }
+
+            if (source == "Wednesday"u8)
+            {
+                result = NestedInClass.MyEnum3.Wednesday;
+                return true;
+            }
+
+            if (source == "Thursday"u8)
+            {
+                result = NestedInClass.MyEnum3.Thursday;
+                return true;
+            }
+
+            if (source == "Friday"u8)
+            {
+                result = NestedInClass.MyEnum3.Friday;
+                return true;
+            }
+
+            if (source == "Saturday"u8)
+            {
+                result = NestedInClass.MyEnum3.Saturday;
+                return true;
+            }
+
+            if (source == "Sunday"u8)
+            {
+                result = NestedInClass.MyEnum3.Sunday;
+                return true;
+            }
+
+            if (source == "0"u8)
+            {
+                result = NestedInClass.MyEnum3.Monday;
+                return true;
+            }
+
+            if (source == "1"u8)
+            {
+                result = NestedInClass.MyEnum3.Tuesday;
+                return true;
+            }
+
+            if (source == "2"u8)
+            {
+                result = NestedInClass.MyEnum3.Wednesday;
+                return true;
+            }
+
+            if (source == "3"u8)
+            {
+                result = NestedInClass.MyEnum3.Thursday;
+                return true;
+            }
+
+            if (source == "4"u8)
+            {
+                result = NestedInClass.MyEnum3.Friday;
+                return true;
+            }
+
+            if (source == "5"u8)
+            {
+                result = NestedInClass.MyEnum3.Saturday;
+                return true;
+            }
+
+            if (source == "6"u8)
+            {
+                result = NestedInClass.MyEnum3.Sunday;
+                return true;
+            }
+
+    #if NET6_0_OR_GREATER
+            int charCount = System.Text.Encoding.UTF8.GetCharCount(source);
+            Span<char> buffer = charCount <= 512
+                ? stackalloc char[512].Slice(0, charCount)
+                : new char[charCount];
+            System.Text.Encoding.UTF8.GetChars(source, buffer);
+            return Enum.TryParse(buffer, out result);
+    #else
+            return Enum.TryParse(System.Text.Encoding.UTF8.GetString(source), out result);
+    #endif
         }
 
         public static bool TryCreateFromDisplayShortName(
@@ -327,24 +558,9 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             };
         }
 
-        private static bool TryParseNumeric(
-            string name,
-            StringComparison comparisonType,
-            out int result)
+        private static bool TryParseNumeric(ReadOnlySpan<char> name, out int result)
         {
-            switch (comparisonType)
-            {
-                case StringComparison.CurrentCulture:
-                case StringComparison.CurrentCultureIgnoreCase:
-                    return int.TryParse(name, NumberStyles.Integer, NumberFormatInfo.CurrentInfo, out result);
-                case StringComparison.InvariantCulture:
-                case StringComparison.InvariantCultureIgnoreCase:
-                case StringComparison.Ordinal:
-                case StringComparison.OrdinalIgnoreCase:
-                    return int.TryParse(name, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out result);
-                default:
-                    return int.TryParse(name, out result);
-            }
+            return int.TryParse(name, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out result);
         }
     }
 }
