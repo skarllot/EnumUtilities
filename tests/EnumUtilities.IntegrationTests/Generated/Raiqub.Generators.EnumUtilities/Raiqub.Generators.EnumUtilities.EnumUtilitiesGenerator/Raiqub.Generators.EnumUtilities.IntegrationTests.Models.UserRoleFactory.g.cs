@@ -4,6 +4,8 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Runtime.CompilerServices;
+using Raiqub.Generators.EnumUtilities;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
@@ -18,45 +20,16 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
         /// </summary>
         /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
-        /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
         /// <param name="result">
         /// When this method returns, result contains an object of type UserRole whose value is represented by value
         /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
         /// underlying type of UserRole. Note that this value need not be a member of the UserRole enumeration.
         /// </param>
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-        /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
-        public static bool TryParse(
-            [NotNullWhen(true)] string? name,
-            StringComparison comparisonType,
-            out UserRole result)
+        public static bool TryParse([NotNullWhen(true)] string? name, bool ignoreCase, out UserRole result)
         {
-            switch (name)
-            {
-                case { } s when s.Equals(nameof(UserRole.None), comparisonType):
-                    result = UserRole.None;
-                    return true;
-                case { } s when s.Equals(nameof(UserRole.NormalUser), comparisonType):
-                    result = UserRole.NormalUser;
-                    return true;
-                case { } s when s.Equals(nameof(UserRole.Custodian), comparisonType):
-                    result = UserRole.Custodian;
-                    return true;
-                case { } s when s.Equals(nameof(UserRole.Finance), comparisonType):
-                    result = UserRole.Finance;
-                    return true;
-                case { } s when s.Equals(nameof(UserRole.SuperUser), comparisonType):
-                    result = UserRole.SuperUser;
-                    return true;
-                case { } s when s.Equals(nameof(UserRole.All), comparisonType):
-                    result = UserRole.All;
-                    return true;
-                case { } s when TryParseNumeric(s.AsSpan(), out ulong val):
-                    result = (UserRole)val;
-                    return true;
-                default:
-                    return Enum.TryParse(name, out result);
-            }
+            return TryParse(name.AsSpan(), ignoreCase, out result);
         }
 
         /// <summary>
@@ -70,54 +43,24 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// underlying type of UserRole. Note that this value need not be a member of the UserRole enumeration.
         /// </param>
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-        public static bool TryParse(
-            [NotNullWhen(true)] string? name,
-            out UserRole result)
+        public static bool TryParse([NotNullWhen(true)] string? name, out UserRole result)
         {
-            switch (name)
-            {
-                case nameof(UserRole.None):
-                    result = UserRole.None;
-                    return true;
-                case nameof(UserRole.NormalUser):
-                    result = UserRole.NormalUser;
-                    return true;
-                case nameof(UserRole.Custodian):
-                    result = UserRole.Custodian;
-                    return true;
-                case nameof(UserRole.Finance):
-                    result = UserRole.Finance;
-                    return true;
-                case nameof(UserRole.SuperUser):
-                    result = UserRole.SuperUser;
-                    return true;
-                case nameof(UserRole.All):
-                    result = UserRole.All;
-                    return true;
-                case { } s when TryParseNumeric(s.AsSpan(), out ulong val):
-                    result = (UserRole)val;
-                    return true;
-                default:
-                    return Enum.TryParse(name, out result);
-            }
+            return TryParse(name.AsSpan(), false, out result);
         }
 
         /// <summary>
         /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+        /// an equivalent enumerated object.
         /// </summary>
         /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
-        /// <param name="result">
-        /// When this method returns, result contains an object of type UserRole whose value is represented by value
-        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-        /// underlying type of UserRole. Note that this value need not be a member of the UserRole enumeration.
-        /// </param>
-        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-        public static bool TryParseIgnoreCase(
-            [NotNullWhen(true)] string? name,
-            out UserRole result)
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+        /// <returns>
+        /// Contains an object of type UserRole whose value is represented by value if the parse operation succeeds.
+        /// If the parse operation fails, result contains <c>null</c> value.
+        /// </returns>
+        public static UserRole? TryParse(string? name, bool ignoreCase)
         {
-            return TryParse(name, StringComparison.OrdinalIgnoreCase, out result);
+            return TryParse(name.AsSpan(), ignoreCase, out UserRole result) ? result : null;
         }
 
         /// <summary>
@@ -131,82 +74,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// </returns>
         public static UserRole? TryParse(string? name)
         {
-            return TryParse(name, out UserRole result) ? result : null;
-        }
-
-        /// <summary>
-        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-        /// an equivalent enumerated object.
-        /// </summary>
-        /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
-        /// <returns>
-        /// Contains an object of type UserRole whose value is represented by value if the parse operation succeeds.
-        /// If the parse operation fails, result contains <c>null</c> value.
-        /// </returns>
-        public static UserRole? TryParseIgnoreCase(string? name)
-        {
-            return TryParse(name, StringComparison.OrdinalIgnoreCase, out UserRole result) ? result : null;
-        }
-
-        /// <summary>
-        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-        /// an equivalent enumerated object.
-        /// </summary>
-        /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
-        /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
-        /// <returns>
-        /// Contains an object of type UserRole whose value is represented by value if the parse operation succeeds.
-        /// If the parse operation fails, result contains <c>null</c> value.
-        /// </returns>
-        /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
-        public static UserRole? TryParse(string? name, StringComparison comparisonType)
-        {
-            return TryParse(name, comparisonType, out UserRole result) ? result : null;
-        }
-
-        /// <summary>
-        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
-        /// </summary>
-        /// <param name="source">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
-        /// <param name="result">
-        /// When this method returns, result contains an object of type UserRole whose value is represented by value
-        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-        /// underlying type of UserRole. Note that this value need not be a member of the UserRole enumeration.
-        /// </param>
-        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-        public static bool TryParse(ReadOnlySpan<char> source, out UserRole result)
-        {
-            switch (source)
-            {
-                case "None":
-                    result = UserRole.None;
-                    return true;
-                case "NormalUser":
-                    result = UserRole.NormalUser;
-                    return true;
-                case "Custodian":
-                    result = UserRole.Custodian;
-                    return true;
-                case "Finance":
-                    result = UserRole.Finance;
-                    return true;
-                case "SuperUser":
-                    result = UserRole.SuperUser;
-                    return true;
-                case "All":
-                    result = UserRole.All;
-                    return true;
-                case { } when TryParseNumeric(source, out ulong number):
-                    result = (UserRole)number;
-                    return true;
-                default:
-    #if NET6_0_OR_GREATER
-                    return Enum.TryParse(source, out result);
-    #else
-                    return Enum.TryParse(source.ToString(), out result);
-    #endif
-            }
+            return TryParse(name.AsSpan(), false, out UserRole result) ? result : null;
         }
 
         /// <summary>
@@ -223,58 +91,31 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
         public static bool TryParse(ReadOnlySpan<char> source, bool ignoreCase, out UserRole result)
         {
-            if (!ignoreCase)
+            bool success = EnumStringParser.TryParse(source, UserRoleStringParser.Instance, ignoreCase, false, out ulong number);
+            if (!success)
             {
-                return TryParse(source, out result);
+                result = 0;
+                return false;
             }
 
-            if (source.Equals("None", StringComparison.OrdinalIgnoreCase))
-            {
-                result = UserRole.None;
-                return true;
-            }
+            result = (UserRole)number;
+            return true;
+        }
 
-            if (source.Equals("NormalUser", StringComparison.OrdinalIgnoreCase))
-            {
-                result = UserRole.NormalUser;
-                return true;
-            }
-
-            if (source.Equals("Custodian", StringComparison.OrdinalIgnoreCase))
-            {
-                result = UserRole.Custodian;
-                return true;
-            }
-
-            if (source.Equals("Finance", StringComparison.OrdinalIgnoreCase))
-            {
-                result = UserRole.Finance;
-                return true;
-            }
-
-            if (source.Equals("SuperUser", StringComparison.OrdinalIgnoreCase))
-            {
-                result = UserRole.SuperUser;
-                return true;
-            }
-
-            if (source.Equals("All", StringComparison.OrdinalIgnoreCase))
-            {
-                result = UserRole.All;
-                return true;
-            }
-
-            if (TryParseNumeric(source, out ulong number))
-            {
-                result = (UserRole)number;
-                return true;
-            }
-
-    #if NET6_0_OR_GREATER
-            return Enum.TryParse(source, ignoreCase, out result);
-    #else
-            return Enum.TryParse(source.ToString(), ignoreCase, out result);
-    #endif
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="source">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type UserRole whose value is represented by value
+        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+        /// underlying type of UserRole. Note that this value need not be a member of the UserRole enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        public static bool TryParse(ReadOnlySpan<char> source, out UserRole result)
+        {
+            return TryParse(source, false, out result);
         }
 
         /// <summary>
@@ -374,6 +215,161 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     #endif
         }
 
+        private sealed class UserRoleStringParser : IEnumParser<ulong>
+        {
+            public static UserRoleStringParser Instance = new UserRoleStringParser();
+
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public ulong BitwiseOr(ulong value1, ulong value2) => unchecked((ulong)(value1 | value2));
+
+            public bool TryParseNumber(ReadOnlySpan<char> value, out ulong result) => EnumNumericParser.TryParse(value, out result);
+
+            public bool TryParseSingleName(ReadOnlySpan<char> value, bool ignoreCase, out ulong result)
+            {
+                return ignoreCase
+                    ? TryParse(value, out result)
+                    : TryParse(value, StringComparison.OrdinalIgnoreCase, out result);
+            }
+
+            public bool TryParseSingleName(ReadOnlySpan<char> value, StringComparison comparisonType, out ulong result)
+            {
+                return TryParse(value, comparisonType, out result);
+            }
+
+            private bool TryParse(ReadOnlySpan<char> value, out ulong result)
+            {
+                switch (value)
+                {
+                    case "None":
+                        result = 0;
+                        return true;
+                    case "NormalUser":
+                        result = 1;
+                        return true;
+                    case "Custodian":
+                        result = 2;
+                        return true;
+                    case "Finance":
+                        result = 4;
+                        return true;
+                    case "SuperUser":
+                        result = 6;
+                        return true;
+                    case "All":
+                        result = 7;
+                        return true;
+                    default:
+                        result = 0;
+                        return false;
+                }
+            }
+
+            private bool TryParse(ReadOnlySpan<char> value, StringComparison comparisonType, out ulong result)
+            {
+                switch (value)
+                {
+                    case { } when value.Equals("None", comparisonType):
+                        result = 0;
+                        return true;
+                    case { } when value.Equals("NormalUser", comparisonType):
+                        result = 1;
+                        return true;
+                    case { } when value.Equals("Custodian", comparisonType):
+                        result = 2;
+                        return true;
+                    case { } when value.Equals("Finance", comparisonType):
+                        result = 4;
+                        return true;
+                    case { } when value.Equals("SuperUser", comparisonType):
+                        result = 6;
+                        return true;
+                    case { } when value.Equals("All", comparisonType):
+                        result = 7;
+                        return true;
+                    default:
+                        result = 0;
+                        return false;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type UserRole whose value is represented by value
+        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+        /// underlying type of UserRole. Note that this value need not be a member of the UserRole enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
+        public static bool TryParse(
+            [NotNullWhen(true)] string? name,
+            StringComparison comparisonType,
+            out UserRole result)
+        {
+            bool success = UserRoleStringParser.Instance.TryParseSingleName(name.AsSpan(), comparisonType, out ulong number)
+                || UserRoleStringParser.Instance.TryParseNumber(name.AsSpan(), out number);
+            if (!success)
+            {
+                return Enum.TryParse(name, out result);
+            }
+
+            result = (UserRole)number;
+            return true;
+        }
+
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type UserRole whose value is represented by value
+        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+        /// underlying type of UserRole. Note that this value need not be a member of the UserRole enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        public static bool TryParseIgnoreCase(
+            [NotNullWhen(true)] string? name,
+            out UserRole result)
+        {
+            return TryParse(name.AsSpan(), true, out result);
+        }
+
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object.
+        /// </summary>
+        /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
+        /// <returns>
+        /// Contains an object of type UserRole whose value is represented by value if the parse operation succeeds.
+        /// If the parse operation fails, result contains <c>null</c> value.
+        /// </returns>
+        public static UserRole? TryParseIgnoreCase(string? name)
+        {
+            return TryParse(name.AsSpan(), true, out UserRole result) ? result : null;
+        }
+
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object.
+        /// </summary>
+        /// <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
+        /// <returns>
+        /// Contains an object of type UserRole whose value is represented by value if the parse operation succeeds.
+        /// If the parse operation fails, result contains <c>null</c> value.
+        /// </returns>
+        /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
+        public static UserRole? TryParse(string? name, StringComparison comparisonType)
+        {
+            return TryParse(name, comparisonType, out UserRole result) ? result : null;
+        }
+
         /// <summary>Retrieves an array of the values of the constants in the UserRole enumeration.</summary>
         /// <returns>An array that contains the values of the constants in UserRole.</returns>
         public static UserRole[] GetValues()
@@ -402,11 +398,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 nameof(UserRole.SuperUser),
                 nameof(UserRole.All),
             };
-        }
-
-        private static bool TryParseNumeric(ReadOnlySpan<char> name, out ulong result)
-        {
-            return ulong.TryParse(name, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out result);
         }
     }
 }

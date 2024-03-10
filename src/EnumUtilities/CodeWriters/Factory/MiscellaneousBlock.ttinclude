@@ -36,11 +36,6 @@
 #>
         };
     }
-
-    private static bool TryParseNumeric(ReadOnlySpan<char> name, out <#= Model.UnderlyingType #> result)
-    {
-        return <#= Model.UnderlyingType #>.TryParse(name, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out result);
-    }
 <#+
     }
 #>
