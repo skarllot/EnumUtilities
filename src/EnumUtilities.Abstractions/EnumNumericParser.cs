@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Buffers.Text;
+using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 
@@ -12,6 +13,12 @@ public static class EnumNumericParser
     private static readonly NumberFormatInfo s_numberFormat = CultureInfo.InvariantCulture.NumberFormat;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static bool TryParse(ReadOnlySpan<byte> utf8Value, out byte result)
+    {
+        return Utf8Parser.TryParse(utf8Value, out result, out int bytesConsumed) && bytesConsumed == utf8Value.Length;
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool TryParse(ReadOnlySpan<char> value, out byte result)
     {
 #if !NETSTANDARD2_0
@@ -19,6 +26,12 @@ public static class EnumNumericParser
 #else
         return byte.TryParse(value.ToString(), EnumNumberStyle, s_numberFormat, out result);
 #endif
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static bool TryParse(ReadOnlySpan<byte> utf8Value, out sbyte result)
+    {
+        return Utf8Parser.TryParse(utf8Value, out result, out int bytesConsumed) && bytesConsumed == utf8Value.Length;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -32,6 +45,12 @@ public static class EnumNumericParser
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static bool TryParse(ReadOnlySpan<byte> utf8Value, out short result)
+    {
+        return Utf8Parser.TryParse(utf8Value, out result, out int bytesConsumed) && bytesConsumed == utf8Value.Length;
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool TryParse(ReadOnlySpan<char> value, out short result)
     {
 #if !NETSTANDARD2_0
@@ -39,6 +58,12 @@ public static class EnumNumericParser
 #else
         return short.TryParse(value.ToString(), EnumNumberStyle, s_numberFormat, out result);
 #endif
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static bool TryParse(ReadOnlySpan<byte> utf8Value, out ushort result)
+    {
+        return Utf8Parser.TryParse(utf8Value, out result, out int bytesConsumed) && bytesConsumed == utf8Value.Length;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -52,6 +77,12 @@ public static class EnumNumericParser
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static bool TryParse(ReadOnlySpan<byte> utf8Value, out int result)
+    {
+        return Utf8Parser.TryParse(utf8Value, out result, out int bytesConsumed) && bytesConsumed == utf8Value.Length;
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool TryParse(ReadOnlySpan<char> value, out int result)
     {
 #if !NETSTANDARD2_0
@@ -59,6 +90,12 @@ public static class EnumNumericParser
 #else
         return int.TryParse(value.ToString(), EnumNumberStyle, s_numberFormat, out result);
 #endif
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static bool TryParse(ReadOnlySpan<byte> utf8Value, out uint result)
+    {
+        return Utf8Parser.TryParse(utf8Value, out result, out int bytesConsumed) && bytesConsumed == utf8Value.Length;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -72,6 +109,12 @@ public static class EnumNumericParser
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static bool TryParse(ReadOnlySpan<byte> utf8Value, out long result)
+    {
+        return Utf8Parser.TryParse(utf8Value, out result, out int bytesConsumed) && bytesConsumed == utf8Value.Length;
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool TryParse(ReadOnlySpan<char> value, out long result)
     {
 #if !NETSTANDARD2_0
@@ -79,6 +122,12 @@ public static class EnumNumericParser
 #else
         return long.TryParse(value.ToString(), EnumNumberStyle, s_numberFormat, out result);
 #endif
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static bool TryParse(ReadOnlySpan<byte> utf8Value, out ulong result)
+    {
+        return Utf8Parser.TryParse(utf8Value, out result, out int bytesConsumed) && bytesConsumed == utf8Value.Length;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

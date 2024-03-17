@@ -5,6 +5,10 @@
     <RootNamespace>Raiqub.Generators.EnumUtilities</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="Raiqub.Generators.EnumUtilities.IntegrationTests" />
+  </ItemGroup>
+
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <PackageReference Include="System.Memory" Version="4.5.5" />
   </ItemGroup>

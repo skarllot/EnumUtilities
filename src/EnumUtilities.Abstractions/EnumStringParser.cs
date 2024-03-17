@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Runtime.CompilerServices;
 
 namespace Raiqub.Generators.EnumUtilities;
 
@@ -26,7 +25,7 @@ public static class EnumStringParser
         where TParser : IEnumParser<TNumber>
         where TNumber : struct
     {
-        switch (AnalyseForParsing(value, out value))
+        switch (AnalyseForParsing(ref value))
         {
             case ParseAnalysisResult.NotNumeric:
                 return TryParseByName(value, enumParser, ignoreCase, throwOnFailure, out result);
@@ -92,33 +91,53 @@ public static class EnumStringParser
     private enum ParseAnalysisResult
     {
         Empty,
+        Invalid,
         NotNumeric,
         MaybeNumeric
     }
 
-    private static ParseAnalysisResult AnalyseForParsing(ReadOnlySpan<char> value, out ReadOnlySpan<char> result)
+    private static ParseAnalysisResult AnalyseForParsing(ref ReadOnlySpan<char> value)
     {
         if (value.IsEmpty)
         {
-            result = default;
             return ParseAnalysisResult.Empty;
         }
 
-        char c = value[0];
-        if (char.IsWhiteSpace(c))
+        value = value.TrimStart();
+        if (value.IsEmpty)
         {
-            value = value.TrimStart();
-            if (value.IsEmpty)
-            {
-                result = default;
-                return ParseAnalysisResult.Empty;
-            }
-
-            c = value[0];
+            return ParseAnalysisResult.Empty;
         }
 
-        result = value;
-        return IsAsciiDigit(c) || c == '-' || c == '+'
+        if (!CodePoint.TryGetCodePointAt(value, 0, out var rune))
+        {
+            return ParseAnalysisResult.Invalid;
+        }
+
+        return rune.IsAsciiDigit || rune == '-' || rune == '+'
+            ? ParseAnalysisResult.MaybeNumeric
+            : ParseAnalysisResult.NotNumeric;
+    }
+
+    private static ParseAnalysisResult AnalyseForParsing(ref ReadOnlySpan<byte> value)
+    {
+        if (value.IsEmpty)
+        {
+            return ParseAnalysisResult.Empty;
+        }
+
+        value = Utf8String.TrimStart(value);
+        if (value.IsEmpty)
+        {
+            return ParseAnalysisResult.Empty;
+        }
+
+        if (!CodePoint.TryGetFirstCodePoint(value, out var rune))
+        {
+            return ParseAnalysisResult.Invalid;
+        }
+
+        return rune.IsAsciiDigit || rune == '-' || rune == '+'
             ? ParseAnalysisResult.MaybeNumeric
             : ParseAnalysisResult.NotNumeric;
     }
@@ -139,8 +158,4 @@ public static class EnumStringParser
         throw new ArgumentException($"Requested value '{value.ToString()}' was not found.", nameof(value));
 #endif
     }
-
-    /// <summary>Indicates whether a character is categorized as an ASCII digit.</summary>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static bool IsAsciiDigit(char c) => c is >= '0' and <= '9';
 }
