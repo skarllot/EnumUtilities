@@ -46,9 +46,9 @@
       },
       "Polyfill": {
         "type": "Direct",
-        "requested": "[5.5.2, )",
-        "resolved": "5.5.2",
-        "contentHash": "9jN6DZKz5JLjmpauPOG4UpqrRAGXCJ6ahe8LR9GKdU5tgqGCLOZckA14z4YIe92I9z4YfZg4tFbeZiTK7b8N3Q=="
+        "requested": "[5.5.3, )",
+        "resolved": "5.5.3",
+        "contentHash": "TfFhHgXQrIrqP9P1RZFhUq0j6Wq9gOzFPqd3Q3VtzR5/e/WpSElwsweyuWjwkdxdSllpC7aYFppoHp9RyBMLRA=="
       },
       "Microsoft.Build.Tasks.Git": {
         "type": "Transitive",
