@@ -40,9 +40,9 @@
       },
       "Polyfill": {
         "type": "Direct",
-        "requested": "[5.5.2, )",
-        "resolved": "5.5.2",
-        "contentHash": "9jN6DZKz5JLjmpauPOG4UpqrRAGXCJ6ahe8LR9GKdU5tgqGCLOZckA14z4YIe92I9z4YfZg4tFbeZiTK7b8N3Q=="
+        "requested": "[5.6.0, )",
+        "resolved": "5.6.0",
+        "contentHash": "eb6mkftrXasI7B1AflSaB48f1U/aLJuHfwlfuEUHc07hnSkNUbkQKhzwnSBrfKuNG1vfTTtFzqHLGBsUS0oI9A=="
       },
       "Microsoft.CodeAnalysis.Common": {
         "type": "Transitive",
