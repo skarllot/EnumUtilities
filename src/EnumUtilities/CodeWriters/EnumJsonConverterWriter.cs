@@ -357,7 +357,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             Append("return ");
         if (castToEnum)
             Append($"({Model.RefName})");
-        if (NeedNumberCasting())
+        if (!castToEnum && NeedNumberCasting())
             Append($"({Model.UnderlyingType})");
 
         return Append($"{fallbackValue}");
