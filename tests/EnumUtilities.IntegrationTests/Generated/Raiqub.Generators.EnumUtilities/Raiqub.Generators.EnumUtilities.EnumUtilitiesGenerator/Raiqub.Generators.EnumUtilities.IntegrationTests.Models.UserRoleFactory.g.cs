@@ -52,8 +52,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 case { } s when s.Equals("All", comparisonType):
                     numValue = 7;
                     break;
-                case { } s when TryParseNumeric(s, comparisonType, out ulong val):
-                    numValue = val;
+                case { } s when TryParseNumeric(s, comparisonType, out numValue):
                     break;
                 default:
                     return Enum.TryParse(name, out result);
@@ -99,8 +98,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 case "All":
                     numValue = 7;
                     break;
-                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out ulong val):
-                    numValue = val;
+                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out numValue):
                     break;
                 default:
                     return Enum.TryParse(name, out result);

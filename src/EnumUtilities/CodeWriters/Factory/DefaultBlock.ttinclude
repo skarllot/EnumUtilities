@@ -43,8 +43,7 @@
 <#+
             }
 #>
-            case { } s when TryParseNumeric(s, comparisonType, out <#= Model.UnderlyingType #> val):
-                numValue = val;
+            case { } s when TryParseNumeric(s, comparisonType, out numValue):
                 break;
             default:
                 return Enum.TryParse(name, out result);
@@ -95,8 +94,7 @@
 <#+
             }
 #>
-            case { } s when TryParseNumeric(s, StringComparison.Ordinal, out <#= Model.UnderlyingType #> val):
-                numValue = val;
+            case { } s when TryParseNumeric(s, StringComparison.Ordinal, out numValue):
                 break;
             default:
                 return Enum.TryParse(name, out result);

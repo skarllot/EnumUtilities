@@ -55,8 +55,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 case { } s when s.Equals("Sunday", comparisonType):
                     numValue = 6;
                     break;
-                case { } s when TryParseNumeric(s, comparisonType, out int val):
-                    numValue = val;
+                case { } s when TryParseNumeric(s, comparisonType, out numValue):
                     break;
                 default:
                     return Enum.TryParse(name, out result);
@@ -105,8 +104,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 case "Sunday":
                     numValue = 6;
                     break;
-                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out int val):
-                    numValue = val;
+                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out numValue):
                     break;
                 default:
                     return Enum.TryParse(name, out result);

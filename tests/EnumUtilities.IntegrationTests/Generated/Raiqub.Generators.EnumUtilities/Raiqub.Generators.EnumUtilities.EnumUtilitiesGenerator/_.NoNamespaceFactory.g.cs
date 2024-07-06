@@ -41,8 +41,7 @@ public static partial class NoNamespaceFactory
             case { } s when s.Equals("Two", comparisonType):
                 numValue = 2;
                 break;
-            case { } s when TryParseNumeric(s, comparisonType, out int val):
-                numValue = val;
+            case { } s when TryParseNumeric(s, comparisonType, out numValue):
                 break;
             default:
                 return Enum.TryParse(name, out result);
@@ -79,8 +78,7 @@ public static partial class NoNamespaceFactory
             case "Two":
                 numValue = 2;
                 break;
-            case { } s when TryParseNumeric(s, StringComparison.Ordinal, out int val):
-                numValue = val;
+            case { } s when TryParseNumeric(s, StringComparison.Ordinal, out numValue):
                 break;
             default:
                 return Enum.TryParse(name, out result);
