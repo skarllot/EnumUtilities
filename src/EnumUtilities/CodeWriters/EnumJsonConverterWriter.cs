@@ -145,7 +145,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             this.Write("\r\n        ");
             
             #line 51 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\EnumJsonConverterWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(AppendFallbackValue(addReturn: true)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(AppendFallbackValue(addReturn: true, castToEnum: true)));
             
             #line default
             #line hidden
@@ -347,13 +347,20 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
     protected override bool CanGenerateFor(EnumToGenerate model) =>
         (model.SelectedGenerators & SelectedGenerators.JsonConverter) != 0;
 
-    private None AppendFallbackValue(bool addReturn = false)
+    private None AppendFallbackValue(bool addReturn = false, bool castToEnum = false)
     {
         object? fallbackValue = Model.JsonConverterGeneratorOptions!.DeserializationFailureFallbackValue;
-        return fallbackValue is not null
-            ? Append(
-                $"{(addReturn ? "return " : "")}{(NeedNumberCasting() ? $"({Model.UnderlyingType})" : "")}{fallbackValue}")
-            : Append("throw new JsonException()");
+        if (fallbackValue is null)
+            return Append("throw new JsonException()");
+
+        if (addReturn)
+            Append("return ");
+        if (castToEnum)
+            Append($"({Model.RefName})");
+        if (NeedNumberCasting())
+            Append($"({Model.UnderlyingType})");
+
+        return Append($"{fallbackValue}");
     }
 
     private static int GetEncodedLength(string value) => value.Sum(c => c < 128 ? 1 : 6);

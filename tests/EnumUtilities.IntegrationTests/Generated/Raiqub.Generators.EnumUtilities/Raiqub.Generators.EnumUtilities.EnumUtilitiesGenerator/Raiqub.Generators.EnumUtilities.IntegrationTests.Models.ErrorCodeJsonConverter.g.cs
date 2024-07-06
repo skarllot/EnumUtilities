@@ -21,7 +21,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             if (reader.TokenType == JsonTokenType.String)
                 return (ErrorCode)ReadFromString(ref reader);
 
-            return (ushort)0;
+            return (ErrorCode)(ushort)0;
         }
 
         public override void Write(Utf8JsonWriter writer, ErrorCode value, JsonSerializerOptions options)
