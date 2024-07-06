@@ -31,23 +31,26 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out NestedInClass.MyEnum1 result)
         {
+            int numValue;
             switch (name)
             {
-                case { } s when s.Equals(nameof(NestedInClass.MyEnum1.Zero), comparisonType):
-                    result = NestedInClass.MyEnum1.Zero;
-                    return true;
-                case { } s when s.Equals(nameof(NestedInClass.MyEnum1.One), comparisonType):
-                    result = NestedInClass.MyEnum1.One;
-                    return true;
-                case { } s when s.Equals(nameof(NestedInClass.MyEnum1.Two), comparisonType):
-                    result = NestedInClass.MyEnum1.Two;
-                    return true;
-                case { } s when TryParseNumeric(s, comparisonType, out int val):
-                    result = (NestedInClass.MyEnum1)val;
-                    return true;
+                case { } s when s.Equals("Zero", comparisonType):
+                    numValue = 0;
+                    break;
+                case { } s when s.Equals("One", comparisonType):
+                    numValue = 1;
+                    break;
+                case { } s when s.Equals("Two", comparisonType):
+                    numValue = 2;
+                    break;
+                case { } s when TryParseNumeric(s, comparisonType, out numValue):
+                    break;
                 default:
                     return Enum.TryParse(name, out result);
             }
+
+            result = (NestedInClass.MyEnum1)numValue;
+            return true;
         }
 
         /// <summary>
@@ -65,23 +68,26 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             [NotNullWhen(true)] string? name,
             out NestedInClass.MyEnum1 result)
         {
+            int numValue;
             switch (name)
             {
-                case nameof(NestedInClass.MyEnum1.Zero):
-                    result = NestedInClass.MyEnum1.Zero;
-                    return true;
-                case nameof(NestedInClass.MyEnum1.One):
-                    result = NestedInClass.MyEnum1.One;
-                    return true;
-                case nameof(NestedInClass.MyEnum1.Two):
-                    result = NestedInClass.MyEnum1.Two;
-                    return true;
-                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out int val):
-                    result = (NestedInClass.MyEnum1)val;
-                    return true;
+                case "Zero":
+                    numValue = 0;
+                    break;
+                case "One":
+                    numValue = 1;
+                    break;
+                case "Two":
+                    numValue = 2;
+                    break;
+                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out numValue):
+                    break;
                 default:
                     return Enum.TryParse(name, out result);
             }
+
+            result = (NestedInClass.MyEnum1)numValue;
+            return true;
         }
 
         /// <summary>
@@ -152,9 +158,9 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return new[]
             {
-                NestedInClass.MyEnum1.Zero,
-                NestedInClass.MyEnum1.One,
-                NestedInClass.MyEnum1.Two,
+                (NestedInClass.MyEnum1)0,
+                (NestedInClass.MyEnum1)1,
+                (NestedInClass.MyEnum1)2,
             };
         }
 
@@ -164,9 +170,9 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return new[]
             {
-                nameof(NestedInClass.MyEnum1.Zero),
-                nameof(NestedInClass.MyEnum1.One),
-                nameof(NestedInClass.MyEnum1.Two),
+                "Zero",
+                "One",
+                "Two",
             };
         }
 

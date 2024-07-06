@@ -26,13 +26,13 @@ using System.Diagnostics.CodeAnalysis;
     /// <returns><c>true</c> if the value of <see cref="<#= Model.Name #>"/> instance exists in the enumeration; <c>false</c> otherwise.</returns>
     public static bool IsDefined(<#= Model.RefName #> value)
     {
-        return value switch
+        return (<#= Model.UnderlyingType #>)value switch
         {
 <#
     foreach (var curr in Model.UniqueValues)
     {
 #>
-            <#= Model.RefName #>.<#= curr.MemberName #> => true,
+            <#= curr.MemberValue #> => true,
 <#
     }
 #>
@@ -50,7 +50,7 @@ using System.Diagnostics.CodeAnalysis;
     foreach (var curr in Model.Values)
     {
 #>
-            { } s when s.Equals(nameof(<#= Model.RefName #>.<#= curr.MemberName #>), comparisonType) => true,
+            { } s when s.Equals("<#= curr.MemberName #>", comparisonType) => true,
 <#
     }
 #>
@@ -71,7 +71,7 @@ using System.Diagnostics.CodeAnalysis;
     foreach (var curr in Model.Values)
     {
 #>
-            nameof(<#= Model.RefName #>.<#= curr.MemberName #>) => true,
+            "<#= curr.MemberName #>" => true,
 <#
     }
 #>

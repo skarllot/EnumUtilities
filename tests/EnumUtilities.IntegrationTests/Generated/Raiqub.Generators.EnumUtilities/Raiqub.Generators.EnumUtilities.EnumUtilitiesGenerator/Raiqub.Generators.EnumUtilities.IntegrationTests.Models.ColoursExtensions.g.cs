@@ -17,11 +17,11 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns>The string representation of the value of this instance.</returns>
         public static string ToStringFast(this Colours value)
         {
-            return value switch
+            return (int)value switch
             {
-                Colours.Red => nameof(Colours.Red),
-                Colours.Blue => nameof(Colours.Blue),
-                Colours.Green => nameof(Colours.Green),
+                1 => "Red",
+                2 => "Blue",
+                4 => "Green",
                 _ => value.ToString()
             };
         }

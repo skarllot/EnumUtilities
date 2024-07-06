@@ -16,14 +16,14 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns><c>true</c> if the value of <see cref="SlimCategories"/> instance exists in the enumeration; <c>false</c> otherwise.</returns>
         public static bool IsDefined(SlimCategories value)
         {
-            return value switch
+            return (byte)value switch
             {
-                SlimCategories.Electronics => true,
-                SlimCategories.Food => true,
-                SlimCategories.Automotive => true,
-                SlimCategories.Arts => true,
-                SlimCategories.BeautyCare => true,
-                SlimCategories.Fashion => true,
+                0 => true,
+                1 => true,
+                2 => true,
+                3 => true,
+                4 => true,
+                5 => true,
                 _ => false
             };
         }
@@ -34,12 +34,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return name switch
             {
-                { } s when s.Equals(nameof(SlimCategories.Electronics), comparisonType) => true,
-                { } s when s.Equals(nameof(SlimCategories.Food), comparisonType) => true,
-                { } s when s.Equals(nameof(SlimCategories.Automotive), comparisonType) => true,
-                { } s when s.Equals(nameof(SlimCategories.Arts), comparisonType) => true,
-                { } s when s.Equals(nameof(SlimCategories.BeautyCare), comparisonType) => true,
-                { } s when s.Equals(nameof(SlimCategories.Fashion), comparisonType) => true,
+                { } s when s.Equals("Electronics", comparisonType) => true,
+                { } s when s.Equals("Food", comparisonType) => true,
+                { } s when s.Equals("Automotive", comparisonType) => true,
+                { } s when s.Equals("Arts", comparisonType) => true,
+                { } s when s.Equals("BeautyCare", comparisonType) => true,
+                { } s when s.Equals("Fashion", comparisonType) => true,
                 _ => false
             };
         }
@@ -53,12 +53,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return name switch
             {
-                nameof(SlimCategories.Electronics) => true,
-                nameof(SlimCategories.Food) => true,
-                nameof(SlimCategories.Automotive) => true,
-                nameof(SlimCategories.Arts) => true,
-                nameof(SlimCategories.BeautyCare) => true,
-                nameof(SlimCategories.Fashion) => true,
+                "Electronics" => true,
+                "Food" => true,
+                "Automotive" => true,
+                "Arts" => true,
+                "BeautyCare" => true,
+                "Fashion" => true,
                 _ => false
             };
         }

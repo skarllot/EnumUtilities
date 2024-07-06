@@ -15,11 +15,11 @@ public static partial class NoNamespaceExtensions
     /// <returns>The string representation of the value of this instance.</returns>
     public static string ToStringFast(this NoNamespace value)
     {
-        return value switch
+        return (int)value switch
         {
-            NoNamespace.Zero => nameof(NoNamespace.Zero),
-            NoNamespace.One => nameof(NoNamespace.One),
-            NoNamespace.Two => nameof(NoNamespace.Two),
+            0 => "Zero",
+            1 => "One",
+            2 => "Two",
             _ => value.ToString()
         };
     }

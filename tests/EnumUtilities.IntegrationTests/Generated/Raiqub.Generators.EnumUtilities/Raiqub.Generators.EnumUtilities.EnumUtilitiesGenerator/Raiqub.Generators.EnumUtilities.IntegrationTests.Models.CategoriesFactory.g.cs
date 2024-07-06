@@ -31,32 +31,35 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out Categories result)
         {
+            int numValue;
             switch (name)
             {
-                case { } s when s.Equals(nameof(Categories.Electronics), comparisonType):
-                    result = Categories.Electronics;
-                    return true;
-                case { } s when s.Equals(nameof(Categories.Food), comparisonType):
-                    result = Categories.Food;
-                    return true;
-                case { } s when s.Equals(nameof(Categories.Automotive), comparisonType):
-                    result = Categories.Automotive;
-                    return true;
-                case { } s when s.Equals(nameof(Categories.Arts), comparisonType):
-                    result = Categories.Arts;
-                    return true;
-                case { } s when s.Equals(nameof(Categories.BeautyCare), comparisonType):
-                    result = Categories.BeautyCare;
-                    return true;
-                case { } s when s.Equals(nameof(Categories.Fashion), comparisonType):
-                    result = Categories.Fashion;
-                    return true;
-                case { } s when TryParseNumeric(s, comparisonType, out int val):
-                    result = (Categories)val;
-                    return true;
+                case { } s when s.Equals("Electronics", comparisonType):
+                    numValue = 0;
+                    break;
+                case { } s when s.Equals("Food", comparisonType):
+                    numValue = 1;
+                    break;
+                case { } s when s.Equals("Automotive", comparisonType):
+                    numValue = 2;
+                    break;
+                case { } s when s.Equals("Arts", comparisonType):
+                    numValue = 3;
+                    break;
+                case { } s when s.Equals("BeautyCare", comparisonType):
+                    numValue = 4;
+                    break;
+                case { } s when s.Equals("Fashion", comparisonType):
+                    numValue = 5;
+                    break;
+                case { } s when TryParseNumeric(s, comparisonType, out numValue):
+                    break;
                 default:
                     return Enum.TryParse(name, out result);
             }
+
+            result = (Categories)numValue;
+            return true;
         }
 
         /// <summary>
@@ -74,32 +77,35 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             [NotNullWhen(true)] string? name,
             out Categories result)
         {
+            int numValue;
             switch (name)
             {
-                case nameof(Categories.Electronics):
-                    result = Categories.Electronics;
-                    return true;
-                case nameof(Categories.Food):
-                    result = Categories.Food;
-                    return true;
-                case nameof(Categories.Automotive):
-                    result = Categories.Automotive;
-                    return true;
-                case nameof(Categories.Arts):
-                    result = Categories.Arts;
-                    return true;
-                case nameof(Categories.BeautyCare):
-                    result = Categories.BeautyCare;
-                    return true;
-                case nameof(Categories.Fashion):
-                    result = Categories.Fashion;
-                    return true;
-                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out int val):
-                    result = (Categories)val;
-                    return true;
+                case "Electronics":
+                    numValue = 0;
+                    break;
+                case "Food":
+                    numValue = 1;
+                    break;
+                case "Automotive":
+                    numValue = 2;
+                    break;
+                case "Arts":
+                    numValue = 3;
+                    break;
+                case "BeautyCare":
+                    numValue = 4;
+                    break;
+                case "Fashion":
+                    numValue = 5;
+                    break;
+                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out numValue):
+                    break;
                 default:
                     return Enum.TryParse(name, out result);
             }
+
+            result = (Categories)numValue;
+            return true;
         }
 
         /// <summary>
@@ -170,12 +176,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return new[]
             {
-                Categories.Electronics,
-                Categories.Food,
-                Categories.Automotive,
-                Categories.Arts,
-                Categories.BeautyCare,
-                Categories.Fashion,
+                (Categories)0,
+                (Categories)1,
+                (Categories)2,
+                (Categories)3,
+                (Categories)4,
+                (Categories)5,
             };
         }
 
@@ -185,12 +191,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return new[]
             {
-                nameof(Categories.Electronics),
-                nameof(Categories.Food),
-                nameof(Categories.Automotive),
-                nameof(Categories.Arts),
-                nameof(Categories.BeautyCare),
-                nameof(Categories.Fashion),
+                "Electronics",
+                "Food",
+                "Automotive",
+                "Arts",
+                "BeautyCare",
+                "Fashion",
             };
         }
 

@@ -29,23 +29,26 @@ public static partial class NoNamespaceFactory
         StringComparison comparisonType,
         out NoNamespace result)
     {
+        int numValue;
         switch (name)
         {
-            case { } s when s.Equals(nameof(NoNamespace.Zero), comparisonType):
-                result = NoNamespace.Zero;
-                return true;
-            case { } s when s.Equals(nameof(NoNamespace.One), comparisonType):
-                result = NoNamespace.One;
-                return true;
-            case { } s when s.Equals(nameof(NoNamespace.Two), comparisonType):
-                result = NoNamespace.Two;
-                return true;
-            case { } s when TryParseNumeric(s, comparisonType, out int val):
-                result = (NoNamespace)val;
-                return true;
+            case { } s when s.Equals("Zero", comparisonType):
+                numValue = 0;
+                break;
+            case { } s when s.Equals("One", comparisonType):
+                numValue = 1;
+                break;
+            case { } s when s.Equals("Two", comparisonType):
+                numValue = 2;
+                break;
+            case { } s when TryParseNumeric(s, comparisonType, out numValue):
+                break;
             default:
                 return Enum.TryParse(name, out result);
         }
+
+        result = (NoNamespace)numValue;
+        return true;
     }
 
     /// <summary>
@@ -63,23 +66,26 @@ public static partial class NoNamespaceFactory
         [NotNullWhen(true)] string? name,
         out NoNamespace result)
     {
+        int numValue;
         switch (name)
         {
-            case nameof(NoNamespace.Zero):
-                result = NoNamespace.Zero;
-                return true;
-            case nameof(NoNamespace.One):
-                result = NoNamespace.One;
-                return true;
-            case nameof(NoNamespace.Two):
-                result = NoNamespace.Two;
-                return true;
-            case { } s when TryParseNumeric(s, StringComparison.Ordinal, out int val):
-                result = (NoNamespace)val;
-                return true;
+            case "Zero":
+                numValue = 0;
+                break;
+            case "One":
+                numValue = 1;
+                break;
+            case "Two":
+                numValue = 2;
+                break;
+            case { } s when TryParseNumeric(s, StringComparison.Ordinal, out numValue):
+                break;
             default:
                 return Enum.TryParse(name, out result);
         }
+
+        result = (NoNamespace)numValue;
+        return true;
     }
 
     /// <summary>
@@ -150,9 +156,9 @@ public static partial class NoNamespaceFactory
     {
         return new[]
         {
-            NoNamespace.Zero,
-            NoNamespace.One,
-            NoNamespace.Two,
+            (NoNamespace)0,
+            (NoNamespace)1,
+            (NoNamespace)2,
         };
     }
 
@@ -162,9 +168,9 @@ public static partial class NoNamespaceFactory
     {
         return new[]
         {
-            nameof(NoNamespace.Zero),
-            nameof(NoNamespace.One),
-            nameof(NoNamespace.Two),
+            "Zero",
+            "One",
+            "Two",
         };
     }
 

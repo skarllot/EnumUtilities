@@ -31,32 +31,35 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out UserRole result)
         {
+            ulong numValue;
             switch (name)
             {
-                case { } s when s.Equals(nameof(UserRole.None), comparisonType):
-                    result = UserRole.None;
-                    return true;
-                case { } s when s.Equals(nameof(UserRole.NormalUser), comparisonType):
-                    result = UserRole.NormalUser;
-                    return true;
-                case { } s when s.Equals(nameof(UserRole.Custodian), comparisonType):
-                    result = UserRole.Custodian;
-                    return true;
-                case { } s when s.Equals(nameof(UserRole.Finance), comparisonType):
-                    result = UserRole.Finance;
-                    return true;
-                case { } s when s.Equals(nameof(UserRole.SuperUser), comparisonType):
-                    result = UserRole.SuperUser;
-                    return true;
-                case { } s when s.Equals(nameof(UserRole.All), comparisonType):
-                    result = UserRole.All;
-                    return true;
-                case { } s when TryParseNumeric(s, comparisonType, out ulong val):
-                    result = (UserRole)val;
-                    return true;
+                case { } s when s.Equals("None", comparisonType):
+                    numValue = 0;
+                    break;
+                case { } s when s.Equals("NormalUser", comparisonType):
+                    numValue = 1;
+                    break;
+                case { } s when s.Equals("Custodian", comparisonType):
+                    numValue = 2;
+                    break;
+                case { } s when s.Equals("Finance", comparisonType):
+                    numValue = 4;
+                    break;
+                case { } s when s.Equals("SuperUser", comparisonType):
+                    numValue = 6;
+                    break;
+                case { } s when s.Equals("All", comparisonType):
+                    numValue = 7;
+                    break;
+                case { } s when TryParseNumeric(s, comparisonType, out numValue):
+                    break;
                 default:
                     return Enum.TryParse(name, out result);
             }
+
+            result = (UserRole)numValue;
+            return true;
         }
 
         /// <summary>
@@ -74,32 +77,35 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             [NotNullWhen(true)] string? name,
             out UserRole result)
         {
+            ulong numValue;
             switch (name)
             {
-                case nameof(UserRole.None):
-                    result = UserRole.None;
-                    return true;
-                case nameof(UserRole.NormalUser):
-                    result = UserRole.NormalUser;
-                    return true;
-                case nameof(UserRole.Custodian):
-                    result = UserRole.Custodian;
-                    return true;
-                case nameof(UserRole.Finance):
-                    result = UserRole.Finance;
-                    return true;
-                case nameof(UserRole.SuperUser):
-                    result = UserRole.SuperUser;
-                    return true;
-                case nameof(UserRole.All):
-                    result = UserRole.All;
-                    return true;
-                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out ulong val):
-                    result = (UserRole)val;
-                    return true;
+                case "None":
+                    numValue = 0;
+                    break;
+                case "NormalUser":
+                    numValue = 1;
+                    break;
+                case "Custodian":
+                    numValue = 2;
+                    break;
+                case "Finance":
+                    numValue = 4;
+                    break;
+                case "SuperUser":
+                    numValue = 6;
+                    break;
+                case "All":
+                    numValue = 7;
+                    break;
+                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out numValue):
+                    break;
                 default:
                     return Enum.TryParse(name, out result);
             }
+
+            result = (UserRole)numValue;
+            return true;
         }
 
         /// <summary>
@@ -170,12 +176,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return new[]
             {
-                UserRole.None,
-                UserRole.NormalUser,
-                UserRole.Custodian,
-                UserRole.Finance,
-                UserRole.SuperUser,
-                UserRole.All,
+                (UserRole)0,
+                (UserRole)1,
+                (UserRole)2,
+                (UserRole)4,
+                (UserRole)6,
+                (UserRole)7,
             };
         }
 
@@ -185,12 +191,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return new[]
             {
-                nameof(UserRole.None),
-                nameof(UserRole.NormalUser),
-                nameof(UserRole.Custodian),
-                nameof(UserRole.Finance),
-                nameof(UserRole.SuperUser),
-                nameof(UserRole.All),
+                "None",
+                "NormalUser",
+                "Custodian",
+                "Finance",
+                "SuperUser",
+                "All",
             };
         }
 

@@ -17,12 +17,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns>The string representation of the value of this instance.</returns>
         public static string ToStringFast(this NestedInClass.MyEnum2 value)
         {
-            return value switch
+            return (int)value switch
             {
-                NestedInClass.MyEnum2.Credit => nameof(NestedInClass.MyEnum2.Credit),
-                NestedInClass.MyEnum2.Debit => nameof(NestedInClass.MyEnum2.Debit),
-                NestedInClass.MyEnum2.Cash => nameof(NestedInClass.MyEnum2.Cash),
-                NestedInClass.MyEnum2.Cheque => nameof(NestedInClass.MyEnum2.Cheque),
+                0 => "Credit",
+                1 => "Debit",
+                2 => "Cash",
+                3 => "Cheque",
                 _ => value.ToString()
             };
         }
@@ -90,28 +90,28 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
         public static string ToEnumMemberValue(this NestedInClass.MyEnum2 value)
         {
-            return value switch
+            return (int)value switch
             {
-                NestedInClass.MyEnum2.Credit => "Credit card",
-                NestedInClass.MyEnum2.Debit => "Debit card",
-                NestedInClass.MyEnum2.Cash => nameof(NestedInClass.MyEnum2.Cash),
-                NestedInClass.MyEnum2.Cheque => nameof(NestedInClass.MyEnum2.Cheque),
+                0 => "Credit card",
+                1 => "Debit card",
+                2 => "Cash",
+                3 => "Cheque",
                 _ => value.ToString()
             };
         }
 
         public static string? GetDescription(this NestedInClass.MyEnum2 value)
         {
-            return value switch
+            return (int)value switch
             {
-                NestedInClass.MyEnum2.Cash => "The payment by using physical cash",
+                2 => "The payment by using physical cash",
                 _ => null
             };
         }
 
         public static string GetDisplayShortName(this NestedInClass.MyEnum2 value)
         {
-            return value switch
+            return (int)value switch
             {
                 _ => GetDisplayName(value)
             };
@@ -119,12 +119,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
         public static string GetDisplayName(this NestedInClass.MyEnum2 value)
         {
-            return value switch
+            return (int)value switch
             {
-                NestedInClass.MyEnum2.Credit => "Credit Card",
-                NestedInClass.MyEnum2.Debit => "Debit Card",
-                NestedInClass.MyEnum2.Cash => "Physical Cash",
-                NestedInClass.MyEnum2.Cheque => nameof(NestedInClass.MyEnum2.Cheque),
+                0 => "Credit Card",
+                1 => "Debit Card",
+                2 => "Physical Cash",
+                3 => "Cheque",
                 _ => value.ToString()
             };
         }

@@ -31,26 +31,29 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out PaymentMethod result)
         {
+            int numValue;
             switch (name)
             {
-                case { } s when s.Equals(nameof(PaymentMethod.Credit), comparisonType):
-                    result = PaymentMethod.Credit;
-                    return true;
-                case { } s when s.Equals(nameof(PaymentMethod.Debit), comparisonType):
-                    result = PaymentMethod.Debit;
-                    return true;
-                case { } s when s.Equals(nameof(PaymentMethod.Cash), comparisonType):
-                    result = PaymentMethod.Cash;
-                    return true;
-                case { } s when s.Equals(nameof(PaymentMethod.Cheque), comparisonType):
-                    result = PaymentMethod.Cheque;
-                    return true;
-                case { } s when TryParseNumeric(s, comparisonType, out int val):
-                    result = (PaymentMethod)val;
-                    return true;
+                case { } s when s.Equals("Credit", comparisonType):
+                    numValue = 0;
+                    break;
+                case { } s when s.Equals("Debit", comparisonType):
+                    numValue = 1;
+                    break;
+                case { } s when s.Equals("Cash", comparisonType):
+                    numValue = 2;
+                    break;
+                case { } s when s.Equals("Cheque", comparisonType):
+                    numValue = 3;
+                    break;
+                case { } s when TryParseNumeric(s, comparisonType, out numValue):
+                    break;
                 default:
                     return Enum.TryParse(name, out result);
             }
+
+            result = (PaymentMethod)numValue;
+            return true;
         }
 
         /// <summary>
@@ -68,26 +71,29 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             [NotNullWhen(true)] string? name,
             out PaymentMethod result)
         {
+            int numValue;
             switch (name)
             {
-                case nameof(PaymentMethod.Credit):
-                    result = PaymentMethod.Credit;
-                    return true;
-                case nameof(PaymentMethod.Debit):
-                    result = PaymentMethod.Debit;
-                    return true;
-                case nameof(PaymentMethod.Cash):
-                    result = PaymentMethod.Cash;
-                    return true;
-                case nameof(PaymentMethod.Cheque):
-                    result = PaymentMethod.Cheque;
-                    return true;
-                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out int val):
-                    result = (PaymentMethod)val;
-                    return true;
+                case "Credit":
+                    numValue = 0;
+                    break;
+                case "Debit":
+                    numValue = 1;
+                    break;
+                case "Cash":
+                    numValue = 2;
+                    break;
+                case "Cheque":
+                    numValue = 3;
+                    break;
+                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out numValue):
+                    break;
                 default:
                     return Enum.TryParse(name, out result);
             }
+
+            result = (PaymentMethod)numValue;
+            return true;
         }
 
         /// <summary>
@@ -170,24 +176,28 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out PaymentMethod result)
         {
+            int numValue;
             switch (enumMemberValue)
             {
                 case { } s when s.Equals("Credit card", comparisonType):
-                    result = PaymentMethod.Credit;
-                    return true;
+                    numValue = 0;
+                    break;
                 case { } s when s.Equals("Debit card", comparisonType):
-                    result = PaymentMethod.Debit;
-                    return true;
-                case { } s when s.Equals(nameof(PaymentMethod.Cash), comparisonType):
-                    result = PaymentMethod.Cash;
-                    return true;
-                case { } s when s.Equals(nameof(PaymentMethod.Cheque), comparisonType):
-                    result = PaymentMethod.Cheque;
-                    return true;
+                    numValue = 1;
+                    break;
+                case { } s when s.Equals("Cash", comparisonType):
+                    numValue = 2;
+                    break;
+                case { } s when s.Equals("Cheque", comparisonType):
+                    numValue = 3;
+                    break;
                 default:
                     result = default;
                     return false;
             }
+
+            result = (PaymentMethod)numValue;
+            return true;
         }
 
         /// <summary>
@@ -241,15 +251,19 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out PaymentMethod result)
         {
+            int numValue;
             switch (description)
             {
                 case { } s when s.Equals("The payment by using physical cash", comparisonType):
-                    result = PaymentMethod.Cash;
-                    return true;
+                    numValue = 2;
+                    break;
                 default:
                     result = default;
                     return false;
             }
+
+            result = (PaymentMethod)numValue;
+            return true;
         }
 
         public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, out PaymentMethod result)
@@ -272,11 +286,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out PaymentMethod result)
         {
-            switch (displayShortName)
-            {
-                default:
-                    return TryCreateFromDisplayName(displayShortName, comparisonType, out result);
-            }
+            return TryCreateFromDisplayName(displayShortName, comparisonType, out result);
         }
 
         public static bool TryCreateFromDisplayShortName([NotNullWhen(true)] string? displayShortName, out PaymentMethod result)
@@ -299,24 +309,28 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out PaymentMethod result)
         {
+            int numValue;
             switch (displayName)
             {
                 case { } s when s.Equals("Credit Card", comparisonType):
-                    result = PaymentMethod.Credit;
-                    return true;
+                    numValue = 0;
+                    break;
                 case { } s when s.Equals("Debit Card", comparisonType):
-                    result = PaymentMethod.Debit;
-                    return true;
+                    numValue = 1;
+                    break;
                 case { } s when s.Equals("Physical Cash", comparisonType):
-                    result = PaymentMethod.Cash;
-                    return true;
-                case { } s when s.Equals(nameof(PaymentMethod.Cheque), comparisonType):
-                    result = PaymentMethod.Cheque;
-                    return true;
+                    numValue = 2;
+                    break;
+                case { } s when s.Equals("Cheque", comparisonType):
+                    numValue = 3;
+                    break;
                 default:
                     result = default;
                     return false;
             }
+
+            result = (PaymentMethod)numValue;
+            return true;
         }
 
         public static bool TryCreateFromDisplayName([NotNullWhen(true)] string? displayName, out PaymentMethod result)
@@ -340,10 +354,10 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return new[]
             {
-                PaymentMethod.Credit,
-                PaymentMethod.Debit,
-                PaymentMethod.Cash,
-                PaymentMethod.Cheque,
+                (PaymentMethod)0,
+                (PaymentMethod)1,
+                (PaymentMethod)2,
+                (PaymentMethod)3,
             };
         }
 
@@ -353,10 +367,10 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return new[]
             {
-                nameof(PaymentMethod.Credit),
-                nameof(PaymentMethod.Debit),
-                nameof(PaymentMethod.Cash),
-                nameof(PaymentMethod.Cheque),
+                "Credit",
+                "Debit",
+                "Cash",
+                "Cheque",
             };
         }
 

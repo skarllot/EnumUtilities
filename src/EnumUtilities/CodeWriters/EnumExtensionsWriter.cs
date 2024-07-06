@@ -155,7 +155,21 @@ this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
         #line hidden
         
         #line 7 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\DefaultBlock.ttinclude"
-this.Write(" value)\r\n    {\r\n        return value switch\r\n        {\r\n");
+this.Write(" value)\r\n    {\r\n        return (");
+
+        
+        #line default
+        #line hidden
+        
+        #line 9 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\DefaultBlock.ttinclude"
+this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
+
+        
+        #line default
+        #line hidden
+        
+        #line 9 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\DefaultBlock.ttinclude"
+this.Write(")value switch\r\n        {\r\n");
 
         
         #line default
@@ -178,42 +192,14 @@ this.Write("            ");
         #line hidden
         
         #line 15 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\DefaultBlock.ttinclude"
-this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
+this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberValue));
 
         
         #line default
         #line hidden
         
         #line 15 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\DefaultBlock.ttinclude"
-this.Write(".");
-
-        
-        #line default
-        #line hidden
-        
-        #line 15 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\DefaultBlock.ttinclude"
-this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
-
-        
-        #line default
-        #line hidden
-        
-        #line 15 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\DefaultBlock.ttinclude"
-this.Write(" => nameof(");
-
-        
-        #line default
-        #line hidden
-        
-        #line 15 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\DefaultBlock.ttinclude"
-this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
-
-        
-        #line default
-        #line hidden
-        
-        #line 15 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\DefaultBlock.ttinclude"
-this.Write(".");
+this.Write(" => \"");
 
         
         #line default
@@ -227,7 +213,7 @@ this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
         #line hidden
         
         #line 15 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\DefaultBlock.ttinclude"
-this.Write("),\r\n");
+this.Write("\",\r\n");
 
         
         #line default
@@ -1524,7 +1510,21 @@ this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
         #line hidden
         
         #line 8 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\EnumMemberBlock.ttinclude"
-this.Write(" value)\r\n    {\r\n        return value switch\r\n        {\r\n");
+this.Write(" value)\r\n    {\r\n        return (");
+
+        
+        #line default
+        #line hidden
+        
+        #line 10 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\EnumMemberBlock.ttinclude"
+this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
+
+        
+        #line default
+        #line hidden
+        
+        #line 10 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\EnumMemberBlock.ttinclude"
+this.Write(")value switch\r\n        {\r\n");
 
         
         #line default
@@ -1547,21 +1547,7 @@ this.Write("            ");
         #line hidden
         
         #line 16 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\EnumMemberBlock.ttinclude"
-this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
-
-        
-        #line default
-        #line hidden
-        
-        #line 16 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\EnumMemberBlock.ttinclude"
-this.Write(".");
-
-        
-        #line default
-        #line hidden
-        
-        #line 16 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\EnumMemberBlock.ttinclude"
-this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
+this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberValue));
 
         
         #line default
@@ -1577,7 +1563,7 @@ this.Write(" => ");
         #line 16 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\EnumMemberBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(curr.SerializationValue != null
                         ? Append($"\"{curr.SerializationValue}\"")
-                        : Append($"nameof({Model.RefName}.{curr.MemberName})")));
+                        : Append($"\"{curr.MemberName}\"")));
 
         
         #line default
@@ -1639,7 +1625,21 @@ this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
         #line hidden
         
         #line 8 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\DescriptionBlock.ttinclude"
-this.Write(" value)\r\n    {\r\n        return value switch\r\n        {\r\n");
+this.Write(" value)\r\n    {\r\n        return (");
+
+        
+        #line default
+        #line hidden
+        
+        #line 10 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\DescriptionBlock.ttinclude"
+this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
+
+        
+        #line default
+        #line hidden
+        
+        #line 10 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\DescriptionBlock.ttinclude"
+this.Write(")value switch\r\n        {\r\n");
 
         
         #line default
@@ -1662,21 +1662,7 @@ this.Write("            ");
         #line hidden
         
         #line 16 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\DescriptionBlock.ttinclude"
-this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
-
-        
-        #line default
-        #line hidden
-        
-        #line 16 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\DescriptionBlock.ttinclude"
-this.Write(".");
-
-        
-        #line default
-        #line hidden
-        
-        #line 16 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\DescriptionBlock.ttinclude"
-this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
+this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberValue));
 
         
         #line default
@@ -1752,7 +1738,21 @@ this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
         #line hidden
         
         #line 8 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\DisplayBlock.ttinclude"
-this.Write(" value)\r\n    {\r\n        return value switch\r\n        {\r\n");
+this.Write(" value)\r\n    {\r\n        return (");
+
+        
+        #line default
+        #line hidden
+        
+        #line 10 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\DisplayBlock.ttinclude"
+this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
+
+        
+        #line default
+        #line hidden
+        
+        #line 10 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\DisplayBlock.ttinclude"
+this.Write(")value switch\r\n        {\r\n");
 
         
         #line default
@@ -1775,21 +1775,7 @@ this.Write("            ");
         #line hidden
         
         #line 16 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\DisplayBlock.ttinclude"
-this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
-
-        
-        #line default
-        #line hidden
-        
-        #line 16 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\DisplayBlock.ttinclude"
-this.Write(".");
-
-        
-        #line default
-        #line hidden
-        
-        #line 16 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\DisplayBlock.ttinclude"
-this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
+this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberValue));
 
         
         #line default
@@ -1841,7 +1827,21 @@ this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
         #line hidden
         
         #line 26 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\DisplayBlock.ttinclude"
-this.Write(" value)\r\n    {\r\n        return value switch\r\n        {\r\n");
+this.Write(" value)\r\n    {\r\n        return (");
+
+        
+        #line default
+        #line hidden
+        
+        #line 28 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\DisplayBlock.ttinclude"
+this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
+
+        
+        #line default
+        #line hidden
+        
+        #line 28 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\DisplayBlock.ttinclude"
+this.Write(")value switch\r\n        {\r\n");
 
         
         #line default
@@ -1864,21 +1864,7 @@ this.Write("            ");
         #line hidden
         
         #line 34 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\DisplayBlock.ttinclude"
-this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
-
-        
-        #line default
-        #line hidden
-        
-        #line 34 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\DisplayBlock.ttinclude"
-this.Write(".");
-
-        
-        #line default
-        #line hidden
-        
-        #line 34 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\DisplayBlock.ttinclude"
-this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
+this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberValue));
 
         
         #line default
@@ -1896,7 +1882,7 @@ this.Write(this.ToStringHelper.ToStringWithCulture(curr.Display?.ResourceName !=
                             ? Append(curr.Display.ResourceName)
                             : curr.Display?.Name != null
                                 ? Append($"\"{curr.Display.Name}\"")
-                                : Append($"nameof({Model.RefName}.{curr.MemberName})")));
+                                : Append($"\"{curr.MemberName}\"")));
 
         
         #line default
@@ -1956,7 +1942,21 @@ this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
         #line hidden
         
         #line 54 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\DisplayBlock.ttinclude"
-this.Write(" value)\r\n    {\r\n        return value switch\r\n        {\r\n");
+this.Write(" value)\r\n    {\r\n        return (");
+
+        
+        #line default
+        #line hidden
+        
+        #line 56 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\DisplayBlock.ttinclude"
+this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
+
+        
+        #line default
+        #line hidden
+        
+        #line 56 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\DisplayBlock.ttinclude"
+this.Write(")value switch\r\n        {\r\n");
 
         
         #line default
@@ -1979,21 +1979,7 @@ this.Write("            ");
         #line hidden
         
         #line 62 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\DisplayBlock.ttinclude"
-this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
-
-        
-        #line default
-        #line hidden
-        
-        #line 62 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\DisplayBlock.ttinclude"
-this.Write(".");
-
-        
-        #line default
-        #line hidden
-        
-        #line 62 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\src\EnumUtilities\CodeWriters\Extensions\DisplayBlock.ttinclude"
-this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
+this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberValue));
 
         
         #line default

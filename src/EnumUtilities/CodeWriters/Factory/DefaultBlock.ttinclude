@@ -20,24 +20,40 @@
         StringComparison comparisonType,
         out <#= Model.RefName #> result)
     {
+<#+
+        if (Model.Values.Count == 0)
+        {
+#>
+        return Enum.TryParse(name, out result);
+<#+
+        }
+        else
+        {
+#>
+        <#= Model.UnderlyingType #> numValue;
         switch (name)
         {
 <#+
-    foreach (var curr in Model.Values)
-    {
+            foreach (var curr in Model.Values)
+            {
 #>
-            case { } s when s.Equals(nameof(<#= Model.RefName #>.<#= curr.MemberName #>), comparisonType):
-                result = <#= Model.RefName #>.<#= curr.MemberName #>;
-                return true;
+            case { } s when s.Equals("<#= curr.MemberName #>", comparisonType):
+                numValue = <#= curr.MemberValue #>;
+                break;
 <#+
-    }
+            }
 #>
-            case { } s when TryParseNumeric(s, comparisonType, out <#= Model.UnderlyingType #> val):
-                result = (<#= Model.RefName #>)val;
-                return true;
+            case { } s when TryParseNumeric(s, comparisonType, out numValue):
+                break;
             default:
                 return Enum.TryParse(name, out result);
         }
+
+        result = (<#= Model.RefName #>)numValue;
+        return true;
+<#+
+        }
+#>
     }
 
     /// <summary>
@@ -55,24 +71,40 @@
         [NotNullWhen(true)] string? name,
         out <#= Model.RefName #> result)
     {
+<#+
+        if (Model.Values.Count == 0)
+        {
+#>
+        return Enum.TryParse(name, out result);
+<#+
+        }
+        else
+        {
+#>
+        <#= Model.UnderlyingType #> numValue;
         switch (name)
         {
 <#+
-    foreach (var curr in Model.Values)
-    {
+            foreach (var curr in Model.Values)
+            {
 #>
-            case nameof(<#= Model.RefName #>.<#= curr.MemberName #>):
-                result = <#= Model.RefName #>.<#= curr.MemberName #>;
-                return true;
+            case "<#= curr.MemberName #>":
+                numValue = <#= curr.MemberValue #>;
+                break;
 <#+
-    }
+            }
 #>
-            case { } s when TryParseNumeric(s, StringComparison.Ordinal, out <#= Model.UnderlyingType #> val):
-                result = (<#= Model.RefName #>)val;
-                return true;
+            case { } s when TryParseNumeric(s, StringComparison.Ordinal, out numValue):
+                break;
             default:
                 return Enum.TryParse(name, out result);
         }
+
+        result = (<#= Model.RefName #>)numValue;
+        return true;
+<#+
+        }
+#>
     }
 
     /// <summary>

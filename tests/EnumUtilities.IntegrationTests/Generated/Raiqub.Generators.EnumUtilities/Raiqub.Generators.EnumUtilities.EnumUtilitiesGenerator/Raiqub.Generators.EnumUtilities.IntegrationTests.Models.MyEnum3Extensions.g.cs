@@ -17,15 +17,15 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns>The string representation of the value of this instance.</returns>
         public static string ToStringFast(this NestedInClass.MyEnum3 value)
         {
-            return value switch
+            return (int)value switch
             {
-                NestedInClass.MyEnum3.Monday => nameof(NestedInClass.MyEnum3.Monday),
-                NestedInClass.MyEnum3.Tuesday => nameof(NestedInClass.MyEnum3.Tuesday),
-                NestedInClass.MyEnum3.Wednesday => nameof(NestedInClass.MyEnum3.Wednesday),
-                NestedInClass.MyEnum3.Thursday => nameof(NestedInClass.MyEnum3.Thursday),
-                NestedInClass.MyEnum3.Friday => nameof(NestedInClass.MyEnum3.Friday),
-                NestedInClass.MyEnum3.Saturday => nameof(NestedInClass.MyEnum3.Saturday),
-                NestedInClass.MyEnum3.Sunday => nameof(NestedInClass.MyEnum3.Sunday),
+                0 => "Monday",
+                1 => "Tuesday",
+                2 => "Wednesday",
+                3 => "Thursday",
+                4 => "Friday",
+                5 => "Saturday",
+                6 => "Sunday",
                 _ => value.ToString()
             };
         }
@@ -93,38 +93,38 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
         public static string GetDisplayShortName(this NestedInClass.MyEnum3 value)
         {
-            return value switch
+            return (int)value switch
             {
-                NestedInClass.MyEnum3.Monday => Raiqub.Generators.EnumUtilities.IntegrationTests.Strings.MondayShort,
-                NestedInClass.MyEnum3.Tuesday => "Tue",
-                NestedInClass.MyEnum3.Friday => "Fri",
-                NestedInClass.MyEnum3.Saturday => "Sat",
+                0 => Raiqub.Generators.EnumUtilities.IntegrationTests.Strings.MondayShort,
+                1 => "Tue",
+                4 => "Fri",
+                5 => "Sat",
                 _ => GetDisplayName(value)
             };
         }
 
         public static string GetDisplayName(this NestedInClass.MyEnum3 value)
         {
-            return value switch
+            return (int)value switch
             {
-                NestedInClass.MyEnum3.Monday => Raiqub.Generators.EnumUtilities.IntegrationTests.Strings.MondayFull,
-                NestedInClass.MyEnum3.Tuesday => nameof(NestedInClass.MyEnum3.Tuesday),
-                NestedInClass.MyEnum3.Wednesday => nameof(NestedInClass.MyEnum3.Wednesday),
-                NestedInClass.MyEnum3.Thursday => "Thursday",
-                NestedInClass.MyEnum3.Friday => "Friday",
-                NestedInClass.MyEnum3.Saturday => nameof(NestedInClass.MyEnum3.Saturday),
-                NestedInClass.MyEnum3.Sunday => nameof(NestedInClass.MyEnum3.Sunday),
+                0 => Raiqub.Generators.EnumUtilities.IntegrationTests.Strings.MondayFull,
+                1 => "Tuesday",
+                2 => "Wednesday",
+                3 => "Thursday",
+                4 => "Friday",
+                5 => "Saturday",
+                6 => "Sunday",
                 _ => value.ToString()
             };
         }
 
         public static string? GetDescription(this NestedInClass.MyEnum3 value)
         {
-            return value switch
+            return (int)value switch
             {
-                NestedInClass.MyEnum3.Monday => Raiqub.Generators.EnumUtilities.IntegrationTests.Strings.MondayDescription,
-                NestedInClass.MyEnum3.Saturday => "Almost the last day of the week",
-                NestedInClass.MyEnum3.Sunday => "The last day of the week",
+                0 => Raiqub.Generators.EnumUtilities.IntegrationTests.Strings.MondayDescription,
+                5 => "Almost the last day of the week",
+                6 => "The last day of the week",
                 _ => null
             };
         }

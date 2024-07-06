@@ -31,35 +31,38 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out WeekDays result)
         {
+            int numValue;
             switch (name)
             {
-                case { } s when s.Equals(nameof(WeekDays.Monday), comparisonType):
-                    result = WeekDays.Monday;
-                    return true;
-                case { } s when s.Equals(nameof(WeekDays.Tuesday), comparisonType):
-                    result = WeekDays.Tuesday;
-                    return true;
-                case { } s when s.Equals(nameof(WeekDays.Wednesday), comparisonType):
-                    result = WeekDays.Wednesday;
-                    return true;
-                case { } s when s.Equals(nameof(WeekDays.Thursday), comparisonType):
-                    result = WeekDays.Thursday;
-                    return true;
-                case { } s when s.Equals(nameof(WeekDays.Friday), comparisonType):
-                    result = WeekDays.Friday;
-                    return true;
-                case { } s when s.Equals(nameof(WeekDays.Saturday), comparisonType):
-                    result = WeekDays.Saturday;
-                    return true;
-                case { } s when s.Equals(nameof(WeekDays.Sunday), comparisonType):
-                    result = WeekDays.Sunday;
-                    return true;
-                case { } s when TryParseNumeric(s, comparisonType, out int val):
-                    result = (WeekDays)val;
-                    return true;
+                case { } s when s.Equals("Monday", comparisonType):
+                    numValue = 0;
+                    break;
+                case { } s when s.Equals("Tuesday", comparisonType):
+                    numValue = 1;
+                    break;
+                case { } s when s.Equals("Wednesday", comparisonType):
+                    numValue = 2;
+                    break;
+                case { } s when s.Equals("Thursday", comparisonType):
+                    numValue = 3;
+                    break;
+                case { } s when s.Equals("Friday", comparisonType):
+                    numValue = 4;
+                    break;
+                case { } s when s.Equals("Saturday", comparisonType):
+                    numValue = 5;
+                    break;
+                case { } s when s.Equals("Sunday", comparisonType):
+                    numValue = 6;
+                    break;
+                case { } s when TryParseNumeric(s, comparisonType, out numValue):
+                    break;
                 default:
                     return Enum.TryParse(name, out result);
             }
+
+            result = (WeekDays)numValue;
+            return true;
         }
 
         /// <summary>
@@ -77,35 +80,38 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             [NotNullWhen(true)] string? name,
             out WeekDays result)
         {
+            int numValue;
             switch (name)
             {
-                case nameof(WeekDays.Monday):
-                    result = WeekDays.Monday;
-                    return true;
-                case nameof(WeekDays.Tuesday):
-                    result = WeekDays.Tuesday;
-                    return true;
-                case nameof(WeekDays.Wednesday):
-                    result = WeekDays.Wednesday;
-                    return true;
-                case nameof(WeekDays.Thursday):
-                    result = WeekDays.Thursday;
-                    return true;
-                case nameof(WeekDays.Friday):
-                    result = WeekDays.Friday;
-                    return true;
-                case nameof(WeekDays.Saturday):
-                    result = WeekDays.Saturday;
-                    return true;
-                case nameof(WeekDays.Sunday):
-                    result = WeekDays.Sunday;
-                    return true;
-                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out int val):
-                    result = (WeekDays)val;
-                    return true;
+                case "Monday":
+                    numValue = 0;
+                    break;
+                case "Tuesday":
+                    numValue = 1;
+                    break;
+                case "Wednesday":
+                    numValue = 2;
+                    break;
+                case "Thursday":
+                    numValue = 3;
+                    break;
+                case "Friday":
+                    numValue = 4;
+                    break;
+                case "Saturday":
+                    numValue = 5;
+                    break;
+                case "Sunday":
+                    numValue = 6;
+                    break;
+                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out numValue):
+                    break;
                 default:
                     return Enum.TryParse(name, out result);
             }
+
+            result = (WeekDays)numValue;
+            return true;
         }
 
         /// <summary>
@@ -175,23 +181,27 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out WeekDays result)
         {
+            int numValue;
             switch (displayShortName)
             {
                 case { } s when s.Equals(Raiqub.Generators.EnumUtilities.IntegrationTests.Strings.MondayShort, comparisonType):
-                    result = WeekDays.Monday;
-                    return true;
+                    numValue = 0;
+                    break;
                 case { } s when s.Equals("Tue", comparisonType):
-                    result = WeekDays.Tuesday;
-                    return true;
+                    numValue = 1;
+                    break;
                 case { } s when s.Equals("Fri", comparisonType):
-                    result = WeekDays.Friday;
-                    return true;
+                    numValue = 4;
+                    break;
                 case { } s when s.Equals("Sat", comparisonType):
-                    result = WeekDays.Saturday;
-                    return true;
+                    numValue = 5;
+                    break;
                 default:
                     return TryCreateFromDisplayName(displayShortName, comparisonType, out result);
             }
+
+            result = (WeekDays)numValue;
+            return true;
         }
 
         public static bool TryCreateFromDisplayShortName([NotNullWhen(true)] string? displayShortName, out WeekDays result)
@@ -214,33 +224,37 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out WeekDays result)
         {
+            int numValue;
             switch (displayName)
             {
                 case { } s when s.Equals(Raiqub.Generators.EnumUtilities.IntegrationTests.Strings.MondayFull, comparisonType):
-                    result = WeekDays.Monday;
-                    return true;
-                case { } s when s.Equals(nameof(WeekDays.Tuesday), comparisonType):
-                    result = WeekDays.Tuesday;
-                    return true;
-                case { } s when s.Equals(nameof(WeekDays.Wednesday), comparisonType):
-                    result = WeekDays.Wednesday;
-                    return true;
+                    numValue = 0;
+                    break;
+                case { } s when s.Equals("Tuesday", comparisonType):
+                    numValue = 1;
+                    break;
+                case { } s when s.Equals("Wednesday", comparisonType):
+                    numValue = 2;
+                    break;
                 case { } s when s.Equals("Thursday", comparisonType):
-                    result = WeekDays.Thursday;
-                    return true;
+                    numValue = 3;
+                    break;
                 case { } s when s.Equals("Friday", comparisonType):
-                    result = WeekDays.Friday;
-                    return true;
-                case { } s when s.Equals(nameof(WeekDays.Saturday), comparisonType):
-                    result = WeekDays.Saturday;
-                    return true;
-                case { } s when s.Equals(nameof(WeekDays.Sunday), comparisonType):
-                    result = WeekDays.Sunday;
-                    return true;
+                    numValue = 4;
+                    break;
+                case { } s when s.Equals("Saturday", comparisonType):
+                    numValue = 5;
+                    break;
+                case { } s when s.Equals("Sunday", comparisonType):
+                    numValue = 6;
+                    break;
                 default:
                     result = default;
                     return false;
             }
+
+            result = (WeekDays)numValue;
+            return true;
         }
 
         public static bool TryCreateFromDisplayName([NotNullWhen(true)] string? displayName, out WeekDays result)
@@ -263,21 +277,25 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out WeekDays result)
         {
+            int numValue;
             switch (description)
             {
                 case { } s when s.Equals(Raiqub.Generators.EnumUtilities.IntegrationTests.Strings.MondayDescription, comparisonType):
-                    result = WeekDays.Monday;
-                    return true;
+                    numValue = 0;
+                    break;
                 case { } s when s.Equals("Almost the last day of the week", comparisonType):
-                    result = WeekDays.Saturday;
-                    return true;
+                    numValue = 5;
+                    break;
                 case { } s when s.Equals("The last day of the week", comparisonType):
-                    result = WeekDays.Sunday;
-                    return true;
+                    numValue = 6;
+                    break;
                 default:
                     result = default;
                     return false;
             }
+
+            result = (WeekDays)numValue;
+            return true;
         }
 
         public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, out WeekDays result)
@@ -301,13 +319,13 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return new[]
             {
-                WeekDays.Monday,
-                WeekDays.Tuesday,
-                WeekDays.Wednesday,
-                WeekDays.Thursday,
-                WeekDays.Friday,
-                WeekDays.Saturday,
-                WeekDays.Sunday,
+                (WeekDays)0,
+                (WeekDays)1,
+                (WeekDays)2,
+                (WeekDays)3,
+                (WeekDays)4,
+                (WeekDays)5,
+                (WeekDays)6,
             };
         }
 
@@ -317,13 +335,13 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return new[]
             {
-                nameof(WeekDays.Monday),
-                nameof(WeekDays.Tuesday),
-                nameof(WeekDays.Wednesday),
-                nameof(WeekDays.Thursday),
-                nameof(WeekDays.Friday),
-                nameof(WeekDays.Saturday),
-                nameof(WeekDays.Sunday),
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+                "Sunday",
             };
         }
 

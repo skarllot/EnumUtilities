@@ -17,15 +17,15 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns>The string representation of the value of this instance.</returns>
         public static string ToStringFast(this WeekDays value)
         {
-            return value switch
+            return (int)value switch
             {
-                WeekDays.Monday => nameof(WeekDays.Monday),
-                WeekDays.Tuesday => nameof(WeekDays.Tuesday),
-                WeekDays.Wednesday => nameof(WeekDays.Wednesday),
-                WeekDays.Thursday => nameof(WeekDays.Thursday),
-                WeekDays.Friday => nameof(WeekDays.Friday),
-                WeekDays.Saturday => nameof(WeekDays.Saturday),
-                WeekDays.Sunday => nameof(WeekDays.Sunday),
+                0 => "Monday",
+                1 => "Tuesday",
+                2 => "Wednesday",
+                3 => "Thursday",
+                4 => "Friday",
+                5 => "Saturday",
+                6 => "Sunday",
                 _ => value.ToString()
             };
         }
@@ -93,38 +93,38 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
         public static string GetDisplayShortName(this WeekDays value)
         {
-            return value switch
+            return (int)value switch
             {
-                WeekDays.Monday => Raiqub.Generators.EnumUtilities.IntegrationTests.Strings.MondayShort,
-                WeekDays.Tuesday => "Tue",
-                WeekDays.Friday => "Fri",
-                WeekDays.Saturday => "Sat",
+                0 => Raiqub.Generators.EnumUtilities.IntegrationTests.Strings.MondayShort,
+                1 => "Tue",
+                4 => "Fri",
+                5 => "Sat",
                 _ => GetDisplayName(value)
             };
         }
 
         public static string GetDisplayName(this WeekDays value)
         {
-            return value switch
+            return (int)value switch
             {
-                WeekDays.Monday => Raiqub.Generators.EnumUtilities.IntegrationTests.Strings.MondayFull,
-                WeekDays.Tuesday => nameof(WeekDays.Tuesday),
-                WeekDays.Wednesday => nameof(WeekDays.Wednesday),
-                WeekDays.Thursday => "Thursday",
-                WeekDays.Friday => "Friday",
-                WeekDays.Saturday => nameof(WeekDays.Saturday),
-                WeekDays.Sunday => nameof(WeekDays.Sunday),
+                0 => Raiqub.Generators.EnumUtilities.IntegrationTests.Strings.MondayFull,
+                1 => "Tuesday",
+                2 => "Wednesday",
+                3 => "Thursday",
+                4 => "Friday",
+                5 => "Saturday",
+                6 => "Sunday",
                 _ => value.ToString()
             };
         }
 
         public static string? GetDescription(this WeekDays value)
         {
-            return value switch
+            return (int)value switch
             {
-                WeekDays.Monday => Raiqub.Generators.EnumUtilities.IntegrationTests.Strings.MondayDescription,
-                WeekDays.Saturday => "Almost the last day of the week",
-                WeekDays.Sunday => "The last day of the week",
+                0 => Raiqub.Generators.EnumUtilities.IntegrationTests.Strings.MondayDescription,
+                5 => "Almost the last day of the week",
+                6 => "The last day of the week",
                 _ => null
             };
         }

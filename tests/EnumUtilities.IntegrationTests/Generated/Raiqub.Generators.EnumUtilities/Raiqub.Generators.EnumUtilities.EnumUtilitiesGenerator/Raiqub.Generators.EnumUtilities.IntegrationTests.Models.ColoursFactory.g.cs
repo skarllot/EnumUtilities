@@ -31,23 +31,26 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out Colours result)
         {
+            int numValue;
             switch (name)
             {
-                case { } s when s.Equals(nameof(Colours.Red), comparisonType):
-                    result = Colours.Red;
-                    return true;
-                case { } s when s.Equals(nameof(Colours.Blue), comparisonType):
-                    result = Colours.Blue;
-                    return true;
-                case { } s when s.Equals(nameof(Colours.Green), comparisonType):
-                    result = Colours.Green;
-                    return true;
-                case { } s when TryParseNumeric(s, comparisonType, out int val):
-                    result = (Colours)val;
-                    return true;
+                case { } s when s.Equals("Red", comparisonType):
+                    numValue = 1;
+                    break;
+                case { } s when s.Equals("Blue", comparisonType):
+                    numValue = 2;
+                    break;
+                case { } s when s.Equals("Green", comparisonType):
+                    numValue = 4;
+                    break;
+                case { } s when TryParseNumeric(s, comparisonType, out numValue):
+                    break;
                 default:
                     return Enum.TryParse(name, out result);
             }
+
+            result = (Colours)numValue;
+            return true;
         }
 
         /// <summary>
@@ -65,23 +68,26 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             [NotNullWhen(true)] string? name,
             out Colours result)
         {
+            int numValue;
             switch (name)
             {
-                case nameof(Colours.Red):
-                    result = Colours.Red;
-                    return true;
-                case nameof(Colours.Blue):
-                    result = Colours.Blue;
-                    return true;
-                case nameof(Colours.Green):
-                    result = Colours.Green;
-                    return true;
-                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out int val):
-                    result = (Colours)val;
-                    return true;
+                case "Red":
+                    numValue = 1;
+                    break;
+                case "Blue":
+                    numValue = 2;
+                    break;
+                case "Green":
+                    numValue = 4;
+                    break;
+                case { } s when TryParseNumeric(s, StringComparison.Ordinal, out numValue):
+                    break;
                 default:
                     return Enum.TryParse(name, out result);
             }
+
+            result = (Colours)numValue;
+            return true;
         }
 
         /// <summary>
@@ -152,9 +158,9 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return new[]
             {
-                Colours.Red,
-                Colours.Blue,
-                Colours.Green,
+                (Colours)1,
+                (Colours)2,
+                (Colours)4,
             };
         }
 
@@ -164,9 +170,9 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return new[]
             {
-                nameof(Colours.Red),
-                nameof(Colours.Blue),
-                nameof(Colours.Green),
+                "Red",
+                "Blue",
+                "Green",
             };
         }
 

@@ -17,14 +17,14 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns>The string representation of the value of this instance.</returns>
         public static string ToStringFast(this UserRole value)
         {
-            return value switch
+            return (ulong)value switch
             {
-                UserRole.None => nameof(UserRole.None),
-                UserRole.NormalUser => nameof(UserRole.NormalUser),
-                UserRole.Custodian => nameof(UserRole.Custodian),
-                UserRole.Finance => nameof(UserRole.Finance),
-                UserRole.SuperUser => nameof(UserRole.SuperUser),
-                UserRole.All => nameof(UserRole.All),
+                0 => "None",
+                1 => "NormalUser",
+                2 => "Custodian",
+                4 => "Finance",
+                6 => "SuperUser",
+                7 => "All",
                 _ => value.ToString()
             };
         }
