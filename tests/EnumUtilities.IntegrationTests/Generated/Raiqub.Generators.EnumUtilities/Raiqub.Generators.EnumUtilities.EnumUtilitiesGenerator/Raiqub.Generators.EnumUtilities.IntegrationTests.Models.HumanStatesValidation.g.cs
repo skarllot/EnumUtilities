@@ -16,13 +16,13 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns><c>true</c> if the value of <see cref="HumanStates"/> instance exists in the enumeration; <c>false</c> otherwise.</returns>
         public static bool IsDefined(HumanStates value)
         {
-            return value switch
+            return (int)value switch
             {
-                HumanStates.Idle => true,
-                HumanStates.Working => true,
-                HumanStates.Sleeping => true,
-                HumanStates.Eating => true,
-                HumanStates.Dead => true,
+                1 => true,
+                2 => true,
+                3 => true,
+                4 => true,
+                5 => true,
                 _ => false
             };
         }
@@ -33,12 +33,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return name switch
             {
-                { } s when s.Equals(nameof(HumanStates.Idle), comparisonType) => true,
-                { } s when s.Equals(nameof(HumanStates.Working), comparisonType) => true,
-                { } s when s.Equals(nameof(HumanStates.Sleeping), comparisonType) => true,
-                { } s when s.Equals(nameof(HumanStates.Eating), comparisonType) => true,
-                { } s when s.Equals(nameof(HumanStates.Dead), comparisonType) => true,
-                { } s when s.Equals(nameof(HumanStates.Relaxing), comparisonType) => true,
+                { } s when s.Equals("Idle", comparisonType) => true,
+                { } s when s.Equals("Working", comparisonType) => true,
+                { } s when s.Equals("Sleeping", comparisonType) => true,
+                { } s when s.Equals("Eating", comparisonType) => true,
+                { } s when s.Equals("Dead", comparisonType) => true,
+                { } s when s.Equals("Relaxing", comparisonType) => true,
                 _ => false
             };
         }
@@ -52,12 +52,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return name switch
             {
-                nameof(HumanStates.Idle) => true,
-                nameof(HumanStates.Working) => true,
-                nameof(HumanStates.Sleeping) => true,
-                nameof(HumanStates.Eating) => true,
-                nameof(HumanStates.Dead) => true,
-                nameof(HumanStates.Relaxing) => true,
+                "Idle" => true,
+                "Working" => true,
+                "Sleeping" => true,
+                "Eating" => true,
+                "Dead" => true,
+                "Relaxing" => true,
                 _ => false
             };
         }

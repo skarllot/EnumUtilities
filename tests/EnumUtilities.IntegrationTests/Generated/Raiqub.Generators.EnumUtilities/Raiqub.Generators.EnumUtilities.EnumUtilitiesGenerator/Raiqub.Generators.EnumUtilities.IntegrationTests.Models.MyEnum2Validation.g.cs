@@ -16,12 +16,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns><c>true</c> if the value of <see cref="MyEnum2"/> instance exists in the enumeration; <c>false</c> otherwise.</returns>
         public static bool IsDefined(NestedInClass.MyEnum2 value)
         {
-            return value switch
+            return (int)value switch
             {
-                NestedInClass.MyEnum2.Credit => true,
-                NestedInClass.MyEnum2.Debit => true,
-                NestedInClass.MyEnum2.Cash => true,
-                NestedInClass.MyEnum2.Cheque => true,
+                0 => true,
+                1 => true,
+                2 => true,
+                3 => true,
                 _ => false
             };
         }
@@ -32,10 +32,10 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return name switch
             {
-                { } s when s.Equals(nameof(NestedInClass.MyEnum2.Credit), comparisonType) => true,
-                { } s when s.Equals(nameof(NestedInClass.MyEnum2.Debit), comparisonType) => true,
-                { } s when s.Equals(nameof(NestedInClass.MyEnum2.Cash), comparisonType) => true,
-                { } s when s.Equals(nameof(NestedInClass.MyEnum2.Cheque), comparisonType) => true,
+                { } s when s.Equals("Credit", comparisonType) => true,
+                { } s when s.Equals("Debit", comparisonType) => true,
+                { } s when s.Equals("Cash", comparisonType) => true,
+                { } s when s.Equals("Cheque", comparisonType) => true,
                 _ => false
             };
         }
@@ -49,10 +49,10 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return name switch
             {
-                nameof(NestedInClass.MyEnum2.Credit) => true,
-                nameof(NestedInClass.MyEnum2.Debit) => true,
-                nameof(NestedInClass.MyEnum2.Cash) => true,
-                nameof(NestedInClass.MyEnum2.Cheque) => true,
+                "Credit" => true,
+                "Debit" => true,
+                "Cash" => true,
+                "Cheque" => true,
                 _ => false
             };
         }

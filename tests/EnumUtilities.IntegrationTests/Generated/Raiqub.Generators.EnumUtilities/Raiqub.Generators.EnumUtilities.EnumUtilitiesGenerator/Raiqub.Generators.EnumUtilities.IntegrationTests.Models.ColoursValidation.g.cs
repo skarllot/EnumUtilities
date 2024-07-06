@@ -16,11 +16,11 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns><c>true</c> if the value of <see cref="Colours"/> instance exists in the enumeration; <c>false</c> otherwise.</returns>
         public static bool IsDefined(Colours value)
         {
-            return value switch
+            return (int)value switch
             {
-                Colours.Red => true,
-                Colours.Blue => true,
-                Colours.Green => true,
+                1 => true,
+                2 => true,
+                4 => true,
                 _ => false
             };
         }
@@ -31,9 +31,9 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return name switch
             {
-                { } s when s.Equals(nameof(Colours.Red), comparisonType) => true,
-                { } s when s.Equals(nameof(Colours.Blue), comparisonType) => true,
-                { } s when s.Equals(nameof(Colours.Green), comparisonType) => true,
+                { } s when s.Equals("Red", comparisonType) => true,
+                { } s when s.Equals("Blue", comparisonType) => true,
+                { } s when s.Equals("Green", comparisonType) => true,
                 _ => false
             };
         }
@@ -47,9 +47,9 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return name switch
             {
-                nameof(Colours.Red) => true,
-                nameof(Colours.Blue) => true,
-                nameof(Colours.Green) => true,
+                "Red" => true,
+                "Blue" => true,
+                "Green" => true,
                 _ => false
             };
         }

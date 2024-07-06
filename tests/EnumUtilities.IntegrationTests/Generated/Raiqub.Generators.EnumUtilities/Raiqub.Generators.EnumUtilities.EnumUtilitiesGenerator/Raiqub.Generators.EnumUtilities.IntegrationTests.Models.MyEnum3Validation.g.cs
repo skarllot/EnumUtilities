@@ -16,15 +16,15 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns><c>true</c> if the value of <see cref="MyEnum3"/> instance exists in the enumeration; <c>false</c> otherwise.</returns>
         public static bool IsDefined(NestedInClass.MyEnum3 value)
         {
-            return value switch
+            return (int)value switch
             {
-                NestedInClass.MyEnum3.Monday => true,
-                NestedInClass.MyEnum3.Tuesday => true,
-                NestedInClass.MyEnum3.Wednesday => true,
-                NestedInClass.MyEnum3.Thursday => true,
-                NestedInClass.MyEnum3.Friday => true,
-                NestedInClass.MyEnum3.Saturday => true,
-                NestedInClass.MyEnum3.Sunday => true,
+                0 => true,
+                1 => true,
+                2 => true,
+                3 => true,
+                4 => true,
+                5 => true,
+                6 => true,
                 _ => false
             };
         }
@@ -35,13 +35,13 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return name switch
             {
-                { } s when s.Equals(nameof(NestedInClass.MyEnum3.Monday), comparisonType) => true,
-                { } s when s.Equals(nameof(NestedInClass.MyEnum3.Tuesday), comparisonType) => true,
-                { } s when s.Equals(nameof(NestedInClass.MyEnum3.Wednesday), comparisonType) => true,
-                { } s when s.Equals(nameof(NestedInClass.MyEnum3.Thursday), comparisonType) => true,
-                { } s when s.Equals(nameof(NestedInClass.MyEnum3.Friday), comparisonType) => true,
-                { } s when s.Equals(nameof(NestedInClass.MyEnum3.Saturday), comparisonType) => true,
-                { } s when s.Equals(nameof(NestedInClass.MyEnum3.Sunday), comparisonType) => true,
+                { } s when s.Equals("Monday", comparisonType) => true,
+                { } s when s.Equals("Tuesday", comparisonType) => true,
+                { } s when s.Equals("Wednesday", comparisonType) => true,
+                { } s when s.Equals("Thursday", comparisonType) => true,
+                { } s when s.Equals("Friday", comparisonType) => true,
+                { } s when s.Equals("Saturday", comparisonType) => true,
+                { } s when s.Equals("Sunday", comparisonType) => true,
                 _ => false
             };
         }
@@ -55,13 +55,13 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return name switch
             {
-                nameof(NestedInClass.MyEnum3.Monday) => true,
-                nameof(NestedInClass.MyEnum3.Tuesday) => true,
-                nameof(NestedInClass.MyEnum3.Wednesday) => true,
-                nameof(NestedInClass.MyEnum3.Thursday) => true,
-                nameof(NestedInClass.MyEnum3.Friday) => true,
-                nameof(NestedInClass.MyEnum3.Saturday) => true,
-                nameof(NestedInClass.MyEnum3.Sunday) => true,
+                "Monday" => true,
+                "Tuesday" => true,
+                "Wednesday" => true,
+                "Thursday" => true,
+                "Friday" => true,
+                "Saturday" => true,
+                "Sunday" => true,
                 _ => false
             };
         }

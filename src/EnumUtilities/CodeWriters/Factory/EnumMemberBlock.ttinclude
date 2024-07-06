@@ -23,25 +23,43 @@
         StringComparison comparisonType,
         out <#= Model.RefName #> result)
     {
+<#+
+        if (Model.Values.Count == 0)
+        {
+#>
+        result = default;
+        return false;
+<#+
+        }
+        else
+        {
+#>
+        <#= Model.UnderlyingType #> numValue;
         switch (enumMemberValue)
         {
 <#+
-        foreach (var curr in Model.Values)
-        {
+            foreach (var curr in Model.Values)
+            {
 #>
             case { } s when s.Equals(<#=
-                    curr.SerializationValue != null
-                        ? Append($"\"{curr.SerializationValue}\"")
-                        : Append($"nameof({Model.RefName}.{curr.MemberName})") #>, comparisonType):
-                result = <#= Model.RefName #>.<#= curr.MemberName #>;
-                return true;
+                        curr.SerializationValue != null
+                            ? Append($"\"{curr.SerializationValue}\"")
+                            : Append($"\"{curr.MemberName}\"") #>, comparisonType):
+                numValue = <#= curr.MemberValue #>;
+                break;
 <#+
-        }
+            }
 #>
             default:
                 result = default;
                 return false;
         }
+
+        result = (<#= Model.RefName #>)numValue;
+        return true;
+<#+
+        }
+#>
     }
 
     /// <summary>

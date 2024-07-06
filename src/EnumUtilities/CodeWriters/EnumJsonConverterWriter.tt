@@ -37,13 +37,13 @@ using System.Text.Json.Serialization;
     public override <#= Model.Name #> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         if (reader.TokenType == JsonTokenType.String)
-            return ReadFromString(ref reader);
+            return (<#= Model.RefName #>)ReadFromString(ref reader);
 <#
     if (Model.JsonConverterGeneratorOptions.AllowIntegerValues)
     {
 #>
         if (reader.TokenType == JsonTokenType.Number)
-            return ReadFromNumber(ref reader);
+            return (<#= Model.RefName #>)ReadFromNumber(ref reader);
 <#
     }
 #>
@@ -53,13 +53,13 @@ using System.Text.Json.Serialization;
 
     public override void Write(Utf8JsonWriter writer, <#= Model.Name #> value, JsonSerializerOptions options)
     {
-        switch (value)
+        switch ((<#= Model.UnderlyingType #>)value)
         {
 <#
     foreach (var curr in Model.UniqueValues)
     {
 #>
-            case <#= Model.RefName #>.<#= curr.MemberName #>:
+            case <#= curr.MemberValue #>:
                 writer.WriteStringValue("<#= curr.JsonPropertyName ?? curr.SerializationValue ?? curr.MemberName #>"u8);
                 break;
 <#
@@ -71,7 +71,7 @@ using System.Text.Json.Serialization;
         }
     }
 
-    private <#= Model.Name #> ReadFromString(ref Utf8JsonReader reader)
+    private <#= Model.UnderlyingType #> ReadFromString(ref Utf8JsonReader reader)
     {
 #if NET7_0_OR_GREATER
         int length = reader.HasValueSequence ? checked((int)reader.ValueSequence.Length) : reader.ValueSpan.Length;
@@ -94,11 +94,11 @@ using System.Text.Json.Serialization;
             <#=
                 curr.JsonPropertyName is not null || curr.SerializationValue is not null
                     ? Append($"\"{curr.JsonPropertyName ?? curr.SerializationValue}\"")
-                    : Append($"nameof({Model.RefName}.{curr.MemberName})") #> => <#= Model.RefName #>.<#= curr.MemberName #>,
+                    : Append($"\"{curr.MemberName}\"") #> => <#= NeedNumberCasting() ? Append($"({Model.UnderlyingType})") : Append("") #><#= curr.MemberValue #>,
 <#
     }
 #>
-            _ => Enum.TryParse(name, out <#= Model.RefName #> result) ? result : <#= AppendFallbackValue() #>
+            _ => Enum.TryParse(name, out <#= Model.RefName #> result) ? (<#= Model.UnderlyingType #>)result : <#= AppendFallbackValue() #>
         };
     }
 <#
@@ -106,10 +106,10 @@ using System.Text.Json.Serialization;
     {
 #>
 
-    private <#= Model.Name #> ReadFromNumber(ref Utf8JsonReader reader)
+    private <#= Model.UnderlyingType #> ReadFromNumber(ref Utf8JsonReader reader)
     {
         return reader.TryGet<#= CSharpExtensions.GetTypeNameFromCSharpKeyword(Model.UnderlyingType) #>(out <#= Model.UnderlyingType #> value)
-            ? (<#= Model.RefName #>)value
+            ? value
             : <#= AppendFallbackValue() #>;
     }
 <#
@@ -138,9 +138,11 @@ using System.Text.Json.Serialization;
     {
         object? fallbackValue = Model.JsonConverterGeneratorOptions!.DeserializationFailureFallbackValue;
         return fallbackValue is not null
-            ? Append($"{(addReturn ? "return " : "")}({Model.RefName}){fallbackValue}")
+            ? Append(
+                $"{(addReturn ? "return " : "")}{(NeedNumberCasting() ? $"({Model.UnderlyingType})" : "")}{fallbackValue}")
             : Append("throw new JsonException()");
     }
 
     private static int GetEncodedLength(string value) => value.Sum(c => c < 128 ? 1 : 6);
+    private bool NeedNumberCasting() => Model.UnderlyingType is "byte" or "short" or "sbyte" or "ushort";
 #>

@@ -16,11 +16,11 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns><c>true</c> if the value of <see cref="MyEnum1"/> instance exists in the enumeration; <c>false</c> otherwise.</returns>
         public static bool IsDefined(NestedInClass.MyEnum1 value)
         {
-            return value switch
+            return (int)value switch
             {
-                NestedInClass.MyEnum1.Zero => true,
-                NestedInClass.MyEnum1.One => true,
-                NestedInClass.MyEnum1.Two => true,
+                0 => true,
+                1 => true,
+                2 => true,
                 _ => false
             };
         }
@@ -31,9 +31,9 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return name switch
             {
-                { } s when s.Equals(nameof(NestedInClass.MyEnum1.Zero), comparisonType) => true,
-                { } s when s.Equals(nameof(NestedInClass.MyEnum1.One), comparisonType) => true,
-                { } s when s.Equals(nameof(NestedInClass.MyEnum1.Two), comparisonType) => true,
+                { } s when s.Equals("Zero", comparisonType) => true,
+                { } s when s.Equals("One", comparisonType) => true,
+                { } s when s.Equals("Two", comparisonType) => true,
                 _ => false
             };
         }
@@ -47,9 +47,9 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return name switch
             {
-                nameof(NestedInClass.MyEnum1.Zero) => true,
-                nameof(NestedInClass.MyEnum1.One) => true,
-                nameof(NestedInClass.MyEnum1.Two) => true,
+                "Zero" => true,
+                "One" => true,
+                "Two" => true,
                 _ => false
             };
         }

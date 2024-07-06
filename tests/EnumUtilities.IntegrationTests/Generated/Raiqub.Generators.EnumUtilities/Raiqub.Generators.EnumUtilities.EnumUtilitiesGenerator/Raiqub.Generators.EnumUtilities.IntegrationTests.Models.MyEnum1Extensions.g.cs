@@ -17,11 +17,11 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns>The string representation of the value of this instance.</returns>
         public static string ToStringFast(this NestedInClass.MyEnum1 value)
         {
-            return value switch
+            return (int)value switch
             {
-                NestedInClass.MyEnum1.Zero => nameof(NestedInClass.MyEnum1.Zero),
-                NestedInClass.MyEnum1.One => nameof(NestedInClass.MyEnum1.One),
-                NestedInClass.MyEnum1.Two => nameof(NestedInClass.MyEnum1.Two),
+                0 => "Zero",
+                1 => "One",
+                2 => "Two",
                 _ => value.ToString()
             };
         }

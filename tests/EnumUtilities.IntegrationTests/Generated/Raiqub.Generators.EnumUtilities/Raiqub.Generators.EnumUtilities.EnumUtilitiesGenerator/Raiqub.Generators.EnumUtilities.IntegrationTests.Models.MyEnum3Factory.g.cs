@@ -31,35 +31,39 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out NestedInClass.MyEnum3 result)
         {
+            int numValue;
             switch (name)
             {
-                case { } s when s.Equals(nameof(NestedInClass.MyEnum3.Monday), comparisonType):
-                    result = NestedInClass.MyEnum3.Monday;
-                    return true;
-                case { } s when s.Equals(nameof(NestedInClass.MyEnum3.Tuesday), comparisonType):
-                    result = NestedInClass.MyEnum3.Tuesday;
-                    return true;
-                case { } s when s.Equals(nameof(NestedInClass.MyEnum3.Wednesday), comparisonType):
-                    result = NestedInClass.MyEnum3.Wednesday;
-                    return true;
-                case { } s when s.Equals(nameof(NestedInClass.MyEnum3.Thursday), comparisonType):
-                    result = NestedInClass.MyEnum3.Thursday;
-                    return true;
-                case { } s when s.Equals(nameof(NestedInClass.MyEnum3.Friday), comparisonType):
-                    result = NestedInClass.MyEnum3.Friday;
-                    return true;
-                case { } s when s.Equals(nameof(NestedInClass.MyEnum3.Saturday), comparisonType):
-                    result = NestedInClass.MyEnum3.Saturday;
-                    return true;
-                case { } s when s.Equals(nameof(NestedInClass.MyEnum3.Sunday), comparisonType):
-                    result = NestedInClass.MyEnum3.Sunday;
-                    return true;
+                case { } s when s.Equals("Monday", comparisonType):
+                    numValue = 0;
+                    break;
+                case { } s when s.Equals("Tuesday", comparisonType):
+                    numValue = 1;
+                    break;
+                case { } s when s.Equals("Wednesday", comparisonType):
+                    numValue = 2;
+                    break;
+                case { } s when s.Equals("Thursday", comparisonType):
+                    numValue = 3;
+                    break;
+                case { } s when s.Equals("Friday", comparisonType):
+                    numValue = 4;
+                    break;
+                case { } s when s.Equals("Saturday", comparisonType):
+                    numValue = 5;
+                    break;
+                case { } s when s.Equals("Sunday", comparisonType):
+                    numValue = 6;
+                    break;
                 case { } s when TryParseNumeric(s, comparisonType, out int val):
-                    result = (NestedInClass.MyEnum3)val;
-                    return true;
+                    numValue = val;
+                    break;
                 default:
                     return Enum.TryParse(name, out result);
             }
+
+            result = (NestedInClass.MyEnum3)numValue;
+            return true;
         }
 
         /// <summary>
@@ -77,35 +81,39 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             [NotNullWhen(true)] string? name,
             out NestedInClass.MyEnum3 result)
         {
+            int numValue;
             switch (name)
             {
-                case nameof(NestedInClass.MyEnum3.Monday):
-                    result = NestedInClass.MyEnum3.Monday;
-                    return true;
-                case nameof(NestedInClass.MyEnum3.Tuesday):
-                    result = NestedInClass.MyEnum3.Tuesday;
-                    return true;
-                case nameof(NestedInClass.MyEnum3.Wednesday):
-                    result = NestedInClass.MyEnum3.Wednesday;
-                    return true;
-                case nameof(NestedInClass.MyEnum3.Thursday):
-                    result = NestedInClass.MyEnum3.Thursday;
-                    return true;
-                case nameof(NestedInClass.MyEnum3.Friday):
-                    result = NestedInClass.MyEnum3.Friday;
-                    return true;
-                case nameof(NestedInClass.MyEnum3.Saturday):
-                    result = NestedInClass.MyEnum3.Saturday;
-                    return true;
-                case nameof(NestedInClass.MyEnum3.Sunday):
-                    result = NestedInClass.MyEnum3.Sunday;
-                    return true;
+                case "Monday":
+                    numValue = 0;
+                    break;
+                case "Tuesday":
+                    numValue = 1;
+                    break;
+                case "Wednesday":
+                    numValue = 2;
+                    break;
+                case "Thursday":
+                    numValue = 3;
+                    break;
+                case "Friday":
+                    numValue = 4;
+                    break;
+                case "Saturday":
+                    numValue = 5;
+                    break;
+                case "Sunday":
+                    numValue = 6;
+                    break;
                 case { } s when TryParseNumeric(s, StringComparison.Ordinal, out int val):
-                    result = (NestedInClass.MyEnum3)val;
-                    return true;
+                    numValue = val;
+                    break;
                 default:
                     return Enum.TryParse(name, out result);
             }
+
+            result = (NestedInClass.MyEnum3)numValue;
+            return true;
         }
 
         /// <summary>
@@ -175,23 +183,27 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out NestedInClass.MyEnum3 result)
         {
+            int numValue;
             switch (displayShortName)
             {
                 case { } s when s.Equals(Raiqub.Generators.EnumUtilities.IntegrationTests.Strings.MondayShort, comparisonType):
-                    result = NestedInClass.MyEnum3.Monday;
-                    return true;
+                    numValue = 0;
+                    break;
                 case { } s when s.Equals("Tue", comparisonType):
-                    result = NestedInClass.MyEnum3.Tuesday;
-                    return true;
+                    numValue = 1;
+                    break;
                 case { } s when s.Equals("Fri", comparisonType):
-                    result = NestedInClass.MyEnum3.Friday;
-                    return true;
+                    numValue = 4;
+                    break;
                 case { } s when s.Equals("Sat", comparisonType):
-                    result = NestedInClass.MyEnum3.Saturday;
-                    return true;
+                    numValue = 5;
+                    break;
                 default:
                     return TryCreateFromDisplayName(displayShortName, comparisonType, out result);
             }
+
+            result = (NestedInClass.MyEnum3)numValue;
+            return true;
         }
 
         public static bool TryCreateFromDisplayShortName([NotNullWhen(true)] string? displayShortName, out NestedInClass.MyEnum3 result)
@@ -214,33 +226,37 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out NestedInClass.MyEnum3 result)
         {
+            int numValue;
             switch (displayName)
             {
                 case { } s when s.Equals(Raiqub.Generators.EnumUtilities.IntegrationTests.Strings.MondayFull, comparisonType):
-                    result = NestedInClass.MyEnum3.Monday;
-                    return true;
-                case { } s when s.Equals(nameof(NestedInClass.MyEnum3.Tuesday), comparisonType):
-                    result = NestedInClass.MyEnum3.Tuesday;
-                    return true;
-                case { } s when s.Equals(nameof(NestedInClass.MyEnum3.Wednesday), comparisonType):
-                    result = NestedInClass.MyEnum3.Wednesday;
-                    return true;
+                    numValue = 0;
+                    break;
+                case { } s when s.Equals("Tuesday", comparisonType):
+                    numValue = 1;
+                    break;
+                case { } s when s.Equals("Wednesday", comparisonType):
+                    numValue = 2;
+                    break;
                 case { } s when s.Equals("Thursday", comparisonType):
-                    result = NestedInClass.MyEnum3.Thursday;
-                    return true;
+                    numValue = 3;
+                    break;
                 case { } s when s.Equals("Friday", comparisonType):
-                    result = NestedInClass.MyEnum3.Friday;
-                    return true;
-                case { } s when s.Equals(nameof(NestedInClass.MyEnum3.Saturday), comparisonType):
-                    result = NestedInClass.MyEnum3.Saturday;
-                    return true;
-                case { } s when s.Equals(nameof(NestedInClass.MyEnum3.Sunday), comparisonType):
-                    result = NestedInClass.MyEnum3.Sunday;
-                    return true;
+                    numValue = 4;
+                    break;
+                case { } s when s.Equals("Saturday", comparisonType):
+                    numValue = 5;
+                    break;
+                case { } s when s.Equals("Sunday", comparisonType):
+                    numValue = 6;
+                    break;
                 default:
                     result = default;
                     return false;
             }
+
+            result = (NestedInClass.MyEnum3)numValue;
+            return true;
         }
 
         public static bool TryCreateFromDisplayName([NotNullWhen(true)] string? displayName, out NestedInClass.MyEnum3 result)
@@ -263,21 +279,25 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out NestedInClass.MyEnum3 result)
         {
+            int numValue;
             switch (description)
             {
                 case { } s when s.Equals(Raiqub.Generators.EnumUtilities.IntegrationTests.Strings.MondayDescription, comparisonType):
-                    result = NestedInClass.MyEnum3.Monday;
-                    return true;
+                    numValue = 0;
+                    break;
                 case { } s when s.Equals("Almost the last day of the week", comparisonType):
-                    result = NestedInClass.MyEnum3.Saturday;
-                    return true;
+                    numValue = 5;
+                    break;
                 case { } s when s.Equals("The last day of the week", comparisonType):
-                    result = NestedInClass.MyEnum3.Sunday;
-                    return true;
+                    numValue = 6;
+                    break;
                 default:
                     result = default;
                     return false;
             }
+
+            result = (NestedInClass.MyEnum3)numValue;
+            return true;
         }
 
         public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, out NestedInClass.MyEnum3 result)
@@ -301,13 +321,13 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return new[]
             {
-                NestedInClass.MyEnum3.Monday,
-                NestedInClass.MyEnum3.Tuesday,
-                NestedInClass.MyEnum3.Wednesday,
-                NestedInClass.MyEnum3.Thursday,
-                NestedInClass.MyEnum3.Friday,
-                NestedInClass.MyEnum3.Saturday,
-                NestedInClass.MyEnum3.Sunday,
+                (NestedInClass.MyEnum3)0,
+                (NestedInClass.MyEnum3)1,
+                (NestedInClass.MyEnum3)2,
+                (NestedInClass.MyEnum3)3,
+                (NestedInClass.MyEnum3)4,
+                (NestedInClass.MyEnum3)5,
+                (NestedInClass.MyEnum3)6,
             };
         }
 
@@ -317,13 +337,13 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return new[]
             {
-                nameof(NestedInClass.MyEnum3.Monday),
-                nameof(NestedInClass.MyEnum3.Tuesday),
-                nameof(NestedInClass.MyEnum3.Wednesday),
-                nameof(NestedInClass.MyEnum3.Thursday),
-                nameof(NestedInClass.MyEnum3.Friday),
-                nameof(NestedInClass.MyEnum3.Saturday),
-                nameof(NestedInClass.MyEnum3.Sunday),
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+                "Sunday",
             };
         }
 

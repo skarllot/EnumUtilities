@@ -19,25 +19,25 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         public override ErrorCode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             if (reader.TokenType == JsonTokenType.String)
-                return ReadFromString(ref reader);
+                return (ErrorCode)ReadFromString(ref reader);
 
-            return (ErrorCode)0;
+            return (ushort)0;
         }
 
         public override void Write(Utf8JsonWriter writer, ErrorCode value, JsonSerializerOptions options)
         {
-            switch (value)
+            switch ((ushort)value)
             {
-                case ErrorCode.None:
+                case 0:
                     writer.WriteStringValue("NON"u8);
                     break;
-                case ErrorCode.Unknown:
+                case 1:
                     writer.WriteStringValue("UNK"u8);
                     break;
-                case ErrorCode.ConnectionLost:
+                case 100:
                     writer.WriteStringValue("CNX"u8);
                     break;
-                case ErrorCode.OutlierReading:
+                case 200:
                     writer.WriteStringValue("OUT"u8);
                     break;
                 default:
@@ -46,12 +46,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             }
         }
 
-        private ErrorCode ReadFromString(ref Utf8JsonReader reader)
+        private ushort ReadFromString(ref Utf8JsonReader reader)
         {
     #if NET7_0_OR_GREATER
             int length = reader.HasValueSequence ? checked((int)reader.ValueSequence.Length) : reader.ValueSpan.Length;
             if (length > MaxBytesLength)
-                return (ErrorCode)0;
+                return (ushort)0;
 
             Span<char> name = stackalloc char[MaxBytesLength];
             int charsWritten = reader.CopyString(name);
@@ -62,11 +62,11 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
             return name switch
             {
-                "NON" => ErrorCode.None,
-                "UNK" => ErrorCode.Unknown,
-                "CNX" => ErrorCode.ConnectionLost,
-                "OUT" => ErrorCode.OutlierReading,
-                _ => Enum.TryParse(name, out ErrorCode result) ? result : (ErrorCode)0
+                "NON" => (ushort)0,
+                "UNK" => (ushort)1,
+                "CNX" => (ushort)100,
+                "OUT" => (ushort)200,
+                _ => Enum.TryParse(name, out ErrorCode result) ? (ushort)result : (ushort)0
             };
         }
     }

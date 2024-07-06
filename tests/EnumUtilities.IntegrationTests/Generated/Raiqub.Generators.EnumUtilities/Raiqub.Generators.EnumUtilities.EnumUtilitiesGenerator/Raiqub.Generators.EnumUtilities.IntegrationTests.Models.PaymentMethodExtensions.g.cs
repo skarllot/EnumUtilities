@@ -17,12 +17,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns>The string representation of the value of this instance.</returns>
         public static string ToStringFast(this PaymentMethod value)
         {
-            return value switch
+            return (int)value switch
             {
-                PaymentMethod.Credit => nameof(PaymentMethod.Credit),
-                PaymentMethod.Debit => nameof(PaymentMethod.Debit),
-                PaymentMethod.Cash => nameof(PaymentMethod.Cash),
-                PaymentMethod.Cheque => nameof(PaymentMethod.Cheque),
+                0 => "Credit",
+                1 => "Debit",
+                2 => "Cash",
+                3 => "Cheque",
                 _ => value.ToString()
             };
         }
@@ -90,28 +90,28 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
         public static string ToEnumMemberValue(this PaymentMethod value)
         {
-            return value switch
+            return (int)value switch
             {
-                PaymentMethod.Credit => "Credit card",
-                PaymentMethod.Debit => "Debit card",
-                PaymentMethod.Cash => nameof(PaymentMethod.Cash),
-                PaymentMethod.Cheque => nameof(PaymentMethod.Cheque),
+                0 => "Credit card",
+                1 => "Debit card",
+                2 => "Cash",
+                3 => "Cheque",
                 _ => value.ToString()
             };
         }
 
         public static string? GetDescription(this PaymentMethod value)
         {
-            return value switch
+            return (int)value switch
             {
-                PaymentMethod.Cash => "The payment by using physical cash",
+                2 => "The payment by using physical cash",
                 _ => null
             };
         }
 
         public static string GetDisplayShortName(this PaymentMethod value)
         {
-            return value switch
+            return (int)value switch
             {
                 _ => GetDisplayName(value)
             };
@@ -119,12 +119,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
         public static string GetDisplayName(this PaymentMethod value)
         {
-            return value switch
+            return (int)value switch
             {
-                PaymentMethod.Credit => "Credit Card",
-                PaymentMethod.Debit => "Debit Card",
-                PaymentMethod.Cash => "Physical Cash",
-                PaymentMethod.Cheque => nameof(PaymentMethod.Cheque),
+                0 => "Credit Card",
+                1 => "Debit Card",
+                2 => "Physical Cash",
+                3 => "Cheque",
                 _ => value.ToString()
             };
         }

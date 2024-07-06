@@ -31,26 +31,30 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out NestedInClass.MyEnum2 result)
         {
+            int numValue;
             switch (name)
             {
-                case { } s when s.Equals(nameof(NestedInClass.MyEnum2.Credit), comparisonType):
-                    result = NestedInClass.MyEnum2.Credit;
-                    return true;
-                case { } s when s.Equals(nameof(NestedInClass.MyEnum2.Debit), comparisonType):
-                    result = NestedInClass.MyEnum2.Debit;
-                    return true;
-                case { } s when s.Equals(nameof(NestedInClass.MyEnum2.Cash), comparisonType):
-                    result = NestedInClass.MyEnum2.Cash;
-                    return true;
-                case { } s when s.Equals(nameof(NestedInClass.MyEnum2.Cheque), comparisonType):
-                    result = NestedInClass.MyEnum2.Cheque;
-                    return true;
+                case { } s when s.Equals("Credit", comparisonType):
+                    numValue = 0;
+                    break;
+                case { } s when s.Equals("Debit", comparisonType):
+                    numValue = 1;
+                    break;
+                case { } s when s.Equals("Cash", comparisonType):
+                    numValue = 2;
+                    break;
+                case { } s when s.Equals("Cheque", comparisonType):
+                    numValue = 3;
+                    break;
                 case { } s when TryParseNumeric(s, comparisonType, out int val):
-                    result = (NestedInClass.MyEnum2)val;
-                    return true;
+                    numValue = val;
+                    break;
                 default:
                     return Enum.TryParse(name, out result);
             }
+
+            result = (NestedInClass.MyEnum2)numValue;
+            return true;
         }
 
         /// <summary>
@@ -68,26 +72,30 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             [NotNullWhen(true)] string? name,
             out NestedInClass.MyEnum2 result)
         {
+            int numValue;
             switch (name)
             {
-                case nameof(NestedInClass.MyEnum2.Credit):
-                    result = NestedInClass.MyEnum2.Credit;
-                    return true;
-                case nameof(NestedInClass.MyEnum2.Debit):
-                    result = NestedInClass.MyEnum2.Debit;
-                    return true;
-                case nameof(NestedInClass.MyEnum2.Cash):
-                    result = NestedInClass.MyEnum2.Cash;
-                    return true;
-                case nameof(NestedInClass.MyEnum2.Cheque):
-                    result = NestedInClass.MyEnum2.Cheque;
-                    return true;
+                case "Credit":
+                    numValue = 0;
+                    break;
+                case "Debit":
+                    numValue = 1;
+                    break;
+                case "Cash":
+                    numValue = 2;
+                    break;
+                case "Cheque":
+                    numValue = 3;
+                    break;
                 case { } s when TryParseNumeric(s, StringComparison.Ordinal, out int val):
-                    result = (NestedInClass.MyEnum2)val;
-                    return true;
+                    numValue = val;
+                    break;
                 default:
                     return Enum.TryParse(name, out result);
             }
+
+            result = (NestedInClass.MyEnum2)numValue;
+            return true;
         }
 
         /// <summary>
@@ -170,24 +178,28 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out NestedInClass.MyEnum2 result)
         {
+            int numValue;
             switch (enumMemberValue)
             {
                 case { } s when s.Equals("Credit card", comparisonType):
-                    result = NestedInClass.MyEnum2.Credit;
-                    return true;
+                    numValue = 0;
+                    break;
                 case { } s when s.Equals("Debit card", comparisonType):
-                    result = NestedInClass.MyEnum2.Debit;
-                    return true;
-                case { } s when s.Equals(nameof(NestedInClass.MyEnum2.Cash), comparisonType):
-                    result = NestedInClass.MyEnum2.Cash;
-                    return true;
-                case { } s when s.Equals(nameof(NestedInClass.MyEnum2.Cheque), comparisonType):
-                    result = NestedInClass.MyEnum2.Cheque;
-                    return true;
+                    numValue = 1;
+                    break;
+                case { } s when s.Equals("Cash", comparisonType):
+                    numValue = 2;
+                    break;
+                case { } s when s.Equals("Cheque", comparisonType):
+                    numValue = 3;
+                    break;
                 default:
                     result = default;
                     return false;
             }
+
+            result = (NestedInClass.MyEnum2)numValue;
+            return true;
         }
 
         /// <summary>
@@ -241,15 +253,19 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out NestedInClass.MyEnum2 result)
         {
+            int numValue;
             switch (description)
             {
                 case { } s when s.Equals("The payment by using physical cash", comparisonType):
-                    result = NestedInClass.MyEnum2.Cash;
-                    return true;
+                    numValue = 2;
+                    break;
                 default:
                     result = default;
                     return false;
             }
+
+            result = (NestedInClass.MyEnum2)numValue;
+            return true;
         }
 
         public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, out NestedInClass.MyEnum2 result)
@@ -272,11 +288,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out NestedInClass.MyEnum2 result)
         {
-            switch (displayShortName)
-            {
-                default:
-                    return TryCreateFromDisplayName(displayShortName, comparisonType, out result);
-            }
+            return TryCreateFromDisplayName(displayShortName, comparisonType, out result);
         }
 
         public static bool TryCreateFromDisplayShortName([NotNullWhen(true)] string? displayShortName, out NestedInClass.MyEnum2 result)
@@ -299,24 +311,28 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out NestedInClass.MyEnum2 result)
         {
+            int numValue;
             switch (displayName)
             {
                 case { } s when s.Equals("Credit Card", comparisonType):
-                    result = NestedInClass.MyEnum2.Credit;
-                    return true;
+                    numValue = 0;
+                    break;
                 case { } s when s.Equals("Debit Card", comparisonType):
-                    result = NestedInClass.MyEnum2.Debit;
-                    return true;
+                    numValue = 1;
+                    break;
                 case { } s when s.Equals("Physical Cash", comparisonType):
-                    result = NestedInClass.MyEnum2.Cash;
-                    return true;
-                case { } s when s.Equals(nameof(NestedInClass.MyEnum2.Cheque), comparisonType):
-                    result = NestedInClass.MyEnum2.Cheque;
-                    return true;
+                    numValue = 2;
+                    break;
+                case { } s when s.Equals("Cheque", comparisonType):
+                    numValue = 3;
+                    break;
                 default:
                     result = default;
                     return false;
             }
+
+            result = (NestedInClass.MyEnum2)numValue;
+            return true;
         }
 
         public static bool TryCreateFromDisplayName([NotNullWhen(true)] string? displayName, out NestedInClass.MyEnum2 result)
@@ -340,10 +356,10 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return new[]
             {
-                NestedInClass.MyEnum2.Credit,
-                NestedInClass.MyEnum2.Debit,
-                NestedInClass.MyEnum2.Cash,
-                NestedInClass.MyEnum2.Cheque,
+                (NestedInClass.MyEnum2)0,
+                (NestedInClass.MyEnum2)1,
+                (NestedInClass.MyEnum2)2,
+                (NestedInClass.MyEnum2)3,
             };
         }
 
@@ -353,10 +369,10 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return new[]
             {
-                nameof(NestedInClass.MyEnum2.Credit),
-                nameof(NestedInClass.MyEnum2.Debit),
-                nameof(NestedInClass.MyEnum2.Cash),
-                nameof(NestedInClass.MyEnum2.Cheque),
+                "Credit",
+                "Debit",
+                "Cash",
+                "Cheque",
             };
         }
 

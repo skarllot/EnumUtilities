@@ -6,13 +6,13 @@
     /// <returns>The string representation of the value of this instance.</returns>
     public static string ToStringFast(this <#= Model.RefName #> value)
     {
-        return value switch
+        return (<#= Model.UnderlyingType #>)value switch
         {
 <#+
     foreach (var curr in Model.UniqueValues)
     {
 #>
-            <#= Model.RefName #>.<#= curr.MemberName #> => nameof(<#= Model.RefName #>.<#= curr.MemberName #>),
+            <#= curr.MemberValue #> => "<#= curr.MemberName #>",
 <#+
     }
 #>

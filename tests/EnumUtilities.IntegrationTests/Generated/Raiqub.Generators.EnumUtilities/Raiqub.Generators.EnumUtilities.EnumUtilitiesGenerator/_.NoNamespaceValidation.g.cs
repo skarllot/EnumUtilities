@@ -14,11 +14,11 @@ public static partial class NoNamespaceValidation
     /// <returns><c>true</c> if the value of <see cref="NoNamespace"/> instance exists in the enumeration; <c>false</c> otherwise.</returns>
     public static bool IsDefined(NoNamespace value)
     {
-        return value switch
+        return (int)value switch
         {
-            NoNamespace.Zero => true,
-            NoNamespace.One => true,
-            NoNamespace.Two => true,
+            0 => true,
+            1 => true,
+            2 => true,
             _ => false
         };
     }
@@ -29,9 +29,9 @@ public static partial class NoNamespaceValidation
     {
         return name switch
         {
-            { } s when s.Equals(nameof(NoNamespace.Zero), comparisonType) => true,
-            { } s when s.Equals(nameof(NoNamespace.One), comparisonType) => true,
-            { } s when s.Equals(nameof(NoNamespace.Two), comparisonType) => true,
+            { } s when s.Equals("Zero", comparisonType) => true,
+            { } s when s.Equals("One", comparisonType) => true,
+            { } s when s.Equals("Two", comparisonType) => true,
             _ => false
         };
     }
@@ -45,9 +45,9 @@ public static partial class NoNamespaceValidation
     {
         return name switch
         {
-            nameof(NoNamespace.Zero) => true,
-            nameof(NoNamespace.One) => true,
-            nameof(NoNamespace.Two) => true,
+            "Zero" => true,
+            "One" => true,
+            "Two" => true,
             _ => false
         };
     }

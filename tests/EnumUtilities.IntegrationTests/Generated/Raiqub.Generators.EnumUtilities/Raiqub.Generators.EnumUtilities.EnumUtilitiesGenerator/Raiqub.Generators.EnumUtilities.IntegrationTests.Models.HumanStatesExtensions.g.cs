@@ -17,13 +17,13 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns>The string representation of the value of this instance.</returns>
         public static string ToStringFast(this HumanStates value)
         {
-            return value switch
+            return (int)value switch
             {
-                HumanStates.Idle => nameof(HumanStates.Idle),
-                HumanStates.Working => nameof(HumanStates.Working),
-                HumanStates.Sleeping => nameof(HumanStates.Sleeping),
-                HumanStates.Eating => nameof(HumanStates.Eating),
-                HumanStates.Dead => nameof(HumanStates.Dead),
+                1 => "Idle",
+                2 => "Working",
+                3 => "Sleeping",
+                4 => "Eating",
+                5 => "Dead",
                 _ => value.ToString()
             };
         }

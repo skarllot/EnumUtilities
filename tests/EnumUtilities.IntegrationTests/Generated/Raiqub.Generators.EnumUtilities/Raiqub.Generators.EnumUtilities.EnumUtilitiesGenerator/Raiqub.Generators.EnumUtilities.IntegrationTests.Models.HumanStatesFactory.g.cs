@@ -31,32 +31,36 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out HumanStates result)
         {
+            int numValue;
             switch (name)
             {
-                case { } s when s.Equals(nameof(HumanStates.Idle), comparisonType):
-                    result = HumanStates.Idle;
-                    return true;
-                case { } s when s.Equals(nameof(HumanStates.Working), comparisonType):
-                    result = HumanStates.Working;
-                    return true;
-                case { } s when s.Equals(nameof(HumanStates.Sleeping), comparisonType):
-                    result = HumanStates.Sleeping;
-                    return true;
-                case { } s when s.Equals(nameof(HumanStates.Eating), comparisonType):
-                    result = HumanStates.Eating;
-                    return true;
-                case { } s when s.Equals(nameof(HumanStates.Dead), comparisonType):
-                    result = HumanStates.Dead;
-                    return true;
-                case { } s when s.Equals(nameof(HumanStates.Relaxing), comparisonType):
-                    result = HumanStates.Relaxing;
-                    return true;
+                case { } s when s.Equals("Idle", comparisonType):
+                    numValue = 1;
+                    break;
+                case { } s when s.Equals("Working", comparisonType):
+                    numValue = 2;
+                    break;
+                case { } s when s.Equals("Sleeping", comparisonType):
+                    numValue = 3;
+                    break;
+                case { } s when s.Equals("Eating", comparisonType):
+                    numValue = 4;
+                    break;
+                case { } s when s.Equals("Dead", comparisonType):
+                    numValue = 5;
+                    break;
+                case { } s when s.Equals("Relaxing", comparisonType):
+                    numValue = 1;
+                    break;
                 case { } s when TryParseNumeric(s, comparisonType, out int val):
-                    result = (HumanStates)val;
-                    return true;
+                    numValue = val;
+                    break;
                 default:
                     return Enum.TryParse(name, out result);
             }
+
+            result = (HumanStates)numValue;
+            return true;
         }
 
         /// <summary>
@@ -74,32 +78,36 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             [NotNullWhen(true)] string? name,
             out HumanStates result)
         {
+            int numValue;
             switch (name)
             {
-                case nameof(HumanStates.Idle):
-                    result = HumanStates.Idle;
-                    return true;
-                case nameof(HumanStates.Working):
-                    result = HumanStates.Working;
-                    return true;
-                case nameof(HumanStates.Sleeping):
-                    result = HumanStates.Sleeping;
-                    return true;
-                case nameof(HumanStates.Eating):
-                    result = HumanStates.Eating;
-                    return true;
-                case nameof(HumanStates.Dead):
-                    result = HumanStates.Dead;
-                    return true;
-                case nameof(HumanStates.Relaxing):
-                    result = HumanStates.Relaxing;
-                    return true;
+                case "Idle":
+                    numValue = 1;
+                    break;
+                case "Working":
+                    numValue = 2;
+                    break;
+                case "Sleeping":
+                    numValue = 3;
+                    break;
+                case "Eating":
+                    numValue = 4;
+                    break;
+                case "Dead":
+                    numValue = 5;
+                    break;
+                case "Relaxing":
+                    numValue = 1;
+                    break;
                 case { } s when TryParseNumeric(s, StringComparison.Ordinal, out int val):
-                    result = (HumanStates)val;
-                    return true;
+                    numValue = val;
+                    break;
                 default:
                     return Enum.TryParse(name, out result);
             }
+
+            result = (HumanStates)numValue;
+            return true;
         }
 
         /// <summary>
@@ -170,11 +178,11 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return new[]
             {
-                HumanStates.Idle,
-                HumanStates.Working,
-                HumanStates.Sleeping,
-                HumanStates.Eating,
-                HumanStates.Dead,
+                (HumanStates)1,
+                (HumanStates)2,
+                (HumanStates)3,
+                (HumanStates)4,
+                (HumanStates)5,
             };
         }
 
@@ -184,12 +192,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return new[]
             {
-                nameof(HumanStates.Idle),
-                nameof(HumanStates.Working),
-                nameof(HumanStates.Sleeping),
-                nameof(HumanStates.Eating),
-                nameof(HumanStates.Dead),
-                nameof(HumanStates.Relaxing),
+                "Idle",
+                "Working",
+                "Sleeping",
+                "Eating",
+                "Dead",
+                "Relaxing",
             };
         }
 

@@ -17,14 +17,14 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns>The string representation of the value of this instance.</returns>
         public static string ToStringFast(this Categories value)
         {
-            return value switch
+            return (int)value switch
             {
-                Categories.Electronics => nameof(Categories.Electronics),
-                Categories.Food => nameof(Categories.Food),
-                Categories.Automotive => nameof(Categories.Automotive),
-                Categories.Arts => nameof(Categories.Arts),
-                Categories.BeautyCare => nameof(Categories.BeautyCare),
-                Categories.Fashion => nameof(Categories.Fashion),
+                0 => "Electronics",
+                1 => "Food",
+                2 => "Automotive",
+                3 => "Arts",
+                4 => "BeautyCare",
+                5 => "Fashion",
                 _ => value.ToString()
             };
         }

@@ -19,27 +19,27 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         public override Season Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             if (reader.TokenType == JsonTokenType.String)
-                return ReadFromString(ref reader);
+                return (Season)ReadFromString(ref reader);
             if (reader.TokenType == JsonTokenType.Number)
-                return ReadFromNumber(ref reader);
+                return (Season)ReadFromNumber(ref reader);
 
             throw new JsonException();
         }
 
         public override void Write(Utf8JsonWriter writer, Season value, JsonSerializerOptions options)
         {
-            switch (value)
+            switch ((int)value)
             {
-                case Season.Spring:
+                case 1:
                     writer.WriteStringValue("🌱"u8);
                     break;
-                case Season.Summer:
+                case 2:
                     writer.WriteStringValue("☀️"u8);
                     break;
-                case Season.Autumn:
+                case 3:
                     writer.WriteStringValue("🍂"u8);
                     break;
-                case Season.Winter:
+                case 4:
                     writer.WriteStringValue("⛄"u8);
                     break;
                 default:
@@ -48,7 +48,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             }
         }
 
-        private Season ReadFromString(ref Utf8JsonReader reader)
+        private int ReadFromString(ref Utf8JsonReader reader)
         {
     #if NET7_0_OR_GREATER
             int length = reader.HasValueSequence ? checked((int)reader.ValueSequence.Length) : reader.ValueSpan.Length;
@@ -64,18 +64,18 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
             return name switch
             {
-                "🌱" => Season.Spring,
-                "☀️" => Season.Summer,
-                "🍂" => Season.Autumn,
-                "⛄" => Season.Winter,
-                _ => Enum.TryParse(name, out Season result) ? result : throw new JsonException()
+                "🌱" => 1,
+                "☀️" => 2,
+                "🍂" => 3,
+                "⛄" => 4,
+                _ => Enum.TryParse(name, out Season result) ? (int)result : throw new JsonException()
             };
         }
 
-        private Season ReadFromNumber(ref Utf8JsonReader reader)
+        private int ReadFromNumber(ref Utf8JsonReader reader)
         {
             return reader.TryGetInt32(out int value)
-                ? (Season)value
+                ? value
                 : throw new JsonException();
         }
     }

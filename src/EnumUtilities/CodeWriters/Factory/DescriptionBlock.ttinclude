@@ -10,22 +10,40 @@
         StringComparison comparisonType,
         out <#= Model.RefName #> result)
     {
+<#+
+        if (Model.Values.All(x => x.Description == null))
+        {
+#>
+        result = default;
+        return false;
+<#+
+        }
+        else
+        {
+#>
+        <#= Model.UnderlyingType #> numValue;
         switch (description)
         {
 <#+
-        foreach (var curr in Model.Values.Where(x => x.Description != null))
-        {
+            foreach (var curr in Model.Values.Where(x => x.Description != null))
+            {
 #>
             case { } s when s.Equals("<#= curr.Description #>", comparisonType):
-                result = <#= Model.RefName #>.<#= curr.MemberName #>;
-                return true;
+                numValue = <#= curr.MemberValue #>;
+                break;
 <#+
-        }
+            }
 #>
             default:
                 result = default;
                 return false;
         }
+
+        result = (<#= Model.RefName #>)numValue;
+        return true;
+<#+
+        }
+#>
     }
 
     public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, out <#= Model.RefName #> result)

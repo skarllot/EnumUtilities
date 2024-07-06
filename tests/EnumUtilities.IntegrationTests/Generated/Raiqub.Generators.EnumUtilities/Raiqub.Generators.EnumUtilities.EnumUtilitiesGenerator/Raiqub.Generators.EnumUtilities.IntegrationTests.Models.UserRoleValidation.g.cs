@@ -16,14 +16,14 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns><c>true</c> if the value of <see cref="UserRole"/> instance exists in the enumeration; <c>false</c> otherwise.</returns>
         public static bool IsDefined(UserRole value)
         {
-            return value switch
+            return (ulong)value switch
             {
-                UserRole.None => true,
-                UserRole.NormalUser => true,
-                UserRole.Custodian => true,
-                UserRole.Finance => true,
-                UserRole.SuperUser => true,
-                UserRole.All => true,
+                0 => true,
+                1 => true,
+                2 => true,
+                4 => true,
+                6 => true,
+                7 => true,
                 _ => false
             };
         }
@@ -34,12 +34,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return name switch
             {
-                { } s when s.Equals(nameof(UserRole.None), comparisonType) => true,
-                { } s when s.Equals(nameof(UserRole.NormalUser), comparisonType) => true,
-                { } s when s.Equals(nameof(UserRole.Custodian), comparisonType) => true,
-                { } s when s.Equals(nameof(UserRole.Finance), comparisonType) => true,
-                { } s when s.Equals(nameof(UserRole.SuperUser), comparisonType) => true,
-                { } s when s.Equals(nameof(UserRole.All), comparisonType) => true,
+                { } s when s.Equals("None", comparisonType) => true,
+                { } s when s.Equals("NormalUser", comparisonType) => true,
+                { } s when s.Equals("Custodian", comparisonType) => true,
+                { } s when s.Equals("Finance", comparisonType) => true,
+                { } s when s.Equals("SuperUser", comparisonType) => true,
+                { } s when s.Equals("All", comparisonType) => true,
                 _ => false
             };
         }
@@ -53,12 +53,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return name switch
             {
-                nameof(UserRole.None) => true,
-                nameof(UserRole.NormalUser) => true,
-                nameof(UserRole.Custodian) => true,
-                nameof(UserRole.Finance) => true,
-                nameof(UserRole.SuperUser) => true,
-                nameof(UserRole.All) => true,
+                "None" => true,
+                "NormalUser" => true,
+                "Custodian" => true,
+                "Finance" => true,
+                "SuperUser" => true,
+                "All" => true,
                 _ => false
             };
         }
