@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Raiqub.Generators.EnumUtilities;
+namespace Raiqub.Generators.EnumUtilities.Parsers;
 
 /// <summary>
 /// A <see langword="ref"/> <see langword="struct"/> that tokenizes a given span of characters for bit flags enum.

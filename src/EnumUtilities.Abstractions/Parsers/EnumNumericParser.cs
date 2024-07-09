@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Runtime.CompilerServices;
 
-namespace Raiqub.Generators.EnumUtilities;
+namespace Raiqub.Generators.EnumUtilities.Parsers;
 
 /// <summary>Parser for enumerations represented as a numeric text.</summary>
 [EditorBrowsable(EditorBrowsableState.Never)]

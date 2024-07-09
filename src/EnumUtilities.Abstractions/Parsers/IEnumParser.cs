@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 
-namespace Raiqub.Generators.EnumUtilities;
+namespace Raiqub.Generators.EnumUtilities.Parsers;
 
 /// <summary>Represents a generic interface for parsing and manipulating enum values.</summary>
 /// <typeparam name="T">The underlying type of enum.</typeparam>

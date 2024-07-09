@@ -2,7 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
-namespace Raiqub.Generators.EnumUtilities;
+namespace Raiqub.Generators.EnumUtilities.Parsers;
 
 /// <summary>Provides utility methods for parsing enum values from string representations.</summary>
 [EditorBrowsable(EditorBrowsableState.Never)]
@@ -35,8 +35,36 @@ public static class EnumStringParser
                        || TryParseByName(value, enumParser, ignoreCase, throwOnFailure, out result);
             case ParseAnalysisResult.Empty:
             default:
-                return TryParseEmpty(throwOnFailure, out result);
+                return TryParseEmpty(nameof(value), throwOnFailure, out result);
         }
+    }
+
+    public static bool TryParseDescription<TParser, TNumber>(
+        ReadOnlySpan<char> description,
+        TParser parser,
+        StringComparison comparisonType,
+        bool throwOnFailure,
+        out TNumber result)
+        where TParser : IEnumDescriptionParser<TNumber>
+        where TNumber : struct
+    {
+        if (description.IsWhiteSpace())
+        {
+            return TryParseEmpty(nameof(description), throwOnFailure, out result);
+        }
+
+        bool success = parser.TryParseDescription(description, comparisonType, out result);
+        if (success)
+        {
+            return true;
+        }
+
+        if (throwOnFailure)
+        {
+            ThrowValueNotFound(description, nameof(description));
+        }
+
+        return false;
     }
 
     private static bool TryParseByName<TParser, TNumber>(
@@ -70,19 +98,19 @@ public static class EnumStringParser
 
         if (throwOnFailure)
         {
-            ThrowValueNotFound(value);
+            ThrowValueNotFound(value, nameof(value));
         }
 
         result = default;
         return false;
     }
 
-    private static bool TryParseEmpty<TNumber>(bool throwOnFailure, out TNumber result)
+    private static bool TryParseEmpty<TNumber>(string parameterName, bool throwOnFailure, out TNumber result)
         where TNumber : struct
     {
         if (throwOnFailure)
         {
-            ThrowInvalidEmptyParseArgument();
+            ThrowInvalidEmptyParseArgument(parameterName);
         }
 
         result = default;
@@ -124,19 +152,19 @@ public static class EnumStringParser
     }
 
     [SuppressMessage("ReSharper", "NotResolvedInText")]
-    private static void ThrowInvalidEmptyParseArgument()
+    private static void ThrowInvalidEmptyParseArgument(string parameterName)
     {
         throw new ArgumentException(
             "Must specify valid information for parsing in the string.",
-            "value");
+            parameterName);
     }
 
-    private static void ThrowValueNotFound(ReadOnlySpan<char> value)
+    private static void ThrowValueNotFound(ReadOnlySpan<char> value, string parameterName)
     {
 #if !NETSTANDARD2_0
-        throw new ArgumentException($"Requested value '{value}' was not found.", nameof(value));
+        throw new ArgumentException($"Requested value '{value}' was not found.", parameterName);
 #else
-        throw new ArgumentException($"Requested value '{value.ToString()}' was not found.", nameof(value));
+        throw new ArgumentException($"Requested value '{value.ToString()}' was not found.", parameterName);
 #endif
     }
 

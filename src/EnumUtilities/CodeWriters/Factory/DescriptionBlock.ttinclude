@@ -5,60 +5,105 @@
             return;
 #>
 
-    public static bool TryCreateFromDescription(
-        [NotNullWhen(true)] string? description,
-        StringComparison comparisonType,
-        out <#= Model.RefName #> result)
+    public static <#= Model.RefName #> CreateFromDescription(string description, StringComparison comparisonType = StringComparison.Ordinal)
     {
+        if (description is null) ThrowArgumentNullException(nameof(description));
+        TryCreateFromDescription(description.AsSpan(), comparisonType, throwOnFailure: true, out var result);
+        return result;
+    }
+
+    public static <#= Model.RefName #> CreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType = StringComparison.Ordinal)
+    {
+        TryCreateFromDescription(description, comparisonType, throwOnFailure: true, out var result);
+        return result;
+    }
+
+    [return: NotNullIfNotNull("description")]
+    public static <#= Model.RefName #>? CreateFromDescriptionOrNull(string? description, StringComparison comparisonType = StringComparison.Ordinal)
+    {
+        if (description is null) return null;
+        TryCreateFromDescription(description.AsSpan(), comparisonType, throwOnFailure: true, out var result);
+        return result;
+    }
+
+    public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, StringComparison comparisonType, out <#= Model.RefName #> result)
+    {
+        return TryCreateFromDescription(description.AsSpan(), comparisonType, throwOnFailure: false, out result);
+    }
+
+    public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, out <#= Model.RefName #> result)
+    {
+        return TryCreateFromDescription(description.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out result);
+    }
+
+    public static <#= Model.RefName #>? TryCreateFromDescription(string? description, StringComparison comparisonType = StringComparison.Ordinal)
+    {
+        return TryCreateFromDescription(description.AsSpan(), comparisonType, throwOnFailure: false, out <#= Model.RefName #> result) ? result : null;
+    }
+
+    public static bool TryCreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType, out <#= Model.RefName #> result)
+    {
+        return TryCreateFromDescription(description, comparisonType, throwOnFailure: false, out result);
+    }
+
+    public static bool TryCreateFromDescription(ReadOnlySpan<char> description, out <#= Model.RefName #> result)
+    {
+        return TryCreateFromDescription(description, StringComparison.Ordinal, throwOnFailure: false, out result);
+    }
+
+    public static <#= Model.RefName #>? TryCreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType = StringComparison.Ordinal)
+    {
+        return TryCreateFromDescription(description, comparisonType, throwOnFailure: false, out <#= Model.RefName #> result) ? result : null;
+    }
+
+    private static bool TryCreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType, bool throwOnFailure, out <#= Model.RefName #> result)
+    {
+        bool success = EnumStringParser.TryParseDescription(description, <#= Model.Name #>StringParser.Instance, comparisonType, throwOnFailure, out <#= Model.UnderlyingType #> number);
+        if (!success)
+        {
+            result = 0;
+            return false;
+        }
+
+        result = (<#= Model.RefName #>)number;
+        return true;
+    }
+
+    private sealed partial class <#= Model.Name #>StringParser : IEnumDescriptionParser<<#= Model.UnderlyingType #>>
+    {
+        public bool TryParseDescription(ReadOnlySpan<char> value, StringComparison comparisonType, out <#= Model.UnderlyingType #> result)
+        {
 <#+
         if (Model.Values.All(x => x.Description == null))
         {
 #>
-        result = default;
-        return false;
+            result = default;
+            return false;
 <#+
         }
         else
         {
 #>
-        <#= Model.UnderlyingType #> numValue;
-        switch (description)
-        {
+            switch (value)
+            {
 <#+
             foreach (var curr in Model.Values.Where(x => x.Description != null))
             {
 #>
-            case { } s when s.Equals("<#= curr.Description #>", comparisonType):
-                numValue = <#= curr.MemberValue #>;
-                break;
+                case { } s when s.Equals("<#= curr.Description #>", comparisonType):
+                    result = <#= curr.MemberValue #>;
+                    return true;
 <#+
             }
 #>
-            default:
-                result = default;
-                return false;
-        }
-
-        result = (<#= Model.RefName #>)numValue;
-        return true;
+                default:
+                    result = default;
+                    return false;
+            }
 <#+
         }
 #>
-    }
-
-    public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, out <#= Model.RefName #> result)
-    {
-        return TryCreateFromDescription(description, StringComparison.Ordinal, out result);
-    }
-
-    public static <#= Model.RefName #>? TryCreateFromDescription(string? description, StringComparison comparisonType)
-    {
-        return TryCreateFromDescription(description, comparisonType, out <#= Model.RefName #> result) ? result : null;
-    }
-
-    public static <#= Model.RefName #>? TryCreateFromDescription(string? description)
-    {
-        return TryCreateFromDescription(description, StringComparison.Ordinal, out <#= Model.RefName #> result) ? result : null;
+        }
     }
 <#+
     }

@@ -38,71 +38,9 @@
     }
 
     [DoesNotReturn]
-    internal static void ThrowArgumentNullException()
+    internal static void ThrowArgumentNullException(string paramName)
     {
-        throw new ArgumentNullException("value");
-    }
-
-    private sealed class <#= Model.Name #>StringParser : IEnumParser<<#= Model.UnderlyingType #>>
-    {
-        public static <#= Model.Name #>StringParser Instance = new <#= Model.Name #>StringParser();
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public <#= Model.UnderlyingType #> BitwiseOr(<#= Model.UnderlyingType #> value1, <#= Model.UnderlyingType #> value2) => unchecked((<#= Model.UnderlyingType #>)(value1 | value2));
-
-        public bool TryParseNumber(ReadOnlySpan<char> value, out <#= Model.UnderlyingType #> result) => EnumNumericParser.TryParse(value, out result);
-
-        public bool TryParseSingleName(ReadOnlySpan<char> value, bool ignoreCase, out <#= Model.UnderlyingType #> result)
-        {
-            return ignoreCase
-                ? TryParse(value, out result)
-                : TryParse(value, StringComparison.OrdinalIgnoreCase, out result);
-        }
-
-        public bool TryParseSingleName(ReadOnlySpan<char> value, StringComparison comparisonType, out <#= Model.UnderlyingType #> result)
-        {
-            return TryParse(value, comparisonType, out result);
-        }
-
-        private bool TryParse(ReadOnlySpan<char> value, out <#= Model.UnderlyingType #> result)
-        {
-            switch (value)
-            {
-<#+
-        foreach (var curr in Model.Values)
-        {
-#>
-                case "<#= curr.MemberName #>":
-                    result = <#= curr.MemberValue #>;
-                    return true;
-<#+
-        }
-#>
-                default:
-                    result = 0;
-                    return false;
-            }
-        }
-
-        private bool TryParse(ReadOnlySpan<char> value, StringComparison comparisonType, out <#= Model.UnderlyingType #> result)
-        {
-            switch (value)
-            {
-<#+
-        foreach (var curr in Model.Values)
-        {
-#>
-                case { } when value.Equals("<#= curr.MemberName #>", comparisonType):
-                    result = <#= curr.MemberValue #>;
-                    return true;
-<#+
-        }
-#>
-                default:
-                    result = 0;
-                    return false;
-            }
-        }
+        throw new ArgumentNullException(paramName);
     }
 <#+
     }

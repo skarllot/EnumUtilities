@@ -15,7 +15,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.CompilerServices;
-using Raiqub.Generators.EnumUtilities;
+using Raiqub.Generators.EnumUtilities.Parsers;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
