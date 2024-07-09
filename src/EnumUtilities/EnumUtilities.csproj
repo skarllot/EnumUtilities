@@ -28,7 +28,7 @@
     <None Include="$(SolutionDir)logos\logo-128.png" Pack="true" PackagePath="icon.png" />
     <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
     <None Include="$(OutputPath)\Raiqub.Generators.EnumUtilities.Abstractions.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
-    <None Include="$(OutputPath)\Raiqub.Generators.EnumUtilities.Abstractions.dll" Pack="true" PackagePath="lib/netstandard2.0" Visible="true" />
+    <None Include="$(SolutionDir).nuget\_._" Pack="true" PackagePath="lib/netstandard2.0" Visible="true" />
   </ItemGroup>
 
   <ItemGroup>
