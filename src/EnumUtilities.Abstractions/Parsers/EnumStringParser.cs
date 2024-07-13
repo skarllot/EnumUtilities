@@ -151,7 +151,6 @@ public static class EnumStringParser
             : ParseAnalysisResult.NotNumeric;
     }
 
-    [SuppressMessage("ReSharper", "NotResolvedInText")]
     private static void ThrowInvalidEmptyParseArgument(string parameterName)
     {
         throw new ArgumentException(
