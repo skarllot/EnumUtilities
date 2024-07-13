@@ -123,7 +123,10 @@
         }
       },
       "Raiqub.Generators.EnumUtilities.Abstractions": {
-        "type": "Project"
+        "type": "Project",
+        "dependencies": {
+          "System.Memory": "[4.5.4, )"
+        }
       }
     }
   }
