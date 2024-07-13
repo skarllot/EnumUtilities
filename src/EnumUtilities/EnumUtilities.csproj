@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EnumUtilities.Abstractions\EnumUtilities.Abstractions.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\EnumUtilities.Abstractions\EnumUtilities.Abstractions.csproj" />
   </ItemGroup>
 
   <ItemGroup>

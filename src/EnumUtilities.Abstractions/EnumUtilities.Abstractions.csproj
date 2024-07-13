@@ -3,7 +3,15 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net6.0;net8.0</TargetFrameworks>
     <RootNamespace>Raiqub.Generators.EnumUtilities</RootNamespace>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
+    <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="$(SolutionDir)README.md" Pack="true" PackagePath="" />
+    <None Include="$(SolutionDir)logos\logo-128.png" Pack="true" PackagePath="icon.png" />
+  </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <PackageReference Include="System.Memory" Version="4.5.4" />
