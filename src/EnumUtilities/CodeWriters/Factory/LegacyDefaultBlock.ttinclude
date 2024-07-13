@@ -1,0 +1,88 @@
+﻿<#+
+    private void WriteLegacyDefaultBlock()
+    {
+#>
+
+    /// <summary>
+    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+    /// </summary>
+    /// <param name="name">The string representation of the enumeration name or underlying value to convert.</param>
+    /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
+    /// <param name="result">
+    /// When this method returns, result contains an object of type <#= Model.Name #> whose value is represented by value
+    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+    /// underlying type of <#= Model.Name #>. Note that this value need not be a member of the <#= Model.Name #> enumeration.
+    /// </param>
+    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
+    [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
+    public static bool TryParse(
+        [NotNullWhen(true)] string? name,
+        StringComparison comparisonType,
+        out <#= Model.RefName #> result)
+    {
+        bool success = <#= Model.Name #>StringParser.Instance.TryParseSingleName(name.AsSpan(), comparisonType, out <#= Model.UnderlyingType #> number)
+            || <#= Model.Name #>StringParser.Instance.TryParseNumber(name.AsSpan(), out number);
+        if (!success)
+        {
+            return Enum.TryParse(name, out result);
+        }
+
+        result = (<#= Model.RefName #>)number;
+        return true;
+    }
+
+    /// <summary>
+    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+    /// </summary>
+    /// <param name="name">The case-insensitive string representation of the enumeration name or underlying value to convert.</param>
+    /// <param name="result">
+    /// When this method returns, result contains an object of type <#= Model.Name #> whose value is represented by value
+    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+    /// underlying type of <#= Model.Name #>. Note that this value need not be a member of the <#= Model.Name #> enumeration.
+    /// </param>
+    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
+    public static bool TryParseIgnoreCase(
+        [NotNullWhen(true)] string? name,
+        out <#= Model.RefName #> result)
+    {
+        return TryParse(name.AsSpan(), ignoreCase: true, out result);
+    }
+
+    /// <summary>
+    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+    /// an equivalent enumerated object.
+    /// </summary>
+    /// <param name="name">The case-insensitive string representation of the enumeration name or underlying value to convert.</param>
+    /// <returns>
+    /// Contains an object of type <#= Model.Name #> whose value is represented by value if the parse operation succeeds.
+    /// If the parse operation fails, result contains <c>null</c> value.
+    /// </returns>
+    [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
+    public static <#= Model.RefName #>? TryParseIgnoreCase(string? name)
+    {
+        return TryParse(name.AsSpan(), ignoreCase: true, out <#= Model.RefName #> result) ? result : null;
+    }
+
+    /// <summary>
+    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+    /// an equivalent enumerated object.
+    /// </summary>
+    /// <param name="name">The string representation of the enumeration name or underlying value to convert.</param>
+    /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
+    /// <returns>
+    /// Contains an object of type <#= Model.Name #> whose value is represented by value if the parse operation succeeds.
+    /// If the parse operation fails, result contains <c>null</c> value.
+    /// </returns>
+    /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
+    [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
+    public static <#= Model.RefName #>? TryParse(string? name, StringComparison comparisonType)
+    {
+        return TryParse(name, comparisonType, out <#= Model.RefName #> result) ? result : null;
+    }
+<#+
+    }
+#>

@@ -3,6 +3,7 @@
 <#@ import namespace="Models" #>
 <#@ import namespace="System.Text" #>
 <#@ include file="$(ProjectDir)CodeWriters\Factory\DefaultBlock.ttinclude"#>
+<#@ include file="$(ProjectDir)CodeWriters\Factory\LegacyDefaultBlock.ttinclude"#>
 <#@ include file="$(ProjectDir)CodeWriters\Factory\EnumMemberBlock.ttinclude"#>
 <#@ include file="$(ProjectDir)CodeWriters\Factory\DescriptionBlock.ttinclude"#>
 <#@ include file="$(ProjectDir)CodeWriters\Factory\DisplayBlock.ttinclude"#>
@@ -13,6 +14,8 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Runtime.CompilerServices;
+using Raiqub.Generators.EnumUtilities.Parsers;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
@@ -30,6 +33,7 @@ using System.Globalization;
 {
 <#
     WriteDefaultBlock();
+    WriteLegacyDefaultBlock();
     WriteEnumMemberBlock();
     WriteDescriptionBlock();
     WriteDisplayBlock();

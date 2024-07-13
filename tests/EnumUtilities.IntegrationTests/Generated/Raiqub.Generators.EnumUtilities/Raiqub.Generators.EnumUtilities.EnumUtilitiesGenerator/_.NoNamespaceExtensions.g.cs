@@ -8,7 +8,7 @@ using System.Threading;
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.6.0.0")]
+[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
 public static partial class NoNamespaceExtensions
 {
     /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
