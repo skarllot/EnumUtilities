@@ -4,6 +4,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using Raiqub.Generators.EnumUtilities.Formatters;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
@@ -13,19 +14,22 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class HumanStatesExtensions
     {
+        /// <summary>Represents the largest possible number of characters produced by converting an <see cref="HumanStates" /> value to string, based on defined members. This field is constant.</summary>
+        public const int NameMaxCharsLength = 8;
+
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
         /// <returns>The string representation of the value of this instance.</returns>
         public static string ToStringFast(this HumanStates value)
         {
-            return (int)value switch
-            {
-                1 => "Idle",
-                2 => "Working",
-                3 => "Sleeping",
-                4 => "Eating",
-                5 => "Dead",
-                _ => value.ToString()
-            };
+            return EnumStringFormatter.GetString((int)value, HumanStatesStringFormatter.Instance);
+        }
+
+        /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
+        /// <param name="value">The value to calculate the number of characters.</param>
+        /// <returns>The number of characters produced by converting the specified value to string.</returns>
+        public static int GetStringCount(this HumanStates value)
+        {
+            return EnumStringFormatter.GetStringCount((int)value, HumanStatesStringFormatter.Instance);
         }
 
         /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
@@ -33,6 +37,43 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         public static bool IsDefined(this HumanStates value)
         {
             return HumanStatesValidation.IsDefined(value);
+        }
+
+        private sealed partial class HumanStatesStringFormatter : IEnumFormatter<int>
+        {
+            public static HumanStatesStringFormatter Instance = new HumanStatesStringFormatter();
+
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public int GetStringCountForNumber(int value) => EnumNumericFormatter.GetStringLength(value);
+
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public string GetStringForNumber(int value) => value.ToString();
+
+            public int? TryGetStringCountForMember(int value)
+            {
+                return value switch
+                {
+                    1 => 4,
+                    2 => 7,
+                    3 => 8,
+                    4 => 6,
+                    5 => 4,
+                    _ => null
+                };
+            }
+
+            public string? TryGetStringForMember(int value)
+            {
+                return value switch
+                {
+                    1 => "Idle",
+                    2 => "Working",
+                    3 => "Sleeping",
+                    4 => "Eating",
+                    5 => "Dead",
+                    _ => null
+                };
+            }
         }
 
         /// <summary>Adds two enumerations and replaces the first integer with the sum, as an atomic operation.</summary>

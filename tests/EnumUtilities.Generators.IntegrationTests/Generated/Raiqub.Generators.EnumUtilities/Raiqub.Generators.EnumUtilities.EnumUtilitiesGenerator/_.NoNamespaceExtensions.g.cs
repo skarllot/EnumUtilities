@@ -4,6 +4,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using Raiqub.Generators.EnumUtilities.Formatters;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
@@ -11,17 +12,22 @@ using System.Threading;
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
 public static partial class NoNamespaceExtensions
 {
+    /// <summary>Represents the largest possible number of characters produced by converting an <see cref="NoNamespace" /> value to string, based on defined members. This field is constant.</summary>
+    public const int NameMaxCharsLength = 4;
+
     /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
     /// <returns>The string representation of the value of this instance.</returns>
     public static string ToStringFast(this NoNamespace value)
     {
-        return (int)value switch
-        {
-            0 => "Zero",
-            1 => "One",
-            2 => "Two",
-            _ => value.ToString()
-        };
+        return EnumStringFormatter.GetString((int)value, NoNamespaceStringFormatter.Instance);
+    }
+
+    /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
+    /// <param name="value">The value to calculate the number of characters.</param>
+    /// <returns>The number of characters produced by converting the specified value to string.</returns>
+    public static int GetStringCount(this NoNamespace value)
+    {
+        return EnumStringFormatter.GetStringCount((int)value, NoNamespaceStringFormatter.Instance);
     }
 
     /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
@@ -29,6 +35,39 @@ public static partial class NoNamespaceExtensions
     public static bool IsDefined(this NoNamespace value)
     {
         return NoNamespaceValidation.IsDefined(value);
+    }
+
+    private sealed partial class NoNamespaceStringFormatter : IEnumFormatter<int>
+    {
+        public static NoNamespaceStringFormatter Instance = new NoNamespaceStringFormatter();
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public int GetStringCountForNumber(int value) => EnumNumericFormatter.GetStringLength(value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public string GetStringForNumber(int value) => value.ToString();
+
+        public int? TryGetStringCountForMember(int value)
+        {
+            return value switch
+            {
+                0 => 4,
+                1 => 3,
+                2 => 3,
+                _ => null
+            };
+        }
+
+        public string? TryGetStringForMember(int value)
+        {
+            return value switch
+            {
+                0 => "Zero",
+                1 => "One",
+                2 => "Two",
+                _ => null
+            };
+        }
     }
 
     /// <summary>Adds two enumerations and replaces the first integer with the sum, as an atomic operation.</summary>
