@@ -1,76 +1,29 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <TargetFrameworks>netstandard2.0;net6.0;net8.0</TargetFrameworks>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>icon.png</PackageIcon>
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DefineConstants>$(DefineConstants);AllowUnsafeBlocks</DefineConstants>
+    <AssemblyName>Raiqub.Generators.EnumUtilities.Abstractions</AssemblyName>
+    <PackageId>Raiqub.Generators.EnumUtilities</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EnumUtilities.Abstractions\EnumUtilities.Abstractions.csproj" />
+    <ProjectReference Include="..\..\gen\EnumUtilities.Generators\EnumUtilities.Generators.csproj"
+                      PackAsAnalyzer="true"
+                      ReferenceOutputAssembly="false" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.3.1" PrivateAssets="all" />
-    <PackageReference Include="Polyfill" Version="5.6.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="System.Memory" Version="4.5.4" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="$(SolutionDir)README.md" Pack="true" PackagePath="" />
     <None Include="$(SolutionDir)logos\logo-128.png" Pack="true" PackagePath="icon.png" />
-    <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
-    <None Include="$(OutputPath)\Raiqub.Generators.EnumUtilities.Abstractions.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
-    <None Include="$(SolutionDir).nuget\_._" Pack="true" PackagePath="lib/netstandard2.0" Visible="true" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="CodeWriters\EnumExtensionsWriter.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>EnumExtensionsWriter.cs</LastGenOutput>
-    </None>
-    <None Update="CodeWriters\EnumFactoryWriter.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>EnumFactoryWriter.cs</LastGenOutput>
-    </None>
-    <None Update="CodeWriters\EnumValidationWriter.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>EnumValidationWriter.cs</LastGenOutput>
-    </None>
-    <None Update="CodeWriters\EnumJsonConverterWriter.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>EnumJsonConverterWriter.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="CodeWriters\EnumExtensionsWriter.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EnumExtensionsWriter.tt</DependentUpon>
-    </Compile>
-    <Compile Update="CodeWriters\EnumFactoryWriter.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EnumFactoryWriter.tt</DependentUpon>
-    </Compile>
-    <Compile Update="CodeWriters\EnumValidationWriter.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EnumValidationWriter.tt</DependentUpon>
-    </Compile>
-    <Compile Update="CodeWriters\EnumJsonConverterWriter.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EnumJsonConverterWriter.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
 
 </Project>
