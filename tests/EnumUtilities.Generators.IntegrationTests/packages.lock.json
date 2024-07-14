@@ -239,7 +239,7 @@
           "xunit.extensibility.core": "[2.9.0]"
         }
       },
-      "Raiqub.Generators.EnumUtilities.Abstractions": {
+      "Raiqub.Generators.EnumUtilities": {
         "type": "Project"
       }
     },
@@ -481,7 +481,7 @@
           "xunit.extensibility.core": "[2.9.0]"
         }
       },
-      "Raiqub.Generators.EnumUtilities.Abstractions": {
+      "Raiqub.Generators.EnumUtilities": {
         "type": "Project"
       }
     }

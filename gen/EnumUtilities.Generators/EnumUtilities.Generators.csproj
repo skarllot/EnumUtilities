@@ -1,0 +1,70 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+    <IsRoslynComponent>true</IsRoslynComponent>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AnalyzerLanguage>cs</AnalyzerLanguage>
+    <AnalyzerRoslynVersion>4.3.1</AnalyzerRoslynVersion>
+    <DefineConstants>$(DefineConstants);AllowUnsafeBlocks</DefineConstants>
+    <RootNamespace>Raiqub.Generators.EnumUtilities</RootNamespace>
+    <AssemblyName>Raiqub.Generators.EnumUtilities</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.3.1" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.3.1" PrivateAssets="all" />
+    <PackageReference Include="Polyfill" Version="5.6.0" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\src\EnumUtilities\EnumGeneratorAttribute.cs" Link="Attributes\EnumGeneratorAttribute.cs" />
+    <Compile Include="..\..\src\EnumUtilities\JsonConverterGeneratorAttribute.cs" Link="Attributes\JsonConverterGeneratorAttribute.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="CodeWriters\EnumExtensionsWriter.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>EnumExtensionsWriter.cs</LastGenOutput>
+    </None>
+    <None Update="CodeWriters\EnumFactoryWriter.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>EnumFactoryWriter.cs</LastGenOutput>
+    </None>
+    <None Update="CodeWriters\EnumValidationWriter.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>EnumValidationWriter.cs</LastGenOutput>
+    </None>
+    <None Update="CodeWriters\EnumJsonConverterWriter.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>EnumJsonConverterWriter.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="CodeWriters\EnumExtensionsWriter.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnumExtensionsWriter.tt</DependentUpon>
+    </Compile>
+    <Compile Update="CodeWriters\EnumFactoryWriter.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnumFactoryWriter.tt</DependentUpon>
+    </Compile>
+    <Compile Update="CodeWriters\EnumValidationWriter.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnumValidationWriter.tt</DependentUpon>
+    </Compile>
+    <Compile Update="CodeWriters\EnumJsonConverterWriter.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnumJsonConverterWriter.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>
