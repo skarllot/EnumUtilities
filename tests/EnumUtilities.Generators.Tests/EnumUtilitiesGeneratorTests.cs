@@ -7,7 +7,7 @@ namespace Raiqub.Generators.EnumUtilities.Generators.Tests;
 public class EnumUtilitiesGeneratorTests
 {
     private const string GeneratorBasePath =
-        "Raiqub.Generators.EnumUtilities.Generators/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator";
+        "Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator";
 
     [StringSyntax("C#")]
     private const string ColoursEnumText =
