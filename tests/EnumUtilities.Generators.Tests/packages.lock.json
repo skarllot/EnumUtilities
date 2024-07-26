@@ -777,9 +777,6 @@
       },
       "Raiqub.Generators.EnumUtilities": {
         "type": "Project"
-      },
-      "Raiqub.Generators.EnumUtilities.Generators": {
-        "type": "Project"
       }
     }
   }
