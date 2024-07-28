@@ -4,6 +4,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using Raiqub.Generators.EnumUtilities.Formatters;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
@@ -13,17 +14,30 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class ColoursExtensions
     {
+        /// <summary>Represents the largest possible number of characters produced by converting an <see cref="Colours" /> value to string, based on defined members. This field is constant.</summary>
+        public const int NameMaxCharsLength = 5;
+
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
         /// <returns>The string representation of the value of this instance.</returns>
         public static string ToStringFast(this Colours value)
         {
-            return (int)value switch
-            {
-                1 => "Red",
-                2 => "Blue",
-                4 => "Green",
-                _ => value.ToString()
-            };
+            return EnumStringFormatter.GetString((int)value, ColoursStringFormatter.Instance);
+        }
+
+        /// <summary>Determines whether one or more bit fields are set in the current instance.</summary>
+        /// <param name="flag">An enumeration value.</param>
+        /// <returns><see langword="true"/> if the bit field or bit fields that are set in flag are also set in the current instance; otherwise, <see langword="false"/>.</returns>
+        public static bool HasFlagFast(this Colours value, Colours flag)
+        {
+            return (value & flag) == flag;
+        }
+
+        /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
+        /// <param name="value">The value to calculate the number of characters.</param>
+        /// <returns>The number of characters produced by converting the specified value to string.</returns>
+        public static int GetStringCount(this Colours value)
+        {
+            return EnumStringFormatter.GetStringCount((int)value, ColoursStringFormatter.Instance);
         }
 
         /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
@@ -31,6 +45,132 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         public static bool IsDefined(this Colours value)
         {
             return ColoursValidation.IsDefined(value);
+        }
+
+        private sealed partial class ColoursStringFormatter : IEnumFormatter<int>
+        {
+            public static ColoursStringFormatter Instance = new ColoursStringFormatter();
+
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public int GetStringCountForNumber(int value) => EnumNumericFormatter.GetStringLength(value);
+
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public string GetStringForNumber(int value) => value.ToString();
+
+            public int? TryGetStringCountForMember(int value)
+            {
+                if (value == 0)
+                {
+                    return 1;
+                }
+
+                int count = 0, foundItemsCount = 0;
+                if ((value & 4) == 4)
+                {
+                    value -= 4;
+                    count = checked(count + 5);
+                    foundItemsCount++;
+                }
+                if ((value & 2) == 2)
+                {
+                    value -= 2;
+                    count = checked(count + 4);
+                    foundItemsCount++;
+                }
+                if ((value & 1) == 1)
+                {
+                    value -= 1;
+                    count = checked(count + 3);
+                    foundItemsCount++;
+                }
+
+                if (value != 0)
+                {
+                    return null;
+                }
+
+                const int separatorStringLength = 2;
+                return checked(count + (separatorStringLength * (foundItemsCount - 1)));
+            }
+
+            public string? TryGetStringForMember(int value)
+            {
+                if (value == 0)
+                {
+                    return "0";
+                }
+
+                Span<int> foundItems = stackalloc int[3];
+                int count = 0, foundItemsCount = 0;
+                if ((value & 4) == 4)
+                {
+                    value -= 4;
+                    count = checked(count + 5);
+                    foundItems[foundItemsCount++] = 4;
+                }
+                if ((value & 2) == 2)
+                {
+                    value -= 2;
+                    count = checked(count + 4);
+                    foundItems[foundItemsCount++] = 2;
+                }
+                if ((value & 1) == 1)
+                {
+                    value -= 1;
+                    count = checked(count + 3);
+                    foundItems[foundItemsCount++] = 1;
+                }
+
+                if (value != 0)
+                {
+                    return null;
+                }
+
+                if (foundItemsCount == 1)
+                {
+                    return GetStringForSingleMember(foundItems[0]);
+                }
+
+                return WriteMultipleFoundFlagsNames(count, foundItemsCount, foundItems);
+            }
+
+            private string WriteMultipleFoundFlagsNames(int count, int foundItemsCount, Span<int> foundItems)
+            {
+                const int separatorStringLength = 2;
+                const char enumSeparatorChar = ',';
+                var strlen = checked(count + (separatorStringLength * (foundItemsCount - 1)));
+                Span<char> result = strlen <= 128
+                    ? stackalloc char[128].Slice(0, strlen)
+                    : new char[strlen];
+                var span = result;
+
+                string name = GetStringForSingleMember(foundItems[--foundItemsCount]);
+                name.AsSpan().CopyTo(span);
+                span = span.Slice(name.Length);
+                while (--foundItemsCount >= 0)
+                {
+                    span[0] = enumSeparatorChar;
+                    span[1] = ' ';
+                    span = span.Slice(2);
+
+                    name = GetStringForSingleMember(foundItems[foundItemsCount]);
+                    name.CopyTo(span);
+                    span = span.Slice(name.Length);
+                }
+
+                return result.ToString();
+            }
+
+            private string GetStringForSingleMember(int value)
+            {
+                return value switch
+                {
+                    1 => "Red",
+                    2 => "Blue",
+                    4 => "Green",
+                    _ => throw new ArgumentOutOfRangeException()
+                };
+            }
         }
 
     #if NET5_0_OR_GREATER

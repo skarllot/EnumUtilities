@@ -4,6 +4,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using Raiqub.Generators.EnumUtilities.Formatters;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
@@ -13,18 +14,22 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     internal static partial class MyEnum2Extensions
     {
+        /// <summary>Represents the largest possible number of characters produced by converting an <see cref="MyEnum2" /> value to string, based on defined members. This field is constant.</summary>
+        public const int NameMaxCharsLength = 6;
+
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
         /// <returns>The string representation of the value of this instance.</returns>
         public static string ToStringFast(this NestedInClass.MyEnum2 value)
         {
-            return (int)value switch
-            {
-                0 => "Credit",
-                1 => "Debit",
-                2 => "Cash",
-                3 => "Cheque",
-                _ => value.ToString()
-            };
+            return EnumStringFormatter.GetString((int)value, MyEnum2StringFormatter.Instance);
+        }
+
+        /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
+        /// <param name="value">The value to calculate the number of characters.</param>
+        /// <returns>The number of characters produced by converting the specified value to string.</returns>
+        public static int GetStringCount(this NestedInClass.MyEnum2 value)
+        {
+            return EnumStringFormatter.GetStringCount((int)value, MyEnum2StringFormatter.Instance);
         }
 
         /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
@@ -32,6 +37,41 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         public static bool IsDefined(this NestedInClass.MyEnum2 value)
         {
             return MyEnum2Validation.IsDefined(value);
+        }
+
+        private sealed partial class MyEnum2StringFormatter : IEnumFormatter<int>
+        {
+            public static MyEnum2StringFormatter Instance = new MyEnum2StringFormatter();
+
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public int GetStringCountForNumber(int value) => EnumNumericFormatter.GetStringLength(value);
+
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public string GetStringForNumber(int value) => value.ToString();
+
+            public int? TryGetStringCountForMember(int value)
+            {
+                return value switch
+                {
+                    0 => 6,
+                    1 => 5,
+                    2 => 4,
+                    3 => 6,
+                    _ => null
+                };
+            }
+
+            public string? TryGetStringForMember(int value)
+            {
+                return value switch
+                {
+                    0 => "Credit",
+                    1 => "Debit",
+                    2 => "Cash",
+                    3 => "Cheque",
+                    _ => null
+                };
+            }
         }
 
         /// <summary>Adds two enumerations and replaces the first integer with the sum, as an atomic operation.</summary>

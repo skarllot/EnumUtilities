@@ -4,6 +4,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using Raiqub.Generators.EnumUtilities.Formatters;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
@@ -13,20 +14,22 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class CategoriesExtensions
     {
+        /// <summary>Represents the largest possible number of characters produced by converting an <see cref="Categories" /> value to string, based on defined members. This field is constant.</summary>
+        public const int NameMaxCharsLength = 11;
+
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
         /// <returns>The string representation of the value of this instance.</returns>
         public static string ToStringFast(this Categories value)
         {
-            return (int)value switch
-            {
-                0 => "Electronics",
-                1 => "Food",
-                2 => "Automotive",
-                3 => "Arts",
-                4 => "BeautyCare",
-                5 => "Fashion",
-                _ => value.ToString()
-            };
+            return EnumStringFormatter.GetString((int)value, CategoriesStringFormatter.Instance);
+        }
+
+        /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
+        /// <param name="value">The value to calculate the number of characters.</param>
+        /// <returns>The number of characters produced by converting the specified value to string.</returns>
+        public static int GetStringCount(this Categories value)
+        {
+            return EnumStringFormatter.GetStringCount((int)value, CategoriesStringFormatter.Instance);
         }
 
         /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
@@ -34,6 +37,45 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         public static bool IsDefined(this Categories value)
         {
             return CategoriesValidation.IsDefined(value);
+        }
+
+        private sealed partial class CategoriesStringFormatter : IEnumFormatter<int>
+        {
+            public static CategoriesStringFormatter Instance = new CategoriesStringFormatter();
+
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public int GetStringCountForNumber(int value) => EnumNumericFormatter.GetStringLength(value);
+
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public string GetStringForNumber(int value) => value.ToString();
+
+            public int? TryGetStringCountForMember(int value)
+            {
+                return value switch
+                {
+                    0 => 11,
+                    1 => 4,
+                    2 => 10,
+                    3 => 4,
+                    4 => 10,
+                    5 => 7,
+                    _ => null
+                };
+            }
+
+            public string? TryGetStringForMember(int value)
+            {
+                return value switch
+                {
+                    0 => "Electronics",
+                    1 => "Food",
+                    2 => "Automotive",
+                    3 => "Arts",
+                    4 => "BeautyCare",
+                    5 => "Fashion",
+                    _ => null
+                };
+            }
         }
 
         /// <summary>Adds two enumerations and replaces the first integer with the sum, as an atomic operation.</summary>
