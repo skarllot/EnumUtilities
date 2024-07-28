@@ -72,20 +72,22 @@ public static class EnumNumericFormatter
     /// <param name="value">The number to count digits.</param>
     /// <returns>The length of the string representation of the value.</returns>
     public static int GetStringLength(int value) =>
-        (value < 0 ? -value : value) switch
-        {
-            // Max = 2_147_483_647
-            > 999_999_999 => 10,
-            > 99_999_999 => 9,
-            > 9_999_999 => 8,
-            > 999_999 => 7,
-            > 99_999 => 6,
-            > 9_999 => 5,
-            > 999 => 4,
-            > 99 => 3,
-            > 9 => 2,
-            _ => 1,
-        } + (value < 0 ? 1 : 0);
+        value == int.MinValue
+            ? 11
+            : (value < 0 ? -value : value) switch
+            {
+                // Max = 2_147_483_647
+                > 999_999_999 => 10,
+                > 99_999_999 => 9,
+                > 9_999_999 => 8,
+                > 999_999 => 7,
+                > 99_999 => 6,
+                > 9_999 => 5,
+                > 999 => 4,
+                > 99 => 3,
+                > 9 => 2,
+                _ => 1,
+            } + (value < 0 ? 1 : 0);
 
     /// <summary>
     /// Gets the string length required to represent an 32-bit unsigned integer value as numeric text.
@@ -114,29 +116,31 @@ public static class EnumNumericFormatter
     /// <param name="value">The number to count digits.</param>
     /// <returns>The length of the string representation of the value.</returns>
     public static int GetStringLength(long value) =>
-        (value < 0 ? -value : value) switch
-        {
-            // Max = 9_223_372_036_854_775_807
-            > 999_999_999_999_999_999L => 19,
-            > 99_999_999_999_999_999L => 18,
-            > 9_999_999_999_999_999L => 17,
-            > 999_999_999_999_999L => 16,
-            > 99_999_999_999_999L => 15,
-            > 9_999_999_999_999L => 14,
-            > 999_999_999_999L => 13,
-            > 99_999_999_999L => 12,
-            > 9_999_999_999L => 11,
-            > 999_999_999L => 10,
-            > 99_999_999L => 9,
-            > 9_999_999L => 8,
-            > 999_999L => 7,
-            > 99_999L => 6,
-            > 9_999L => 5,
-            > 999L => 4,
-            > 99L => 3,
-            > 9L => 2,
-            _ => 1,
-        } + (value < 0 ? 1 : 0);
+        value == long.MinValue
+            ? 20
+            : (value < 0 ? -value : value) switch
+            {
+                // Max = 9_223_372_036_854_775_807
+                > 999_999_999_999_999_999L => 19,
+                > 99_999_999_999_999_999L => 18,
+                > 9_999_999_999_999_999L => 17,
+                > 999_999_999_999_999L => 16,
+                > 99_999_999_999_999L => 15,
+                > 9_999_999_999_999L => 14,
+                > 999_999_999_999L => 13,
+                > 99_999_999_999L => 12,
+                > 9_999_999_999L => 11,
+                > 999_999_999L => 10,
+                > 99_999_999L => 9,
+                > 9_999_999L => 8,
+                > 999_999L => 7,
+                > 99_999L => 6,
+                > 9_999L => 5,
+                > 999L => 4,
+                > 99L => 3,
+                > 9L => 2,
+                _ => 1,
+            } + (value < 0 ? 1 : 0);
 
     /// <summary>
     /// Gets the string length required to represent an 64-bit unsigned integer value as numeric text.
