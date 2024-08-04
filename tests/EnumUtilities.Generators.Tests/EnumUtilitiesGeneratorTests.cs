@@ -90,6 +90,20 @@ public class EnumUtilitiesGeneratorTests
         }
         """;
 
+    [StringSyntax("C#")]
+    private const string NoMembersEnumText =
+        """
+        using Raiqub.Generators.EnumUtilities;
+
+        namespace Testing.Models;
+
+        [EnumGenerator]
+        [JsonConverterGenerator]
+        public enum MyEnum
+        {
+        }
+        """;
+
     [Fact]
     public void GenerateFiles()
     {
@@ -109,6 +123,7 @@ public class EnumUtilitiesGeneratorTests
 
         Assert.Equal(
             [
+                $"{GeneratorBasePath}/Testing.Models.WeekDaysEnumInfo.g.cs".Replace('/', Path.DirectorySeparatorChar),
                 $"{GeneratorBasePath}/Testing.Models.WeekDaysExtensions.g.cs".Replace('/', Path.DirectorySeparatorChar),
                 $"{GeneratorBasePath}/Testing.Models.WeekDaysFactory.g.cs".Replace('/', Path.DirectorySeparatorChar),
                 $"{GeneratorBasePath}/Testing.Models.WeekDaysValidation.g.cs".Replace('/', Path.DirectorySeparatorChar),
@@ -136,6 +151,7 @@ public class EnumUtilitiesGeneratorTests
 
         Assert.Equal(
             [
+                $"{GeneratorBasePath}/Testing.Models.ColoursEnumInfo.g.cs".Replace('/', Path.DirectorySeparatorChar),
                 $"{GeneratorBasePath}/Testing.Models.ColoursExtensions.g.cs".Replace('/', Path.DirectorySeparatorChar),
                 $"{GeneratorBasePath}/Testing.Models.ColoursFactory.g.cs".Replace('/', Path.DirectorySeparatorChar),
                 $"{GeneratorBasePath}/Testing.Models.ColoursValidation.g.cs".Replace('/', Path.DirectorySeparatorChar),
@@ -162,10 +178,31 @@ public class EnumUtilitiesGeneratorTests
 
         Assert.Equal(
             [
+                $"{GeneratorBasePath}/Testing.Models.PaymentMethodEnumInfo.g.cs".Replace('/', Path.DirectorySeparatorChar),
                 $"{GeneratorBasePath}/Testing.Models.PaymentMethodExtensions.g.cs".Replace('/', Path.DirectorySeparatorChar),
                 $"{GeneratorBasePath}/Testing.Models.PaymentMethodFactory.g.cs".Replace('/', Path.DirectorySeparatorChar),
                 $"{GeneratorBasePath}/Testing.Models.PaymentMethodValidation.g.cs".Replace('/', Path.DirectorySeparatorChar),
             ],
             generatedFilesNames);
+    }
+
+    [Fact]
+    public void NoGenerateFiles()
+    {
+        var generator = new EnumUtilitiesGenerator();
+        var driver = CSharpGeneratorDriver.Create(generator);
+
+        var compilation = CSharpCompilation.Create(
+            nameof(EnumUtilitiesGeneratorTests),
+            new[] { CSharpSyntaxTree.ParseText(NoMembersEnumText) },
+            AppDomain.CurrentDomain.GetAssemblies()
+                .Append(typeof(EnumGeneratorAttribute).Assembly)
+                .Where(it => !it.IsDynamic && !string.IsNullOrWhiteSpace(it.Location))
+                .Select(it => MetadataReference.CreateFromFile(it.Location)));
+
+        var runResult = driver.RunGenerators(compilation).GetRunResult();
+        var generatedFilesNames = runResult.GeneratedTrees.Select(t => t.FilePath);
+
+        Assert.Empty(generatedFilesNames);
     }
 }

@@ -17,11 +17,13 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <summary>Represents the largest possible number of characters produced by converting an <see cref="MyEnum3" /> value to string, based on defined members. This field is constant.</summary>
         public const int NameMaxCharsLength = 9;
 
+        private static readonly MyEnum3EnumInfo.StringFormatter s_stringFormatter = MyEnum3EnumInfo.StringFormatter.Instance;
+
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
         /// <returns>The string representation of the value of this instance.</returns>
         public static string ToStringFast(this NestedInClass.MyEnum3 value)
         {
-            return EnumStringFormatter.GetString((int)value, MyEnum3StringFormatter.Instance);
+            return EnumStringFormatter.GetString((int)value, s_stringFormatter);
         }
 
         /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
@@ -29,7 +31,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns>The number of characters produced by converting the specified value to string.</returns>
         public static int GetStringCount(this NestedInClass.MyEnum3 value)
         {
-            return EnumStringFormatter.GetStringCount((int)value, MyEnum3StringFormatter.Instance);
+            return EnumStringFormatter.GetStringCount((int)value, s_stringFormatter);
         }
 
         /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
@@ -37,47 +39,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         public static bool IsDefined(this NestedInClass.MyEnum3 value)
         {
             return MyEnum3Validation.IsDefined(value);
-        }
-
-        private sealed partial class MyEnum3StringFormatter : IEnumFormatter<int>
-        {
-            public static MyEnum3StringFormatter Instance = new MyEnum3StringFormatter();
-
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public int GetStringCountForNumber(int value) => EnumNumericFormatter.GetStringLength(value);
-
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public string GetStringForNumber(int value) => value.ToString();
-
-            public int? TryGetStringCountForMember(int value)
-            {
-                return value switch
-                {
-                    0 => 6,
-                    1 => 7,
-                    2 => 9,
-                    3 => 8,
-                    4 => 6,
-                    5 => 8,
-                    6 => 6,
-                    _ => null
-                };
-            }
-
-            public string? TryGetStringForMember(int value)
-            {
-                return value switch
-                {
-                    0 => "Monday",
-                    1 => "Tuesday",
-                    2 => "Wednesday",
-                    3 => "Thursday",
-                    4 => "Friday",
-                    5 => "Saturday",
-                    6 => "Sunday",
-                    _ => null
-                };
-            }
         }
 
         /// <summary>Adds two enumerations and replaces the first integer with the sum, as an atomic operation.</summary>

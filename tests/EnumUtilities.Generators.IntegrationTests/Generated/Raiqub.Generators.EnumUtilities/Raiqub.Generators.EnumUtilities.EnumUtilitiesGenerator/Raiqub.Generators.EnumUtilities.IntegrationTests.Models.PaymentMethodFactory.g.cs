@@ -15,6 +15,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class PaymentMethodFactory
     {
+        private static readonly PaymentMethodEnumInfo.StringParser s_stringParser = PaymentMethodEnumInfo.StringParser.Instance;
+
         /// <summary>
         /// Converts the string representation of the name or numeric value of one or more enumerated constants to
         /// an equivalent enumerated object.
@@ -158,7 +160,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
         private static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, bool throwOnFailure, out PaymentMethod result)
         {
-            bool success = EnumStringParser.TryParse(value, PaymentMethodStringParser.Instance, ignoreCase, throwOnFailure, out int number);
+            bool success = EnumStringParser.TryParse(value, s_stringParser, ignoreCase, throwOnFailure, out int number);
             if (!success)
             {
                 result = 0;
@@ -167,72 +169,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
             result = (PaymentMethod)number;
             return true;
-        }
-
-        private sealed partial class PaymentMethodStringParser : IEnumParser<int>
-        {
-            public static PaymentMethodStringParser Instance = new PaymentMethodStringParser();
-
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public int BitwiseOr(int value1, int value2) => unchecked((int)(value1 | value2));
-
-            public bool TryParseNumber(ReadOnlySpan<char> value, out int result) => EnumNumericParser.TryParse(value, out result);
-
-            public bool TryParseSingleName(ReadOnlySpan<char> value, bool ignoreCase, out int result)
-            {
-                return ignoreCase
-                    ? TryParse(value, out result)
-                    : TryParse(value, StringComparison.OrdinalIgnoreCase, out result);
-            }
-
-            public bool TryParseSingleName(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
-            {
-                return TryParse(value, comparisonType, out result);
-            }
-
-            private bool TryParse(ReadOnlySpan<char> value, out int result)
-            {
-                switch (value)
-                {
-                    case { } when value.SequenceEqual("Credit".AsSpan()):
-                        result = 0;
-                        return true;
-                    case { } when value.SequenceEqual("Debit".AsSpan()):
-                        result = 1;
-                        return true;
-                    case { } when value.SequenceEqual("Cash".AsSpan()):
-                        result = 2;
-                        return true;
-                    case { } when value.SequenceEqual("Cheque".AsSpan()):
-                        result = 3;
-                        return true;
-                    default:
-                        result = 0;
-                        return false;
-                }
-            }
-
-            private bool TryParse(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
-            {
-                switch (value)
-                {
-                    case { } when value.Equals("Credit", comparisonType):
-                        result = 0;
-                        return true;
-                    case { } when value.Equals("Debit", comparisonType):
-                        result = 1;
-                        return true;
-                    case { } when value.Equals("Cash", comparisonType):
-                        result = 2;
-                        return true;
-                    case { } when value.Equals("Cheque", comparisonType):
-                        result = 3;
-                        return true;
-                    default:
-                        result = 0;
-                        return false;
-                }
-            }
         }
 
         /// <summary>
@@ -254,8 +190,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out PaymentMethod result)
         {
-            bool success = PaymentMethodStringParser.Instance.TryParseSingleName(name.AsSpan(), comparisonType, out int number)
-                || PaymentMethodStringParser.Instance.TryParseNumber(name.AsSpan(), out number);
+            bool success = s_stringParser.TryParseSingleName(name.AsSpan(), comparisonType, out int number)
+                || s_stringParser.TryParseNumber(name.AsSpan(), out number);
             if (!success)
             {
                 return Enum.TryParse(name, out result);
@@ -457,7 +393,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
         private static bool TryCreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType, bool throwOnFailure, out PaymentMethod result)
         {
-            bool success = EnumStringParser.TryParseDescription(description, PaymentMethodStringParser.Instance, comparisonType, throwOnFailure, out int number);
+            bool success = EnumStringParser.TryParseDescription(description, s_stringParser, comparisonType, throwOnFailure, out int number);
             if (!success)
             {
                 result = 0;
@@ -466,22 +402,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
             result = (PaymentMethod)number;
             return true;
-        }
-
-        private sealed partial class PaymentMethodStringParser : IEnumDescriptionParser<int>
-        {
-            public bool TryParseDescription(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
-            {
-                switch (value)
-                {
-                    case { } s when s.Equals("The payment by using physical cash", comparisonType):
-                        result = 2;
-                        return true;
-                    default:
-                        result = default;
-                        return false;
-                }
-            }
         }
 
         public static bool TryCreateFromDisplayShortName(

@@ -15,6 +15,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class HumanStatesFactory
     {
+        private static readonly HumanStatesEnumInfo.StringParser s_stringParser = HumanStatesEnumInfo.StringParser.Instance;
+
         /// <summary>
         /// Converts the string representation of the name or numeric value of one or more enumerated constants to
         /// an equivalent enumerated object.
@@ -158,7 +160,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
         private static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, bool throwOnFailure, out HumanStates result)
         {
-            bool success = EnumStringParser.TryParse(value, HumanStatesStringParser.Instance, ignoreCase, throwOnFailure, out int number);
+            bool success = EnumStringParser.TryParse(value, s_stringParser, ignoreCase, throwOnFailure, out int number);
             if (!success)
             {
                 result = 0;
@@ -167,84 +169,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
             result = (HumanStates)number;
             return true;
-        }
-
-        private sealed partial class HumanStatesStringParser : IEnumParser<int>
-        {
-            public static HumanStatesStringParser Instance = new HumanStatesStringParser();
-
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public int BitwiseOr(int value1, int value2) => unchecked((int)(value1 | value2));
-
-            public bool TryParseNumber(ReadOnlySpan<char> value, out int result) => EnumNumericParser.TryParse(value, out result);
-
-            public bool TryParseSingleName(ReadOnlySpan<char> value, bool ignoreCase, out int result)
-            {
-                return ignoreCase
-                    ? TryParse(value, out result)
-                    : TryParse(value, StringComparison.OrdinalIgnoreCase, out result);
-            }
-
-            public bool TryParseSingleName(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
-            {
-                return TryParse(value, comparisonType, out result);
-            }
-
-            private bool TryParse(ReadOnlySpan<char> value, out int result)
-            {
-                switch (value)
-                {
-                    case { } when value.SequenceEqual("Idle".AsSpan()):
-                        result = 1;
-                        return true;
-                    case { } when value.SequenceEqual("Working".AsSpan()):
-                        result = 2;
-                        return true;
-                    case { } when value.SequenceEqual("Sleeping".AsSpan()):
-                        result = 3;
-                        return true;
-                    case { } when value.SequenceEqual("Eating".AsSpan()):
-                        result = 4;
-                        return true;
-                    case { } when value.SequenceEqual("Dead".AsSpan()):
-                        result = 5;
-                        return true;
-                    case { } when value.SequenceEqual("Relaxing".AsSpan()):
-                        result = 1;
-                        return true;
-                    default:
-                        result = 0;
-                        return false;
-                }
-            }
-
-            private bool TryParse(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
-            {
-                switch (value)
-                {
-                    case { } when value.Equals("Idle", comparisonType):
-                        result = 1;
-                        return true;
-                    case { } when value.Equals("Working", comparisonType):
-                        result = 2;
-                        return true;
-                    case { } when value.Equals("Sleeping", comparisonType):
-                        result = 3;
-                        return true;
-                    case { } when value.Equals("Eating", comparisonType):
-                        result = 4;
-                        return true;
-                    case { } when value.Equals("Dead", comparisonType):
-                        result = 5;
-                        return true;
-                    case { } when value.Equals("Relaxing", comparisonType):
-                        result = 1;
-                        return true;
-                    default:
-                        result = 0;
-                        return false;
-                }
-            }
         }
 
         /// <summary>
@@ -266,8 +190,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out HumanStates result)
         {
-            bool success = HumanStatesStringParser.Instance.TryParseSingleName(name.AsSpan(), comparisonType, out int number)
-                || HumanStatesStringParser.Instance.TryParseNumber(name.AsSpan(), out number);
+            bool success = s_stringParser.TryParseSingleName(name.AsSpan(), comparisonType, out int number)
+                || s_stringParser.TryParseNumber(name.AsSpan(), out number);
             if (!success)
             {
                 return Enum.TryParse(name, out result);

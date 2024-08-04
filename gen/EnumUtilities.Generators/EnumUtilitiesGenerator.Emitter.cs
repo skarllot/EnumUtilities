@@ -11,6 +11,7 @@ public partial class EnumUtilitiesGenerator
 {
     private static readonly CodeWriterDispatcher<EnumToGenerate> s_dispatcher =
         new(
+            sb => new EnumInfoWriter(sb),
             sb => new EnumExtensionsWriter(sb),
             sb => new EnumFactoryWriter(sb),
             sb => new EnumValidationWriter(sb),
