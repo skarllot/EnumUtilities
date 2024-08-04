@@ -4,6 +4,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using Raiqub.Generators.EnumUtilities.Formatters;
+using Raiqub.Generators.EnumUtilities.Parsers;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
@@ -54,6 +55,79 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                     200000000000 => "OutlierReading",
                     _ => null
                 };
+            }
+        }
+
+        /// <summary>Provides support for parsing <see cref="BigErrorCode"/> values.</summary>
+        public sealed partial class StringParser
+            : IEnumParser<ulong>
+        {
+            /// <summary>Gets the singleton instance of the <see cref="StringParser"/> class.</summary>
+            public static StringParser Instance = new StringParser();
+
+            /// <inheritdoc />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public ulong BitwiseOr(ulong value1, ulong value2) => unchecked((ulong)(value1 | value2));
+
+            /// <inheritdoc />
+            public bool TryParseNumber(ReadOnlySpan<char> value, out ulong result) => EnumNumericParser.TryParse(value, out result);
+
+            /// <inheritdoc />
+            public bool TryParseSingleName(ReadOnlySpan<char> value, bool ignoreCase, out ulong result)
+            {
+                return ignoreCase
+                    ? TryParse(value, out result)
+                    : TryParse(value, StringComparison.OrdinalIgnoreCase, out result);
+            }
+
+            /// <inheritdoc />
+            public bool TryParseSingleName(ReadOnlySpan<char> value, StringComparison comparisonType, out ulong result)
+            {
+                return TryParse(value, comparisonType, out result);
+            }
+
+            private bool TryParse(ReadOnlySpan<char> value, out ulong result)
+            {
+                switch (value)
+                {
+                    case { } when value.SequenceEqual("None".AsSpan()):
+                        result = 0;
+                        return true;
+                    case { } when value.SequenceEqual("Unknown".AsSpan()):
+                        result = 1;
+                        return true;
+                    case { } when value.SequenceEqual("ConnectionLost".AsSpan()):
+                        result = 100;
+                        return true;
+                    case { } when value.SequenceEqual("OutlierReading".AsSpan()):
+                        result = 200000000000;
+                        return true;
+                    default:
+                        result = 0;
+                        return false;
+                }
+            }
+
+            private bool TryParse(ReadOnlySpan<char> value, StringComparison comparisonType, out ulong result)
+            {
+                switch (value)
+                {
+                    case { } when value.Equals("None", comparisonType):
+                        result = 0;
+                        return true;
+                    case { } when value.Equals("Unknown", comparisonType):
+                        result = 1;
+                        return true;
+                    case { } when value.Equals("ConnectionLost", comparisonType):
+                        result = 100;
+                        return true;
+                    case { } when value.Equals("OutlierReading", comparisonType):
+                        result = 200000000000;
+                        return true;
+                    default:
+                        result = 0;
+                        return false;
+                }
             }
         }
     }

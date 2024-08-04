@@ -22,8 +22,8 @@
         StringComparison comparisonType,
         out <#= Model.RefName #> result)
     {
-        bool success = <#= Model.Name #>StringParser.Instance.TryParseSingleName(name.AsSpan(), comparisonType, out <#= Model.UnderlyingType #> number)
-            || <#= Model.Name #>StringParser.Instance.TryParseNumber(name.AsSpan(), out number);
+        bool success = s_stringParser.TryParseSingleName(name.AsSpan(), comparisonType, out <#= Model.UnderlyingType #> number)
+            || s_stringParser.TryParseNumber(name.AsSpan(), out number);
         if (!success)
         {
             return Enum.TryParse(name, out result);

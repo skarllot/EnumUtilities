@@ -2,6 +2,8 @@
     private void WriteDefaultBlock()
     {
 #>
+    private static readonly <#= Model.Name #>EnumInfo.StringParser s_stringParser = <#= Model.Name #>EnumInfo.StringParser.Instance;
+
     /// <summary>
     /// Converts the string representation of the name or numeric value of one or more enumerated constants to
     /// an equivalent enumerated object.
@@ -145,7 +147,7 @@
 
     private static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, bool throwOnFailure, out <#= Model.RefName #> result)
     {
-        bool success = EnumStringParser.TryParse(value, <#= Model.Name #>StringParser.Instance, ignoreCase, throwOnFailure, out <#= Model.UnderlyingType #> number);
+        bool success = EnumStringParser.TryParse(value, s_stringParser, ignoreCase, throwOnFailure, out <#= Model.UnderlyingType #> number);
         if (!success)
         {
             result = 0;
@@ -154,68 +156,6 @@
 
         result = (<#= Model.RefName #>)number;
         return true;
-    }
-
-    private sealed partial class <#= Model.Name #>StringParser : IEnumParser<<#= Model.UnderlyingType #>>
-    {
-        public static <#= Model.Name #>StringParser Instance = new <#= Model.Name #>StringParser();
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public <#= Model.UnderlyingType #> BitwiseOr(<#= Model.UnderlyingType #> value1, <#= Model.UnderlyingType #> value2) => unchecked((<#= Model.UnderlyingType #>)(value1 | value2));
-
-        public bool TryParseNumber(ReadOnlySpan<char> value, out <#= Model.UnderlyingType #> result) => EnumNumericParser.TryParse(value, out result);
-
-        public bool TryParseSingleName(ReadOnlySpan<char> value, bool ignoreCase, out <#= Model.UnderlyingType #> result)
-        {
-            return ignoreCase
-                ? TryParse(value, out result)
-                : TryParse(value, StringComparison.OrdinalIgnoreCase, out result);
-        }
-
-        public bool TryParseSingleName(ReadOnlySpan<char> value, StringComparison comparisonType, out <#= Model.UnderlyingType #> result)
-        {
-            return TryParse(value, comparisonType, out result);
-        }
-
-        private bool TryParse(ReadOnlySpan<char> value, out <#= Model.UnderlyingType #> result)
-        {
-            switch (value)
-            {
-<#+
-        foreach (var curr in Model.Values)
-        {
-#>
-                case { } when value.SequenceEqual("<#= curr.MemberName #>".AsSpan()):
-                    result = <#= curr.MemberValue #>;
-                    return true;
-<#+
-        }
-#>
-                default:
-                    result = 0;
-                    return false;
-            }
-        }
-
-        private bool TryParse(ReadOnlySpan<char> value, StringComparison comparisonType, out <#= Model.UnderlyingType #> result)
-        {
-            switch (value)
-            {
-<#+
-        foreach (var curr in Model.Values)
-        {
-#>
-                case { } when value.Equals("<#= curr.MemberName #>", comparisonType):
-                    result = <#= curr.MemberValue #>;
-                    return true;
-<#+
-        }
-#>
-                default:
-                    result = 0;
-                    return false;
-            }
-        }
     }
 <#+
     }

@@ -13,6 +13,7 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Raiqub.Generators.EnumUtilities.Formatters;
+using Raiqub.Generators.EnumUtilities.Parsers;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
@@ -36,6 +37,7 @@ using Raiqub.Generators.EnumUtilities.Formatters;
                         x => x.JsonPropertyName?.Length ?? x.SerializationValue?.Length ?? x.MemberName.Length) #>;
 
     private static readonly <#= Model.Name #>EnumInfo.StringFormatter s_stringFormatter = <#= Model.Name #>EnumInfo.StringFormatter.Instance;
+    private static readonly <#= Model.Name #>EnumInfo.StringParser s_stringParser = <#= Model.Name #>EnumInfo.StringParser.Instance;
 
     public override <#= Model.Name #> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
@@ -100,7 +102,7 @@ using Raiqub.Generators.EnumUtilities.Formatters;
 <#
     }
 #>
-            _ => Enum.TryParse(name, out <#= Model.RefName #> result) ? (<#= Model.UnderlyingType #>)result : <#= AppendFallbackValue() #>
+            _ => EnumStringParser.TryParse(name, s_stringParser, ignoreCase: true, throwOnFailure: false, out <#= Model.UnderlyingType #> result) ? result : <#= AppendFallbackValue() #>
         };
     }
 
@@ -143,7 +145,7 @@ using Raiqub.Generators.EnumUtilities.Formatters;
 <#
     }
 #>
-            _ => Enum.TryParse(name, out <#= Model.RefName #> result) ? (<#= Model.UnderlyingType #>)result : <#= AppendFallbackValue() #>
+            _ => EnumStringParser.TryParse(name, s_stringParser, ignoreCase: true, throwOnFailure: false, out <#= Model.UnderlyingType #> result) ? result : <#= AppendFallbackValue() #>
         };
     }
 

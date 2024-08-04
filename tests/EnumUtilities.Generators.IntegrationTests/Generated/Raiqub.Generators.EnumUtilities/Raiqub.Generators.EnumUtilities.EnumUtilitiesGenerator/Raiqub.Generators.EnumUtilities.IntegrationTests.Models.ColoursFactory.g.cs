@@ -15,6 +15,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class ColoursFactory
     {
+        private static readonly ColoursEnumInfo.StringParser s_stringParser = ColoursEnumInfo.StringParser.Instance;
+
         /// <summary>
         /// Converts the string representation of the name or numeric value of one or more enumerated constants to
         /// an equivalent enumerated object.
@@ -158,7 +160,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
         private static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, bool throwOnFailure, out Colours result)
         {
-            bool success = EnumStringParser.TryParse(value, ColoursStringParser.Instance, ignoreCase, throwOnFailure, out int number);
+            bool success = EnumStringParser.TryParse(value, s_stringParser, ignoreCase, throwOnFailure, out int number);
             if (!success)
             {
                 result = 0;
@@ -167,66 +169,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
             result = (Colours)number;
             return true;
-        }
-
-        private sealed partial class ColoursStringParser : IEnumParser<int>
-        {
-            public static ColoursStringParser Instance = new ColoursStringParser();
-
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public int BitwiseOr(int value1, int value2) => unchecked((int)(value1 | value2));
-
-            public bool TryParseNumber(ReadOnlySpan<char> value, out int result) => EnumNumericParser.TryParse(value, out result);
-
-            public bool TryParseSingleName(ReadOnlySpan<char> value, bool ignoreCase, out int result)
-            {
-                return ignoreCase
-                    ? TryParse(value, out result)
-                    : TryParse(value, StringComparison.OrdinalIgnoreCase, out result);
-            }
-
-            public bool TryParseSingleName(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
-            {
-                return TryParse(value, comparisonType, out result);
-            }
-
-            private bool TryParse(ReadOnlySpan<char> value, out int result)
-            {
-                switch (value)
-                {
-                    case { } when value.SequenceEqual("Red".AsSpan()):
-                        result = 1;
-                        return true;
-                    case { } when value.SequenceEqual("Blue".AsSpan()):
-                        result = 2;
-                        return true;
-                    case { } when value.SequenceEqual("Green".AsSpan()):
-                        result = 4;
-                        return true;
-                    default:
-                        result = 0;
-                        return false;
-                }
-            }
-
-            private bool TryParse(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
-            {
-                switch (value)
-                {
-                    case { } when value.Equals("Red", comparisonType):
-                        result = 1;
-                        return true;
-                    case { } when value.Equals("Blue", comparisonType):
-                        result = 2;
-                        return true;
-                    case { } when value.Equals("Green", comparisonType):
-                        result = 4;
-                        return true;
-                    default:
-                        result = 0;
-                        return false;
-                }
-            }
         }
 
         /// <summary>
@@ -248,8 +190,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out Colours result)
         {
-            bool success = ColoursStringParser.Instance.TryParseSingleName(name.AsSpan(), comparisonType, out int number)
-                || ColoursStringParser.Instance.TryParseNumber(name.AsSpan(), out number);
+            bool success = s_stringParser.TryParseSingleName(name.AsSpan(), comparisonType, out int number)
+                || s_stringParser.TryParseNumber(name.AsSpan(), out number);
             if (!success)
             {
                 return Enum.TryParse(name, out result);

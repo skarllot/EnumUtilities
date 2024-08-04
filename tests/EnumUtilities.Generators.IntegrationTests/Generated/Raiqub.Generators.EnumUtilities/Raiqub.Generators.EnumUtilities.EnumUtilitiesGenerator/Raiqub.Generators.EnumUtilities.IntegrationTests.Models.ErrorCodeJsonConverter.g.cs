@@ -5,6 +5,7 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Raiqub.Generators.EnumUtilities.Formatters;
+using Raiqub.Generators.EnumUtilities.Parsers;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
@@ -18,6 +19,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         private const int MaxCharsLength = 3;
 
         private static readonly ErrorCodeEnumInfo.StringFormatter s_stringFormatter = ErrorCodeEnumInfo.StringFormatter.Instance;
+        private static readonly ErrorCodeEnumInfo.StringParser s_stringParser = ErrorCodeEnumInfo.StringParser.Instance;
 
         public override ErrorCode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
@@ -68,7 +70,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 "UNK" => (ushort)1,
                 "CNX" => (ushort)100,
                 "OUT" => (ushort)200,
-                _ => Enum.TryParse(name, out ErrorCode result) ? (ushort)result : (ushort)0
+                _ => EnumStringParser.TryParse(name, s_stringParser, ignoreCase: true, throwOnFailure: false, out ushort result) ? result : (ushort)0
             };
         }
 
@@ -106,7 +108,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 "UNK" => (ushort)1,
                 "CNX" => (ushort)100,
                 "OUT" => (ushort)200,
-                _ => Enum.TryParse(name, out ErrorCode result) ? (ushort)result : (ushort)0
+                _ => EnumStringParser.TryParse(name, s_stringParser, ignoreCase: true, throwOnFailure: false, out ushort result) ? result : (ushort)0
             };
         }
 

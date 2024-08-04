@@ -15,6 +15,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class UserRoleFactory
     {
+        private static readonly UserRoleEnumInfo.StringParser s_stringParser = UserRoleEnumInfo.StringParser.Instance;
+
         /// <summary>
         /// Converts the string representation of the name or numeric value of one or more enumerated constants to
         /// an equivalent enumerated object.
@@ -158,7 +160,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
         private static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, bool throwOnFailure, out UserRole result)
         {
-            bool success = EnumStringParser.TryParse(value, UserRoleStringParser.Instance, ignoreCase, throwOnFailure, out ulong number);
+            bool success = EnumStringParser.TryParse(value, s_stringParser, ignoreCase, throwOnFailure, out ulong number);
             if (!success)
             {
                 result = 0;
@@ -167,84 +169,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
             result = (UserRole)number;
             return true;
-        }
-
-        private sealed partial class UserRoleStringParser : IEnumParser<ulong>
-        {
-            public static UserRoleStringParser Instance = new UserRoleStringParser();
-
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public ulong BitwiseOr(ulong value1, ulong value2) => unchecked((ulong)(value1 | value2));
-
-            public bool TryParseNumber(ReadOnlySpan<char> value, out ulong result) => EnumNumericParser.TryParse(value, out result);
-
-            public bool TryParseSingleName(ReadOnlySpan<char> value, bool ignoreCase, out ulong result)
-            {
-                return ignoreCase
-                    ? TryParse(value, out result)
-                    : TryParse(value, StringComparison.OrdinalIgnoreCase, out result);
-            }
-
-            public bool TryParseSingleName(ReadOnlySpan<char> value, StringComparison comparisonType, out ulong result)
-            {
-                return TryParse(value, comparisonType, out result);
-            }
-
-            private bool TryParse(ReadOnlySpan<char> value, out ulong result)
-            {
-                switch (value)
-                {
-                    case { } when value.SequenceEqual("None".AsSpan()):
-                        result = 0;
-                        return true;
-                    case { } when value.SequenceEqual("NormalUser".AsSpan()):
-                        result = 1;
-                        return true;
-                    case { } when value.SequenceEqual("Custodian".AsSpan()):
-                        result = 2;
-                        return true;
-                    case { } when value.SequenceEqual("Finance".AsSpan()):
-                        result = 4;
-                        return true;
-                    case { } when value.SequenceEqual("SuperUser".AsSpan()):
-                        result = 6;
-                        return true;
-                    case { } when value.SequenceEqual("All".AsSpan()):
-                        result = 7;
-                        return true;
-                    default:
-                        result = 0;
-                        return false;
-                }
-            }
-
-            private bool TryParse(ReadOnlySpan<char> value, StringComparison comparisonType, out ulong result)
-            {
-                switch (value)
-                {
-                    case { } when value.Equals("None", comparisonType):
-                        result = 0;
-                        return true;
-                    case { } when value.Equals("NormalUser", comparisonType):
-                        result = 1;
-                        return true;
-                    case { } when value.Equals("Custodian", comparisonType):
-                        result = 2;
-                        return true;
-                    case { } when value.Equals("Finance", comparisonType):
-                        result = 4;
-                        return true;
-                    case { } when value.Equals("SuperUser", comparisonType):
-                        result = 6;
-                        return true;
-                    case { } when value.Equals("All", comparisonType):
-                        result = 7;
-                        return true;
-                    default:
-                        result = 0;
-                        return false;
-                }
-            }
         }
 
         /// <summary>
@@ -266,8 +190,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out UserRole result)
         {
-            bool success = UserRoleStringParser.Instance.TryParseSingleName(name.AsSpan(), comparisonType, out ulong number)
-                || UserRoleStringParser.Instance.TryParseNumber(name.AsSpan(), out number);
+            bool success = s_stringParser.TryParseSingleName(name.AsSpan(), comparisonType, out ulong number)
+                || s_stringParser.TryParseNumber(name.AsSpan(), out number);
             if (!success)
             {
                 return Enum.TryParse(name, out result);

@@ -1,0 +1,119 @@
+﻿<#+
+    private void WriteFactoryBlock()
+    {
+#>
+
+    /// <summary>Provides support for parsing <see cref="<#= Model.Name #>"/> values.</summary>
+    public sealed partial class StringParser
+        : IEnumParser<<#= Model.UnderlyingType #>><#=
+                Model.HasDescription ? Append($", IEnumDescriptionParser<{Model.UnderlyingType}>") : new None() #>
+    {
+        /// <summary>Gets the singleton instance of the <see cref="StringParser"/> class.</summary>
+        public static StringParser Instance = new StringParser();
+
+        /// <inheritdoc />
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public <#= Model.UnderlyingType #> BitwiseOr(<#= Model.UnderlyingType #> value1, <#= Model.UnderlyingType #> value2) => unchecked((<#= Model.UnderlyingType #>)(value1 | value2));
+
+        /// <inheritdoc />
+        public bool TryParseNumber(ReadOnlySpan<char> value, out <#= Model.UnderlyingType #> result) => EnumNumericParser.TryParse(value, out result);
+
+        /// <inheritdoc />
+        public bool TryParseSingleName(ReadOnlySpan<char> value, bool ignoreCase, out <#= Model.UnderlyingType #> result)
+        {
+            return ignoreCase
+                ? TryParse(value, out result)
+                : TryParse(value, StringComparison.OrdinalIgnoreCase, out result);
+        }
+
+        /// <inheritdoc />
+        public bool TryParseSingleName(ReadOnlySpan<char> value, StringComparison comparisonType, out <#= Model.UnderlyingType #> result)
+        {
+            return TryParse(value, comparisonType, out result);
+        }
+<#+
+        if (Model.HasDescription)
+        {
+#>
+
+        /// <inheritdoc />
+        public bool TryParseDescription(ReadOnlySpan<char> value, StringComparison comparisonType, out <#= Model.UnderlyingType #> result)
+        {
+<#+
+            if (Model.Values.All(x => x.Description == null))
+            {
+#>
+            result = default;
+            return false;
+<#+
+            }
+            else
+            {
+#>
+            switch (value)
+            {
+<#+
+                foreach (var curr in Model.Values.Where(x => x.Description != null))
+                {
+#>
+                case { } s when s.Equals("<#= curr.Description #>", comparisonType):
+                    result = <#= curr.MemberValue #>;
+                    return true;
+<#+
+                }
+#>
+                default:
+                    result = default;
+                    return false;
+            }
+<#+
+            }
+#>
+        }
+<#+
+        }
+#>
+
+        private bool TryParse(ReadOnlySpan<char> value, out <#= Model.UnderlyingType #> result)
+        {
+            switch (value)
+            {
+<#+
+        foreach (var curr in Model.Values)
+        {
+#>
+                case { } when value.SequenceEqual("<#= curr.MemberName #>".AsSpan()):
+                    result = <#= curr.MemberValue #>;
+                    return true;
+<#+
+        }
+#>
+                default:
+                    result = 0;
+                    return false;
+            }
+        }
+
+        private bool TryParse(ReadOnlySpan<char> value, StringComparison comparisonType, out <#= Model.UnderlyingType #> result)
+        {
+            switch (value)
+            {
+<#+
+        foreach (var curr in Model.Values)
+        {
+#>
+                case { } when value.Equals("<#= curr.MemberName #>", comparisonType):
+                    result = <#= curr.MemberValue #>;
+                    return true;
+<#+
+        }
+#>
+                default:
+                    result = 0;
+                    return false;
+            }
+        }
+    }
+<#+
+    }
+#>

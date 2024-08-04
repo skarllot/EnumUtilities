@@ -58,7 +58,7 @@
 
     private static bool TryCreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType, bool throwOnFailure, out <#= Model.RefName #> result)
     {
-        bool success = EnumStringParser.TryParseDescription(description, <#= Model.Name #>StringParser.Instance, comparisonType, throwOnFailure, out <#= Model.UnderlyingType #> number);
+        bool success = EnumStringParser.TryParseDescription(description, s_stringParser, comparisonType, throwOnFailure, out <#= Model.UnderlyingType #> number);
         if (!success)
         {
             result = 0;
@@ -67,43 +67,6 @@
 
         result = (<#= Model.RefName #>)number;
         return true;
-    }
-
-    private sealed partial class <#= Model.Name #>StringParser : IEnumDescriptionParser<<#= Model.UnderlyingType #>>
-    {
-        public bool TryParseDescription(ReadOnlySpan<char> value, StringComparison comparisonType, out <#= Model.UnderlyingType #> result)
-        {
-<#+
-        if (Model.Values.All(x => x.Description == null))
-        {
-#>
-            result = default;
-            return false;
-<#+
-        }
-        else
-        {
-#>
-            switch (value)
-            {
-<#+
-            foreach (var curr in Model.Values.Where(x => x.Description != null))
-            {
-#>
-                case { } s when s.Equals("<#= curr.Description #>", comparisonType):
-                    result = <#= curr.MemberValue #>;
-                    return true;
-<#+
-            }
-#>
-                default:
-                    result = default;
-                    return false;
-            }
-<#+
-        }
-#>
-        }
     }
 <#+
     }

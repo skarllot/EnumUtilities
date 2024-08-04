@@ -15,6 +15,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class SlimCategoriesFactory
     {
+        private static readonly SlimCategoriesEnumInfo.StringParser s_stringParser = SlimCategoriesEnumInfo.StringParser.Instance;
+
         /// <summary>
         /// Converts the string representation of the name or numeric value of one or more enumerated constants to
         /// an equivalent enumerated object.
@@ -158,7 +160,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
         private static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, bool throwOnFailure, out SlimCategories result)
         {
-            bool success = EnumStringParser.TryParse(value, SlimCategoriesStringParser.Instance, ignoreCase, throwOnFailure, out byte number);
+            bool success = EnumStringParser.TryParse(value, s_stringParser, ignoreCase, throwOnFailure, out byte number);
             if (!success)
             {
                 result = 0;
@@ -167,84 +169,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
             result = (SlimCategories)number;
             return true;
-        }
-
-        private sealed partial class SlimCategoriesStringParser : IEnumParser<byte>
-        {
-            public static SlimCategoriesStringParser Instance = new SlimCategoriesStringParser();
-
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public byte BitwiseOr(byte value1, byte value2) => unchecked((byte)(value1 | value2));
-
-            public bool TryParseNumber(ReadOnlySpan<char> value, out byte result) => EnumNumericParser.TryParse(value, out result);
-
-            public bool TryParseSingleName(ReadOnlySpan<char> value, bool ignoreCase, out byte result)
-            {
-                return ignoreCase
-                    ? TryParse(value, out result)
-                    : TryParse(value, StringComparison.OrdinalIgnoreCase, out result);
-            }
-
-            public bool TryParseSingleName(ReadOnlySpan<char> value, StringComparison comparisonType, out byte result)
-            {
-                return TryParse(value, comparisonType, out result);
-            }
-
-            private bool TryParse(ReadOnlySpan<char> value, out byte result)
-            {
-                switch (value)
-                {
-                    case { } when value.SequenceEqual("Electronics".AsSpan()):
-                        result = 0;
-                        return true;
-                    case { } when value.SequenceEqual("Food".AsSpan()):
-                        result = 1;
-                        return true;
-                    case { } when value.SequenceEqual("Automotive".AsSpan()):
-                        result = 2;
-                        return true;
-                    case { } when value.SequenceEqual("Arts".AsSpan()):
-                        result = 3;
-                        return true;
-                    case { } when value.SequenceEqual("BeautyCare".AsSpan()):
-                        result = 4;
-                        return true;
-                    case { } when value.SequenceEqual("Fashion".AsSpan()):
-                        result = 5;
-                        return true;
-                    default:
-                        result = 0;
-                        return false;
-                }
-            }
-
-            private bool TryParse(ReadOnlySpan<char> value, StringComparison comparisonType, out byte result)
-            {
-                switch (value)
-                {
-                    case { } when value.Equals("Electronics", comparisonType):
-                        result = 0;
-                        return true;
-                    case { } when value.Equals("Food", comparisonType):
-                        result = 1;
-                        return true;
-                    case { } when value.Equals("Automotive", comparisonType):
-                        result = 2;
-                        return true;
-                    case { } when value.Equals("Arts", comparisonType):
-                        result = 3;
-                        return true;
-                    case { } when value.Equals("BeautyCare", comparisonType):
-                        result = 4;
-                        return true;
-                    case { } when value.Equals("Fashion", comparisonType):
-                        result = 5;
-                        return true;
-                    default:
-                        result = 0;
-                        return false;
-                }
-            }
         }
 
         /// <summary>
@@ -266,8 +190,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out SlimCategories result)
         {
-            bool success = SlimCategoriesStringParser.Instance.TryParseSingleName(name.AsSpan(), comparisonType, out byte number)
-                || SlimCategoriesStringParser.Instance.TryParseNumber(name.AsSpan(), out number);
+            bool success = s_stringParser.TryParseSingleName(name.AsSpan(), comparisonType, out byte number)
+                || s_stringParser.TryParseNumber(name.AsSpan(), out number);
             if (!success)
             {
                 return Enum.TryParse(name, out result);

@@ -5,6 +5,7 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Raiqub.Generators.EnumUtilities.Formatters;
+using Raiqub.Generators.EnumUtilities.Parsers;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
@@ -18,6 +19,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         private const int MaxCharsLength = 3;
 
         private static readonly BigErrorCodeEnumInfo.StringFormatter s_stringFormatter = BigErrorCodeEnumInfo.StringFormatter.Instance;
+        private static readonly BigErrorCodeEnumInfo.StringParser s_stringParser = BigErrorCodeEnumInfo.StringParser.Instance;
 
         public override BigErrorCode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
@@ -68,7 +70,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 "UNK" => 1,
                 "CNX" => 100,
                 "OUT" => 200000000000,
-                _ => Enum.TryParse(name, out BigErrorCode result) ? (ulong)result : 0
+                _ => EnumStringParser.TryParse(name, s_stringParser, ignoreCase: true, throwOnFailure: false, out ulong result) ? result : 0
             };
         }
 
@@ -106,7 +108,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 "UNK" => 1,
                 "CNX" => 100,
                 "OUT" => 200000000000,
-                _ => Enum.TryParse(name, out BigErrorCode result) ? (ulong)result : 0
+                _ => EnumStringParser.TryParse(name, s_stringParser, ignoreCase: true, throwOnFailure: false, out ulong result) ? result : 0
             };
         }
 

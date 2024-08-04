@@ -15,6 +15,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class WeekDaysFactory
     {
+        private static readonly WeekDaysEnumInfo.StringParser s_stringParser = WeekDaysEnumInfo.StringParser.Instance;
+
         /// <summary>
         /// Converts the string representation of the name or numeric value of one or more enumerated constants to
         /// an equivalent enumerated object.
@@ -158,7 +160,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
         private static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, bool throwOnFailure, out WeekDays result)
         {
-            bool success = EnumStringParser.TryParse(value, WeekDaysStringParser.Instance, ignoreCase, throwOnFailure, out int number);
+            bool success = EnumStringParser.TryParse(value, s_stringParser, ignoreCase, throwOnFailure, out int number);
             if (!success)
             {
                 result = 0;
@@ -167,90 +169,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
             result = (WeekDays)number;
             return true;
-        }
-
-        private sealed partial class WeekDaysStringParser : IEnumParser<int>
-        {
-            public static WeekDaysStringParser Instance = new WeekDaysStringParser();
-
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public int BitwiseOr(int value1, int value2) => unchecked((int)(value1 | value2));
-
-            public bool TryParseNumber(ReadOnlySpan<char> value, out int result) => EnumNumericParser.TryParse(value, out result);
-
-            public bool TryParseSingleName(ReadOnlySpan<char> value, bool ignoreCase, out int result)
-            {
-                return ignoreCase
-                    ? TryParse(value, out result)
-                    : TryParse(value, StringComparison.OrdinalIgnoreCase, out result);
-            }
-
-            public bool TryParseSingleName(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
-            {
-                return TryParse(value, comparisonType, out result);
-            }
-
-            private bool TryParse(ReadOnlySpan<char> value, out int result)
-            {
-                switch (value)
-                {
-                    case { } when value.SequenceEqual("Monday".AsSpan()):
-                        result = 0;
-                        return true;
-                    case { } when value.SequenceEqual("Tuesday".AsSpan()):
-                        result = 1;
-                        return true;
-                    case { } when value.SequenceEqual("Wednesday".AsSpan()):
-                        result = 2;
-                        return true;
-                    case { } when value.SequenceEqual("Thursday".AsSpan()):
-                        result = 3;
-                        return true;
-                    case { } when value.SequenceEqual("Friday".AsSpan()):
-                        result = 4;
-                        return true;
-                    case { } when value.SequenceEqual("Saturday".AsSpan()):
-                        result = 5;
-                        return true;
-                    case { } when value.SequenceEqual("Sunday".AsSpan()):
-                        result = 6;
-                        return true;
-                    default:
-                        result = 0;
-                        return false;
-                }
-            }
-
-            private bool TryParse(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
-            {
-                switch (value)
-                {
-                    case { } when value.Equals("Monday", comparisonType):
-                        result = 0;
-                        return true;
-                    case { } when value.Equals("Tuesday", comparisonType):
-                        result = 1;
-                        return true;
-                    case { } when value.Equals("Wednesday", comparisonType):
-                        result = 2;
-                        return true;
-                    case { } when value.Equals("Thursday", comparisonType):
-                        result = 3;
-                        return true;
-                    case { } when value.Equals("Friday", comparisonType):
-                        result = 4;
-                        return true;
-                    case { } when value.Equals("Saturday", comparisonType):
-                        result = 5;
-                        return true;
-                    case { } when value.Equals("Sunday", comparisonType):
-                        result = 6;
-                        return true;
-                    default:
-                        result = 0;
-                        return false;
-                }
-            }
         }
 
         /// <summary>
@@ -272,8 +190,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out WeekDays result)
         {
-            bool success = WeekDaysStringParser.Instance.TryParseSingleName(name.AsSpan(), comparisonType, out int number)
-                || WeekDaysStringParser.Instance.TryParseNumber(name.AsSpan(), out number);
+            bool success = s_stringParser.TryParseSingleName(name.AsSpan(), comparisonType, out int number)
+                || s_stringParser.TryParseNumber(name.AsSpan(), out number);
             if (!success)
             {
                 return Enum.TryParse(name, out result);
