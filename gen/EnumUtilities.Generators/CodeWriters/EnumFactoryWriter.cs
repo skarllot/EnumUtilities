@@ -2320,7 +2320,7 @@ this.Write("\",\r\n");
         #line hidden
         
         #line 37 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\MiscellaneousBlock.ttinclude"
-this.Write("        };\r\n    }\r\n\r\n    [DoesNotReturn]\r\n    internal static void ThrowArgumentNullException(string paramName)\r\n    {\r\n        throw new ArgumentNullException(paramName);\r\n    }\r\n");
+this.Write("        };\r\n    }\r\n\r\n    [DoesNotReturn]\r\n    private static void ThrowArgumentNullException(string paramName)\r\n    {\r\n        throw new ArgumentNullException(paramName);\r\n    }\r\n");
 
         
         #line default
