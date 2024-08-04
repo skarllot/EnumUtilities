@@ -24,6 +24,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             return (BigErrorCode)0;
         }
 
+    #if NET7_0_OR_GREATER
+
         public override void Write(Utf8JsonWriter writer, BigErrorCode value, JsonSerializerOptions options)
         {
             switch ((ulong)value)
@@ -48,7 +50,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
         private ulong ReadFromString(ref Utf8JsonReader reader)
         {
-    #if NET7_0_OR_GREATER
             int length = reader.HasValueSequence ? checked((int)reader.ValueSequence.Length) : reader.ValueSpan.Length;
             if (length > MaxBytesLength)
                 return 0;
@@ -56,9 +57,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             Span<char> name = stackalloc char[MaxBytesLength];
             int charsWritten = reader.CopyString(name);
             name = name.Slice(0, charsWritten);
-    #else
-            string? name = reader.GetString();
-    #endif
 
             return name switch
             {
@@ -69,5 +67,44 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 _ => Enum.TryParse(name, out BigErrorCode result) ? (ulong)result : 0
             };
         }
+
+    #else
+
+        public override void Write(Utf8JsonWriter writer, BigErrorCode value, JsonSerializerOptions options)
+        {
+            switch ((ulong)value)
+            {
+                case 0:
+                    writer.WriteStringValue("NON");
+                    break;
+                case 1:
+                    writer.WriteStringValue("UNK");
+                    break;
+                case 100:
+                    writer.WriteStringValue("CNX");
+                    break;
+                case 200000000000:
+                    writer.WriteStringValue("OUT");
+                    break;
+                default:
+                    writer.WriteStringValue(value.ToString());
+                    break;
+            }
+        }
+
+        private ulong ReadFromString(ref Utf8JsonReader reader)
+        {
+            var name = reader.GetString();
+            return name switch
+            {
+                "NON" => 0,
+                "UNK" => 1,
+                "CNX" => 100,
+                "OUT" => 200000000000,
+                _ => Enum.TryParse(name, out BigErrorCode result) ? (ulong)result : 0
+            };
+        }
+
+    #endif
     }
 }

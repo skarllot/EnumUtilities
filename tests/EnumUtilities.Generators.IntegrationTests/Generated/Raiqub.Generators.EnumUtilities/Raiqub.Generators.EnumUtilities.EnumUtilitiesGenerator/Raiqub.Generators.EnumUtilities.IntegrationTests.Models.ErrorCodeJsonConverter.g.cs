@@ -24,6 +24,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             return (ErrorCode)0;
         }
 
+    #if NET7_0_OR_GREATER
+
         public override void Write(Utf8JsonWriter writer, ErrorCode value, JsonSerializerOptions options)
         {
             switch ((ushort)value)
@@ -48,7 +50,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
         private ushort ReadFromString(ref Utf8JsonReader reader)
         {
-    #if NET7_0_OR_GREATER
             int length = reader.HasValueSequence ? checked((int)reader.ValueSequence.Length) : reader.ValueSpan.Length;
             if (length > MaxBytesLength)
                 return (ushort)0;
@@ -56,9 +57,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             Span<char> name = stackalloc char[MaxBytesLength];
             int charsWritten = reader.CopyString(name);
             name = name.Slice(0, charsWritten);
-    #else
-            string? name = reader.GetString();
-    #endif
 
             return name switch
             {
@@ -69,5 +67,44 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 _ => Enum.TryParse(name, out ErrorCode result) ? (ushort)result : (ushort)0
             };
         }
+
+    #else
+
+        public override void Write(Utf8JsonWriter writer, ErrorCode value, JsonSerializerOptions options)
+        {
+            switch ((ushort)value)
+            {
+                case 0:
+                    writer.WriteStringValue("NON");
+                    break;
+                case 1:
+                    writer.WriteStringValue("UNK");
+                    break;
+                case 100:
+                    writer.WriteStringValue("CNX");
+                    break;
+                case 200:
+                    writer.WriteStringValue("OUT");
+                    break;
+                default:
+                    writer.WriteStringValue(value.ToString());
+                    break;
+            }
+        }
+
+        private ushort ReadFromString(ref Utf8JsonReader reader)
+        {
+            var name = reader.GetString();
+            return name switch
+            {
+                "NON" => (ushort)0,
+                "UNK" => (ushort)1,
+                "CNX" => (ushort)100,
+                "OUT" => (ushort)200,
+                _ => Enum.TryParse(name, out ErrorCode result) ? (ushort)result : (ushort)0
+            };
+        }
+
+    #endif
     }
 }

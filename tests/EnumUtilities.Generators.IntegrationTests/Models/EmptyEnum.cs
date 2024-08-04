@@ -4,4 +4,6 @@
 
 [EnumGenerator]
 [JsonConverterGenerator]
-public enum EmptyEnum;
+public enum EmptyEnum
+{
+}

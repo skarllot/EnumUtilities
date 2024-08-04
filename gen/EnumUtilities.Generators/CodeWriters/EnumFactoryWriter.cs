@@ -747,7 +747,7 @@ this.Write(" result)\r\n        {\r\n            switch (value)\r\n            {
         #line hidden
         
         #line 188 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
-this.Write("                case \"");
+this.Write("                case { } when value.SequenceEqual(\"");
 
         
         #line default
@@ -761,7 +761,7 @@ this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
         #line hidden
         
         #line 188 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
-this.Write("\":\r\n                    result = ");
+this.Write("\".AsSpan()):\r\n                    result = ");
 
         
         #line default

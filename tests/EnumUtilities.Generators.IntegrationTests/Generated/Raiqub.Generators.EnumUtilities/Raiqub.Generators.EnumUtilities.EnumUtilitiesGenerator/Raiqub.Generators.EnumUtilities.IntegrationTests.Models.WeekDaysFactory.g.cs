@@ -194,25 +194,25 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             {
                 switch (value)
                 {
-                    case "Monday":
+                    case { } when value.SequenceEqual("Monday".AsSpan()):
                         result = 0;
                         return true;
-                    case "Tuesday":
+                    case { } when value.SequenceEqual("Tuesday".AsSpan()):
                         result = 1;
                         return true;
-                    case "Wednesday":
+                    case { } when value.SequenceEqual("Wednesday".AsSpan()):
                         result = 2;
                         return true;
-                    case "Thursday":
+                    case { } when value.SequenceEqual("Thursday".AsSpan()):
                         result = 3;
                         return true;
-                    case "Friday":
+                    case { } when value.SequenceEqual("Friday".AsSpan()):
                         result = 4;
                         return true;
-                    case "Saturday":
+                    case { } when value.SequenceEqual("Saturday".AsSpan()):
                         result = 5;
                         return true;
-                    case "Sunday":
+                    case { } when value.SequenceEqual("Sunday".AsSpan()):
                         result = 6;
                         return true;
                     default:

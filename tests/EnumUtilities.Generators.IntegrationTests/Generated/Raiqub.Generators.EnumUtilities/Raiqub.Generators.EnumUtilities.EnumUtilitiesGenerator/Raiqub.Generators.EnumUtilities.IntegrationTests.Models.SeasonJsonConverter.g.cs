@@ -26,6 +26,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             throw new JsonException();
         }
 
+    #if NET7_0_OR_GREATER
+
         public override void Write(Utf8JsonWriter writer, Season value, JsonSerializerOptions options)
         {
             switch ((int)value)
@@ -50,7 +52,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
         private int ReadFromString(ref Utf8JsonReader reader)
         {
-    #if NET7_0_OR_GREATER
             int length = reader.HasValueSequence ? checked((int)reader.ValueSequence.Length) : reader.ValueSpan.Length;
             if (length > MaxBytesLength)
                 throw new JsonException();
@@ -58,9 +59,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             Span<char> name = stackalloc char[MaxBytesLength];
             int charsWritten = reader.CopyString(name);
             name = name.Slice(0, charsWritten);
-    #else
-            string? name = reader.GetString();
-    #endif
 
             return name switch
             {
@@ -71,6 +69,45 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 _ => Enum.TryParse(name, out Season result) ? (int)result : throw new JsonException()
             };
         }
+
+    #else
+
+        public override void Write(Utf8JsonWriter writer, Season value, JsonSerializerOptions options)
+        {
+            switch ((int)value)
+            {
+                case 1:
+                    writer.WriteStringValue("🌱");
+                    break;
+                case 2:
+                    writer.WriteStringValue("☀️");
+                    break;
+                case 3:
+                    writer.WriteStringValue("🍂");
+                    break;
+                case 4:
+                    writer.WriteStringValue("⛄");
+                    break;
+                default:
+                    writer.WriteStringValue(value.ToString());
+                    break;
+            }
+        }
+
+        private int ReadFromString(ref Utf8JsonReader reader)
+        {
+            var name = reader.GetString();
+            return name switch
+            {
+                "🌱" => 1,
+                "☀️" => 2,
+                "🍂" => 3,
+                "⛄" => 4,
+                _ => Enum.TryParse(name, out Season result) ? (int)result : throw new JsonException()
+            };
+        }
+
+    #endif
 
         private int ReadFromNumber(ref Utf8JsonReader reader)
         {

@@ -194,22 +194,22 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             {
                 switch (value)
                 {
-                    case "None":
+                    case { } when value.SequenceEqual("None".AsSpan()):
                         result = 0;
                         return true;
-                    case "NormalUser":
+                    case { } when value.SequenceEqual("NormalUser".AsSpan()):
                         result = 1;
                         return true;
-                    case "Custodian":
+                    case { } when value.SequenceEqual("Custodian".AsSpan()):
                         result = 2;
                         return true;
-                    case "Finance":
+                    case { } when value.SequenceEqual("Finance".AsSpan()):
                         result = 4;
                         return true;
-                    case "SuperUser":
+                    case { } when value.SequenceEqual("SuperUser".AsSpan()):
                         result = 6;
                         return true;
-                    case "All":
+                    case { } when value.SequenceEqual("All".AsSpan()):
                         result = 7;
                         return true;
                     default:
