@@ -4,6 +4,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Raiqub.Generators.EnumUtilities.Formatters;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
@@ -15,6 +16,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     {
         private const int MaxBytesLength = 12;
         private const int MaxCharsLength = 2;
+
+        private static readonly SeasonEnumInfo.StringFormatter s_stringFormatter = SeasonEnumInfo.StringFormatter.Instance;
 
         public override Season Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
@@ -45,7 +48,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                     writer.WriteStringValue("⛄"u8);
                     break;
                 default:
-                    writer.WriteStringValue(value.ToString());
+                    string strValue = EnumStringFormatter.GetString((int)value, s_stringFormatter);
+                    writer.WriteStringValue(strValue);
                     break;
             }
         }
@@ -89,7 +93,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                     writer.WriteStringValue("⛄");
                     break;
                 default:
-                    writer.WriteStringValue(value.ToString());
+                    string strValue = EnumStringFormatter.GetString((int)value, s_stringFormatter);
+                    writer.WriteStringValue(strValue);
                     break;
             }
         }

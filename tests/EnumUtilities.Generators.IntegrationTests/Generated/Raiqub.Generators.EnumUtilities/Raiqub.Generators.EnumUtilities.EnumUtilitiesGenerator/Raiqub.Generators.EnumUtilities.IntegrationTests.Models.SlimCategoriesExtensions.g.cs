@@ -16,11 +16,13 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <summary>Represents the largest possible number of characters produced by converting an <see cref="SlimCategories" /> value to string, based on defined members. This field is constant.</summary>
         public const int NameMaxCharsLength = 11;
 
+        private static readonly SlimCategoriesEnumInfo.StringFormatter s_stringFormatter = SlimCategoriesEnumInfo.StringFormatter.Instance;
+
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
         /// <returns>The string representation of the value of this instance.</returns>
         public static string ToStringFast(this SlimCategories value)
         {
-            return EnumStringFormatter.GetString((byte)value, SlimCategoriesStringFormatter.Instance);
+            return EnumStringFormatter.GetString((byte)value, s_stringFormatter);
         }
 
         /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
@@ -28,7 +30,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns>The number of characters produced by converting the specified value to string.</returns>
         public static int GetStringCount(this SlimCategories value)
         {
-            return EnumStringFormatter.GetStringCount((byte)value, SlimCategoriesStringFormatter.Instance);
+            return EnumStringFormatter.GetStringCount((byte)value, s_stringFormatter);
         }
 
         /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
@@ -36,45 +38,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         public static bool IsDefined(this SlimCategories value)
         {
             return SlimCategoriesValidation.IsDefined(value);
-        }
-
-        private sealed partial class SlimCategoriesStringFormatter : IEnumFormatter<byte>
-        {
-            public static SlimCategoriesStringFormatter Instance = new SlimCategoriesStringFormatter();
-
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public int GetStringCountForNumber(byte value) => EnumNumericFormatter.GetStringLength(value);
-
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public string GetStringForNumber(byte value) => value.ToString();
-
-            public int? TryGetStringCountForMember(byte value)
-            {
-                return value switch
-                {
-                    0 => 11,
-                    1 => 4,
-                    2 => 10,
-                    3 => 4,
-                    4 => 10,
-                    5 => 7,
-                    _ => null
-                };
-            }
-
-            public string? TryGetStringForMember(byte value)
-            {
-                return value switch
-                {
-                    0 => "Electronics",
-                    1 => "Food",
-                    2 => "Automotive",
-                    3 => "Arts",
-                    4 => "BeautyCare",
-                    5 => "Fashion",
-                    _ => null
-                };
-            }
         }
     }
 }

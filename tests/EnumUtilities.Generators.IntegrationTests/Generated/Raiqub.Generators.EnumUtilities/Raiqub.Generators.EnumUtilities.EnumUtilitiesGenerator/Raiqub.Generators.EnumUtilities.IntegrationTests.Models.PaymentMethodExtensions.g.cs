@@ -17,11 +17,13 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <summary>Represents the largest possible number of characters produced by converting an <see cref="PaymentMethod" /> value to string, based on defined members. This field is constant.</summary>
         public const int NameMaxCharsLength = 6;
 
+        private static readonly PaymentMethodEnumInfo.StringFormatter s_stringFormatter = PaymentMethodEnumInfo.StringFormatter.Instance;
+
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
         /// <returns>The string representation of the value of this instance.</returns>
         public static string ToStringFast(this PaymentMethod value)
         {
-            return EnumStringFormatter.GetString((int)value, PaymentMethodStringFormatter.Instance);
+            return EnumStringFormatter.GetString((int)value, s_stringFormatter);
         }
 
         /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
@@ -29,7 +31,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns>The number of characters produced by converting the specified value to string.</returns>
         public static int GetStringCount(this PaymentMethod value)
         {
-            return EnumStringFormatter.GetStringCount((int)value, PaymentMethodStringFormatter.Instance);
+            return EnumStringFormatter.GetStringCount((int)value, s_stringFormatter);
         }
 
         /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
@@ -37,41 +39,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         public static bool IsDefined(this PaymentMethod value)
         {
             return PaymentMethodValidation.IsDefined(value);
-        }
-
-        private sealed partial class PaymentMethodStringFormatter : IEnumFormatter<int>
-        {
-            public static PaymentMethodStringFormatter Instance = new PaymentMethodStringFormatter();
-
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public int GetStringCountForNumber(int value) => EnumNumericFormatter.GetStringLength(value);
-
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public string GetStringForNumber(int value) => value.ToString();
-
-            public int? TryGetStringCountForMember(int value)
-            {
-                return value switch
-                {
-                    0 => 6,
-                    1 => 5,
-                    2 => 4,
-                    3 => 6,
-                    _ => null
-                };
-            }
-
-            public string? TryGetStringForMember(int value)
-            {
-                return value switch
-                {
-                    0 => "Credit",
-                    1 => "Debit",
-                    2 => "Cash",
-                    3 => "Cheque",
-                    _ => null
-                };
-            }
         }
 
         /// <summary>Adds two enumerations and replaces the first integer with the sum, as an atomic operation.</summary>

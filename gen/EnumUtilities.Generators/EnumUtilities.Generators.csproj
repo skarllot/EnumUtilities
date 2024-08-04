@@ -42,6 +42,10 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>EnumJsonConverterWriter.cs</LastGenOutput>
     </None>
+    <None Update="CodeWriters\EnumInfoWriter.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>EnumInfoWriter.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -64,6 +68,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EnumJsonConverterWriter.tt</DependentUpon>
+    </Compile>
+    <Compile Update="CodeWriters\EnumInfoWriter.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnumInfoWriter.tt</DependentUpon>
     </Compile>
   </ItemGroup>
 

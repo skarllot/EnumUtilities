@@ -12,6 +12,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Raiqub.Generators.EnumUtilities.Formatters;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
@@ -33,6 +34,8 @@ using System.Text.Json.Serialization;
     private const int MaxCharsLength = <#=
                     Model.Values.Max(
                         x => x.JsonPropertyName?.Length ?? x.SerializationValue?.Length ?? x.MemberName.Length) #>;
+
+    private static readonly <#= Model.Name #>EnumInfo.StringFormatter s_stringFormatter = <#= Model.Name #>EnumInfo.StringFormatter.Instance;
 
     public override <#= Model.Name #> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
@@ -68,7 +71,8 @@ using System.Text.Json.Serialization;
     }
 #>
             default:
-                writer.WriteStringValue(value.ToString());
+                string strValue = EnumStringFormatter.GetString((<#= Model.UnderlyingType #>)value, s_stringFormatter);
+                writer.WriteStringValue(strValue);
                 break;
         }
     }
@@ -117,7 +121,8 @@ using System.Text.Json.Serialization;
     }
 #>
             default:
-                writer.WriteStringValue(value.ToString());
+                string strValue = EnumStringFormatter.GetString((<#= Model.UnderlyingType #>)value, s_stringFormatter);
+                writer.WriteStringValue(strValue);
                 break;
         }
     }

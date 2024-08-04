@@ -4,6 +4,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Raiqub.Generators.EnumUtilities.Formatters;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
@@ -15,6 +16,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     {
         private const int MaxBytesLength = 3;
         private const int MaxCharsLength = 3;
+
+        private static readonly ErrorCodeEnumInfo.StringFormatter s_stringFormatter = ErrorCodeEnumInfo.StringFormatter.Instance;
 
         public override ErrorCode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
@@ -43,7 +46,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                     writer.WriteStringValue("OUT"u8);
                     break;
                 default:
-                    writer.WriteStringValue(value.ToString());
+                    string strValue = EnumStringFormatter.GetString((ushort)value, s_stringFormatter);
+                    writer.WriteStringValue(strValue);
                     break;
             }
         }
@@ -87,7 +91,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                     writer.WriteStringValue("OUT");
                     break;
                 default:
-                    writer.WriteStringValue(value.ToString());
+                    string strValue = EnumStringFormatter.GetString((ushort)value, s_stringFormatter);
+                    writer.WriteStringValue(strValue);
                     break;
             }
         }
