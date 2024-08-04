@@ -90,6 +90,20 @@ public class EnumUtilitiesGeneratorTests
         }
         """;
 
+    [StringSyntax("C#")]
+    private const string NoMembersEnumText =
+        """
+        using Raiqub.Generators.EnumUtilities;
+
+        namespace Testing.Models;
+
+        [EnumGenerator]
+        [JsonConverterGenerator]
+        public enum MyEnum
+        {
+        }
+        """;
+
     [Fact]
     public void GenerateFiles()
     {
@@ -170,5 +184,25 @@ public class EnumUtilitiesGeneratorTests
                 $"{GeneratorBasePath}/Testing.Models.PaymentMethodValidation.g.cs".Replace('/', Path.DirectorySeparatorChar),
             ],
             generatedFilesNames);
+    }
+
+    [Fact]
+    public void NoGenerateFiles()
+    {
+        var generator = new EnumUtilitiesGenerator();
+        var driver = CSharpGeneratorDriver.Create(generator);
+
+        var compilation = CSharpCompilation.Create(
+            nameof(EnumUtilitiesGeneratorTests),
+            new[] { CSharpSyntaxTree.ParseText(NoMembersEnumText) },
+            AppDomain.CurrentDomain.GetAssemblies()
+                .Append(typeof(EnumGeneratorAttribute).Assembly)
+                .Where(it => !it.IsDynamic && !string.IsNullOrWhiteSpace(it.Location))
+                .Select(it => MetadataReference.CreateFromFile(it.Location)));
+
+        var runResult = driver.RunGenerators(compilation).GetRunResult();
+        var generatedFilesNames = runResult.GeneratedTrees.Select(t => t.FilePath);
+
+        Assert.Empty(generatedFilesNames);
     }
 }
