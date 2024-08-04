@@ -194,13 +194,13 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             {
                 switch (value)
                 {
-                    case "Red":
+                    case { } when value.SequenceEqual("Red".AsSpan()):
                         result = 1;
                         return true;
-                    case "Blue":
+                    case { } when value.SequenceEqual("Blue".AsSpan()):
                         result = 2;
                         return true;
-                    case "Green":
+                    case { } when value.SequenceEqual("Green".AsSpan()):
                         result = 4;
                         return true;
                     default:

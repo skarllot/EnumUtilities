@@ -185,7 +185,7 @@
         foreach (var curr in Model.Values)
         {
 #>
-                case "<#= curr.MemberName #>":
+                case { } when value.SequenceEqual("<#= curr.MemberName #>".AsSpan()):
                     result = <#= curr.MemberValue #>;
                     return true;
 <#+

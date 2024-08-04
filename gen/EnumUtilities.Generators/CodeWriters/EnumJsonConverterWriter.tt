@@ -51,6 +51,8 @@ using System.Text.Json.Serialization;
         <#= AppendFallbackValue(addReturn: true, castToEnum: true) #>;
     }
 
+#if NET7_0_OR_GREATER
+
     public override void Write(Utf8JsonWriter writer, <#= Model.Name #> value, JsonSerializerOptions options)
     {
         switch ((<#= Model.UnderlyingType #>)value)
@@ -73,7 +75,6 @@ using System.Text.Json.Serialization;
 
     private <#= Model.UnderlyingType #> ReadFromString(ref Utf8JsonReader reader)
     {
-#if NET7_0_OR_GREATER
         int length = reader.HasValueSequence ? checked((int)reader.ValueSequence.Length) : reader.ValueSpan.Length;
         if (length > MaxBytesLength)
             <#= AppendFallbackValue(addReturn: true) #>;
@@ -81,9 +82,6 @@ using System.Text.Json.Serialization;
         Span<char> name = stackalloc char[MaxBytesLength];
         int charsWritten = reader.CopyString(name);
         name = name.Slice(0, charsWritten);
-#else
-        string? name = reader.GetString();
-#endif
 
         return name switch
         {
@@ -101,6 +99,50 @@ using System.Text.Json.Serialization;
             _ => Enum.TryParse(name, out <#= Model.RefName #> result) ? (<#= Model.UnderlyingType #>)result : <#= AppendFallbackValue() #>
         };
     }
+
+#else
+
+    public override void Write(Utf8JsonWriter writer, <#= Model.Name #> value, JsonSerializerOptions options)
+    {
+        switch ((<#= Model.UnderlyingType #>)value)
+        {
+<#
+    foreach (var curr in Model.UniqueValues)
+    {
+#>
+            case <#= curr.MemberValue #>:
+                writer.WriteStringValue("<#= curr.JsonPropertyName ?? curr.SerializationValue ?? curr.MemberName #>");
+                break;
+<#
+    }
+#>
+            default:
+                writer.WriteStringValue(value.ToString());
+                break;
+        }
+    }
+
+    private <#= Model.UnderlyingType #> ReadFromString(ref Utf8JsonReader reader)
+    {
+        var name = reader.GetString();
+        return name switch
+        {
+<#
+    foreach (var curr in Model.Values)
+    {
+#>
+            <#=
+                curr.JsonPropertyName is not null || curr.SerializationValue is not null
+                    ? Append($"\"{curr.JsonPropertyName ?? curr.SerializationValue}\"")
+                    : Append($"\"{curr.MemberName}\"") #> => <#= NeedNumberCasting() ? Append($"({Model.UnderlyingType})") : Append("") #><#= curr.MemberValue #>,
+<#
+    }
+#>
+            _ => Enum.TryParse(name, out <#= Model.RefName #> result) ? (<#= Model.UnderlyingType #>)result : <#= AppendFallbackValue() #>
+        };
+    }
+
+#endif
 <#
     if (Model.JsonConverterGeneratorOptions.AllowIntegerValues)
     {

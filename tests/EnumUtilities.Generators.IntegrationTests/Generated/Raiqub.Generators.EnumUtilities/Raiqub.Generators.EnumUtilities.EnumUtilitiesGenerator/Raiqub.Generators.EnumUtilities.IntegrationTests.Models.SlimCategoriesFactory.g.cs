@@ -194,22 +194,22 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             {
                 switch (value)
                 {
-                    case "Electronics":
+                    case { } when value.SequenceEqual("Electronics".AsSpan()):
                         result = 0;
                         return true;
-                    case "Food":
+                    case { } when value.SequenceEqual("Food".AsSpan()):
                         result = 1;
                         return true;
-                    case "Automotive":
+                    case { } when value.SequenceEqual("Automotive".AsSpan()):
                         result = 2;
                         return true;
-                    case "Arts":
+                    case { } when value.SequenceEqual("Arts".AsSpan()):
                         result = 3;
                         return true;
-                    case "BeautyCare":
+                    case { } when value.SequenceEqual("BeautyCare".AsSpan()):
                         result = 4;
                         return true;
-                    case "Fashion":
+                    case { } when value.SequenceEqual("Fashion".AsSpan()):
                         result = 5;
                         return true;
                     default:

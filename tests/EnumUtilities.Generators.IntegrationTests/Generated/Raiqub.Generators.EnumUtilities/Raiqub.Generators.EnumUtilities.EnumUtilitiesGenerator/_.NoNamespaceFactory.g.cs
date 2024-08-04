@@ -192,13 +192,13 @@ public static partial class NoNamespaceFactory
         {
             switch (value)
             {
-                case "Zero":
+                case { } when value.SequenceEqual("Zero".AsSpan()):
                     result = 0;
                     return true;
-                case "One":
+                case { } when value.SequenceEqual("One".AsSpan()):
                     result = 1;
                     return true;
-                case "Two":
+                case { } when value.SequenceEqual("Two".AsSpan()):
                     result = 2;
                     return true;
                 default:

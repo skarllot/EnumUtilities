@@ -149,23 +149,23 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             
             #line default
             #line hidden
-            this.Write(";\r\n    }\r\n\r\n    public override void Write(Utf8JsonWriter writer, ");
+            this.Write(";\r\n    }\r\n\r\n#if NET7_0_OR_GREATER\r\n\r\n    public override void Write(Utf8JsonWriter writer, ");
             
-            #line 54 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+            #line 56 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(" value, JsonSerializerOptions options)\r\n    {\r\n        switch ((");
             
-            #line 56 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+            #line 58 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
             
             #line default
             #line hidden
             this.Write(")value)\r\n        {\r\n");
             
-            #line 58 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+            #line 60 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
 
     foreach (var curr in Model.UniqueValues)
     {
@@ -175,21 +175,21 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("            case ");
             
-            #line 62 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+            #line 64 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberValue));
             
             #line default
             #line hidden
             this.Write(":\r\n                writer.WriteStringValue(\"");
             
-            #line 63 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+            #line 65 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(curr.JsonPropertyName ?? curr.SerializationValue ?? curr.MemberName));
             
             #line default
             #line hidden
             this.Write("\"u8);\r\n                break;\r\n");
             
-            #line 65 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+            #line 67 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
 
     }
 
@@ -198,21 +198,21 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("            default:\r\n                writer.WriteStringValue(value.ToString());\r\n                break;\r\n        }\r\n    }\r\n\r\n    private ");
             
-            #line 74 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+            #line 76 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
             
             #line default
             #line hidden
-            this.Write(" ReadFromString(ref Utf8JsonReader reader)\r\n    {\r\n#if NET7_0_OR_GREATER\r\n        int length = reader.HasValueSequence ? checked((int)reader.ValueSequence.Length) : reader.ValueSpan.Length;\r\n        if (length > MaxBytesLength)\r\n            ");
+            this.Write(" ReadFromString(ref Utf8JsonReader reader)\r\n    {\r\n        int length = reader.HasValueSequence ? checked((int)reader.ValueSequence.Length) : reader.ValueSpan.Length;\r\n        if (length > MaxBytesLength)\r\n            ");
             
-            #line 79 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+            #line 80 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(AppendFallbackValue(addReturn: true)));
             
             #line default
             #line hidden
-            this.Write(";\r\n\r\n        Span<char> name = stackalloc char[MaxBytesLength];\r\n        int charsWritten = reader.CopyString(name);\r\n        name = name.Slice(0, charsWritten);\r\n#else\r\n        string? name = reader.GetString();\r\n#endif\r\n\r\n        return name switch\r\n        {\r\n");
+            this.Write(";\r\n\r\n        Span<char> name = stackalloc char[MaxBytesLength];\r\n        int charsWritten = reader.CopyString(name);\r\n        name = name.Slice(0, charsWritten);\r\n\r\n        return name switch\r\n        {\r\n");
             
-            #line 90 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+            #line 88 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
 
     foreach (var curr in Model.Values)
     {
@@ -222,7 +222,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("            ");
             
-            #line 94 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+            #line 92 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(curr.JsonPropertyName is not null || curr.SerializationValue is not null
                     ? Append($"\"{curr.JsonPropertyName ?? curr.SerializationValue}\"")
                     : Append($"\"{curr.MemberName}\"")));
@@ -231,20 +231,20 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write(" => ");
             
-            #line 97 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+            #line 95 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(NeedNumberCasting() ? Append($"({Model.UnderlyingType})") : Append("")));
             
             #line default
             #line hidden
             
-            #line 97 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+            #line 95 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberValue));
             
             #line default
             #line hidden
             this.Write(",\r\n");
             
-            #line 98 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+            #line 96 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
 
     }
 
@@ -253,28 +253,144 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("            _ => Enum.TryParse(name, out ");
             
-            #line 101 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+            #line 99 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
             this.Write(" result) ? (");
             
-            #line 101 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+            #line 99 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
             
             #line default
             #line hidden
             this.Write(")result : ");
             
-            #line 101 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+            #line 99 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(AppendFallbackValue()));
             
             #line default
             #line hidden
-            this.Write("\r\n        };\r\n    }\r\n");
+            this.Write("\r\n        };\r\n    }\r\n\r\n#else\r\n\r\n    public override void Write(Utf8JsonWriter writer, ");
             
-            #line 104 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+            #line 105 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write(" value, JsonSerializerOptions options)\r\n    {\r\n        switch ((");
+            
+            #line 107 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
+            
+            #line default
+            #line hidden
+            this.Write(")value)\r\n        {\r\n");
+            
+            #line 109 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+
+    foreach (var curr in Model.UniqueValues)
+    {
+
+            
+            #line default
+            #line hidden
+            this.Write("            case ");
+            
+            #line 113 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberValue));
+            
+            #line default
+            #line hidden
+            this.Write(":\r\n                writer.WriteStringValue(\"");
+            
+            #line 114 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(curr.JsonPropertyName ?? curr.SerializationValue ?? curr.MemberName));
+            
+            #line default
+            #line hidden
+            this.Write("\");\r\n                break;\r\n");
+            
+            #line 116 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+
+    }
+
+            
+            #line default
+            #line hidden
+            this.Write("            default:\r\n                writer.WriteStringValue(value.ToString());\r\n                break;\r\n        }\r\n    }\r\n\r\n    private ");
+            
+            #line 125 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
+            
+            #line default
+            #line hidden
+            this.Write(" ReadFromString(ref Utf8JsonReader reader)\r\n    {\r\n        var name = reader.GetString();\r\n        return name switch\r\n        {\r\n");
+            
+            #line 130 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+
+    foreach (var curr in Model.Values)
+    {
+
+            
+            #line default
+            #line hidden
+            this.Write("            ");
+            
+            #line 134 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(curr.JsonPropertyName is not null || curr.SerializationValue is not null
+                    ? Append($"\"{curr.JsonPropertyName ?? curr.SerializationValue}\"")
+                    : Append($"\"{curr.MemberName}\"")));
+            
+            #line default
+            #line hidden
+            this.Write(" => ");
+            
+            #line 137 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(NeedNumberCasting() ? Append($"({Model.UnderlyingType})") : Append("")));
+            
+            #line default
+            #line hidden
+            
+            #line 137 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberValue));
+            
+            #line default
+            #line hidden
+            this.Write(",\r\n");
+            
+            #line 138 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+
+    }
+
+            
+            #line default
+            #line hidden
+            this.Write("            _ => Enum.TryParse(name, out ");
+            
+            #line 141 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
+            
+            #line default
+            #line hidden
+            this.Write(" result) ? (");
+            
+            #line 141 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
+            
+            #line default
+            #line hidden
+            this.Write(")result : ");
+            
+            #line 141 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(AppendFallbackValue()));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n        };\r\n    }\r\n\r\n#endif\r\n");
+            
+            #line 146 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
 
     if (Model.JsonConverterGeneratorOptions.AllowIntegerValues)
     {
@@ -284,35 +400,35 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("\r\n    private ");
             
-            #line 109 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+            #line 151 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
             
             #line default
             #line hidden
             this.Write(" ReadFromNumber(ref Utf8JsonReader reader)\r\n    {\r\n        return reader.TryGet");
             
-            #line 111 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+            #line 153 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(CSharpExtensions.GetTypeNameFromCSharpKeyword(Model.UnderlyingType)));
             
             #line default
             #line hidden
             this.Write("(out ");
             
-            #line 111 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+            #line 153 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
             
             #line default
             #line hidden
             this.Write(" value)\r\n            ? value\r\n            : ");
             
-            #line 113 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+            #line 155 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(AppendFallbackValue()));
             
             #line default
             #line hidden
             this.Write(";\r\n    }\r\n");
             
-            #line 115 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+            #line 157 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
 
     }
 
@@ -321,7 +437,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("}\r\n");
             
-            #line 119 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+            #line 161 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
 
     if (!string.IsNullOrEmpty(Model.Namespace))
     {
@@ -335,7 +451,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 126 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
+        #line 168 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
 
 #nullable enable
     public EnumJsonConverterWriter(StringBuilder builder) : base(builder)

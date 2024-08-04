@@ -194,22 +194,22 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             {
                 switch (value)
                 {
-                    case "Idle":
+                    case { } when value.SequenceEqual("Idle".AsSpan()):
                         result = 1;
                         return true;
-                    case "Working":
+                    case { } when value.SequenceEqual("Working".AsSpan()):
                         result = 2;
                         return true;
-                    case "Sleeping":
+                    case { } when value.SequenceEqual("Sleeping".AsSpan()):
                         result = 3;
                         return true;
-                    case "Eating":
+                    case { } when value.SequenceEqual("Eating".AsSpan()):
                         result = 4;
                         return true;
-                    case "Dead":
+                    case { } when value.SequenceEqual("Dead".AsSpan()):
                         result = 5;
                         return true;
-                    case "Relaxing":
+                    case { } when value.SequenceEqual("Relaxing".AsSpan()):
                         result = 1;
                         return true;
                     default:

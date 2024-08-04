@@ -194,16 +194,16 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             {
                 switch (value)
                 {
-                    case "Credit":
+                    case { } when value.SequenceEqual("Credit".AsSpan()):
                         result = 0;
                         return true;
-                    case "Debit":
+                    case { } when value.SequenceEqual("Debit".AsSpan()):
                         result = 1;
                         return true;
-                    case "Cash":
+                    case { } when value.SequenceEqual("Cash".AsSpan()):
                         result = 2;
                         return true;
-                    case "Cheque":
+                    case { } when value.SequenceEqual("Cheque".AsSpan()):
                         result = 3;
                         return true;
                     default:
