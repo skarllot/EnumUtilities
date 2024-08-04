@@ -1,12 +1,14 @@
 ﻿<#+
     private void WriteFactoryBlock()
     {
+        bool enableDescription = (Model.SelectedGenerators & SelectedGenerators.MainGenerator) ==
+                                 SelectedGenerators.MainGenerator && Model.HasDescription;
 #>
 
     /// <summary>Provides support for parsing <see cref="<#= Model.Name #>"/> values.</summary>
     public sealed partial class StringParser
         : IEnumParser<<#= Model.UnderlyingType #>><#=
-                Model.HasDescription ? Append($", IEnumDescriptionParser<{Model.UnderlyingType}>") : new None() #>
+                enableDescription ? Append($", IEnumDescriptionParser<{Model.UnderlyingType}>") : new None() #>
     {
         /// <summary>Gets the singleton instance of the <see cref="StringParser"/> class.</summary>
         public static StringParser Instance = new StringParser();
@@ -32,7 +34,7 @@
             return TryParse(value, comparisonType, out result);
         }
 <#+
-        if (Model.HasDescription)
+        if (enableDescription)
         {
 #>
 
