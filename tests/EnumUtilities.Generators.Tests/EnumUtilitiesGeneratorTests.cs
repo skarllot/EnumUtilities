@@ -109,6 +109,7 @@ public class EnumUtilitiesGeneratorTests
 
         Assert.Equal(
             [
+                $"{GeneratorBasePath}/Testing.Models.WeekDaysEnumInfo.g.cs".Replace('/', Path.DirectorySeparatorChar),
                 $"{GeneratorBasePath}/Testing.Models.WeekDaysExtensions.g.cs".Replace('/', Path.DirectorySeparatorChar),
                 $"{GeneratorBasePath}/Testing.Models.WeekDaysFactory.g.cs".Replace('/', Path.DirectorySeparatorChar),
                 $"{GeneratorBasePath}/Testing.Models.WeekDaysValidation.g.cs".Replace('/', Path.DirectorySeparatorChar),
@@ -136,6 +137,7 @@ public class EnumUtilitiesGeneratorTests
 
         Assert.Equal(
             [
+                $"{GeneratorBasePath}/Testing.Models.ColoursEnumInfo.g.cs".Replace('/', Path.DirectorySeparatorChar),
                 $"{GeneratorBasePath}/Testing.Models.ColoursExtensions.g.cs".Replace('/', Path.DirectorySeparatorChar),
                 $"{GeneratorBasePath}/Testing.Models.ColoursFactory.g.cs".Replace('/', Path.DirectorySeparatorChar),
                 $"{GeneratorBasePath}/Testing.Models.ColoursValidation.g.cs".Replace('/', Path.DirectorySeparatorChar),
@@ -162,6 +164,7 @@ public class EnumUtilitiesGeneratorTests
 
         Assert.Equal(
             [
+                $"{GeneratorBasePath}/Testing.Models.PaymentMethodEnumInfo.g.cs".Replace('/', Path.DirectorySeparatorChar),
                 $"{GeneratorBasePath}/Testing.Models.PaymentMethodExtensions.g.cs".Replace('/', Path.DirectorySeparatorChar),
                 $"{GeneratorBasePath}/Testing.Models.PaymentMethodFactory.g.cs".Replace('/', Path.DirectorySeparatorChar),
                 $"{GeneratorBasePath}/Testing.Models.PaymentMethodValidation.g.cs".Replace('/', Path.DirectorySeparatorChar),
