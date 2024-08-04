@@ -422,7 +422,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         }
 
         [DoesNotReturn]
-        internal static void ThrowArgumentNullException(string paramName)
+        private static void ThrowArgumentNullException(string paramName)
         {
             throw new ArgumentNullException(paramName);
         }
