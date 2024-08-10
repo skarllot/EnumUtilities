@@ -13,7 +13,7 @@
 
         /// <inheritdoc />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public int GetStringCountForNumber(<#= Model.UnderlyingType #> value) => EnumNumericFormatter.GetStringLength(value);
+        public int GetStringLengthForNumber(<#= Model.UnderlyingType #> value) => EnumNumericFormatter.GetStringLength(value);
 
         /// <inheritdoc />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -24,7 +24,7 @@
 #>
 
         /// <inheritdoc />
-        public int? TryGetStringCountForMember(<#= Model.UnderlyingType #> value)
+        public int? TryGetStringLengthForMember(<#= Model.UnderlyingType #> value)
         {
             if (value == 0)
             {
@@ -146,7 +146,7 @@
 #>
 
         /// <inheritdoc />
-        public int? TryGetStringCountForMember(<#= Model.UnderlyingType #> value)
+        public int? TryGetStringLengthForMember(<#= Model.UnderlyingType #> value)
         {
             return value switch
             {

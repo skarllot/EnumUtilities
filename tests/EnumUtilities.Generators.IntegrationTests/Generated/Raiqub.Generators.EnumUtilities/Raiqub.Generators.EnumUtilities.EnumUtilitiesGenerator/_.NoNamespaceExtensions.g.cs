@@ -27,9 +27,9 @@ public static partial class NoNamespaceExtensions
     /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
     /// <param name="value">The value to calculate the number of characters.</param>
     /// <returns>The number of characters produced by converting the specified value to string.</returns>
-    public static int GetStringCount(this NoNamespace value)
+    public static int GetStringLength(this NoNamespace value)
     {
-        return EnumStringFormatter.GetStringCount((int)value, s_stringFormatter);
+        return EnumStringFormatter.GetStringLength((int)value, s_stringFormatter);
     }
 
     /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>

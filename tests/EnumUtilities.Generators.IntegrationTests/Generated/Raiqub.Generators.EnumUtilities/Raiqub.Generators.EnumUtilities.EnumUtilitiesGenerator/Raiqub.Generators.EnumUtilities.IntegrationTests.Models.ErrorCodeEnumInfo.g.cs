@@ -25,14 +25,14 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
             /// <inheritdoc />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public int GetStringCountForNumber(ushort value) => EnumNumericFormatter.GetStringLength(value);
+            public int GetStringLengthForNumber(ushort value) => EnumNumericFormatter.GetStringLength(value);
 
             /// <inheritdoc />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public string GetStringForNumber(ushort value) => value.ToString();
 
             /// <inheritdoc />
-            public int? TryGetStringCountForMember(ushort value)
+            public int? TryGetStringLengthForMember(ushort value)
             {
                 return value switch
                 {

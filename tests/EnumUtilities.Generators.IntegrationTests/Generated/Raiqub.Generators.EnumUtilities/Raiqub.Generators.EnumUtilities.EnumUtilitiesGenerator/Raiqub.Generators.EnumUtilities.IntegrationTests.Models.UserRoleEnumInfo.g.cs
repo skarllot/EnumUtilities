@@ -25,14 +25,14 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
             /// <inheritdoc />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public int GetStringCountForNumber(ulong value) => EnumNumericFormatter.GetStringLength(value);
+            public int GetStringLengthForNumber(ulong value) => EnumNumericFormatter.GetStringLength(value);
 
             /// <inheritdoc />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public string GetStringForNumber(ulong value) => value.ToString();
 
             /// <inheritdoc />
-            public int? TryGetStringCountForMember(ulong value)
+            public int? TryGetStringLengthForMember(ulong value)
             {
                 if (value == 0)
                 {

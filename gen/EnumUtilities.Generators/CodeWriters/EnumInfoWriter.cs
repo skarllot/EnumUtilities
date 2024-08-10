@@ -163,7 +163,7 @@ this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
         #line hidden
         
         #line 9 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumInfo\ExtensionsBlock.ttinclude"
-this.Write(">\r\n    {\r\n        /// <summary>Gets the singleton instance of the <see cref=\"StringFormatter\"/> class.</summary>\r\n        public static StringFormatter Instance = new StringFormatter();\r\n\r\n        /// <inheritdoc />\r\n        [MethodImpl(MethodImplOptions.AggressiveInlining)]\r\n        public int GetStringCountForNumber(");
+this.Write(">\r\n    {\r\n        /// <summary>Gets the singleton instance of the <see cref=\"StringFormatter\"/> class.</summary>\r\n        public static StringFormatter Instance = new StringFormatter();\r\n\r\n        /// <inheritdoc />\r\n        [MethodImpl(MethodImplOptions.AggressiveInlining)]\r\n        public int GetStringLengthForNumber(");
 
         
         #line default
@@ -207,7 +207,7 @@ this.Write(" value) => value.ToString();\r\n");
         #line hidden
         
         #line 26 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumInfo\ExtensionsBlock.ttinclude"
-this.Write("\r\n        /// <inheritdoc />\r\n        public int? TryGetStringCountForMember(");
+this.Write("\r\n        /// <inheritdoc />\r\n        public int? TryGetStringLengthForMember(");
 
         
         #line default
@@ -601,7 +601,7 @@ this.Write("                _ => throw new ArgumentOutOfRangeException()\r\n    
         #line hidden
         
         #line 148 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumInfo\ExtensionsBlock.ttinclude"
-this.Write("\r\n        /// <inheritdoc />\r\n        public int? TryGetStringCountForMember(");
+this.Write("\r\n        /// <inheritdoc />\r\n        public int? TryGetStringLengthForMember(");
 
         
         #line default

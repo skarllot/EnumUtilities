@@ -37,9 +37,9 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
         /// <param name="value">The value to calculate the number of characters.</param>
         /// <returns>The number of characters produced by converting the specified value to string.</returns>
-        public static int GetStringCount(this UserRole value)
+        public static int GetStringLength(this UserRole value)
         {
-            return EnumStringFormatter.GetStringCount((ulong)value, s_stringFormatter);
+            return EnumStringFormatter.GetStringLength((ulong)value, s_stringFormatter);
         }
 
         /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>

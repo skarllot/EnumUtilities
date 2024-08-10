@@ -284,7 +284,7 @@ this.Write(" flag)\r\n    {\r\n        return (value & flag) == flag;\r\n    }\r
         #line hidden
         
         #line 32 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Extensions\DefaultBlock.ttinclude"
-this.Write("\r\n    /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>\r\n    /// <param name=\"value\">The value to calculate the number of characters.</param>\r\n    /// <returns>The number of characters produced by converting the specified value to string.</returns>\r\n    public static int GetStringCount(this ");
+this.Write("\r\n    /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>\r\n    /// <param name=\"value\">The value to calculate the number of characters.</param>\r\n    /// <returns>The number of characters produced by converting the specified value to string.</returns>\r\n    public static int GetStringLength(this ");
 
         
         #line default
@@ -298,7 +298,7 @@ this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
         #line hidden
         
         #line 35 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Extensions\DefaultBlock.ttinclude"
-this.Write(" value)\r\n    {\r\n        return EnumStringFormatter.GetStringCount((");
+this.Write(" value)\r\n    {\r\n        return EnumStringFormatter.GetStringLength((");
 
         
         #line default
