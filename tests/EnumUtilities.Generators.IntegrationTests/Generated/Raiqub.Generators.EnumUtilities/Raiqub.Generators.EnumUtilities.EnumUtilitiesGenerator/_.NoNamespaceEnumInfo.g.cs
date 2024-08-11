@@ -12,8 +12,35 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
 public static partial class NoNamespaceEnumInfo
 {
-    /// <summary>Represents the largest possible number of characters produced by converting an <see cref="NoNamespace" /> value to string, based on defined members. This field is constant.</summary>
-    public const int NameMaxCharsLength = 4;
+    /// <summary>Provides constant values for <see cref="NoNamespace" /> names.</summary>
+    public static partial class Name
+    {
+        /// <summary>Represents the largest possible number of characters produced by converting an <see cref="NoNamespace" /> value to string, based on defined members. This field is constant.</summary>
+        public const int MaxCharsLength = 4;
+
+        /// <summary>The string representation of <see cref="NoNamespace.Zero" /> name.</summary>
+        public const string Zero = "Zero";
+
+        /// <summary>The string representation of <see cref="NoNamespace.One" /> name.</summary>
+        public const string One = "One";
+
+        /// <summary>The string representation of <see cref="NoNamespace.Two" /> name.</summary>
+        public const string Two = "Two";
+
+        private static string[]? s_names;
+
+        /// <summary>Retrieves the names of the constants in <see cref="NoNamespace" /> enumeration.</summary>
+        /// <returns>The names of the constants in <see cref="NoNamespace" />.</returns>
+        public static ReadOnlyMemory<string> GetNames()
+        {
+            return s_names ??= new string[]
+            {
+                "Zero",
+                "One",
+                "Two",
+            };
+        }
+    }
 
     /// <summary>Provides support for formatting <see cref="NoNamespace"/> values.</summary>
     public sealed partial class StringFormatter : IEnumFormatter<int>
@@ -86,13 +113,13 @@ public static partial class NoNamespaceEnumInfo
         {
             switch (value)
             {
-                case { } when value.SequenceEqual("Zero".AsSpan()):
+                case { } when value.SequenceEqual("Zero"):
                     result = 0;
                     return true;
-                case { } when value.SequenceEqual("One".AsSpan()):
+                case { } when value.SequenceEqual("One"):
                     result = 1;
                     return true;
-                case { } when value.SequenceEqual("Two".AsSpan()):
+                case { } when value.SequenceEqual("Two"):
                     result = 2;
                     return true;
                 default:

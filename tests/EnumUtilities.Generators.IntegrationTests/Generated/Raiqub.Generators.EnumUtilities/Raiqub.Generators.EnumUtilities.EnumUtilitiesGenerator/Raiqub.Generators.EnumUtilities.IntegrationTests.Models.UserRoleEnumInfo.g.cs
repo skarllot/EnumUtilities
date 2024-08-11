@@ -14,8 +14,47 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class UserRoleEnumInfo
     {
-        /// <summary>Represents the largest possible number of characters produced by converting an <see cref="UserRole" /> value to string, based on defined members. This field is constant.</summary>
-        public const int NameMaxCharsLength = 10;
+        /// <summary>Provides constant values for <see cref="UserRole" /> names.</summary>
+        public static partial class Name
+        {
+            /// <summary>Represents the largest possible number of characters produced by converting an <see cref="UserRole" /> value to string, based on defined members. This field is constant.</summary>
+            public const int MaxCharsLength = 10;
+
+            /// <summary>The string representation of <see cref="UserRole.None" /> name.</summary>
+            public const string None = "None";
+
+            /// <summary>The string representation of <see cref="UserRole.NormalUser" /> name.</summary>
+            public const string NormalUser = "NormalUser";
+
+            /// <summary>The string representation of <see cref="UserRole.Custodian" /> name.</summary>
+            public const string Custodian = "Custodian";
+
+            /// <summary>The string representation of <see cref="UserRole.Finance" /> name.</summary>
+            public const string Finance = "Finance";
+
+            /// <summary>The string representation of <see cref="UserRole.SuperUser" /> name.</summary>
+            public const string SuperUser = "SuperUser";
+
+            /// <summary>The string representation of <see cref="UserRole.All" /> name.</summary>
+            public const string All = "All";
+
+            private static string[]? s_names;
+
+            /// <summary>Retrieves the names of the constants in <see cref="UserRole" /> enumeration.</summary>
+            /// <returns>The names of the constants in <see cref="UserRole" />.</returns>
+            public static ReadOnlyMemory<string> GetNames()
+            {
+                return s_names ??= new string[]
+                {
+                    "None",
+                    "NormalUser",
+                    "Custodian",
+                    "Finance",
+                    "SuperUser",
+                    "All",
+                };
+            }
+        }
 
         /// <summary>Provides support for formatting <see cref="UserRole"/> values.</summary>
         public sealed partial class StringFormatter : IEnumFormatter<ulong>
@@ -208,22 +247,22 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             {
                 switch (value)
                 {
-                    case { } when value.SequenceEqual("None".AsSpan()):
+                    case { } when value.SequenceEqual("None"):
                         result = 0;
                         return true;
-                    case { } when value.SequenceEqual("NormalUser".AsSpan()):
+                    case { } when value.SequenceEqual("NormalUser"):
                         result = 1;
                         return true;
-                    case { } when value.SequenceEqual("Custodian".AsSpan()):
+                    case { } when value.SequenceEqual("Custodian"):
                         result = 2;
                         return true;
-                    case { } when value.SequenceEqual("Finance".AsSpan()):
+                    case { } when value.SequenceEqual("Finance"):
                         result = 4;
                         return true;
-                    case { } when value.SequenceEqual("SuperUser".AsSpan()):
+                    case { } when value.SequenceEqual("SuperUser"):
                         result = 6;
                         return true;
-                    case { } when value.SequenceEqual("All".AsSpan()):
+                    case { } when value.SequenceEqual("All"):
                         result = 7;
                         return true;
                     default:

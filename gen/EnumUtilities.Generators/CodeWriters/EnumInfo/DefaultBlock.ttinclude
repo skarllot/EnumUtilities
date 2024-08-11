@@ -1,0 +1,45 @@
+﻿<#+
+    private void WriteDefaultBlock()
+    {
+        if ((Model.SelectedGenerators & SelectedGenerators.MainGenerator) != SelectedGenerators.MainGenerator)
+            return;
+#>
+    /// <summary>Provides constant values for <see cref="<#= Model.Name #>" /> names.</summary>
+    public static partial class Name
+    {
+        /// <summary>Represents the largest possible number of characters produced by converting an <see cref="<#= Model.Name #>" /> value to string, based on defined members. This field is constant.</summary>
+        public const int MaxCharsLength = <#= Model.Values.Max(x => x.MemberName.Length) #>;
+<#+
+        foreach (var curr in Model.Values)
+        {
+#>
+
+        /// <summary>The string representation of <see cref="<#= Model.Name #>.<#= curr.MemberName #>" /> name.</summary>
+        public const string <#= curr.MemberName #> = "<#= curr.MemberName #>";
+<#+
+        }
+#>
+
+        private static string[]? s_names;
+
+        /// <summary>Retrieves the names of the constants in <see cref="<#= Model.Name #>" /> enumeration.</summary>
+        /// <returns>The names of the constants in <see cref="<#= Model.Name #>" />.</returns>
+        public static ReadOnlyMemory<string> GetNames()
+        {
+            return s_names ??= new string[]
+            {
+<#+
+        foreach (var curr in Model.Values)
+        {
+#>
+                "<#= curr.MemberName #>",
+<#+
+        }
+#>
+            };
+        }
+    }
+<#+
+        WriteLine();
+    }
+#>

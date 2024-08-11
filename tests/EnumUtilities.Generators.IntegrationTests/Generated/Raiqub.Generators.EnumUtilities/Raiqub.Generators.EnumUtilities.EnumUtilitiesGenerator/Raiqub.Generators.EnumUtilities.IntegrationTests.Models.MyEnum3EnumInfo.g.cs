@@ -14,8 +14,51 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class MyEnum3EnumInfo
     {
-        /// <summary>Represents the largest possible number of characters produced by converting an <see cref="MyEnum3" /> value to string, based on defined members. This field is constant.</summary>
-        public const int NameMaxCharsLength = 9;
+        /// <summary>Provides constant values for <see cref="MyEnum3" /> names.</summary>
+        public static partial class Name
+        {
+            /// <summary>Represents the largest possible number of characters produced by converting an <see cref="MyEnum3" /> value to string, based on defined members. This field is constant.</summary>
+            public const int MaxCharsLength = 9;
+
+            /// <summary>The string representation of <see cref="MyEnum3.Monday" /> name.</summary>
+            public const string Monday = "Monday";
+
+            /// <summary>The string representation of <see cref="MyEnum3.Tuesday" /> name.</summary>
+            public const string Tuesday = "Tuesday";
+
+            /// <summary>The string representation of <see cref="MyEnum3.Wednesday" /> name.</summary>
+            public const string Wednesday = "Wednesday";
+
+            /// <summary>The string representation of <see cref="MyEnum3.Thursday" /> name.</summary>
+            public const string Thursday = "Thursday";
+
+            /// <summary>The string representation of <see cref="MyEnum3.Friday" /> name.</summary>
+            public const string Friday = "Friday";
+
+            /// <summary>The string representation of <see cref="MyEnum3.Saturday" /> name.</summary>
+            public const string Saturday = "Saturday";
+
+            /// <summary>The string representation of <see cref="MyEnum3.Sunday" /> name.</summary>
+            public const string Sunday = "Sunday";
+
+            private static string[]? s_names;
+
+            /// <summary>Retrieves the names of the constants in <see cref="MyEnum3" /> enumeration.</summary>
+            /// <returns>The names of the constants in <see cref="MyEnum3" />.</returns>
+            public static ReadOnlyMemory<string> GetNames()
+            {
+                return s_names ??= new string[]
+                {
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday",
+                    "Sunday",
+                };
+            }
+        }
 
         /// <summary>Provides support for formatting <see cref="MyEnum3"/> values.</summary>
         public sealed partial class StringFormatter : IEnumFormatter<int>
@@ -96,25 +139,25 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             {
                 switch (value)
                 {
-                    case { } when value.SequenceEqual("Monday".AsSpan()):
+                    case { } when value.SequenceEqual("Monday"):
                         result = 0;
                         return true;
-                    case { } when value.SequenceEqual("Tuesday".AsSpan()):
+                    case { } when value.SequenceEqual("Tuesday"):
                         result = 1;
                         return true;
-                    case { } when value.SequenceEqual("Wednesday".AsSpan()):
+                    case { } when value.SequenceEqual("Wednesday"):
                         result = 2;
                         return true;
-                    case { } when value.SequenceEqual("Thursday".AsSpan()):
+                    case { } when value.SequenceEqual("Thursday"):
                         result = 3;
                         return true;
-                    case { } when value.SequenceEqual("Friday".AsSpan()):
+                    case { } when value.SequenceEqual("Friday"):
                         result = 4;
                         return true;
-                    case { } when value.SequenceEqual("Saturday".AsSpan()):
+                    case { } when value.SequenceEqual("Saturday"):
                         result = 5;
                         return true;
-                    case { } when value.SequenceEqual("Sunday".AsSpan()):
+                    case { } when value.SequenceEqual("Sunday"):
                         result = 6;
                         return true;
                     default:

@@ -194,7 +194,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 || s_stringParser.TryParseNumber(name.AsSpan(), out number);
             if (!success)
             {
-                return Enum.TryParse(name, out result);
+                return TryParse(name, out result);
             }
 
             result = (PaymentMethod)number;
@@ -286,8 +286,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                     numValue = 3;
                     break;
                 default:
-                    result = default;
-                    return false;
+                    return TryParse(enumMemberValue, ignoreCase: IsIgnoreCase(comparisonType), out result);
             }
 
             result = (PaymentMethod)numValue;
@@ -448,8 +447,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                     numValue = 3;
                     break;
                 default:
-                    result = default;
-                    return false;
+                    return TryParse(displayName, ignoreCase: IsIgnoreCase(comparisonType), out result);
             }
 
             result = (PaymentMethod)numValue;
@@ -495,6 +493,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 "Cash",
                 "Cheque",
             };
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static bool IsIgnoreCase(StringComparison comparisonType)
+        {
+            return ((int)comparisonType) % 2 == 1;
         }
 
         [DoesNotReturn]

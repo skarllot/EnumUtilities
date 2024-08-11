@@ -2,9 +2,6 @@
     private void WriteExtensionsBlock()
     {
 #>
-    /// <summary>Represents the largest possible number of characters produced by converting an <see cref="<#= Model.Name #>" /> value to string, based on defined members. This field is constant.</summary>
-    public const int NameMaxCharsLength = <#= Model.Values.Max(x => x.MemberName.Length) #>;
-
     /// <summary>Provides support for formatting <see cref="<#= Model.Name #>"/> values.</summary>
     public sealed partial class StringFormatter : IEnumFormatter<<#= Model.UnderlyingType #>>
     {

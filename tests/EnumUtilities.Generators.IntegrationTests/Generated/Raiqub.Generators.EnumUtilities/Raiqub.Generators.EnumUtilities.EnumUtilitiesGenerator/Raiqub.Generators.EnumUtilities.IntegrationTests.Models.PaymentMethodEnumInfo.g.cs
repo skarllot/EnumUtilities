@@ -14,8 +14,39 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class PaymentMethodEnumInfo
     {
-        /// <summary>Represents the largest possible number of characters produced by converting an <see cref="PaymentMethod" /> value to string, based on defined members. This field is constant.</summary>
-        public const int NameMaxCharsLength = 6;
+        /// <summary>Provides constant values for <see cref="PaymentMethod" /> names.</summary>
+        public static partial class Name
+        {
+            /// <summary>Represents the largest possible number of characters produced by converting an <see cref="PaymentMethod" /> value to string, based on defined members. This field is constant.</summary>
+            public const int MaxCharsLength = 6;
+
+            /// <summary>The string representation of <see cref="PaymentMethod.Credit" /> name.</summary>
+            public const string Credit = "Credit";
+
+            /// <summary>The string representation of <see cref="PaymentMethod.Debit" /> name.</summary>
+            public const string Debit = "Debit";
+
+            /// <summary>The string representation of <see cref="PaymentMethod.Cash" /> name.</summary>
+            public const string Cash = "Cash";
+
+            /// <summary>The string representation of <see cref="PaymentMethod.Cheque" /> name.</summary>
+            public const string Cheque = "Cheque";
+
+            private static string[]? s_names;
+
+            /// <summary>Retrieves the names of the constants in <see cref="PaymentMethod" /> enumeration.</summary>
+            /// <returns>The names of the constants in <see cref="PaymentMethod" />.</returns>
+            public static ReadOnlyMemory<string> GetNames()
+            {
+                return s_names ??= new string[]
+                {
+                    "Credit",
+                    "Debit",
+                    "Cash",
+                    "Cheque",
+                };
+            }
+        }
 
         /// <summary>Provides support for formatting <see cref="PaymentMethod"/> values.</summary>
         public sealed partial class StringFormatter : IEnumFormatter<int>
@@ -104,16 +135,16 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             {
                 switch (value)
                 {
-                    case { } when value.SequenceEqual("Credit".AsSpan()):
+                    case { } when value.SequenceEqual("Credit"):
                         result = 0;
                         return true;
-                    case { } when value.SequenceEqual("Debit".AsSpan()):
+                    case { } when value.SequenceEqual("Debit"):
                         result = 1;
                         return true;
-                    case { } when value.SequenceEqual("Cash".AsSpan()):
+                    case { } when value.SequenceEqual("Cash"):
                         result = 2;
                         return true;
-                    case { } when value.SequenceEqual("Cheque".AsSpan()):
+                    case { } when value.SequenceEqual("Cheque"):
                         result = 3;
                         return true;
                     default:

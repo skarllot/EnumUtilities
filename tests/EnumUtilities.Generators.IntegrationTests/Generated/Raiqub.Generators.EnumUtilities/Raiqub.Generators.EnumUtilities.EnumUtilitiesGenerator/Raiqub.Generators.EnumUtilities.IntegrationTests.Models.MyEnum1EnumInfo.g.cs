@@ -14,8 +14,35 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     internal static partial class MyEnum1EnumInfo
     {
-        /// <summary>Represents the largest possible number of characters produced by converting an <see cref="MyEnum1" /> value to string, based on defined members. This field is constant.</summary>
-        public const int NameMaxCharsLength = 4;
+        /// <summary>Provides constant values for <see cref="MyEnum1" /> names.</summary>
+        public static partial class Name
+        {
+            /// <summary>Represents the largest possible number of characters produced by converting an <see cref="MyEnum1" /> value to string, based on defined members. This field is constant.</summary>
+            public const int MaxCharsLength = 4;
+
+            /// <summary>The string representation of <see cref="MyEnum1.Zero" /> name.</summary>
+            public const string Zero = "Zero";
+
+            /// <summary>The string representation of <see cref="MyEnum1.One" /> name.</summary>
+            public const string One = "One";
+
+            /// <summary>The string representation of <see cref="MyEnum1.Two" /> name.</summary>
+            public const string Two = "Two";
+
+            private static string[]? s_names;
+
+            /// <summary>Retrieves the names of the constants in <see cref="MyEnum1" /> enumeration.</summary>
+            /// <returns>The names of the constants in <see cref="MyEnum1" />.</returns>
+            public static ReadOnlyMemory<string> GetNames()
+            {
+                return s_names ??= new string[]
+                {
+                    "Zero",
+                    "One",
+                    "Two",
+                };
+            }
+        }
 
         /// <summary>Provides support for formatting <see cref="MyEnum1"/> values.</summary>
         public sealed partial class StringFormatter : IEnumFormatter<int>
@@ -88,13 +115,13 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             {
                 switch (value)
                 {
-                    case { } when value.SequenceEqual("Zero".AsSpan()):
+                    case { } when value.SequenceEqual("Zero"):
                         result = 0;
                         return true;
-                    case { } when value.SequenceEqual("One".AsSpan()):
+                    case { } when value.SequenceEqual("One"):
                         result = 1;
                         return true;
-                    case { } when value.SequenceEqual("Two".AsSpan()):
+                    case { } when value.SequenceEqual("Two"):
                         result = 2;
                         return true;
                     default:

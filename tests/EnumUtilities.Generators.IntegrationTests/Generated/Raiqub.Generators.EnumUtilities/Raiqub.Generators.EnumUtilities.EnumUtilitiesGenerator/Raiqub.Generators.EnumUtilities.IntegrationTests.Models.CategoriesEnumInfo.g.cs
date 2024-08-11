@@ -14,8 +14,47 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class CategoriesEnumInfo
     {
-        /// <summary>Represents the largest possible number of characters produced by converting an <see cref="Categories" /> value to string, based on defined members. This field is constant.</summary>
-        public const int NameMaxCharsLength = 11;
+        /// <summary>Provides constant values for <see cref="Categories" /> names.</summary>
+        public static partial class Name
+        {
+            /// <summary>Represents the largest possible number of characters produced by converting an <see cref="Categories" /> value to string, based on defined members. This field is constant.</summary>
+            public const int MaxCharsLength = 11;
+
+            /// <summary>The string representation of <see cref="Categories.Electronics" /> name.</summary>
+            public const string Electronics = "Electronics";
+
+            /// <summary>The string representation of <see cref="Categories.Food" /> name.</summary>
+            public const string Food = "Food";
+
+            /// <summary>The string representation of <see cref="Categories.Automotive" /> name.</summary>
+            public const string Automotive = "Automotive";
+
+            /// <summary>The string representation of <see cref="Categories.Arts" /> name.</summary>
+            public const string Arts = "Arts";
+
+            /// <summary>The string representation of <see cref="Categories.BeautyCare" /> name.</summary>
+            public const string BeautyCare = "BeautyCare";
+
+            /// <summary>The string representation of <see cref="Categories.Fashion" /> name.</summary>
+            public const string Fashion = "Fashion";
+
+            private static string[]? s_names;
+
+            /// <summary>Retrieves the names of the constants in <see cref="Categories" /> enumeration.</summary>
+            /// <returns>The names of the constants in <see cref="Categories" />.</returns>
+            public static ReadOnlyMemory<string> GetNames()
+            {
+                return s_names ??= new string[]
+                {
+                    "Electronics",
+                    "Food",
+                    "Automotive",
+                    "Arts",
+                    "BeautyCare",
+                    "Fashion",
+                };
+            }
+        }
 
         /// <summary>Provides support for formatting <see cref="Categories"/> values.</summary>
         public sealed partial class StringFormatter : IEnumFormatter<int>
@@ -94,22 +133,22 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             {
                 switch (value)
                 {
-                    case { } when value.SequenceEqual("Electronics".AsSpan()):
+                    case { } when value.SequenceEqual("Electronics"):
                         result = 0;
                         return true;
-                    case { } when value.SequenceEqual("Food".AsSpan()):
+                    case { } when value.SequenceEqual("Food"):
                         result = 1;
                         return true;
-                    case { } when value.SequenceEqual("Automotive".AsSpan()):
+                    case { } when value.SequenceEqual("Automotive"):
                         result = 2;
                         return true;
-                    case { } when value.SequenceEqual("Arts".AsSpan()):
+                    case { } when value.SequenceEqual("Arts"):
                         result = 3;
                         return true;
-                    case { } when value.SequenceEqual("BeautyCare".AsSpan()):
+                    case { } when value.SequenceEqual("BeautyCare"):
                         result = 4;
                         return true;
-                    case { } when value.SequenceEqual("Fashion".AsSpan()):
+                    case { } when value.SequenceEqual("Fashion"):
                         result = 5;
                         return true;
                     default:

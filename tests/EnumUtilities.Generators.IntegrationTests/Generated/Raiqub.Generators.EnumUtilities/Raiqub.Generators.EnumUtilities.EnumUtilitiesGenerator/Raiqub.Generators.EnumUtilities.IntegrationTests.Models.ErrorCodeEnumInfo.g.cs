@@ -14,9 +14,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     internal static partial class ErrorCodeEnumInfo
     {
-        /// <summary>Represents the largest possible number of characters produced by converting an <see cref="ErrorCode" /> value to string, based on defined members. This field is constant.</summary>
-        public const int NameMaxCharsLength = 14;
-
         /// <summary>Provides support for formatting <see cref="ErrorCode"/> values.</summary>
         public sealed partial class StringFormatter : IEnumFormatter<ushort>
         {
@@ -90,16 +87,16 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             {
                 switch (value)
                 {
-                    case { } when value.SequenceEqual("None".AsSpan()):
+                    case { } when value.SequenceEqual("None"):
                         result = 0;
                         return true;
-                    case { } when value.SequenceEqual("Unknown".AsSpan()):
+                    case { } when value.SequenceEqual("Unknown"):
                         result = 1;
                         return true;
-                    case { } when value.SequenceEqual("ConnectionLost".AsSpan()):
+                    case { } when value.SequenceEqual("ConnectionLost"):
                         result = 100;
                         return true;
-                    case { } when value.SequenceEqual("OutlierReading".AsSpan()):
+                    case { } when value.SequenceEqual("OutlierReading"):
                         result = 200;
                         return true;
                     default:

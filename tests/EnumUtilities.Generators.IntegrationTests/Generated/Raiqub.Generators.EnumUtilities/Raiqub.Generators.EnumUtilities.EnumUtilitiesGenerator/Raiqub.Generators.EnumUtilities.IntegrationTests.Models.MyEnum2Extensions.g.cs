@@ -103,7 +103,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 1 => "Debit card",
                 2 => "Cash",
                 3 => "Cheque",
-                _ => value.ToString()
+                _ => ToStringFast(value)
             };
         }
 
@@ -132,7 +132,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 1 => "Debit Card",
                 2 => "Physical Cash",
                 3 => "Cheque",
-                _ => value.ToString()
+                _ => ToStringFast(value)
             };
         }
     }

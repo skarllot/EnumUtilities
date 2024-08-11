@@ -14,8 +14,35 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class ColoursEnumInfo
     {
-        /// <summary>Represents the largest possible number of characters produced by converting an <see cref="Colours" /> value to string, based on defined members. This field is constant.</summary>
-        public const int NameMaxCharsLength = 5;
+        /// <summary>Provides constant values for <see cref="Colours" /> names.</summary>
+        public static partial class Name
+        {
+            /// <summary>Represents the largest possible number of characters produced by converting an <see cref="Colours" /> value to string, based on defined members. This field is constant.</summary>
+            public const int MaxCharsLength = 5;
+
+            /// <summary>The string representation of <see cref="Colours.Red" /> name.</summary>
+            public const string Red = "Red";
+
+            /// <summary>The string representation of <see cref="Colours.Blue" /> name.</summary>
+            public const string Blue = "Blue";
+
+            /// <summary>The string representation of <see cref="Colours.Green" /> name.</summary>
+            public const string Green = "Green";
+
+            private static string[]? s_names;
+
+            /// <summary>Retrieves the names of the constants in <see cref="Colours" /> enumeration.</summary>
+            /// <returns>The names of the constants in <see cref="Colours" />.</returns>
+            public static ReadOnlyMemory<string> GetNames()
+            {
+                return s_names ??= new string[]
+                {
+                    "Red",
+                    "Blue",
+                    "Green",
+                };
+            }
+        }
 
         /// <summary>Provides support for formatting <see cref="Colours"/> values.</summary>
         public sealed partial class StringFormatter : IEnumFormatter<int>
@@ -181,13 +208,13 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             {
                 switch (value)
                 {
-                    case { } when value.SequenceEqual("Red".AsSpan()):
+                    case { } when value.SequenceEqual("Red"):
                         result = 1;
                         return true;
-                    case { } when value.SequenceEqual("Blue".AsSpan()):
+                    case { } when value.SequenceEqual("Blue"):
                         result = 2;
                         return true;
-                    case { } when value.SequenceEqual("Green".AsSpan()):
+                    case { } when value.SequenceEqual("Green"):
                         result = 4;
                         return true;
                     default:

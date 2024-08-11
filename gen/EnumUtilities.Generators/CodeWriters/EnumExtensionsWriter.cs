@@ -1669,7 +1669,7 @@ this.Write(",\r\n");
         #line hidden
         
         #line 23 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Extensions\EnumMemberBlock.ttinclude"
-this.Write("            _ => value.ToString()\r\n        };\r\n    }\r\n");
+this.Write("            _ => ToStringFast(value)\r\n        };\r\n    }\r\n");
 
         
         #line default
@@ -1988,7 +1988,7 @@ this.Write(",\r\n");
         #line hidden
         
         #line 43 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Extensions\DisplayBlock.ttinclude"
-this.Write("            _ => value.ToString()\r\n        };\r\n    }\r\n");
+this.Write("            _ => ToStringFast(value)\r\n        };\r\n    }\r\n");
 
         
         #line default

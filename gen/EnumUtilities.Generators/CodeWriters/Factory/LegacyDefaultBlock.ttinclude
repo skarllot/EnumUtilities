@@ -26,7 +26,7 @@
             || s_stringParser.TryParseNumber(name.AsSpan(), out number);
         if (!success)
         {
-            return Enum.TryParse(name, out result);
+            return TryParse(name, out result);
         }
 
         result = (<#= Model.RefName #>)number;

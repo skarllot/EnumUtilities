@@ -194,7 +194,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 || s_stringParser.TryParseNumber(name.AsSpan(), out number);
             if (!success)
             {
-                return Enum.TryParse(name, out result);
+                return TryParse(name, out result);
             }
 
             result = (Colours)number;
@@ -274,6 +274,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 "Blue",
                 "Green",
             };
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static bool IsIgnoreCase(StringComparison comparisonType)
+        {
+            return ((int)comparisonType) % 2 == 1;
         }
 
         [DoesNotReturn]

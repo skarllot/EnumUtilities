@@ -14,8 +14,47 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class HumanStatesEnumInfo
     {
-        /// <summary>Represents the largest possible number of characters produced by converting an <see cref="HumanStates" /> value to string, based on defined members. This field is constant.</summary>
-        public const int NameMaxCharsLength = 8;
+        /// <summary>Provides constant values for <see cref="HumanStates" /> names.</summary>
+        public static partial class Name
+        {
+            /// <summary>Represents the largest possible number of characters produced by converting an <see cref="HumanStates" /> value to string, based on defined members. This field is constant.</summary>
+            public const int MaxCharsLength = 8;
+
+            /// <summary>The string representation of <see cref="HumanStates.Idle" /> name.</summary>
+            public const string Idle = "Idle";
+
+            /// <summary>The string representation of <see cref="HumanStates.Working" /> name.</summary>
+            public const string Working = "Working";
+
+            /// <summary>The string representation of <see cref="HumanStates.Sleeping" /> name.</summary>
+            public const string Sleeping = "Sleeping";
+
+            /// <summary>The string representation of <see cref="HumanStates.Eating" /> name.</summary>
+            public const string Eating = "Eating";
+
+            /// <summary>The string representation of <see cref="HumanStates.Dead" /> name.</summary>
+            public const string Dead = "Dead";
+
+            /// <summary>The string representation of <see cref="HumanStates.Relaxing" /> name.</summary>
+            public const string Relaxing = "Relaxing";
+
+            private static string[]? s_names;
+
+            /// <summary>Retrieves the names of the constants in <see cref="HumanStates" /> enumeration.</summary>
+            /// <returns>The names of the constants in <see cref="HumanStates" />.</returns>
+            public static ReadOnlyMemory<string> GetNames()
+            {
+                return s_names ??= new string[]
+                {
+                    "Idle",
+                    "Working",
+                    "Sleeping",
+                    "Eating",
+                    "Dead",
+                    "Relaxing",
+                };
+            }
+        }
 
         /// <summary>Provides support for formatting <see cref="HumanStates"/> values.</summary>
         public sealed partial class StringFormatter : IEnumFormatter<int>
@@ -92,22 +131,22 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             {
                 switch (value)
                 {
-                    case { } when value.SequenceEqual("Idle".AsSpan()):
+                    case { } when value.SequenceEqual("Idle"):
                         result = 1;
                         return true;
-                    case { } when value.SequenceEqual("Working".AsSpan()):
+                    case { } when value.SequenceEqual("Working"):
                         result = 2;
                         return true;
-                    case { } when value.SequenceEqual("Sleeping".AsSpan()):
+                    case { } when value.SequenceEqual("Sleeping"):
                         result = 3;
                         return true;
-                    case { } when value.SequenceEqual("Eating".AsSpan()):
+                    case { } when value.SequenceEqual("Eating"):
                         result = 4;
                         return true;
-                    case { } when value.SequenceEqual("Dead".AsSpan()):
+                    case { } when value.SequenceEqual("Dead"):
                         result = 5;
                         return true;
-                    case { } when value.SequenceEqual("Relaxing".AsSpan()):
+                    case { } when value.SequenceEqual("Relaxing"):
                         result = 1;
                         return true;
                     default:

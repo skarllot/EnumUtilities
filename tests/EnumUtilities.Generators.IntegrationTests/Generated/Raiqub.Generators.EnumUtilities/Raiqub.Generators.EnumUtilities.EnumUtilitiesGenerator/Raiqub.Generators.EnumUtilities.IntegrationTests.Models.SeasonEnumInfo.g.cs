@@ -14,9 +14,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class SeasonEnumInfo
     {
-        /// <summary>Represents the largest possible number of characters produced by converting an <see cref="Season" /> value to string, based on defined members. This field is constant.</summary>
-        public const int NameMaxCharsLength = 6;
-
         /// <summary>Provides support for formatting <see cref="Season"/> values.</summary>
         public sealed partial class StringFormatter : IEnumFormatter<int>
         {
@@ -90,16 +87,16 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             {
                 switch (value)
                 {
-                    case { } when value.SequenceEqual("Spring".AsSpan()):
+                    case { } when value.SequenceEqual("Spring"):
                         result = 1;
                         return true;
-                    case { } when value.SequenceEqual("Summer".AsSpan()):
+                    case { } when value.SequenceEqual("Summer"):
                         result = 2;
                         return true;
-                    case { } when value.SequenceEqual("Autumn".AsSpan()):
+                    case { } when value.SequenceEqual("Autumn"):
                         result = 3;
                         return true;
-                    case { } when value.SequenceEqual("Winter".AsSpan()):
+                    case { } when value.SequenceEqual("Winter"):
                         result = 4;
                         return true;
                     default:

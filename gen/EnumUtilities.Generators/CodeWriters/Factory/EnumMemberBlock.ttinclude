@@ -51,8 +51,7 @@
             }
 #>
             default:
-                result = default;
-                return false;
+                return TryParse(enumMemberValue, ignoreCase: IsIgnoreCase(comparisonType), out result);
         }
 
         result = (<#= Model.RefName #>)numValue;
