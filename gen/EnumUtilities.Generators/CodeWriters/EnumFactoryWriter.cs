@@ -1001,27 +1001,27 @@ this.Write(";\r\n                break;\r\n");
         #line hidden
         
         #line 53 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
-this.Write("            default:\r\n                return TryParse(enumMemberValue, ignoreCase: IsIgnoreCase(comparisonType), out result);\r\n        }\r\n\r\n        result = (");
+this.Write("            default:\r\n                result = default;\r\n                return false;\r\n        }\r\n\r\n        result = (");
 
         
         #line default
         #line hidden
         
-        #line 57 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
+        #line 58 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
 
         
         #line default
         #line hidden
         
-        #line 57 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
+        #line 58 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
 this.Write(")numValue;\r\n        return true;\r\n");
 
         
         #line default
         #line hidden
         
-        #line 59 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
+        #line 60 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
 
         }
 
@@ -1029,154 +1029,154 @@ this.Write(")numValue;\r\n        return true;\r\n");
         #line default
         #line hidden
         
-        #line 62 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
+        #line 63 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
 this.Write("    }\r\n\r\n    /// <summary>\r\n    /// Converts the string representation of the value associated with one enumerated constant to\r\n    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.\r\n    /// </summary>\r\n    /// <param name=\"enumMemberValue\">The value as defined with <see cref=\"System.Runtime.Serialization.EnumMemberAttribute\"/>.</param>\r\n    /// <param name=\"result\">\r\n    /// When this method returns, result contains an object of type ");
 
         
         #line default
         #line hidden
         
-        #line 70 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
+        #line 71 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
 
         
         #line default
         #line hidden
         
-        #line 70 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
+        #line 71 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
 this.Write(" whose value is represented by value\r\n    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the\r\n    /// underlying type of ");
 
         
         #line default
         #line hidden
         
-        #line 72 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
+        #line 73 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
 
         
         #line default
         #line hidden
         
-        #line 72 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
+        #line 73 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
 this.Write(". Note that this value need not be a member of the ");
 
         
         #line default
         #line hidden
         
-        #line 72 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
+        #line 73 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
 
         
         #line default
         #line hidden
         
-        #line 72 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
+        #line 73 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
 this.Write(" enumeration.\r\n    /// </param>\r\n    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>\r\n    public static bool TryParseFromEnumMemberValue([NotNullWhen(true)] string? enumMemberValue, out ");
 
         
         #line default
         #line hidden
         
-        #line 75 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
+        #line 76 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
 
         
         #line default
         #line hidden
         
-        #line 75 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
+        #line 76 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
 this.Write(" result)\r\n    {\r\n        return TryParseFromEnumMemberValue(enumMemberValue, StringComparison.Ordinal, out result);\r\n    }\r\n\r\n    /// <summary>\r\n    /// Converts the string representation of the value associated with one enumerated constant to\r\n    /// an equivalent enumerated object.\r\n    /// </summary>\r\n    /// <param name=\"enumMemberValue\">The value as defined with <see cref=\"System.Runtime.Serialization.EnumMemberAttribute\"/>.</param>\r\n    /// <param name=\"comparisonType\">One of the enumeration values that specifies how the strings will be compared.</param>\r\n    /// <returns>\r\n    /// Contains an object of type ");
 
         
         #line default
         #line hidden
         
-        #line 87 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
+        #line 88 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
 
         
         #line default
         #line hidden
         
-        #line 87 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
+        #line 88 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
 this.Write(" whose value is represented by value if the parse operation succeeds.\r\n    /// If the parse operation fails, result contains a null value.\r\n    /// </returns>\r\n    /// <exception cref=\"ArgumentException\"><paramref name=\"comparisonType\"/> is not a <see cref=\"StringComparison\"/> value.</exception>\r\n    public static ");
 
         
         #line default
         #line hidden
         
-        #line 91 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
+        #line 92 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
 
         
         #line default
         #line hidden
         
-        #line 91 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
+        #line 92 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
 this.Write("? TryParseFromEnumMemberValue(string? enumMemberValue, StringComparison comparisonType)\r\n    {\r\n        return TryParseFromEnumMemberValue(enumMemberValue, comparisonType, out ");
 
         
         #line default
         #line hidden
         
-        #line 93 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
+        #line 94 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
 
         
         #line default
         #line hidden
         
-        #line 93 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
+        #line 94 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
 this.Write(" result) ? result : null;\r\n    }\r\n\r\n    /// <summary>\r\n    /// Converts the string representation of the value associated with one enumerated constant to\r\n    /// an equivalent enumerated object.\r\n    /// </summary>\r\n    /// <param name=\"enumMemberValue\">The value as defined with <see cref=\"System.Runtime.Serialization.EnumMemberAttribute\"/>.</param>\r\n    /// <returns>\r\n    /// Contains an object of type ");
 
         
         #line default
         #line hidden
         
-        #line 102 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
+        #line 103 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
 
         
         #line default
         #line hidden
         
-        #line 102 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
+        #line 103 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
 this.Write(" whose value is represented by value if the parse operation succeeds.\r\n    /// If the parse operation fails, result contains a null value.\r\n    /// </returns>\r\n    public static ");
 
         
         #line default
         #line hidden
         
-        #line 105 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
+        #line 106 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
 
         
         #line default
         #line hidden
         
-        #line 105 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
+        #line 106 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
 this.Write("? TryParseFromEnumMemberValue(string? enumMemberValue)\r\n    {\r\n        return TryParseFromEnumMemberValue(enumMemberValue, StringComparison.Ordinal, out ");
 
         
         #line default
         #line hidden
         
-        #line 107 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
+        #line 108 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
 
         
         #line default
         #line hidden
         
-        #line 107 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
+        #line 108 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
 this.Write(" result) ? result : null;\r\n    }\r\n");
 
         
         #line default
         #line hidden
         
-        #line 109 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
+        #line 110 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\EnumMemberBlock.ttinclude"
 
     }
 
@@ -1763,27 +1763,27 @@ this.Write(";\r\n                break;\r\n");
         #line hidden
         
         #line 99 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
-this.Write("            default:\r\n                return TryParse(displayName, ignoreCase: IsIgnoreCase(comparisonType), out result);\r\n        }\r\n\r\n        result = (");
+this.Write("            default:\r\n                result = default;\r\n                return false;\r\n        }\r\n\r\n        result = (");
 
         
         #line default
         #line hidden
         
-        #line 103 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 104 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
 
         
         #line default
         #line hidden
         
-        #line 103 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 104 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write(")numValue;\r\n        return true;\r\n");
 
         
         #line default
         #line hidden
         
-        #line 105 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 106 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 
             }
 
@@ -1791,84 +1791,84 @@ this.Write(")numValue;\r\n        return true;\r\n");
         #line default
         #line hidden
         
-        #line 108 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 109 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write("    }\r\n\r\n    public static bool TryCreateFromDisplayName([NotNullWhen(true)] string? displayName, out ");
 
         
         #line default
         #line hidden
         
-        #line 110 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 111 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
 
         
         #line default
         #line hidden
         
-        #line 110 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 111 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write(" result)\r\n    {\r\n        return TryCreateFromDisplayName(displayName, StringComparison.Ordinal, out result);\r\n    }\r\n\r\n    public static ");
 
         
         #line default
         #line hidden
         
-        #line 115 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 116 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
 
         
         #line default
         #line hidden
         
-        #line 115 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 116 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write("? TryCreateFromDisplayName(string? displayName, StringComparison comparisonType)\r\n    {\r\n        return TryCreateFromDisplayName(displayName, comparisonType, out ");
 
         
         #line default
         #line hidden
         
-        #line 117 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 118 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
 
         
         #line default
         #line hidden
         
-        #line 117 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 118 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write(" result) ? result : null;\r\n    }\r\n\r\n    public static ");
 
         
         #line default
         #line hidden
         
-        #line 120 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 121 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
 
         
         #line default
         #line hidden
         
-        #line 120 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 121 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write("? TryCreateFromDisplayName(string? displayName)\r\n    {\r\n        return TryCreateFromDisplayName(displayName, StringComparison.Ordinal, out ");
 
         
         #line default
         #line hidden
         
-        #line 122 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 123 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
 
         
         #line default
         #line hidden
         
-        #line 122 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 123 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write(" result) ? result : null;\r\n    }\r\n");
 
         
         #line default
         #line hidden
         
-        #line 124 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 125 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 
         }
 
@@ -1876,7 +1876,7 @@ this.Write(" result) ? result : null;\r\n    }\r\n");
         #line default
         #line hidden
         
-        #line 127 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 128 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 
         if (Model.HasDisplayDescription)
         {
@@ -1885,28 +1885,28 @@ this.Write(" result) ? result : null;\r\n    }\r\n");
         #line default
         #line hidden
         
-        #line 132 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 133 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write("\r\n    public static bool TryCreateFromDescription(\r\n        [NotNullWhen(true)] string? description,\r\n        StringComparison comparisonType,\r\n        out ");
 
         
         #line default
         #line hidden
         
-        #line 135 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 136 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
 
         
         #line default
         #line hidden
         
-        #line 135 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 136 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write(" result)\r\n    {\r\n");
 
         
         #line default
         #line hidden
         
-        #line 137 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 138 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 
             if (Model.Values.All(x => x.Display?.Description == null))
             {
@@ -1915,14 +1915,14 @@ this.Write(" result)\r\n    {\r\n");
         #line default
         #line hidden
         
-        #line 141 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 142 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write("        result = default;\r\n        return false;\r\n");
 
         
         #line default
         #line hidden
         
-        #line 143 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 144 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 
             }
             else
@@ -1932,28 +1932,28 @@ this.Write("        result = default;\r\n        return false;\r\n");
         #line default
         #line hidden
         
-        #line 148 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 149 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write("        ");
 
         
         #line default
         #line hidden
         
-        #line 148 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 149 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
 
         
         #line default
         #line hidden
         
-        #line 148 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 149 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write(" numValue;\r\n        switch (description)\r\n        {\r\n");
 
         
         #line default
         #line hidden
         
-        #line 151 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 152 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 
                 foreach (var curr in Model.Values.Where(x => x.Display?.Description != null))
                 {
@@ -1962,14 +1962,14 @@ this.Write(" numValue;\r\n        switch (description)\r\n        {\r\n");
         #line default
         #line hidden
         
-        #line 155 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 156 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write("            case { } s when s.Equals(");
 
         
         #line default
         #line hidden
         
-        #line 155 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 156 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(curr.Display!.ResourceDescription != null
                                 ? Append(curr.Display.ResourceDescription)
                                 : Append($"\"{curr.Display.Description}\"")));
@@ -1978,28 +1978,28 @@ this.Write(this.ToStringHelper.ToStringWithCulture(curr.Display!.ResourceDescrip
         #line default
         #line hidden
         
-        #line 158 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 159 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write(", comparisonType):\r\n                numValue = ");
 
         
         #line default
         #line hidden
         
-        #line 159 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 160 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberValue));
 
         
         #line default
         #line hidden
         
-        #line 159 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 160 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write(";\r\n                break;\r\n");
 
         
         #line default
         #line hidden
         
-        #line 161 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 162 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 
                 }
 
@@ -2007,28 +2007,28 @@ this.Write(";\r\n                break;\r\n");
         #line default
         #line hidden
         
-        #line 164 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 165 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write("            default:\r\n                result = default;\r\n                return false;\r\n        }\r\n\r\n        result = (");
 
         
         #line default
         #line hidden
         
-        #line 169 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 170 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
 
         
         #line default
         #line hidden
         
-        #line 169 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 170 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write(")numValue;\r\n        return true;\r\n");
 
         
         #line default
         #line hidden
         
-        #line 171 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 172 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 
             }
 
@@ -2036,84 +2036,84 @@ this.Write(")numValue;\r\n        return true;\r\n");
         #line default
         #line hidden
         
-        #line 174 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 175 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write("    }\r\n\r\n    public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, out ");
 
         
         #line default
         #line hidden
         
-        #line 176 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 177 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
 
         
         #line default
         #line hidden
         
-        #line 176 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 177 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write(" result)\r\n    {\r\n        return TryCreateFromDescription(description, StringComparison.Ordinal, out result);\r\n    }\r\n\r\n    public static ");
 
         
         #line default
         #line hidden
         
-        #line 181 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 182 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
 
         
         #line default
         #line hidden
         
-        #line 181 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 182 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write("? TryCreateFromDescription(string? description, StringComparison comparisonType)\r\n    {\r\n        return TryCreateFromDescription(description, comparisonType, out ");
 
         
         #line default
         #line hidden
         
-        #line 183 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 184 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
 
         
         #line default
         #line hidden
         
-        #line 183 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 184 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write(" result) ? result : null;\r\n    }\r\n\r\n    public static ");
 
         
         #line default
         #line hidden
         
-        #line 186 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 187 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
 
         
         #line default
         #line hidden
         
-        #line 186 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 187 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write("? TryCreateFromDescription(string? description)\r\n    {\r\n        return TryCreateFromDescription(description, StringComparison.Ordinal, out ");
 
         
         #line default
         #line hidden
         
-        #line 188 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 189 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
 
         
         #line default
         #line hidden
         
-        #line 188 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 189 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 this.Write(" result) ? result : null;\r\n    }\r\n");
 
         
         #line default
         #line hidden
         
-        #line 190 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
+        #line 191 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DisplayBlock.ttinclude"
 
         }
     }

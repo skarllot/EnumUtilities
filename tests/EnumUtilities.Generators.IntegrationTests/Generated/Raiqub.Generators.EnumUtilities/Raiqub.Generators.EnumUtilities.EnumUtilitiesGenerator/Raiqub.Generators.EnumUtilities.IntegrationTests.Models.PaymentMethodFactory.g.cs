@@ -286,7 +286,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                     numValue = 3;
                     break;
                 default:
-                    return TryParse(enumMemberValue, ignoreCase: IsIgnoreCase(comparisonType), out result);
+                    result = default;
+                    return false;
             }
 
             result = (PaymentMethod)numValue;
@@ -447,7 +448,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                     numValue = 3;
                     break;
                 default:
-                    return TryParse(displayName, ignoreCase: IsIgnoreCase(comparisonType), out result);
+                    result = default;
+                    return false;
             }
 
             result = (PaymentMethod)numValue;

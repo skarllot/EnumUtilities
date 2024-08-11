@@ -97,7 +97,8 @@
                 }
 #>
             default:
-                return TryParse(displayName, ignoreCase: IsIgnoreCase(comparisonType), out result);
+                result = default;
+                return false;
         }
 
         result = (<#= Model.RefName #>)numValue;
