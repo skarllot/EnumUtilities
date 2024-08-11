@@ -65,7 +65,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         }
 
         /// <summary>Provides support for formatting <see cref="UserRole"/> values.</summary>
-        public sealed partial class StringFormatter : IEnumFormatter<ulong>
+        internal sealed partial class StringFormatter : IEnumFormatter<ulong>
         {
             /// <summary>Gets the singleton instance of the <see cref="StringFormatter"/> class.</summary>
             public static StringFormatter Instance = new StringFormatter();
@@ -224,7 +224,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         }
 
         /// <summary>Provides support for parsing <see cref="UserRole"/> values.</summary>
-        public sealed partial class StringParser
+        internal sealed partial class StringParser
             : IEnumParser<ulong>
         {
             /// <summary>Gets the singleton instance of the <see cref="StringParser"/> class.</summary>

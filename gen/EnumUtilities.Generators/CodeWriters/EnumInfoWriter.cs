@@ -424,7 +424,7 @@ this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
         #line hidden
         
         #line 5 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumInfo\ExtensionsBlock.ttinclude"
-this.Write("\"/> values.</summary>\r\n    public sealed partial class StringFormatter : IEnumFormatter<");
+this.Write("\"/> values.</summary>\r\n    internal sealed partial class StringFormatter : IEnumFormatter<");
 
         
         #line default
@@ -1099,7 +1099,7 @@ this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
         #line hidden
         
         #line 8 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumInfo\FactoryBlock.ttinclude"
-this.Write("\"/> values.</summary>\r\n    public sealed partial class StringParser\r\n        : IEnumParser<");
+this.Write("\"/> values.</summary>\r\n    internal sealed partial class StringParser\r\n        : IEnumParser<");
 
         
         #line default

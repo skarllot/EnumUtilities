@@ -65,7 +65,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         }
 
         /// <summary>Provides support for formatting <see cref="SlimCategories"/> values.</summary>
-        public sealed partial class StringFormatter : IEnumFormatter<byte>
+        internal sealed partial class StringFormatter : IEnumFormatter<byte>
         {
             /// <summary>Gets the singleton instance of the <see cref="StringFormatter"/> class.</summary>
             public static StringFormatter Instance = new StringFormatter();
@@ -110,7 +110,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         }
 
         /// <summary>Provides support for parsing <see cref="SlimCategories"/> values.</summary>
-        public sealed partial class StringParser
+        internal sealed partial class StringParser
             : IEnumParser<byte>
         {
             /// <summary>Gets the singleton instance of the <see cref="StringParser"/> class.</summary>

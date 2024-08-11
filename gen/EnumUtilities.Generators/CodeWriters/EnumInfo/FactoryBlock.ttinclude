@@ -6,7 +6,7 @@
 #>
 
     /// <summary>Provides support for parsing <see cref="<#= Model.Name #>"/> values.</summary>
-    public sealed partial class StringParser
+    internal sealed partial class StringParser
         : IEnumParser<<#= Model.UnderlyingType #>><#=
                 enableDescription ? Append($", IEnumDescriptionParser<{Model.UnderlyingType}>") : new None() #>
     {

@@ -15,7 +15,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     internal static partial class ErrorCodeMetadata
     {
         /// <summary>Provides support for formatting <see cref="ErrorCode"/> values.</summary>
-        public sealed partial class StringFormatter : IEnumFormatter<ushort>
+        internal sealed partial class StringFormatter : IEnumFormatter<ushort>
         {
             /// <summary>Gets the singleton instance of the <see cref="StringFormatter"/> class.</summary>
             public static StringFormatter Instance = new StringFormatter();
@@ -56,7 +56,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         }
 
         /// <summary>Provides support for parsing <see cref="ErrorCode"/> values.</summary>
-        public sealed partial class StringParser
+        internal sealed partial class StringParser
             : IEnumParser<ushort>
         {
             /// <summary>Gets the singleton instance of the <see cref="StringParser"/> class.</summary>
