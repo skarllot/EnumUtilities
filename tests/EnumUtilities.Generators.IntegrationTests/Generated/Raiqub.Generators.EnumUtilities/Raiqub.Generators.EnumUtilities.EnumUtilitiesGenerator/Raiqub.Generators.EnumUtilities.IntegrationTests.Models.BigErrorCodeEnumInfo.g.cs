@@ -12,7 +12,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
-    internal static partial class BigErrorCodeEnumInfo
+    internal static partial class BigErrorCodeMetadata
     {
         /// <summary>Provides support for formatting <see cref="BigErrorCode"/> values.</summary>
         public sealed partial class StringFormatter : IEnumFormatter<ulong>

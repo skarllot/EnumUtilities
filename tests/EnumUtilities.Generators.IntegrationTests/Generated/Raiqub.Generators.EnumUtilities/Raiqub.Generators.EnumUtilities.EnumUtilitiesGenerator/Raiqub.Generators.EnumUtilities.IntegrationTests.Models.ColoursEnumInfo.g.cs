@@ -12,9 +12,9 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
-    public static partial class ColoursEnumInfo
+    public static partial class ColoursMetadata
     {
-        /// <summary>Provides constant values for <see cref="Colours" /> names.</summary>
+        /// <summary>Provides constant values for <see cref="Colours" /> members names.</summary>
         public static partial class Name
         {
             /// <summary>Represents the largest possible number of characters produced by converting an <see cref="Colours" /> value to string, based on defined members. This field is constant.</summary>
@@ -28,20 +28,22 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
             /// <summary>The string representation of <see cref="Colours.Green" /> name.</summary>
             public const string Green = "Green";
+        }
 
-            private static string[]? s_names;
+        /// <summary>Provides static values for <see cref="Colours" /> UTF-8 encoded members names.</summary>
+        public static partial class Utf8Name
+        {
+            /// <summary>Represents the largest possible number of bytes produced by converting an <see cref="Colours" /> value to UTF-8 string, based on defined members. This field is constant.</summary>
+            public const int MaxBytesLength = 5;
 
-            /// <summary>Retrieves the names of the constants in <see cref="Colours" /> enumeration.</summary>
-            /// <returns>The names of the constants in <see cref="Colours" />.</returns>
-            public static ReadOnlyMemory<string> GetNames()
-            {
-                return s_names ??= new string[]
-                {
-                    "Red",
-                    "Blue",
-                    "Green",
-                };
-            }
+            /// <summary>The UTF-8 representation of <see cref="Colours.Red" /> name.</summary>
+            public static ReadOnlySpan<byte> Red => new byte[3] { 82, 101, 100 };
+
+            /// <summary>The UTF-8 representation of <see cref="Colours.Blue" /> name.</summary>
+            public static ReadOnlySpan<byte> Blue => new byte[4] { 66, 108, 117, 101 };
+
+            /// <summary>The UTF-8 representation of <see cref="Colours.Green" /> name.</summary>
+            public static ReadOnlySpan<byte> Green => new byte[5] { 71, 114, 101, 101, 110 };
         }
 
         /// <summary>Provides support for formatting <see cref="Colours"/> values.</summary>
@@ -157,7 +159,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                     span = span.Slice(2);
 
                     name = GetStringForSingleMember(foundItems[foundItemsCount]);
-                    name.CopyTo(span);
+                    name.AsSpan().CopyTo(span);
                     span = span.Slice(name.Length);
                 }
 

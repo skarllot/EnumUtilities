@@ -14,10 +14,10 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class HumanStatesExtensions
     {
+        private static readonly HumanStatesMetadata.StringFormatter s_stringFormatter = HumanStatesMetadata.StringFormatter.Instance;
+
         /// <summary>Represents the largest possible number of characters produced by converting an <see cref="HumanStates" /> value to string, based on defined members. This field is constant.</summary>
         public const int NameMaxCharsLength = 8;
-
-        private static readonly HumanStatesEnumInfo.StringFormatter s_stringFormatter = HumanStatesEnumInfo.StringFormatter.Instance;
 
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
         /// <returns>The string representation of the value of this instance.</returns>

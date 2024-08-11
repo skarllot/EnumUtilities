@@ -14,10 +14,10 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     internal static partial class MyEnum2Extensions
     {
+        private static readonly MyEnum2Metadata.StringFormatter s_stringFormatter = MyEnum2Metadata.StringFormatter.Instance;
+
         /// <summary>Represents the largest possible number of characters produced by converting an <see cref="MyEnum2" /> value to string, based on defined members. This field is constant.</summary>
         public const int NameMaxCharsLength = 6;
-
-        private static readonly MyEnum2EnumInfo.StringFormatter s_stringFormatter = MyEnum2EnumInfo.StringFormatter.Instance;
 
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
         /// <returns>The string representation of the value of this instance.</returns>

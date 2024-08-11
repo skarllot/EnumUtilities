@@ -18,8 +18,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         private const int MaxBytesLength = 3;
         private const int MaxCharsLength = 3;
 
-        private static readonly ErrorCodeEnumInfo.StringFormatter s_stringFormatter = ErrorCodeEnumInfo.StringFormatter.Instance;
-        private static readonly ErrorCodeEnumInfo.StringParser s_stringParser = ErrorCodeEnumInfo.StringParser.Instance;
+        private static readonly ErrorCodeMetadata.StringFormatter s_stringFormatter = ErrorCodeMetadata.StringFormatter.Instance;
+        private static readonly ErrorCodeMetadata.StringParser s_stringParser = ErrorCodeMetadata.StringParser.Instance;
 
         public override ErrorCode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {

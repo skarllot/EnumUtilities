@@ -14,10 +14,10 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class UserRoleExtensions
     {
+        private static readonly UserRoleMetadata.StringFormatter s_stringFormatter = UserRoleMetadata.StringFormatter.Instance;
+
         /// <summary>Represents the largest possible number of characters produced by converting an <see cref="UserRole" /> value to string, based on defined members. This field is constant.</summary>
         public const int NameMaxCharsLength = 10;
-
-        private static readonly UserRoleEnumInfo.StringFormatter s_stringFormatter = UserRoleEnumInfo.StringFormatter.Instance;
 
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
         /// <returns>The string representation of the value of this instance.</returns>

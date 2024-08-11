@@ -14,10 +14,10 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class WeekDaysExtensions
     {
+        private static readonly WeekDaysMetadata.StringFormatter s_stringFormatter = WeekDaysMetadata.StringFormatter.Instance;
+
         /// <summary>Represents the largest possible number of characters produced by converting an <see cref="WeekDays" /> value to string, based on defined members. This field is constant.</summary>
         public const int NameMaxCharsLength = 9;
-
-        private static readonly WeekDaysEnumInfo.StringFormatter s_stringFormatter = WeekDaysEnumInfo.StringFormatter.Instance;
 
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
         /// <returns>The string representation of the value of this instance.</returns>

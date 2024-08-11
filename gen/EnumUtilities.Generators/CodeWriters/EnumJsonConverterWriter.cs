@@ -105,32 +105,32 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             this.Write(";\r\n\r\n    private static readonly ");
             
             #line 39 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.MetadataClassName));
             
             #line default
             #line hidden
-            this.Write("EnumInfo.StringFormatter s_stringFormatter = ");
+            this.Write(".StringFormatter s_stringFormatter = ");
             
             #line 39 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.MetadataClassName));
             
             #line default
             #line hidden
-            this.Write("EnumInfo.StringFormatter.Instance;\r\n    private static readonly ");
+            this.Write(".StringFormatter.Instance;\r\n    private static readonly ");
             
             #line 40 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.MetadataClassName));
             
             #line default
             #line hidden
-            this.Write("EnumInfo.StringParser s_stringParser = ");
+            this.Write(".StringParser s_stringParser = ");
             
             #line 40 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.MetadataClassName));
             
             #line default
             #line hidden
-            this.Write("EnumInfo.StringParser.Instance;\r\n\r\n    public override ");
+            this.Write(".StringParser.Instance;\r\n\r\n    public override ");
             
             #line 42 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumJsonConverterWriter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));

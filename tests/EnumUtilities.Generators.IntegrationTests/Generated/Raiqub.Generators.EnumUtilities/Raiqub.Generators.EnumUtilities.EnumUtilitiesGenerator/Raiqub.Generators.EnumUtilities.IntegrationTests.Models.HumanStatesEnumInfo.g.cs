@@ -12,9 +12,9 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
-    public static partial class HumanStatesEnumInfo
+    public static partial class HumanStatesMetadata
     {
-        /// <summary>Provides constant values for <see cref="HumanStates" /> names.</summary>
+        /// <summary>Provides constant values for <see cref="HumanStates" /> members names.</summary>
         public static partial class Name
         {
             /// <summary>Represents the largest possible number of characters produced by converting an <see cref="HumanStates" /> value to string, based on defined members. This field is constant.</summary>
@@ -37,23 +37,31 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
             /// <summary>The string representation of <see cref="HumanStates.Relaxing" /> name.</summary>
             public const string Relaxing = "Relaxing";
+        }
 
-            private static string[]? s_names;
+        /// <summary>Provides static values for <see cref="HumanStates" /> UTF-8 encoded members names.</summary>
+        public static partial class Utf8Name
+        {
+            /// <summary>Represents the largest possible number of bytes produced by converting an <see cref="HumanStates" /> value to UTF-8 string, based on defined members. This field is constant.</summary>
+            public const int MaxBytesLength = 8;
 
-            /// <summary>Retrieves the names of the constants in <see cref="HumanStates" /> enumeration.</summary>
-            /// <returns>The names of the constants in <see cref="HumanStates" />.</returns>
-            public static ReadOnlyMemory<string> GetNames()
-            {
-                return s_names ??= new string[]
-                {
-                    "Idle",
-                    "Working",
-                    "Sleeping",
-                    "Eating",
-                    "Dead",
-                    "Relaxing",
-                };
-            }
+            /// <summary>The UTF-8 representation of <see cref="HumanStates.Idle" /> name.</summary>
+            public static ReadOnlySpan<byte> Idle => new byte[4] { 73, 100, 108, 101 };
+
+            /// <summary>The UTF-8 representation of <see cref="HumanStates.Working" /> name.</summary>
+            public static ReadOnlySpan<byte> Working => new byte[7] { 87, 111, 114, 107, 105, 110, 103 };
+
+            /// <summary>The UTF-8 representation of <see cref="HumanStates.Sleeping" /> name.</summary>
+            public static ReadOnlySpan<byte> Sleeping => new byte[8] { 83, 108, 101, 101, 112, 105, 110, 103 };
+
+            /// <summary>The UTF-8 representation of <see cref="HumanStates.Eating" /> name.</summary>
+            public static ReadOnlySpan<byte> Eating => new byte[6] { 69, 97, 116, 105, 110, 103 };
+
+            /// <summary>The UTF-8 representation of <see cref="HumanStates.Dead" /> name.</summary>
+            public static ReadOnlySpan<byte> Dead => new byte[4] { 68, 101, 97, 100 };
+
+            /// <summary>The UTF-8 representation of <see cref="HumanStates.Relaxing" /> name.</summary>
+            public static ReadOnlySpan<byte> Relaxing => new byte[8] { 82, 101, 108, 97, 120, 105, 110, 103 };
         }
 
         /// <summary>Provides support for formatting <see cref="HumanStates"/> values.</summary>

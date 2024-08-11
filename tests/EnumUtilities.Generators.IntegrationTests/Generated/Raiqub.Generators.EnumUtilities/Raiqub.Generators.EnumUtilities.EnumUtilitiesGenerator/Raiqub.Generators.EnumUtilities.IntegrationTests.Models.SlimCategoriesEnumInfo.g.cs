@@ -12,9 +12,9 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
-    public static partial class SlimCategoriesEnumInfo
+    public static partial class SlimCategoriesMetadata
     {
-        /// <summary>Provides constant values for <see cref="SlimCategories" /> names.</summary>
+        /// <summary>Provides constant values for <see cref="SlimCategories" /> members names.</summary>
         public static partial class Name
         {
             /// <summary>Represents the largest possible number of characters produced by converting an <see cref="SlimCategories" /> value to string, based on defined members. This field is constant.</summary>
@@ -37,23 +37,31 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
             /// <summary>The string representation of <see cref="SlimCategories.Fashion" /> name.</summary>
             public const string Fashion = "Fashion";
+        }
 
-            private static string[]? s_names;
+        /// <summary>Provides static values for <see cref="SlimCategories" /> UTF-8 encoded members names.</summary>
+        public static partial class Utf8Name
+        {
+            /// <summary>Represents the largest possible number of bytes produced by converting an <see cref="SlimCategories" /> value to UTF-8 string, based on defined members. This field is constant.</summary>
+            public const int MaxBytesLength = 11;
 
-            /// <summary>Retrieves the names of the constants in <see cref="SlimCategories" /> enumeration.</summary>
-            /// <returns>The names of the constants in <see cref="SlimCategories" />.</returns>
-            public static ReadOnlyMemory<string> GetNames()
-            {
-                return s_names ??= new string[]
-                {
-                    "Electronics",
-                    "Food",
-                    "Automotive",
-                    "Arts",
-                    "BeautyCare",
-                    "Fashion",
-                };
-            }
+            /// <summary>The UTF-8 representation of <see cref="SlimCategories.Electronics" /> name.</summary>
+            public static ReadOnlySpan<byte> Electronics => new byte[11] { 69, 108, 101, 99, 116, 114, 111, 110, 105, 99, 115 };
+
+            /// <summary>The UTF-8 representation of <see cref="SlimCategories.Food" /> name.</summary>
+            public static ReadOnlySpan<byte> Food => new byte[4] { 70, 111, 111, 100 };
+
+            /// <summary>The UTF-8 representation of <see cref="SlimCategories.Automotive" /> name.</summary>
+            public static ReadOnlySpan<byte> Automotive => new byte[10] { 65, 117, 116, 111, 109, 111, 116, 105, 118, 101 };
+
+            /// <summary>The UTF-8 representation of <see cref="SlimCategories.Arts" /> name.</summary>
+            public static ReadOnlySpan<byte> Arts => new byte[4] { 65, 114, 116, 115 };
+
+            /// <summary>The UTF-8 representation of <see cref="SlimCategories.BeautyCare" /> name.</summary>
+            public static ReadOnlySpan<byte> BeautyCare => new byte[10] { 66, 101, 97, 117, 116, 121, 67, 97, 114, 101 };
+
+            /// <summary>The UTF-8 representation of <see cref="SlimCategories.Fashion" /> name.</summary>
+            public static ReadOnlySpan<byte> Fashion => new byte[7] { 70, 97, 115, 104, 105, 111, 110 };
         }
 
         /// <summary>Provides support for formatting <see cref="SlimCategories"/> values.</summary>

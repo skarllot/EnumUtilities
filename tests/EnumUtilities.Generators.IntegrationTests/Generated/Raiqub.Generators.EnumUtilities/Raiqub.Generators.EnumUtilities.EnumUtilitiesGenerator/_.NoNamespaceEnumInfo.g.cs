@@ -10,9 +10,9 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
-public static partial class NoNamespaceEnumInfo
+public static partial class NoNamespaceMetadata
 {
-    /// <summary>Provides constant values for <see cref="NoNamespace" /> names.</summary>
+    /// <summary>Provides constant values for <see cref="NoNamespace" /> members names.</summary>
     public static partial class Name
     {
         /// <summary>Represents the largest possible number of characters produced by converting an <see cref="NoNamespace" /> value to string, based on defined members. This field is constant.</summary>
@@ -26,20 +26,22 @@ public static partial class NoNamespaceEnumInfo
 
         /// <summary>The string representation of <see cref="NoNamespace.Two" /> name.</summary>
         public const string Two = "Two";
+    }
 
-        private static string[]? s_names;
+    /// <summary>Provides static values for <see cref="NoNamespace" /> UTF-8 encoded members names.</summary>
+    public static partial class Utf8Name
+    {
+        /// <summary>Represents the largest possible number of bytes produced by converting an <see cref="NoNamespace" /> value to UTF-8 string, based on defined members. This field is constant.</summary>
+        public const int MaxBytesLength = 4;
 
-        /// <summary>Retrieves the names of the constants in <see cref="NoNamespace" /> enumeration.</summary>
-        /// <returns>The names of the constants in <see cref="NoNamespace" />.</returns>
-        public static ReadOnlyMemory<string> GetNames()
-        {
-            return s_names ??= new string[]
-            {
-                "Zero",
-                "One",
-                "Two",
-            };
-        }
+        /// <summary>The UTF-8 representation of <see cref="NoNamespace.Zero" /> name.</summary>
+        public static ReadOnlySpan<byte> Zero => new byte[4] { 90, 101, 114, 111 };
+
+        /// <summary>The UTF-8 representation of <see cref="NoNamespace.One" /> name.</summary>
+        public static ReadOnlySpan<byte> One => new byte[3] { 79, 110, 101 };
+
+        /// <summary>The UTF-8 representation of <see cref="NoNamespace.Two" /> name.</summary>
+        public static ReadOnlySpan<byte> Two => new byte[3] { 84, 119, 111 };
     }
 
     /// <summary>Provides support for formatting <see cref="NoNamespace"/> values.</summary>

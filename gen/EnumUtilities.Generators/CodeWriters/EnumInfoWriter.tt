@@ -25,7 +25,7 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 #>
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("<#= CurrentAssemblyName.Name #>", "<#= Append($"{CurrentAssemblyName.Version}") #>")]
-<#= Model.IsPublic ? "public" : "internal" #> static partial class <#= Model.Name #>EnumInfo
+<#= Model.IsPublic ? "public" : "internal" #> static partial class <#= Model.MetadataClassName #>
 {
 <#
             WriteDefaultBlock();

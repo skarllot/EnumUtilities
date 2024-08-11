@@ -12,9 +12,9 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
-    internal static partial class MyEnum2EnumInfo
+    internal static partial class MyEnum2Metadata
     {
-        /// <summary>Provides constant values for <see cref="MyEnum2" /> names.</summary>
+        /// <summary>Provides constant values for <see cref="MyEnum2" /> members names.</summary>
         public static partial class Name
         {
             /// <summary>Represents the largest possible number of characters produced by converting an <see cref="MyEnum2" /> value to string, based on defined members. This field is constant.</summary>
@@ -31,21 +31,25 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
             /// <summary>The string representation of <see cref="MyEnum2.Cheque" /> name.</summary>
             public const string Cheque = "Cheque";
+        }
 
-            private static string[]? s_names;
+        /// <summary>Provides static values for <see cref="MyEnum2" /> UTF-8 encoded members names.</summary>
+        public static partial class Utf8Name
+        {
+            /// <summary>Represents the largest possible number of bytes produced by converting an <see cref="MyEnum2" /> value to UTF-8 string, based on defined members. This field is constant.</summary>
+            public const int MaxBytesLength = 6;
 
-            /// <summary>Retrieves the names of the constants in <see cref="MyEnum2" /> enumeration.</summary>
-            /// <returns>The names of the constants in <see cref="MyEnum2" />.</returns>
-            public static ReadOnlyMemory<string> GetNames()
-            {
-                return s_names ??= new string[]
-                {
-                    "Credit",
-                    "Debit",
-                    "Cash",
-                    "Cheque",
-                };
-            }
+            /// <summary>The UTF-8 representation of <see cref="MyEnum2.Credit" /> name.</summary>
+            public static ReadOnlySpan<byte> Credit => new byte[6] { 67, 114, 101, 100, 105, 116 };
+
+            /// <summary>The UTF-8 representation of <see cref="MyEnum2.Debit" /> name.</summary>
+            public static ReadOnlySpan<byte> Debit => new byte[5] { 68, 101, 98, 105, 116 };
+
+            /// <summary>The UTF-8 representation of <see cref="MyEnum2.Cash" /> name.</summary>
+            public static ReadOnlySpan<byte> Cash => new byte[4] { 67, 97, 115, 104 };
+
+            /// <summary>The UTF-8 representation of <see cref="MyEnum2.Cheque" /> name.</summary>
+            public static ReadOnlySpan<byte> Cheque => new byte[6] { 67, 104, 101, 113, 117, 101 };
         }
 
         /// <summary>Provides support for formatting <see cref="MyEnum2"/> values.</summary>

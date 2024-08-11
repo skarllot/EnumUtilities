@@ -15,7 +15,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class HumanStatesFactory
     {
-        private static readonly HumanStatesEnumInfo.StringParser s_stringParser = HumanStatesEnumInfo.StringParser.Instance;
+        private static readonly HumanStatesMetadata.StringParser s_stringParser = HumanStatesMetadata.StringParser.Instance;
 
         /// <summary>
         /// Converts the string representation of the name or numeric value of one or more enumerated constants to

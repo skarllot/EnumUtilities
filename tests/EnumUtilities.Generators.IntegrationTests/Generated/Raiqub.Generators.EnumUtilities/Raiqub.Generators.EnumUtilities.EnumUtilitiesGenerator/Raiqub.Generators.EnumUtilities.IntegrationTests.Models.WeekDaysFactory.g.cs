@@ -15,7 +15,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class WeekDaysFactory
     {
-        private static readonly WeekDaysEnumInfo.StringParser s_stringParser = WeekDaysEnumInfo.StringParser.Instance;
+        private static readonly WeekDaysMetadata.StringParser s_stringParser = WeekDaysMetadata.StringParser.Instance;
 
         /// <summary>
         /// Converts the string representation of the name or numeric value of one or more enumerated constants to

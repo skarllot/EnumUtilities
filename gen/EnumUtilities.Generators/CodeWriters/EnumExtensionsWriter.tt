@@ -39,6 +39,8 @@ using Raiqub.Generators.EnumUtilities.Formatters;
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("<#= CurrentAssemblyName.Name #>", "<#= Append($"{CurrentAssemblyName.Version}") #>")]
 <#= Model.IsPublic ? "public" : "internal" #> static partial class <#= Model.Name #>Extensions
 {
+    private static readonly <#= Model.MetadataClassName #>.StringFormatter s_stringFormatter = <#= Model.MetadataClassName #>.StringFormatter.Instance;
+
 <#
             WriteDefaultBlock();
             WriteInterlockedBlock();

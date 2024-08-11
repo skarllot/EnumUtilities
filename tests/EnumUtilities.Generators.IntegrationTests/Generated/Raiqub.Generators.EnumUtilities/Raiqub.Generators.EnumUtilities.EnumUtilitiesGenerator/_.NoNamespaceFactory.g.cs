@@ -13,7 +13,7 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
 public static partial class NoNamespaceFactory
 {
-    private static readonly NoNamespaceEnumInfo.StringParser s_stringParser = NoNamespaceEnumInfo.StringParser.Instance;
+    private static readonly NoNamespaceMetadata.StringParser s_stringParser = NoNamespaceMetadata.StringParser.Instance;
 
     /// <summary>
     /// Converts the string representation of the name or numeric value of one or more enumerated constants to

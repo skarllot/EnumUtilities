@@ -15,7 +15,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class CategoriesFactory
     {
-        private static readonly CategoriesEnumInfo.StringParser s_stringParser = CategoriesEnumInfo.StringParser.Instance;
+        private static readonly CategoriesMetadata.StringParser s_stringParser = CategoriesMetadata.StringParser.Instance;
 
         /// <summary>
         /// Converts the string representation of the name or numeric value of one or more enumerated constants to

@@ -13,10 +13,10 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class SlimCategoriesExtensions
     {
+        private static readonly SlimCategoriesMetadata.StringFormatter s_stringFormatter = SlimCategoriesMetadata.StringFormatter.Instance;
+
         /// <summary>Represents the largest possible number of characters produced by converting an <see cref="SlimCategories" /> value to string, based on defined members. This field is constant.</summary>
         public const int NameMaxCharsLength = 11;
-
-        private static readonly SlimCategoriesEnumInfo.StringFormatter s_stringFormatter = SlimCategoriesEnumInfo.StringFormatter.Instance;
 
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
         /// <returns>The string representation of the value of this instance.</returns>

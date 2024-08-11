@@ -31,6 +31,8 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("<#= CurrentAssemblyName.Name #>", "<#= Append($"{CurrentAssemblyName.Version}") #>")]
 <#= Model.IsPublic ? "public" : "internal" #> static partial class <#= Model.Name #>Factory
 {
+    private static readonly <#= Model.MetadataClassName #>.StringParser s_stringParser = <#= Model.MetadataClassName #>.StringParser.Instance;
+
 <#
     WriteDefaultBlock();
     WriteLegacyDefaultBlock();

@@ -15,7 +15,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class ColoursFactory
     {
-        private static readonly ColoursEnumInfo.StringParser s_stringParser = ColoursEnumInfo.StringParser.Instance;
+        private static readonly ColoursMetadata.StringParser s_stringParser = ColoursMetadata.StringParser.Instance;
 
         /// <summary>
         /// Converts the string representation of the name or numeric value of one or more enumerated constants to
