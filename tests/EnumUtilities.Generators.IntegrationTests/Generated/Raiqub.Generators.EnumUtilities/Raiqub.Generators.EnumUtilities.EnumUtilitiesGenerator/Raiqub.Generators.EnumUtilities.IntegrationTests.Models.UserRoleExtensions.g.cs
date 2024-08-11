@@ -16,9 +16,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     {
         private static readonly UserRoleMetadata.StringFormatter s_stringFormatter = UserRoleMetadata.StringFormatter.Instance;
 
-        /// <summary>Represents the largest possible number of characters produced by converting an <see cref="UserRole" /> value to string, based on defined members. This field is constant.</summary>
-        public const int NameMaxCharsLength = 10;
-
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
         /// <returns>The string representation of the value of this instance.</returns>
         public static string ToStringFast(this UserRole value)

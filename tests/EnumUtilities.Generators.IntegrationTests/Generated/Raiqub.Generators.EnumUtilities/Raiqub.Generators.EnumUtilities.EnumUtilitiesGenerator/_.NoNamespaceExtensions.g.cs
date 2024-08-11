@@ -14,9 +14,6 @@ public static partial class NoNamespaceExtensions
 {
     private static readonly NoNamespaceMetadata.StringFormatter s_stringFormatter = NoNamespaceMetadata.StringFormatter.Instance;
 
-    /// <summary>Represents the largest possible number of characters produced by converting an <see cref="NoNamespace" /> value to string, based on defined members. This field is constant.</summary>
-    public const int NameMaxCharsLength = 4;
-
     /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
     /// <returns>The string representation of the value of this instance.</returns>
     public static string ToStringFast(this NoNamespace value)
