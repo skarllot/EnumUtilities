@@ -2306,13 +2306,13 @@ this.Write("\",\r\n");
         #line hidden
         
         #line 37 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\MiscellaneousBlock.ttinclude"
-this.Write("        };\r\n    }\r\n\r\n    [MethodImpl(MethodImplOptions.AggressiveInlining)]\r\n    private static bool IsIgnoreCase(StringComparison comparisonType)\r\n    {\r\n        return ((int)comparisonType) % 2 == 1;\r\n    }\r\n\r\n    [DoesNotReturn]\r\n    private static void ThrowArgumentNullException(string paramName)\r\n    {\r\n        throw new ArgumentNullException(paramName);\r\n    }\r\n");
+this.Write("        };\r\n    }\r\n\r\n    [DoesNotReturn]\r\n    private static void ThrowArgumentNullException(string paramName)\r\n    {\r\n        throw new ArgumentNullException(paramName);\r\n    }\r\n");
 
         
         #line default
         #line hidden
         
-        #line 51 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\MiscellaneousBlock.ttinclude"
+        #line 45 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\MiscellaneousBlock.ttinclude"
 
     }
 

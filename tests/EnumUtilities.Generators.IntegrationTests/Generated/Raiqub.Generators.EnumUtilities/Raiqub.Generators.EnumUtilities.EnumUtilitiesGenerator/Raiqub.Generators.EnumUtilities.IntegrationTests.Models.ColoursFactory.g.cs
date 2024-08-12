@@ -276,12 +276,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             };
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static bool IsIgnoreCase(StringComparison comparisonType)
-        {
-            return ((int)comparisonType) % 2 == 1;
-        }
-
         [DoesNotReturn]
         private static void ThrowArgumentNullException(string paramName)
         {
