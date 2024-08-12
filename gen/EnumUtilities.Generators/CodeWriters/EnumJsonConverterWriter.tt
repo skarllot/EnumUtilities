@@ -36,8 +36,8 @@ using Raiqub.Generators.EnumUtilities.Parsers;
                     Model.Values.Max(
                         x => x.JsonPropertyName?.Length ?? x.SerializationValue?.Length ?? x.MemberName.Length) #>;
 
-    private static readonly <#= Model.Name #>EnumInfo.StringFormatter s_stringFormatter = <#= Model.Name #>EnumInfo.StringFormatter.Instance;
-    private static readonly <#= Model.Name #>EnumInfo.StringParser s_stringParser = <#= Model.Name #>EnumInfo.StringParser.Instance;
+    private static readonly <#= Model.MetadataClassName #>.StringFormatter s_stringFormatter = <#= Model.MetadataClassName #>.StringFormatter.Instance;
+    private static readonly <#= Model.MetadataClassName #>.StringParser s_stringParser = <#= Model.MetadataClassName #>.StringParser.Instance;
 
     public override <#= Model.Name #> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {

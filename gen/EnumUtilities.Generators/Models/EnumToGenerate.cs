@@ -17,6 +17,7 @@ public sealed record EnumToGenerate(
     ImmutableArray<Location> Locations)
     : ILocalizableSource
 {
+    public string MetadataClassName => Name.Contains("Metadata") ? $"{Name}Info" : $"{Name}Metadata";
     public string RefName { get; } = ContainingType is not null ? $"{ContainingType.Name}.{Name}" : Name;
 
     public IEnumerable<EnumValue> UniqueValues =>

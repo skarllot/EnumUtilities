@@ -2,8 +2,6 @@
     private void WriteDefaultBlock()
     {
 #>
-    private static readonly <#= Model.Name #>EnumInfo.StringParser s_stringParser = <#= Model.Name #>EnumInfo.StringParser.Instance;
-
     /// <summary>
     /// Converts the string representation of the name or numeric value of one or more enumerated constants to
     /// an equivalent enumerated object.

@@ -18,8 +18,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         private const int MaxBytesLength = 12;
         private const int MaxCharsLength = 2;
 
-        private static readonly SeasonEnumInfo.StringFormatter s_stringFormatter = SeasonEnumInfo.StringFormatter.Instance;
-        private static readonly SeasonEnumInfo.StringParser s_stringParser = SeasonEnumInfo.StringParser.Instance;
+        private static readonly SeasonMetadata.StringFormatter s_stringFormatter = SeasonMetadata.StringFormatter.Instance;
+        private static readonly SeasonMetadata.StringParser s_stringParser = SeasonMetadata.StringParser.Instance;
 
         public override Season Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {

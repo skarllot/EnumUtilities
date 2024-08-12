@@ -15,7 +15,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class UserRoleFactory
     {
-        private static readonly UserRoleEnumInfo.StringParser s_stringParser = UserRoleEnumInfo.StringParser.Instance;
+        private static readonly UserRoleMetadata.StringParser s_stringParser = UserRoleMetadata.StringParser.Instance;
 
         /// <summary>
         /// Converts the string representation of the name or numeric value of one or more enumerated constants to
@@ -194,7 +194,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 || s_stringParser.TryParseNumber(name.AsSpan(), out number);
             if (!success)
             {
-                return Enum.TryParse(name, out result);
+                return TryParse(name, out result);
             }
 
             result = (UserRole)number;

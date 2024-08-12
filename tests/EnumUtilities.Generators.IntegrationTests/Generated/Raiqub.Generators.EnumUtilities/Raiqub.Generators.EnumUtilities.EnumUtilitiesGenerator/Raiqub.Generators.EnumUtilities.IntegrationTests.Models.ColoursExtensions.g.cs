@@ -14,10 +14,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class ColoursExtensions
     {
-        /// <summary>Represents the largest possible number of characters produced by converting an <see cref="Colours" /> value to string, based on defined members. This field is constant.</summary>
-        public const int NameMaxCharsLength = 5;
-
-        private static readonly ColoursEnumInfo.StringFormatter s_stringFormatter = ColoursEnumInfo.StringFormatter.Instance;
+        private static readonly ColoursMetadata.StringFormatter s_stringFormatter = ColoursMetadata.StringFormatter.Instance;
 
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
         /// <returns>The string representation of the value of this instance.</returns>
@@ -37,9 +34,9 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
         /// <param name="value">The value to calculate the number of characters.</param>
         /// <returns>The number of characters produced by converting the specified value to string.</returns>
-        public static int GetStringCount(this Colours value)
+        public static int GetStringLength(this Colours value)
         {
-            return EnumStringFormatter.GetStringCount((int)value, s_stringFormatter);
+            return EnumStringFormatter.GetStringLength((int)value, s_stringFormatter);
         }
 
         /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>

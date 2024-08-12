@@ -40,7 +40,7 @@
 <#+
             }
 #>
-            _ => value.ToString()
+            _ => ToStringFast(value)
         };
     }
 <#+

@@ -63,10 +63,10 @@ public class EnumExtensionsTests
     [InlineData((Colours)10)]
     [InlineData((Colours)15)]
     [InlineData((Colours)0)]
-    public void GetStringCountIsSameAsToStringUsingFlagEnum(Colours value)
+    public void GetStringLengthIsSameAsToStringUsingFlagEnum(Colours value)
     {
         int expected = value.ToString().Length;
-        int actual = value.GetStringCount();
+        int actual = value.GetStringLength();
 
         Assert.Equal(expected, actual);
     }
@@ -82,10 +82,10 @@ public class EnumExtensionsTests
     [InlineData(UserRole.NormalUser | UserRole.Custodian)]
     [InlineData((UserRole)10)]
     [InlineData((UserRole)15)]
-    public void GetStringCountWithZeroIsSameAsToStringUsingFlagEnum(UserRole value)
+    public void GetStringLengthWithZeroIsSameAsToStringUsingFlagEnum(UserRole value)
     {
         int expected = value.ToString().Length;
-        int actual = value.GetStringCount();
+        int actual = value.GetStringLength();
 
         Assert.Equal(expected, actual);
     }
@@ -98,10 +98,10 @@ public class EnumExtensionsTests
     [InlineData(HumanStates.Dead)]
     [InlineData((HumanStates)0)]
     [InlineData((HumanStates)100)]
-    public void GetStringCountIsSameAsToString(HumanStates value)
+    public void GetStringLengthIsSameAsToString(HumanStates value)
     {
         int expected = value.ToString().Length;
-        int actual = value.GetStringCount();
+        int actual = value.GetStringLength();
 
         Assert.Equal(expected, actual);
     }

@@ -12,10 +12,7 @@ using Raiqub.Generators.EnumUtilities.Formatters;
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
 public static partial class NoNamespaceExtensions
 {
-    /// <summary>Represents the largest possible number of characters produced by converting an <see cref="NoNamespace" /> value to string, based on defined members. This field is constant.</summary>
-    public const int NameMaxCharsLength = 4;
-
-    private static readonly NoNamespaceEnumInfo.StringFormatter s_stringFormatter = NoNamespaceEnumInfo.StringFormatter.Instance;
+    private static readonly NoNamespaceMetadata.StringFormatter s_stringFormatter = NoNamespaceMetadata.StringFormatter.Instance;
 
     /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
     /// <returns>The string representation of the value of this instance.</returns>
@@ -27,9 +24,9 @@ public static partial class NoNamespaceExtensions
     /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
     /// <param name="value">The value to calculate the number of characters.</param>
     /// <returns>The number of characters produced by converting the specified value to string.</returns>
-    public static int GetStringCount(this NoNamespace value)
+    public static int GetStringLength(this NoNamespace value)
     {
-        return EnumStringFormatter.GetStringCount((int)value, s_stringFormatter);
+        return EnumStringFormatter.GetStringLength((int)value, s_stringFormatter);
     }
 
     /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>

@@ -12,27 +12,74 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
-    public static partial class UserRoleEnumInfo
+    public static partial class UserRoleMetadata
     {
-        /// <summary>Represents the largest possible number of characters produced by converting an <see cref="UserRole" /> value to string, based on defined members. This field is constant.</summary>
-        public const int NameMaxCharsLength = 10;
+        /// <summary>Provides constant values for <see cref="UserRole" /> members names.</summary>
+        public static partial class Name
+        {
+            /// <summary>Represents the largest possible number of characters produced by converting an <see cref="UserRole" /> value to string, based on defined members. This field is constant.</summary>
+            public const int MaxCharsLength = 10;
+
+            /// <summary>The string representation of <see cref="UserRole.None" /> name.</summary>
+            public const string None = "None";
+
+            /// <summary>The string representation of <see cref="UserRole.NormalUser" /> name.</summary>
+            public const string NormalUser = "NormalUser";
+
+            /// <summary>The string representation of <see cref="UserRole.Custodian" /> name.</summary>
+            public const string Custodian = "Custodian";
+
+            /// <summary>The string representation of <see cref="UserRole.Finance" /> name.</summary>
+            public const string Finance = "Finance";
+
+            /// <summary>The string representation of <see cref="UserRole.SuperUser" /> name.</summary>
+            public const string SuperUser = "SuperUser";
+
+            /// <summary>The string representation of <see cref="UserRole.All" /> name.</summary>
+            public const string All = "All";
+        }
+
+        /// <summary>Provides static values for <see cref="UserRole" /> UTF-8 encoded members names.</summary>
+        public static partial class Utf8Name
+        {
+            /// <summary>Represents the largest possible number of bytes produced by converting an <see cref="UserRole" /> value to UTF-8 string, based on defined members. This field is constant.</summary>
+            public const int MaxBytesLength = 10;
+
+            /// <summary>The UTF-8 representation of <see cref="UserRole.None" /> name.</summary>
+            public static ReadOnlySpan<byte> None => new byte[4] { 78, 111, 110, 101 };
+
+            /// <summary>The UTF-8 representation of <see cref="UserRole.NormalUser" /> name.</summary>
+            public static ReadOnlySpan<byte> NormalUser => new byte[10] { 78, 111, 114, 109, 97, 108, 85, 115, 101, 114 };
+
+            /// <summary>The UTF-8 representation of <see cref="UserRole.Custodian" /> name.</summary>
+            public static ReadOnlySpan<byte> Custodian => new byte[9] { 67, 117, 115, 116, 111, 100, 105, 97, 110 };
+
+            /// <summary>The UTF-8 representation of <see cref="UserRole.Finance" /> name.</summary>
+            public static ReadOnlySpan<byte> Finance => new byte[7] { 70, 105, 110, 97, 110, 99, 101 };
+
+            /// <summary>The UTF-8 representation of <see cref="UserRole.SuperUser" /> name.</summary>
+            public static ReadOnlySpan<byte> SuperUser => new byte[9] { 83, 117, 112, 101, 114, 85, 115, 101, 114 };
+
+            /// <summary>The UTF-8 representation of <see cref="UserRole.All" /> name.</summary>
+            public static ReadOnlySpan<byte> All => new byte[3] { 65, 108, 108 };
+        }
 
         /// <summary>Provides support for formatting <see cref="UserRole"/> values.</summary>
-        public sealed partial class StringFormatter : IEnumFormatter<ulong>
+        internal sealed partial class StringFormatter : IEnumFormatter<ulong>
         {
             /// <summary>Gets the singleton instance of the <see cref="StringFormatter"/> class.</summary>
             public static StringFormatter Instance = new StringFormatter();
 
             /// <inheritdoc />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public int GetStringCountForNumber(ulong value) => EnumNumericFormatter.GetStringLength(value);
+            public int GetStringLengthForNumber(ulong value) => EnumNumericFormatter.GetStringLength(value);
 
             /// <inheritdoc />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public string GetStringForNumber(ulong value) => value.ToString();
 
             /// <inheritdoc />
-            public int? TryGetStringCountForMember(ulong value)
+            public int? TryGetStringLengthForMember(ulong value)
             {
                 if (value == 0)
                 {
@@ -154,7 +201,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                     span = span.Slice(2);
 
                     name = GetStringForSingleMember(foundItems[foundItemsCount]);
-                    name.CopyTo(span);
+                    name.AsSpan().CopyTo(span);
                     span = span.Slice(name.Length);
                 }
 
@@ -177,7 +224,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         }
 
         /// <summary>Provides support for parsing <see cref="UserRole"/> values.</summary>
-        public sealed partial class StringParser
+        internal sealed partial class StringParser
             : IEnumParser<ulong>
         {
             /// <summary>Gets the singleton instance of the <see cref="StringParser"/> class.</summary>
@@ -208,22 +255,22 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             {
                 switch (value)
                 {
-                    case { } when value.SequenceEqual("None".AsSpan()):
+                    case { } when value.SequenceEqual("None"):
                         result = 0;
                         return true;
-                    case { } when value.SequenceEqual("NormalUser".AsSpan()):
+                    case { } when value.SequenceEqual("NormalUser"):
                         result = 1;
                         return true;
-                    case { } when value.SequenceEqual("Custodian".AsSpan()):
+                    case { } when value.SequenceEqual("Custodian"):
                         result = 2;
                         return true;
-                    case { } when value.SequenceEqual("Finance".AsSpan()):
+                    case { } when value.SequenceEqual("Finance"):
                         result = 4;
                         return true;
-                    case { } when value.SequenceEqual("SuperUser".AsSpan()):
+                    case { } when value.SequenceEqual("SuperUser"):
                         result = 6;
                         return true;
-                    case { } when value.SequenceEqual("All".AsSpan()):
+                    case { } when value.SequenceEqual("All"):
                         result = 7;
                         return true;
                     default:

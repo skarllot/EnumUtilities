@@ -12,27 +12,62 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
-    public static partial class PaymentMethodEnumInfo
+    public static partial class PaymentMethodMetadata
     {
-        /// <summary>Represents the largest possible number of characters produced by converting an <see cref="PaymentMethod" /> value to string, based on defined members. This field is constant.</summary>
-        public const int NameMaxCharsLength = 6;
+        /// <summary>Provides constant values for <see cref="PaymentMethod" /> members names.</summary>
+        public static partial class Name
+        {
+            /// <summary>Represents the largest possible number of characters produced by converting an <see cref="PaymentMethod" /> value to string, based on defined members. This field is constant.</summary>
+            public const int MaxCharsLength = 6;
+
+            /// <summary>The string representation of <see cref="PaymentMethod.Credit" /> name.</summary>
+            public const string Credit = "Credit";
+
+            /// <summary>The string representation of <see cref="PaymentMethod.Debit" /> name.</summary>
+            public const string Debit = "Debit";
+
+            /// <summary>The string representation of <see cref="PaymentMethod.Cash" /> name.</summary>
+            public const string Cash = "Cash";
+
+            /// <summary>The string representation of <see cref="PaymentMethod.Cheque" /> name.</summary>
+            public const string Cheque = "Cheque";
+        }
+
+        /// <summary>Provides static values for <see cref="PaymentMethod" /> UTF-8 encoded members names.</summary>
+        public static partial class Utf8Name
+        {
+            /// <summary>Represents the largest possible number of bytes produced by converting an <see cref="PaymentMethod" /> value to UTF-8 string, based on defined members. This field is constant.</summary>
+            public const int MaxBytesLength = 6;
+
+            /// <summary>The UTF-8 representation of <see cref="PaymentMethod.Credit" /> name.</summary>
+            public static ReadOnlySpan<byte> Credit => new byte[6] { 67, 114, 101, 100, 105, 116 };
+
+            /// <summary>The UTF-8 representation of <see cref="PaymentMethod.Debit" /> name.</summary>
+            public static ReadOnlySpan<byte> Debit => new byte[5] { 68, 101, 98, 105, 116 };
+
+            /// <summary>The UTF-8 representation of <see cref="PaymentMethod.Cash" /> name.</summary>
+            public static ReadOnlySpan<byte> Cash => new byte[4] { 67, 97, 115, 104 };
+
+            /// <summary>The UTF-8 representation of <see cref="PaymentMethod.Cheque" /> name.</summary>
+            public static ReadOnlySpan<byte> Cheque => new byte[6] { 67, 104, 101, 113, 117, 101 };
+        }
 
         /// <summary>Provides support for formatting <see cref="PaymentMethod"/> values.</summary>
-        public sealed partial class StringFormatter : IEnumFormatter<int>
+        internal sealed partial class StringFormatter : IEnumFormatter<int>
         {
             /// <summary>Gets the singleton instance of the <see cref="StringFormatter"/> class.</summary>
             public static StringFormatter Instance = new StringFormatter();
 
             /// <inheritdoc />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public int GetStringCountForNumber(int value) => EnumNumericFormatter.GetStringLength(value);
+            public int GetStringLengthForNumber(int value) => EnumNumericFormatter.GetStringLength(value);
 
             /// <inheritdoc />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public string GetStringForNumber(int value) => value.ToString();
 
             /// <inheritdoc />
-            public int? TryGetStringCountForMember(int value)
+            public int? TryGetStringLengthForMember(int value)
             {
                 return value switch
                 {
@@ -59,7 +94,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         }
 
         /// <summary>Provides support for parsing <see cref="PaymentMethod"/> values.</summary>
-        public sealed partial class StringParser
+        internal sealed partial class StringParser
             : IEnumParser<int>, IEnumDescriptionParser<int>
         {
             /// <summary>Gets the singleton instance of the <see cref="StringParser"/> class.</summary>
@@ -104,16 +139,16 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             {
                 switch (value)
                 {
-                    case { } when value.SequenceEqual("Credit".AsSpan()):
+                    case { } when value.SequenceEqual("Credit"):
                         result = 0;
                         return true;
-                    case { } when value.SequenceEqual("Debit".AsSpan()):
+                    case { } when value.SequenceEqual("Debit"):
                         result = 1;
                         return true;
-                    case { } when value.SequenceEqual("Cash".AsSpan()):
+                    case { } when value.SequenceEqual("Cash"):
                         result = 2;
                         return true;
-                    case { } when value.SequenceEqual("Cheque".AsSpan()):
+                    case { } when value.SequenceEqual("Cheque"):
                         result = 3;
                         return true;
                     default:

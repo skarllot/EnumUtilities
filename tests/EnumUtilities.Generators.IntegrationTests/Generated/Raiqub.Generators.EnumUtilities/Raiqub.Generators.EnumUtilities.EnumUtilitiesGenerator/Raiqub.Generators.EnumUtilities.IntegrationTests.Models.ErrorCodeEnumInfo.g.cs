@@ -12,27 +12,24 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
-    internal static partial class ErrorCodeEnumInfo
+    internal static partial class ErrorCodeMetadata
     {
-        /// <summary>Represents the largest possible number of characters produced by converting an <see cref="ErrorCode" /> value to string, based on defined members. This field is constant.</summary>
-        public const int NameMaxCharsLength = 14;
-
         /// <summary>Provides support for formatting <see cref="ErrorCode"/> values.</summary>
-        public sealed partial class StringFormatter : IEnumFormatter<ushort>
+        internal sealed partial class StringFormatter : IEnumFormatter<ushort>
         {
             /// <summary>Gets the singleton instance of the <see cref="StringFormatter"/> class.</summary>
             public static StringFormatter Instance = new StringFormatter();
 
             /// <inheritdoc />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public int GetStringCountForNumber(ushort value) => EnumNumericFormatter.GetStringLength(value);
+            public int GetStringLengthForNumber(ushort value) => EnumNumericFormatter.GetStringLength(value);
 
             /// <inheritdoc />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public string GetStringForNumber(ushort value) => value.ToString();
 
             /// <inheritdoc />
-            public int? TryGetStringCountForMember(ushort value)
+            public int? TryGetStringLengthForMember(ushort value)
             {
                 return value switch
                 {
@@ -59,7 +56,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         }
 
         /// <summary>Provides support for parsing <see cref="ErrorCode"/> values.</summary>
-        public sealed partial class StringParser
+        internal sealed partial class StringParser
             : IEnumParser<ushort>
         {
             /// <summary>Gets the singleton instance of the <see cref="StringParser"/> class.</summary>
@@ -90,16 +87,16 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             {
                 switch (value)
                 {
-                    case { } when value.SequenceEqual("None".AsSpan()):
+                    case { } when value.SequenceEqual("None"):
                         result = 0;
                         return true;
-                    case { } when value.SequenceEqual("Unknown".AsSpan()):
+                    case { } when value.SequenceEqual("Unknown"):
                         result = 1;
                         return true;
-                    case { } when value.SequenceEqual("ConnectionLost".AsSpan()):
+                    case { } when value.SequenceEqual("ConnectionLost"):
                         result = 100;
                         return true;
-                    case { } when value.SequenceEqual("OutlierReading".AsSpan()):
+                    case { } when value.SequenceEqual("OutlierReading"):
                         result = 200;
                         return true;
                     default:

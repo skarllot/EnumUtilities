@@ -6,7 +6,7 @@
 #>
 
     /// <summary>Provides support for parsing <see cref="<#= Model.Name #>"/> values.</summary>
-    public sealed partial class StringParser
+    internal sealed partial class StringParser
         : IEnumParser<<#= Model.UnderlyingType #>><#=
                 enableDescription ? Append($", IEnumDescriptionParser<{Model.UnderlyingType}>") : new None() #>
     {
@@ -84,7 +84,7 @@
         foreach (var curr in Model.Values)
         {
 #>
-                case { } when value.SequenceEqual("<#= curr.MemberName #>".AsSpan()):
+                case { } when value.SequenceEqual("<#= curr.MemberName #>"):
                     result = <#= curr.MemberValue #>;
                     return true;
 <#+

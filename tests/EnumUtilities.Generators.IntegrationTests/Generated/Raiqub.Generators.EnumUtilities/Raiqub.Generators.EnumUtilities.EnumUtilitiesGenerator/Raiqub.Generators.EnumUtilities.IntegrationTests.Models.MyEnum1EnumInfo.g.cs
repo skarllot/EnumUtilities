@@ -12,27 +12,56 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
-    internal static partial class MyEnum1EnumInfo
+    internal static partial class MyEnum1Metadata
     {
-        /// <summary>Represents the largest possible number of characters produced by converting an <see cref="MyEnum1" /> value to string, based on defined members. This field is constant.</summary>
-        public const int NameMaxCharsLength = 4;
+        /// <summary>Provides constant values for <see cref="MyEnum1" /> members names.</summary>
+        public static partial class Name
+        {
+            /// <summary>Represents the largest possible number of characters produced by converting an <see cref="MyEnum1" /> value to string, based on defined members. This field is constant.</summary>
+            public const int MaxCharsLength = 4;
+
+            /// <summary>The string representation of <see cref="MyEnum1.Zero" /> name.</summary>
+            public const string Zero = "Zero";
+
+            /// <summary>The string representation of <see cref="MyEnum1.One" /> name.</summary>
+            public const string One = "One";
+
+            /// <summary>The string representation of <see cref="MyEnum1.Two" /> name.</summary>
+            public const string Two = "Two";
+        }
+
+        /// <summary>Provides static values for <see cref="MyEnum1" /> UTF-8 encoded members names.</summary>
+        public static partial class Utf8Name
+        {
+            /// <summary>Represents the largest possible number of bytes produced by converting an <see cref="MyEnum1" /> value to UTF-8 string, based on defined members. This field is constant.</summary>
+            public const int MaxBytesLength = 4;
+
+            /// <summary>The UTF-8 representation of <see cref="MyEnum1.Zero" /> name.</summary>
+            public static ReadOnlySpan<byte> Zero => new byte[4] { 90, 101, 114, 111 };
+
+            /// <summary>The UTF-8 representation of <see cref="MyEnum1.One" /> name.</summary>
+            public static ReadOnlySpan<byte> One => new byte[3] { 79, 110, 101 };
+
+            /// <summary>The UTF-8 representation of <see cref="MyEnum1.Two" /> name.</summary>
+            public static ReadOnlySpan<byte> Two => new byte[3] { 84, 119, 111 };
+        }
 
         /// <summary>Provides support for formatting <see cref="MyEnum1"/> values.</summary>
-        public sealed partial class StringFormatter : IEnumFormatter<int>
+        internal sealed partial class StringFormatter : IEnumFormatter<int>
         {
             /// <summary>Gets the singleton instance of the <see cref="StringFormatter"/> class.</summary>
             public static StringFormatter Instance = new StringFormatter();
 
             /// <inheritdoc />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public int GetStringCountForNumber(int value) => EnumNumericFormatter.GetStringLength(value);
+            public int GetStringLengthForNumber(int value) => EnumNumericFormatter.GetStringLength(value);
 
             /// <inheritdoc />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public string GetStringForNumber(int value) => value.ToString();
 
             /// <inheritdoc />
-            public int? TryGetStringCountForMember(int value)
+            public int? TryGetStringLengthForMember(int value)
             {
                 return value switch
                 {
@@ -57,7 +86,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         }
 
         /// <summary>Provides support for parsing <see cref="MyEnum1"/> values.</summary>
-        public sealed partial class StringParser
+        internal sealed partial class StringParser
             : IEnumParser<int>
         {
             /// <summary>Gets the singleton instance of the <see cref="StringParser"/> class.</summary>
@@ -88,13 +117,13 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             {
                 switch (value)
                 {
-                    case { } when value.SequenceEqual("Zero".AsSpan()):
+                    case { } when value.SequenceEqual("Zero"):
                         result = 0;
                         return true;
-                    case { } when value.SequenceEqual("One".AsSpan()):
+                    case { } when value.SequenceEqual("One"):
                         result = 1;
                         return true;
-                    case { } when value.SequenceEqual("Two".AsSpan()):
+                    case { } when value.SequenceEqual("Two"):
                         result = 2;
                         return true;
                     default:

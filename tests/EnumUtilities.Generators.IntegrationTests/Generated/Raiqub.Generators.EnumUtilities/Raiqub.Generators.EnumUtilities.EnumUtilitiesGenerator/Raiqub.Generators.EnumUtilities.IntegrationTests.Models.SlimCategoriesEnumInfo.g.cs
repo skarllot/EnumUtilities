@@ -12,27 +12,74 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
-    public static partial class SlimCategoriesEnumInfo
+    public static partial class SlimCategoriesMetadata
     {
-        /// <summary>Represents the largest possible number of characters produced by converting an <see cref="SlimCategories" /> value to string, based on defined members. This field is constant.</summary>
-        public const int NameMaxCharsLength = 11;
+        /// <summary>Provides constant values for <see cref="SlimCategories" /> members names.</summary>
+        public static partial class Name
+        {
+            /// <summary>Represents the largest possible number of characters produced by converting an <see cref="SlimCategories" /> value to string, based on defined members. This field is constant.</summary>
+            public const int MaxCharsLength = 11;
+
+            /// <summary>The string representation of <see cref="SlimCategories.Electronics" /> name.</summary>
+            public const string Electronics = "Electronics";
+
+            /// <summary>The string representation of <see cref="SlimCategories.Food" /> name.</summary>
+            public const string Food = "Food";
+
+            /// <summary>The string representation of <see cref="SlimCategories.Automotive" /> name.</summary>
+            public const string Automotive = "Automotive";
+
+            /// <summary>The string representation of <see cref="SlimCategories.Arts" /> name.</summary>
+            public const string Arts = "Arts";
+
+            /// <summary>The string representation of <see cref="SlimCategories.BeautyCare" /> name.</summary>
+            public const string BeautyCare = "BeautyCare";
+
+            /// <summary>The string representation of <see cref="SlimCategories.Fashion" /> name.</summary>
+            public const string Fashion = "Fashion";
+        }
+
+        /// <summary>Provides static values for <see cref="SlimCategories" /> UTF-8 encoded members names.</summary>
+        public static partial class Utf8Name
+        {
+            /// <summary>Represents the largest possible number of bytes produced by converting an <see cref="SlimCategories" /> value to UTF-8 string, based on defined members. This field is constant.</summary>
+            public const int MaxBytesLength = 11;
+
+            /// <summary>The UTF-8 representation of <see cref="SlimCategories.Electronics" /> name.</summary>
+            public static ReadOnlySpan<byte> Electronics => new byte[11] { 69, 108, 101, 99, 116, 114, 111, 110, 105, 99, 115 };
+
+            /// <summary>The UTF-8 representation of <see cref="SlimCategories.Food" /> name.</summary>
+            public static ReadOnlySpan<byte> Food => new byte[4] { 70, 111, 111, 100 };
+
+            /// <summary>The UTF-8 representation of <see cref="SlimCategories.Automotive" /> name.</summary>
+            public static ReadOnlySpan<byte> Automotive => new byte[10] { 65, 117, 116, 111, 109, 111, 116, 105, 118, 101 };
+
+            /// <summary>The UTF-8 representation of <see cref="SlimCategories.Arts" /> name.</summary>
+            public static ReadOnlySpan<byte> Arts => new byte[4] { 65, 114, 116, 115 };
+
+            /// <summary>The UTF-8 representation of <see cref="SlimCategories.BeautyCare" /> name.</summary>
+            public static ReadOnlySpan<byte> BeautyCare => new byte[10] { 66, 101, 97, 117, 116, 121, 67, 97, 114, 101 };
+
+            /// <summary>The UTF-8 representation of <see cref="SlimCategories.Fashion" /> name.</summary>
+            public static ReadOnlySpan<byte> Fashion => new byte[7] { 70, 97, 115, 104, 105, 111, 110 };
+        }
 
         /// <summary>Provides support for formatting <see cref="SlimCategories"/> values.</summary>
-        public sealed partial class StringFormatter : IEnumFormatter<byte>
+        internal sealed partial class StringFormatter : IEnumFormatter<byte>
         {
             /// <summary>Gets the singleton instance of the <see cref="StringFormatter"/> class.</summary>
             public static StringFormatter Instance = new StringFormatter();
 
             /// <inheritdoc />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public int GetStringCountForNumber(byte value) => EnumNumericFormatter.GetStringLength(value);
+            public int GetStringLengthForNumber(byte value) => EnumNumericFormatter.GetStringLength(value);
 
             /// <inheritdoc />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public string GetStringForNumber(byte value) => value.ToString();
 
             /// <inheritdoc />
-            public int? TryGetStringCountForMember(byte value)
+            public int? TryGetStringLengthForMember(byte value)
             {
                 return value switch
                 {
@@ -63,7 +110,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         }
 
         /// <summary>Provides support for parsing <see cref="SlimCategories"/> values.</summary>
-        public sealed partial class StringParser
+        internal sealed partial class StringParser
             : IEnumParser<byte>
         {
             /// <summary>Gets the singleton instance of the <see cref="StringParser"/> class.</summary>
@@ -94,22 +141,22 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             {
                 switch (value)
                 {
-                    case { } when value.SequenceEqual("Electronics".AsSpan()):
+                    case { } when value.SequenceEqual("Electronics"):
                         result = 0;
                         return true;
-                    case { } when value.SequenceEqual("Food".AsSpan()):
+                    case { } when value.SequenceEqual("Food"):
                         result = 1;
                         return true;
-                    case { } when value.SequenceEqual("Automotive".AsSpan()):
+                    case { } when value.SequenceEqual("Automotive"):
                         result = 2;
                         return true;
-                    case { } when value.SequenceEqual("Arts".AsSpan()):
+                    case { } when value.SequenceEqual("Arts"):
                         result = 3;
                         return true;
-                    case { } when value.SequenceEqual("BeautyCare".AsSpan()):
+                    case { } when value.SequenceEqual("BeautyCare"):
                         result = 4;
                         return true;
-                    case { } when value.SequenceEqual("Fashion".AsSpan()):
+                    case { } when value.SequenceEqual("Fashion"):
                         result = 5;
                         return true;
                     default:

@@ -12,27 +12,24 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
-    public static partial class SeasonEnumInfo
+    public static partial class SeasonMetadata
     {
-        /// <summary>Represents the largest possible number of characters produced by converting an <see cref="Season" /> value to string, based on defined members. This field is constant.</summary>
-        public const int NameMaxCharsLength = 6;
-
         /// <summary>Provides support for formatting <see cref="Season"/> values.</summary>
-        public sealed partial class StringFormatter : IEnumFormatter<int>
+        internal sealed partial class StringFormatter : IEnumFormatter<int>
         {
             /// <summary>Gets the singleton instance of the <see cref="StringFormatter"/> class.</summary>
             public static StringFormatter Instance = new StringFormatter();
 
             /// <inheritdoc />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public int GetStringCountForNumber(int value) => EnumNumericFormatter.GetStringLength(value);
+            public int GetStringLengthForNumber(int value) => EnumNumericFormatter.GetStringLength(value);
 
             /// <inheritdoc />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public string GetStringForNumber(int value) => value.ToString();
 
             /// <inheritdoc />
-            public int? TryGetStringCountForMember(int value)
+            public int? TryGetStringLengthForMember(int value)
             {
                 return value switch
                 {
@@ -59,7 +56,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         }
 
         /// <summary>Provides support for parsing <see cref="Season"/> values.</summary>
-        public sealed partial class StringParser
+        internal sealed partial class StringParser
             : IEnumParser<int>
         {
             /// <summary>Gets the singleton instance of the <see cref="StringParser"/> class.</summary>
@@ -90,16 +87,16 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             {
                 switch (value)
                 {
-                    case { } when value.SequenceEqual("Spring".AsSpan()):
+                    case { } when value.SequenceEqual("Spring"):
                         result = 1;
                         return true;
-                    case { } when value.SequenceEqual("Summer".AsSpan()):
+                    case { } when value.SequenceEqual("Summer"):
                         result = 2;
                         return true;
-                    case { } when value.SequenceEqual("Autumn".AsSpan()):
+                    case { } when value.SequenceEqual("Autumn"):
                         result = 3;
                         return true;
-                    case { } when value.SequenceEqual("Winter".AsSpan()):
+                    case { } when value.SequenceEqual("Winter"):
                         result = 4;
                         return true;
                     default:

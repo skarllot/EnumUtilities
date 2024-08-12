@@ -12,27 +12,56 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
-    public static partial class ColoursEnumInfo
+    public static partial class ColoursMetadata
     {
-        /// <summary>Represents the largest possible number of characters produced by converting an <see cref="Colours" /> value to string, based on defined members. This field is constant.</summary>
-        public const int NameMaxCharsLength = 5;
+        /// <summary>Provides constant values for <see cref="Colours" /> members names.</summary>
+        public static partial class Name
+        {
+            /// <summary>Represents the largest possible number of characters produced by converting an <see cref="Colours" /> value to string, based on defined members. This field is constant.</summary>
+            public const int MaxCharsLength = 5;
+
+            /// <summary>The string representation of <see cref="Colours.Red" /> name.</summary>
+            public const string Red = "Red";
+
+            /// <summary>The string representation of <see cref="Colours.Blue" /> name.</summary>
+            public const string Blue = "Blue";
+
+            /// <summary>The string representation of <see cref="Colours.Green" /> name.</summary>
+            public const string Green = "Green";
+        }
+
+        /// <summary>Provides static values for <see cref="Colours" /> UTF-8 encoded members names.</summary>
+        public static partial class Utf8Name
+        {
+            /// <summary>Represents the largest possible number of bytes produced by converting an <see cref="Colours" /> value to UTF-8 string, based on defined members. This field is constant.</summary>
+            public const int MaxBytesLength = 5;
+
+            /// <summary>The UTF-8 representation of <see cref="Colours.Red" /> name.</summary>
+            public static ReadOnlySpan<byte> Red => new byte[3] { 82, 101, 100 };
+
+            /// <summary>The UTF-8 representation of <see cref="Colours.Blue" /> name.</summary>
+            public static ReadOnlySpan<byte> Blue => new byte[4] { 66, 108, 117, 101 };
+
+            /// <summary>The UTF-8 representation of <see cref="Colours.Green" /> name.</summary>
+            public static ReadOnlySpan<byte> Green => new byte[5] { 71, 114, 101, 101, 110 };
+        }
 
         /// <summary>Provides support for formatting <see cref="Colours"/> values.</summary>
-        public sealed partial class StringFormatter : IEnumFormatter<int>
+        internal sealed partial class StringFormatter : IEnumFormatter<int>
         {
             /// <summary>Gets the singleton instance of the <see cref="StringFormatter"/> class.</summary>
             public static StringFormatter Instance = new StringFormatter();
 
             /// <inheritdoc />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public int GetStringCountForNumber(int value) => EnumNumericFormatter.GetStringLength(value);
+            public int GetStringLengthForNumber(int value) => EnumNumericFormatter.GetStringLength(value);
 
             /// <inheritdoc />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public string GetStringForNumber(int value) => value.ToString();
 
             /// <inheritdoc />
-            public int? TryGetStringCountForMember(int value)
+            public int? TryGetStringLengthForMember(int value)
             {
                 if (value == 0)
                 {
@@ -130,7 +159,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                     span = span.Slice(2);
 
                     name = GetStringForSingleMember(foundItems[foundItemsCount]);
-                    name.CopyTo(span);
+                    name.AsSpan().CopyTo(span);
                     span = span.Slice(name.Length);
                 }
 
@@ -150,7 +179,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         }
 
         /// <summary>Provides support for parsing <see cref="Colours"/> values.</summary>
-        public sealed partial class StringParser
+        internal sealed partial class StringParser
             : IEnumParser<int>
         {
             /// <summary>Gets the singleton instance of the <see cref="StringParser"/> class.</summary>
@@ -181,13 +210,13 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             {
                 switch (value)
                 {
-                    case { } when value.SequenceEqual("Red".AsSpan()):
+                    case { } when value.SequenceEqual("Red"):
                         result = 1;
                         return true;
-                    case { } when value.SequenceEqual("Blue".AsSpan()):
+                    case { } when value.SequenceEqual("Blue"):
                         result = 2;
                         return true;
-                    case { } when value.SequenceEqual("Green".AsSpan()):
+                    case { } when value.SequenceEqual("Green"):
                         result = 4;
                         return true;
                     default:

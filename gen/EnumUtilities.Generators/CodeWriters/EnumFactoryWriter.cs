@@ -75,9 +75,23 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             
             #line default
             #line hidden
-            this.Write("Factory\r\n{\r\n");
+            this.Write("Factory\r\n{\r\n    private static readonly ");
             
             #line 34 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.MetadataClassName));
+            
+            #line default
+            #line hidden
+            this.Write(".StringParser s_stringParser = ");
+            
+            #line 34 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumFactoryWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.MetadataClassName));
+            
+            #line default
+            #line hidden
+            this.Write(".StringParser.Instance;\r\n\r\n");
+            
+            #line 36 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumFactoryWriter.tt"
 
     WriteDefaultBlock();
     WriteLegacyDefaultBlock();
@@ -91,7 +105,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("}\r\n");
             
-            #line 43 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumFactoryWriter.tt"
+            #line 45 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumFactoryWriter.tt"
 
     if (!string.IsNullOrEmpty(Model.Namespace))
     {
@@ -115,475 +129,447 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
         #line hidden
         
         #line 5 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
-this.Write("    private static readonly ");
+this.Write("    /// <summary>\r\n    /// Converts the string representation of the name or numeric value of one or more enumerated constants to\r\n    /// an equivalent enumerated object.\r\n    /// </summary>\r\n    /// <param name=\"value\">The string representation of the enumeration name or underlying value to convert.</param>\r\n    /// <param name=\"ignoreCase\"><see langword=\"true\"/> to ignore case; <see langword=\"false\"/> to regard case.</param>\r\n    /// <returns>The value represented by the specified name or numeric value. Note that this value need not be a member of the ");
 
         
         #line default
         #line hidden
         
-        #line 5 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 11 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
 
         
         #line default
         #line hidden
         
-        #line 5 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
-this.Write("EnumInfo.StringParser s_stringParser = ");
-
-        
-        #line default
-        #line hidden
-        
-        #line 5 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
-this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
-
-        
-        #line default
-        #line hidden
-        
-        #line 5 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
-this.Write("EnumInfo.StringParser.Instance;\r\n\r\n    /// <summary>\r\n    /// Converts the string representation of the name or numeric value of one or more enumerated constants to\r\n    /// an equivalent enumerated object.\r\n    /// </summary>\r\n    /// <param name=\"value\">The string representation of the enumeration name or underlying value to convert.</param>\r\n    /// <param name=\"ignoreCase\"><see langword=\"true\"/> to ignore case; <see langword=\"false\"/> to regard case.</param>\r\n    /// <returns>The value represented by the specified name or numeric value. Note that this value need not be a member of the ");
-
-        
-        #line default
-        #line hidden
-        
-        #line 13 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
-this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
-
-        
-        #line default
-        #line hidden
-        
-        #line 13 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 11 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(" enumeration.</returns>\r\n    /// <exception cref=\"ArgumentException\"><paramref name=\"value\"/> is empty or does not represent a valid value.</exception>\r\n    public static ");
 
         
         #line default
         #line hidden
         
-        #line 15 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 13 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
 
         
         #line default
         #line hidden
         
-        #line 15 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 13 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(" Parse(string value, bool ignoreCase = false)\r\n    {\r\n        if (value is null) ThrowArgumentNullException(nameof(value));\r\n        TryParse(value.AsSpan(), ignoreCase, throwOnFailure: true, out var result);\r\n        return result;\r\n    }\r\n\r\n    /// <summary>\r\n    /// Converts the string representation of the name or numeric value of one or more enumerated constants to\r\n    /// an equivalent enumerated object.\r\n    /// </summary>\r\n    /// <param name=\"value\">The string representation of the enumeration name or underlying value to convert.</param>\r\n    /// <param name=\"ignoreCase\"><see langword=\"true\"/> to ignore case; <see langword=\"false\"/> to regard case.</param>\r\n    /// <returns>The value represented by the specified name or numeric value. Note that this value need not be a member of the ");
 
         
         #line default
         #line hidden
         
-        #line 28 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 26 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
 
         
         #line default
         #line hidden
         
-        #line 28 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 26 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(" enumeration.</returns>\r\n    /// <exception cref=\"ArgumentException\"><paramref name=\"value\"/> is empty or does not represent a valid value.</exception>\r\n    public static ");
 
         
         #line default
         #line hidden
         
-        #line 30 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 28 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
 
         
         #line default
         #line hidden
         
-        #line 30 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 28 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(" Parse(ReadOnlySpan<char> value, bool ignoreCase = false)\r\n    {\r\n        TryParse(value, ignoreCase, throwOnFailure: true, out var result);\r\n        return result;\r\n    }\r\n\r\n    /// <summary>\r\n    /// Converts the string representation of the name or numeric value of one or more enumerated constants to\r\n    /// an equivalent enumerated object.\r\n    /// </summary>\r\n    /// <param name=\"value\">The string representation of the enumeration name or underlying value to convert.</param>\r\n    /// <param name=\"ignoreCase\"><see langword=\"true\"/> to ignore case; <see langword=\"false\"/> to regard case.</param>\r\n    /// <returns>The value represented by the specified name or numeric value or null. Note that this value need not be a member of the ");
 
         
         #line default
         #line hidden
         
-        #line 42 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 40 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
 
         
         #line default
         #line hidden
         
-        #line 42 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 40 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(" enumeration.</returns>\r\n    /// <exception cref=\"ArgumentException\"><paramref name=\"value\"/> is empty or does not represent a valid value.</exception>\r\n    [return: NotNullIfNotNull(\"value\")]\r\n    public static ");
 
         
         #line default
         #line hidden
         
-        #line 45 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 43 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
 
         
         #line default
         #line hidden
         
-        #line 45 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 43 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write("? ParseOrNull(string? value, bool ignoreCase = false)\r\n    {\r\n        if (value is null) return null;\r\n        TryParse(value.AsSpan(), ignoreCase, throwOnFailure: true, out var result);\r\n        return result;\r\n    }\r\n\r\n    /// <summary>\r\n    /// Converts the string representation of the name or numeric value of one or more enumerated constants to\r\n    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.\r\n    /// </summary>\r\n    /// <param name=\"value\">The string representation of the enumeration name or underlying value to convert.</param>\r\n    /// <param name=\"ignoreCase\"><see langword=\"true\"/> to ignore case; <see langword=\"false\"/> to regard case.</param>\r\n    /// <param name=\"result\">\r\n    /// When this method returns, result contains an object of type ");
 
         
         #line default
         #line hidden
         
-        #line 59 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 57 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
 
         
         #line default
         #line hidden
         
-        #line 59 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 57 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(" whose value is represented by value\r\n    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the\r\n    /// underlying type of ");
 
         
         #line default
         #line hidden
         
-        #line 61 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 59 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
 
         
         #line default
         #line hidden
         
-        #line 61 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 59 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(". Note that this value need not be a member of the ");
 
         
         #line default
         #line hidden
         
-        #line 61 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 59 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
 
         
         #line default
         #line hidden
         
-        #line 61 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 59 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(" enumeration.\r\n    /// </param>\r\n    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>\r\n    public static bool TryParse([NotNullWhen(true)] string? value, bool ignoreCase, out ");
 
         
         #line default
         #line hidden
         
-        #line 64 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 62 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
 
         
         #line default
         #line hidden
         
-        #line 64 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 62 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(" result)\r\n    {\r\n        return TryParse(value.AsSpan(), ignoreCase, throwOnFailure: false, out result);\r\n    }\r\n\r\n    /// <summary>\r\n    /// Converts the string representation of the name or numeric value of one or more enumerated constants to\r\n    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.\r\n    /// </summary>\r\n    /// <param name=\"value\">The string representation of the enumeration name or underlying value to convert.</param>\r\n    /// <param name=\"result\">\r\n    /// When this method returns, result contains an object of type ");
 
         
         #line default
         #line hidden
         
-        #line 75 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 73 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
 
         
         #line default
         #line hidden
         
-        #line 75 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 73 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(" whose value is represented by value\r\n    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the\r\n    /// underlying type of ");
 
         
         #line default
         #line hidden
         
-        #line 77 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 75 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
 
         
         #line default
         #line hidden
         
-        #line 77 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 75 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(". Note that this value need not be a member of the ");
 
         
         #line default
         #line hidden
         
-        #line 77 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 75 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
 
         
         #line default
         #line hidden
         
-        #line 77 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 75 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(" enumeration.\r\n    /// </param>\r\n    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>\r\n    public static bool TryParse([NotNullWhen(true)] string? value, out ");
 
         
         #line default
         #line hidden
         
-        #line 80 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 78 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
 
         
         #line default
         #line hidden
         
-        #line 80 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 78 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(" result)\r\n    {\r\n        return TryParse(value.AsSpan(), ignoreCase: false, throwOnFailure: false, out result);\r\n    }\r\n\r\n    /// <summary>\r\n    /// Converts the string representation of the name or numeric value of one or more enumerated constants to\r\n    /// an equivalent enumerated object.\r\n    /// </summary>\r\n    /// <param name=\"value\">The string representation of the enumeration name or underlying value to convert.</param>\r\n    /// <param name=\"ignoreCase\"><see langword=\"true\"/> to ignore case; <see langword=\"false\"/> to regard case.</param>\r\n    /// <returns>\r\n    /// Contains an object of type ");
 
         
         #line default
         #line hidden
         
-        #line 92 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 90 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
 
         
         #line default
         #line hidden
         
-        #line 92 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 90 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(" whose value is represented by value if the parse operation succeeds.\r\n    /// If the parse operation fails, result contains <c>null</c> value.\r\n    /// </returns>\r\n    public static ");
 
         
         #line default
         #line hidden
         
-        #line 95 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 93 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
 
         
         #line default
         #line hidden
         
-        #line 95 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 93 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write("? TryParse(string? value, bool ignoreCase = false)\r\n    {\r\n        return TryParse(value.AsSpan(), ignoreCase, throwOnFailure: false, out ");
 
         
         #line default
         #line hidden
         
-        #line 97 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 95 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
 
         
         #line default
         #line hidden
         
-        #line 97 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 95 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(" result) ? result : null;\r\n    }\r\n\r\n    /// <summary>\r\n    /// Converts the string representation of the name or numeric value of one or more enumerated constants to\r\n    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.\r\n    /// </summary>\r\n    /// <param name=\"value\">The string representation of the enumeration name or underlying value to convert.</param>\r\n    /// <param name=\"ignoreCase\"><see langword=\"true\"/> to ignore case; <see langword=\"false\"/> to regard case.</param>\r\n    /// <param name=\"result\">\r\n    /// When this method returns, result contains an object of type ");
 
         
         #line default
         #line hidden
         
-        #line 107 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 105 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
 
         
         #line default
         #line hidden
         
-        #line 107 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 105 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(" whose value is represented by value\r\n    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the\r\n    /// underlying type of ");
 
         
         #line default
         #line hidden
         
-        #line 109 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 107 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
 
         
         #line default
         #line hidden
         
-        #line 109 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 107 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(". Note that this value need not be a member of the ");
 
         
         #line default
         #line hidden
         
-        #line 109 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 107 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
 
         
         #line default
         #line hidden
         
-        #line 109 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 107 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(" enumeration.\r\n    /// </param>\r\n    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>\r\n    public static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, out ");
 
         
         #line default
         #line hidden
         
-        #line 112 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 110 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
 
         
         #line default
         #line hidden
         
-        #line 112 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 110 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(" result)\r\n    {\r\n        return TryParse(value, ignoreCase, throwOnFailure: false, out result);\r\n    }\r\n\r\n    /// <summary>\r\n    /// Converts the string representation of the name or numeric value of one or more enumerated constants to\r\n    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.\r\n    /// </summary>\r\n    /// <param name=\"value\">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>\r\n    /// <param name=\"result\">\r\n    /// When this method returns, result contains an object of type ");
 
         
         #line default
         #line hidden
         
-        #line 123 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 121 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
 
         
         #line default
         #line hidden
         
-        #line 123 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 121 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(" whose value is represented by value\r\n    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the\r\n    /// underlying type of ");
 
         
         #line default
         #line hidden
         
-        #line 125 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 123 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
 
         
         #line default
         #line hidden
         
-        #line 125 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 123 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(". Note that this value need not be a member of the ");
 
         
         #line default
         #line hidden
         
-        #line 125 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 123 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
 
         
         #line default
         #line hidden
         
-        #line 125 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 123 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(" enumeration.\r\n    /// </param>\r\n    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>\r\n    public static bool TryParse(ReadOnlySpan<char> value, out ");
 
         
         #line default
         #line hidden
         
-        #line 128 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 126 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
 
         
         #line default
         #line hidden
         
-        #line 128 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 126 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(" result)\r\n    {\r\n        return TryParse(value, ignoreCase: false, throwOnFailure: false, out result);\r\n    }\r\n\r\n    /// <summary>\r\n    /// Converts the string representation of the name or numeric value of one or more enumerated constants to\r\n    /// an equivalent enumerated object.\r\n    /// </summary>\r\n    /// <param name=\"value\">The string representation of the enumeration name or underlying value to convert.</param>\r\n    /// <param name=\"ignoreCase\"><see langword=\"true\"/> to ignore case; <see langword=\"false\"/> to regard case.</param>\r\n    /// <returns>\r\n    /// Contains an object of type ");
 
         
         #line default
         #line hidden
         
-        #line 140 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 138 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
 
         
         #line default
         #line hidden
         
-        #line 140 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 138 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(" whose value is represented by value if the parse operation succeeds.\r\n    /// If the parse operation fails, result contains <c>null</c> value.\r\n    /// </returns>\r\n    public static ");
 
         
         #line default
         #line hidden
         
-        #line 143 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 141 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
 
         
         #line default
         #line hidden
         
-        #line 143 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 141 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write("? TryParse(ReadOnlySpan<char> value, bool ignoreCase = false)\r\n    {\r\n        return TryParse(value, ignoreCase, throwOnFailure: false, out ");
 
         
         #line default
         #line hidden
         
-        #line 145 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 143 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
 
         
         #line default
         #line hidden
         
-        #line 145 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 143 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(" result) ? result : null;\r\n    }\r\n\r\n    private static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, bool throwOnFailure, out ");
 
         
         #line default
         #line hidden
         
-        #line 148 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 146 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
 
         
         #line default
         #line hidden
         
-        #line 148 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 146 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(" result)\r\n    {\r\n        bool success = EnumStringParser.TryParse(value, s_stringParser, ignoreCase, throwOnFailure, out ");
 
         
         #line default
         #line hidden
         
-        #line 150 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 148 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
 
         
         #line default
         #line hidden
         
-        #line 150 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 148 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(" number);\r\n        if (!success)\r\n        {\r\n            result = 0;\r\n            return false;\r\n        }\r\n\r\n        result = (");
 
         
         #line default
         #line hidden
         
-        #line 157 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 155 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
 
         
         #line default
         #line hidden
         
-        #line 157 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 155 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 this.Write(")number;\r\n        return true;\r\n    }\r\n");
 
         
         #line default
         #line hidden
         
-        #line 160 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
+        #line 158 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DefaultBlock.ttinclude"
 
     }
 
@@ -671,7 +657,7 @@ this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
         #line hidden
         
         #line 25 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\LegacyDefaultBlock.ttinclude"
-this.Write(" number)\r\n            || s_stringParser.TryParseNumber(name.AsSpan(), out number);\r\n        if (!success)\r\n        {\r\n            return Enum.TryParse(name, out result);\r\n        }\r\n\r\n        result = (");
+this.Write(" number)\r\n            || s_stringParser.TryParseNumber(name.AsSpan(), out number);\r\n        if (!success)\r\n        {\r\n            return TryParse(name, out result);\r\n        }\r\n\r\n        result = (");
 
         
         #line default
@@ -2334,7 +2320,7 @@ this.Write("        };\r\n    }\r\n\r\n    [DoesNotReturn]\r\n    private static
         #line default
         #line hidden
         
-        #line 50 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumFactoryWriter.tt"
+        #line 52 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumFactoryWriter.tt"
 
     public EnumFactoryWriter(StringBuilder builder) : base(builder)
     {

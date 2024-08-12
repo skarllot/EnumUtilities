@@ -15,7 +15,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class PaymentMethodFactory
     {
-        private static readonly PaymentMethodEnumInfo.StringParser s_stringParser = PaymentMethodEnumInfo.StringParser.Instance;
+        private static readonly PaymentMethodMetadata.StringParser s_stringParser = PaymentMethodMetadata.StringParser.Instance;
 
         /// <summary>
         /// Converts the string representation of the name or numeric value of one or more enumerated constants to
@@ -194,7 +194,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 || s_stringParser.TryParseNumber(name.AsSpan(), out number);
             if (!success)
             {
-                return Enum.TryParse(name, out result);
+                return TryParse(name, out result);
             }
 
             result = (PaymentMethod)number;

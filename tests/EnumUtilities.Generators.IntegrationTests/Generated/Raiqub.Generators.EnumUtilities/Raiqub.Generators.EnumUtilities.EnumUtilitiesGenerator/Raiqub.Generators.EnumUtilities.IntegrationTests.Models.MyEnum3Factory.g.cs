@@ -15,7 +15,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class MyEnum3Factory
     {
-        private static readonly MyEnum3EnumInfo.StringParser s_stringParser = MyEnum3EnumInfo.StringParser.Instance;
+        private static readonly MyEnum3Metadata.StringParser s_stringParser = MyEnum3Metadata.StringParser.Instance;
 
         /// <summary>
         /// Converts the string representation of the name or numeric value of one or more enumerated constants to
@@ -194,7 +194,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 || s_stringParser.TryParseNumber(name.AsSpan(), out number);
             if (!success)
             {
-                return Enum.TryParse(name, out result);
+                return TryParse(name, out result);
             }
 
             result = (NestedInClass.MyEnum3)number;

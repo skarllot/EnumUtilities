@@ -28,6 +28,8 @@ public class DescriptionTests
     [InlineData("")]
     [InlineData("   ")]
     [InlineData("the payment by using physical cash")]
+    [InlineData(nameof(PaymentMethod.Credit))]
+    [InlineData(nameof(PaymentMethod.Debit))]
     public void CreateFromDescriptionShouldThrowException(string description)
     {
         Assert.Throws<ArgumentException>(() => PaymentMethodFactory.CreateFromDescription(description));

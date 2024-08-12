@@ -2,18 +2,15 @@
     private void WriteExtensionsBlock()
     {
 #>
-    /// <summary>Represents the largest possible number of characters produced by converting an <see cref="<#= Model.Name #>" /> value to string, based on defined members. This field is constant.</summary>
-    public const int NameMaxCharsLength = <#= Model.Values.Max(x => x.MemberName.Length) #>;
-
     /// <summary>Provides support for formatting <see cref="<#= Model.Name #>"/> values.</summary>
-    public sealed partial class StringFormatter : IEnumFormatter<<#= Model.UnderlyingType #>>
+    internal sealed partial class StringFormatter : IEnumFormatter<<#= Model.UnderlyingType #>>
     {
         /// <summary>Gets the singleton instance of the <see cref="StringFormatter"/> class.</summary>
         public static StringFormatter Instance = new StringFormatter();
 
         /// <inheritdoc />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public int GetStringCountForNumber(<#= Model.UnderlyingType #> value) => EnumNumericFormatter.GetStringLength(value);
+        public int GetStringLengthForNumber(<#= Model.UnderlyingType #> value) => EnumNumericFormatter.GetStringLength(value);
 
         /// <inheritdoc />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -24,7 +21,7 @@
 #>
 
         /// <inheritdoc />
-        public int? TryGetStringCountForMember(<#= Model.UnderlyingType #> value)
+        public int? TryGetStringLengthForMember(<#= Model.UnderlyingType #> value)
         {
             if (value == 0)
             {
@@ -117,7 +114,7 @@
                 span = span.Slice(2);
 
                 name = GetStringForSingleMember(foundItems[foundItemsCount]);
-                name.CopyTo(span);
+                name.AsSpan().CopyTo(span);
                 span = span.Slice(name.Length);
             }
 
@@ -146,7 +143,7 @@
 #>
 
         /// <inheritdoc />
-        public int? TryGetStringCountForMember(<#= Model.UnderlyingType #> value)
+        public int? TryGetStringLengthForMember(<#= Model.UnderlyingType #> value)
         {
             return value switch
             {

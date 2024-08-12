@@ -14,10 +14,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class UserRoleExtensions
     {
-        /// <summary>Represents the largest possible number of characters produced by converting an <see cref="UserRole" /> value to string, based on defined members. This field is constant.</summary>
-        public const int NameMaxCharsLength = 10;
-
-        private static readonly UserRoleEnumInfo.StringFormatter s_stringFormatter = UserRoleEnumInfo.StringFormatter.Instance;
+        private static readonly UserRoleMetadata.StringFormatter s_stringFormatter = UserRoleMetadata.StringFormatter.Instance;
 
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
         /// <returns>The string representation of the value of this instance.</returns>
@@ -37,9 +34,9 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
         /// <param name="value">The value to calculate the number of characters.</param>
         /// <returns>The number of characters produced by converting the specified value to string.</returns>
-        public static int GetStringCount(this UserRole value)
+        public static int GetStringLength(this UserRole value)
         {
-            return EnumStringFormatter.GetStringCount((ulong)value, s_stringFormatter);
+            return EnumStringFormatter.GetStringLength((ulong)value, s_stringFormatter);
         }
 
         /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>

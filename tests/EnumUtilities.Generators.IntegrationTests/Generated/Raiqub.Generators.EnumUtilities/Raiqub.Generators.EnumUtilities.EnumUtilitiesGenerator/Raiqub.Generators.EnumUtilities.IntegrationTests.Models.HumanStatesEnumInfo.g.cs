@@ -12,27 +12,74 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
-    public static partial class HumanStatesEnumInfo
+    public static partial class HumanStatesMetadata
     {
-        /// <summary>Represents the largest possible number of characters produced by converting an <see cref="HumanStates" /> value to string, based on defined members. This field is constant.</summary>
-        public const int NameMaxCharsLength = 8;
+        /// <summary>Provides constant values for <see cref="HumanStates" /> members names.</summary>
+        public static partial class Name
+        {
+            /// <summary>Represents the largest possible number of characters produced by converting an <see cref="HumanStates" /> value to string, based on defined members. This field is constant.</summary>
+            public const int MaxCharsLength = 8;
+
+            /// <summary>The string representation of <see cref="HumanStates.Idle" /> name.</summary>
+            public const string Idle = "Idle";
+
+            /// <summary>The string representation of <see cref="HumanStates.Working" /> name.</summary>
+            public const string Working = "Working";
+
+            /// <summary>The string representation of <see cref="HumanStates.Sleeping" /> name.</summary>
+            public const string Sleeping = "Sleeping";
+
+            /// <summary>The string representation of <see cref="HumanStates.Eating" /> name.</summary>
+            public const string Eating = "Eating";
+
+            /// <summary>The string representation of <see cref="HumanStates.Dead" /> name.</summary>
+            public const string Dead = "Dead";
+
+            /// <summary>The string representation of <see cref="HumanStates.Relaxing" /> name.</summary>
+            public const string Relaxing = "Relaxing";
+        }
+
+        /// <summary>Provides static values for <see cref="HumanStates" /> UTF-8 encoded members names.</summary>
+        public static partial class Utf8Name
+        {
+            /// <summary>Represents the largest possible number of bytes produced by converting an <see cref="HumanStates" /> value to UTF-8 string, based on defined members. This field is constant.</summary>
+            public const int MaxBytesLength = 8;
+
+            /// <summary>The UTF-8 representation of <see cref="HumanStates.Idle" /> name.</summary>
+            public static ReadOnlySpan<byte> Idle => new byte[4] { 73, 100, 108, 101 };
+
+            /// <summary>The UTF-8 representation of <see cref="HumanStates.Working" /> name.</summary>
+            public static ReadOnlySpan<byte> Working => new byte[7] { 87, 111, 114, 107, 105, 110, 103 };
+
+            /// <summary>The UTF-8 representation of <see cref="HumanStates.Sleeping" /> name.</summary>
+            public static ReadOnlySpan<byte> Sleeping => new byte[8] { 83, 108, 101, 101, 112, 105, 110, 103 };
+
+            /// <summary>The UTF-8 representation of <see cref="HumanStates.Eating" /> name.</summary>
+            public static ReadOnlySpan<byte> Eating => new byte[6] { 69, 97, 116, 105, 110, 103 };
+
+            /// <summary>The UTF-8 representation of <see cref="HumanStates.Dead" /> name.</summary>
+            public static ReadOnlySpan<byte> Dead => new byte[4] { 68, 101, 97, 100 };
+
+            /// <summary>The UTF-8 representation of <see cref="HumanStates.Relaxing" /> name.</summary>
+            public static ReadOnlySpan<byte> Relaxing => new byte[8] { 82, 101, 108, 97, 120, 105, 110, 103 };
+        }
 
         /// <summary>Provides support for formatting <see cref="HumanStates"/> values.</summary>
-        public sealed partial class StringFormatter : IEnumFormatter<int>
+        internal sealed partial class StringFormatter : IEnumFormatter<int>
         {
             /// <summary>Gets the singleton instance of the <see cref="StringFormatter"/> class.</summary>
             public static StringFormatter Instance = new StringFormatter();
 
             /// <inheritdoc />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public int GetStringCountForNumber(int value) => EnumNumericFormatter.GetStringLength(value);
+            public int GetStringLengthForNumber(int value) => EnumNumericFormatter.GetStringLength(value);
 
             /// <inheritdoc />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public string GetStringForNumber(int value) => value.ToString();
 
             /// <inheritdoc />
-            public int? TryGetStringCountForMember(int value)
+            public int? TryGetStringLengthForMember(int value)
             {
                 return value switch
                 {
@@ -61,7 +108,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         }
 
         /// <summary>Provides support for parsing <see cref="HumanStates"/> values.</summary>
-        public sealed partial class StringParser
+        internal sealed partial class StringParser
             : IEnumParser<int>
         {
             /// <summary>Gets the singleton instance of the <see cref="StringParser"/> class.</summary>
@@ -92,22 +139,22 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             {
                 switch (value)
                 {
-                    case { } when value.SequenceEqual("Idle".AsSpan()):
+                    case { } when value.SequenceEqual("Idle"):
                         result = 1;
                         return true;
-                    case { } when value.SequenceEqual("Working".AsSpan()):
+                    case { } when value.SequenceEqual("Working"):
                         result = 2;
                         return true;
-                    case { } when value.SequenceEqual("Sleeping".AsSpan()):
+                    case { } when value.SequenceEqual("Sleeping"):
                         result = 3;
                         return true;
-                    case { } when value.SequenceEqual("Eating".AsSpan()):
+                    case { } when value.SequenceEqual("Eating"):
                         result = 4;
                         return true;
-                    case { } when value.SequenceEqual("Dead".AsSpan()):
+                    case { } when value.SequenceEqual("Dead"):
                         result = 5;
                         return true;
-                    case { } when value.SequenceEqual("Relaxing".AsSpan()):
+                    case { } when value.SequenceEqual("Relaxing"):
                         result = 1;
                         return true;
                     default:
