@@ -56,6 +56,12 @@
         "resolved": "5.6.0",
         "contentHash": "eb6mkftrXasI7B1AflSaB48f1U/aLJuHfwlfuEUHc07hnSkNUbkQKhzwnSBrfKuNG1vfTTtFzqHLGBsUS0oI9A=="
       },
+      "Raiqub.Generators.T4CodeWriter.Sources": {
+        "type": "Direct",
+        "requested": "[1.0.49, )",
+        "resolved": "1.0.49",
+        "contentHash": "5O4yf9VUhtnlxM7zj8vvyEljlvryzTXtawa1T5urqALxTqq2TCMMHU32ew5yOl3ft8MypjAZSqLr/KuX8h2jjA=="
+      },
       "Humanizer.Core": {
         "type": "Transitive",
         "resolved": "2.14.1",
