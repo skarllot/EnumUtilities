@@ -4,6 +4,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Raiqub.Generators.EnumUtilities.CodeWriters;
 using Raiqub.Generators.EnumUtilities.Common;
 using Raiqub.Generators.EnumUtilities.Models;
+using Raiqub.Generators.T4CodeWriter;
 
 namespace Raiqub.Generators.EnumUtilities;
 
@@ -11,6 +12,7 @@ public partial class EnumUtilitiesGenerator
 {
     private static readonly CodeWriterDispatcher<EnumToGenerate> s_dispatcher =
         new(
+            HandleCodeWriterException,
             sb => new EnumInfoWriter(sb),
             sb => new EnumExtensionsWriter(sb),
             sb => new EnumFactoryWriter(sb),
@@ -73,5 +75,13 @@ public partial class EnumUtilitiesGenerator
                 })
             .WhereNotNull()
             .ToList();
+    }
+
+    private static Diagnostic HandleCodeWriterException(Exception exception, EnumToGenerate model)
+    {
+        return Diagnostic.Create(
+            DiagnosticDescriptors.UnexpectedErrorGenerating,
+            model.GetDefaultLocation(),
+            exception.ToString().Replace("\n", " "));
     }
 }

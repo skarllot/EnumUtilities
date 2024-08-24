@@ -2,6 +2,7 @@
 <#@ import namespace="Common" #>
 <#@ import namespace="Models" #>
 <#@ import namespace="System.Text" #>
+<#@ import namespace="T4CodeWriter" #>
 <#
     if (Model.JsonConverterGeneratorOptions is null)
         return string.Empty;

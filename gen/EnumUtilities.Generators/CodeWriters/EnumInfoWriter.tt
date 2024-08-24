@@ -2,6 +2,7 @@
 <#@ import namespace="Common" #>
 <#@ import namespace="Models" #>
 <#@ import namespace="System.Text" #>
+<#@ import namespace="T4CodeWriter" #>
 <#@ include file="$(ProjectDir)CodeWriters\EnumInfo\DefaultBlock.ttinclude" #>
 <#@ include file="$(ProjectDir)CodeWriters\EnumInfo\ExtensionsBlock.ttinclude" #>
 <#@ include file="$(ProjectDir)CodeWriters\EnumInfo\FactoryBlock.ttinclude" #>
