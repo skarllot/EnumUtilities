@@ -65,7 +65,7 @@
     public static partial class Utf8SerializedValue
     {
         /// <summary>Represents the largest possible number of bytes produced by converting an <see cref="<#= Model.Name #>" /> value to UTF-8 string, based on defined members. This field is constant.</summary>
-        public const int MaxBytesLength = <#= Model.Values.Max(x => _utf8Encoding.GetByteCount(x.MemberName)) #>;
+        public const int MaxBytesLength = <#= Model.Values.Max(x => _utf8Encoding.GetByteCount(x.ResolvedSerializedValue)) #>;
 <#+
         foreach (var curr in Model.Values)
         {

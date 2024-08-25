@@ -93,7 +93,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         public static partial class Utf8SerializedValue
         {
             /// <summary>Represents the largest possible number of bytes produced by converting an <see cref="UserRole" /> value to UTF-8 string, based on defined members. This field is constant.</summary>
-            public const int MaxBytesLength = 10;
+            public const int MaxBytesLength = 11;
 
             /// <summary>The UTF-8 representation of serialized <see cref="UserRole.None" /> value.</summary>
             public static ReadOnlySpan<byte> None => new byte[4] { 78, 111, 110, 101 };

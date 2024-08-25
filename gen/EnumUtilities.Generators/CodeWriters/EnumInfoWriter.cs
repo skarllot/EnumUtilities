@@ -566,7 +566,7 @@ this.Write("\" /> value to UTF-8 string, based on defined members. This field is
         #line hidden
         
         #line 68 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumInfo\DefaultBlock.ttinclude"
-this.Write(this.ToStringHelper.ToStringWithCulture(Model.Values.Max(x => _utf8Encoding.GetByteCount(x.MemberName))));
+this.Write(this.ToStringHelper.ToStringWithCulture(Model.Values.Max(x => _utf8Encoding.GetByteCount(x.ResolvedSerializedValue))));
 
         
         #line default
