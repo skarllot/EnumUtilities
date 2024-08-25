@@ -2184,7 +2184,7 @@ this.Write("                case '");
         #line hidden
         
         #line 42 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumInfo\FactoryBlock.ttinclude"
-this.Write(this.ToStringHelper.ToStringWithCulture($"{curr.Key}"));
+this.Write(this.ToStringHelper.ToStringWithCulture(curr.Key));
 
         
         #line default
@@ -2215,7 +2215,7 @@ this.Write("                case '");
         #line hidden
         
         #line 48 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumInfo\FactoryBlock.ttinclude"
-this.Write(this.ToStringHelper.ToStringWithCulture($"{char.ToUpperInvariant(curr.Key)}"));
+this.Write(this.ToStringHelper.ToStringWithCulture(char.ToUpperInvariant(curr.Key)));
 
         
         #line default
@@ -2229,7 +2229,7 @@ this.Write("':\r\n                case '");
         #line hidden
         
         #line 49 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumInfo\FactoryBlock.ttinclude"
-this.Write(this.ToStringHelper.ToStringWithCulture($"{char.ToLowerInvariant(curr.Key)}"));
+this.Write(this.ToStringHelper.ToStringWithCulture(char.ToLowerInvariant(curr.Key)));
 
         
         #line default
@@ -2708,7 +2708,7 @@ this.Write("                case '");
         #line hidden
         
         #line 173 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumInfo\FactoryBlock.ttinclude"
-this.Write(this.ToStringHelper.ToStringWithCulture($"{curr.Key}"));
+this.Write(this.ToStringHelper.ToStringWithCulture(curr.Key));
 
         
         #line default
@@ -2739,7 +2739,7 @@ this.Write("                case '");
         #line hidden
         
         #line 179 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumInfo\FactoryBlock.ttinclude"
-this.Write(this.ToStringHelper.ToStringWithCulture($"{char.ToUpperInvariant(curr.Key)}"));
+this.Write(this.ToStringHelper.ToStringWithCulture(char.ToUpperInvariant(curr.Key)));
 
         
         #line default
@@ -2753,7 +2753,7 @@ this.Write("':\r\n                case '");
         #line hidden
         
         #line 180 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumInfo\FactoryBlock.ttinclude"
-this.Write(this.ToStringHelper.ToStringWithCulture($"{char.ToLowerInvariant(curr.Key)}"));
+this.Write(this.ToStringHelper.ToStringWithCulture(char.ToLowerInvariant(curr.Key)));
 
         
         #line default

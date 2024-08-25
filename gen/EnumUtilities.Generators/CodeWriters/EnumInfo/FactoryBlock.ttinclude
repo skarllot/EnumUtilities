@@ -39,14 +39,14 @@
             if (char.ToUpperInvariant(curr.Key) == curr.Key && char.ToLowerInvariant(curr.Key) == curr.Key)
             {
 #>
-                case '<#= $"{curr.Key}" #>':
+                case '<#= curr.Key #>':
 <#+
             }
             else
             {
 #>
-                case '<#= $"{char.ToUpperInvariant(curr.Key)}" #>':
-                case '<#= $"{char.ToLowerInvariant(curr.Key)}" #>':
+                case '<#= char.ToUpperInvariant(curr.Key) #>':
+                case '<#= char.ToLowerInvariant(curr.Key) #>':
 <#+
             }
 #>
@@ -170,14 +170,14 @@
             if (char.ToUpperInvariant(curr.Key) == curr.Key && char.ToLowerInvariant(curr.Key) == curr.Key)
             {
 #>
-                case '<#= $"{curr.Key}" #>':
+                case '<#= curr.Key #>':
 <#+
             }
             else
             {
 #>
-                case '<#= $"{char.ToUpperInvariant(curr.Key)}" #>':
-                case '<#= $"{char.ToLowerInvariant(curr.Key)}" #>':
+                case '<#= char.ToUpperInvariant(curr.Key) #>':
+                case '<#= char.ToLowerInvariant(curr.Key) #>':
 <#+
             }
 #>
