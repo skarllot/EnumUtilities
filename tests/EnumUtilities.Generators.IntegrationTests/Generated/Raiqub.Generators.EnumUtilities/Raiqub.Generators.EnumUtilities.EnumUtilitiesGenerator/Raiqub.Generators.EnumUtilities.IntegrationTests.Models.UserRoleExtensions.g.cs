@@ -15,6 +15,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     public static partial class UserRoleExtensions
     {
         private static readonly UserRoleMetadata.StringFormatter s_stringFormatter = UserRoleMetadata.StringFormatter.Instance;
+        private static readonly UserRoleMetadata.SerializationStringFormatter s_serializationStringFormatter = UserRoleMetadata.SerializationStringFormatter.Instance;
 
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
         /// <returns>The string representation of the value of this instance.</returns>
@@ -105,7 +106,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
         public static string ToEnumMemberValue(this UserRole value)
         {
-            return EnumStringFormatter.GetString((ulong)value, UserRoleMetadata.SerializationStringFormatter.Instance);
+            return EnumStringFormatter.GetString((ulong)value, s_serializationStringFormatter);
+        }
+
+        public static int GetEnumMemberValueStringLength(this UserRole value)
+        {
+            return EnumStringFormatter.GetStringLength((ulong)value, s_serializationStringFormatter);
         }
     }
 }

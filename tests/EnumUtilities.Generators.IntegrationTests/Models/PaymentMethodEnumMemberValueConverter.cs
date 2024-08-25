@@ -8,7 +8,7 @@ public class PaymentMethodEnumMemberValueConverter : ValueConverter<PaymentMetho
         : base(
             model => model.ToEnumMemberValue(),
             provider =>
-                PaymentMethodFactory.TryParseFromEnumMemberValue(provider, StringComparison.OrdinalIgnoreCase) ?? 0)
+                PaymentMethodFactory.TryParseFromEnumMemberValue(provider, true) ?? 0)
     {
     }
 }

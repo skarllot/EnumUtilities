@@ -7,7 +7,12 @@
 
     public static string ToEnumMemberValue(this <#= Model.RefName #> value)
     {
-        return EnumStringFormatter.GetString((<#= Model.UnderlyingType #>)value, <#= Model.MetadataClassName #>.SerializationStringFormatter.Instance);
+        return EnumStringFormatter.GetString((<#= Model.UnderlyingType #>)value, s_serializationStringFormatter);
+    }
+
+    public static int GetEnumMemberValueStringLength(this <#= Model.RefName #> value)
+    {
+        return EnumStringFormatter.GetStringLength((<#= Model.UnderlyingType #>)value, s_serializationStringFormatter);
     }
 <#+
     }

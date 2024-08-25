@@ -15,6 +15,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     internal static partial class MyEnum2Extensions
     {
         private static readonly MyEnum2Metadata.StringFormatter s_stringFormatter = MyEnum2Metadata.StringFormatter.Instance;
+        private static readonly MyEnum2Metadata.SerializationStringFormatter s_serializationStringFormatter = MyEnum2Metadata.SerializationStringFormatter.Instance;
 
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
         /// <returns>The string representation of the value of this instance.</returns>
@@ -94,7 +95,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
         public static string ToEnumMemberValue(this NestedInClass.MyEnum2 value)
         {
-            return EnumStringFormatter.GetString((int)value, MyEnum2Metadata.SerializationStringFormatter.Instance);
+            return EnumStringFormatter.GetString((int)value, s_serializationStringFormatter);
+        }
+
+        public static int GetEnumMemberValueStringLength(this NestedInClass.MyEnum2 value)
+        {
+            return EnumStringFormatter.GetStringLength((int)value, s_serializationStringFormatter);
         }
 
         public static string? GetDescription(this NestedInClass.MyEnum2 value)

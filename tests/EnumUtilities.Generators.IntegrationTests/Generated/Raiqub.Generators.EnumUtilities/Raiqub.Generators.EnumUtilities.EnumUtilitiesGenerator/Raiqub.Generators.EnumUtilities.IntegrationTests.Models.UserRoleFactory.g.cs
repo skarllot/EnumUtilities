@@ -332,33 +332,64 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         }
 
         /// <summary>
-        /// Converts the string representation of the value associated with one enumerated constant to
-        /// an equivalent enumerated object.
+        /// Converts the string representation of the serialized value to an equivalent enumerated object.
         /// </summary>
-        /// <param name="enumMemberValue">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
-        /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
+        /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
         /// <returns>
         /// Contains an object of type UserRole whose value is represented by value if the parse operation succeeds.
         /// If the parse operation fails, result contains a null value.
         /// </returns>
-        /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
-        public static UserRole? TryParseFromEnumMemberValue(string? enumMemberValue, StringComparison comparisonType)
+        public static UserRole? TryParseFromEnumMemberValue(string? value, bool ignoreCase = false)
         {
-            return TryParseFromEnumMemberValue(enumMemberValue.AsSpan(), comparisonType, throwOnFailure: false, out UserRole result) ? result : null;
+            return TryParseFromEnumMemberValue(value.AsSpan(), ignoreCase, throwOnFailure: false, out UserRole result) ? result : null;
         }
 
         /// <summary>
-        /// Converts the string representation of the value associated with one enumerated constant to
-        /// an equivalent enumerated object.
+        /// Converts the string representation of the serialized value to an equivalent enumerated object.
+        /// The return value indicates whether the conversion succeeded.
         /// </summary>
-        /// <param name="enumMemberValue">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
+        /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type UserRole whose value is represented by a
+        /// serialized value if the parse operation succeeds. If the parse operation fails, result contains the default
+        /// value of the underlying type of UserRole. Note that this value need not be a member of the UserRole enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        public static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase, out UserRole result)
+        {
+            return TryParseFromEnumMemberValue(value, ignoreCase, throwOnFailure: false, out result);
+        }
+
+        /// <summary>
+        /// Converts the string representation of the serialized value to an equivalent enumerated object.
+        /// The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type UserRole whose value is represented by a
+        /// serialized value if the parse operation succeeds. If the parse operation fails, result contains the default
+        /// value of the underlying type of UserRole. Note that this value need not be a member of the UserRole enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        public static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, out UserRole result)
+        {
+            return TryParseFromEnumMemberValue(value, ignoreCase: false, throwOnFailure: false, out result);
+        }
+
+        /// <summary>
+        /// Converts the string representation of the serialized value to an equivalent enumerated object.
+        /// </summary>
+        /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
         /// <returns>
         /// Contains an object of type UserRole whose value is represented by value if the parse operation succeeds.
         /// If the parse operation fails, result contains a null value.
         /// </returns>
-        public static UserRole? TryParseFromEnumMemberValue(string? enumMemberValue)
+        public static UserRole? TryParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase = false)
         {
-            return TryParseFromEnumMemberValue(enumMemberValue.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out UserRole result) ? result : null;
+            return TryParseFromEnumMemberValue(value, ignoreCase, throwOnFailure: false, out UserRole result) ? result : null;
         }
 
         private static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase, bool throwOnFailure, out UserRole result)
@@ -399,6 +430,23 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             out UserRole result)
         {
             return TryParseFromEnumMemberValue(value.AsSpan(), comparisonType, throwOnFailure: false, out result);
+        }
+
+        /// <summary>
+        /// Converts the string representation of the value associated with one enumerated constant to
+        /// an equivalent enumerated object.
+        /// </summary>
+        /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
+        /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
+        /// <returns>
+        /// Contains an object of type UserRole whose value is represented by value if the parse operation succeeds.
+        /// If the parse operation fails, result contains a null value.
+        /// </returns>
+        /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
+        [Obsolete("Use TryParseFromEnumMemberValue overload with 'ignoreCase' parameter")]
+        public static UserRole? TryParseFromEnumMemberValue(string? value, StringComparison comparisonType)
+        {
+            return TryParseFromEnumMemberValue(value.AsSpan(), comparisonType, throwOnFailure: false, out UserRole result) ? result : null;
         }
 
         /// <summary>Retrieves an array of the values of the constants in the UserRole enumeration.</summary>

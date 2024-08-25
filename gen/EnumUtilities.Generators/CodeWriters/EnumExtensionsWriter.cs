@@ -117,9 +117,42 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             
             #line default
             #line hidden
-            this.Write(".StringFormatter.Instance;\r\n\r\n");
+            this.Write(".StringFormatter.Instance;\r\n");
             
-            #line 45 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumExtensionsWriter.tt"
+            #line 44 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumExtensionsWriter.tt"
+
+            if (Model.HasSerializationValue)
+            {
+
+            
+            #line default
+            #line hidden
+            this.Write("    private static readonly ");
+            
+            #line 48 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumExtensionsWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.MetadataClassName));
+            
+            #line default
+            #line hidden
+            this.Write(".SerializationStringFormatter s_serializationStringFormatter = ");
+            
+            #line 48 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumExtensionsWriter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.MetadataClassName));
+            
+            #line default
+            #line hidden
+            this.Write(".SerializationStringFormatter.Instance;\r\n");
+            
+            #line 49 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumExtensionsWriter.tt"
+
+            }
+
+            
+            #line default
+            #line hidden
+            this.Write("\r\n");
+            
+            #line 53 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumExtensionsWriter.tt"
 
             WriteDefaultBlock();
             WriteInterlockedBlock();
@@ -132,7 +165,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             #line hidden
             this.Write("}\r\n");
             
-            #line 53 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumExtensionsWriter.tt"
+            #line 61 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumExtensionsWriter.tt"
 
             if (!string.IsNullOrEmpty(Model.Namespace))
             {
@@ -1567,27 +1600,41 @@ this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
         #line hidden
         
         #line 10 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Extensions\EnumMemberBlock.ttinclude"
-this.Write(")value, ");
+this.Write(")value, s_serializationStringFormatter);\r\n    }\r\n\r\n    public static int GetEnumMemberValueStringLength(this ");
 
         
         #line default
         #line hidden
         
-        #line 10 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Extensions\EnumMemberBlock.ttinclude"
-this.Write(this.ToStringHelper.ToStringWithCulture(Model.MetadataClassName));
+        #line 13 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Extensions\EnumMemberBlock.ttinclude"
+this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
 
         
         #line default
         #line hidden
         
-        #line 10 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Extensions\EnumMemberBlock.ttinclude"
-this.Write(".SerializationStringFormatter.Instance);\r\n    }\r\n");
+        #line 13 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Extensions\EnumMemberBlock.ttinclude"
+this.Write(" value)\r\n    {\r\n        return EnumStringFormatter.GetStringLength((");
 
         
         #line default
         #line hidden
         
-        #line 12 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Extensions\EnumMemberBlock.ttinclude"
+        #line 15 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Extensions\EnumMemberBlock.ttinclude"
+this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
+
+        
+        #line default
+        #line hidden
+        
+        #line 15 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Extensions\EnumMemberBlock.ttinclude"
+this.Write(")value, s_serializationStringFormatter);\r\n    }\r\n");
+
+        
+        #line default
+        #line hidden
+        
+        #line 17 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Extensions\EnumMemberBlock.ttinclude"
 
     }
 
@@ -2028,7 +2075,7 @@ this.Write("            _ => null\r\n        };\r\n    }\r\n");
         #line default
         #line hidden
         
-        #line 60 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumExtensionsWriter.tt"
+        #line 68 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\EnumExtensionsWriter.tt"
 
     public EnumExtensionsWriter(StringBuilder builder) : base(builder)
     {
