@@ -70,57 +70,60 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             public bool TryParseNumber(ReadOnlySpan<char> value, out ushort result) => EnumNumericParser.TryParse(value, out result);
 
             /// <inheritdoc />
-            public bool TryParseSingleName(ReadOnlySpan<char> value, bool ignoreCase, out ushort result)
-            {
-                return ignoreCase
-                    ? TryParse(value, out result)
-                    : TryParse(value, StringComparison.OrdinalIgnoreCase, out result);
-            }
-
-            /// <inheritdoc />
             public bool TryParseSingleName(ReadOnlySpan<char> value, StringComparison comparisonType, out ushort result)
             {
-                return TryParse(value, comparisonType, out result);
-            }
-
-            private bool TryParse(ReadOnlySpan<char> value, out ushort result)
-            {
-                switch (value)
+                if (value.IsEmpty)
                 {
-                    case { } when value.SequenceEqual("None"):
-                        result = 0;
-                        return true;
-                    case { } when value.SequenceEqual("Unknown"):
-                        result = 1;
-                        return true;
-                    case { } when value.SequenceEqual("ConnectionLost"):
-                        result = 100;
-                        return true;
-                    case { } when value.SequenceEqual("OutlierReading"):
-                        result = 200;
-                        return true;
-                    default:
-                        result = 0;
-                        return false;
+                    result = 0;
+                    return false;
                 }
-            }
 
-            private bool TryParse(ReadOnlySpan<char> value, StringComparison comparisonType, out ushort result)
-            {
-                switch (value)
+                switch (value[0])
                 {
-                    case { } when value.Equals("None", comparisonType):
-                        result = 0;
-                        return true;
-                    case { } when value.Equals("Unknown", comparisonType):
-                        result = 1;
-                        return true;
-                    case { } when value.Equals("ConnectionLost", comparisonType):
-                        result = 100;
-                        return true;
-                    case { } when value.Equals("OutlierReading", comparisonType):
-                        result = 200;
-                        return true;
+                    case 'N':
+                    case 'n':
+                        switch (value)
+                        {
+                            case { } when value.Equals("None", comparisonType):
+                                result = 0;
+                                return true;
+                            default:
+                                result = 0;
+                                return false;
+                        }
+                    case 'U':
+                    case 'u':
+                        switch (value)
+                        {
+                            case { } when value.Equals("Unknown", comparisonType):
+                                result = 1;
+                                return true;
+                            default:
+                                result = 0;
+                                return false;
+                        }
+                    case 'C':
+                    case 'c':
+                        switch (value)
+                        {
+                            case { } when value.Equals("ConnectionLost", comparisonType):
+                                result = 100;
+                                return true;
+                            default:
+                                result = 0;
+                                return false;
+                        }
+                    case 'O':
+                    case 'o':
+                        switch (value)
+                        {
+                            case { } when value.Equals("OutlierReading", comparisonType):
+                                result = 200;
+                                return true;
+                            default:
+                                result = 0;
+                                return false;
+                        }
                     default:
                         result = 0;
                         return false;

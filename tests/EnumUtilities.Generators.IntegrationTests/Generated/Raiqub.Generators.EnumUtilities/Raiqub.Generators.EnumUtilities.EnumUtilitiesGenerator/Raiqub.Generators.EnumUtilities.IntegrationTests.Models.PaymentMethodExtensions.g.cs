@@ -94,14 +94,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
         public static string ToEnumMemberValue(this PaymentMethod value)
         {
-            return (int)value switch
-            {
-                0 => "Credit card",
-                1 => "Debit card",
-                2 => "Cash",
-                3 => "Cheque",
-                _ => ToStringFast(value)
-            };
+            return EnumStringFormatter.GetString((int)value, PaymentMethodMetadata.SerializationStringFormatter.Instance);
         }
 
         public static string? GetDescription(this PaymentMethod value)

@@ -21,8 +21,8 @@ public interface IEnumParser<T>
 
     /// <summary>Tries to parse an enum value from a single name.</summary>
     /// <param name="value">The name of the enum value as a character span.</param>
-    /// <param name="ignoreCase">Indicates whether the parsing should be case-insensitive.</param>
+    /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
     /// <param name="result">When this method returns, contains the parsed enum value if successful; otherwise, the default value.</param>
     /// <returns><c>true</c> if the parsing was successful; otherwise, <c>false</c>.</returns>
-    bool TryParseSingleName(ReadOnlySpan<char> value, bool ignoreCase, out T result);
+    bool TryParseSingleName(ReadOnlySpan<char> value, StringComparison comparisonType, out T result);
 }

@@ -3,7 +3,7 @@
 
     private void WriteDefaultBlock()
     {
-        if ((Model.SelectedGenerators & SelectedGenerators.MainGenerator) != SelectedGenerators.MainGenerator)
+        if (!HasMainGenerator)
             return;
 #>
     /// <summary>Provides constant values for <see cref="<#= Model.Name #>" /> members names.</summary>
@@ -40,6 +40,45 @@
 #>
     }
 <#+
+        if (HasMainGenerator && Model.HasSerializationValue)
+        {
+#>
+
+    /// <summary>Provides constant values for <see cref="<#= Model.Name #>" /> serialized members values.</summary>
+    public static partial class SerializedValue
+    {
+        /// <summary>Represents the largest possible number of characters produced by converting an <see cref="<#= Model.Name #>" /> value to string, based on defined members. This field is constant.</summary>
+        public const int MaxCharsLength = <#= Model.Values.Max(x => x.ResolvedSerializedValue.Length) #>;
+<#+
+        foreach (var curr in Model.Values)
+        {
+#>
+
+        /// <summary>The string representation of serialized <see cref="<#= Model.Name #>.<#= curr.MemberName #>" /> value.</summary>
+        public const string <#= curr.MemberName #> = "<#= curr.ResolvedSerializedValue #>";
+<#+
+        }
+#>
+    }
+
+    /// <summary>Provides static values for <see cref="<#= Model.Name #>" /> UTF-8 encoded members serialized values.</summary>
+    public static partial class Utf8SerializedValue
+    {
+        /// <summary>Represents the largest possible number of bytes produced by converting an <see cref="<#= Model.Name #>" /> value to UTF-8 string, based on defined members. This field is constant.</summary>
+        public const int MaxBytesLength = <#= Model.Values.Max(x => _utf8Encoding.GetByteCount(x.MemberName)) #>;
+<#+
+        foreach (var curr in Model.Values)
+        {
+#>
+
+        /// <summary>The UTF-8 representation of serialized <see cref="<#= Model.Name #>.<#= curr.MemberName #>" /> value.</summary>
+        public static ReadOnlySpan<byte> <#= curr.MemberName #> => new byte[<#= _utf8Encoding.GetByteCount(curr.ResolvedSerializedValue) #>] { <#= _utf8Encoding.GetBytes(curr.ResolvedSerializedValue).JoinToString() #> };
+<#+
+        }
+#>
+    }
+<#+
+        }
         WriteLine();
     }
 #>

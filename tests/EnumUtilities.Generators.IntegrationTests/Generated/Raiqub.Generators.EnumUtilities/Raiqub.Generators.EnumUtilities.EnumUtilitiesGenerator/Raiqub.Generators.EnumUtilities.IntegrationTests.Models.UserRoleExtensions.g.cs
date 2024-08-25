@@ -102,5 +102,10 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             long resultRaw = Interlocked.Read(ref locationRaw);
             return Unsafe.As<long, UserRole>(ref resultRaw);
         }
+
+        public static string ToEnumMemberValue(this UserRole value)
+        {
+            return EnumStringFormatter.GetString((ulong)value, UserRoleMetadata.SerializationStringFormatter.Instance);
+        }
     }
 }

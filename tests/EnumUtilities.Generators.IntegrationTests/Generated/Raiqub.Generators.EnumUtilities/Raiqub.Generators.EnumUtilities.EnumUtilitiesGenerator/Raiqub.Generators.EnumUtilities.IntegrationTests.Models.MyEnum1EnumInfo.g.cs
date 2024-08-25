@@ -100,51 +100,49 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             public bool TryParseNumber(ReadOnlySpan<char> value, out int result) => EnumNumericParser.TryParse(value, out result);
 
             /// <inheritdoc />
-            public bool TryParseSingleName(ReadOnlySpan<char> value, bool ignoreCase, out int result)
-            {
-                return ignoreCase
-                    ? TryParse(value, out result)
-                    : TryParse(value, StringComparison.OrdinalIgnoreCase, out result);
-            }
-
-            /// <inheritdoc />
             public bool TryParseSingleName(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
             {
-                return TryParse(value, comparisonType, out result);
-            }
-
-            private bool TryParse(ReadOnlySpan<char> value, out int result)
-            {
-                switch (value)
+                if (value.IsEmpty)
                 {
-                    case { } when value.SequenceEqual("Zero"):
-                        result = 0;
-                        return true;
-                    case { } when value.SequenceEqual("One"):
-                        result = 1;
-                        return true;
-                    case { } when value.SequenceEqual("Two"):
-                        result = 2;
-                        return true;
-                    default:
-                        result = 0;
-                        return false;
+                    result = 0;
+                    return false;
                 }
-            }
 
-            private bool TryParse(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
-            {
-                switch (value)
+                switch (value[0])
                 {
-                    case { } when value.Equals("Zero", comparisonType):
-                        result = 0;
-                        return true;
-                    case { } when value.Equals("One", comparisonType):
-                        result = 1;
-                        return true;
-                    case { } when value.Equals("Two", comparisonType):
-                        result = 2;
-                        return true;
+                    case 'Z':
+                    case 'z':
+                        switch (value)
+                        {
+                            case { } when value.Equals("Zero", comparisonType):
+                                result = 0;
+                                return true;
+                            default:
+                                result = 0;
+                                return false;
+                        }
+                    case 'O':
+                    case 'o':
+                        switch (value)
+                        {
+                            case { } when value.Equals("One", comparisonType):
+                                result = 1;
+                                return true;
+                            default:
+                                result = 0;
+                                return false;
+                        }
+                    case 'T':
+                    case 't':
+                        switch (value)
+                        {
+                            case { } when value.Equals("Two", comparisonType):
+                                result = 2;
+                                return true;
+                            default:
+                                result = 0;
+                                return false;
+                        }
                     default:
                         result = 0;
                         return false;

@@ -16,6 +16,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     public static partial class PaymentMethodFactory
     {
         private static readonly PaymentMethodMetadata.StringParser s_stringParser = PaymentMethodMetadata.StringParser.Instance;
+        private static readonly PaymentMethodMetadata.SerializationStringParser s_serializationStringParser = PaymentMethodMetadata.SerializationStringParser.Instance;
 
         /// <summary>
         /// Converts the string representation of the name or numeric value of one or more enumerated constants to
@@ -24,6 +25,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
         /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
         /// <returns>The value represented by the specified name or numeric value. Note that this value need not be a member of the PaymentMethod enumeration.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
         public static PaymentMethod Parse(string value, bool ignoreCase = false)
         {
@@ -160,7 +162,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
         private static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, bool throwOnFailure, out PaymentMethod result)
         {
-            bool success = EnumStringParser.TryParse(value, s_stringParser, ignoreCase, throwOnFailure, out int number);
+            var comparisonType = ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
+            bool success = EnumStringParser.TryParse(value, s_stringParser, comparisonType, throwOnFailure, out int number);
             if (!success)
             {
                 result = 0;
@@ -190,11 +193,11 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out PaymentMethod result)
         {
-            bool success = s_stringParser.TryParseSingleName(name.AsSpan(), comparisonType, out int number)
-                || s_stringParser.TryParseNumber(name.AsSpan(), out number);
+            bool success = EnumStringParser.TryParse(name, s_stringParser, comparisonType, throwOnFailure: false, out int number);
             if (!success)
             {
-                return TryParse(name, out result);
+                result = 0;
+                return false;
             }
 
             result = (PaymentMethod)number;
@@ -253,61 +256,79 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         }
 
         /// <summary>
-        /// Converts the string representation of the value associated with one enumerated constant to
-        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+        /// Converts the string representation of the serialized value to an equivalent enumerated object.
         /// </summary>
-        /// <param name="enumMemberValue">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
-        /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
-        /// <param name="result">
-        /// When this method returns, result contains an object of type PaymentMethod whose value is represented by value
-        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-        /// underlying type of PaymentMethod. Note that this value need not be a member of the PaymentMethod enumeration.
-        /// </param>
-        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-        /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
-        public static bool TryParseFromEnumMemberValue(
-            [NotNullWhen(true)] string? enumMemberValue,
-            StringComparison comparisonType,
-            out PaymentMethod result)
+        /// <param name="value">The string representation of the enumeration serialized value to convert.</param>
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+        /// <returns>The value represented by the specified serialized value. Note that this value need not be a member of the PaymentMethod enumeration.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+        public static PaymentMethod ParseFromEnumMemberValue(string value, bool ignoreCase = false)
         {
-            int numValue;
-            switch (enumMemberValue)
-            {
-                case { } s when s.Equals("Credit card", comparisonType):
-                    numValue = 0;
-                    break;
-                case { } s when s.Equals("Debit card", comparisonType):
-                    numValue = 1;
-                    break;
-                case { } s when s.Equals("Cash", comparisonType):
-                    numValue = 2;
-                    break;
-                case { } s when s.Equals("Cheque", comparisonType):
-                    numValue = 3;
-                    break;
-                default:
-                    result = default;
-                    return false;
-            }
-
-            result = (PaymentMethod)numValue;
-            return true;
+            if (value is null) ThrowArgumentNullException(nameof(value));
+            TryParseFromEnumMemberValue(value.AsSpan(), ignoreCase, throwOnFailure: true, out var result);
+            return result;
         }
 
         /// <summary>
-        /// Converts the string representation of the value associated with one enumerated constant to
-        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+        /// Converts the string representation of the serialized value to an equivalent enumerated object.
         /// </summary>
-        /// <param name="enumMemberValue">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
+        /// <param name="value">The string representation of the enumeration serialized value to convert.</param>
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+        /// <returns>The value represented by the specified serialized value. Note that this value need not be a member of the PaymentMethod enumeration.</returns>
+        /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+        public static PaymentMethod ParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase = false)
+        {
+            TryParseFromEnumMemberValue(value, ignoreCase, throwOnFailure: true, out var result);
+            return result;
+        }
+
+        /// <summary>
+        /// Converts the string representation of the serialized value to an equivalent enumerated object.
+        /// </summary>
+        /// <param name="value">The string representation of the enumeration serialized value to convert.</param>
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+        /// <returns>The value represented by the specified serialized value or null. Note that this value need not be a member of the PaymentMethod enumeration.</returns>
+        /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+        [return: NotNullIfNotNull("value")]
+        public static PaymentMethod? ParseFromEnumMemberValueOrNull(string? value, bool ignoreCase = false)
+        {
+            if (value is null) return null;
+            TryParseFromEnumMemberValue(value.AsSpan(), ignoreCase, throwOnFailure: true, out var result);
+            return result;
+        }
+
+        /// <summary>
+        /// Converts the string representation of the serialized value to an equivalent enumerated object.
+        /// The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
         /// <param name="result">
-        /// When this method returns, result contains an object of type PaymentMethod whose value is represented by value
-        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-        /// underlying type of PaymentMethod. Note that this value need not be a member of the PaymentMethod enumeration.
+        /// When this method returns, result contains an object of type PaymentMethod whose value is represented by a
+        /// serialized value if the parse operation succeeds. If the parse operation fails, result contains the default
+        /// value of the underlying type of PaymentMethod. Note that this value need not be a member of the PaymentMethod enumeration.
         /// </param>
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-        public static bool TryParseFromEnumMemberValue([NotNullWhen(true)] string? enumMemberValue, out PaymentMethod result)
+        public static bool TryParseFromEnumMemberValue([NotNullWhen(true)] string? value, bool ignoreCase, out PaymentMethod result)
         {
-            return TryParseFromEnumMemberValue(enumMemberValue, StringComparison.Ordinal, out result);
+            return TryParseFromEnumMemberValue(value.AsSpan(), ignoreCase, throwOnFailure: false, out result);
+        }
+
+        /// <summary>
+        /// Converts the string representation of the serialized value to an equivalent enumerated object.
+        /// The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type PaymentMethod whose value is represented by a
+        /// serialized value if the parse operation succeeds. If the parse operation fails, result contains the default
+        /// value of the underlying type of PaymentMethod. Note that this value need not be a member of the PaymentMethod enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        public static bool TryParseFromEnumMemberValue([NotNullWhen(true)] string? value, out PaymentMethod result)
+        {
+            return TryParseFromEnumMemberValue(value.AsSpan(), ignoreCase: false, throwOnFailure: false, out result);
         }
 
         /// <summary>
@@ -323,7 +344,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
         public static PaymentMethod? TryParseFromEnumMemberValue(string? enumMemberValue, StringComparison comparisonType)
         {
-            return TryParseFromEnumMemberValue(enumMemberValue, comparisonType, out PaymentMethod result) ? result : null;
+            return TryParseFromEnumMemberValue(enumMemberValue.AsSpan(), comparisonType, throwOnFailure: false, out PaymentMethod result) ? result : null;
         }
 
         /// <summary>
@@ -337,7 +358,47 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// </returns>
         public static PaymentMethod? TryParseFromEnumMemberValue(string? enumMemberValue)
         {
-            return TryParseFromEnumMemberValue(enumMemberValue, StringComparison.Ordinal, out PaymentMethod result) ? result : null;
+            return TryParseFromEnumMemberValue(enumMemberValue.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out PaymentMethod result) ? result : null;
+        }
+
+        private static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase, bool throwOnFailure, out PaymentMethod result)
+        {
+            return TryParseFromEnumMemberValue(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure, out result);
+        }
+
+        private static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out PaymentMethod result)
+        {
+            bool success = EnumStringParser.TryParse(value, s_serializationStringParser, comparisonType, throwOnFailure, out int number);
+            if (!success)
+            {
+                result = 0;
+                return false;
+            }
+
+            result = (PaymentMethod)number;
+            return true;
+        }
+
+        /// <summary>
+        /// Converts the string representation of the serialized value to an equivalent enumerated object.
+        /// The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
+        /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type PaymentMethod whose value is represented by value
+        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+        /// underlying type of PaymentMethod. Note that this value need not be a member of the PaymentMethod enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
+        [Obsolete("Use TryParseFromEnumMemberValue overload with 'ignoreCase' parameter")]
+        public static bool TryParseFromEnumMemberValue(
+            [NotNullWhen(true)] string? value,
+            StringComparison comparisonType,
+            out PaymentMethod result)
+        {
+            return TryParseFromEnumMemberValue(value.AsSpan(), comparisonType, throwOnFailure: false, out result);
         }
 
         public static PaymentMethod CreateFromDescription(string description, StringComparison comparisonType = StringComparison.Ordinal)

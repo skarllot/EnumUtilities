@@ -19,6 +19,7 @@ public sealed class EnumValue
     public string? Description { get; set; }
     public DisplayAttribute? Display { get; set; }
     public string? JsonPropertyName { get; set; }
+    public string ResolvedSerializedValue => SerializationValue ?? MemberName;
 
     public static EnumValue? FromSymbol(ISymbol symbol)
     {

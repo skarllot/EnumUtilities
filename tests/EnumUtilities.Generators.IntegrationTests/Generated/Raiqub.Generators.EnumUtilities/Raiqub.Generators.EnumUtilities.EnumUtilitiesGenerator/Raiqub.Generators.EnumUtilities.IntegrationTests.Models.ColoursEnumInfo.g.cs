@@ -47,7 +47,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         }
 
         /// <summary>Provides support for formatting <see cref="Colours"/> values.</summary>
-        internal sealed partial class StringFormatter : IEnumFormatter<int>
+        internal sealed partial class StringFormatter : IEnumFlagsFormatter<int>
         {
             /// <summary>Gets the singleton instance of the <see cref="StringFormatter"/> class.</summary>
             public static StringFormatter Instance = new StringFormatter();
@@ -136,37 +136,10 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                     return GetStringForSingleMember(foundItems[0]);
                 }
 
-                return WriteMultipleFoundFlagsNames(count, foundItemsCount, foundItems);
+                return EnumStringFormatter.WriteMultipleFoundFlagsNames(this, count, foundItemsCount, foundItems);
             }
 
-            private string WriteMultipleFoundFlagsNames(int count, int foundItemsCount, Span<int> foundItems)
-            {
-                const int separatorStringLength = 2;
-                const char enumSeparatorChar = ',';
-                var strlen = checked(count + (separatorStringLength * (foundItemsCount - 1)));
-                Span<char> result = strlen <= 128
-                    ? stackalloc char[128].Slice(0, strlen)
-                    : new char[strlen];
-                var span = result;
-
-                string name = GetStringForSingleMember(foundItems[--foundItemsCount]);
-                name.AsSpan().CopyTo(span);
-                span = span.Slice(name.Length);
-                while (--foundItemsCount >= 0)
-                {
-                    span[0] = enumSeparatorChar;
-                    span[1] = ' ';
-                    span = span.Slice(2);
-
-                    name = GetStringForSingleMember(foundItems[foundItemsCount]);
-                    name.AsSpan().CopyTo(span);
-                    span = span.Slice(name.Length);
-                }
-
-                return result.ToString();
-            }
-
-            private string GetStringForSingleMember(int value)
+            public string GetStringForSingleMember(int value)
             {
                 return value switch
                 {
@@ -193,51 +166,49 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             public bool TryParseNumber(ReadOnlySpan<char> value, out int result) => EnumNumericParser.TryParse(value, out result);
 
             /// <inheritdoc />
-            public bool TryParseSingleName(ReadOnlySpan<char> value, bool ignoreCase, out int result)
-            {
-                return ignoreCase
-                    ? TryParse(value, out result)
-                    : TryParse(value, StringComparison.OrdinalIgnoreCase, out result);
-            }
-
-            /// <inheritdoc />
             public bool TryParseSingleName(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
             {
-                return TryParse(value, comparisonType, out result);
-            }
-
-            private bool TryParse(ReadOnlySpan<char> value, out int result)
-            {
-                switch (value)
+                if (value.IsEmpty)
                 {
-                    case { } when value.SequenceEqual("Red"):
-                        result = 1;
-                        return true;
-                    case { } when value.SequenceEqual("Blue"):
-                        result = 2;
-                        return true;
-                    case { } when value.SequenceEqual("Green"):
-                        result = 4;
-                        return true;
-                    default:
-                        result = 0;
-                        return false;
+                    result = 0;
+                    return false;
                 }
-            }
 
-            private bool TryParse(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
-            {
-                switch (value)
+                switch (value[0])
                 {
-                    case { } when value.Equals("Red", comparisonType):
-                        result = 1;
-                        return true;
-                    case { } when value.Equals("Blue", comparisonType):
-                        result = 2;
-                        return true;
-                    case { } when value.Equals("Green", comparisonType):
-                        result = 4;
-                        return true;
+                    case 'R':
+                    case 'r':
+                        switch (value)
+                        {
+                            case { } when value.Equals("Red", comparisonType):
+                                result = 1;
+                                return true;
+                            default:
+                                result = 0;
+                                return false;
+                        }
+                    case 'B':
+                    case 'b':
+                        switch (value)
+                        {
+                            case { } when value.Equals("Blue", comparisonType):
+                                result = 2;
+                                return true;
+                            default:
+                                result = 0;
+                                return false;
+                        }
+                    case 'G':
+                    case 'g':
+                        switch (value)
+                        {
+                            case { } when value.Equals("Green", comparisonType):
+                                result = 4;
+                                return true;
+                            default:
+                                result = 0;
+                                return false;
+                        }
                     default:
                         result = 0;
                         return false;

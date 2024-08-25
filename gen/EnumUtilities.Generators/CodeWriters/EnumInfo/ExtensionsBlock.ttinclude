@@ -3,7 +3,7 @@
     {
 #>
     /// <summary>Provides support for formatting <see cref="<#= Model.Name #>"/> values.</summary>
-    internal sealed partial class StringFormatter : IEnumFormatter<<#= Model.UnderlyingType #>>
+    internal sealed partial class StringFormatter : IEnum<#= Model.IsFlags ? "Flags" : "" #>Formatter<<#= Model.UnderlyingType #>>
     {
         /// <summary>Gets the singleton instance of the <see cref="StringFormatter"/> class.</summary>
         public static StringFormatter Instance = new StringFormatter();
@@ -91,37 +91,10 @@
                 return GetStringForSingleMember(foundItems[0]);
             }
 
-            return WriteMultipleFoundFlagsNames(count, foundItemsCount, foundItems);
+            return EnumStringFormatter.WriteMultipleFoundFlagsNames(this, count, foundItemsCount, foundItems);
         }
 
-        private string WriteMultipleFoundFlagsNames(int count, int foundItemsCount, Span<<#= Model.UnderlyingType #>> foundItems)
-        {
-            const int separatorStringLength = 2;
-            const char enumSeparatorChar = ',';
-            var strlen = checked(count + (separatorStringLength * (foundItemsCount - 1)));
-            Span<char> result = strlen <= 128
-                ? stackalloc char[128].Slice(0, strlen)
-                : new char[strlen];
-            var span = result;
-
-            string name = GetStringForSingleMember(foundItems[--foundItemsCount]);
-            name.AsSpan().CopyTo(span);
-            span = span.Slice(name.Length);
-            while (--foundItemsCount >= 0)
-            {
-                span[0] = enumSeparatorChar;
-                span[1] = ' ';
-                span = span.Slice(2);
-
-                name = GetStringForSingleMember(foundItems[foundItemsCount]);
-                name.AsSpan().CopyTo(span);
-                span = span.Slice(name.Length);
-            }
-
-            return result.ToString();
-        }
-
-        private string GetStringForSingleMember(<#= Model.UnderlyingType #> value)
+        public string GetStringForSingleMember(<#= Model.UnderlyingType #> value)
         {
             return value switch
             {
@@ -180,6 +153,163 @@
 #>
     }
 <#+
+        if (HasMainGenerator && Model.HasSerializationValue)
+        {
+#>
+
+    /// <summary>Provides support for formatting <see cref="<#= Model.Name #>"/> serialized values.</summary>
+    internal sealed partial class SerializationStringFormatter : IEnum<#= Model.IsFlags ? "Flags" : "" #>Formatter<<#= Model.UnderlyingType #>>
+    {
+        /// <summary>Gets the singleton instance of the <see cref="SerializationStringFormatter"/> class.</summary>
+        public static SerializationStringFormatter Instance = new SerializationStringFormatter();
+
+        /// <inheritdoc />
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public int GetStringLengthForNumber(<#= Model.UnderlyingType #> value) => EnumNumericFormatter.GetStringLength(value);
+
+        /// <inheritdoc />
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public string GetStringForNumber(<#= Model.UnderlyingType #> value) => value.ToString();
+<#+
+            if (Model.IsFlags)
+            {
+#>
+
+        /// <inheritdoc />
+        public int? TryGetStringLengthForMember(<#= Model.UnderlyingType #> value)
+        {
+            if (value == 0)
+            {
+                return <#=
+                        Model.Values.FirstOrDefault(x => x.MemberValue == "0")?.ResolvedSerializedValue.Length ?? 1 #>;
+            }
+
+            int count = 0, foundItemsCount = 0;
+<#+
+                foreach (
+                    var curr in
+                        Model.UniqueValues.OrderByDescending(x => x.RealMemberValue).Where(x => x.MemberValue != "0"))
+                {
+#>
+            if ((value & <#= curr.MemberValue #>) == <#= curr.MemberValue #>)
+            {
+                value -= <#= curr.MemberValue #>;
+                count = checked(count + <#= curr.ResolvedSerializedValue.Length #>);
+                foundItemsCount++;
+            }
+<#+
+                }
+#>
+
+            if (value != 0)
+            {
+                return null;
+            }
+
+            const int separatorStringLength = 2;
+            return checked(count + (separatorStringLength * (foundItemsCount - 1)));
+        }
+
+        /// <inheritdoc />
+        public string? TryGetStringForMember(<#= Model.UnderlyingType #> value)
+        {
+            if (value == 0)
+            {
+                return "<#=
+                        Model.Values.FirstOrDefault(x => x.MemberValue == "0")?.ResolvedSerializedValue ?? "0" #>";
+            }
+
+            Span<<#= Model.UnderlyingType #>> foundItems = stackalloc <#= Model.UnderlyingType #>[<#= GetMappedBitCount() #>];
+            int count = 0, foundItemsCount = 0;
+<#+
+                foreach (
+                    var curr in
+                        Model.UniqueValues.OrderByDescending(x => x.RealMemberValue).Where(x => x.MemberValue != "0"))
+                {
+#>
+            if ((value & <#= curr.MemberValue #>) == <#= curr.MemberValue #>)
+            {
+                value -= <#= curr.MemberValue #>;
+                count = checked(count + <#= curr.ResolvedSerializedValue.Length #>);
+                foundItems[foundItemsCount++] = <#= curr.MemberValue #>;
+            }
+<#+
+                }
+#>
+
+            if (value != 0)
+            {
+                return null;
+            }
+
+            if (foundItemsCount == 1)
+            {
+                return GetStringForSingleMember(foundItems[0]);
+            }
+
+            return EnumStringFormatter.WriteMultipleFoundFlagsNames(this, count, foundItemsCount, foundItems);
+        }
+
+        public string GetStringForSingleMember(<#= Model.UnderlyingType #> value)
+        {
+            return value switch
+            {
+<#+
+                foreach (var curr in Model.UniqueValues)
+                {
+#>
+                <#= curr.MemberValue #> => "<#= curr.ResolvedSerializedValue #>",
+<#+
+                }
+#>
+                _ => throw new ArgumentOutOfRangeException()
+            };
+        }
+<#+
+            }
+            else
+            {
+#>
+
+        /// <inheritdoc />
+        public int? TryGetStringLengthForMember(<#= Model.UnderlyingType #> value)
+        {
+            return value switch
+            {
+<#+
+                foreach (var curr in Model.UniqueValues)
+                {
+#>
+                <#= curr.MemberValue #> => <#= curr.ResolvedSerializedValue.Length #>,
+<#+
+                }
+#>
+                _ => null
+            };
+        }
+
+        /// <inheritdoc />
+        public string? TryGetStringForMember(<#= Model.UnderlyingType #> value)
+        {
+            return value switch
+            {
+<#+
+                foreach (var curr in Model.UniqueValues)
+                {
+#>
+                <#= curr.MemberValue #> => "<#= curr.ResolvedSerializedValue #>",
+<#+
+                }
+#>
+                _ => null
+            };
+        }
+<#+
+            }
+#>
+    }
+<#+
+        }
     }
 
     private int GetBitCount() => Model.UnderlyingType switch {

@@ -12,14 +12,14 @@ public static class EnumStringParser
     /// <typeparam name="TNumber">The underlying numeric type of the enum.</typeparam>
     /// <param name="value">The string representation to parse.</param>
     /// <param name="enumParser">An instance of the enum parser.</param>
-    /// <param name="ignoreCase">Indicates whether parsing should be case-insensitive.</param>
+    /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
     /// <param name="throwOnFailure">Indicates whether an exception should be thrown on parsing failure.</param>
     /// <param name="result">When this method returns, contains the parsed enum value if successful; otherwise, the default value.</param>
     /// <returns><c>true</c> if the parsing was successful; otherwise, <c>false</c>.</returns>
     public static bool TryParse<TParser, TNumber>(
         ReadOnlySpan<char> value,
         TParser enumParser,
-        bool ignoreCase,
+        StringComparison comparisonType,
         bool throwOnFailure,
         out TNumber result)
         where TParser : IEnumParser<TNumber>
@@ -28,13 +28,13 @@ public static class EnumStringParser
         switch (AnalyseForParsing(value, out value))
         {
             case ParseAnalysisResult.NotNumeric:
-                return TryParseByName(value, enumParser, ignoreCase, throwOnFailure, out result);
+                return TryParseByName(value, enumParser, comparisonType, throwOnFailure, out result);
             case ParseAnalysisResult.MaybeNumeric:
-                return enumParser.TryParseNumber(value, out result)
-                       || TryParseByName(value, enumParser, ignoreCase, throwOnFailure, out result);
+                return enumParser.TryParseNumber(value, out result) ||
+                       TryParseByName(value, enumParser, comparisonType, throwOnFailure, out result);
             case ParseAnalysisResult.Empty:
             default:
-                return TryParseEmpty(nameof(value), throwOnFailure, out result);
+                return TryParseEmpty(value, enumParser, comparisonType, nameof(value), throwOnFailure, out result);
         }
     }
 
@@ -69,7 +69,7 @@ public static class EnumStringParser
     private static bool TryParseByName<TParser, TNumber>(
         ReadOnlySpan<char> value,
         TParser enumParser,
-        bool ignoreCase,
+        StringComparison comparisonType,
         bool throwOnFailure,
         out TNumber result)
         where TParser : IEnumParser<TNumber>
@@ -79,7 +79,7 @@ public static class EnumStringParser
         TNumber localResult = default;
         foreach (var item in new FlagsEnumTokenizer(value))
         {
-            bool success = enumParser.TryParseSingleName(item, ignoreCase, out TNumber singleValue);
+            bool success = enumParser.TryParseSingleName(item, comparisonType, out TNumber singleValue);
             if (!success)
             {
                 parsed = false;
@@ -101,6 +101,29 @@ public static class EnumStringParser
         }
 
         result = default;
+        return false;
+    }
+
+    private static bool TryParseEmpty<TParser, TNumber>(
+        ReadOnlySpan<char> value,
+        TParser enumParser,
+        StringComparison comparisonType,
+        string parameterName,
+        bool throwOnFailure,
+        out TNumber result)
+        where TParser : IEnumParser<TNumber>
+        where TNumber : struct
+    {
+        if (enumParser.TryParseSingleName(value, comparisonType, out result))
+        {
+            return true;
+        }
+
+        if (throwOnFailure)
+        {
+            ThrowInvalidEmptyParseArgument(parameterName);
+        }
+
         return false;
     }
 

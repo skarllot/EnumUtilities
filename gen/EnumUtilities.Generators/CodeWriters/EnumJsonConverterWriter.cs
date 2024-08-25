@@ -219,7 +219,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
 
     }
 
-            this.Write("            _ => EnumStringParser.TryParse(name, s_stringParser, ignoreCase: true, throwOnFailure: false, out ");
+            this.Write("            _ => EnumStringParser.TryParse(name, s_stringParser, StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out ");
             
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
             
@@ -304,7 +304,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
 
     }
 
-            this.Write("            _ => EnumStringParser.TryParse(name, s_stringParser, ignoreCase: true, throwOnFailure: false, out ");
+            this.Write("            _ => EnumStringParser.TryParse(name, s_stringParser, StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out ");
             
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
             
