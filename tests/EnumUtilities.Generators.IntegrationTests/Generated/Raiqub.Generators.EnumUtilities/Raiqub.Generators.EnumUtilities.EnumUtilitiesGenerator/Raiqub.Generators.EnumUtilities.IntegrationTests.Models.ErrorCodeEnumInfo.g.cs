@@ -87,10 +87,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                             case { } when value.Equals("None", comparisonType):
                                 result = 0;
                                 return true;
-                            default:
-                                result = 0;
-                                return false;
                         }
+                        goto default;
                     case 'U':
                     case 'u':
                         switch (value)
@@ -98,10 +96,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                             case { } when value.Equals("Unknown", comparisonType):
                                 result = 1;
                                 return true;
-                            default:
-                                result = 0;
-                                return false;
                         }
+                        goto default;
                     case 'C':
                     case 'c':
                         switch (value)
@@ -109,10 +105,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                             case { } when value.Equals("ConnectionLost", comparisonType):
                                 result = 100;
                                 return true;
-                            default:
-                                result = 0;
-                                return false;
                         }
+                        goto default;
                     case 'O':
                     case 'o':
                         switch (value)
@@ -120,10 +114,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                             case { } when value.Equals("OutlierReading", comparisonType):
                                 result = 200;
                                 return true;
-                            default:
-                                result = 0;
-                                return false;
                         }
+                        goto default;
                     default:
                         result = 0;
                         return false;

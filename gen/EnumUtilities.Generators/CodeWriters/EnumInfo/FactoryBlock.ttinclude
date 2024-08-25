@@ -62,10 +62,8 @@
 <#+
             }
 #>
-                        default:
-                            result = 0;
-                            return false;
                     }
+                    goto default;
 <#+
         }
 #>
@@ -193,10 +191,8 @@
 <#+
             }
 #>
-                        default:
-                            result = 0;
-                            return false;
                     }
+                    goto default;
 <#+
         }
 #>

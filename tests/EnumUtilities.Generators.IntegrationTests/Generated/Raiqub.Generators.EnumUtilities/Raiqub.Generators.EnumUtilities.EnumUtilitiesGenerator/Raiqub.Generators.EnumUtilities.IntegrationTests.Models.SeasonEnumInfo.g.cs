@@ -90,10 +90,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                             case { } when value.Equals("Summer", comparisonType):
                                 result = 2;
                                 return true;
-                            default:
-                                result = 0;
-                                return false;
                         }
+                        goto default;
                     case 'A':
                     case 'a':
                         switch (value)
@@ -101,10 +99,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                             case { } when value.Equals("Autumn", comparisonType):
                                 result = 3;
                                 return true;
-                            default:
-                                result = 0;
-                                return false;
                         }
+                        goto default;
                     case 'W':
                     case 'w':
                         switch (value)
@@ -112,10 +108,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                             case { } when value.Equals("Winter", comparisonType):
                                 result = 4;
                                 return true;
-                            default:
-                                result = 0;
-                                return false;
                         }
+                        goto default;
                     default:
                         result = 0;
                         return false;

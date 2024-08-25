@@ -115,10 +115,8 @@ public static partial class NoNamespaceMetadata
                         case { } when value.Equals("Zero", comparisonType):
                             result = 0;
                             return true;
-                        default:
-                            result = 0;
-                            return false;
                     }
+                    goto default;
                 case 'O':
                 case 'o':
                     switch (value)
@@ -126,10 +124,8 @@ public static partial class NoNamespaceMetadata
                         case { } when value.Equals("One", comparisonType):
                             result = 1;
                             return true;
-                        default:
-                            result = 0;
-                            return false;
                     }
+                    goto default;
                 case 'T':
                 case 't':
                     switch (value)
@@ -137,10 +133,8 @@ public static partial class NoNamespaceMetadata
                         case { } when value.Equals("Two", comparisonType):
                             result = 2;
                             return true;
-                        default:
-                            result = 0;
-                            return false;
                     }
+                    goto default;
                 default:
                     result = 0;
                     return false;

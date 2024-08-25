@@ -141,10 +141,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                             case { } when value.Equals("Electronics", comparisonType):
                                 result = 0;
                                 return true;
-                            default:
-                                result = 0;
-                                return false;
                         }
+                        goto default;
                     case 'F':
                     case 'f':
                         switch (value)
@@ -155,10 +153,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                             case { } when value.Equals("Fashion", comparisonType):
                                 result = 5;
                                 return true;
-                            default:
-                                result = 0;
-                                return false;
                         }
+                        goto default;
                     case 'A':
                     case 'a':
                         switch (value)
@@ -169,10 +165,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                             case { } when value.Equals("Arts", comparisonType):
                                 result = 3;
                                 return true;
-                            default:
-                                result = 0;
-                                return false;
                         }
+                        goto default;
                     case 'B':
                     case 'b':
                         switch (value)
@@ -180,10 +174,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                             case { } when value.Equals("BeautyCare", comparisonType):
                                 result = 4;
                                 return true;
-                            default:
-                                result = 0;
-                                return false;
                         }
+                        goto default;
                     default:
                         result = 0;
                         return false;

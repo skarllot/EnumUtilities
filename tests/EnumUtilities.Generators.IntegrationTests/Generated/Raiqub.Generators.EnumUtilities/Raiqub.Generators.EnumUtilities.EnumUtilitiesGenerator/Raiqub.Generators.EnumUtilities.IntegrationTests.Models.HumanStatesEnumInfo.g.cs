@@ -139,10 +139,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                             case { } when value.Equals("Idle", comparisonType):
                                 result = 1;
                                 return true;
-                            default:
-                                result = 0;
-                                return false;
                         }
+                        goto default;
                     case 'W':
                     case 'w':
                         switch (value)
@@ -150,10 +148,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                             case { } when value.Equals("Working", comparisonType):
                                 result = 2;
                                 return true;
-                            default:
-                                result = 0;
-                                return false;
                         }
+                        goto default;
                     case 'S':
                     case 's':
                         switch (value)
@@ -161,10 +157,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                             case { } when value.Equals("Sleeping", comparisonType):
                                 result = 3;
                                 return true;
-                            default:
-                                result = 0;
-                                return false;
                         }
+                        goto default;
                     case 'E':
                     case 'e':
                         switch (value)
@@ -172,10 +166,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                             case { } when value.Equals("Eating", comparisonType):
                                 result = 4;
                                 return true;
-                            default:
-                                result = 0;
-                                return false;
                         }
+                        goto default;
                     case 'D':
                     case 'd':
                         switch (value)
@@ -183,10 +175,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                             case { } when value.Equals("Dead", comparisonType):
                                 result = 5;
                                 return true;
-                            default:
-                                result = 0;
-                                return false;
                         }
+                        goto default;
                     case 'R':
                     case 'r':
                         switch (value)
@@ -194,10 +184,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                             case { } when value.Equals("Relaxing", comparisonType):
                                 result = 1;
                                 return true;
-                            default:
-                                result = 0;
-                                return false;
                         }
+                        goto default;
                     default:
                         result = 0;
                         return false;

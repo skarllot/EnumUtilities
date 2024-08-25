@@ -149,10 +149,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                             case { } when value.Equals("Monday", comparisonType):
                                 result = 0;
                                 return true;
-                            default:
-                                result = 0;
-                                return false;
                         }
+                        goto default;
                     case 'T':
                     case 't':
                         switch (value)
@@ -163,10 +161,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                             case { } when value.Equals("Thursday", comparisonType):
                                 result = 3;
                                 return true;
-                            default:
-                                result = 0;
-                                return false;
                         }
+                        goto default;
                     case 'W':
                     case 'w':
                         switch (value)
@@ -174,10 +170,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                             case { } when value.Equals("Wednesday", comparisonType):
                                 result = 2;
                                 return true;
-                            default:
-                                result = 0;
-                                return false;
                         }
+                        goto default;
                     case 'F':
                     case 'f':
                         switch (value)
@@ -185,10 +179,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                             case { } when value.Equals("Friday", comparisonType):
                                 result = 4;
                                 return true;
-                            default:
-                                result = 0;
-                                return false;
                         }
+                        goto default;
                     case 'S':
                     case 's':
                         switch (value)
@@ -199,10 +191,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                             case { } when value.Equals("Sunday", comparisonType):
                                 result = 6;
                                 return true;
-                            default:
-                                result = 0;
-                                return false;
                         }
+                        goto default;
                     default:
                         result = 0;
                         return false;
