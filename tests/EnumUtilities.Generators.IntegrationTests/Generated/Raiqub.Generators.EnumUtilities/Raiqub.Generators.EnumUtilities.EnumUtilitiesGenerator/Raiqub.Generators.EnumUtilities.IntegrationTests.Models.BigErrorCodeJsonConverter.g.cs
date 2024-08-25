@@ -70,7 +70,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 "UNK" => 1,
                 "CNX" => 100,
                 "OUT" => 200000000000,
-                _ => EnumStringParser.TryParse(name, s_stringParser, ignoreCase: true, throwOnFailure: false, out ulong result) ? result : 0
+                _ => EnumStringParser.TryParse(name, s_stringParser, StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out ulong result) ? result : 0
             };
         }
 
@@ -108,7 +108,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 "UNK" => 1,
                 "CNX" => 100,
                 "OUT" => 200000000000,
-                _ => EnumStringParser.TryParse(name, s_stringParser, ignoreCase: true, throwOnFailure: false, out ulong result) ? result : 0
+                _ => EnumStringParser.TryParse(name, s_stringParser, StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out ulong result) ? result : 0
             };
         }
 

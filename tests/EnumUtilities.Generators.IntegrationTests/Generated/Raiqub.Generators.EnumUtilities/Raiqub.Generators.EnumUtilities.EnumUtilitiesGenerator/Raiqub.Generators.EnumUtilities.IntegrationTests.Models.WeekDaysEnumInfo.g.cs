@@ -132,75 +132,67 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             public bool TryParseNumber(ReadOnlySpan<char> value, out int result) => EnumNumericParser.TryParse(value, out result);
 
             /// <inheritdoc />
-            public bool TryParseSingleName(ReadOnlySpan<char> value, bool ignoreCase, out int result)
-            {
-                return ignoreCase
-                    ? TryParse(value, out result)
-                    : TryParse(value, StringComparison.OrdinalIgnoreCase, out result);
-            }
-
-            /// <inheritdoc />
             public bool TryParseSingleName(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
             {
-                return TryParse(value, comparisonType, out result);
-            }
-
-            private bool TryParse(ReadOnlySpan<char> value, out int result)
-            {
-                switch (value)
+                if (value.IsEmpty)
                 {
-                    case { } when value.SequenceEqual("Monday"):
-                        result = 0;
-                        return true;
-                    case { } when value.SequenceEqual("Tuesday"):
-                        result = 1;
-                        return true;
-                    case { } when value.SequenceEqual("Wednesday"):
-                        result = 2;
-                        return true;
-                    case { } when value.SequenceEqual("Thursday"):
-                        result = 3;
-                        return true;
-                    case { } when value.SequenceEqual("Friday"):
-                        result = 4;
-                        return true;
-                    case { } when value.SequenceEqual("Saturday"):
-                        result = 5;
-                        return true;
-                    case { } when value.SequenceEqual("Sunday"):
-                        result = 6;
-                        return true;
-                    default:
-                        result = 0;
-                        return false;
+                    result = 0;
+                    return false;
                 }
-            }
 
-            private bool TryParse(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
-            {
-                switch (value)
+                switch (value[0])
                 {
-                    case { } when value.Equals("Monday", comparisonType):
-                        result = 0;
-                        return true;
-                    case { } when value.Equals("Tuesday", comparisonType):
-                        result = 1;
-                        return true;
-                    case { } when value.Equals("Wednesday", comparisonType):
-                        result = 2;
-                        return true;
-                    case { } when value.Equals("Thursday", comparisonType):
-                        result = 3;
-                        return true;
-                    case { } when value.Equals("Friday", comparisonType):
-                        result = 4;
-                        return true;
-                    case { } when value.Equals("Saturday", comparisonType):
-                        result = 5;
-                        return true;
-                    case { } when value.Equals("Sunday", comparisonType):
-                        result = 6;
-                        return true;
+                    case 'M':
+                    case 'm':
+                        switch (value)
+                        {
+                            case { } when value.Equals("Monday", comparisonType):
+                                result = 0;
+                                return true;
+                        }
+                        goto default;
+                    case 'T':
+                    case 't':
+                        switch (value)
+                        {
+                            case { } when value.Equals("Tuesday", comparisonType):
+                                result = 1;
+                                return true;
+                            case { } when value.Equals("Thursday", comparisonType):
+                                result = 3;
+                                return true;
+                        }
+                        goto default;
+                    case 'W':
+                    case 'w':
+                        switch (value)
+                        {
+                            case { } when value.Equals("Wednesday", comparisonType):
+                                result = 2;
+                                return true;
+                        }
+                        goto default;
+                    case 'F':
+                    case 'f':
+                        switch (value)
+                        {
+                            case { } when value.Equals("Friday", comparisonType):
+                                result = 4;
+                                return true;
+                        }
+                        goto default;
+                    case 'S':
+                    case 's':
+                        switch (value)
+                        {
+                            case { } when value.Equals("Saturday", comparisonType):
+                                result = 5;
+                                return true;
+                            case { } when value.Equals("Sunday", comparisonType):
+                                result = 6;
+                                return true;
+                        }
+                        goto default;
                     default:
                         result = 0;
                         return false;

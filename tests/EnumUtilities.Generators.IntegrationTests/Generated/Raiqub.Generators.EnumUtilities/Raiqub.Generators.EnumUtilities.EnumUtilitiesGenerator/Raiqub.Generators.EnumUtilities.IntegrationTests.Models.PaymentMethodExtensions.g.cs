@@ -15,6 +15,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     public static partial class PaymentMethodExtensions
     {
         private static readonly PaymentMethodMetadata.StringFormatter s_stringFormatter = PaymentMethodMetadata.StringFormatter.Instance;
+        private static readonly PaymentMethodMetadata.SerializationStringFormatter s_serializationStringFormatter = PaymentMethodMetadata.SerializationStringFormatter.Instance;
 
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
         /// <returns>The string representation of the value of this instance.</returns>
@@ -94,14 +95,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
         public static string ToEnumMemberValue(this PaymentMethod value)
         {
-            return (int)value switch
-            {
-                0 => "Credit card",
-                1 => "Debit card",
-                2 => "Cash",
-                3 => "Cheque",
-                _ => ToStringFast(value)
-            };
+            return EnumStringFormatter.GetString((int)value, s_serializationStringFormatter);
+        }
+
+        public static int GetEnumMemberValueStringLength(this PaymentMethod value)
+        {
+            return EnumStringFormatter.GetStringLength((int)value, s_serializationStringFormatter);
         }
 
         public static string? GetDescription(this PaymentMethod value)

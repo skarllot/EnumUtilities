@@ -7,21 +7,12 @@
 
     public static string ToEnumMemberValue(this <#= Model.RefName #> value)
     {
-        return (<#= Model.UnderlyingType #>)value switch
-        {
-<#+
-        foreach (var curr in Model.UniqueValues)
-        {
-#>
-            <#= curr.MemberValue #> => <#=
-                    curr.SerializationValue != null
-                        ? Append($"\"{curr.SerializationValue}\"")
-                        : Append($"\"{curr.MemberName}\"") #>,
-<#+
-        }
-#>
-            _ => ToStringFast(value)
-        };
+        return EnumStringFormatter.GetString((<#= Model.UnderlyingType #>)value, s_serializationStringFormatter);
+    }
+
+    public static int GetEnumMemberValueStringLength(this <#= Model.RefName #> value)
+    {
+        return EnumStringFormatter.GetStringLength((<#= Model.UnderlyingType #>)value, s_serializationStringFormatter);
     }
 <#+
     }

@@ -70,7 +70,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 "UNK" => (ushort)1,
                 "CNX" => (ushort)100,
                 "OUT" => (ushort)200,
-                _ => EnumStringParser.TryParse(name, s_stringParser, ignoreCase: true, throwOnFailure: false, out ushort result) ? result : (ushort)0
+                _ => EnumStringParser.TryParse(name, s_stringParser, StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out ushort result) ? result : (ushort)0
             };
         }
 
@@ -108,7 +108,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 "UNK" => (ushort)1,
                 "CNX" => (ushort)100,
                 "OUT" => (ushort)200,
-                _ => EnumStringParser.TryParse(name, s_stringParser, ignoreCase: true, throwOnFailure: false, out ushort result) ? result : (ushort)0
+                _ => EnumStringParser.TryParse(name, s_stringParser, StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out ushort result) ? result : (ushort)0
             };
         }
 

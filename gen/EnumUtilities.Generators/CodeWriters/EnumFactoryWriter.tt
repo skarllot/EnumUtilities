@@ -33,6 +33,14 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 <#= Model.IsPublic ? "public" : "internal" #> static partial class <#= Model.Name #>Factory
 {
     private static readonly <#= Model.MetadataClassName #>.StringParser s_stringParser = <#= Model.MetadataClassName #>.StringParser.Instance;
+<#
+    if (Model.HasSerializationValue)
+    {
+#>
+    private static readonly <#= Model.MetadataClassName #>.SerializationStringParser s_serializationStringParser = <#= Model.MetadataClassName #>.SerializationStringParser.Instance;
+<#
+    }
+#>
 
 <#
     WriteDefaultBlock();

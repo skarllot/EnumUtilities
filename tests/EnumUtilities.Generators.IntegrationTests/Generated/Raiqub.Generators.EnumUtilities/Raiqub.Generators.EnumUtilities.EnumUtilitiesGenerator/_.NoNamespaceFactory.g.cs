@@ -22,6 +22,7 @@ public static partial class NoNamespaceFactory
     /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
     /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
     /// <returns>The value represented by the specified name or numeric value. Note that this value need not be a member of the NoNamespace enumeration.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
     public static NoNamespace Parse(string value, bool ignoreCase = false)
     {
@@ -158,7 +159,8 @@ public static partial class NoNamespaceFactory
 
     private static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, bool throwOnFailure, out NoNamespace result)
     {
-        bool success = EnumStringParser.TryParse(value, s_stringParser, ignoreCase, throwOnFailure, out int number);
+        var comparisonType = ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
+        bool success = EnumStringParser.TryParse(value, s_stringParser, comparisonType, throwOnFailure, out int number);
         if (!success)
         {
             result = 0;
@@ -188,11 +190,11 @@ public static partial class NoNamespaceFactory
         StringComparison comparisonType,
         out NoNamespace result)
     {
-        bool success = s_stringParser.TryParseSingleName(name.AsSpan(), comparisonType, out int number)
-            || s_stringParser.TryParseNumber(name.AsSpan(), out number);
+        bool success = EnumStringParser.TryParse(name, s_stringParser, comparisonType, throwOnFailure: false, out int number);
         if (!success)
         {
-            return TryParse(name, out result);
+            result = 0;
+            return false;
         }
 
         result = (NoNamespace)number;

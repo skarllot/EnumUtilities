@@ -72,7 +72,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 "☀️" => 2,
                 "🍂" => 3,
                 "⛄" => 4,
-                _ => EnumStringParser.TryParse(name, s_stringParser, ignoreCase: true, throwOnFailure: false, out int result) ? result : throw new JsonException()
+                _ => EnumStringParser.TryParse(name, s_stringParser, StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out int result) ? result : throw new JsonException()
             };
         }
 
@@ -110,7 +110,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 "☀️" => 2,
                 "🍂" => 3,
                 "⛄" => 4,
-                _ => EnumStringParser.TryParse(name, s_stringParser, ignoreCase: true, throwOnFailure: false, out int result) ? result : throw new JsonException()
+                _ => EnumStringParser.TryParse(name, s_stringParser, StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out int result) ? result : throw new JsonException()
             };
         }
 

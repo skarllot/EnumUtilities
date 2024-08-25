@@ -122,69 +122,70 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             public bool TryParseNumber(ReadOnlySpan<char> value, out int result) => EnumNumericParser.TryParse(value, out result);
 
             /// <inheritdoc />
-            public bool TryParseSingleName(ReadOnlySpan<char> value, bool ignoreCase, out int result)
-            {
-                return ignoreCase
-                    ? TryParse(value, out result)
-                    : TryParse(value, StringComparison.OrdinalIgnoreCase, out result);
-            }
-
-            /// <inheritdoc />
             public bool TryParseSingleName(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
             {
-                return TryParse(value, comparisonType, out result);
-            }
-
-            private bool TryParse(ReadOnlySpan<char> value, out int result)
-            {
-                switch (value)
+                if (value.IsEmpty)
                 {
-                    case { } when value.SequenceEqual("Idle"):
-                        result = 1;
-                        return true;
-                    case { } when value.SequenceEqual("Working"):
-                        result = 2;
-                        return true;
-                    case { } when value.SequenceEqual("Sleeping"):
-                        result = 3;
-                        return true;
-                    case { } when value.SequenceEqual("Eating"):
-                        result = 4;
-                        return true;
-                    case { } when value.SequenceEqual("Dead"):
-                        result = 5;
-                        return true;
-                    case { } when value.SequenceEqual("Relaxing"):
-                        result = 1;
-                        return true;
-                    default:
-                        result = 0;
-                        return false;
+                    result = 0;
+                    return false;
                 }
-            }
 
-            private bool TryParse(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
-            {
-                switch (value)
+                switch (value[0])
                 {
-                    case { } when value.Equals("Idle", comparisonType):
-                        result = 1;
-                        return true;
-                    case { } when value.Equals("Working", comparisonType):
-                        result = 2;
-                        return true;
-                    case { } when value.Equals("Sleeping", comparisonType):
-                        result = 3;
-                        return true;
-                    case { } when value.Equals("Eating", comparisonType):
-                        result = 4;
-                        return true;
-                    case { } when value.Equals("Dead", comparisonType):
-                        result = 5;
-                        return true;
-                    case { } when value.Equals("Relaxing", comparisonType):
-                        result = 1;
-                        return true;
+                    case 'I':
+                    case 'i':
+                        switch (value)
+                        {
+                            case { } when value.Equals("Idle", comparisonType):
+                                result = 1;
+                                return true;
+                        }
+                        goto default;
+                    case 'W':
+                    case 'w':
+                        switch (value)
+                        {
+                            case { } when value.Equals("Working", comparisonType):
+                                result = 2;
+                                return true;
+                        }
+                        goto default;
+                    case 'S':
+                    case 's':
+                        switch (value)
+                        {
+                            case { } when value.Equals("Sleeping", comparisonType):
+                                result = 3;
+                                return true;
+                        }
+                        goto default;
+                    case 'E':
+                    case 'e':
+                        switch (value)
+                        {
+                            case { } when value.Equals("Eating", comparisonType):
+                                result = 4;
+                                return true;
+                        }
+                        goto default;
+                    case 'D':
+                    case 'd':
+                        switch (value)
+                        {
+                            case { } when value.Equals("Dead", comparisonType):
+                                result = 5;
+                                return true;
+                        }
+                        goto default;
+                    case 'R':
+                    case 'r':
+                        switch (value)
+                        {
+                            case { } when value.Equals("Relaxing", comparisonType):
+                                result = 1;
+                                return true;
+                        }
+                        goto default;
                     default:
                         result = 0;
                         return false;

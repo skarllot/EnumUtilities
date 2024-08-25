@@ -103,7 +103,7 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 <#
     }
 #>
-            _ => EnumStringParser.TryParse(name, s_stringParser, ignoreCase: true, throwOnFailure: false, out <#= Model.UnderlyingType #> result) ? result : <#= AppendFallbackValue() #>
+            _ => EnumStringParser.TryParse(name, s_stringParser, StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out <#= Model.UnderlyingType #> result) ? result : <#= AppendFallbackValue() #>
         };
     }
 
@@ -146,7 +146,7 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 <#
     }
 #>
-            _ => EnumStringParser.TryParse(name, s_stringParser, ignoreCase: true, throwOnFailure: false, out <#= Model.UnderlyingType #> result) ? result : <#= AppendFallbackValue() #>
+            _ => EnumStringParser.TryParse(name, s_stringParser, StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out <#= Model.UnderlyingType #> result) ? result : <#= AppendFallbackValue() #>
         };
     }
 
