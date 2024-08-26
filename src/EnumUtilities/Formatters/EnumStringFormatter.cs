@@ -44,7 +44,7 @@ public static class EnumStringFormatter
     /// <param name="foundItems">A span containing the found enum values.</param>
     /// <returns>A string that represents the names of the found flags, separated by commas.</returns>
     /// <exception cref="OverflowException">Thrown if the computed string length exceeds the capacity of an <see cref="int"/>.</exception>
-    public static string WriteMultipleFoundFlagsNames<TFormatter, TNumber>(
+    public static unsafe string WriteMultipleFoundFlagsNames<TFormatter, TNumber>(
         TFormatter enumFormatter,
         int count,
         int foundItemsCount,
@@ -55,25 +55,32 @@ public static class EnumStringFormatter
         const int separatorStringLength = 2;
         const char enumSeparatorChar = ',';
         int strlen = checked(count + (separatorStringLength * (foundItemsCount - 1)));
-        Span<char> result = strlen <= 128
-            ? stackalloc char[128].Slice(0, strlen)
-            : new char[strlen];
-        var span = result;
 
-        string name = enumFormatter.GetStringForSingleMember(foundItems[--foundItemsCount]);
-        name.AsSpan().CopyTo(span);
-        span = span.Slice(name.Length);
-        while (--foundItemsCount >= 0)
+#if NET6_0_OR_GREATER
+        var result = string.Create(strlen, 0, static (_, _) => { });
+#else
+        var result = new string('\0', strlen);
+#endif
+
+        fixed (char* ptr = result)
         {
-            span[0] = enumSeparatorChar;
-            span[1] = ' ';
-            span = span.Slice(2);
+            var span = new Span<char>(ptr, strlen);
 
-            name = enumFormatter.GetStringForSingleMember(foundItems[foundItemsCount]);
+            string name = enumFormatter.GetStringForSingleMember(foundItems[--foundItemsCount]);
             name.AsSpan().CopyTo(span);
             span = span.Slice(name.Length);
+            while (--foundItemsCount >= 0)
+            {
+                span[0] = enumSeparatorChar;
+                span[1] = ' ';
+                span = span.Slice(2);
+
+                name = enumFormatter.GetStringForSingleMember(foundItems[foundItemsCount]);
+                name.AsSpan().CopyTo(span);
+                span = span.Slice(name.Length);
+            }
         }
 
-        return result.ToString();
+        return result;
     }
 }
