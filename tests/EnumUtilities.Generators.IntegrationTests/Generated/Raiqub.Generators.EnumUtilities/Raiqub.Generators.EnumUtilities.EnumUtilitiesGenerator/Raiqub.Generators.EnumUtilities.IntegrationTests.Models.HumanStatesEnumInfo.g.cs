@@ -64,48 +64,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             public static ReadOnlySpan<byte> Relaxing => new byte[8] { 82, 101, 108, 97, 120, 105, 110, 103 };
         }
 
-        /// <summary>Provides support for formatting <see cref="HumanStates"/> values.</summary>
-        internal sealed partial class StringFormatter : IEnumFormatter<int>
-        {
-            /// <summary>Gets the singleton instance of the <see cref="StringFormatter"/> class.</summary>
-            public static StringFormatter Instance = new StringFormatter();
-
-            /// <inheritdoc />
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public int GetStringLengthForNumber(int value) => EnumNumericFormatter.GetStringLength(value);
-
-            /// <inheritdoc />
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public string GetStringForNumber(int value) => value.ToString();
-
-            /// <inheritdoc />
-            public int? TryGetStringLengthForMember(int value)
-            {
-                return value switch
-                {
-                    1 => 4,
-                    2 => 7,
-                    3 => 8,
-                    4 => 6,
-                    5 => 4,
-                    _ => null
-                };
-            }
-
-            /// <inheritdoc />
-            public string? TryGetStringForMember(int value)
-            {
-                return value switch
-                {
-                    1 => "Idle",
-                    2 => "Working",
-                    3 => "Sleeping",
-                    4 => "Eating",
-                    5 => "Dead",
-                    _ => null
-                };
-            }
-        }
 
         /// <summary>Provides support for parsing <see cref="HumanStates"/> values.</summary>
         internal sealed partial class StringParser

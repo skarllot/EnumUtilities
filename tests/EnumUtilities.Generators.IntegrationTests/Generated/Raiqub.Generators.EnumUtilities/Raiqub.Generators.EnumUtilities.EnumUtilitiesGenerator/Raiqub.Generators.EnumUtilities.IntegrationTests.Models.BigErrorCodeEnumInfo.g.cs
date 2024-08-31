@@ -14,46 +14,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     internal static partial class BigErrorCodeMetadata
     {
-        /// <summary>Provides support for formatting <see cref="BigErrorCode"/> values.</summary>
-        internal sealed partial class StringFormatter : IEnumFormatter<ulong>
-        {
-            /// <summary>Gets the singleton instance of the <see cref="StringFormatter"/> class.</summary>
-            public static StringFormatter Instance = new StringFormatter();
-
-            /// <inheritdoc />
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public int GetStringLengthForNumber(ulong value) => EnumNumericFormatter.GetStringLength(value);
-
-            /// <inheritdoc />
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public string GetStringForNumber(ulong value) => value.ToString();
-
-            /// <inheritdoc />
-            public int? TryGetStringLengthForMember(ulong value)
-            {
-                return value switch
-                {
-                    0 => 4,
-                    1 => 7,
-                    100 => 14,
-                    200000000000 => 14,
-                    _ => null
-                };
-            }
-
-            /// <inheritdoc />
-            public string? TryGetStringForMember(ulong value)
-            {
-                return value switch
-                {
-                    0 => "None",
-                    1 => "Unknown",
-                    100 => "ConnectionLost",
-                    200000000000 => "OutlierReading",
-                    _ => null
-                };
-            }
-        }
 
         /// <summary>Provides support for parsing <see cref="BigErrorCode"/> values.</summary>
         internal sealed partial class StringParser

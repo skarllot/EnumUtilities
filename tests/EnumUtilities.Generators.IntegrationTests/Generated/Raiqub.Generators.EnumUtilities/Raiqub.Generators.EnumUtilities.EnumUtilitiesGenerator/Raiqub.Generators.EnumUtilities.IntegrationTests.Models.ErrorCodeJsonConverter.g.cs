@@ -18,7 +18,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         private const int MaxBytesLength = 3;
         private const int MaxCharsLength = 3;
 
-        private static readonly ErrorCodeMetadata.StringFormatter s_stringFormatter = ErrorCodeMetadata.StringFormatter.Instance;
         private static readonly ErrorCodeMetadata.StringParser s_stringParser = ErrorCodeMetadata.StringParser.Instance;
 
         public override ErrorCode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -48,8 +47,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                     writer.WriteStringValue("OUT"u8);
                     break;
                 default:
-                    string strValue = EnumStringFormatter.GetString((ushort)value, s_stringFormatter);
-                    writer.WriteStringValue(strValue);
+                    writer.WriteStringValue(value.ToStringFast());
                     break;
             }
         }
@@ -93,8 +91,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                     writer.WriteStringValue("OUT");
                     break;
                 default:
-                    string strValue = EnumStringFormatter.GetString((ushort)value, s_stringFormatter);
-                    writer.WriteStringValue(strValue);
+                    writer.WriteStringValue(value.ToStringFast());
                     break;
             }
         }

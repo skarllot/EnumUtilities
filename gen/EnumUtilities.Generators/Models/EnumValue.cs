@@ -9,12 +9,12 @@ public sealed class EnumValue
     {
         MemberName = memberName;
         MemberValue = memberValue;
-        RealMemberValue = realMemberValue;
+        RealMemberValue = Convert.ToUInt64(realMemberValue);
     }
 
     public string MemberName { get; }
     public string MemberValue { get; }
-    public object RealMemberValue { get; }
+    public ulong RealMemberValue { get; }
     public string? SerializationValue { get; set; }
     public string? Description { get; set; }
     public DisplayAttribute? Display { get; set; }

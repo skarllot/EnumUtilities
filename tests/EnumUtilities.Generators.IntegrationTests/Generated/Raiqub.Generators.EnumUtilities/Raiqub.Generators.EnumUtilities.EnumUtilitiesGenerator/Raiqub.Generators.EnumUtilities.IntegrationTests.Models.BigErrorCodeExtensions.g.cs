@@ -3,6 +3,7 @@
 
 using System;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using Raiqub.Generators.EnumUtilities.Formatters;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
@@ -11,66 +12,60 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
-    public static partial class SlimCategoriesExtensions
+    internal static partial class BigErrorCodeExtensions
     {
 
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
         /// <returns>The string representation of the value of this instance.</returns>
-        public static string ToStringFast(this SlimCategories value)
+        public static string ToStringFast(this BigErrorCode value)
         {
-            var numberValue = (byte)value;
+            var numberValue = (ulong)value;
             return GetNameInlined(numberValue) ?? numberValue.ToString();
         }
 
         /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
         /// <param name="value">The value to calculate the number of characters.</param>
         /// <returns>The number of characters produced by converting the specified value to string.</returns>
-        public static int GetStringLength(this SlimCategories value)
+        public static int GetStringLength(this BigErrorCode value)
         {
-            var numberValue = (byte)value;
+            var numberValue = (ulong)value;
             return GetNameLengthInlined(numberValue) ?? EnumNumericFormatter.GetStringLength(numberValue);
         }
 
         /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
         /// <returns><c>true</c> if the value of this instance exists in the enumeration; <c>false</c> otherwise.</returns>
-        public static bool IsDefined(this SlimCategories value)
+        public static bool IsDefined(this BigErrorCode value)
         {
-            return (byte)value switch
+            return (ulong)value switch
             {
                 0 => true,
                 1 => true,
-                2 => true,
-                3 => true,
-                4 => true,
-                5 => true,
+                100 => true,
+                200000000000 => true,
                 _ => false
             };
         }
 
-        private static int? GetNameLengthInlined(byte value)
+        private static int? GetNameLengthInlined(ulong value)
         {
             return value switch
             {
-                0 => 11,
-                1 => 4,
-                2 => 10,
-                3 => 4,
-                4 => 10,
-                5 => 7,
+                0 => 4,
+                1 => 7,
+                100 => 14,
+                200000000000 => 14,
                 _ => null
             };
         }
 
-        private static string? GetNameInlined(byte value)
+        private static string? GetNameInlined(ulong value)
         {
             return value switch
             {
-                0 => "Electronics",
-                1 => "Food",
-                2 => "Automotive",
-                3 => "Arts",
-                4 => "BeautyCare",
-                5 => "Fashion",
+                0 => "None",
+                1 => "Unknown",
+                100 => "ConnectionLost",
+                200000000000 => "OutlierReading",
                 _ => null
             };
         }

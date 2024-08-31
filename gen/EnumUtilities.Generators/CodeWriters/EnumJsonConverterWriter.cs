@@ -89,18 +89,6 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             
             #line default
             #line hidden
-            this.Write(".StringFormatter s_stringFormatter = ");
-            
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.MetadataClassName));
-            
-            #line default
-            #line hidden
-            this.Write(".StringFormatter.Instance;\r\n    private static readonly ");
-            
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.MetadataClassName));
-            
-            #line default
-            #line hidden
             this.Write(".StringParser s_stringParser = ");
             
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.MetadataClassName));
@@ -173,13 +161,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
 
     }
 
-            this.Write("            default:\r\n                string strValue = EnumStringFormatter.GetString((");
-            
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
-            
-            #line default
-            #line hidden
-            this.Write(")value, s_stringFormatter);\r\n                writer.WriteStringValue(strValue);\r\n                break;\r\n        }\r\n    }\r\n\r\n    private ");
+            this.Write("            default:\r\n                writer.WriteStringValue(value.ToStringFast());\r\n                break;\r\n        }\r\n    }\r\n\r\n    private ");
             
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
             
@@ -264,13 +246,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
 
     }
 
-            this.Write("            default:\r\n                string strValue = EnumStringFormatter.GetString((");
-            
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
-            
-            #line default
-            #line hidden
-            this.Write(")value, s_stringFormatter);\r\n                writer.WriteStringValue(strValue);\r\n                break;\r\n        }\r\n    }\r\n\r\n    private ");
+            this.Write("            default:\r\n                writer.WriteStringValue(value.ToStringFast());\r\n                break;\r\n        }\r\n    }\r\n\r\n    private ");
             
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
             

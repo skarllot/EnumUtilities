@@ -14,46 +14,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     internal static partial class ErrorCodeMetadata
     {
-        /// <summary>Provides support for formatting <see cref="ErrorCode"/> values.</summary>
-        internal sealed partial class StringFormatter : IEnumFormatter<ushort>
-        {
-            /// <summary>Gets the singleton instance of the <see cref="StringFormatter"/> class.</summary>
-            public static StringFormatter Instance = new StringFormatter();
-
-            /// <inheritdoc />
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public int GetStringLengthForNumber(ushort value) => EnumNumericFormatter.GetStringLength(value);
-
-            /// <inheritdoc />
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public string GetStringForNumber(ushort value) => value.ToString();
-
-            /// <inheritdoc />
-            public int? TryGetStringLengthForMember(ushort value)
-            {
-                return value switch
-                {
-                    0 => 4,
-                    1 => 7,
-                    100 => 14,
-                    200 => 14,
-                    _ => null
-                };
-            }
-
-            /// <inheritdoc />
-            public string? TryGetStringForMember(ushort value)
-            {
-                return value switch
-                {
-                    0 => "None",
-                    1 => "Unknown",
-                    100 => "ConnectionLost",
-                    200 => "OutlierReading",
-                    _ => null
-                };
-            }
-        }
 
         /// <summary>Provides support for parsing <see cref="ErrorCode"/> values.</summary>
         internal sealed partial class StringParser

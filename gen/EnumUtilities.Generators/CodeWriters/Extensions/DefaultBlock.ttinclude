@@ -1,12 +1,14 @@
 ﻿<#+
     private void WriteDefaultBlock()
     {
+        bool hasZeroMember = Model.Values.Any(x => x.RealMemberValue == 0);
 #>
     /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
     /// <returns>The string representation of the value of this instance.</returns>
     public static string ToStringFast(this <#= Model.RefName #> value)
     {
-        return EnumStringFormatter.GetString((<#= Model.UnderlyingType #>)value, s_stringFormatter);
+        var numberValue = (<#= Model.UnderlyingType #>)value;
+        return <#= Model.IsFlags ? "FormatFlagNames" : "GetNameInlined" #>(numberValue) ?? numberValue.ToString();
     }
 <#+
         if (Model.IsFlags)
@@ -29,15 +31,236 @@
     /// <returns>The number of characters produced by converting the specified value to string.</returns>
     public static int GetStringLength(this <#= Model.RefName #> value)
     {
-        return EnumStringFormatter.GetStringLength((<#= Model.UnderlyingType #>)value, s_stringFormatter);
+        var numberValue = (<#= Model.UnderlyingType #>)value;
+        return <#= Model.IsFlags ? "FormatFlagNamesLength" : "GetNameLengthInlined" #>(numberValue) ?? EnumNumericFormatter.GetStringLength(numberValue);
     }
 
     /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
     /// <returns><c>true</c> if the value of this instance exists in the enumeration; <c>false</c> otherwise.</returns>
     public static bool IsDefined(this <#= Model.RefName #> value)
     {
-        return <#= Model.Name #>Validation.IsDefined(value);
+        return (<#= Model.UnderlyingType #>)value switch
+        {
+<#+
+        foreach (var curr in Model.UniqueValues)
+        {
+#>
+            <#= curr.MemberValue #> => true,
+<#+
+        }
+#>
+            _ => false
+        };
     }
 <#+
+        if (Model.IsFlags)
+        {
+            string[] rangeCondition = ["value > 0xffff_ffff_ffff", "value > 0xffff_ffff","value > 0xffff", "true"];
+            var h2Values = GetBitCount() == 64
+                ? Model.UniqueValues
+                    .Where(x => x.RealMemberValue > 0x0000_ffff_ffff_ffffUL)
+                    .OrderByDescending(x => x.RealMemberValue)
+                    .ToList()
+                : [];
+            var h1Values = GetBitCount() == 64
+                ? Model.UniqueValues
+                    .Where(
+                        x => x.RealMemberValue > 0x0000_0000_ffff_ffffUL & x.RealMemberValue <= 0x0000_ffff_ffff_ffffUL)
+                    .OrderByDescending(x => x.RealMemberValue)
+                    .ToList()
+                : [];
+            var l2Values = GetBitCount() >= 32
+                ? Model.UniqueValues
+                    .Where(
+                        x => x.RealMemberValue > 0x0000_0000_0000_ffffUL & x.RealMemberValue <= 0x0000_0000_ffff_ffffUL)
+                    .OrderByDescending(x => x.RealMemberValue)
+                    .ToList()
+                : [];
+            var l1Values = GetBitCount() >= 16
+                ? Model.UniqueValues
+                    .Where(
+                        x => x.RealMemberValue > 0x0000_0000_0000_0000UL & x.RealMemberValue <= 0x0000_0000_0000_ffffUL)
+                    .OrderByDescending(x => x.RealMemberValue)
+                    .ToList()
+                : [];
+            List<EnumValue>[] valuesRanges = [h2Values,h1Values,l2Values,l1Values];
+#>
+
+    private static int? FormatFlagNamesLength(<#= Model.UnderlyingType #> value)
+    {
+        int? fastResult = GetNameLengthInlined(value);
+        if (fastResult is not null)
+        {
+            return fastResult.Value;
+        }
+<#+
+            if (Model.Values.All(x => x.MemberValue != "0"))
+            {
+#>
+
+        if (value == 0)
+        {
+            return 1;
+        }
+<#+
+            }
+#>
+
+        int count = 0, foundItemsCount = 0;
+<#+
+            foreach (var (i, vRange) in valuesRanges.Index())
+            {
+                if (vRange.Count == 0)
+                    continue;
+#>
+        if (<#= rangeCondition[i] #>)
+        {
+<#+
+                foreach (var curr in vRange)
+                {
+#>
+            if ((value & <#= curr.MemberValue #>) == <#= curr.MemberValue #>)
+            {
+                value -= <#= curr.MemberValue #>;
+                count = checked(count + <#= curr.MemberName.Length #>);
+                foundItemsCount++;
+                if (value == 0) goto CountLength;
+            }
+<#+
+                }
+#>
+        }
+<#+
+            }
+#>
+
+        if (value != 0)
+        {
+            return null;
+        }
+
+CountLength:
+        const int separatorStringLength = 2;
+        return checked(count + (separatorStringLength * (foundItemsCount - 1)));
+    }
+
+    private static string? FormatFlagNames(<#= Model.UnderlyingType #> value)
+    {
+        string? result = GetNameInlined(value);
+        if (result is null)
+        {
+            Span<<#= Model.UnderlyingType #>> foundItems = stackalloc <#= Model.UnderlyingType #>[<#= GetMappedBitCount() #>];
+            if (TryFindFlagsNames(value, foundItems, out int resultLength, out int foundItemsCount))
+            {
+                result = EnumStringFormatter.WriteMultipleFoundFlagsNames(GetNameInlined!, resultLength, foundItemsCount, foundItems);
+            }
+        }
+
+        return result;
+    }
+
+    private static bool TryFindFlagsNames(<#= Model.UnderlyingType #> value, Span<<#= Model.UnderlyingType #>> foundItems, out int resultLength, out int foundItemsCount)
+    {
+        resultLength = 0;
+        foundItemsCount = 0;
+<#+
+            foreach (var (i, vRange) in valuesRanges.Index())
+            {
+                if (vRange.Count == 0)
+                    continue;
+#>
+        if (<#= rangeCondition[i] #>)
+        {
+<#+
+                foreach (var curr in vRange)
+                {
+#>
+            if ((value & <#= curr.MemberValue #>) == <#= curr.MemberValue #>)
+            {
+                value -= <#= curr.MemberValue #>;
+                resultLength = checked(resultLength + <#= curr.MemberName.Length #>);
+                foundItems[foundItemsCount++] = <#= curr.MemberValue #>;
+                if (value == 0) return true;
+            }
+<#+
+                }
+#>
+        }
+<#+
+            }
+#>
+
+        return value == 0;
+    }
+<#+
+        }
+#>
+
+    private static int? GetNameLengthInlined(<#= Model.UnderlyingType #> value)
+    {
+        return value switch
+        {
+<#+
+        if (!hasZeroMember)
+        {
+#>
+            0 => 1,
+<#+
+        }
+        foreach (var curr in Model.UniqueValues)
+        {
+#>
+            <#= curr.MemberValue #> => <#= curr.MemberName.Length #>,
+<#+
+        }
+#>
+            _ => null
+        };
+    }
+
+    private static string? GetNameInlined(<#= Model.UnderlyingType #> value)
+    {
+        return value switch
+        {
+<#+
+        if (!hasZeroMember)
+        {
+#>
+            0 => "0",
+<#+
+        }
+        foreach (var curr in Model.UniqueValues)
+        {
+#>
+            <#= curr.MemberValue #> => "<#= curr.MemberName #>",
+<#+
+        }
+#>
+            _ => null
+        };
+    }
+<#+
+    }
+
+    private int GetBitCount() => Model.UnderlyingType switch {
+        "byte" => 8,
+        "sbyte" => 8,
+        "short" => 16,
+        "ushort" => 16,
+        "int" => 32,
+        "uint" => 32,
+        "long" => 64,
+        "ulong" => 64,
+        _ => 64,
+        };
+
+    private int GetMappedBitCount()
+    {
+        if (Model.Values.Any(x => x.MemberValue[0] == '-'))
+            return GetBitCount();
+
+        return GetBitCount() -
+               (BitOperations.LeadingZeroCount(Model.Values.Select(x => x.RealMemberValue).Max()) -
+                (64 - GetBitCount()));
     }
 #>

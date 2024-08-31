@@ -10,40 +10,40 @@ Job=ShortRun  Arguments=Default  NuGetReferences=Default
 IterationCount=3  LaunchCount=1  WarmupCount=3  
 
 ```
-| Method               | Permissions          | Mean          | Error      | StdDev    | Ratio | RatioSD | Gen0   | Allocated | Alloc Ratio |
-|--------------------- |--------------------- |--------------:|-----------:|----------:|------:|--------:|-------:|----------:|------------:|
-| **BuiltInToString**      | **None**                 |    **16.8544 ns** |  **1.8936 ns** | **0.1038 ns** |  **1.00** |    **0.01** | **0.0057** |      **24 B** |        **1.00** |
-| FastEnumToString     | None                 |     1.7076 ns |  0.1706 ns | 0.0093 ns |  0.10 |    0.00 |      - |         - |        0.00 |
-| EnumsNetAsString     | None                 |    10.8865 ns |  0.4560 ns | 0.0250 ns |  0.65 |    0.00 |      - |         - |        0.00 |
-| NetEscapadesToString | None                 |     0.7937 ns |  0.2712 ns | 0.0149 ns |  0.05 |    0.00 |      - |         - |        0.00 |
-| RaiqubToString       | None                 |     2.8528 ns |  0.0962 ns | 0.0053 ns |  0.17 |    0.00 |      - |         - |        0.00 |
-|                      |                      |               |            |           |       |         |        |           |             |
-| **BuiltInToString**      | **Read**                 |    **47.2297 ns** |  **2.9597 ns** | **0.1622 ns** |  **1.00** |    **0.00** | **0.0057** |      **24 B** |        **1.00** |
-| FastEnumToString     | Read                 |     1.6926 ns |  0.0082 ns | 0.0004 ns |  0.04 |    0.00 |      - |         - |        0.00 |
-| EnumsNetAsString     | Read                 |    10.5495 ns |  0.2322 ns | 0.0127 ns |  0.22 |    0.00 |      - |         - |        0.00 |
-| NetEscapadesToString | Read                 |     0.7875 ns |  0.3875 ns | 0.0212 ns |  0.02 |    0.00 |      - |         - |        0.00 |
-| RaiqubToString       | Read                 |    13.1209 ns |  5.9053 ns | 0.3237 ns |  0.28 |    0.01 |      - |         - |        0.00 |
-|                      |                      |               |            |           |       |         |        |           |             |
-| **BuiltInToString**      | **Write**                |    **43.9242 ns** | **33.4211 ns** | **1.8319 ns** |  **1.00** |    **0.05** | **0.0057** |      **24 B** |        **1.00** |
-| FastEnumToString     | Write                |     1.6789 ns |  0.0081 ns | 0.0004 ns |  0.04 |    0.00 |      - |         - |        0.00 |
-| EnumsNetAsString     | Write                |    10.4479 ns |  0.4290 ns | 0.0235 ns |  0.24 |    0.01 |      - |         - |        0.00 |
-| NetEscapadesToString | Write                |     0.7786 ns |  0.0285 ns | 0.0016 ns |  0.02 |    0.00 |      - |         - |        0.00 |
-| RaiqubToString       | Write                |    11.8897 ns |  9.2146 ns | 0.5051 ns |  0.27 |    0.01 |      - |         - |        0.00 |
-|                      |                      |               |            |           |       |         |        |           |             |
-| **BuiltInToString**      | **Read, Write**          |    **52.8468 ns** |  **5.5096 ns** | **0.3020 ns** |  **1.00** |    **0.01** | **0.0172** |      **72 B** |        **1.00** |
-| FastEnumToString     | Read, Write          |     3.2021 ns |  0.0782 ns | 0.0043 ns |  0.06 |    0.00 |      - |         - |        0.00 |
-| EnumsNetAsString     | Read, Write          |    60.1827 ns | 95.6046 ns | 5.2404 ns |  1.14 |    0.09 | 0.0362 |     152 B |        2.11 |
-| NetEscapadesToString | Read, Write          |    53.8442 ns |  2.7113 ns | 0.1486 ns |  1.02 |    0.01 | 0.0172 |      72 B |        1.00 |
-| RaiqubToString       | Read, Write          |    36.9615 ns | 18.0552 ns | 0.9897 ns |  0.70 |    0.02 | 0.0114 |      48 B |        0.67 |
-|                      |                      |               |            |           |       |         |        |           |             |
-| **BuiltInToString**      | **Delet(...) Move [39]** |    **77.3492 ns** | **69.4074 ns** | **3.8045 ns** |  **1.00** |    **0.06** | **0.0305** |     **128 B** |        **1.00** |
-| FastEnumToString     | Delet(...) Move [39] |    12.1657 ns |  3.7689 ns | 0.2066 ns |  0.16 |    0.01 | 0.0076 |      32 B |        0.25 |
-| EnumsNetAsString     | Delet(...) Move [39] |   186.0545 ns | 34.7467 ns | 1.9046 ns |  2.41 |    0.10 | 0.1070 |     448 B |        3.50 |
-| NetEscapadesToString | Delet(...) Move [39] |    77.6757 ns |  6.6191 ns | 0.3628 ns |  1.01 |    0.04 | 0.0305 |     128 B |        1.00 |
-| RaiqubToString       | Delet(...) Move [39] |    73.4633 ns |  6.0710 ns | 0.3328 ns |  0.95 |    0.04 | 0.0248 |     104 B |        0.81 |
-|                      |                      |               |            |           |       |         |        |           |             |
-| **BuiltInToString**      | **Read(...)lock [245]**  |   **316.3875 ns** | **27.2744 ns** | **1.4950 ns** |  **1.00** |    **0.01** | **0.1278** |     **536 B** |        **1.00** |
-| FastEnumToString     | Read(...)lock [245]  |    16.0299 ns |  1.6426 ns | 0.0900 ns |  0.05 |    0.00 | 0.0115 |      48 B |        0.09 |
-| EnumsNetAsString     | Read(...)lock [245]  | 1,117.8888 ns | 62.0284 ns | 3.4000 ns |  3.53 |    0.02 | 0.3300 |    1384 B |        2.58 |
-| NetEscapadesToString | Read(...)lock [245]  |   280.6901 ns | 16.8232 ns | 0.9221 ns |  0.89 |    0.00 | 0.1278 |     536 B |        1.00 |
-| RaiqubToString       | Read(...)lock [245]  |   375.6710 ns | 96.8803 ns | 5.3103 ns |  1.19 |    0.02 | 0.1221 |     512 B |        0.96 |
+| Method               | Permissions          | Mean          | Error       | StdDev     | Ratio | RatioSD | Gen0   | Allocated | Alloc Ratio |
+|--------------------- |--------------------- |--------------:|------------:|-----------:|------:|--------:|-------:|----------:|------------:|
+| **BuiltInToString**      | **None**                 |    **16.7930 ns** |   **0.7112 ns** |  **0.0390 ns** |  **1.00** |    **0.00** | **0.0057** |      **24 B** |        **1.00** |
+| FastEnumToString     | None                 |     1.7954 ns |   0.3401 ns |  0.0186 ns |  0.11 |    0.00 |      - |         - |        0.00 |
+| EnumsNetAsString     | None                 |    10.8834 ns |   3.5318 ns |  0.1936 ns |  0.65 |    0.01 |      - |         - |        0.00 |
+| NetEscapadesToString | None                 |     0.7893 ns |   0.0995 ns |  0.0055 ns |  0.05 |    0.00 |      - |         - |        0.00 |
+| RaiqubToString       | None                 |     4.6455 ns |   2.2042 ns |  0.1208 ns |  0.28 |    0.01 |      - |         - |        0.00 |
+|                      |                      |               |             |            |       |         |        |           |             |
+| **BuiltInToString**      | **Read**                 |    **46.2530 ns** |   **0.7443 ns** |  **0.0408 ns** |  **1.00** |    **0.00** | **0.0057** |      **24 B** |        **1.00** |
+| FastEnumToString     | Read                 |     1.8036 ns |   0.2011 ns |  0.0110 ns |  0.04 |    0.00 |      - |         - |        0.00 |
+| EnumsNetAsString     | Read                 |    10.8982 ns |   1.0707 ns |  0.0587 ns |  0.24 |    0.00 |      - |         - |        0.00 |
+| NetEscapadesToString | Read                 |     0.7790 ns |   0.0379 ns |  0.0021 ns |  0.02 |    0.00 |      - |         - |        0.00 |
+| RaiqubToString       | Read                 |     4.4785 ns |   0.0320 ns |  0.0018 ns |  0.10 |    0.00 |      - |         - |        0.00 |
+|                      |                      |               |             |            |       |         |        |           |             |
+| **BuiltInToString**      | **Write**                |    **43.3199 ns** |  **15.7660 ns** |  **0.8642 ns** |  **1.00** |    **0.02** | **0.0057** |      **24 B** |        **1.00** |
+| FastEnumToString     | Write                |     1.7683 ns |   0.2705 ns |  0.0148 ns |  0.04 |    0.00 |      - |         - |        0.00 |
+| EnumsNetAsString     | Write                |    10.5087 ns |   1.0713 ns |  0.0587 ns |  0.24 |    0.00 |      - |         - |        0.00 |
+| NetEscapadesToString | Write                |     0.7793 ns |   0.0761 ns |  0.0042 ns |  0.02 |    0.00 |      - |         - |        0.00 |
+| RaiqubToString       | Write                |     4.5957 ns |   0.6882 ns |  0.0377 ns |  0.11 |    0.00 |      - |         - |        0.00 |
+|                      |                      |               |             |            |       |         |        |           |             |
+| **BuiltInToString**      | **Read, Write**          |    **52.8651 ns** |   **8.5595 ns** |  **0.4692 ns** |  **1.00** |    **0.01** | **0.0172** |      **72 B** |        **1.00** |
+| FastEnumToString     | Read, Write          |     3.2042 ns |   0.0306 ns |  0.0017 ns |  0.06 |    0.00 |      - |         - |        0.00 |
+| EnumsNetAsString     | Read, Write          |    53.1715 ns |   4.8580 ns |  0.2663 ns |  1.01 |    0.01 | 0.0363 |     152 B |        2.11 |
+| NetEscapadesToString | Read, Write          |    53.9850 ns |   2.5190 ns |  0.1381 ns |  1.02 |    0.01 | 0.0172 |      72 B |        1.00 |
+| RaiqubToString       | Read, Write          |    38.0268 ns |   4.7252 ns |  0.2590 ns |  0.72 |    0.01 | 0.0114 |      48 B |        0.67 |
+|                      |                      |               |             |            |       |         |        |           |             |
+| **BuiltInToString**      | **Delet(...) Move [39]** |    **75.1718 ns** |   **4.2637 ns** |  **0.2337 ns** |  **1.00** |    **0.00** | **0.0305** |     **128 B** |        **1.00** |
+| FastEnumToString     | Delet(...) Move [39] |    12.1982 ns |   2.1203 ns |  0.1162 ns |  0.16 |    0.00 | 0.0076 |      32 B |        0.25 |
+| EnumsNetAsString     | Delet(...) Move [39] |   192.5542 ns |  34.6929 ns |  1.9016 ns |  2.56 |    0.02 | 0.1070 |     448 B |        3.50 |
+| NetEscapadesToString | Delet(...) Move [39] |    79.9217 ns |   9.4581 ns |  0.5184 ns |  1.06 |    0.01 | 0.0305 |     128 B |        1.00 |
+| RaiqubToString       | Delet(...) Move [39] |    75.3040 ns |   4.6654 ns |  0.2557 ns |  1.00 |    0.00 | 0.0248 |     104 B |        0.81 |
+|                      |                      |               |             |            |       |         |        |           |             |
+| **BuiltInToString**      | **Read(...)lock [245]**  |   **286.7287 ns** | **531.0970 ns** | **29.1112 ns** |  **1.01** |    **0.13** | **0.1278** |     **536 B** |        **1.00** |
+| FastEnumToString     | Read(...)lock [245]  |    16.4008 ns |   1.4773 ns |  0.0810 ns |  0.06 |    0.01 | 0.0115 |      48 B |        0.09 |
+| EnumsNetAsString     | Read(...)lock [245]  | 1,133.2051 ns | 166.8450 ns |  9.1453 ns |  3.98 |    0.37 | 0.3300 |    1384 B |        2.58 |
+| NetEscapadesToString | Read(...)lock [245]  |   318.8403 ns |  59.5440 ns |  3.2638 ns |  1.12 |    0.10 | 0.1278 |     536 B |        1.00 |
+| RaiqubToString       | Read(...)lock [245]  |   428.1725 ns |  37.8223 ns |  2.0732 ns |  1.50 |    0.14 | 0.1221 |     512 B |        0.96 |

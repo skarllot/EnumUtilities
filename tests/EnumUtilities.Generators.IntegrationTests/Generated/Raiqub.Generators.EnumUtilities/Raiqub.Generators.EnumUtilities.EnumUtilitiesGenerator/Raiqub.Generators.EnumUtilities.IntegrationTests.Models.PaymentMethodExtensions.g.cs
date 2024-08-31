@@ -14,14 +14,14 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class PaymentMethodExtensions
     {
-        private static readonly PaymentMethodMetadata.StringFormatter s_stringFormatter = PaymentMethodMetadata.StringFormatter.Instance;
         private static readonly PaymentMethodMetadata.SerializationStringFormatter s_serializationStringFormatter = PaymentMethodMetadata.SerializationStringFormatter.Instance;
 
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
         /// <returns>The string representation of the value of this instance.</returns>
         public static string ToStringFast(this PaymentMethod value)
         {
-            return EnumStringFormatter.GetString((int)value, s_stringFormatter);
+            var numberValue = (int)value;
+            return GetNameInlined(numberValue) ?? numberValue.ToString();
         }
 
         /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
@@ -29,14 +29,46 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns>The number of characters produced by converting the specified value to string.</returns>
         public static int GetStringLength(this PaymentMethod value)
         {
-            return EnumStringFormatter.GetStringLength((int)value, s_stringFormatter);
+            var numberValue = (int)value;
+            return GetNameLengthInlined(numberValue) ?? EnumNumericFormatter.GetStringLength(numberValue);
         }
 
         /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
         /// <returns><c>true</c> if the value of this instance exists in the enumeration; <c>false</c> otherwise.</returns>
         public static bool IsDefined(this PaymentMethod value)
         {
-            return PaymentMethodValidation.IsDefined(value);
+            return (int)value switch
+            {
+                0 => true,
+                1 => true,
+                2 => true,
+                3 => true,
+                _ => false
+            };
+        }
+
+        private static int? GetNameLengthInlined(int value)
+        {
+            return value switch
+            {
+                0 => 6,
+                1 => 5,
+                2 => 4,
+                3 => 6,
+                _ => null
+            };
+        }
+
+        private static string? GetNameInlined(int value)
+        {
+            return value switch
+            {
+                0 => "Credit",
+                1 => "Debit",
+                2 => "Cash",
+                3 => "Cheque",
+                _ => null
+            };
         }
 
         /// <summary>Adds two enumerations and replaces the first integer with the sum, as an atomic operation.</summary>

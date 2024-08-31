@@ -70,52 +70,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             public static ReadOnlySpan<byte> Sunday => new byte[6] { 83, 117, 110, 100, 97, 121 };
         }
 
-        /// <summary>Provides support for formatting <see cref="WeekDays"/> values.</summary>
-        internal sealed partial class StringFormatter : IEnumFormatter<int>
-        {
-            /// <summary>Gets the singleton instance of the <see cref="StringFormatter"/> class.</summary>
-            public static StringFormatter Instance = new StringFormatter();
-
-            /// <inheritdoc />
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public int GetStringLengthForNumber(int value) => EnumNumericFormatter.GetStringLength(value);
-
-            /// <inheritdoc />
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public string GetStringForNumber(int value) => value.ToString();
-
-            /// <inheritdoc />
-            public int? TryGetStringLengthForMember(int value)
-            {
-                return value switch
-                {
-                    0 => 6,
-                    1 => 7,
-                    2 => 9,
-                    3 => 8,
-                    4 => 6,
-                    5 => 8,
-                    6 => 6,
-                    _ => null
-                };
-            }
-
-            /// <inheritdoc />
-            public string? TryGetStringForMember(int value)
-            {
-                return value switch
-                {
-                    0 => "Monday",
-                    1 => "Tuesday",
-                    2 => "Wednesday",
-                    3 => "Thursday",
-                    4 => "Friday",
-                    5 => "Saturday",
-                    6 => "Sunday",
-                    _ => null
-                };
-            }
-        }
 
         /// <summary>Provides support for parsing <see cref="WeekDays"/> values.</summary>
         internal sealed partial class StringParser

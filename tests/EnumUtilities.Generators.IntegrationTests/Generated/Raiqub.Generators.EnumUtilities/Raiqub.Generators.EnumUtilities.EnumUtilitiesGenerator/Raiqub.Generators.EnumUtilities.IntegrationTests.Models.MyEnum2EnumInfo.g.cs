@@ -90,46 +90,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             public static ReadOnlySpan<byte> Cheque => new byte[6] { 67, 104, 101, 113, 117, 101 };
         }
 
-        /// <summary>Provides support for formatting <see cref="MyEnum2"/> values.</summary>
-        internal sealed partial class StringFormatter : IEnumFormatter<int>
-        {
-            /// <summary>Gets the singleton instance of the <see cref="StringFormatter"/> class.</summary>
-            public static StringFormatter Instance = new StringFormatter();
-
-            /// <inheritdoc />
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public int GetStringLengthForNumber(int value) => EnumNumericFormatter.GetStringLength(value);
-
-            /// <inheritdoc />
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public string GetStringForNumber(int value) => value.ToString();
-
-            /// <inheritdoc />
-            public int? TryGetStringLengthForMember(int value)
-            {
-                return value switch
-                {
-                    0 => 6,
-                    1 => 5,
-                    2 => 4,
-                    3 => 6,
-                    _ => null
-                };
-            }
-
-            /// <inheritdoc />
-            public string? TryGetStringForMember(int value)
-            {
-                return value switch
-                {
-                    0 => "Credit",
-                    1 => "Debit",
-                    2 => "Cash",
-                    3 => "Cheque",
-                    _ => null
-                };
-            }
-        }
 
         /// <summary>Provides support for formatting <see cref="MyEnum2"/> serialized values.</summary>
         internal sealed partial class SerializationStringFormatter : IEnumFormatter<int>

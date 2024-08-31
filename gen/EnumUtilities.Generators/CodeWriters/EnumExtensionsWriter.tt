@@ -40,9 +40,8 @@ using Raiqub.Generators.EnumUtilities.Formatters;
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("<#= CurrentAssemblyName.Name #>", "<#= Append($"{CurrentAssemblyName.Version}") #>")]
 <#= Model.IsPublic ? "public" : "internal" #> static partial class <#= Model.Name #>Extensions
 {
-    private static readonly <#= Model.MetadataClassName #>.StringFormatter s_stringFormatter = <#= Model.MetadataClassName #>.StringFormatter.Instance;
 <#
-            if (Model.HasSerializationValue)
+            if (Model.HasSerializationValue && (Model.SelectedGenerators & SelectedGenerators.MainGenerator) != 0)
             {
 #>
     private static readonly <#= Model.MetadataClassName #>.SerializationStringFormatter s_serializationStringFormatter = <#= Model.MetadataClassName #>.SerializationStringFormatter.Instance;
@@ -52,10 +51,13 @@ using Raiqub.Generators.EnumUtilities.Formatters;
 
 <#
             WriteDefaultBlock();
-            WriteInterlockedBlock();
-            WriteEnumMemberBlock();
-            WriteDescriptionBlock();
-            WriteDisplayBlock();
+            if ((Model.SelectedGenerators & SelectedGenerators.MainGenerator) != 0)
+            {
+                WriteInterlockedBlock();
+                WriteEnumMemberBlock();
+                WriteDescriptionBlock();
+                WriteDisplayBlock();
+            }
 #>
 }
 <#
@@ -73,5 +75,5 @@ using Raiqub.Generators.EnumUtilities.Formatters;
     public override string GetFileName() => $"{Model.Namespace ?? "_"}.{Model.Name}Extensions.g.cs";
 
     protected override bool CanGenerateFor(EnumToGenerate model) =>
-        (model.SelectedGenerators & SelectedGenerators.MainGenerator) != 0;
+        (model.SelectedGenerators & (SelectedGenerators.MainGenerator | SelectedGenerators.JsonConverter)) != 0;
 #>

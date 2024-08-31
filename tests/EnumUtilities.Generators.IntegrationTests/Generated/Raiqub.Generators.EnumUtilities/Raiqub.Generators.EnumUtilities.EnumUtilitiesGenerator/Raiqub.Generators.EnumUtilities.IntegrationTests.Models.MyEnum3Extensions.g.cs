@@ -14,13 +14,13 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class MyEnum3Extensions
     {
-        private static readonly MyEnum3Metadata.StringFormatter s_stringFormatter = MyEnum3Metadata.StringFormatter.Instance;
 
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
         /// <returns>The string representation of the value of this instance.</returns>
         public static string ToStringFast(this NestedInClass.MyEnum3 value)
         {
-            return EnumStringFormatter.GetString((int)value, s_stringFormatter);
+            var numberValue = (int)value;
+            return GetNameInlined(numberValue) ?? numberValue.ToString();
         }
 
         /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
@@ -28,14 +28,55 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns>The number of characters produced by converting the specified value to string.</returns>
         public static int GetStringLength(this NestedInClass.MyEnum3 value)
         {
-            return EnumStringFormatter.GetStringLength((int)value, s_stringFormatter);
+            var numberValue = (int)value;
+            return GetNameLengthInlined(numberValue) ?? EnumNumericFormatter.GetStringLength(numberValue);
         }
 
         /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
         /// <returns><c>true</c> if the value of this instance exists in the enumeration; <c>false</c> otherwise.</returns>
         public static bool IsDefined(this NestedInClass.MyEnum3 value)
         {
-            return MyEnum3Validation.IsDefined(value);
+            return (int)value switch
+            {
+                0 => true,
+                1 => true,
+                2 => true,
+                3 => true,
+                4 => true,
+                5 => true,
+                6 => true,
+                _ => false
+            };
+        }
+
+        private static int? GetNameLengthInlined(int value)
+        {
+            return value switch
+            {
+                0 => 6,
+                1 => 7,
+                2 => 9,
+                3 => 8,
+                4 => 6,
+                5 => 8,
+                6 => 6,
+                _ => null
+            };
+        }
+
+        private static string? GetNameInlined(int value)
+        {
+            return value switch
+            {
+                0 => "Monday",
+                1 => "Tuesday",
+                2 => "Wednesday",
+                3 => "Thursday",
+                4 => "Friday",
+                5 => "Saturday",
+                6 => "Sunday",
+                _ => null
+            };
         }
 
         /// <summary>Adds two enumerations and replaces the first integer with the sum, as an atomic operation.</summary>

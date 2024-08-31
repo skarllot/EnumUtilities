@@ -14,46 +14,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class SeasonMetadata
     {
-        /// <summary>Provides support for formatting <see cref="Season"/> values.</summary>
-        internal sealed partial class StringFormatter : IEnumFormatter<int>
-        {
-            /// <summary>Gets the singleton instance of the <see cref="StringFormatter"/> class.</summary>
-            public static StringFormatter Instance = new StringFormatter();
-
-            /// <inheritdoc />
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public int GetStringLengthForNumber(int value) => EnumNumericFormatter.GetStringLength(value);
-
-            /// <inheritdoc />
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public string GetStringForNumber(int value) => value.ToString();
-
-            /// <inheritdoc />
-            public int? TryGetStringLengthForMember(int value)
-            {
-                return value switch
-                {
-                    1 => 6,
-                    2 => 6,
-                    3 => 6,
-                    4 => 6,
-                    _ => null
-                };
-            }
-
-            /// <inheritdoc />
-            public string? TryGetStringForMember(int value)
-            {
-                return value switch
-                {
-                    1 => "Spring",
-                    2 => "Summer",
-                    3 => "Autumn",
-                    4 => "Winter",
-                    _ => null
-                };
-            }
-        }
 
         /// <summary>Provides support for parsing <see cref="Season"/> values.</summary>
         internal sealed partial class StringParser

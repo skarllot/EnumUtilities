@@ -64,50 +64,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             public static ReadOnlySpan<byte> Fashion => new byte[7] { 70, 97, 115, 104, 105, 111, 110 };
         }
 
-        /// <summary>Provides support for formatting <see cref="Categories"/> values.</summary>
-        internal sealed partial class StringFormatter : IEnumFormatter<int>
-        {
-            /// <summary>Gets the singleton instance of the <see cref="StringFormatter"/> class.</summary>
-            public static StringFormatter Instance = new StringFormatter();
-
-            /// <inheritdoc />
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public int GetStringLengthForNumber(int value) => EnumNumericFormatter.GetStringLength(value);
-
-            /// <inheritdoc />
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public string GetStringForNumber(int value) => value.ToString();
-
-            /// <inheritdoc />
-            public int? TryGetStringLengthForMember(int value)
-            {
-                return value switch
-                {
-                    0 => 11,
-                    1 => 4,
-                    2 => 10,
-                    3 => 4,
-                    4 => 10,
-                    5 => 7,
-                    _ => null
-                };
-            }
-
-            /// <inheritdoc />
-            public string? TryGetStringForMember(int value)
-            {
-                return value switch
-                {
-                    0 => "Electronics",
-                    1 => "Food",
-                    2 => "Automotive",
-                    3 => "Arts",
-                    4 => "BeautyCare",
-                    5 => "Fashion",
-                    _ => null
-                };
-            }
-        }
 
         /// <summary>Provides support for parsing <see cref="Categories"/> values.</summary>
         internal sealed partial class StringParser

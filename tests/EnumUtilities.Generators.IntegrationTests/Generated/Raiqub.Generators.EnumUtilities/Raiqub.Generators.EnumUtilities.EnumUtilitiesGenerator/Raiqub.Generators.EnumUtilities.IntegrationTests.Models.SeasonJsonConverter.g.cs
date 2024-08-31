@@ -18,7 +18,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         private const int MaxBytesLength = 12;
         private const int MaxCharsLength = 2;
 
-        private static readonly SeasonMetadata.StringFormatter s_stringFormatter = SeasonMetadata.StringFormatter.Instance;
         private static readonly SeasonMetadata.StringParser s_stringParser = SeasonMetadata.StringParser.Instance;
 
         public override Season Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -50,8 +49,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                     writer.WriteStringValue("⛄"u8);
                     break;
                 default:
-                    string strValue = EnumStringFormatter.GetString((int)value, s_stringFormatter);
-                    writer.WriteStringValue(strValue);
+                    writer.WriteStringValue(value.ToStringFast());
                     break;
             }
         }
@@ -95,8 +93,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                     writer.WriteStringValue("⛄");
                     break;
                 default:
-                    string strValue = EnumStringFormatter.GetString((int)value, s_stringFormatter);
-                    writer.WriteStringValue(strValue);
+                    writer.WriteStringValue(value.ToStringFast());
                     break;
             }
         }
