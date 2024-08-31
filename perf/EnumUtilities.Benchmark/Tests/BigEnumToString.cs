@@ -6,10 +6,13 @@ using FastEnumUtility;
 namespace EnumUtilities.Benchmark.Tests;
 
 [MemoryDiagnoser]
-[ShortRunJob]
+[MediumRunJob]
 public class BigEnumToString
 {
-    public IEnumerable<Elf> Values => [0, (Elf)1, (Elf)1000];
+    public IEnumerable<Elf> Values =>
+    [
+        0, (Elf)1, (Elf)32, (Elf)1000
+    ];
 
     [ParamsSource(nameof(Values))] public Elf Elf;
 

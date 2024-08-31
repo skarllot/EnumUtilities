@@ -6,12 +6,12 @@ using FastEnumUtility;
 namespace EnumUtilities.Benchmark.Tests;
 
 [MemoryDiagnoser]
-[ShortRunJob]
+[MediumRunJob]
 public class BigFlagsEnumToString
 {
     public IEnumerable<Permissions> Values =>
     [
-        0, (Permissions)1, (Permissions)2, (Permissions)3, (Permissions)1000, (Permissions)int.MaxValue,
+        0, (Permissions)(1 << 15), (Permissions)3, (Permissions)1000, (Permissions)int.MaxValue,
     ];
 
     [ParamsSource(nameof(Values))] public Permissions Permissions;

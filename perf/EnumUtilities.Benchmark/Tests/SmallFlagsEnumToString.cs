@@ -6,12 +6,12 @@ using FastEnumUtility;
 namespace EnumUtilities.Benchmark.Tests;
 
 [MemoryDiagnoser]
-[ShortRunJob]
+[MediumRunJob]
 public class SmallFlagsEnumToString
 {
     public IEnumerable<UserRole> Values =>
     [
-        0, (UserRole)1, (UserRole)2, (UserRole)3, (UserRole)1000,
+        0, (UserRole)4, (UserRole)3, (UserRole)1000,
     ];
 
     [ParamsSource(nameof(Values))] public UserRole UserRole;
