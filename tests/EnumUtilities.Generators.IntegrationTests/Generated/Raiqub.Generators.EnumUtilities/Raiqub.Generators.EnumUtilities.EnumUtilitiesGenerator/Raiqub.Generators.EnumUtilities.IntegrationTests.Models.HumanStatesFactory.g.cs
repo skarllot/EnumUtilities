@@ -260,11 +260,11 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return new[]
             {
-                (HumanStates)1,
-                (HumanStates)2,
-                (HumanStates)3,
-                (HumanStates)4,
-                (HumanStates)5,
+                (HumanStates)(1),
+                (HumanStates)(2),
+                (HumanStates)(3),
+                (HumanStates)(4),
+                (HumanStates)(5),
             };
         }
 

@@ -260,12 +260,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return new[]
             {
-                (SlimCategories)0,
-                (SlimCategories)1,
-                (SlimCategories)2,
-                (SlimCategories)3,
-                (SlimCategories)4,
-                (SlimCategories)5,
+                (SlimCategories)(0),
+                (SlimCategories)(1),
+                (SlimCategories)(2),
+                (SlimCategories)(3),
+                (SlimCategories)(4),
+                (SlimCategories)(5),
             };
         }
 
