@@ -1,4 +1,7 @@
-﻿namespace Raiqub.Generators.EnumUtilities.Formatters;
+﻿using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+
+namespace Raiqub.Generators.EnumUtilities.Formatters;
 
 /// <summary>Provides utility methods for formatting enumerations as strings.</summary>
 public static class EnumStringFormatter
@@ -9,6 +12,7 @@ public static class EnumStringFormatter
     /// <param name="value">The value to format.</param>
     /// <param name="enumFormatter">The formatter to use.</param>
     /// <returns>The length of the string representation of the value.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static int GetStringLength<TFormatter, TNumber>(
         TNumber value,
         TFormatter enumFormatter)
@@ -24,6 +28,7 @@ public static class EnumStringFormatter
     /// <param name="value">The value to format.</param>
     /// <param name="enumFormatter">The formatter to use.</param>
     /// <returns>The string representation of the value.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static string GetString<TFormatter, TNumber>(
         TNumber value,
         TFormatter enumFormatter)
@@ -58,13 +63,14 @@ public static class EnumStringFormatter
 
 #if NET6_0_OR_GREATER
         var result = string.Create(strlen, 0, static (_, _) => { });
+        var span = MemoryMarshal.CreateSpan(ref MemoryMarshal.GetReference(result.AsSpan()), strlen);
+        {
 #else
         var result = new string('\0', strlen);
-#endif
-
         fixed (char* ptr = result)
         {
             var span = new Span<char>(ptr, strlen);
+#endif
 
             string name = enumFormatter.GetStringForSingleMember(foundItems[--foundItemsCount]);
             name.AsSpan().CopyTo(span);

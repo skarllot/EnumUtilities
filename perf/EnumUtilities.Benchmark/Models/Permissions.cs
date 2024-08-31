@@ -1,6 +1,11 @@
-﻿namespace EnumUtilities.Benchmark.Models;
+﻿using NetEscapades.EnumGenerators;
+using Raiqub.Generators.EnumUtilities;
+
+namespace EnumUtilities.Benchmark.Models;
 
 [Flags]
+[EnumExtensions(ExtensionClassName = "PermissionsNetEscapades")]
+[EnumGenerator]
 public enum Permissions : uint
 {
     None = 0,

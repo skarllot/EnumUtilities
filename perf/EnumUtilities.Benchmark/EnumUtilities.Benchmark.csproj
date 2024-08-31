@@ -4,6 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Configurations>Release</Configurations>
     <Platforms>AnyCPU</Platforms>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" Version="0.14.0" />
