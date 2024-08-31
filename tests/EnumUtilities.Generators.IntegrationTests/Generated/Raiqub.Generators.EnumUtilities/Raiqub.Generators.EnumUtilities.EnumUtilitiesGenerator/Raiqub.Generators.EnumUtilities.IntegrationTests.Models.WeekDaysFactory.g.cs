@@ -397,13 +397,13 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return new[]
             {
-                (WeekDays)0,
-                (WeekDays)1,
-                (WeekDays)2,
-                (WeekDays)3,
-                (WeekDays)4,
-                (WeekDays)5,
-                (WeekDays)6,
+                (WeekDays)(0),
+                (WeekDays)(1),
+                (WeekDays)(2),
+                (WeekDays)(3),
+                (WeekDays)(4),
+                (WeekDays)(5),
+                (WeekDays)(6),
             };
         }
 

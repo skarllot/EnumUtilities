@@ -13,10 +13,10 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
-    internal static partial class MyEnum2Factory
+    public static partial class StatusCodeFactory
     {
-        private static readonly MyEnum2Metadata.StringParser s_stringParser = MyEnum2Metadata.StringParser.Instance;
-        private static readonly MyEnum2Metadata.SerializationStringParser s_serializationStringParser = MyEnum2Metadata.SerializationStringParser.Instance;
+        private static readonly StatusCodeMetadata.StringParser s_stringParser = StatusCodeMetadata.StringParser.Instance;
+        private static readonly StatusCodeMetadata.SerializationStringParser s_serializationStringParser = StatusCodeMetadata.SerializationStringParser.Instance;
 
         /// <summary>
         /// Converts the string representation of the name or numeric value of one or more enumerated constants to
@@ -24,10 +24,10 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// </summary>
         /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
         /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-        /// <returns>The value represented by the specified name or numeric value. Note that this value need not be a member of the MyEnum2 enumeration.</returns>
+        /// <returns>The value represented by the specified name or numeric value. Note that this value need not be a member of the StatusCode enumeration.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
-        public static NestedInClass.MyEnum2 Parse(string value, bool ignoreCase = false)
+        public static StatusCode Parse(string value, bool ignoreCase = false)
         {
             if (value is null) ThrowArgumentNullException(nameof(value));
             TryParse(value.AsSpan(), ignoreCase, throwOnFailure: true, out var result);
@@ -40,9 +40,9 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// </summary>
         /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
         /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-        /// <returns>The value represented by the specified name or numeric value. Note that this value need not be a member of the MyEnum2 enumeration.</returns>
+        /// <returns>The value represented by the specified name or numeric value. Note that this value need not be a member of the StatusCode enumeration.</returns>
         /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
-        public static NestedInClass.MyEnum2 Parse(ReadOnlySpan<char> value, bool ignoreCase = false)
+        public static StatusCode Parse(ReadOnlySpan<char> value, bool ignoreCase = false)
         {
             TryParse(value, ignoreCase, throwOnFailure: true, out var result);
             return result;
@@ -54,10 +54,10 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// </summary>
         /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
         /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-        /// <returns>The value represented by the specified name or numeric value or null. Note that this value need not be a member of the MyEnum2 enumeration.</returns>
+        /// <returns>The value represented by the specified name or numeric value or null. Note that this value need not be a member of the StatusCode enumeration.</returns>
         /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
         [return: NotNullIfNotNull("value")]
-        public static NestedInClass.MyEnum2? ParseOrNull(string? value, bool ignoreCase = false)
+        public static StatusCode? ParseOrNull(string? value, bool ignoreCase = false)
         {
             if (value is null) return null;
             TryParse(value.AsSpan(), ignoreCase, throwOnFailure: true, out var result);
@@ -71,12 +71,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
         /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
         /// <param name="result">
-        /// When this method returns, result contains an object of type MyEnum2 whose value is represented by value
+        /// When this method returns, result contains an object of type StatusCode whose value is represented by value
         /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-        /// underlying type of MyEnum2. Note that this value need not be a member of the MyEnum2 enumeration.
+        /// underlying type of StatusCode. Note that this value need not be a member of the StatusCode enumeration.
         /// </param>
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-        public static bool TryParse([NotNullWhen(true)] string? value, bool ignoreCase, out NestedInClass.MyEnum2 result)
+        public static bool TryParse([NotNullWhen(true)] string? value, bool ignoreCase, out StatusCode result)
         {
             return TryParse(value.AsSpan(), ignoreCase, throwOnFailure: false, out result);
         }
@@ -87,12 +87,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// </summary>
         /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
         /// <param name="result">
-        /// When this method returns, result contains an object of type MyEnum2 whose value is represented by value
+        /// When this method returns, result contains an object of type StatusCode whose value is represented by value
         /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-        /// underlying type of MyEnum2. Note that this value need not be a member of the MyEnum2 enumeration.
+        /// underlying type of StatusCode. Note that this value need not be a member of the StatusCode enumeration.
         /// </param>
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-        public static bool TryParse([NotNullWhen(true)] string? value, out NestedInClass.MyEnum2 result)
+        public static bool TryParse([NotNullWhen(true)] string? value, out StatusCode result)
         {
             return TryParse(value.AsSpan(), ignoreCase: false, throwOnFailure: false, out result);
         }
@@ -104,12 +104,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
         /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
         /// <returns>
-        /// Contains an object of type MyEnum2 whose value is represented by value if the parse operation succeeds.
+        /// Contains an object of type StatusCode whose value is represented by value if the parse operation succeeds.
         /// If the parse operation fails, result contains <c>null</c> value.
         /// </returns>
-        public static NestedInClass.MyEnum2? TryParse(string? value, bool ignoreCase = false)
+        public static StatusCode? TryParse(string? value, bool ignoreCase = false)
         {
-            return TryParse(value.AsSpan(), ignoreCase, throwOnFailure: false, out NestedInClass.MyEnum2 result) ? result : null;
+            return TryParse(value.AsSpan(), ignoreCase, throwOnFailure: false, out StatusCode result) ? result : null;
         }
 
         /// <summary>
@@ -119,12 +119,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
         /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
         /// <param name="result">
-        /// When this method returns, result contains an object of type MyEnum2 whose value is represented by value
+        /// When this method returns, result contains an object of type StatusCode whose value is represented by value
         /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-        /// underlying type of MyEnum2. Note that this value need not be a member of the MyEnum2 enumeration.
+        /// underlying type of StatusCode. Note that this value need not be a member of the StatusCode enumeration.
         /// </param>
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-        public static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, out NestedInClass.MyEnum2 result)
+        public static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, out StatusCode result)
         {
             return TryParse(value, ignoreCase, throwOnFailure: false, out result);
         }
@@ -135,12 +135,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// </summary>
         /// <param name="value">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
         /// <param name="result">
-        /// When this method returns, result contains an object of type MyEnum2 whose value is represented by value
+        /// When this method returns, result contains an object of type StatusCode whose value is represented by value
         /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-        /// underlying type of MyEnum2. Note that this value need not be a member of the MyEnum2 enumeration.
+        /// underlying type of StatusCode. Note that this value need not be a member of the StatusCode enumeration.
         /// </param>
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-        public static bool TryParse(ReadOnlySpan<char> value, out NestedInClass.MyEnum2 result)
+        public static bool TryParse(ReadOnlySpan<char> value, out StatusCode result)
         {
             return TryParse(value, ignoreCase: false, throwOnFailure: false, out result);
         }
@@ -152,15 +152,15 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
         /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
         /// <returns>
-        /// Contains an object of type MyEnum2 whose value is represented by value if the parse operation succeeds.
+        /// Contains an object of type StatusCode whose value is represented by value if the parse operation succeeds.
         /// If the parse operation fails, result contains <c>null</c> value.
         /// </returns>
-        public static NestedInClass.MyEnum2? TryParse(ReadOnlySpan<char> value, bool ignoreCase = false)
+        public static StatusCode? TryParse(ReadOnlySpan<char> value, bool ignoreCase = false)
         {
-            return TryParse(value, ignoreCase, throwOnFailure: false, out NestedInClass.MyEnum2 result) ? result : null;
+            return TryParse(value, ignoreCase, throwOnFailure: false, out StatusCode result) ? result : null;
         }
 
-        private static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, bool throwOnFailure, out NestedInClass.MyEnum2 result)
+        private static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, bool throwOnFailure, out StatusCode result)
         {
             var comparisonType = ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
             bool success = EnumStringParser.TryParse(value, s_stringParser, comparisonType, throwOnFailure, out int number);
@@ -170,7 +170,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 return false;
             }
 
-            result = (NestedInClass.MyEnum2)number;
+            result = (StatusCode)number;
             return true;
         }
 
@@ -181,9 +181,9 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <param name="name">The string representation of the enumeration name or underlying value to convert.</param>
         /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
         /// <param name="result">
-        /// When this method returns, result contains an object of type MyEnum2 whose value is represented by value
+        /// When this method returns, result contains an object of type StatusCode whose value is represented by value
         /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-        /// underlying type of MyEnum2. Note that this value need not be a member of the MyEnum2 enumeration.
+        /// underlying type of StatusCode. Note that this value need not be a member of the StatusCode enumeration.
         /// </param>
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
         /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
@@ -191,7 +191,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         public static bool TryParse(
             [NotNullWhen(true)] string? name,
             StringComparison comparisonType,
-            out NestedInClass.MyEnum2 result)
+            out StatusCode result)
         {
             bool success = EnumStringParser.TryParse(name, s_stringParser, comparisonType, throwOnFailure: false, out int number);
             if (!success)
@@ -200,7 +200,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 return false;
             }
 
-            result = (NestedInClass.MyEnum2)number;
+            result = (StatusCode)number;
             return true;
         }
 
@@ -210,15 +210,15 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// </summary>
         /// <param name="name">The case-insensitive string representation of the enumeration name or underlying value to convert.</param>
         /// <param name="result">
-        /// When this method returns, result contains an object of type MyEnum2 whose value is represented by value
+        /// When this method returns, result contains an object of type StatusCode whose value is represented by value
         /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-        /// underlying type of MyEnum2. Note that this value need not be a member of the MyEnum2 enumeration.
+        /// underlying type of StatusCode. Note that this value need not be a member of the StatusCode enumeration.
         /// </param>
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
         [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
         public static bool TryParseIgnoreCase(
             [NotNullWhen(true)] string? name,
-            out NestedInClass.MyEnum2 result)
+            out StatusCode result)
         {
             return TryParse(name.AsSpan(), ignoreCase: true, out result);
         }
@@ -229,13 +229,13 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// </summary>
         /// <param name="name">The case-insensitive string representation of the enumeration name or underlying value to convert.</param>
         /// <returns>
-        /// Contains an object of type MyEnum2 whose value is represented by value if the parse operation succeeds.
+        /// Contains an object of type StatusCode whose value is represented by value if the parse operation succeeds.
         /// If the parse operation fails, result contains <c>null</c> value.
         /// </returns>
         [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
-        public static NestedInClass.MyEnum2? TryParseIgnoreCase(string? name)
+        public static StatusCode? TryParseIgnoreCase(string? name)
         {
-            return TryParse(name.AsSpan(), ignoreCase: true, out NestedInClass.MyEnum2 result) ? result : null;
+            return TryParse(name.AsSpan(), ignoreCase: true, out StatusCode result) ? result : null;
         }
 
         /// <summary>
@@ -245,14 +245,14 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <param name="name">The string representation of the enumeration name or underlying value to convert.</param>
         /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
         /// <returns>
-        /// Contains an object of type MyEnum2 whose value is represented by value if the parse operation succeeds.
+        /// Contains an object of type StatusCode whose value is represented by value if the parse operation succeeds.
         /// If the parse operation fails, result contains <c>null</c> value.
         /// </returns>
         /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
         [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
-        public static NestedInClass.MyEnum2? TryParse(string? name, StringComparison comparisonType)
+        public static StatusCode? TryParse(string? name, StringComparison comparisonType)
         {
-            return TryParse(name, comparisonType, out NestedInClass.MyEnum2 result) ? result : null;
+            return TryParse(name, comparisonType, out StatusCode result) ? result : null;
         }
 
         /// <summary>
@@ -260,10 +260,10 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// </summary>
         /// <param name="value">The string representation of the enumeration serialized value to convert.</param>
         /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-        /// <returns>The value represented by the specified serialized value. Note that this value need not be a member of the MyEnum2 enumeration.</returns>
+        /// <returns>The value represented by the specified serialized value. Note that this value need not be a member of the StatusCode enumeration.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
-        public static NestedInClass.MyEnum2 ParseFromEnumMemberValue(string value, bool ignoreCase = false)
+        public static StatusCode ParseFromEnumMemberValue(string value, bool ignoreCase = false)
         {
             if (value is null) ThrowArgumentNullException(nameof(value));
             TryParseFromEnumMemberValue(value.AsSpan(), ignoreCase, throwOnFailure: true, out var result);
@@ -275,9 +275,9 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// </summary>
         /// <param name="value">The string representation of the enumeration serialized value to convert.</param>
         /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-        /// <returns>The value represented by the specified serialized value. Note that this value need not be a member of the MyEnum2 enumeration.</returns>
+        /// <returns>The value represented by the specified serialized value. Note that this value need not be a member of the StatusCode enumeration.</returns>
         /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
-        public static NestedInClass.MyEnum2 ParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase = false)
+        public static StatusCode ParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase = false)
         {
             TryParseFromEnumMemberValue(value, ignoreCase, throwOnFailure: true, out var result);
             return result;
@@ -288,10 +288,10 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// </summary>
         /// <param name="value">The string representation of the enumeration serialized value to convert.</param>
         /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-        /// <returns>The value represented by the specified serialized value or null. Note that this value need not be a member of the MyEnum2 enumeration.</returns>
+        /// <returns>The value represented by the specified serialized value or null. Note that this value need not be a member of the StatusCode enumeration.</returns>
         /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
         [return: NotNullIfNotNull("value")]
-        public static NestedInClass.MyEnum2? ParseFromEnumMemberValueOrNull(string? value, bool ignoreCase = false)
+        public static StatusCode? ParseFromEnumMemberValueOrNull(string? value, bool ignoreCase = false)
         {
             if (value is null) return null;
             TryParseFromEnumMemberValue(value.AsSpan(), ignoreCase, throwOnFailure: true, out var result);
@@ -305,12 +305,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
         /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
         /// <param name="result">
-        /// When this method returns, result contains an object of type MyEnum2 whose value is represented by a
+        /// When this method returns, result contains an object of type StatusCode whose value is represented by a
         /// serialized value if the parse operation succeeds. If the parse operation fails, result contains the default
-        /// value of the underlying type of MyEnum2. Note that this value need not be a member of the MyEnum2 enumeration.
+        /// value of the underlying type of StatusCode. Note that this value need not be a member of the StatusCode enumeration.
         /// </param>
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-        public static bool TryParseFromEnumMemberValue([NotNullWhen(true)] string? value, bool ignoreCase, out NestedInClass.MyEnum2 result)
+        public static bool TryParseFromEnumMemberValue([NotNullWhen(true)] string? value, bool ignoreCase, out StatusCode result)
         {
             return TryParseFromEnumMemberValue(value.AsSpan(), ignoreCase, throwOnFailure: false, out result);
         }
@@ -321,12 +321,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// </summary>
         /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
         /// <param name="result">
-        /// When this method returns, result contains an object of type MyEnum2 whose value is represented by a
+        /// When this method returns, result contains an object of type StatusCode whose value is represented by a
         /// serialized value if the parse operation succeeds. If the parse operation fails, result contains the default
-        /// value of the underlying type of MyEnum2. Note that this value need not be a member of the MyEnum2 enumeration.
+        /// value of the underlying type of StatusCode. Note that this value need not be a member of the StatusCode enumeration.
         /// </param>
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-        public static bool TryParseFromEnumMemberValue([NotNullWhen(true)] string? value, out NestedInClass.MyEnum2 result)
+        public static bool TryParseFromEnumMemberValue([NotNullWhen(true)] string? value, out StatusCode result)
         {
             return TryParseFromEnumMemberValue(value.AsSpan(), ignoreCase: false, throwOnFailure: false, out result);
         }
@@ -337,12 +337,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
         /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
         /// <returns>
-        /// Contains an object of type MyEnum2 whose value is represented by value if the parse operation succeeds.
+        /// Contains an object of type StatusCode whose value is represented by value if the parse operation succeeds.
         /// If the parse operation fails, result contains a null value.
         /// </returns>
-        public static NestedInClass.MyEnum2? TryParseFromEnumMemberValue(string? value, bool ignoreCase = false)
+        public static StatusCode? TryParseFromEnumMemberValue(string? value, bool ignoreCase = false)
         {
-            return TryParseFromEnumMemberValue(value.AsSpan(), ignoreCase, throwOnFailure: false, out NestedInClass.MyEnum2 result) ? result : null;
+            return TryParseFromEnumMemberValue(value.AsSpan(), ignoreCase, throwOnFailure: false, out StatusCode result) ? result : null;
         }
 
         /// <summary>
@@ -352,12 +352,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
         /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
         /// <param name="result">
-        /// When this method returns, result contains an object of type MyEnum2 whose value is represented by a
+        /// When this method returns, result contains an object of type StatusCode whose value is represented by a
         /// serialized value if the parse operation succeeds. If the parse operation fails, result contains the default
-        /// value of the underlying type of MyEnum2. Note that this value need not be a member of the MyEnum2 enumeration.
+        /// value of the underlying type of StatusCode. Note that this value need not be a member of the StatusCode enumeration.
         /// </param>
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-        public static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase, out NestedInClass.MyEnum2 result)
+        public static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase, out StatusCode result)
         {
             return TryParseFromEnumMemberValue(value, ignoreCase, throwOnFailure: false, out result);
         }
@@ -368,12 +368,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// </summary>
         /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
         /// <param name="result">
-        /// When this method returns, result contains an object of type MyEnum2 whose value is represented by a
+        /// When this method returns, result contains an object of type StatusCode whose value is represented by a
         /// serialized value if the parse operation succeeds. If the parse operation fails, result contains the default
-        /// value of the underlying type of MyEnum2. Note that this value need not be a member of the MyEnum2 enumeration.
+        /// value of the underlying type of StatusCode. Note that this value need not be a member of the StatusCode enumeration.
         /// </param>
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-        public static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, out NestedInClass.MyEnum2 result)
+        public static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, out StatusCode result)
         {
             return TryParseFromEnumMemberValue(value, ignoreCase: false, throwOnFailure: false, out result);
         }
@@ -384,20 +384,20 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
         /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
         /// <returns>
-        /// Contains an object of type MyEnum2 whose value is represented by value if the parse operation succeeds.
+        /// Contains an object of type StatusCode whose value is represented by value if the parse operation succeeds.
         /// If the parse operation fails, result contains a null value.
         /// </returns>
-        public static NestedInClass.MyEnum2? TryParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase = false)
+        public static StatusCode? TryParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase = false)
         {
-            return TryParseFromEnumMemberValue(value, ignoreCase, throwOnFailure: false, out NestedInClass.MyEnum2 result) ? result : null;
+            return TryParseFromEnumMemberValue(value, ignoreCase, throwOnFailure: false, out StatusCode result) ? result : null;
         }
 
-        private static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase, bool throwOnFailure, out NestedInClass.MyEnum2 result)
+        private static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase, bool throwOnFailure, out StatusCode result)
         {
             return TryParseFromEnumMemberValue(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure, out result);
         }
 
-        private static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out NestedInClass.MyEnum2 result)
+        private static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out StatusCode result)
         {
             bool success = EnumStringParser.TryParse(value, s_serializationStringParser, comparisonType, throwOnFailure, out int number);
             if (!success)
@@ -406,7 +406,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 return false;
             }
 
-            result = (NestedInClass.MyEnum2)number;
+            result = (StatusCode)number;
             return true;
         }
 
@@ -417,9 +417,9 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
         /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
         /// <param name="result">
-        /// When this method returns, result contains an object of type MyEnum2 whose value is represented by value
+        /// When this method returns, result contains an object of type StatusCode whose value is represented by value
         /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-        /// underlying type of MyEnum2. Note that this value need not be a member of the MyEnum2 enumeration.
+        /// underlying type of StatusCode. Note that this value need not be a member of the StatusCode enumeration.
         /// </param>
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
         /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
@@ -427,7 +427,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         public static bool TryParseFromEnumMemberValue(
             [NotNullWhen(true)] string? value,
             StringComparison comparisonType,
-            out NestedInClass.MyEnum2 result)
+            out StatusCode result)
         {
             return TryParseFromEnumMemberValue(value.AsSpan(), comparisonType, throwOnFailure: false, out result);
         }
@@ -439,170 +439,176 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
         /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
         /// <returns>
-        /// Contains an object of type MyEnum2 whose value is represented by value if the parse operation succeeds.
+        /// Contains an object of type StatusCode whose value is represented by value if the parse operation succeeds.
         /// If the parse operation fails, result contains a null value.
         /// </returns>
         /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
         [Obsolete("Use TryParseFromEnumMemberValue overload with 'ignoreCase' parameter")]
-        public static NestedInClass.MyEnum2? TryParseFromEnumMemberValue(string? value, StringComparison comparisonType)
+        public static StatusCode? TryParseFromEnumMemberValue(string? value, StringComparison comparisonType)
         {
-            return TryParseFromEnumMemberValue(value.AsSpan(), comparisonType, throwOnFailure: false, out NestedInClass.MyEnum2 result) ? result : null;
-        }
-
-        public static NestedInClass.MyEnum2 CreateFromDescription(string description, StringComparison comparisonType = StringComparison.Ordinal)
-        {
-            if (description is null) ThrowArgumentNullException(nameof(description));
-            TryCreateFromDescription(description.AsSpan(), comparisonType, throwOnFailure: true, out var result);
-            return result;
-        }
-
-        public static NestedInClass.MyEnum2 CreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType = StringComparison.Ordinal)
-        {
-            TryCreateFromDescription(description, comparisonType, throwOnFailure: true, out var result);
-            return result;
-        }
-
-        [return: NotNullIfNotNull("description")]
-        public static NestedInClass.MyEnum2? CreateFromDescriptionOrNull(string? description, StringComparison comparisonType = StringComparison.Ordinal)
-        {
-            if (description is null) return null;
-            TryCreateFromDescription(description.AsSpan(), comparisonType, throwOnFailure: true, out var result);
-            return result;
-        }
-
-        public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, StringComparison comparisonType, out NestedInClass.MyEnum2 result)
-        {
-            return TryCreateFromDescription(description.AsSpan(), comparisonType, throwOnFailure: false, out result);
-        }
-
-        public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, out NestedInClass.MyEnum2 result)
-        {
-            return TryCreateFromDescription(description.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out result);
-        }
-
-        public static NestedInClass.MyEnum2? TryCreateFromDescription(string? description, StringComparison comparisonType = StringComparison.Ordinal)
-        {
-            return TryCreateFromDescription(description.AsSpan(), comparisonType, throwOnFailure: false, out NestedInClass.MyEnum2 result) ? result : null;
-        }
-
-        public static bool TryCreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType, out NestedInClass.MyEnum2 result)
-        {
-            return TryCreateFromDescription(description, comparisonType, throwOnFailure: false, out result);
-        }
-
-        public static bool TryCreateFromDescription(ReadOnlySpan<char> description, out NestedInClass.MyEnum2 result)
-        {
-            return TryCreateFromDescription(description, StringComparison.Ordinal, throwOnFailure: false, out result);
-        }
-
-        public static NestedInClass.MyEnum2? TryCreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType = StringComparison.Ordinal)
-        {
-            return TryCreateFromDescription(description, comparisonType, throwOnFailure: false, out NestedInClass.MyEnum2 result) ? result : null;
-        }
-
-        private static bool TryCreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType, bool throwOnFailure, out NestedInClass.MyEnum2 result)
-        {
-            bool success = EnumStringParser.TryParseDescription(description, s_stringParser, comparisonType, throwOnFailure, out int number);
-            if (!success)
-            {
-                result = 0;
-                return false;
-            }
-
-            result = (NestedInClass.MyEnum2)number;
-            return true;
+            return TryParseFromEnumMemberValue(value.AsSpan(), comparisonType, throwOnFailure: false, out StatusCode result) ? result : null;
         }
 
         public static bool TryCreateFromDisplayShortName(
             [NotNullWhen(true)] string? displayShortName,
             StringComparison comparisonType,
-            out NestedInClass.MyEnum2 result)
+            out StatusCode result)
         {
             return TryCreateFromDisplayName(displayShortName, comparisonType, out result);
         }
 
-        public static bool TryCreateFromDisplayShortName([NotNullWhen(true)] string? displayShortName, out NestedInClass.MyEnum2 result)
+        public static bool TryCreateFromDisplayShortName([NotNullWhen(true)] string? displayShortName, out StatusCode result)
         {
             return TryCreateFromDisplayShortName(displayShortName, StringComparison.Ordinal, out result);
         }
 
-        public static NestedInClass.MyEnum2? TryCreateFromDisplayShortName(string? displayShortName, StringComparison comparisonType)
+        public static StatusCode? TryCreateFromDisplayShortName(string? displayShortName, StringComparison comparisonType)
         {
-            return TryCreateFromDisplayShortName(displayShortName, comparisonType, out NestedInClass.MyEnum2 result) ? result : null;
+            return TryCreateFromDisplayShortName(displayShortName, comparisonType, out StatusCode result) ? result : null;
         }
 
-        public static NestedInClass.MyEnum2? TryCreateFromDisplayShortName(string? displayShortName)
+        public static StatusCode? TryCreateFromDisplayShortName(string? displayShortName)
         {
-            return TryCreateFromDisplayShortName(displayShortName, StringComparison.Ordinal, out NestedInClass.MyEnum2 result) ? result : null;
+            return TryCreateFromDisplayShortName(displayShortName, StringComparison.Ordinal, out StatusCode result) ? result : null;
         }
 
         public static bool TryCreateFromDisplayName(
             [NotNullWhen(true)] string? displayName,
             StringComparison comparisonType,
-            out NestedInClass.MyEnum2 result)
+            out StatusCode result)
         {
             int numValue;
             switch (displayName)
             {
-                case { } s when s.Equals("Credit Card", comparisonType):
+                case { } s when s.Equals("Unknown", comparisonType):
+                    numValue = -1;
+                    break;
+                case { } s when s.Equals("Success", comparisonType):
                     numValue = 0;
                     break;
-                case { } s when s.Equals("Debit Card", comparisonType):
-                    numValue = 1;
+                case { } s when s.Equals("Error", comparisonType):
+                    numValue = -2;
                     break;
-                case { } s when s.Equals("Physical Cash", comparisonType):
-                    numValue = 2;
+                case { } s when s.Equals("NotFound", comparisonType):
+                    numValue = -3;
                     break;
-                case { } s when s.Equals("Cheque", comparisonType):
-                    numValue = 3;
+                case { } s when s.Equals("Timeout", comparisonType):
+                    numValue = -4;
+                    break;
+                case { } s when s.Equals("Unauthorized", comparisonType):
+                    numValue = -5;
+                    break;
+                case { } s when s.Equals("Forbidden", comparisonType):
+                    numValue = -6;
+                    break;
+                case { } s when s.Equals("Conflict", comparisonType):
+                    numValue = -7;
+                    break;
+                case { } s when s.Equals("Gone", comparisonType):
+                    numValue = -8;
+                    break;
+                case { } s when s.Equals("Invalid request", comparisonType):
+                    numValue = -9;
+                    break;
+                case { } s when s.Equals("ServerError", comparisonType):
+                    numValue = -10;
                     break;
                 default:
                     result = default;
                     return false;
             }
 
-            result = (NestedInClass.MyEnum2)numValue;
+            result = (StatusCode)numValue;
             return true;
         }
 
-        public static bool TryCreateFromDisplayName([NotNullWhen(true)] string? displayName, out NestedInClass.MyEnum2 result)
+        public static bool TryCreateFromDisplayName([NotNullWhen(true)] string? displayName, out StatusCode result)
         {
             return TryCreateFromDisplayName(displayName, StringComparison.Ordinal, out result);
         }
 
-        public static NestedInClass.MyEnum2? TryCreateFromDisplayName(string? displayName, StringComparison comparisonType)
+        public static StatusCode? TryCreateFromDisplayName(string? displayName, StringComparison comparisonType)
         {
-            return TryCreateFromDisplayName(displayName, comparisonType, out NestedInClass.MyEnum2 result) ? result : null;
+            return TryCreateFromDisplayName(displayName, comparisonType, out StatusCode result) ? result : null;
         }
 
-        public static NestedInClass.MyEnum2? TryCreateFromDisplayName(string? displayName)
+        public static StatusCode? TryCreateFromDisplayName(string? displayName)
         {
-            return TryCreateFromDisplayName(displayName, StringComparison.Ordinal, out NestedInClass.MyEnum2 result) ? result : null;
+            return TryCreateFromDisplayName(displayName, StringComparison.Ordinal, out StatusCode result) ? result : null;
         }
 
-        /// <summary>Retrieves an array of the values of the constants in the MyEnum2 enumeration.</summary>
-        /// <returns>An array that contains the values of the constants in MyEnum2.</returns>
-        public static NestedInClass.MyEnum2[] GetValues()
+        public static bool TryCreateFromDescription(
+            [NotNullWhen(true)] string? description,
+            StringComparison comparisonType,
+            out StatusCode result)
+        {
+            int numValue;
+            switch (description)
+            {
+                case { } s when s.Equals("The request is invalid", comparisonType):
+                    numValue = -9;
+                    break;
+                default:
+                    result = default;
+                    return false;
+            }
+
+            result = (StatusCode)numValue;
+            return true;
+        }
+
+        public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, out StatusCode result)
+        {
+            return TryCreateFromDescription(description, StringComparison.Ordinal, out result);
+        }
+
+        public static StatusCode? TryCreateFromDescription(string? description, StringComparison comparisonType)
+        {
+            return TryCreateFromDescription(description, comparisonType, out StatusCode result) ? result : null;
+        }
+
+        public static StatusCode? TryCreateFromDescription(string? description)
+        {
+            return TryCreateFromDescription(description, StringComparison.Ordinal, out StatusCode result) ? result : null;
+        }
+
+        /// <summary>Retrieves an array of the values of the constants in the StatusCode enumeration.</summary>
+        /// <returns>An array that contains the values of the constants in StatusCode.</returns>
+        public static StatusCode[] GetValues()
         {
             return new[]
             {
-                (NestedInClass.MyEnum2)(0),
-                (NestedInClass.MyEnum2)(1),
-                (NestedInClass.MyEnum2)(2),
-                (NestedInClass.MyEnum2)(3),
+                (StatusCode)(-1),
+                (StatusCode)(0),
+                (StatusCode)(-2),
+                (StatusCode)(-3),
+                (StatusCode)(-4),
+                (StatusCode)(-5),
+                (StatusCode)(-6),
+                (StatusCode)(-7),
+                (StatusCode)(-8),
+                (StatusCode)(-9),
+                (StatusCode)(-10),
             };
         }
 
-        /// <summary>Retrieves an array of the names of the constants in MyEnum2 enumeration.</summary>
-        /// <returns>A string array of the names of the constants in MyEnum2.</returns>
+        /// <summary>Retrieves an array of the names of the constants in StatusCode enumeration.</summary>
+        /// <returns>A string array of the names of the constants in StatusCode.</returns>
         public static string[] GetNames()
         {
             return new[]
             {
-                "Credit",
-                "Debit",
-                "Cash",
-                "Cheque",
+                "Unknown",
+                "Success",
+                "Error",
+                "NotFound",
+                "Timeout",
+                "Unauthorized",
+                "Forbidden",
+                "Conflict",
+                "Gone",
+                "InvalidRequest",
+                "ServerError",
             };
         }
 

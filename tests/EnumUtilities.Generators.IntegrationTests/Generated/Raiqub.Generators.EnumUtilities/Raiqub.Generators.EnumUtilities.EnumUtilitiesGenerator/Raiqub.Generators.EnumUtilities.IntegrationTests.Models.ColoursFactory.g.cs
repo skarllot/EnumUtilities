@@ -260,9 +260,9 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return new[]
             {
-                (Colours)1,
-                (Colours)2,
-                (Colours)4,
+                (Colours)(1),
+                (Colours)(2),
+                (Colours)(4),
             };
         }
 
