@@ -7,7 +7,7 @@
 
     public static <#= Model.RefName #> CreateFromDescription(string description, StringComparison comparisonType = StringComparison.Ordinal)
     {
-        if (description is null) ThrowArgumentNullException(nameof(description));
+        if (description is null) ThrowHelper.ThrowArgumentNullException(nameof(description));
         TryCreateFromDescription(description.AsSpan(), comparisonType, throwOnFailure: true, out var result);
         return result;
     }
@@ -58,16 +58,25 @@
 
     private static bool TryCreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType, bool throwOnFailure, out <#= Model.RefName #> result)
     {
-        bool success = EnumStringParser.TryParseDescription(description, s_stringParser, comparisonType, throwOnFailure, out <#= Model.UnderlyingType #> number);
-        if (!success)
+        bool success = TryParseSingleDescription(description, comparisonType, out <#= Model.UnderlyingType #> number);
+        if (success)
         {
-            result = 0;
-            return false;
+            result = (<#= Model.RefName #>)number;
+            return true;
         }
 
-        result = (<#= Model.RefName #>)number;
-        return true;
+        if (throwOnFailure)
+        {
+            if (description.IsWhiteSpace())
+                ThrowHelper.ThrowInvalidEmptyParseArgument(nameof(description));
+            ThrowHelper.ThrowValueNotFound(description, nameof(description));
+        }
+
+        result = 0;
+        return false;
     }
+
 <#+
+        WriteTryParseLookup(x => x.Description, "Description");
     }
 #>

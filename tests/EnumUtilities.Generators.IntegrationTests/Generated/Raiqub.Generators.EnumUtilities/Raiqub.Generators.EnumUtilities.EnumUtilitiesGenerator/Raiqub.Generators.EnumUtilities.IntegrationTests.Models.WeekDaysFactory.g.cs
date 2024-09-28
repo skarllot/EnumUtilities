@@ -15,8 +15,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class WeekDaysFactory
     {
-        private static readonly WeekDaysMetadata.StringParser s_stringParser = WeekDaysMetadata.StringParser.Instance;
-
         /// <summary>
         /// Converts the string representation of the name or numeric value of one or more enumerated constants to
         /// an equivalent enumerated object.
@@ -28,7 +26,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
         public static WeekDays Parse(string value, bool ignoreCase = false)
         {
-            if (value is null) ThrowArgumentNullException(nameof(value));
+            if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
             TryParse(value.AsSpan(), ignoreCase, throwOnFailure: true, out var result);
             return result;
         }
@@ -162,7 +160,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         private static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, bool throwOnFailure, out WeekDays result)
         {
             var comparisonType = ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
-            bool success = EnumStringParser.TryParse(value, s_stringParser, comparisonType, throwOnFailure, out int number);
+            return TryParse(value, comparisonType, throwOnFailure, out result);
+        }
+
+        private static bool TryParse(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out WeekDays result)
+        {
+            bool success = EnumStringParser.TryParse(value, TryParseSingleName, comparisonType, throwOnFailure, out int number);
             if (!success)
             {
                 result = 0;
@@ -171,6 +174,73 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
             result = (WeekDays)number;
             return true;
+        }
+
+        private static bool TryParseSingleName(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
+        {
+            if (value.IsEmpty)
+            {
+                    result = 0;
+                    return false;
+            }
+
+            switch (value[0])
+            {
+                case 'F':
+                case 'f':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Friday", comparisonType):
+                            result = 4;
+                            return true;
+                    }
+                    break;
+                case 'M':
+                case 'm':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Monday", comparisonType):
+                            result = 0;
+                            return true;
+                    }
+                    break;
+                case 'S':
+                case 's':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Saturday", comparisonType):
+                            result = 5;
+                            return true;
+                        case { } when value.Equals("Sunday", comparisonType):
+                            result = 6;
+                            return true;
+                    }
+                    break;
+                case 'T':
+                case 't':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Tuesday", comparisonType):
+                            result = 1;
+                            return true;
+                        case { } when value.Equals("Thursday", comparisonType):
+                            result = 3;
+                            return true;
+                    }
+                    break;
+                case 'W':
+                case 'w':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Wednesday", comparisonType):
+                            result = 2;
+                            return true;
+                    }
+                    break;
+            }
+
+            result = 0;
+            return false;
         }
 
         /// <summary>
@@ -192,15 +262,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out WeekDays result)
         {
-            bool success = EnumStringParser.TryParse(name, s_stringParser, comparisonType, throwOnFailure: false, out int number);
-            if (!success)
-            {
-                result = 0;
-                return false;
-            }
-
-            result = (WeekDays)number;
-            return true;
+            return TryParse(name.AsSpan(), comparisonType, throwOnFailure: false, out result);
         }
 
         /// <summary>
@@ -421,12 +483,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 "Saturday",
                 "Sunday",
             };
-        }
-
-        [DoesNotReturn]
-        private static void ThrowArgumentNullException(string paramName)
-        {
-            throw new ArgumentNullException(paramName);
         }
     }
 }

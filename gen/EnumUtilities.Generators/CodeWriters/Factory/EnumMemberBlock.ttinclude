@@ -15,7 +15,7 @@
     /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
     public static <#= Model.RefName #> ParseFromEnumMemberValue(string value, bool ignoreCase = false)
     {
-        if (value is null) ThrowArgumentNullException(nameof(value));
+        if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
         TryParseFromEnumMemberValue(value.AsSpan(), ignoreCase, throwOnFailure: true, out var result);
         return result;
     }
@@ -149,7 +149,7 @@
 
     private static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out <#= Model.RefName #> result)
     {
-        bool success = EnumStringParser.TryParse(value, s_serializationStringParser, comparisonType, throwOnFailure, out <#= Model.UnderlyingType #> number);
+        bool success = EnumStringParser.TryParse<#= Model.IsFlags ? "WithFlags" : "" #>(value, TryParseSingleEnumMemberValue, comparisonType, throwOnFailure, out <#= Model.UnderlyingType #> number);
         if (!success)
         {
             result = 0;
@@ -159,6 +159,10 @@
         result = (<#= Model.RefName #>)number;
         return true;
     }
+
+<#+
+        WriteTryParseLookup(x => x.ResolvedSerializedValue, "EnumMemberValue");
+#>
 
     /// <summary>
     /// Converts the string representation of the serialized value to an equivalent enumerated object.

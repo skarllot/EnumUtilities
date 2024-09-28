@@ -18,8 +18,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         private const int MaxBytesLength = 12;
         private const int MaxCharsLength = 2;
 
-        private static readonly SeasonMetadata.StringParser s_stringParser = SeasonMetadata.StringParser.Instance;
-
         public override Season Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             if (reader.TokenType == JsonTokenType.String)
@@ -70,7 +68,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 "☀️" => 2,
                 "🍂" => 3,
                 "⛄" => 4,
-                _ => EnumStringParser.TryParse(name, s_stringParser, StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out int result) ? result : throw new JsonException()
+                //_ => EnumStringParser.TryParse(name, s_stringParser, StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out int result) ? result : throw new JsonException()
+                _ => throw new JsonException()
             };
         }
 
@@ -107,7 +106,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 "☀️" => 2,
                 "🍂" => 3,
                 "⛄" => 4,
-                _ => EnumStringParser.TryParse(name, s_stringParser, StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out int result) ? result : throw new JsonException()
+                //_ => EnumStringParser.TryParse(name, s_stringParser, StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out int result) ? result : throw new JsonException()
+                _ => throw new JsonException()
             };
         }
 

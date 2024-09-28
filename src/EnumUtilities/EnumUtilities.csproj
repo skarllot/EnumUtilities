@@ -26,4 +26,19 @@
     <None Include="$(SolutionDir)logos\logo-128.png" Pack="true" PackagePath="icon.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Parsers\EnumStringParserOverloads.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EnumStringParserOverloads.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Parsers\EnumStringParserOverloads.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnumStringParserOverloads.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>

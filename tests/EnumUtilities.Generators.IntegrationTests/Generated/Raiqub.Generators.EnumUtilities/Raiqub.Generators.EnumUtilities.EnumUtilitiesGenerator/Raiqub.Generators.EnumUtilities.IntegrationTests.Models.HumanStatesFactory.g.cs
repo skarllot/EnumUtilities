@@ -15,8 +15,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class HumanStatesFactory
     {
-        private static readonly HumanStatesMetadata.StringParser s_stringParser = HumanStatesMetadata.StringParser.Instance;
-
         /// <summary>
         /// Converts the string representation of the name or numeric value of one or more enumerated constants to
         /// an equivalent enumerated object.
@@ -28,7 +26,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
         public static HumanStates Parse(string value, bool ignoreCase = false)
         {
-            if (value is null) ThrowArgumentNullException(nameof(value));
+            if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
             TryParse(value.AsSpan(), ignoreCase, throwOnFailure: true, out var result);
             return result;
         }
@@ -162,7 +160,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         private static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, bool throwOnFailure, out HumanStates result)
         {
             var comparisonType = ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
-            bool success = EnumStringParser.TryParse(value, s_stringParser, comparisonType, throwOnFailure, out int number);
+            return TryParse(value, comparisonType, throwOnFailure, out result);
+        }
+
+        private static bool TryParse(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out HumanStates result)
+        {
+            bool success = EnumStringParser.TryParse(value, TryParseSingleName, comparisonType, throwOnFailure, out int number);
             if (!success)
             {
                 result = 0;
@@ -171,6 +174,76 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
             result = (HumanStates)number;
             return true;
+        }
+
+        private static bool TryParseSingleName(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
+        {
+            if (value.IsEmpty)
+            {
+                    result = 0;
+                    return false;
+            }
+
+            switch (value[0])
+            {
+                case 'D':
+                case 'd':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Dead", comparisonType):
+                            result = 5;
+                            return true;
+                    }
+                    break;
+                case 'E':
+                case 'e':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Eating", comparisonType):
+                            result = 4;
+                            return true;
+                    }
+                    break;
+                case 'I':
+                case 'i':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Idle", comparisonType):
+                            result = 1;
+                            return true;
+                    }
+                    break;
+                case 'R':
+                case 'r':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Relaxing", comparisonType):
+                            result = 1;
+                            return true;
+                    }
+                    break;
+                case 'S':
+                case 's':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Sleeping", comparisonType):
+                            result = 3;
+                            return true;
+                    }
+                    break;
+                case 'W':
+                case 'w':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Working", comparisonType):
+                            result = 2;
+                            return true;
+                    }
+                    break;
+            }
+
+            result = 0;
+            return false;
         }
 
         /// <summary>
@@ -192,15 +265,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out HumanStates result)
         {
-            bool success = EnumStringParser.TryParse(name, s_stringParser, comparisonType, throwOnFailure: false, out int number);
-            if (!success)
-            {
-                result = 0;
-                return false;
-            }
-
-            result = (HumanStates)number;
-            return true;
+            return TryParse(name.AsSpan(), comparisonType, throwOnFailure: false, out result);
         }
 
         /// <summary>
@@ -281,12 +346,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 "Dead",
                 "Relaxing",
             };
-        }
-
-        [DoesNotReturn]
-        private static void ThrowArgumentNullException(string paramName)
-        {
-            throw new ArgumentNullException(paramName);
         }
     }
 }

@@ -1,0 +1,76 @@
+﻿<#+
+    private void WriteTryParseLookup(
+        Func<EnumValue, string?> keySelector,
+        string type)
+    {
+#>
+    private static bool TryParseSingle<#= type #>(ReadOnlySpan<char> value, StringComparison comparisonType, out <#= Model.UnderlyingType #> result)
+    {
+        if (value.IsEmpty)
+        {
+<#+
+        var binEmptyValue = Model.Values.FirstOrDefault(x => keySelector(x)?.Length == 0);
+        if (binEmptyValue != null)
+        {
+#>
+                result = <#= binEmptyValue.MemberValue #>;
+                return true;
+<#+
+        }
+        else
+        {
+#>
+                result = 0;
+                return false;
+<#+
+        }
+#>
+        }
+
+<#+
+        var lookupTable = Model.Values.Where(x => keySelector(x)?.Length > 0).ToLookup(x => keySelector(x)![0]);
+#>
+        switch (value[0])
+        {
+<#+
+        foreach (var curr in lookupTable.OrderBy(x => x.Key))
+        {
+            if (char.ToUpperInvariant(curr.Key) == curr.Key && char.ToLowerInvariant(curr.Key) == curr.Key)
+            {
+#>
+            case '<#= curr.Key #>':
+<#+
+            }
+            else
+            {
+#>
+            case '<#= char.ToUpperInvariant(curr.Key) #>':
+            case '<#= char.ToLowerInvariant(curr.Key) #>':
+<#+
+            }
+#>
+                switch (value)
+                {
+<#+
+            foreach (var enumValue in curr)
+            {
+#>
+                    case { } when value.Equals("<#= keySelector(enumValue) #>", comparisonType):
+                        result = <#= enumValue.MemberValue #>;
+                        return true;
+<#+
+            }
+#>
+                }
+                break;
+<#+
+        }
+#>
+        }
+
+        result = 0;
+        return false;
+    }
+<#+
+    }
+#>

@@ -18,8 +18,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         private const int MaxBytesLength = 3;
         private const int MaxCharsLength = 3;
 
-        private static readonly BigErrorCodeMetadata.StringParser s_stringParser = BigErrorCodeMetadata.StringParser.Instance;
-
         public override BigErrorCode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             if (reader.TokenType == JsonTokenType.String)
@@ -68,7 +66,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 "UNK" => 1,
                 "CNX" => 100,
                 "OUT" => 200000000000,
-                _ => EnumStringParser.TryParse(name, s_stringParser, StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out ulong result) ? result : 0
+                //_ => EnumStringParser.TryParse(name, s_stringParser, StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out ulong result) ? result : 0
+                _ => 0
             };
         }
 
@@ -105,7 +104,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 "UNK" => 1,
                 "CNX" => 100,
                 "OUT" => 200000000000,
-                _ => EnumStringParser.TryParse(name, s_stringParser, StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out ulong result) ? result : 0
+                //_ => EnumStringParser.TryParse(name, s_stringParser, StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out ulong result) ? result : 0
+                _ => 0
             };
         }
 

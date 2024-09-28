@@ -15,9 +15,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class UserRoleFactory
     {
-        private static readonly UserRoleMetadata.StringParser s_stringParser = UserRoleMetadata.StringParser.Instance;
-        private static readonly UserRoleMetadata.SerializationStringParser s_serializationStringParser = UserRoleMetadata.SerializationStringParser.Instance;
-
         /// <summary>
         /// Converts the string representation of the name or numeric value of one or more enumerated constants to
         /// an equivalent enumerated object.
@@ -29,7 +26,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
         public static UserRole Parse(string value, bool ignoreCase = false)
         {
-            if (value is null) ThrowArgumentNullException(nameof(value));
+            if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
             TryParse(value.AsSpan(), ignoreCase, throwOnFailure: true, out var result);
             return result;
         }
@@ -163,7 +160,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         private static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, bool throwOnFailure, out UserRole result)
         {
             var comparisonType = ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
-            bool success = EnumStringParser.TryParse(value, s_stringParser, comparisonType, throwOnFailure, out ulong number);
+            return TryParse(value, comparisonType, throwOnFailure, out result);
+        }
+
+        private static bool TryParse(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out UserRole result)
+        {
+            bool success = EnumStringParser.TryParseWithFlags(value, TryParseSingleName, comparisonType, throwOnFailure, out ulong number);
             if (!success)
             {
                 result = 0;
@@ -172,6 +174,70 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
             result = (UserRole)number;
             return true;
+        }
+
+        private static bool TryParseSingleName(ReadOnlySpan<char> value, StringComparison comparisonType, out ulong result)
+        {
+            if (value.IsEmpty)
+            {
+                    result = 0;
+                    return false;
+            }
+
+            switch (value[0])
+            {
+                case 'A':
+                case 'a':
+                    switch (value)
+                    {
+                        case { } when value.Equals("All", comparisonType):
+                            result = 7;
+                            return true;
+                    }
+                    break;
+                case 'C':
+                case 'c':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Custodian", comparisonType):
+                            result = 2;
+                            return true;
+                    }
+                    break;
+                case 'F':
+                case 'f':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Finance", comparisonType):
+                            result = 4;
+                            return true;
+                    }
+                    break;
+                case 'N':
+                case 'n':
+                    switch (value)
+                    {
+                        case { } when value.Equals("None", comparisonType):
+                            result = 0;
+                            return true;
+                        case { } when value.Equals("NormalUser", comparisonType):
+                            result = 1;
+                            return true;
+                    }
+                    break;
+                case 'S':
+                case 's':
+                    switch (value)
+                    {
+                        case { } when value.Equals("SuperUser", comparisonType):
+                            result = 6;
+                            return true;
+                    }
+                    break;
+            }
+
+            result = 0;
+            return false;
         }
 
         /// <summary>
@@ -193,15 +259,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out UserRole result)
         {
-            bool success = EnumStringParser.TryParse(name, s_stringParser, comparisonType, throwOnFailure: false, out ulong number);
-            if (!success)
-            {
-                result = 0;
-                return false;
-            }
-
-            result = (UserRole)number;
-            return true;
+            return TryParse(name.AsSpan(), comparisonType, throwOnFailure: false, out result);
         }
 
         /// <summary>
@@ -265,7 +323,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
         public static UserRole ParseFromEnumMemberValue(string value, bool ignoreCase = false)
         {
-            if (value is null) ThrowArgumentNullException(nameof(value));
+            if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
             TryParseFromEnumMemberValue(value.AsSpan(), ignoreCase, throwOnFailure: true, out var result);
             return result;
         }
@@ -399,7 +457,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
         private static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out UserRole result)
         {
-            bool success = EnumStringParser.TryParse(value, s_serializationStringParser, comparisonType, throwOnFailure, out ulong number);
+            bool success = EnumStringParser.TryParseWithFlags(value, TryParseSingleEnumMemberValue, comparisonType, throwOnFailure, out ulong number);
             if (!success)
             {
                 result = 0;
@@ -408,6 +466,70 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
             result = (UserRole)number;
             return true;
+        }
+
+        private static bool TryParseSingleEnumMemberValue(ReadOnlySpan<char> value, StringComparison comparisonType, out ulong result)
+        {
+            if (value.IsEmpty)
+            {
+                    result = 0;
+                    return false;
+            }
+
+            switch (value[0])
+            {
+                case 'A':
+                case 'a':
+                    switch (value)
+                    {
+                        case { } when value.Equals("All", comparisonType):
+                            result = 7;
+                            return true;
+                    }
+                    break;
+                case 'C':
+                case 'c':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Custodian", comparisonType):
+                            result = 2;
+                            return true;
+                    }
+                    break;
+                case 'F':
+                case 'f':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Finance", comparisonType):
+                            result = 4;
+                            return true;
+                    }
+                    break;
+                case 'N':
+                case 'n':
+                    switch (value)
+                    {
+                        case { } when value.Equals("None", comparisonType):
+                            result = 0;
+                            return true;
+                        case { } when value.Equals("Normal User", comparisonType):
+                            result = 1;
+                            return true;
+                    }
+                    break;
+                case 'S':
+                case 's':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Super User", comparisonType):
+                            result = 6;
+                            return true;
+                    }
+                    break;
+            }
+
+            result = 0;
+            return false;
         }
 
         /// <summary>
@@ -477,12 +599,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 "SuperUser",
                 "All",
             };
-        }
-
-        [DoesNotReturn]
-        private static void ThrowArgumentNullException(string paramName)
-        {
-            throw new ArgumentNullException(paramName);
         }
     }
 }

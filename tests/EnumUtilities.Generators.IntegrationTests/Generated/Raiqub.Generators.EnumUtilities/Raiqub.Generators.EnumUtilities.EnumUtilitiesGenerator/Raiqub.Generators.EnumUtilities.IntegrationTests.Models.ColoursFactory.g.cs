@@ -15,8 +15,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class ColoursFactory
     {
-        private static readonly ColoursMetadata.StringParser s_stringParser = ColoursMetadata.StringParser.Instance;
-
         /// <summary>
         /// Converts the string representation of the name or numeric value of one or more enumerated constants to
         /// an equivalent enumerated object.
@@ -28,7 +26,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
         public static Colours Parse(string value, bool ignoreCase = false)
         {
-            if (value is null) ThrowArgumentNullException(nameof(value));
+            if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
             TryParse(value.AsSpan(), ignoreCase, throwOnFailure: true, out var result);
             return result;
         }
@@ -162,7 +160,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         private static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, bool throwOnFailure, out Colours result)
         {
             var comparisonType = ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
-            bool success = EnumStringParser.TryParse(value, s_stringParser, comparisonType, throwOnFailure, out int number);
+            return TryParse(value, comparisonType, throwOnFailure, out result);
+        }
+
+        private static bool TryParse(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out Colours result)
+        {
+            bool success = EnumStringParser.TryParseWithFlags(value, TryParseSingleName, comparisonType, throwOnFailure, out int number);
             if (!success)
             {
                 result = 0;
@@ -171,6 +174,49 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
             result = (Colours)number;
             return true;
+        }
+
+        private static bool TryParseSingleName(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
+        {
+            if (value.IsEmpty)
+            {
+                    result = 0;
+                    return false;
+            }
+
+            switch (value[0])
+            {
+                case 'B':
+                case 'b':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Blue", comparisonType):
+                            result = 2;
+                            return true;
+                    }
+                    break;
+                case 'G':
+                case 'g':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Green", comparisonType):
+                            result = 4;
+                            return true;
+                    }
+                    break;
+                case 'R':
+                case 'r':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Red", comparisonType):
+                            result = 1;
+                            return true;
+                    }
+                    break;
+            }
+
+            result = 0;
+            return false;
         }
 
         /// <summary>
@@ -192,15 +238,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out Colours result)
         {
-            bool success = EnumStringParser.TryParse(name, s_stringParser, comparisonType, throwOnFailure: false, out int number);
-            if (!success)
-            {
-                result = 0;
-                return false;
-            }
-
-            result = (Colours)number;
-            return true;
+            return TryParse(name.AsSpan(), comparisonType, throwOnFailure: false, out result);
         }
 
         /// <summary>
@@ -276,12 +314,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 "Blue",
                 "Green",
             };
-        }
-
-        [DoesNotReturn]
-        private static void ThrowArgumentNullException(string paramName)
-        {
-            throw new ArgumentNullException(paramName);
         }
     }
 }

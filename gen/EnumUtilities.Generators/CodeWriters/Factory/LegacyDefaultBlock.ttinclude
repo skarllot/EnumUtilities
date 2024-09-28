@@ -22,15 +22,7 @@
         StringComparison comparisonType,
         out <#= Model.RefName #> result)
     {
-        bool success = EnumStringParser.TryParse(name, s_stringParser, comparisonType, throwOnFailure: false, out <#= Model.UnderlyingType #> number);
-        if (!success)
-        {
-            result = 0;
-            return false;
-        }
-
-        result = (<#= Model.RefName #>)number;
-        return true;
+        return TryParse(name.AsSpan(), comparisonType, throwOnFailure: false, out result);
     }
 
     /// <summary>

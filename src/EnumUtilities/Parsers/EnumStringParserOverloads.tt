@@ -1,0 +1,156 @@
+﻿<#@ template debug="false" linePragmas="false" hostspecific="false" language="C#" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+namespace Raiqub.Generators.EnumUtilities.Parsers;
+
+public static partial class EnumStringParser
+{
+<#
+    var supportedTypes = new[] { "byte", "sbyte", "short", "ushort", "int", "uint", "long", "ulong" };
+    foreach (var type in supportedTypes)
+    {
+#>
+    /// <summary>Tries to parse enum values from a string representation.</summary>
+    /// <param name="value">The string representation to parse.</param>
+    /// <param name="tryParseSingleValueHandler">A delegate that represents a method for parsing an enumeration value by name.</param>
+    /// <param name="comparisonType">An enumeration value that determines how enumeration values are compared.</param>
+    /// <param name="throwOnFailure">Indicates whether an exception should be thrown on parsing failure.</param>
+    /// <param name="result">When this method returns, contains the parsed enum value if successful; otherwise, the default value.</param>
+    /// <returns><c>true</c> if the parsing was successful; otherwise, <c>false</c>.</returns>
+    public static bool TryParseWithFlags(
+        ReadOnlySpan<char> value,
+        TryParseSingleValueHandler<<#= type #>> tryParseSingleValueHandler,
+        StringComparison comparisonType,
+        bool throwOnFailure,
+        out <#= type #> result)
+    {
+        if (!value.IsEmpty)
+        {
+            char c = value[0];
+            if (char.IsWhiteSpace(c))
+            {
+                value = value.TrimStart();
+                if (value.IsEmpty)
+                {
+                    goto ParseFailure;
+                }
+
+                c = value[0];
+            }
+
+            if ((c < '0' || c > '9') && c != '-' && c != '+')
+            {
+                return TryParseByName(value, tryParseSingleValueHandler, comparisonType, throwOnFailure, out result);
+            }
+
+            return EnumNumericParser.TryParse(value, out result) ||
+                TryParseByName(value, tryParseSingleValueHandler, comparisonType, throwOnFailure, out result);
+        }
+
+        ParseFailure:
+        if (throwOnFailure)
+        {
+            ThrowHelper.ThrowInvalidEmptyParseArgument(nameof(value));
+        }
+
+        result = 0;
+        return false;
+    }
+
+<#
+    }
+    foreach (var type in supportedTypes)
+    {
+#>
+    /// <summary>Tries to parse an enum value from a string representation.</summary>
+    /// <param name="value">The string representation to parse.</param>
+    /// <param name="tryParseSingleValueHandler">A delegate that represents a method for parsing an enumeration value by name.</param>
+    /// <param name="comparisonType">An enumeration value that determines how enumeration values are compared.</param>
+    /// <param name="throwOnFailure">Indicates whether an exception should be thrown on parsing failure.</param>
+    /// <param name="result">When this method returns, contains the parsed enum value if successful; otherwise, the default value.</param>
+    /// <returns><c>true</c> if the parsing was successful; otherwise, <c>false</c>.</returns>
+    public static bool TryParse(
+        ReadOnlySpan<char> value,
+        TryParseSingleValueHandler<<#= type #>> tryParseSingleValueHandler,
+        StringComparison comparisonType,
+        bool throwOnFailure,
+        out <#= type #> result)
+    {
+        if (!value.IsEmpty)
+        {
+            char c = value[0];
+            if (char.IsWhiteSpace(c))
+            {
+                value = value.TrimStart();
+                if (value.IsEmpty)
+                {
+                    goto ParseFailure;
+                }
+
+                c = value[0];
+            }
+
+            if ((c < '0' || c > '9') && c != '-' && c != '+')
+            {
+                return TryParseSingleName(value, tryParseSingleValueHandler, comparisonType, throwOnFailure, out result);
+            }
+
+            return EnumNumericParser.TryParse(value, out result) ||
+                TryParseSingleName(value, tryParseSingleValueHandler, comparisonType, throwOnFailure, out result);
+        }
+
+        ParseFailure:
+        if (throwOnFailure)
+        {
+            ThrowHelper.ThrowInvalidEmptyParseArgument(nameof(value));
+        }
+
+        result = 0;
+        return false;
+    }
+
+<#
+    }
+    foreach (string type in supportedTypes)
+    {
+#>
+    private static bool TryParseByName(
+        ReadOnlySpan<char> value,
+        TryParseSingleValueHandler<<#= type #>> tryParseSingleValueHandler,
+        StringComparison comparisonType,
+        bool throwOnFailure,
+        out <#= type #> result)
+    {
+        bool parsed = true;
+        <#= type #> localResult = 0;
+        foreach (var item in new FlagsEnumTokenizer(value))
+        {
+            bool success = tryParseSingleValueHandler(item, comparisonType, out <#= type #> singleValue);
+            if (!success)
+            {
+                parsed = false;
+                break;
+            }
+
+            localResult |= singleValue;
+        }
+
+        if (parsed)
+        {
+            result = localResult;
+            return true;
+        }
+
+        if (throwOnFailure)
+        {
+            ThrowHelper.ThrowValueNotFound(value, nameof(value));
+        }
+
+        result = 0;
+        return false;
+    }
+
+<#
+    }
+#>
+}

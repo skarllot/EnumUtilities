@@ -13,8 +13,6 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
 public static partial class NoNamespaceFactory
 {
-    private static readonly NoNamespaceMetadata.StringParser s_stringParser = NoNamespaceMetadata.StringParser.Instance;
-
     /// <summary>
     /// Converts the string representation of the name or numeric value of one or more enumerated constants to
     /// an equivalent enumerated object.
@@ -26,7 +24,7 @@ public static partial class NoNamespaceFactory
     /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
     public static NoNamespace Parse(string value, bool ignoreCase = false)
     {
-        if (value is null) ThrowArgumentNullException(nameof(value));
+        if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
         TryParse(value.AsSpan(), ignoreCase, throwOnFailure: true, out var result);
         return result;
     }
@@ -160,7 +158,12 @@ public static partial class NoNamespaceFactory
     private static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, bool throwOnFailure, out NoNamespace result)
     {
         var comparisonType = ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
-        bool success = EnumStringParser.TryParse(value, s_stringParser, comparisonType, throwOnFailure, out int number);
+        return TryParse(value, comparisonType, throwOnFailure, out result);
+    }
+
+    private static bool TryParse(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out NoNamespace result)
+    {
+        bool success = EnumStringParser.TryParse(value, TryParseSingleName, comparisonType, throwOnFailure, out int number);
         if (!success)
         {
             result = 0;
@@ -169,6 +172,49 @@ public static partial class NoNamespaceFactory
 
         result = (NoNamespace)number;
         return true;
+    }
+
+    private static bool TryParseSingleName(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
+    {
+        if (value.IsEmpty)
+        {
+                result = 0;
+                return false;
+        }
+
+        switch (value[0])
+        {
+            case 'O':
+            case 'o':
+                switch (value)
+                {
+                    case { } when value.Equals("One", comparisonType):
+                        result = 1;
+                        return true;
+                }
+                break;
+            case 'T':
+            case 't':
+                switch (value)
+                {
+                    case { } when value.Equals("Two", comparisonType):
+                        result = 2;
+                        return true;
+                }
+                break;
+            case 'Z':
+            case 'z':
+                switch (value)
+                {
+                    case { } when value.Equals("Zero", comparisonType):
+                        result = 0;
+                        return true;
+                }
+                break;
+        }
+
+        result = 0;
+        return false;
     }
 
     /// <summary>
@@ -190,15 +236,7 @@ public static partial class NoNamespaceFactory
         StringComparison comparisonType,
         out NoNamespace result)
     {
-        bool success = EnumStringParser.TryParse(name, s_stringParser, comparisonType, throwOnFailure: false, out int number);
-        if (!success)
-        {
-            result = 0;
-            return false;
-        }
-
-        result = (NoNamespace)number;
-        return true;
+        return TryParse(name.AsSpan(), comparisonType, throwOnFailure: false, out result);
     }
 
     /// <summary>
@@ -274,11 +312,5 @@ public static partial class NoNamespaceFactory
             "One",
             "Two",
         };
-    }
-
-    [DoesNotReturn]
-    private static void ThrowArgumentNullException(string paramName)
-    {
-        throw new ArgumentNullException(paramName);
     }
 }

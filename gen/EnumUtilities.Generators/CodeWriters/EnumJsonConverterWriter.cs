@@ -83,19 +83,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             
             #line default
             #line hidden
-            this.Write(";\r\n\r\n    private static readonly ");
-            
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.MetadataClassName));
-            
-            #line default
-            #line hidden
-            this.Write(".StringParser s_stringParser = ");
-            
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.MetadataClassName));
-            
-            #line default
-            #line hidden
-            this.Write(".StringParser.Instance;\r\n\r\n    public override ");
+            this.Write(";\r\n\r\n    public override ");
             
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
@@ -201,13 +189,19 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
 
     }
 
-            this.Write("            _ => EnumStringParser.TryParse(name, s_stringParser, StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out ");
+            this.Write("            //_ => EnumStringParser.TryParse(name, s_stringParser, StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out ");
             
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
             
             #line default
             #line hidden
             this.Write(" result) ? result : ");
+            
+            this.Write(this.ToStringHelper.ToStringWithCulture(AppendFallbackValue()));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n            _ => ");
             
             this.Write(this.ToStringHelper.ToStringWithCulture(AppendFallbackValue()));
             
@@ -280,13 +274,19 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
 
     }
 
-            this.Write("            _ => EnumStringParser.TryParse(name, s_stringParser, StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out ");
+            this.Write("            //_ => EnumStringParser.TryParse(name, s_stringParser, StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out ");
             
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
             
             #line default
             #line hidden
             this.Write(" result) ? result : ");
+            
+            this.Write(this.ToStringHelper.ToStringWithCulture(AppendFallbackValue()));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n            _ => ");
             
             this.Write(this.ToStringHelper.ToStringWithCulture(AppendFallbackValue()));
             

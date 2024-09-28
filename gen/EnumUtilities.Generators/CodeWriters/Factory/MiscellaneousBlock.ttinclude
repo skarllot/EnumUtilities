@@ -36,12 +36,6 @@
 #>
         };
     }
-
-    [DoesNotReturn]
-    private static void ThrowArgumentNullException(string paramName)
-    {
-        throw new ArgumentNullException(paramName);
-    }
 <#+
     }
 #>
