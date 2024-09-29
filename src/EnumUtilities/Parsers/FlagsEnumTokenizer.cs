@@ -7,7 +7,7 @@ namespace Raiqub.Generators.EnumUtilities.Parsers;
 /// A <see langword="ref"/> <see langword="struct"/> that tokenizes a given span of characters for bit flags enum.
 /// </summary>
 [EditorBrowsable(EditorBrowsableState.Never)]
-internal ref struct FlagsEnumTokenizer
+public ref struct FlagsEnumTokenizer
 {
     /// <summary>Character used to separate flag enum values when formatted in a list.</summary>
     private const char EnumSeparatorChar = ',';

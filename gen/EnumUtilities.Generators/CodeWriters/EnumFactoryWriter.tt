@@ -5,7 +5,6 @@
 <#@ import namespace="T4CodeWriter" #>
 <#@ include file="$(ProjectDir)CodeWriters\Factory\TryParseInternal.ttinclude"#>
 <#@ include file="$(ProjectDir)CodeWriters\Factory\DefaultBlock.ttinclude"#>
-<#@ include file="$(ProjectDir)CodeWriters\Factory\LegacyDefaultBlock.ttinclude"#>
 <#@ include file="$(ProjectDir)CodeWriters\Factory\EnumMemberBlock.ttinclude"#>
 <#@ include file="$(ProjectDir)CodeWriters\Factory\DescriptionBlock.ttinclude"#>
 <#@ include file="$(ProjectDir)CodeWriters\Factory\DisplayBlock.ttinclude"#>
@@ -38,7 +37,6 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 {
 <#
     WriteDefaultBlock();
-    WriteLegacyDefaultBlock();
     WriteEnumMemberBlock();
     WriteDescriptionBlock();
     WriteDisplayBlock();

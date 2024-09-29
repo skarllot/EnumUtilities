@@ -11,7 +11,7 @@ public class SmallEnumToString
 {
     public IEnumerable<Valar> Values =>
     [
-        0, (Valar)1, (Valar)8, (Valar)1000
+        0, (Valar)1, (Valar)8, (Valar)1000,
     ];
 
     [ParamsSource(nameof(Values))] public Valar Valar;

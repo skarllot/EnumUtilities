@@ -27,8 +27,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         public static WeekDays Parse(string value, bool ignoreCase = false)
         {
             if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
-            TryParse(value.AsSpan(), ignoreCase, throwOnFailure: true, out var result);
-            return result;
+            TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
+            return (WeekDays)result;
         }
 
         /// <summary>
@@ -41,8 +41,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
         public static WeekDays Parse(ReadOnlySpan<char> value, bool ignoreCase = false)
         {
-            TryParse(value, ignoreCase, throwOnFailure: true, out var result);
-            return result;
+            TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
+            return (WeekDays)result;
         }
 
         /// <summary>
@@ -57,8 +57,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         public static WeekDays? ParseOrNull(string? value, bool ignoreCase = false)
         {
             if (value is null) return null;
-            TryParse(value.AsSpan(), ignoreCase, throwOnFailure: true, out var result);
-            return result;
+            TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
+            return (WeekDays)result;
         }
 
         /// <summary>
@@ -75,7 +75,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
         public static bool TryParse([NotNullWhen(true)] string? value, bool ignoreCase, out WeekDays result)
         {
-            return TryParse(value.AsSpan(), ignoreCase, throwOnFailure: false, out result);
+            Unsafe.SkipInit(out result);
+            return TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<WeekDays, int>(ref result));
         }
 
         /// <summary>
@@ -91,7 +92,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
         public static bool TryParse([NotNullWhen(true)] string? value, out WeekDays result)
         {
-            return TryParse(value.AsSpan(), ignoreCase: false, throwOnFailure: false, out result);
+            Unsafe.SkipInit(out result);
+            return TryParseName(value.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<WeekDays, int>(ref result));
         }
 
         /// <summary>
@@ -106,7 +108,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// </returns>
         public static WeekDays? TryParse(string? value, bool ignoreCase = false)
         {
-            return TryParse(value.AsSpan(), ignoreCase, throwOnFailure: false, out WeekDays result) ? result : null;
+            return TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (WeekDays?)result : null;
         }
 
         /// <summary>
@@ -123,7 +125,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
         public static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, out WeekDays result)
         {
-            return TryParse(value, ignoreCase, throwOnFailure: false, out result);
+            Unsafe.SkipInit(out result);
+            return TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<WeekDays, int>(ref result));
         }
 
         /// <summary>
@@ -139,7 +142,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
         public static bool TryParse(ReadOnlySpan<char> value, out WeekDays result)
         {
-            return TryParse(value, ignoreCase: false, throwOnFailure: false, out result);
+            Unsafe.SkipInit(out result);
+            return TryParseName(value, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<WeekDays, int>(ref result));
         }
 
         /// <summary>
@@ -154,26 +158,63 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// </returns>
         public static WeekDays? TryParse(ReadOnlySpan<char> value, bool ignoreCase = false)
         {
-            return TryParse(value, ignoreCase, throwOnFailure: false, out WeekDays result) ? result : null;
+            return TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (WeekDays?)result : null;
         }
 
-        private static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, bool throwOnFailure, out WeekDays result)
+        private static bool TryParseName(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out int result)
         {
-            var comparisonType = ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
-            return TryParse(value, comparisonType, throwOnFailure, out result);
-        }
-
-        private static bool TryParse(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out WeekDays result)
-        {
-            bool success = EnumStringParser.TryParse(value, TryParseSingleName, comparisonType, throwOnFailure, out int number);
-            if (!success)
+            if (!value.IsEmpty)
             {
-                result = 0;
-                return false;
+                char c = value[0];
+                if (char.IsWhiteSpace(c))
+                {
+                    value = value.TrimStart();
+                    if (value.IsEmpty)
+                    {
+                        goto ParseFailure;
+                    }
+
+                    c = value[0];
+                }
+
+                if ((c < '0' || c > '9') && c != '-' && c != '+')
+                {
+                    return TryParseNonNumericName(value, comparisonType, throwOnFailure, out result);
+                }
+
+                bool success = EnumNumericParser.TryParse(value, out result);
+                if (success)
+                {
+                    return true;
+                }
+
+                return TryParseNonNumericName(value, comparisonType, throwOnFailure, out result);
             }
 
-            result = (WeekDays)number;
-            return true;
+            ParseFailure:
+            if (throwOnFailure)
+            {
+                ThrowHelper.ThrowInvalidEmptyParseArgument(nameof(value));
+            }
+
+            result = 0;
+            return false;
+        }
+
+        private static bool TryParseNonNumericName(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out int result)
+        {
+            bool success = TryParseSingleName(value, comparisonType, out result);
+            if (success)
+            {
+                return true;
+            }
+
+            if (throwOnFailure)
+            {
+                ThrowHelper.ThrowValueNotFound(value, nameof(value));
+            }
+
+            return false;
         }
 
         private static bool TryParseSingleName(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
@@ -262,7 +303,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out WeekDays result)
         {
-            return TryParse(name.AsSpan(), comparisonType, throwOnFailure: false, out result);
+            Unsafe.SkipInit(out result);
+            return TryParseName(name.AsSpan(), comparisonType, throwOnFailure: false, out Unsafe.As<WeekDays, int>(ref result));
         }
 
         /// <summary>
@@ -281,7 +323,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             [NotNullWhen(true)] string? name,
             out WeekDays result)
         {
-            return TryParse(name.AsSpan(), ignoreCase: true, out result);
+            Unsafe.SkipInit(out result);
+            return TryParseName(name.AsSpan(), StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out Unsafe.As<WeekDays, int>(ref result));
         }
 
         /// <summary>
@@ -296,7 +339,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
         public static WeekDays? TryParseIgnoreCase(string? name)
         {
-            return TryParse(name.AsSpan(), ignoreCase: true, out WeekDays result) ? result : null;
+            return TryParseName(name.AsSpan(), StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out var result) ? (WeekDays?)result : null;
         }
 
         /// <summary>
@@ -313,7 +356,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
         public static WeekDays? TryParse(string? name, StringComparison comparisonType)
         {
-            return TryParse(name, comparisonType, out WeekDays result) ? result : null;
+            return TryParseName(name.AsSpan(), comparisonType, throwOnFailure: false, out var result) ? (WeekDays?)result : null;
         }
 
         public static bool TryCreateFromDisplayShortName(

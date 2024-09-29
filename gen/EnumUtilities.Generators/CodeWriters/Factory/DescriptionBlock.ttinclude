@@ -8,75 +8,59 @@
     public static <#= Model.RefName #> CreateFromDescription(string description, StringComparison comparisonType = StringComparison.Ordinal)
     {
         if (description is null) ThrowHelper.ThrowArgumentNullException(nameof(description));
-        TryCreateFromDescription(description.AsSpan(), comparisonType, throwOnFailure: true, out var result);
-        return result;
+        TryParseDescription(description.AsSpan(), comparisonType, throwOnFailure: true, out var result);
+        return (<#= Model.RefName #>)result;
     }
 
     public static <#= Model.RefName #> CreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType = StringComparison.Ordinal)
     {
-        TryCreateFromDescription(description, comparisonType, throwOnFailure: true, out var result);
-        return result;
+        TryParseDescription(description, comparisonType, throwOnFailure: true, out var result);
+        return (<#= Model.RefName #>)result;
     }
 
     [return: NotNullIfNotNull("description")]
     public static <#= Model.RefName #>? CreateFromDescriptionOrNull(string? description, StringComparison comparisonType = StringComparison.Ordinal)
     {
         if (description is null) return null;
-        TryCreateFromDescription(description.AsSpan(), comparisonType, throwOnFailure: true, out var result);
-        return result;
+        TryParseDescription(description.AsSpan(), comparisonType, throwOnFailure: true, out var result);
+        return (<#= Model.RefName #>)result;
     }
 
     public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, StringComparison comparisonType, out <#= Model.RefName #> result)
     {
-        return TryCreateFromDescription(description.AsSpan(), comparisonType, throwOnFailure: false, out result);
+        Unsafe.SkipInit(out result);
+        return TryParseDescription(description.AsSpan(), comparisonType, throwOnFailure: false, out Unsafe.As<<#= Model.RefName #>, <#= Model.UnderlyingType #>>(ref result));
     }
 
     public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, out <#= Model.RefName #> result)
     {
-        return TryCreateFromDescription(description.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out result);
+        Unsafe.SkipInit(out result);
+        return TryParseDescription(description.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<<#= Model.RefName #>, <#= Model.UnderlyingType #>>(ref result));
     }
 
     public static <#= Model.RefName #>? TryCreateFromDescription(string? description, StringComparison comparisonType = StringComparison.Ordinal)
     {
-        return TryCreateFromDescription(description.AsSpan(), comparisonType, throwOnFailure: false, out <#= Model.RefName #> result) ? result : null;
+        return TryParseDescription(description.AsSpan(), comparisonType, throwOnFailure: false, out var result) ? (<#= Model.RefName #>?)result : null;
     }
 
     public static bool TryCreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType, out <#= Model.RefName #> result)
     {
-        return TryCreateFromDescription(description, comparisonType, throwOnFailure: false, out result);
+        Unsafe.SkipInit(out result);
+        return TryParseDescription(description, comparisonType, throwOnFailure: false, out Unsafe.As<<#= Model.RefName #>, <#= Model.UnderlyingType #>>(ref result));
     }
 
     public static bool TryCreateFromDescription(ReadOnlySpan<char> description, out <#= Model.RefName #> result)
     {
-        return TryCreateFromDescription(description, StringComparison.Ordinal, throwOnFailure: false, out result);
+        Unsafe.SkipInit(out result);
+        return TryParseDescription(description, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<<#= Model.RefName #>, <#= Model.UnderlyingType #>>(ref result));
     }
 
     public static <#= Model.RefName #>? TryCreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType = StringComparison.Ordinal)
     {
-        return TryCreateFromDescription(description, comparisonType, throwOnFailure: false, out <#= Model.RefName #> result) ? result : null;
-    }
-
-    private static bool TryCreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType, bool throwOnFailure, out <#= Model.RefName #> result)
-    {
-        bool success = TryParseSingleDescription(description, comparisonType, out <#= Model.UnderlyingType #> number);
-        if (success)
-        {
-            result = (<#= Model.RefName #>)number;
-            return true;
-        }
-
-        if (throwOnFailure)
-        {
-            if (description.IsWhiteSpace())
-                ThrowHelper.ThrowInvalidEmptyParseArgument(nameof(description));
-            ThrowHelper.ThrowValueNotFound(description, nameof(description));
-        }
-
-        result = 0;
-        return false;
+        return TryParseDescription(description, comparisonType, throwOnFailure: false, out var result) ? (<#= Model.RefName #>?)result : null;
     }
 
 <#+
-        WriteTryParseLookup(x => x.Description, "Description");
+        WriteTryParse(x => x.Description, "Description", "description");
     }
 #>
