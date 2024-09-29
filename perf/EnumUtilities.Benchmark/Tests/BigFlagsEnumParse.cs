@@ -6,7 +6,7 @@ using FastEnumUtility;
 namespace EnumUtilities.Benchmark.Tests;
 
 [MemoryDiagnoser]
-[ShortRunJob]
+[MediumRunJob]
 public class BigFlagsEnumParse
 {
     public IEnumerable<string> Values =>

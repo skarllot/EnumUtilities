@@ -3,35 +3,35 @@
 BenchmarkDotNet v0.14.0, Windows 11 (10.0.22631.4169/23H2/2023Update/SunValley3)
 AMD Ryzen 5 1600, 1 CPU, 12 logical and 6 physical cores
 .NET SDK 8.0.401
-  [Host]   : .NET 8.0.8 (8.0.824.36612), X64 RyuJIT AVX2
-  ShortRun : .NET 8.0.8 (8.0.824.36612), X64 RyuJIT AVX2
+  [Host]    : .NET 8.0.8 (8.0.824.36612), X64 RyuJIT AVX2
+  MediumRun : .NET 8.0.8 (8.0.824.36612), X64 RyuJIT AVX2
 
-Job=ShortRun  Arguments=Default  NuGetReferences=Default  
-IterationCount=3  LaunchCount=1  WarmupCount=3  
+Job=MediumRun  Arguments=Default  NuGetReferences=Default  
+IterationCount=15  LaunchCount=2  WarmupCount=10  
 
 ```
-| Method            | Valar | Mean      | Error     | StdDev    | Ratio | Allocated | Alloc Ratio |
-|------------------ |------ |----------:|----------:|----------:|------:|----------:|------------:|
-| **BuiltInParse**      | **0**     | **14.122 ns** | **2.3857 ns** | **0.1308 ns** |  **1.00** |         **-** |          **NA** |
-| FastEnumParse     | 0     | 10.010 ns | 0.6469 ns | 0.0355 ns |  0.71 |         - |          NA |
-| EnumsNetParse     | 0     | 12.323 ns | 1.5154 ns | 0.0831 ns |  0.87 |         - |          NA |
-| NetEscapadesParse | 0     |  9.413 ns | 2.8606 ns | 0.1568 ns |  0.67 |         - |          NA |
-| RaiqubParse       | 0     |  9.779 ns | 1.1236 ns | 0.0616 ns |  0.69 |         - |          NA |
-|                   |       |           |           |           |       |           |             |
-| **BuiltInParse**      | **1000**  | **17.393 ns** | **0.3123 ns** | **0.0171 ns** |  **1.00** |         **-** |          **NA** |
-| FastEnumParse     | 1000  | 14.738 ns | 0.6141 ns | 0.0337 ns |  0.85 |         - |          NA |
-| EnumsNetParse     | 1000  | 15.128 ns | 0.6087 ns | 0.0334 ns |  0.87 |         - |          NA |
-| NetEscapadesParse | 1000  | 12.854 ns | 3.4578 ns | 0.1895 ns |  0.74 |         - |          NA |
-| RaiqubParse       | 1000  | 15.624 ns | 4.0917 ns | 0.2243 ns |  0.90 |         - |          NA |
-|                   |       |           |           |           |       |           |             |
-| **BuiltInParse**      | **Manwe** | **25.925 ns** | **0.9777 ns** | **0.0536 ns** |  **1.00** |         **-** |          **NA** |
-| FastEnumParse     | Manwe | 15.276 ns | 1.3099 ns | 0.0718 ns |  0.59 |         - |          NA |
-| EnumsNetParse     | Manwe | 22.084 ns | 0.8068 ns | 0.0442 ns |  0.85 |         - |          NA |
-| NetEscapadesParse | Manwe |  4.162 ns | 0.7835 ns | 0.0429 ns |  0.16 |         - |          NA |
-| RaiqubParse       | Manwe | 18.059 ns | 1.1906 ns | 0.0653 ns |  0.70 |         - |          NA |
-|                   |       |           |           |           |       |           |             |
-| **BuiltInParse**      | **Orome** | **47.359 ns** | **1.3685 ns** | **0.0750 ns** |  **1.00** |         **-** |          **NA** |
-| FastEnumParse     | Orome | 20.924 ns | 0.4447 ns | 0.0244 ns |  0.44 |         - |          NA |
-| EnumsNetParse     | Orome | 22.342 ns | 0.3720 ns | 0.0204 ns |  0.47 |         - |          NA |
-| NetEscapadesParse | Orome |  4.236 ns | 0.7567 ns | 0.0415 ns |  0.09 |         - |          NA |
-| RaiqubParse       | Orome | 17.905 ns | 0.9680 ns | 0.0531 ns |  0.38 |         - |          NA |
+| Method            | Valar | Mean      | Error     | StdDev    | Median    | Ratio | RatioSD | Allocated | Alloc Ratio |
+|------------------ |------ |----------:|----------:|----------:|----------:|------:|--------:|----------:|------------:|
+| **BuiltInParse**      | **0**     | **14.009 ns** | **0.0380 ns** | **0.0520 ns** | **13.988 ns** |  **1.00** |    **0.01** |         **-** |          **NA** |
+| FastEnumParse     | 0     | 10.025 ns | 0.0689 ns | 0.1031 ns | 10.013 ns |  0.72 |    0.01 |         - |          NA |
+| EnumsNetParse     | 0     | 12.577 ns | 0.1104 ns | 0.1584 ns | 12.592 ns |  0.90 |    0.01 |         - |          NA |
+| NetEscapadesParse | 0     |  9.304 ns | 0.1782 ns | 0.2667 ns |  9.256 ns |  0.66 |    0.02 |         - |          NA |
+| RaiqubParse       | 0     |  8.974 ns | 0.0363 ns | 0.0521 ns |  8.970 ns |  0.64 |    0.00 |         - |          NA |
+|                   |       |           |           |           |           |       |         |           |             |
+| **BuiltInParse**      | **1000**  | **17.546 ns** | **0.0390 ns** | **0.0547 ns** | **17.546 ns** |  **1.00** |    **0.00** |         **-** |          **NA** |
+| FastEnumParse     | 1000  | 14.643 ns | 0.1779 ns | 0.2608 ns | 14.692 ns |  0.83 |    0.01 |         - |          NA |
+| EnumsNetParse     | 1000  | 15.048 ns | 0.1278 ns | 0.1792 ns | 14.988 ns |  0.86 |    0.01 |         - |          NA |
+| NetEscapadesParse | 1000  | 12.921 ns | 0.3500 ns | 0.5130 ns | 12.877 ns |  0.74 |    0.03 |         - |          NA |
+| RaiqubParse       | 1000  | 11.739 ns | 0.0759 ns | 0.1039 ns | 11.698 ns |  0.67 |    0.01 |         - |          NA |
+|                   |       |           |           |           |           |       |         |           |             |
+| **BuiltInParse**      | **Manwe** | **25.912 ns** | **0.0853 ns** | **0.1196 ns** | **25.919 ns** |  **1.00** |    **0.01** |         **-** |          **NA** |
+| FastEnumParse     | Manwe | 15.073 ns | 0.1319 ns | 0.1760 ns | 15.094 ns |  0.58 |    0.01 |         - |          NA |
+| EnumsNetParse     | Manwe | 22.680 ns | 0.3163 ns | 0.4536 ns | 22.935 ns |  0.88 |    0.02 |         - |          NA |
+| NetEscapadesParse | Manwe |  4.153 ns | 0.0801 ns | 0.1199 ns |  4.152 ns |  0.16 |    0.00 |         - |          NA |
+| RaiqubParse       | Manwe | 15.512 ns | 0.0971 ns | 0.1361 ns | 15.470 ns |  0.60 |    0.01 |         - |          NA |
+|                   |       |           |           |           |           |       |         |           |             |
+| **BuiltInParse**      | **Orome** | **47.739 ns** | **0.3490 ns** | **0.5116 ns** | **47.641 ns** |  **1.00** |    **0.01** |         **-** |          **NA** |
+| FastEnumParse     | Orome | 15.363 ns | 0.2900 ns | 0.3970 ns | 15.662 ns |  0.32 |    0.01 |         - |          NA |
+| EnumsNetParse     | Orome | 22.730 ns | 0.1685 ns | 0.2522 ns | 22.760 ns |  0.48 |    0.01 |         - |          NA |
+| NetEscapadesParse | Orome |  4.248 ns | 0.0824 ns | 0.1233 ns |  4.249 ns |  0.09 |    0.00 |         - |          NA |
+| RaiqubParse       | Orome | 15.741 ns | 0.0944 ns | 0.1413 ns | 15.725 ns |  0.33 |    0.00 |         - |          NA |
