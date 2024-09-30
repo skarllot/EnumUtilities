@@ -1,0 +1,23 @@
+﻿<#+
+    private void WriteJsonBlock()
+    {
+        if (!Model.HasJsonProperty && (Model.SelectedGenerators & SelectedGenerators.JsonConverter) == 0)
+            return;
+#>
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static string? ToJsonString(this <#= Model.RefName #> value)
+    {
+        return <#= Model.IsFlags ? "FormatFlagJsonStrings" : "GetJsonStringInlined" #>((<#= Model.UnderlyingType #>)value);
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static int? GetJsonStringLength(this <#= Model.RefName #> value)
+    {
+        return <#= Model.IsFlags ? "FormatFlagJsonStringsLength" : "GetJsonStringLengthInlined" #>((<#= Model.UnderlyingType #>)value);
+    }
+
+<#+
+        WriteFormatString(x => x.ResolvedJsonValue, "JsonString");
+    }
+#>

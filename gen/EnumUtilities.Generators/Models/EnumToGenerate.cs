@@ -41,6 +41,9 @@ public sealed record EnumToGenerate(
     public bool HasDisplayGroupName =>
         Values.Exists(static it => it.Display?.GroupName != null);
 
+    public bool HasJsonProperty =>
+        Values.Exists(static it => it.JsonPropertyName != null);
+
     public bool HasZeroMember { get; } =
         Values.Any(x => x.RealMemberValue == 0);
 

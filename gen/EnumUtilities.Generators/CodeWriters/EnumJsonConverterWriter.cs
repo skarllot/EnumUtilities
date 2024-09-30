@@ -116,40 +116,52 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             
             #line default
             #line hidden
-            this.Write(";\r\n    }\r\n\r\n#if NET7_0_OR_GREATER\r\n\r\n    public override void Write(Utf8JsonWriter writer, ");
+            this.Write(";\r\n    }\r\n\r\n    public override void Write(Utf8JsonWriter writer, ");
             
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
-            this.Write(" value, JsonSerializerOptions options)\r\n    {\r\n        switch ((");
+            this.Write(" value, JsonSerializerOptions options)\r\n    {\r\n        string? jsonString = value.ToJsonString();\r\n        if (jsonString is not null)\r\n        {\r\n            writer.WriteStringValue(jsonString);\r\n        }\r\n");
+
+    if (Model.JsonConverterGeneratorOptions.AllowIntegerValues)
+    {
+
+            this.Write("        else\r\n        {\r\n            writer.WriteNumberValue((");
             
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
             
             #line default
             #line hidden
-            this.Write(")value)\r\n        {\r\n");
+            this.Write(")value);\r\n        }\r\n");
 
-    foreach (var curr in Model.UniqueValues)
+    }
+    else if (Model.JsonConverterGeneratorOptions.DeserializationFailureFallbackValue is not null)
     {
 
-            this.Write("            case ");
+            this.Write("        else\r\n        {\r\n            jsonString = ((");
             
-            this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberValue));
-            
-            #line default
-            #line hidden
-            this.Write(":\r\n                writer.WriteStringValue(\"");
-            
-            this.Write(this.ToStringHelper.ToStringWithCulture(curr.JsonPropertyName ?? curr.SerializationValue ?? curr.MemberName));
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
             
             #line default
             #line hidden
-            this.Write("\"u8);\r\n                break;\r\n");
+            this.Write(")");
+            
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.JsonConverterGeneratorOptions.DeserializationFailureFallbackValue));
+            
+            #line default
+            #line hidden
+            this.Write(").ToJsonString();\r\n            if (jsonString is not null)\r\n                writer.WriteStringValue(jsonString);\r\n            else\r\n                throw new JsonException();\r\n        }\r\n");
+
+    }
+    else
+    {
+
+            this.Write("        else\r\n        {\r\n            throw new JsonException();\r\n        }\r\n");
 
     }
 
-            this.Write("            default:\r\n                writer.WriteStringValue(value.ToStringFast());\r\n                break;\r\n        }\r\n    }\r\n\r\n    private ");
+            this.Write("    }\r\n\r\n#if NET7_0_OR_GREATER\r\n\r\n    private ");
             
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
             
@@ -207,40 +219,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             
             #line default
             #line hidden
-            this.Write("\r\n        };\r\n    }\r\n\r\n#else\r\n\r\n    public override void Write(Utf8JsonWriter writer, ");
-            
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
-            
-            #line default
-            #line hidden
-            this.Write(" value, JsonSerializerOptions options)\r\n    {\r\n        switch ((");
-            
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
-            
-            #line default
-            #line hidden
-            this.Write(")value)\r\n        {\r\n");
-
-    foreach (var curr in Model.UniqueValues)
-    {
-
-            this.Write("            case ");
-            
-            this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberValue));
-            
-            #line default
-            #line hidden
-            this.Write(":\r\n                writer.WriteStringValue(\"");
-            
-            this.Write(this.ToStringHelper.ToStringWithCulture(curr.JsonPropertyName ?? curr.SerializationValue ?? curr.MemberName));
-            
-            #line default
-            #line hidden
-            this.Write("\");\r\n                break;\r\n");
-
-    }
-
-            this.Write("            default:\r\n                writer.WriteStringValue(value.ToStringFast());\r\n                break;\r\n        }\r\n    }\r\n\r\n    private ");
+            this.Write("\r\n        };\r\n    }\r\n\r\n#else\r\n\r\n    private ");
             
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
             

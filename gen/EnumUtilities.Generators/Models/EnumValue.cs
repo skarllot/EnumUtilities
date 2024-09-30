@@ -21,6 +21,7 @@ public sealed class EnumValue
     public DisplayAttribute? Display { get; set; }
     public string? JsonPropertyName { get; set; }
     public string ResolvedSerializedValue => SerializationValue ?? MemberName;
+    public string ResolvedJsonValue => JsonPropertyName ?? SerializationValue ?? MemberName;
 
     public static EnumValue? FromSymbol(ISymbol symbol)
     {

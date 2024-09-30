@@ -9,6 +9,7 @@
 <#@ include file="$(ProjectDir)CodeWriters\Extensions\EnumMemberBlock.ttinclude" #>
 <#@ include file="$(ProjectDir)CodeWriters\Extensions\DescriptionBlock.ttinclude" #>
 <#@ include file="$(ProjectDir)CodeWriters\Extensions\DisplayBlock.ttinclude" #>
+<#@ include file="$(ProjectDir)CodeWriters\Extensions\JsonBlock.ttinclude" #>
 <#
 #nullable enable
 #>
@@ -42,14 +43,15 @@ using Raiqub.Generators.EnumUtilities.Formatters;
 <#= Model.IsPublic ? "public" : "internal" #> static partial class <#= Model.Name #>Extensions
 {
 <#
-            WriteDefaultBlock();
             if ((Model.SelectedGenerators & SelectedGenerators.MainGenerator) != 0)
             {
+                WriteDefaultBlock();
                 WriteInterlockedBlock();
                 WriteEnumMemberBlock();
                 WriteDescriptionBlock();
                 WriteDisplayBlock();
             }
+            WriteJsonBlock();
 #>
 }
 <#

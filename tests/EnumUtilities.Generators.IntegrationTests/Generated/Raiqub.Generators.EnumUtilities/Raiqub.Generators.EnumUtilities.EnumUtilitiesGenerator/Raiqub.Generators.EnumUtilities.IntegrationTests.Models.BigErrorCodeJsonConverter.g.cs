@@ -26,29 +26,24 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             return (BigErrorCode)0;
         }
 
-    #if NET7_0_OR_GREATER
-
         public override void Write(Utf8JsonWriter writer, BigErrorCode value, JsonSerializerOptions options)
         {
-            switch ((ulong)value)
+            string? jsonString = value.ToJsonString();
+            if (jsonString is not null)
             {
-                case 0:
-                    writer.WriteStringValue("NON"u8);
-                    break;
-                case 1:
-                    writer.WriteStringValue("UNK"u8);
-                    break;
-                case 100:
-                    writer.WriteStringValue("CNX"u8);
-                    break;
-                case 200000000000:
-                    writer.WriteStringValue("OUT"u8);
-                    break;
-                default:
-                    writer.WriteStringValue(value.ToStringFast());
-                    break;
+                writer.WriteStringValue(jsonString);
+            }
+            else
+            {
+                jsonString = ((BigErrorCode)0).ToJsonString();
+                if (jsonString is not null)
+                    writer.WriteStringValue(jsonString);
+                else
+                    throw new JsonException();
             }
         }
+
+    #if NET7_0_OR_GREATER
 
         private ulong ReadFromString(ref Utf8JsonReader reader)
         {
@@ -72,28 +67,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         }
 
     #else
-
-        public override void Write(Utf8JsonWriter writer, BigErrorCode value, JsonSerializerOptions options)
-        {
-            switch ((ulong)value)
-            {
-                case 0:
-                    writer.WriteStringValue("NON");
-                    break;
-                case 1:
-                    writer.WriteStringValue("UNK");
-                    break;
-                case 100:
-                    writer.WriteStringValue("CNX");
-                    break;
-                case 200000000000:
-                    writer.WriteStringValue("OUT");
-                    break;
-                default:
-                    writer.WriteStringValue(value.ToStringFast());
-                    break;
-            }
-        }
 
         private ulong ReadFromString(ref Utf8JsonReader reader)
         {

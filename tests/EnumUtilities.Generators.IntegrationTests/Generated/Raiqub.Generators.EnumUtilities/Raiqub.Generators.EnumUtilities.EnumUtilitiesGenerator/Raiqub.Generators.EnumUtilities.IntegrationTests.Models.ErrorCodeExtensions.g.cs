@@ -13,57 +13,39 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     internal static partial class ErrorCodeExtensions
     {
-        /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
-        /// <returns>The string representation of the value of this instance.</returns>
-        public static string ToStringFast(this ErrorCode value)
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string? ToJsonString(this ErrorCode value)
         {
-            return GetNameInlined((ushort)value)
-                ?? ((ushort)value).ToString();
+            return GetJsonStringInlined((ushort)value);
         }
 
-        /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
-        /// <param name="value">The value to calculate the number of characters.</param>
-        /// <returns>The number of characters produced by converting the specified value to string.</returns>
-        public static int GetStringLength(this ErrorCode value)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int? GetJsonStringLength(this ErrorCode value)
         {
-            return GetNameLengthInlined((ushort)value)
-                ?? EnumNumericFormatter.GetStringLength((ushort)value);
+            return GetJsonStringLengthInlined((ushort)value);
         }
 
-        /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
-        /// <returns><c>true</c> if the value of this instance exists in the enumeration; <c>false</c> otherwise.</returns>
-        public static bool IsDefined(this ErrorCode value)
-        {
-            return (ushort)value switch
-            {
-                0 => true,
-                1 => true,
-                100 => true,
-                200 => true,
-                _ => false
-            };
-        }
-
-        private static int? GetNameLengthInlined(ushort value)
+        private static int? GetJsonStringLengthInlined(ushort value)
         {
             return value switch
             {
-                0 => 4,
-                1 => 7,
-                100 => 14,
-                200 => 14,
+                0 => 3,
+                1 => 3,
+                100 => 3,
+                200 => 3,
                 _ => null
             };
         }
 
-        private static string? GetNameInlined(ushort value)
+        private static string? GetJsonStringInlined(ushort value)
         {
             return value switch
             {
-                0 => "None",
-                1 => "Unknown",
-                100 => "ConnectionLost",
-                200 => "OutlierReading",
+                0 => "NON",
+                1 => "UNK",
+                100 => "CNX",
+                200 => "OUT",
                 _ => null
             };
         }

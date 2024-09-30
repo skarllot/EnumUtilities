@@ -54,27 +54,49 @@ using Raiqub.Generators.EnumUtilities.Parsers;
         <#= AppendFallbackValue(addReturn: true, castToEnum: true) #>;
     }
 
-#if NET7_0_OR_GREATER
-
-    public override void Write(Utf8JsonWriter writer, <#= Model.Name #> value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, <#= Model.RefName #> value, JsonSerializerOptions options)
     {
-        switch ((<#= Model.UnderlyingType #>)value)
+        string? jsonString = value.ToJsonString();
+        if (jsonString is not null)
         {
+            writer.WriteStringValue(jsonString);
+        }
 <#
-    foreach (var curr in Model.UniqueValues)
+    if (Model.JsonConverterGeneratorOptions.AllowIntegerValues)
     {
 #>
-            case <#= curr.MemberValue #>:
-                writer.WriteStringValue("<#= curr.JsonPropertyName ?? curr.SerializationValue ?? curr.MemberName #>"u8);
-                break;
+        else
+        {
+            writer.WriteNumberValue((<#= Model.UnderlyingType #>)value);
+        }
+<#
+    }
+    else if (Model.JsonConverterGeneratorOptions.DeserializationFailureFallbackValue is not null)
+    {
+#>
+        else
+        {
+            jsonString = ((<#= Model.RefName #>)<#= Model.JsonConverterGeneratorOptions.DeserializationFailureFallbackValue #>).ToJsonString();
+            if (jsonString is not null)
+                writer.WriteStringValue(jsonString);
+            else
+                throw new JsonException();
+        }
+<#
+    }
+    else
+    {
+#>
+        else
+        {
+            throw new JsonException();
+        }
 <#
     }
 #>
-            default:
-                writer.WriteStringValue(value.ToStringFast());
-                break;
-        }
     }
+
+#if NET7_0_OR_GREATER
 
     private <#= Model.UnderlyingType #> ReadFromString(ref Utf8JsonReader reader)
     {
@@ -105,26 +127,6 @@ using Raiqub.Generators.EnumUtilities.Parsers;
     }
 
 #else
-
-    public override void Write(Utf8JsonWriter writer, <#= Model.Name #> value, JsonSerializerOptions options)
-    {
-        switch ((<#= Model.UnderlyingType #>)value)
-        {
-<#
-    foreach (var curr in Model.UniqueValues)
-    {
-#>
-            case <#= curr.MemberValue #>:
-                writer.WriteStringValue("<#= curr.JsonPropertyName ?? curr.SerializationValue ?? curr.MemberName #>");
-                break;
-<#
-    }
-#>
-            default:
-                writer.WriteStringValue(value.ToStringFast());
-                break;
-        }
-    }
 
     private <#= Model.UnderlyingType #> ReadFromString(ref Utf8JsonReader reader)
     {

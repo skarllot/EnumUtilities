@@ -14,57 +14,39 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     internal static partial class BigErrorCodeExtensions
     {
-        /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
-        /// <returns>The string representation of the value of this instance.</returns>
-        public static string ToStringFast(this BigErrorCode value)
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string? ToJsonString(this BigErrorCode value)
         {
-            return GetNameInlined((ulong)value)
-                ?? ((ulong)value).ToString();
+            return GetJsonStringInlined((ulong)value);
         }
 
-        /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
-        /// <param name="value">The value to calculate the number of characters.</param>
-        /// <returns>The number of characters produced by converting the specified value to string.</returns>
-        public static int GetStringLength(this BigErrorCode value)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int? GetJsonStringLength(this BigErrorCode value)
         {
-            return GetNameLengthInlined((ulong)value)
-                ?? EnumNumericFormatter.GetStringLength((ulong)value);
+            return GetJsonStringLengthInlined((ulong)value);
         }
 
-        /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
-        /// <returns><c>true</c> if the value of this instance exists in the enumeration; <c>false</c> otherwise.</returns>
-        public static bool IsDefined(this BigErrorCode value)
-        {
-            return (ulong)value switch
-            {
-                0 => true,
-                1 => true,
-                100 => true,
-                200000000000 => true,
-                _ => false
-            };
-        }
-
-        private static int? GetNameLengthInlined(ulong value)
+        private static int? GetJsonStringLengthInlined(ulong value)
         {
             return value switch
             {
-                0 => 4,
-                1 => 7,
-                100 => 14,
-                200000000000 => 14,
+                0 => 3,
+                1 => 3,
+                100 => 3,
+                200000000000 => 3,
                 _ => null
             };
         }
 
-        private static string? GetNameInlined(ulong value)
+        private static string? GetJsonStringInlined(ulong value)
         {
             return value switch
             {
-                0 => "None",
-                1 => "Unknown",
-                100 => "ConnectionLost",
-                200000000000 => "OutlierReading",
+                0 => "NON",
+                1 => "UNK",
+                100 => "CNX",
+                200000000000 => "OUT",
                 _ => null
             };
         }

@@ -14,59 +14,41 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class SeasonExtensions
     {
-        /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
-        /// <returns>The string representation of the value of this instance.</returns>
-        public static string ToStringFast(this Season value)
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string? ToJsonString(this Season value)
         {
-            return GetNameInlined((int)value)
-                ?? ((int)value).ToString();
+            return GetJsonStringInlined((int)value);
         }
 
-        /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
-        /// <param name="value">The value to calculate the number of characters.</param>
-        /// <returns>The number of characters produced by converting the specified value to string.</returns>
-        public static int GetStringLength(this Season value)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int? GetJsonStringLength(this Season value)
         {
-            return GetNameLengthInlined((int)value)
-                ?? EnumNumericFormatter.GetStringLength((int)value);
+            return GetJsonStringLengthInlined((int)value);
         }
 
-        /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
-        /// <returns><c>true</c> if the value of this instance exists in the enumeration; <c>false</c> otherwise.</returns>
-        public static bool IsDefined(this Season value)
-        {
-            return (int)value switch
-            {
-                1 => true,
-                2 => true,
-                3 => true,
-                4 => true,
-                _ => false
-            };
-        }
-
-        private static int? GetNameLengthInlined(int value)
+        private static int? GetJsonStringLengthInlined(int value)
         {
             return value switch
             {
                 0 => 1,
-                1 => 6,
-                2 => 6,
-                3 => 6,
-                4 => 6,
+                1 => 2,
+                2 => 2,
+                3 => 2,
+                4 => 1,
                 _ => null
             };
         }
 
-        private static string? GetNameInlined(int value)
+        private static string? GetJsonStringInlined(int value)
         {
             return value switch
             {
                 0 => "0",
-                1 => "Spring",
-                2 => "Summer",
-                3 => "Autumn",
-                4 => "Winter",
+                1 => "🌱",
+                2 => "☀️",
+                3 => "🍂",
+                4 => "⛄",
                 _ => null
             };
         }

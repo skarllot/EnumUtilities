@@ -28,29 +28,20 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             throw new JsonException();
         }
 
-    #if NET7_0_OR_GREATER
-
         public override void Write(Utf8JsonWriter writer, Season value, JsonSerializerOptions options)
         {
-            switch ((int)value)
+            string? jsonString = value.ToJsonString();
+            if (jsonString is not null)
             {
-                case 1:
-                    writer.WriteStringValue("🌱"u8);
-                    break;
-                case 2:
-                    writer.WriteStringValue("☀️"u8);
-                    break;
-                case 3:
-                    writer.WriteStringValue("🍂"u8);
-                    break;
-                case 4:
-                    writer.WriteStringValue("⛄"u8);
-                    break;
-                default:
-                    writer.WriteStringValue(value.ToStringFast());
-                    break;
+                writer.WriteStringValue(jsonString);
+            }
+            else
+            {
+                writer.WriteNumberValue((int)value);
             }
         }
+
+    #if NET7_0_OR_GREATER
 
         private int ReadFromString(ref Utf8JsonReader reader)
         {
@@ -74,28 +65,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         }
 
     #else
-
-        public override void Write(Utf8JsonWriter writer, Season value, JsonSerializerOptions options)
-        {
-            switch ((int)value)
-            {
-                case 1:
-                    writer.WriteStringValue("🌱");
-                    break;
-                case 2:
-                    writer.WriteStringValue("☀️");
-                    break;
-                case 3:
-                    writer.WriteStringValue("🍂");
-                    break;
-                case 4:
-                    writer.WriteStringValue("⛄");
-                    break;
-                default:
-                    writer.WriteStringValue(value.ToStringFast());
-                    break;
-            }
-        }
 
         private int ReadFromString(ref Utf8JsonReader reader)
         {
