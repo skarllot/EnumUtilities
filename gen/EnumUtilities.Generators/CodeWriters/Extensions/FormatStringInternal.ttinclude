@@ -77,17 +77,25 @@ CountLength:
         string? result = Get<#= type #>Inlined(value);
         if (result is null)
         {
-            Span<<#= Model.UnderlyingType #>> foundItems = stackalloc <#= Model.UnderlyingType #>[<#= Model.GetMappedBitCount() #>];
-            if (TryFindFlags<#= type #>s(value, foundItems, out int resultLength, out int foundItemsCount))
+            var rented = System.Buffers.ArrayPool<string>.Shared.Rent(<#= Model.GetMappedBitCount() #>);
+            try
             {
-                result = EnumStringFormatter.WriteMultipleFoundFlagsNames(Get<#= type #>Inlined!, resultLength, foundItemsCount, foundItems);
+                Span<string> foundItems = new Span<string>(rented, 0, <#= Model.GetMappedBitCount() #>);
+                if (TryFindFlags<#= type #>s(value, foundItems, out int foundItemsCount, out int resultLength))
+                {
+                    result = EnumStringFormatter.WriteMultipleFoundFlagsNames(foundItems, foundItemsCount, resultLength);
+                }
+            }
+            finally
+            {
+                System.Buffers.ArrayPool<string>.Shared.Return(rented);
             }
         }
 
         return result;
     }
 
-    private static bool TryFindFlags<#= type #>s(<#= Model.UnderlyingType #> value, Span<<#= Model.UnderlyingType #>> foundItems, out int resultLength, out int foundItemsCount)
+    private static bool TryFindFlags<#= type #>s(<#= Model.UnderlyingType #> value, Span<string> foundItems, out int foundItemsCount, out int resultLength)
     {
         resultLength = 0;
         foundItemsCount = 0;
@@ -107,7 +115,7 @@ CountLength:
             {
                 value -= <#= curr.MemberValue #>;
                 resultLength = checked(resultLength + <#= keySelector(curr)!.Length #>);
-                foundItems[foundItemsCount++] = <#= curr.MemberValue #>;
+                foundItems[foundItemsCount++] = "<#= keySelector(curr) #>";
                 if (value == 0) return true;
             }
 <#+

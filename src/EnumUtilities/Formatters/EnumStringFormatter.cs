@@ -8,18 +8,15 @@ public static class EnumStringFormatter
     /// <summary>
     /// Writes the names of multiple found flags into a single string, separated by commas.
     /// </summary>
-    /// <param name="getStringForSingleMember">Gets the string representation of a single member in a flags enumeration.</param>
-    /// <param name="count">The total length of the resulting string, excluding separators.</param>
+    /// <param name="foundItems">A span containing the string of found enum values.</param>
     /// <param name="foundItemsCount">The number of enum values found.</param>
-    /// <param name="foundItems">A span containing the found enum values.</param>
+    /// <param name="count">The total length of the resulting string, excluding separators.</param>
     /// <returns>A string that represents the names of the found flags, separated by commas.</returns>
     /// <exception cref="OverflowException">Thrown if the computed string length exceeds the capacity of an <see cref="int"/>.</exception>
-    public static unsafe string WriteMultipleFoundFlagsNames<TNumber>(
-        Func<TNumber, string> getStringForSingleMember,
-        int count,
+    public static unsafe string WriteMultipleFoundFlagsNames(
+        Span<string> foundItems,
         int foundItemsCount,
-        Span<TNumber> foundItems)
-        where TNumber : unmanaged
+        int count)
     {
         const int separatorStringLength = 2;
         int strlen = checked(count + (separatorStringLength * (foundItemsCount - 1)));
@@ -35,7 +32,7 @@ public static class EnumStringFormatter
             var span = new Span<char>(ptr, strlen);
 #endif
 
-            string name = getStringForSingleMember(foundItems[--foundItemsCount]);
+            string name = foundItems[--foundItemsCount];
             name.AsSpan().CopyTo(span);
             span = span.Slice(name.Length);
             while (--foundItemsCount >= 0)
@@ -44,7 +41,7 @@ public static class EnumStringFormatter
                 span[1] = ' ';
                 span = span.Slice(2);
 
-                name = getStringForSingleMember(foundItems[foundItemsCount]);
+                name = foundItems[foundItemsCount];
                 name.AsSpan().CopyTo(span);
                 span = span.Slice(name.Length);
             }
