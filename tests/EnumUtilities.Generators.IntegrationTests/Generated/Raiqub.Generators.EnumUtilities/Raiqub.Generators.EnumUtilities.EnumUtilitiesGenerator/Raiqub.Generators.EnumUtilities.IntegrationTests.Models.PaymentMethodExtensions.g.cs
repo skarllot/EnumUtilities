@@ -14,14 +14,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class PaymentMethodExtensions
     {
-        private static readonly PaymentMethodMetadata.SerializationStringFormatter s_serializationStringFormatter = PaymentMethodMetadata.SerializationStringFormatter.Instance;
-
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
         /// <returns>The string representation of the value of this instance.</returns>
         public static string ToStringFast(this PaymentMethod value)
         {
-            var numberValue = (int)value;
-            return GetNameInlined(numberValue) ?? numberValue.ToString();
+            return GetNameInlined((int)value)
+                ?? ((int)value).ToString();
         }
 
         /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
@@ -29,8 +27,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns>The number of characters produced by converting the specified value to string.</returns>
         public static int GetStringLength(this PaymentMethod value)
         {
-            var numberValue = (int)value;
-            return GetNameLengthInlined(numberValue) ?? EnumNumericFormatter.GetStringLength(numberValue);
+            return GetNameLengthInlined((int)value)
+                ?? EnumNumericFormatter.GetStringLength((int)value);
         }
 
         /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
@@ -127,12 +125,38 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
         public static string ToEnumMemberValue(this PaymentMethod value)
         {
-            return EnumStringFormatter.GetString((int)value, s_serializationStringFormatter);
+            return GetEnumMemberValueInlined((int)value)
+                ?? ((int)value).ToString();
         }
 
         public static int GetEnumMemberValueStringLength(this PaymentMethod value)
         {
-            return EnumStringFormatter.GetStringLength((int)value, s_serializationStringFormatter);
+            return GetEnumMemberValueLengthInlined((int)value)
+                ?? EnumNumericFormatter.GetStringLength((int)value);
+        }
+
+        private static int? GetEnumMemberValueLengthInlined(int value)
+        {
+            return value switch
+            {
+                0 => 11,
+                1 => 10,
+                2 => 4,
+                3 => 6,
+                _ => null
+            };
+        }
+
+        private static string? GetEnumMemberValueInlined(int value)
+        {
+            return value switch
+            {
+                0 => "Credit card",
+                1 => "Debit card",
+                2 => "Cash",
+                3 => "Cheque",
+                _ => null
+            };
         }
 
         public static string? GetDescription(this PaymentMethod value)

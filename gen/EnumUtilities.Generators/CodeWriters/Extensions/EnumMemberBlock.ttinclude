@@ -7,13 +7,17 @@
 
     public static string ToEnumMemberValue(this <#= Model.RefName #> value)
     {
-        return EnumStringFormatter.GetString((<#= Model.UnderlyingType #>)value, s_serializationStringFormatter);
+        return <#= Model.IsFlags ? "FormatFlagEnumMemberValues" : "GetEnumMemberValueInlined" #>((<#= Model.UnderlyingType #>)value)
+            ?? ((<#= Model.UnderlyingType #>)value).ToString();
     }
 
     public static int GetEnumMemberValueStringLength(this <#= Model.RefName #> value)
     {
-        return EnumStringFormatter.GetStringLength((<#= Model.UnderlyingType #>)value, s_serializationStringFormatter);
+        return <#= Model.IsFlags ? "FormatFlagEnumMemberValuesLength" : "GetEnumMemberValueLengthInlined" #>((<#= Model.UnderlyingType #>)value)
+            ?? EnumNumericFormatter.GetStringLength((<#= Model.UnderlyingType #>)value);
     }
+
 <#+
+        WriteFormatString(x => x.ResolvedSerializedValue, "EnumMemberValue");
     }
 #>

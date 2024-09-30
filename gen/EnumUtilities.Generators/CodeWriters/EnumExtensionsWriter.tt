@@ -3,6 +3,7 @@
 <#@ import namespace="Models" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="T4CodeWriter" #>
+<#@ include file="$(ProjectDir)CodeWriters\Extensions\FormatStringInternal.ttinclude" #>
 <#@ include file="$(ProjectDir)CodeWriters\Extensions\DefaultBlock.ttinclude" #>
 <#@ include file="$(ProjectDir)CodeWriters\Extensions\InterlockedBlock.ttinclude" #>
 <#@ include file="$(ProjectDir)CodeWriters\Extensions\EnumMemberBlock.ttinclude" #>
@@ -17,7 +18,7 @@
 using System;
 using System.Runtime.CompilerServices;
 <#
-            if (IsInterlockedSupported())
+            if (Model.IsInterlockedSupported())
             {
 #>
 using System.Threading;
@@ -40,15 +41,6 @@ using Raiqub.Generators.EnumUtilities.Formatters;
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("<#= CurrentAssemblyName.Name #>", "<#= Append($"{CurrentAssemblyName.Version}") #>")]
 <#= Model.IsPublic ? "public" : "internal" #> static partial class <#= Model.Name #>Extensions
 {
-<#
-            if (Model.HasSerializationValue && (Model.SelectedGenerators & SelectedGenerators.MainGenerator) != 0)
-            {
-#>
-    private static readonly <#= Model.MetadataClassName #>.SerializationStringFormatter s_serializationStringFormatter = <#= Model.MetadataClassName #>.SerializationStringFormatter.Instance;
-<#
-            }
-#>
-
 <#
             WriteDefaultBlock();
             if ((Model.SelectedGenerators & SelectedGenerators.MainGenerator) != 0)

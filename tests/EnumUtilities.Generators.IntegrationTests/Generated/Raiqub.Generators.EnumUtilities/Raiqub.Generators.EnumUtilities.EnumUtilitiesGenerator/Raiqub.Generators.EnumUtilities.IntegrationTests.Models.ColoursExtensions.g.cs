@@ -14,18 +14,18 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class ColoursExtensions
     {
-
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
         /// <returns>The string representation of the value of this instance.</returns>
         public static string ToStringFast(this Colours value)
         {
-            var numberValue = (int)value;
-            return FormatFlagNames(numberValue) ?? numberValue.ToString();
+            return FormatFlagNames((int)value)
+                ?? ((int)value).ToString();
         }
 
         /// <summary>Determines whether one or more bit fields are set in the current instance.</summary>
         /// <param name="flag">An enumeration value.</param>
         /// <returns><see langword="true"/> if the bit field or bit fields that are set in flag are also set in the current instance; otherwise, <see langword="false"/>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool HasFlagFast(this Colours value, Colours flag)
         {
             return (value & flag) == flag;
@@ -36,8 +36,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns>The number of characters produced by converting the specified value to string.</returns>
         public static int GetStringLength(this Colours value)
         {
-            var numberValue = (int)value;
-            return FormatFlagNamesLength(numberValue) ?? EnumNumericFormatter.GetStringLength(numberValue);
+            return FormatFlagNamesLength((int)value)
+                ?? EnumNumericFormatter.GetStringLength((int)value);
         }
 
         /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>

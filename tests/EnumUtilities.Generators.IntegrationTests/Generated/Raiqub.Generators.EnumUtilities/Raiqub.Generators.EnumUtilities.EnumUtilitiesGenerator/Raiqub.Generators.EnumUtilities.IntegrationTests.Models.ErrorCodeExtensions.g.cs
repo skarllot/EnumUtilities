@@ -13,13 +13,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     internal static partial class ErrorCodeExtensions
     {
-
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
         /// <returns>The string representation of the value of this instance.</returns>
         public static string ToStringFast(this ErrorCode value)
         {
-            var numberValue = (ushort)value;
-            return GetNameInlined(numberValue) ?? numberValue.ToString();
+            return GetNameInlined((ushort)value)
+                ?? ((ushort)value).ToString();
         }
 
         /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
@@ -27,8 +26,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns>The number of characters produced by converting the specified value to string.</returns>
         public static int GetStringLength(this ErrorCode value)
         {
-            var numberValue = (ushort)value;
-            return GetNameLengthInlined(numberValue) ?? EnumNumericFormatter.GetStringLength(numberValue);
+            return GetNameLengthInlined((ushort)value)
+                ?? EnumNumericFormatter.GetStringLength((ushort)value);
         }
 
         /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>

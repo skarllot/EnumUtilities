@@ -14,19 +14,18 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class UserRoleExtensions
     {
-        private static readonly UserRoleMetadata.SerializationStringFormatter s_serializationStringFormatter = UserRoleMetadata.SerializationStringFormatter.Instance;
-
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
         /// <returns>The string representation of the value of this instance.</returns>
         public static string ToStringFast(this UserRole value)
         {
-            var numberValue = (ulong)value;
-            return FormatFlagNames(numberValue) ?? numberValue.ToString();
+            return FormatFlagNames((ulong)value)
+                ?? ((ulong)value).ToString();
         }
 
         /// <summary>Determines whether one or more bit fields are set in the current instance.</summary>
         /// <param name="flag">An enumeration value.</param>
         /// <returns><see langword="true"/> if the bit field or bit fields that are set in flag are also set in the current instance; otherwise, <see langword="false"/>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool HasFlagFast(this UserRole value, UserRole flag)
         {
             return (value & flag) == flag;
@@ -37,8 +36,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns>The number of characters produced by converting the specified value to string.</returns>
         public static int GetStringLength(this UserRole value)
         {
-            var numberValue = (ulong)value;
-            return FormatFlagNamesLength(numberValue) ?? EnumNumericFormatter.GetStringLength(numberValue);
+            return FormatFlagNamesLength((ulong)value)
+                ?? EnumNumericFormatter.GetStringLength((ulong)value);
         }
 
         /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
@@ -63,6 +62,11 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             if (fastResult is not null)
             {
                 return fastResult.Value;
+            }
+
+            if (value == 0)
+            {
+                return 1;
             }
 
             int count = 0, foundItemsCount = 0;
@@ -263,12 +267,166 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
         public static string ToEnumMemberValue(this UserRole value)
         {
-            return EnumStringFormatter.GetString((ulong)value, s_serializationStringFormatter);
+            return FormatFlagEnumMemberValues((ulong)value)
+                ?? ((ulong)value).ToString();
         }
 
         public static int GetEnumMemberValueStringLength(this UserRole value)
         {
-            return EnumStringFormatter.GetStringLength((ulong)value, s_serializationStringFormatter);
+            return FormatFlagEnumMemberValuesLength((ulong)value)
+                ?? EnumNumericFormatter.GetStringLength((ulong)value);
+        }
+
+        private static int? FormatFlagEnumMemberValuesLength(ulong value)
+        {
+            int? fastResult = GetEnumMemberValueLengthInlined(value);
+            if (fastResult is not null)
+            {
+                return fastResult.Value;
+            }
+
+            if (value == 0)
+            {
+                return 1;
+            }
+
+            int count = 0, foundItemsCount = 0;
+            if (true)
+            {
+                if ((value & 7) == 7)
+                {
+                    value -= 7;
+                    count = checked(count + 3);
+                    foundItemsCount++;
+                    if (value == 0) goto CountLength;
+                }
+                if ((value & 6) == 6)
+                {
+                    value -= 6;
+                    count = checked(count + 10);
+                    foundItemsCount++;
+                    if (value == 0) goto CountLength;
+                }
+                if ((value & 4) == 4)
+                {
+                    value -= 4;
+                    count = checked(count + 7);
+                    foundItemsCount++;
+                    if (value == 0) goto CountLength;
+                }
+                if ((value & 2) == 2)
+                {
+                    value -= 2;
+                    count = checked(count + 9);
+                    foundItemsCount++;
+                    if (value == 0) goto CountLength;
+                }
+                if ((value & 1) == 1)
+                {
+                    value -= 1;
+                    count = checked(count + 11);
+                    foundItemsCount++;
+                    if (value == 0) goto CountLength;
+                }
+            }
+
+            if (value != 0)
+            {
+                return null;
+            }
+
+    CountLength:
+            const int separatorStringLength = 2;
+            return checked(count + (separatorStringLength * (foundItemsCount - 1)));
+        }
+
+        private static string? FormatFlagEnumMemberValues(ulong value)
+        {
+            string? result = GetEnumMemberValueInlined(value);
+            if (result is null)
+            {
+                Span<ulong> foundItems = stackalloc ulong[3];
+                if (TryFindFlagsEnumMemberValues(value, foundItems, out int resultLength, out int foundItemsCount))
+                {
+                    result = EnumStringFormatter.WriteMultipleFoundFlagsNames(GetEnumMemberValueInlined!, resultLength, foundItemsCount, foundItems);
+                }
+            }
+
+            return result;
+        }
+
+        private static bool TryFindFlagsEnumMemberValues(ulong value, Span<ulong> foundItems, out int resultLength, out int foundItemsCount)
+        {
+            resultLength = 0;
+            foundItemsCount = 0;
+            if (true)
+            {
+                if ((value & 7) == 7)
+                {
+                    value -= 7;
+                    resultLength = checked(resultLength + 3);
+                    foundItems[foundItemsCount++] = 7;
+                    if (value == 0) return true;
+                }
+                if ((value & 6) == 6)
+                {
+                    value -= 6;
+                    resultLength = checked(resultLength + 10);
+                    foundItems[foundItemsCount++] = 6;
+                    if (value == 0) return true;
+                }
+                if ((value & 4) == 4)
+                {
+                    value -= 4;
+                    resultLength = checked(resultLength + 7);
+                    foundItems[foundItemsCount++] = 4;
+                    if (value == 0) return true;
+                }
+                if ((value & 2) == 2)
+                {
+                    value -= 2;
+                    resultLength = checked(resultLength + 9);
+                    foundItems[foundItemsCount++] = 2;
+                    if (value == 0) return true;
+                }
+                if ((value & 1) == 1)
+                {
+                    value -= 1;
+                    resultLength = checked(resultLength + 11);
+                    foundItems[foundItemsCount++] = 1;
+                    if (value == 0) return true;
+                }
+            }
+
+            return value == 0;
+        }
+
+        private static int? GetEnumMemberValueLengthInlined(ulong value)
+        {
+            return value switch
+            {
+                0 => 4,
+                1 => 11,
+                2 => 9,
+                4 => 7,
+                6 => 10,
+                7 => 3,
+                _ => null
+            };
+        }
+
+        private static string? GetEnumMemberValueInlined(ulong value)
+        {
+            return value switch
+            {
+                0 => "None",
+                1 => "Normal User",
+                2 => "Custodian",
+                4 => "Finance",
+                6 => "Super User",
+                7 => "All",
+                _ => null
+            };
         }
     }
 }

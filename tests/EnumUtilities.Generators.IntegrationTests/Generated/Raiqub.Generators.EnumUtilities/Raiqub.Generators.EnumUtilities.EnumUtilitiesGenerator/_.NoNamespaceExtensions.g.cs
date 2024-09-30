@@ -12,13 +12,12 @@ using Raiqub.Generators.EnumUtilities.Formatters;
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
 public static partial class NoNamespaceExtensions
 {
-
     /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
     /// <returns>The string representation of the value of this instance.</returns>
     public static string ToStringFast(this NoNamespace value)
     {
-        var numberValue = (int)value;
-        return GetNameInlined(numberValue) ?? numberValue.ToString();
+        return GetNameInlined((int)value)
+            ?? ((int)value).ToString();
     }
 
     /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
@@ -26,8 +25,8 @@ public static partial class NoNamespaceExtensions
     /// <returns>The number of characters produced by converting the specified value to string.</returns>
     public static int GetStringLength(this NoNamespace value)
     {
-        var numberValue = (int)value;
-        return GetNameLengthInlined(numberValue) ?? EnumNumericFormatter.GetStringLength(numberValue);
+        return GetNameLengthInlined((int)value)
+            ?? EnumNumericFormatter.GetStringLength((int)value);
     }
 
     /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>

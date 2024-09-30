@@ -20,8 +20,8 @@ public sealed record EnumToGenerate(
     public string MetadataClassName => Name.Contains("Metadata") ? $"{Name}Info" : $"{Name}Metadata";
     public string RefName { get; } = ContainingType is not null ? $"{ContainingType.Name}.{Name}" : Name;
 
-    public IEnumerable<EnumValue> UniqueValues =>
-        Values.DistinctBy(static it => it.MemberValue, StringComparer.Ordinal);
+    public List<EnumValue> UniqueValues { get; } =
+        Values.DistinctBy(static it => it.MemberValue, StringComparer.Ordinal).ToList();
 
     public bool HasSerializationValue =>
         Values.Exists(static it => it.SerializationValue != null);
@@ -40,6 +40,22 @@ public sealed record EnumToGenerate(
 
     public bool HasDisplayGroupName =>
         Values.Exists(static it => it.Display?.GroupName != null);
+
+    public bool HasZeroMember { get; } =
+        Values.Any(x => x.RealMemberValue == 0);
+
+    private int BitCount { get; } = UnderlyingType switch
+    {
+        "byte" => 8,
+        "sbyte" => 8,
+        "short" => 16,
+        "ushort" => 16,
+        "int" => 32,
+        "uint" => 32,
+        "long" => 64,
+        "ulong" => 64,
+        _ => 64,
+    };
 
     public static EnumToGenerate? FromSymbol(ISymbol symbol)
     {
@@ -83,4 +99,61 @@ public sealed record EnumToGenerate(
             enumValues,
             typeSymbol.Locations);
     }
+
+    public static string[] BitRangeConditionStrings { get; } =
+        ["value > 0xffff_ffff_ffff", "value > 0xffff_ffff", "value > 0xffff", "true"];
+
+    public List<EnumValue>[] GetEnumValueRangesByBitRange()
+    {
+        var h2Values = BitCount == 64
+            ? UniqueValues
+                .Where(x => x.RealMemberValue > 0x0000_ffff_ffff_ffffUL)
+                .OrderByDescending(x => x.RealMemberValue)
+                .ToList()
+            : [];
+        var h1Values = BitCount == 64
+            ? UniqueValues
+                .Where(
+                    x => x.RealMemberValue > 0x0000_0000_ffff_ffffUL & x.RealMemberValue <= 0x0000_ffff_ffff_ffffUL)
+                .OrderByDescending(x => x.RealMemberValue)
+                .ToList()
+            : [];
+        var l2Values = BitCount >= 32
+            ? UniqueValues
+                .Where(
+                    x => x.RealMemberValue > 0x0000_0000_0000_ffffUL & x.RealMemberValue <= 0x0000_0000_ffff_ffffUL)
+                .OrderByDescending(x => x.RealMemberValue)
+                .ToList()
+            : [];
+        var l1Values = BitCount >= 16
+            ? UniqueValues
+                .Where(
+                    x => x.RealMemberValue > 0x0000_0000_0000_0000UL & x.RealMemberValue <= 0x0000_0000_0000_ffffUL)
+                .OrderByDescending(x => x.RealMemberValue)
+                .ToList()
+            : [];
+        return [h2Values, h1Values, l2Values, l1Values];
+    }
+
+    public int GetMappedBitCount()
+    {
+        if (Values.Any(x => x.MemberValue[0] == '-'))
+            return BitCount;
+
+        return BitCount -
+               (BitOperations.LeadingZeroCount(Values.Select(x => x.RealMemberValue).Max()) -
+                (64 - BitCount));
+    }
+
+    public string? InterlockedUnderlyingType =>
+        UnderlyingType switch
+        {
+            "int" => "int",
+            "long" => "long",
+            "uint" => "int",
+            "ulong" => "long",
+            _ => null,
+        };
+
+    public bool IsInterlockedSupported() => InterlockedUnderlyingType != null;
 }

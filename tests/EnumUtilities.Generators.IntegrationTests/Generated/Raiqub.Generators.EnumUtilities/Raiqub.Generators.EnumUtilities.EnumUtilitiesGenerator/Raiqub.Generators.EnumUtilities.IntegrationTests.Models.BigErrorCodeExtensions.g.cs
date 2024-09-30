@@ -14,13 +14,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     internal static partial class BigErrorCodeExtensions
     {
-
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
         /// <returns>The string representation of the value of this instance.</returns>
         public static string ToStringFast(this BigErrorCode value)
         {
-            var numberValue = (ulong)value;
-            return GetNameInlined(numberValue) ?? numberValue.ToString();
+            return GetNameInlined((ulong)value)
+                ?? ((ulong)value).ToString();
         }
 
         /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
@@ -28,8 +27,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns>The number of characters produced by converting the specified value to string.</returns>
         public static int GetStringLength(this BigErrorCode value)
         {
-            var numberValue = (ulong)value;
-            return GetNameLengthInlined(numberValue) ?? EnumNumericFormatter.GetStringLength(numberValue);
+            return GetNameLengthInlined((ulong)value)
+                ?? EnumNumericFormatter.GetStringLength((ulong)value);
         }
 
         /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
