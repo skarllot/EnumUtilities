@@ -10,6 +10,7 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
+    /// <summary>Provides metadata for <see cref="MyEnum2" /> enumeration.</summary>
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     internal static partial class MyEnum2Metadata
@@ -17,7 +18,15 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <summary>Provides constant values for <see cref="MyEnum2" /> members names.</summary>
         public static partial class Name
         {
-            /// <summary>Represents the largest possible number of characters produced by converting an <see cref="MyEnum2" /> value to string, based on defined members. This field is constant.</summary>
+            private static readonly string[] s_names = new string[4] { "Credit", "Debit", "Cash", "Cheque" };
+
+            /// <summary>Gets a read-only memory containing the members names of <see cref="MyEnum2" />.</summary>
+            public static ReadOnlyMemory<string> Names => new ReadOnlyMemory<string>(s_names);
+
+            /// <summary>Gets a read-only span containing the members names of <see cref="MyEnum2" />.</summary>
+            public static ReadOnlySpan<string> NamesSpan => new ReadOnlySpan<string>(s_names);
+
+            /// <summary>Represents the largest possible number of characters produced by converting a <see cref="MyEnum2" /> value to string, based on defined members.</summary>
             public const int MaxCharsLength = 6;
 
             /// <summary>The string representation of <see cref="MyEnum2.Credit" /> name.</summary>
@@ -36,7 +45,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <summary>Provides static values for <see cref="MyEnum2" /> UTF-8 encoded members names.</summary>
         public static partial class Utf8Name
         {
-            /// <summary>Represents the largest possible number of bytes produced by converting an <see cref="MyEnum2" /> value to UTF-8 string, based on defined members. This field is constant.</summary>
+            /// <summary>Represents the largest possible number of bytes produced by converting a <see cref="MyEnum2" /> value to UTF-8 string, based on defined members.</summary>
             public const int MaxBytesLength = 6;
 
             /// <summary>The UTF-8 representation of <see cref="MyEnum2.Credit" /> name.</summary>
@@ -51,44 +60,50 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             /// <summary>The UTF-8 representation of <see cref="MyEnum2.Cheque" /> name.</summary>
             public static ReadOnlySpan<byte> Cheque => new byte[6] { 67, 104, 101, 113, 117, 101 };
         }
-
         /// <summary>Provides constant values for <see cref="MyEnum2" /> serialized members values.</summary>
         public static partial class SerializedValue
         {
-            /// <summary>Represents the largest possible number of characters produced by converting an <see cref="MyEnum2" /> value to string, based on defined members. This field is constant.</summary>
+            private static readonly string[] s_values = new string[4] { "Credit card", "Debit card", "Cash", "Cheque" };
+
+            /// <summary>Gets a read-only memory containing the serialized members values of <see cref="MyEnum2" />.</summary>
+            public static ReadOnlyMemory<string> Values => new ReadOnlyMemory<string>(s_values);
+
+            /// <summary>Gets a read-only span containing the serialized members values of <see cref="MyEnum2" />.</summary>
+            public static ReadOnlySpan<string> ValuesSpan => new ReadOnlySpan<string>(s_values);
+
+            /// <summary>Represents the largest possible number of characters produced by serializing a <see cref="MyEnum2" /> value to string, based on defined members.</summary>
             public const int MaxCharsLength = 11;
 
-            /// <summary>The string representation of serialized <see cref="MyEnum2.Credit" /> value.</summary>
+            /// <summary>The string representation of <see cref="MyEnum2.Credit" /> serialized value.</summary>
             public const string Credit = "Credit card";
 
-            /// <summary>The string representation of serialized <see cref="MyEnum2.Debit" /> value.</summary>
+            /// <summary>The string representation of <see cref="MyEnum2.Debit" /> serialized value.</summary>
             public const string Debit = "Debit card";
 
-            /// <summary>The string representation of serialized <see cref="MyEnum2.Cash" /> value.</summary>
+            /// <summary>The string representation of <see cref="MyEnum2.Cash" /> serialized value.</summary>
             public const string Cash = "Cash";
 
-            /// <summary>The string representation of serialized <see cref="MyEnum2.Cheque" /> value.</summary>
+            /// <summary>The string representation of <see cref="MyEnum2.Cheque" /> serialized value.</summary>
             public const string Cheque = "Cheque";
         }
 
-        /// <summary>Provides static values for <see cref="MyEnum2" /> UTF-8 encoded members serialized values.</summary>
+        /// <summary>Provides static values for <see cref="MyEnum2" /> UTF-8 encoded serialized members values.</summary>
         public static partial class Utf8SerializedValue
         {
-            /// <summary>Represents the largest possible number of bytes produced by converting an <see cref="MyEnum2" /> value to UTF-8 string, based on defined members. This field is constant.</summary>
+            /// <summary>Represents the largest possible number of bytes produced by serializing a <see cref="MyEnum2" /> value to UTF-8 string, based on defined members.</summary>
             public const int MaxBytesLength = 11;
 
-            /// <summary>The UTF-8 representation of serialized <see cref="MyEnum2.Credit" /> value.</summary>
+            /// <summary>The UTF-8 representation of <see cref="MyEnum2.Credit" /> serialized value.</summary>
             public static ReadOnlySpan<byte> Credit => new byte[11] { 67, 114, 101, 100, 105, 116, 32, 99, 97, 114, 100 };
 
-            /// <summary>The UTF-8 representation of serialized <see cref="MyEnum2.Debit" /> value.</summary>
+            /// <summary>The UTF-8 representation of <see cref="MyEnum2.Debit" /> serialized value.</summary>
             public static ReadOnlySpan<byte> Debit => new byte[10] { 68, 101, 98, 105, 116, 32, 99, 97, 114, 100 };
 
-            /// <summary>The UTF-8 representation of serialized <see cref="MyEnum2.Cash" /> value.</summary>
+            /// <summary>The UTF-8 representation of <see cref="MyEnum2.Cash" /> serialized value.</summary>
             public static ReadOnlySpan<byte> Cash => new byte[4] { 67, 97, 115, 104 };
 
-            /// <summary>The UTF-8 representation of serialized <see cref="MyEnum2.Cheque" /> value.</summary>
+            /// <summary>The UTF-8 representation of <see cref="MyEnum2.Cheque" /> serialized value.</summary>
             public static ReadOnlySpan<byte> Cheque => new byte[6] { 67, 104, 101, 113, 117, 101 };
         }
-
     }
 }

@@ -10,6 +10,7 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
+    /// <summary>Provides metadata for <see cref="SlimCategories" /> enumeration.</summary>
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class SlimCategoriesMetadata
@@ -17,7 +18,15 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <summary>Provides constant values for <see cref="SlimCategories" /> members names.</summary>
         public static partial class Name
         {
-            /// <summary>Represents the largest possible number of characters produced by converting an <see cref="SlimCategories" /> value to string, based on defined members. This field is constant.</summary>
+            private static readonly string[] s_names = new string[6] { "Electronics", "Food", "Automotive", "Arts", "BeautyCare", "Fashion" };
+
+            /// <summary>Gets a read-only memory containing the members names of <see cref="SlimCategories" />.</summary>
+            public static ReadOnlyMemory<string> Names => new ReadOnlyMemory<string>(s_names);
+
+            /// <summary>Gets a read-only span containing the members names of <see cref="SlimCategories" />.</summary>
+            public static ReadOnlySpan<string> NamesSpan => new ReadOnlySpan<string>(s_names);
+
+            /// <summary>Represents the largest possible number of characters produced by converting a <see cref="SlimCategories" /> value to string, based on defined members.</summary>
             public const int MaxCharsLength = 11;
 
             /// <summary>The string representation of <see cref="SlimCategories.Electronics" /> name.</summary>
@@ -42,7 +51,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <summary>Provides static values for <see cref="SlimCategories" /> UTF-8 encoded members names.</summary>
         public static partial class Utf8Name
         {
-            /// <summary>Represents the largest possible number of bytes produced by converting an <see cref="SlimCategories" /> value to UTF-8 string, based on defined members. This field is constant.</summary>
+            /// <summary>Represents the largest possible number of bytes produced by converting a <see cref="SlimCategories" /> value to UTF-8 string, based on defined members.</summary>
             public const int MaxBytesLength = 11;
 
             /// <summary>The UTF-8 representation of <see cref="SlimCategories.Electronics" /> name.</summary>
@@ -63,6 +72,5 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             /// <summary>The UTF-8 representation of <see cref="SlimCategories.Fashion" /> name.</summary>
             public static ReadOnlySpan<byte> Fashion => new byte[7] { 70, 97, 115, 104, 105, 111, 110 };
         }
-
     }
 }

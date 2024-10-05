@@ -6,16 +6,18 @@ namespace Raiqub.Generators.EnumUtilities.Models;
 
 public sealed class EnumValue
 {
-    private EnumValue(string memberName, string memberValue, object realMemberValue)
+    private EnumValue(string memberName, string memberValue, object realMemberValue, int index)
     {
         MemberName = memberName;
         MemberValue = memberValue;
         RealMemberValue = ConvertToUInt64(realMemberValue);
+        Index = index;
     }
 
     public string MemberName { get; }
     public string MemberValue { get; }
     public ulong RealMemberValue { get; set; }
+    public int Index { get; }
     public string? SerializationValue { get; set; }
     public string? Description { get; set; }
     public DisplayAttribute? Display { get; set; }
@@ -23,12 +25,12 @@ public sealed class EnumValue
     public string ResolvedSerializedValue => SerializationValue ?? MemberName;
     public string ResolvedJsonValue => JsonPropertyName ?? SerializationValue ?? MemberName;
 
-    public static EnumValue? FromSymbol(ISymbol symbol)
+    public static EnumValue? FromSymbol(ISymbol symbol, int index)
     {
         if (symbol is not IFieldSymbol { ConstantValue: not null } field)
             return null;
 
-        var result = new EnumValue(field.Name, field.ConstantValue.ToString(), field.ConstantValue);
+        var result = new EnumValue(field.Name, field.ConstantValue.ToString(), field.ConstantValue, index);
 
         foreach (var attribute in field.GetAttributes())
         {

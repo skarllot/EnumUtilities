@@ -18,6 +18,6 @@
     }
 
 <#+
-        WriteFormatString(x => x.ResolvedSerializedValue, "EnumMemberValue");
+        WriteFormatString(x => x.ResolvedSerializedValue, "EnumMemberValue", $"{Model.MetadataClassName}.SerializedValue.ValuesSpan");
     }
 #>

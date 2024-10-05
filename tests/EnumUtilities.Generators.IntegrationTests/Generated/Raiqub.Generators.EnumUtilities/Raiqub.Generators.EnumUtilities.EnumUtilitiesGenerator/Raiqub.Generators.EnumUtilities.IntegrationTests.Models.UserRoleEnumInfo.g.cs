@@ -10,6 +10,7 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
+    /// <summary>Provides metadata for <see cref="UserRole" /> enumeration.</summary>
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class UserRoleMetadata
@@ -17,7 +18,15 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <summary>Provides constant values for <see cref="UserRole" /> members names.</summary>
         public static partial class Name
         {
-            /// <summary>Represents the largest possible number of characters produced by converting an <see cref="UserRole" /> value to string, based on defined members. This field is constant.</summary>
+            private static readonly string[] s_names = new string[6] { "None", "NormalUser", "Custodian", "Finance", "SuperUser", "All" };
+
+            /// <summary>Gets a read-only memory containing the members names of <see cref="UserRole" />.</summary>
+            public static ReadOnlyMemory<string> Names => new ReadOnlyMemory<string>(s_names);
+
+            /// <summary>Gets a read-only span containing the members names of <see cref="UserRole" />.</summary>
+            public static ReadOnlySpan<string> NamesSpan => new ReadOnlySpan<string>(s_names);
+
+            /// <summary>Represents the largest possible number of characters produced by converting a <see cref="UserRole" /> value to string, based on defined members.</summary>
             public const int MaxCharsLength = 10;
 
             /// <summary>The string representation of <see cref="UserRole.None" /> name.</summary>
@@ -42,7 +51,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <summary>Provides static values for <see cref="UserRole" /> UTF-8 encoded members names.</summary>
         public static partial class Utf8Name
         {
-            /// <summary>Represents the largest possible number of bytes produced by converting an <see cref="UserRole" /> value to UTF-8 string, based on defined members. This field is constant.</summary>
+            /// <summary>Represents the largest possible number of bytes produced by converting a <see cref="UserRole" /> value to UTF-8 string, based on defined members.</summary>
             public const int MaxBytesLength = 10;
 
             /// <summary>The UTF-8 representation of <see cref="UserRole.None" /> name.</summary>
@@ -63,56 +72,62 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             /// <summary>The UTF-8 representation of <see cref="UserRole.All" /> name.</summary>
             public static ReadOnlySpan<byte> All => new byte[3] { 65, 108, 108 };
         }
-
         /// <summary>Provides constant values for <see cref="UserRole" /> serialized members values.</summary>
         public static partial class SerializedValue
         {
-            /// <summary>Represents the largest possible number of characters produced by converting an <see cref="UserRole" /> value to string, based on defined members. This field is constant.</summary>
+            private static readonly string[] s_values = new string[6] { "None", "Normal User", "Custodian", "Finance", "Super User", "All" };
+
+            /// <summary>Gets a read-only memory containing the serialized members values of <see cref="UserRole" />.</summary>
+            public static ReadOnlyMemory<string> Values => new ReadOnlyMemory<string>(s_values);
+
+            /// <summary>Gets a read-only span containing the serialized members values of <see cref="UserRole" />.</summary>
+            public static ReadOnlySpan<string> ValuesSpan => new ReadOnlySpan<string>(s_values);
+
+            /// <summary>Represents the largest possible number of characters produced by serializing a <see cref="UserRole" /> value to string, based on defined members.</summary>
             public const int MaxCharsLength = 11;
 
-            /// <summary>The string representation of serialized <see cref="UserRole.None" /> value.</summary>
+            /// <summary>The string representation of <see cref="UserRole.None" /> serialized value.</summary>
             public const string None = "None";
 
-            /// <summary>The string representation of serialized <see cref="UserRole.NormalUser" /> value.</summary>
+            /// <summary>The string representation of <see cref="UserRole.NormalUser" /> serialized value.</summary>
             public const string NormalUser = "Normal User";
 
-            /// <summary>The string representation of serialized <see cref="UserRole.Custodian" /> value.</summary>
+            /// <summary>The string representation of <see cref="UserRole.Custodian" /> serialized value.</summary>
             public const string Custodian = "Custodian";
 
-            /// <summary>The string representation of serialized <see cref="UserRole.Finance" /> value.</summary>
+            /// <summary>The string representation of <see cref="UserRole.Finance" /> serialized value.</summary>
             public const string Finance = "Finance";
 
-            /// <summary>The string representation of serialized <see cref="UserRole.SuperUser" /> value.</summary>
+            /// <summary>The string representation of <see cref="UserRole.SuperUser" /> serialized value.</summary>
             public const string SuperUser = "Super User";
 
-            /// <summary>The string representation of serialized <see cref="UserRole.All" /> value.</summary>
+            /// <summary>The string representation of <see cref="UserRole.All" /> serialized value.</summary>
             public const string All = "All";
         }
 
-        /// <summary>Provides static values for <see cref="UserRole" /> UTF-8 encoded members serialized values.</summary>
+        /// <summary>Provides static values for <see cref="UserRole" /> UTF-8 encoded serialized members values.</summary>
         public static partial class Utf8SerializedValue
         {
-            /// <summary>Represents the largest possible number of bytes produced by converting an <see cref="UserRole" /> value to UTF-8 string, based on defined members. This field is constant.</summary>
+            /// <summary>Represents the largest possible number of bytes produced by serializing a <see cref="UserRole" /> value to UTF-8 string, based on defined members.</summary>
             public const int MaxBytesLength = 11;
 
-            /// <summary>The UTF-8 representation of serialized <see cref="UserRole.None" /> value.</summary>
+            /// <summary>The UTF-8 representation of <see cref="UserRole.None" /> serialized value.</summary>
             public static ReadOnlySpan<byte> None => new byte[4] { 78, 111, 110, 101 };
 
-            /// <summary>The UTF-8 representation of serialized <see cref="UserRole.NormalUser" /> value.</summary>
+            /// <summary>The UTF-8 representation of <see cref="UserRole.NormalUser" /> serialized value.</summary>
             public static ReadOnlySpan<byte> NormalUser => new byte[11] { 78, 111, 114, 109, 97, 108, 32, 85, 115, 101, 114 };
 
-            /// <summary>The UTF-8 representation of serialized <see cref="UserRole.Custodian" /> value.</summary>
+            /// <summary>The UTF-8 representation of <see cref="UserRole.Custodian" /> serialized value.</summary>
             public static ReadOnlySpan<byte> Custodian => new byte[9] { 67, 117, 115, 116, 111, 100, 105, 97, 110 };
 
-            /// <summary>The UTF-8 representation of serialized <see cref="UserRole.Finance" /> value.</summary>
+            /// <summary>The UTF-8 representation of <see cref="UserRole.Finance" /> serialized value.</summary>
             public static ReadOnlySpan<byte> Finance => new byte[7] { 70, 105, 110, 97, 110, 99, 101 };
 
-            /// <summary>The UTF-8 representation of serialized <see cref="UserRole.SuperUser" /> value.</summary>
+            /// <summary>The UTF-8 representation of <see cref="UserRole.SuperUser" /> serialized value.</summary>
             public static ReadOnlySpan<byte> SuperUser => new byte[10] { 83, 117, 112, 101, 114, 32, 85, 115, 101, 114 };
 
-            /// <summary>The UTF-8 representation of serialized <see cref="UserRole.All" /> value.</summary>
+            /// <summary>The UTF-8 representation of <see cref="UserRole.All" /> serialized value.</summary>
             public static ReadOnlySpan<byte> All => new byte[3] { 65, 108, 108 };
         }
-
     }
 }

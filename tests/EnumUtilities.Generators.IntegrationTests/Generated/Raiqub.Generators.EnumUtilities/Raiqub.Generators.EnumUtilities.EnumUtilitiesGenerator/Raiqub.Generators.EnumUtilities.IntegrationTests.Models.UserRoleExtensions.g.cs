@@ -124,25 +124,17 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             string? result = GetNameInlined(value);
             if (result is null)
             {
-                var rented = System.Buffers.ArrayPool<string>.Shared.Rent(3);
-                try
+                Span<int> foundItems = stackalloc int[3];
+                if (TryFindFlagsNames(value, foundItems, out int foundItemsCount, out int resultLength))
                 {
-                    Span<string> foundItems = new Span<string>(rented, 0, 3);
-                    if (TryFindFlagsNames(value, foundItems, out int foundItemsCount, out int resultLength))
-                    {
-                        result = EnumStringFormatter.WriteMultipleFoundFlagsNames(foundItems, foundItemsCount, resultLength);
-                    }
-                }
-                finally
-                {
-                    System.Buffers.ArrayPool<string>.Shared.Return(rented);
+                    result = EnumStringFormatter.WriteMultipleFoundFlagsNames(UserRoleMetadata.Name.NamesSpan, foundItems, foundItemsCount, resultLength);
                 }
             }
 
             return result;
         }
 
-        private static bool TryFindFlagsNames(ulong value, Span<string> foundItems, out int foundItemsCount, out int resultLength)
+        private static bool TryFindFlagsNames(ulong value, Span<int> foundItems, out int foundItemsCount, out int resultLength)
         {
             resultLength = 0;
             foundItemsCount = 0;
@@ -152,35 +144,35 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 {
                     value -= 7;
                     resultLength = checked(resultLength + 3);
-                    foundItems[foundItemsCount++] = "All";
+                    foundItems[foundItemsCount++] = 5;
                     if (value == 0) return true;
                 }
                 if ((value & 6) == 6)
                 {
                     value -= 6;
                     resultLength = checked(resultLength + 9);
-                    foundItems[foundItemsCount++] = "SuperUser";
+                    foundItems[foundItemsCount++] = 4;
                     if (value == 0) return true;
                 }
                 if ((value & 4) == 4)
                 {
                     value -= 4;
                     resultLength = checked(resultLength + 7);
-                    foundItems[foundItemsCount++] = "Finance";
+                    foundItems[foundItemsCount++] = 3;
                     if (value == 0) return true;
                 }
                 if ((value & 2) == 2)
                 {
                     value -= 2;
                     resultLength = checked(resultLength + 9);
-                    foundItems[foundItemsCount++] = "Custodian";
+                    foundItems[foundItemsCount++] = 2;
                     if (value == 0) return true;
                 }
                 if ((value & 1) == 1)
                 {
                     value -= 1;
                     resultLength = checked(resultLength + 10);
-                    foundItems[foundItemsCount++] = "NormalUser";
+                    foundItems[foundItemsCount++] = 1;
                     if (value == 0) return true;
                 }
             }
@@ -353,25 +345,17 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             string? result = GetEnumMemberValueInlined(value);
             if (result is null)
             {
-                var rented = System.Buffers.ArrayPool<string>.Shared.Rent(3);
-                try
+                Span<int> foundItems = stackalloc int[3];
+                if (TryFindFlagsEnumMemberValues(value, foundItems, out int foundItemsCount, out int resultLength))
                 {
-                    Span<string> foundItems = new Span<string>(rented, 0, 3);
-                    if (TryFindFlagsEnumMemberValues(value, foundItems, out int foundItemsCount, out int resultLength))
-                    {
-                        result = EnumStringFormatter.WriteMultipleFoundFlagsNames(foundItems, foundItemsCount, resultLength);
-                    }
-                }
-                finally
-                {
-                    System.Buffers.ArrayPool<string>.Shared.Return(rented);
+                    result = EnumStringFormatter.WriteMultipleFoundFlagsNames(UserRoleMetadata.Name.NamesSpan, foundItems, foundItemsCount, resultLength);
                 }
             }
 
             return result;
         }
 
-        private static bool TryFindFlagsEnumMemberValues(ulong value, Span<string> foundItems, out int foundItemsCount, out int resultLength)
+        private static bool TryFindFlagsEnumMemberValues(ulong value, Span<int> foundItems, out int foundItemsCount, out int resultLength)
         {
             resultLength = 0;
             foundItemsCount = 0;
@@ -381,35 +365,35 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 {
                     value -= 7;
                     resultLength = checked(resultLength + 3);
-                    foundItems[foundItemsCount++] = "All";
+                    foundItems[foundItemsCount++] = 5;
                     if (value == 0) return true;
                 }
                 if ((value & 6) == 6)
                 {
                     value -= 6;
                     resultLength = checked(resultLength + 10);
-                    foundItems[foundItemsCount++] = "Super User";
+                    foundItems[foundItemsCount++] = 4;
                     if (value == 0) return true;
                 }
                 if ((value & 4) == 4)
                 {
                     value -= 4;
                     resultLength = checked(resultLength + 7);
-                    foundItems[foundItemsCount++] = "Finance";
+                    foundItems[foundItemsCount++] = 3;
                     if (value == 0) return true;
                 }
                 if ((value & 2) == 2)
                 {
                     value -= 2;
                     resultLength = checked(resultLength + 9);
-                    foundItems[foundItemsCount++] = "Custodian";
+                    foundItems[foundItemsCount++] = 2;
                     if (value == 0) return true;
                 }
                 if ((value & 1) == 1)
                 {
                     value -= 1;
                     resultLength = checked(resultLength + 11);
-                    foundItems[foundItemsCount++] = "Normal User";
+                    foundItems[foundItemsCount++] = 1;
                     if (value == 0) return true;
                 }
             }

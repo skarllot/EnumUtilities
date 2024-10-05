@@ -8,6 +8,7 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
+/// <summary>Provides metadata for <see cref="NoNamespace" /> enumeration.</summary>
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
 public static partial class NoNamespaceMetadata
@@ -15,7 +16,15 @@ public static partial class NoNamespaceMetadata
     /// <summary>Provides constant values for <see cref="NoNamespace" /> members names.</summary>
     public static partial class Name
     {
-        /// <summary>Represents the largest possible number of characters produced by converting an <see cref="NoNamespace" /> value to string, based on defined members. This field is constant.</summary>
+        private static readonly string[] s_names = new string[3] { "Zero", "One", "Two" };
+
+        /// <summary>Gets a read-only memory containing the members names of <see cref="NoNamespace" />.</summary>
+        public static ReadOnlyMemory<string> Names => new ReadOnlyMemory<string>(s_names);
+
+        /// <summary>Gets a read-only span containing the members names of <see cref="NoNamespace" />.</summary>
+        public static ReadOnlySpan<string> NamesSpan => new ReadOnlySpan<string>(s_names);
+
+        /// <summary>Represents the largest possible number of characters produced by converting a <see cref="NoNamespace" /> value to string, based on defined members.</summary>
         public const int MaxCharsLength = 4;
 
         /// <summary>The string representation of <see cref="NoNamespace.Zero" /> name.</summary>
@@ -31,7 +40,7 @@ public static partial class NoNamespaceMetadata
     /// <summary>Provides static values for <see cref="NoNamespace" /> UTF-8 encoded members names.</summary>
     public static partial class Utf8Name
     {
-        /// <summary>Represents the largest possible number of bytes produced by converting an <see cref="NoNamespace" /> value to UTF-8 string, based on defined members. This field is constant.</summary>
+        /// <summary>Represents the largest possible number of bytes produced by converting a <see cref="NoNamespace" /> value to UTF-8 string, based on defined members.</summary>
         public const int MaxBytesLength = 4;
 
         /// <summary>The UTF-8 representation of <see cref="NoNamespace.Zero" /> name.</summary>
@@ -43,5 +52,4 @@ public static partial class NoNamespaceMetadata
         /// <summary>The UTF-8 representation of <see cref="NoNamespace.Two" /> name.</summary>
         public static ReadOnlySpan<byte> Two => new byte[3] { 84, 119, 111 };
     }
-
 }

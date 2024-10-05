@@ -1,0 +1,63 @@
+﻿<#+
+    private void WriteNames(
+        string className,
+        string xmlDocAllRef,
+        string xmlDocItemRef,
+        string xmlDocAction,
+        Func<EnumValue, string> keySelector,
+        bool isName)
+    {
+        string fieldName = isName ? "s_names" : "s_values";
+        string propName = isName ? "Names" : "Values";
+#>
+    /// <summary>Provides constant values for <see cref="<#= Model.Name #>" /> <#= xmlDocAllRef #>.</summary>
+    public static partial class <#= className #>
+    {
+        private static readonly string[] <#= fieldName #> = new string[<#= Model.Values.Count #>] { <#+
+        foreach (var (index, curr) in Model.Values.Index())
+        {
+            if (index > 0)
+                Write(", ");
+            Write($"\"{keySelector(curr)}\"");
+        }
+#> };
+
+        /// <summary>Gets a read-only memory containing the <#= xmlDocAllRef #> of <see cref="<#= Model.Name #>" />.</summary>
+        public static ReadOnlyMemory<string> <#= propName #> => new ReadOnlyMemory<string>(<#= fieldName #>);
+
+        /// <summary>Gets a read-only span containing the <#= xmlDocAllRef #> of <see cref="<#= Model.Name #>" />.</summary>
+        public static ReadOnlySpan<string> <#= propName #>Span => new ReadOnlySpan<string>(<#= fieldName #>);
+
+        /// <summary>Represents the largest possible number of characters produced by <#= xmlDocAction #> a <see cref="<#= Model.Name #>" /> value to string, based on defined members.</summary>
+        public const int MaxCharsLength = <#= Model.Values.Max(x => keySelector(x).Length) #>;
+<#+
+        foreach (var curr in Model.Values)
+        {
+#>
+
+        /// <summary>The string representation of <see cref="<#= Model.Name #>.<#= curr.MemberName #>" /> <#= xmlDocItemRef #>.</summary>
+        public const string <#= curr.MemberName #> = "<#= keySelector(curr) #>";
+<#+
+        }
+#>
+    }
+
+    /// <summary>Provides static values for <see cref="<#= Model.Name #>" /> UTF-8 encoded <#= xmlDocAllRef #>.</summary>
+    public static partial class Utf8<#= className #>
+    {
+        /// <summary>Represents the largest possible number of bytes produced by <#= xmlDocAction #> a <see cref="<#= Model.Name #>" /> value to UTF-8 string, based on defined members.</summary>
+        public const int MaxBytesLength = <#= Model.Values.Max(x => _utf8Encoding.GetByteCount(keySelector(x))) #>;
+<#+
+        foreach (var curr in Model.Values)
+        {
+#>
+
+        /// <summary>The UTF-8 representation of <see cref="<#= Model.Name #>.<#= curr.MemberName #>" /> <#= xmlDocItemRef #>.</summary>
+        public static ReadOnlySpan<byte> <#= curr.MemberName #> => new byte[<#= _utf8Encoding.GetByteCount(keySelector(curr)) #>] { <#= _utf8Encoding.GetBytes(keySelector(curr)).JoinToString() #> };
+<#+
+        }
+#>
+    }
+<#+
+    }
+#>

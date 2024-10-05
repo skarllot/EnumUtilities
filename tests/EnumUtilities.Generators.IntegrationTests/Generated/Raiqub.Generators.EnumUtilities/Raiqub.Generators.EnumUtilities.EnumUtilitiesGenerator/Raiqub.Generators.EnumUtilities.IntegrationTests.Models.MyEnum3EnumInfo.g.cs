@@ -10,6 +10,7 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
+    /// <summary>Provides metadata for <see cref="MyEnum3" /> enumeration.</summary>
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class MyEnum3Metadata
@@ -17,7 +18,15 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <summary>Provides constant values for <see cref="MyEnum3" /> members names.</summary>
         public static partial class Name
         {
-            /// <summary>Represents the largest possible number of characters produced by converting an <see cref="MyEnum3" /> value to string, based on defined members. This field is constant.</summary>
+            private static readonly string[] s_names = new string[7] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
+
+            /// <summary>Gets a read-only memory containing the members names of <see cref="MyEnum3" />.</summary>
+            public static ReadOnlyMemory<string> Names => new ReadOnlyMemory<string>(s_names);
+
+            /// <summary>Gets a read-only span containing the members names of <see cref="MyEnum3" />.</summary>
+            public static ReadOnlySpan<string> NamesSpan => new ReadOnlySpan<string>(s_names);
+
+            /// <summary>Represents the largest possible number of characters produced by converting a <see cref="MyEnum3" /> value to string, based on defined members.</summary>
             public const int MaxCharsLength = 9;
 
             /// <summary>The string representation of <see cref="MyEnum3.Monday" /> name.</summary>
@@ -45,7 +54,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <summary>Provides static values for <see cref="MyEnum3" /> UTF-8 encoded members names.</summary>
         public static partial class Utf8Name
         {
-            /// <summary>Represents the largest possible number of bytes produced by converting an <see cref="MyEnum3" /> value to UTF-8 string, based on defined members. This field is constant.</summary>
+            /// <summary>Represents the largest possible number of bytes produced by converting a <see cref="MyEnum3" /> value to UTF-8 string, based on defined members.</summary>
             public const int MaxBytesLength = 9;
 
             /// <summary>The UTF-8 representation of <see cref="MyEnum3.Monday" /> name.</summary>
@@ -69,6 +78,5 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             /// <summary>The UTF-8 representation of <see cref="MyEnum3.Sunday" /> name.</summary>
             public static ReadOnlySpan<byte> Sunday => new byte[6] { 83, 117, 110, 100, 97, 121 };
         }
-
     }
 }

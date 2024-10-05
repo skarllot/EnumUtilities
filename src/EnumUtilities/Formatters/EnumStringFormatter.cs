@@ -8,13 +8,15 @@ public static class EnumStringFormatter
     /// <summary>
     /// Writes the names of multiple found flags into a single string, separated by commas.
     /// </summary>
+    /// <param name="names">A span containing all enumeration names.</param>
     /// <param name="foundItems">A span containing the string of found enum values.</param>
     /// <param name="foundItemsCount">The number of enum values found.</param>
     /// <param name="count">The total length of the resulting string, excluding separators.</param>
     /// <returns>A string that represents the names of the found flags, separated by commas.</returns>
     /// <exception cref="OverflowException">Thrown if the computed string length exceeds the capacity of an <see cref="int"/>.</exception>
     public static unsafe string WriteMultipleFoundFlagsNames(
-        Span<string> foundItems,
+        ReadOnlySpan<string> names,
+        Span<int> foundItems,
         int foundItemsCount,
         int count)
     {
@@ -32,7 +34,7 @@ public static class EnumStringFormatter
             var span = new Span<char>(ptr, strlen);
 #endif
 
-            string name = foundItems[--foundItemsCount];
+            string name = names[foundItems[--foundItemsCount]];
             name.AsSpan().CopyTo(span);
             span = span.Slice(name.Length);
             while (--foundItemsCount >= 0)
@@ -41,7 +43,7 @@ public static class EnumStringFormatter
                 span[1] = ' ';
                 span = span.Slice(2);
 
-                name = foundItems[foundItemsCount];
+                name = names[foundItems[foundItemsCount]];
                 name.AsSpan().CopyTo(span);
                 span = span.Slice(name.Length);
             }
