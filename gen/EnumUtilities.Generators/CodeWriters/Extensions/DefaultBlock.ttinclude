@@ -54,6 +54,6 @@
     }
 
 <#+
-        WriteFormatString(x => x.MemberName, "Name", $"{Model.MetadataClassName}.Name.NamesSpan");
+        WriteFormatString(x => x.MemberName, "Name");
     }
 #>

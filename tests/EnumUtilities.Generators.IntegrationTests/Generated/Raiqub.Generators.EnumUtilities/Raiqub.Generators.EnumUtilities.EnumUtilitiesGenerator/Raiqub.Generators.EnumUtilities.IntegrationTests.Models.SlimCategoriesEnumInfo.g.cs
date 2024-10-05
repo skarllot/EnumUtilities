@@ -18,14 +18,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <summary>Provides constant values for <see cref="SlimCategories" /> members names.</summary>
         public static partial class Name
         {
-            private static readonly string[] s_names = new string[6] { "Electronics", "Food", "Automotive", "Arts", "BeautyCare", "Fashion" };
-
-            /// <summary>Gets a read-only memory containing the members names of <see cref="SlimCategories" />.</summary>
-            public static ReadOnlyMemory<string> Names => new ReadOnlyMemory<string>(s_names);
-
-            /// <summary>Gets a read-only span containing the members names of <see cref="SlimCategories" />.</summary>
-            public static ReadOnlySpan<string> NamesSpan => new ReadOnlySpan<string>(s_names);
-
             /// <summary>Represents the largest possible number of characters produced by converting a <see cref="SlimCategories" /> value to string, based on defined members.</summary>
             public const int MaxCharsLength = 11;
 

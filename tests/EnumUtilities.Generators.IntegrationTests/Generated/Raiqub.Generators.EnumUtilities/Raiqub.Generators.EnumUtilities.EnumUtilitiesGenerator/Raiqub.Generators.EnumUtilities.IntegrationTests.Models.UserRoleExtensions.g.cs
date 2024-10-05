@@ -119,6 +119,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             return checked(count + (separatorStringLength * (foundItemsCount - 1)));
         }
 
+        private static readonly string[] s_formatNames = new string[6] { "All", "SuperUser", "Finance", "Custodian", "NormalUser", "None" };
+
         private static string? FormatFlagNames(ulong value)
         {
             string? result = GetNameInlined(value);
@@ -127,7 +129,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 Span<int> foundItems = stackalloc int[3];
                 if (TryFindFlagsNames(value, foundItems, out int foundItemsCount, out int resultLength))
                 {
-                    result = EnumStringFormatter.WriteMultipleFoundFlagsNames(UserRoleMetadata.Name.NamesSpan, foundItems, foundItemsCount, resultLength);
+                    result = EnumStringFormatter.WriteMultipleFoundFlagsNames(s_formatNames, foundItems, foundItemsCount, resultLength);
                 }
             }
 
@@ -144,35 +146,35 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 {
                     value -= 7;
                     resultLength = checked(resultLength + 3);
-                    foundItems[foundItemsCount++] = 5;
+                    foundItems[foundItemsCount++] = 0;
                     if (value == 0) return true;
                 }
                 if ((value & 6) == 6)
                 {
                     value -= 6;
                     resultLength = checked(resultLength + 9);
-                    foundItems[foundItemsCount++] = 4;
+                    foundItems[foundItemsCount++] = 1;
                     if (value == 0) return true;
                 }
                 if ((value & 4) == 4)
                 {
                     value -= 4;
                     resultLength = checked(resultLength + 7);
-                    foundItems[foundItemsCount++] = 3;
+                    foundItems[foundItemsCount++] = 2;
                     if (value == 0) return true;
                 }
                 if ((value & 2) == 2)
                 {
                     value -= 2;
                     resultLength = checked(resultLength + 9);
-                    foundItems[foundItemsCount++] = 2;
+                    foundItems[foundItemsCount++] = 3;
                     if (value == 0) return true;
                 }
                 if ((value & 1) == 1)
                 {
                     value -= 1;
                     resultLength = checked(resultLength + 10);
-                    foundItems[foundItemsCount++] = 1;
+                    foundItems[foundItemsCount++] = 4;
                     if (value == 0) return true;
                 }
             }
@@ -340,6 +342,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             return checked(count + (separatorStringLength * (foundItemsCount - 1)));
         }
 
+        private static readonly string[] s_formatEnumMemberValues = new string[6] { "All", "Super User", "Finance", "Custodian", "Normal User", "None" };
+
         private static string? FormatFlagEnumMemberValues(ulong value)
         {
             string? result = GetEnumMemberValueInlined(value);
@@ -348,7 +352,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 Span<int> foundItems = stackalloc int[3];
                 if (TryFindFlagsEnumMemberValues(value, foundItems, out int foundItemsCount, out int resultLength))
                 {
-                    result = EnumStringFormatter.WriteMultipleFoundFlagsNames(UserRoleMetadata.Name.NamesSpan, foundItems, foundItemsCount, resultLength);
+                    result = EnumStringFormatter.WriteMultipleFoundFlagsNames(s_formatEnumMemberValues, foundItems, foundItemsCount, resultLength);
                 }
             }
 
@@ -365,35 +369,35 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 {
                     value -= 7;
                     resultLength = checked(resultLength + 3);
-                    foundItems[foundItemsCount++] = 5;
+                    foundItems[foundItemsCount++] = 0;
                     if (value == 0) return true;
                 }
                 if ((value & 6) == 6)
                 {
                     value -= 6;
                     resultLength = checked(resultLength + 10);
-                    foundItems[foundItemsCount++] = 4;
+                    foundItems[foundItemsCount++] = 1;
                     if (value == 0) return true;
                 }
                 if ((value & 4) == 4)
                 {
                     value -= 4;
                     resultLength = checked(resultLength + 7);
-                    foundItems[foundItemsCount++] = 3;
+                    foundItems[foundItemsCount++] = 2;
                     if (value == 0) return true;
                 }
                 if ((value & 2) == 2)
                 {
                     value -= 2;
                     resultLength = checked(resultLength + 9);
-                    foundItems[foundItemsCount++] = 2;
+                    foundItems[foundItemsCount++] = 3;
                     if (value == 0) return true;
                 }
                 if ((value & 1) == 1)
                 {
                     value -= 1;
                     resultLength = checked(resultLength + 11);
-                    foundItems[foundItemsCount++] = 1;
+                    foundItems[foundItemsCount++] = 4;
                     if (value == 0) return true;
                 }
             }

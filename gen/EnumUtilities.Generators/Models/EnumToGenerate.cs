@@ -17,11 +17,19 @@ public sealed record EnumToGenerate(
     ImmutableArray<Location> Locations)
     : ILocalizableSource
 {
+    private List<EnumValue>? _invertedValues;
+
     public string MetadataClassName => Name.Contains("Metadata") ? $"{Name}Info" : $"{Name}Metadata";
     public string RefName { get; } = ContainingType is not null ? $"{ContainingType.Name}.{Name}" : Name;
 
     public List<EnumValue> UniqueValues { get; } =
         Values.DistinctBy(static it => it.MemberValue, StringComparer.Ordinal).ToList();
+
+    public List<EnumValue> InvertedValues =>
+        _invertedValues ??= Values
+            .DistinctBy(x => x.RealMemberValue)
+            .OrderByDescending(x => x.RealMemberValue)
+            .ToList();
 
     public bool HasSerializationValue =>
         Values.Exists(static it => it.SerializationValue != null);
@@ -109,30 +117,26 @@ public sealed record EnumToGenerate(
     public List<EnumValue>[] GetEnumValueRangesByBitRange()
     {
         var h2Values = BitCount == 64
-            ? UniqueValues
+            ? InvertedValues
                 .Where(x => x.RealMemberValue > 0x0000_ffff_ffff_ffffUL)
-                .OrderByDescending(x => x.RealMemberValue)
                 .ToList()
             : [];
         var h1Values = BitCount == 64
-            ? UniqueValues
+            ? InvertedValues
                 .Where(
                     x => x.RealMemberValue > 0x0000_0000_ffff_ffffUL & x.RealMemberValue <= 0x0000_ffff_ffff_ffffUL)
-                .OrderByDescending(x => x.RealMemberValue)
                 .ToList()
             : [];
         var l2Values = BitCount >= 32
-            ? UniqueValues
+            ? InvertedValues
                 .Where(
                     x => x.RealMemberValue > 0x0000_0000_0000_ffffUL & x.RealMemberValue <= 0x0000_0000_ffff_ffffUL)
-                .OrderByDescending(x => x.RealMemberValue)
                 .ToList()
             : [];
         var l1Values = BitCount >= 16
-            ? UniqueValues
+            ? InvertedValues
                 .Where(
                     x => x.RealMemberValue > 0x0000_0000_0000_0000UL & x.RealMemberValue <= 0x0000_0000_0000_ffffUL)
-                .OrderByDescending(x => x.RealMemberValue)
                 .ToList()
             : [];
         return [h2Values, h1Values, l2Values, l1Values];

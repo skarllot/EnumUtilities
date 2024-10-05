@@ -102,6 +102,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             return checked(count + (separatorStringLength * (foundItemsCount - 1)));
         }
 
+        private static readonly string[] s_formatNames = new string[3] { "Green", "Blue", "Red" };
+
         private static string? FormatFlagNames(int value)
         {
             string? result = GetNameInlined(value);
@@ -110,7 +112,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 Span<int> foundItems = stackalloc int[3];
                 if (TryFindFlagsNames(value, foundItems, out int foundItemsCount, out int resultLength))
                 {
-                    result = EnumStringFormatter.WriteMultipleFoundFlagsNames(ColoursMetadata.Name.NamesSpan, foundItems, foundItemsCount, resultLength);
+                    result = EnumStringFormatter.WriteMultipleFoundFlagsNames(s_formatNames, foundItems, foundItemsCount, resultLength);
                 }
             }
 
@@ -127,7 +129,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 {
                     value -= 4;
                     resultLength = checked(resultLength + 5);
-                    foundItems[foundItemsCount++] = 2;
+                    foundItems[foundItemsCount++] = 0;
                     if (value == 0) return true;
                 }
                 if ((value & 2) == 2)
@@ -141,7 +143,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 {
                     value -= 1;
                     resultLength = checked(resultLength + 3);
-                    foundItems[foundItemsCount++] = 0;
+                    foundItems[foundItemsCount++] = 2;
                     if (value == 0) return true;
                 }
             }

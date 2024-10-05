@@ -1,16 +1,16 @@
 ﻿<#+
-    private void WriteFormatString(Func<EnumValue, string?> keySelector, string type, string getNamesReference)
+    private void WriteFormatString(Func<EnumValue, string?> keySelector, string type)
     {
         if (Model.IsFlags)
         {
-            WriteFormatStringLookup(keySelector, type, getNamesReference);
+            WriteFormatStringLookup(keySelector, type);
             WriteLine();
         }
 
         WriteInlineFormatString(keySelector, type);
     }
 
-    private void WriteFormatStringLookup(Func<EnumValue, string?> keySelector, string type, string getNamesReference)
+    private void WriteFormatStringLookup(Func<EnumValue, string?> keySelector, string type)
     {
         var valuesRanges = Model.GetEnumValueRangesByBitRange();
 #>
@@ -72,6 +72,15 @@ CountLength:
         return checked(count + (separatorStringLength * (foundItemsCount - 1)));
     }
 
+    private static readonly string[] s_format<#= type #>s = new string[<#= Model.InvertedValues.Count #>] { <#+
+        foreach (var (index, curr) in Model.InvertedValues.Index())
+        {
+            if (index > 0)
+                Write(", ");
+            Write($"\"{keySelector(curr)}\"");
+        }
+#> };
+
     private static string? FormatFlag<#= type #>s(<#= Model.UnderlyingType #> value)
     {
         string? result = Get<#= type #>Inlined(value);
@@ -80,7 +89,7 @@ CountLength:
             Span<int> foundItems = stackalloc int[<#= Model.GetMappedBitCount() #>];
             if (TryFindFlags<#= type #>s(value, foundItems, out int foundItemsCount, out int resultLength))
             {
-                result = EnumStringFormatter.WriteMultipleFoundFlagsNames(<#= getNamesReference #>, foundItems, foundItemsCount, resultLength);
+                result = EnumStringFormatter.WriteMultipleFoundFlagsNames(s_format<#= type #>s, foundItems, foundItemsCount, resultLength);
             }
         }
 
@@ -107,7 +116,7 @@ CountLength:
             {
                 value -= <#= curr.MemberValue #>;
                 resultLength = checked(resultLength + <#= keySelector(curr)!.Length #>);
-                foundItems[foundItemsCount++] = <#= curr.Index #>;
+                foundItems[foundItemsCount++] = <#= Model.InvertedValues.IndexOf(curr) #>;
                 if (value == 0) return true;
             }
 <#+

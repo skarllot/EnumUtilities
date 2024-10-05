@@ -18,6 +18,6 @@
     }
 
 <#+
-        WriteFormatString(x => x.ResolvedJsonValue, "JsonString", $"{Model.MetadataClassName}.JsonValue.ValuesSpan");
+        WriteFormatString(x => x.ResolvedJsonValue, "JsonString");
     }
 #>

@@ -10,8 +10,7 @@
                 "members names",
                 "name",
                 "converting",
-                x => x.MemberName,
-                isName: true);
+                x => x.MemberName);
         }
 
         if (HasMainGenerator && Model.HasSerializationValue)
@@ -21,8 +20,7 @@
                 "serialized members values",
                 "serialized value",
                 "serializing",
-                x => x.ResolvedSerializedValue,
-                isName: false);
+                x => x.ResolvedSerializedValue);
         }
 
         if ((HasMainGenerator && Model.HasJsonProperty) ||
@@ -33,8 +31,7 @@
                 "serialized members values",
                 "serialized value",
                 "serializing",
-                x => x.ResolvedJsonValue,
-                isName: false);
+                x => x.ResolvedJsonValue);
         }
     }
 #>
