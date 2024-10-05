@@ -818,10 +818,10 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return new[]
             {
-                (PaymentMethod)0,
-                (PaymentMethod)1,
-                (PaymentMethod)2,
-                (PaymentMethod)3,
+                (PaymentMethod)(0),
+                (PaymentMethod)(1),
+                (PaymentMethod)(2),
+                (PaymentMethod)(3),
             };
         }
 

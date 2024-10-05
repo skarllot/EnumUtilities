@@ -693,12 +693,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return new[]
             {
-                (UserRole)0,
-                (UserRole)1,
-                (UserRole)2,
-                (UserRole)4,
-                (UserRole)6,
-                (UserRole)7,
+                (UserRole)(0),
+                (UserRole)(1),
+                (UserRole)(2),
+                (UserRole)(4),
+                (UserRole)(6),
+                (UserRole)(7),
             };
         }
 

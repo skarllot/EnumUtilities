@@ -339,9 +339,9 @@ public static partial class NoNamespaceFactory
     {
         return new[]
         {
-            (NoNamespace)0,
-            (NoNamespace)1,
-            (NoNamespace)2,
+            (NoNamespace)(0),
+            (NoNamespace)(1),
+            (NoNamespace)(2),
         };
     }
 

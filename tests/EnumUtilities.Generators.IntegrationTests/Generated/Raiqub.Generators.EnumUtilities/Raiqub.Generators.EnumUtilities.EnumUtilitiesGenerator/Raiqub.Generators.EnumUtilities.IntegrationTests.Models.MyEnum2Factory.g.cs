@@ -818,10 +818,10 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return new[]
             {
-                (NestedInClass.MyEnum2)0,
-                (NestedInClass.MyEnum2)1,
-                (NestedInClass.MyEnum2)2,
-                (NestedInClass.MyEnum2)3,
+                (NestedInClass.MyEnum2)(0),
+                (NestedInClass.MyEnum2)(1),
+                (NestedInClass.MyEnum2)(2),
+                (NestedInClass.MyEnum2)(3),
             };
         }
 

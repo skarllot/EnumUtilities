@@ -341,9 +341,9 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return new[]
             {
-                (NestedInClass.MyEnum1)0,
-                (NestedInClass.MyEnum1)1,
-                (NestedInClass.MyEnum1)2,
+                (NestedInClass.MyEnum1)(0),
+                (NestedInClass.MyEnum1)(1),
+                (NestedInClass.MyEnum1)(2),
             };
         }
 

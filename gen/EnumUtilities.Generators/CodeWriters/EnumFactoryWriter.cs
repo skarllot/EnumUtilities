@@ -4676,7 +4676,7 @@ this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
         #line hidden
         
         #line 16 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\MiscellaneousBlock.ttinclude"
-this.Write(")");
+this.Write(")(");
 
         
         #line default
@@ -4690,7 +4690,7 @@ this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberValue));
         #line hidden
         
         #line 16 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\MiscellaneousBlock.ttinclude"
-this.Write(",\r\n");
+this.Write("),\r\n");
 
         
         #line default

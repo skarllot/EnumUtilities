@@ -13,7 +13,7 @@
         foreach (var curr in Model.UniqueValues)
         {
 #>
-            (<#= Model.RefName #>)<#= curr.MemberValue #>,
+            (<#= Model.RefName #>)(<#= curr.MemberValue #>),
 <#+
         }
 #>

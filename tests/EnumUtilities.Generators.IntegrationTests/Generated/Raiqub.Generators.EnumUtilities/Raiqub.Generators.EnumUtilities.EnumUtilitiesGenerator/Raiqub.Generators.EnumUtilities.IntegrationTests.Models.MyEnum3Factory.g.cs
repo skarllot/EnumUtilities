@@ -502,13 +502,13 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return new[]
             {
-                (NestedInClass.MyEnum3)0,
-                (NestedInClass.MyEnum3)1,
-                (NestedInClass.MyEnum3)2,
-                (NestedInClass.MyEnum3)3,
-                (NestedInClass.MyEnum3)4,
-                (NestedInClass.MyEnum3)5,
-                (NestedInClass.MyEnum3)6,
+                (NestedInClass.MyEnum3)(0),
+                (NestedInClass.MyEnum3)(1),
+                (NestedInClass.MyEnum3)(2),
+                (NestedInClass.MyEnum3)(3),
+                (NestedInClass.MyEnum3)(4),
+                (NestedInClass.MyEnum3)(5),
+                (NestedInClass.MyEnum3)(6),
             };
         }
 

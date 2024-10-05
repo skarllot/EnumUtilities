@@ -356,12 +356,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             return new[]
             {
-                (Categories)0,
-                (Categories)1,
-                (Categories)2,
-                (Categories)3,
-                (Categories)4,
-                (Categories)5,
+                (Categories)(0),
+                (Categories)(1),
+                (Categories)(2),
+                (Categories)(3),
+                (Categories)(4),
+                (Categories)(5),
             };
         }
 
