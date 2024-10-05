@@ -50,6 +50,5 @@ using Raiqub.Generators.EnumUtilities.Parsers;
     public override string GetFileName() => $"{Model.Namespace ?? "_"}.{Model.Name}EnumInfo.g.cs";
 
     protected override bool CanGenerateFor(EnumToGenerate model) =>
-        (model.SelectedGenerators & SelectedGenerators.MainGenerator) != 0 ||
-        ((model.SelectedGenerators & SelectedGenerators.JsonConverter) != 0 && model.IsFlags);
+        (model.SelectedGenerators & SelectedGenerators.MainGenerator) != 0;
 #>

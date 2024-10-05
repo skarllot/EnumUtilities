@@ -64,6 +64,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             /// <summary>The UTF-8 representation of <see cref="UserRole.All" /> name.</summary>
             public static ReadOnlySpan<byte> All => new byte[3] { 65, 108, 108 };
         }
+
         /// <summary>Provides constant values for <see cref="UserRole" /> serialized members values.</summary>
         public static partial class SerializedValue
         {

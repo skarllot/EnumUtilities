@@ -8,6 +8,7 @@
 <#@ include file="$(ProjectDir)CodeWriters\Factory\EnumMemberBlock.ttinclude"#>
 <#@ include file="$(ProjectDir)CodeWriters\Factory\DescriptionBlock.ttinclude"#>
 <#@ include file="$(ProjectDir)CodeWriters\Factory\DisplayBlock.ttinclude"#>
+<#@ include file="$(ProjectDir)CodeWriters\Factory\JsonBlock.ttinclude"#>
 <#@ include file="$(ProjectDir)CodeWriters\Factory\MiscellaneousBlock.ttinclude"#>
 <#
 #nullable enable
@@ -24,31 +25,35 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
 <#
-    if (!string.IsNullOrEmpty(Model.Namespace))
-    {
-        WriteLine($"namespace {Model.Namespace}");
-        WriteLine("{");
-        PushIndent();
-    }
+            if (!string.IsNullOrEmpty(Model.Namespace))
+            {
+                WriteLine($"namespace {Model.Namespace}");
+                WriteLine("{");
+                PushIndent();
+            }
 #>
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("<#= CurrentAssemblyName.Name #>", "<#= Append($"{CurrentAssemblyName.Version}") #>")]
 <#= Model.IsPublic ? "public" : "internal" #> static partial class <#= Model.Name #>Factory
 {
 <#
-    WriteDefaultBlock();
-    WriteEnumMemberBlock();
-    WriteDescriptionBlock();
-    WriteDisplayBlock();
-    WriteMiscellaneousBlock();
+            if ((Model.SelectedGenerators & SelectedGenerators.MainGenerator) != 0)
+            {
+                WriteDefaultBlock();
+                WriteEnumMemberBlock();
+                WriteDescriptionBlock();
+                WriteDisplayBlock();
+                WriteMiscellaneousBlock();
+            }
+            WriteJsonBlock();
 #>
 }
 <#
-    if (!string.IsNullOrEmpty(Model.Namespace))
-    {
-        PopIndent();
-        WriteLine("}");
-    }
+            if (!string.IsNullOrEmpty(Model.Namespace))
+            {
+                PopIndent();
+                WriteLine("}");
+            }
 #>
 <#+
     public EnumFactoryWriter(StringBuilder builder) : base(builder)
@@ -58,5 +63,5 @@ using Raiqub.Generators.EnumUtilities.Parsers;
     public override string GetFileName() => $"{Model.Namespace ?? "_"}.{Model.Name}Factory.g.cs";
 
     protected override bool CanGenerateFor(EnumToGenerate model) =>
-        (model.SelectedGenerators & SelectedGenerators.MainGenerator) != 0;
+        (model.SelectedGenerators & (SelectedGenerators.MainGenerator | SelectedGenerators.JsonConverter)) != 0;
 #>

@@ -7,5 +7,6 @@ namespace Raiqub.Generators.EnumUtilities;
 public sealed class JsonConverterGeneratorAttribute : Attribute
 {
     public bool AllowIntegerValues { get; set; } = true;
+    public bool IgnoreCase { get; set; }
     public object? DeserializationFailureFallbackValue { get; set; }
 }

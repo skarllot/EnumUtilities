@@ -11,6 +11,7 @@
 #nullable enable
 
 using System;
+using System.Buffers;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Raiqub.Generators.EnumUtilities.Formatters;
@@ -30,17 +31,12 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("<#= CurrentAssemblyName.Name #>", "<#= Append($"{CurrentAssemblyName.Version}") #>")]
 <#= Model.IsPublic ? "public" : "internal" #> sealed class <#= Model.Name #>JsonConverter : JsonConverter<<#= Model.Name #>>
 {
-    private const int MaxBytesLength = <#=
-                    Model.Values.Max(
-                        x => GetEncodedLength(x.JsonPropertyName ?? x.SerializationValue ?? x.MemberName)) #>;
-    private const int MaxCharsLength = <#=
-                    Model.Values.Max(
-                        x => x.JsonPropertyName?.Length ?? x.SerializationValue?.Length ?? x.MemberName.Length) #>;
+    private const int MaxCharStack = 256;
 
-    public override <#= Model.Name #> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override <#= Model.RefName #> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         if (reader.TokenType == JsonTokenType.String)
-            return (<#= Model.RefName #>)ReadFromString(ref reader);
+            return ReadFromString(ref reader);
 <#
     if (Model.JsonConverterGeneratorOptions.AllowIntegerValues)
     {
@@ -98,55 +94,46 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 
 #if NET7_0_OR_GREATER
 
-    private <#= Model.UnderlyingType #> ReadFromString(ref Utf8JsonReader reader)
+    private <#= Model.RefName #> ReadFromString(ref Utf8JsonReader reader)
     {
         int length = reader.HasValueSequence ? checked((int)reader.ValueSequence.Length) : reader.ValueSpan.Length;
-        if (length > MaxBytesLength)
-            <#= AppendFallbackValue(addReturn: true) #>;
 
-        Span<char> name = stackalloc char[MaxBytesLength];
-        int charsWritten = reader.CopyString(name);
-        name = name.Slice(0, charsWritten);
-
-        return name switch
+        char[]? rented = null;
+        Span<char> name = length <= MaxCharStack ? stackalloc char[MaxCharStack] : (rented = ArrayPool<char>.Shared.Rent(length));
+        try
         {
-<#
-    foreach (var curr in Model.Values)
-    {
-#>
-            <#=
-                curr.JsonPropertyName is not null || curr.SerializationValue is not null
-                    ? Append($"\"{curr.JsonPropertyName ?? curr.SerializationValue}\"")
-                    : Append($"\"{curr.MemberName}\"") #> => <#= NeedNumberCasting() ? Append($"({Model.UnderlyingType})") : Append("") #><#= curr.MemberValue #>,
-<#
-    }
-#>
-            //_ => EnumStringParser.TryParse(name, s_stringParser, StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out <#= Model.UnderlyingType #> result) ? result : <#= AppendFallbackValue() #>
-            _ => <#= AppendFallbackValue() #>
-        };
+            int charsWritten = reader.CopyString(name);
+            name = name.Slice(0, charsWritten);
+
+            bool isParsed = <#= Model.Name #>Factory.TryParseJsonString(name, ignoreCase: <#= Model.JsonConverterGeneratorOptions.IgnoreCase ? "true" : "false" #>, out <#= Model.RefName #> result);
+            if (!isParsed)
+            {
+                <#= AppendFallbackValue(addReturn: true, castToEnum: true) #>;
+            }
+
+            return result;
+        }
+        finally
+        {
+            if (rented != null)
+            {
+                ArrayPool<char>.Shared.Return(rented);
+            }
+        }
     }
 
 #else
 
-    private <#= Model.UnderlyingType #> ReadFromString(ref Utf8JsonReader reader)
+    private <#= Model.RefName #> ReadFromString(ref Utf8JsonReader reader)
     {
         var name = reader.GetString();
-        return name switch
+        bool isParsed = <#= Model.Name #>Factory.TryParseJsonString(name, ignoreCase: <#= Model.JsonConverterGeneratorOptions.IgnoreCase ? "true" : "false" #>, out <#= Model.RefName #> result);
+        if (!isParsed)
         {
-<#
-    foreach (var curr in Model.Values)
-    {
-#>
-            <#=
-                curr.JsonPropertyName is not null || curr.SerializationValue is not null
-                    ? Append($"\"{curr.JsonPropertyName ?? curr.SerializationValue}\"")
-                    : Append($"\"{curr.MemberName}\"") #> => <#= NeedNumberCasting() ? Append($"({Model.UnderlyingType})") : Append("") #><#= curr.MemberValue #>,
-<#
-    }
-#>
-            //_ => EnumStringParser.TryParse(name, s_stringParser, StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out <#= Model.UnderlyingType #> result) ? result : <#= AppendFallbackValue() #>
-            _ => <#= AppendFallbackValue() #>
-        };
+            <#= AppendFallbackValue(addReturn: true, castToEnum: true) #>;
+        }
+
+        return result;
     }
 
 #endif
@@ -199,6 +186,5 @@ using Raiqub.Generators.EnumUtilities.Parsers;
         return Append($"{fallbackValue}");
     }
 
-    private static int GetEncodedLength(string value) => value.Sum(c => c < 128 ? 1 : 6);
     private bool NeedNumberCasting() => Model.UnderlyingType is "byte" or "short" or "sbyte" or "ushort";
 #>

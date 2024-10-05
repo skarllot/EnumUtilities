@@ -2,6 +2,7 @@
 #nullable enable
 
 using System;
+using System.Buffers;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Raiqub.Generators.EnumUtilities.Formatters;
@@ -15,13 +16,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public sealed class SeasonJsonConverter : JsonConverter<Season>
     {
-        private const int MaxBytesLength = 12;
-        private const int MaxCharsLength = 2;
+        private const int MaxCharStack = 256;
 
         public override Season Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             if (reader.TokenType == JsonTokenType.String)
-                return (Season)ReadFromString(ref reader);
+                return ReadFromString(ref reader);
             if (reader.TokenType == JsonTokenType.Number)
                 return (Season)ReadFromNumber(ref reader);
 
@@ -43,41 +43,46 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
     #if NET7_0_OR_GREATER
 
-        private int ReadFromString(ref Utf8JsonReader reader)
+        private Season ReadFromString(ref Utf8JsonReader reader)
         {
             int length = reader.HasValueSequence ? checked((int)reader.ValueSequence.Length) : reader.ValueSpan.Length;
-            if (length > MaxBytesLength)
-                throw new JsonException();
 
-            Span<char> name = stackalloc char[MaxBytesLength];
-            int charsWritten = reader.CopyString(name);
-            name = name.Slice(0, charsWritten);
-
-            return name switch
+            char[]? rented = null;
+            Span<char> name = length <= MaxCharStack ? stackalloc char[MaxCharStack] : (rented = ArrayPool<char>.Shared.Rent(length));
+            try
             {
-                "🌱" => 1,
-                "☀️" => 2,
-                "🍂" => 3,
-                "⛄" => 4,
-                //_ => EnumStringParser.TryParse(name, s_stringParser, StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out int result) ? result : throw new JsonException()
-                _ => throw new JsonException()
-            };
+                int charsWritten = reader.CopyString(name);
+                name = name.Slice(0, charsWritten);
+
+                bool isParsed = SeasonFactory.TryParseJsonString(name, ignoreCase: false, out Season result);
+                if (!isParsed)
+                {
+                    throw new JsonException();
+                }
+
+                return result;
+            }
+            finally
+            {
+                if (rented != null)
+                {
+                    ArrayPool<char>.Shared.Return(rented);
+                }
+            }
         }
 
     #else
 
-        private int ReadFromString(ref Utf8JsonReader reader)
+        private Season ReadFromString(ref Utf8JsonReader reader)
         {
             var name = reader.GetString();
-            return name switch
+            bool isParsed = SeasonFactory.TryParseJsonString(name, ignoreCase: false, out Season result);
+            if (!isParsed)
             {
-                "🌱" => 1,
-                "☀️" => 2,
-                "🍂" => 3,
-                "⛄" => 4,
-                //_ => EnumStringParser.TryParse(name, s_stringParser, StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out int result) ? result : throw new JsonException()
-                _ => throw new JsonException()
-            };
+                throw new JsonException();
+            }
+
+            return result;
         }
 
     #endif

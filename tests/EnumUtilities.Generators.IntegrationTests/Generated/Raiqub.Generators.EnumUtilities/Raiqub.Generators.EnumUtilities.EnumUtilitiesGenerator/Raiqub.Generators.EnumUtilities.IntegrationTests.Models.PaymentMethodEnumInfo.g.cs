@@ -52,6 +52,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             /// <summary>The UTF-8 representation of <see cref="PaymentMethod.Cheque" /> name.</summary>
             public static ReadOnlySpan<byte> Cheque => new byte[6] { 67, 104, 101, 113, 117, 101 };
         }
+
         /// <summary>Provides constant values for <see cref="PaymentMethod" /> serialized members values.</summary>
         public static partial class SerializedValue
         {

@@ -535,6 +535,7 @@ this.Write("    }\r\n");
 
         if (HasMainGenerator && Model.HasSerializationValue)
         {
+            WriteLine();
             WriteNames(
                 "SerializedValue",
                 "serialized members values",
@@ -543,9 +544,9 @@ this.Write("    }\r\n");
                 x => x.ResolvedSerializedValue);
         }
 
-        if ((HasMainGenerator && Model.HasJsonProperty) ||
-            (Model.SelectedGenerators & SelectedGenerators.JsonConverter) != 0 && Model.IsFlags)
+        if (HasMainGenerator && Model.HasJsonProperty)
         {
+            WriteLine();
             WriteNames(
                 "JsonValue",
                 "serialized members values",
@@ -571,8 +572,7 @@ this.Write("    }\r\n");
     public override string GetFileName() => $"{Model.Namespace ?? "_"}.{Model.Name}EnumInfo.g.cs";
 
     protected override bool CanGenerateFor(EnumToGenerate model) =>
-        (model.SelectedGenerators & SelectedGenerators.MainGenerator) != 0 ||
-        ((model.SelectedGenerators & SelectedGenerators.JsonConverter) != 0 && model.IsFlags);
+        (model.SelectedGenerators & SelectedGenerators.MainGenerator) != 0;
 
         
         #line default

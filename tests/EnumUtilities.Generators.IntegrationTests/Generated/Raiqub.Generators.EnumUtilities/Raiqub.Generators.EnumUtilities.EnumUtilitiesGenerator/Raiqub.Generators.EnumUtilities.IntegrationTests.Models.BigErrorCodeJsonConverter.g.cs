@@ -2,6 +2,7 @@
 #nullable enable
 
 using System;
+using System.Buffers;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Raiqub.Generators.EnumUtilities.Formatters;
@@ -15,13 +16,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     internal sealed class BigErrorCodeJsonConverter : JsonConverter<BigErrorCode>
     {
-        private const int MaxBytesLength = 3;
-        private const int MaxCharsLength = 3;
+        private const int MaxCharStack = 256;
 
         public override BigErrorCode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             if (reader.TokenType == JsonTokenType.String)
-                return (BigErrorCode)ReadFromString(ref reader);
+                return ReadFromString(ref reader);
 
             return (BigErrorCode)0;
         }
@@ -45,41 +45,46 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
     #if NET7_0_OR_GREATER
 
-        private ulong ReadFromString(ref Utf8JsonReader reader)
+        private BigErrorCode ReadFromString(ref Utf8JsonReader reader)
         {
             int length = reader.HasValueSequence ? checked((int)reader.ValueSequence.Length) : reader.ValueSpan.Length;
-            if (length > MaxBytesLength)
-                return 0;
 
-            Span<char> name = stackalloc char[MaxBytesLength];
-            int charsWritten = reader.CopyString(name);
-            name = name.Slice(0, charsWritten);
-
-            return name switch
+            char[]? rented = null;
+            Span<char> name = length <= MaxCharStack ? stackalloc char[MaxCharStack] : (rented = ArrayPool<char>.Shared.Rent(length));
+            try
             {
-                "NON" => 0,
-                "UNK" => 1,
-                "CNX" => 100,
-                "OUT" => 200000000000,
-                //_ => EnumStringParser.TryParse(name, s_stringParser, StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out ulong result) ? result : 0
-                _ => 0
-            };
+                int charsWritten = reader.CopyString(name);
+                name = name.Slice(0, charsWritten);
+
+                bool isParsed = BigErrorCodeFactory.TryParseJsonString(name, ignoreCase: false, out BigErrorCode result);
+                if (!isParsed)
+                {
+                    return (BigErrorCode)0;
+                }
+
+                return result;
+            }
+            finally
+            {
+                if (rented != null)
+                {
+                    ArrayPool<char>.Shared.Return(rented);
+                }
+            }
         }
 
     #else
 
-        private ulong ReadFromString(ref Utf8JsonReader reader)
+        private BigErrorCode ReadFromString(ref Utf8JsonReader reader)
         {
             var name = reader.GetString();
-            return name switch
+            bool isParsed = BigErrorCodeFactory.TryParseJsonString(name, ignoreCase: false, out BigErrorCode result);
+            if (!isParsed)
             {
-                "NON" => 0,
-                "UNK" => 1,
-                "CNX" => 100,
-                "OUT" => 200000000000,
-                //_ => EnumStringParser.TryParse(name, s_stringParser, StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out ulong result) ? result : 0
-                _ => 0
-            };
+                return (BigErrorCode)0;
+            }
+
+            return result;
         }
 
     #endif
