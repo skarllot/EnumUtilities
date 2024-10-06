@@ -3172,7 +3172,7 @@ this.Write("?)result : null;\r\n    }\r\n\r\n");
         
         #line 63 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\DescriptionBlock.ttinclude"
 
-        WriteTryParse(x => x.Description, "Description", "description");
+        WriteTryParse(x => x.Description, "Description", "description", allowNumbers: false);
     }
 
         

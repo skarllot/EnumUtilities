@@ -668,33 +668,9 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             if (!description.IsEmpty)
             {
-                char c = description[0];
-                if (char.IsWhiteSpace(c))
-                {
-                    description = description.TrimStart();
-                    if (description.IsEmpty)
-                    {
-                        goto ParseFailure;
-                    }
-
-                    c = description[0];
-                }
-
-                if ((c < '0' || c > '9') && c != '-' && c != '+')
-                {
-                    return TryParseNonNumericDescription(description, comparisonType, throwOnFailure, out result);
-                }
-
-                bool success = EnumNumericParser.TryParse(description, out result);
-                if (success)
-                {
-                    return true;
-                }
-
                 return TryParseNonNumericDescription(description, comparisonType, throwOnFailure, out result);
             }
 
-            ParseFailure:
             if (throwOnFailure)
             {
                 ThrowHelper.ThrowInvalidEmptyParseArgument(nameof(description));

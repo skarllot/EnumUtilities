@@ -61,6 +61,6 @@
     }
 
 <#+
-        WriteTryParse(x => x.Description, "Description", "description");
+        WriteTryParse(x => x.Description, "Description", "description", allowNumbers: false);
     }
 #>
