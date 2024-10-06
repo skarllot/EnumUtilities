@@ -33,8 +33,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DotNet.ReproducibleBuilds" Version="1.2.4" PrivateAssets="All" />
-    <PackageReference Include="Nerdbank.GitVersioning" Version="3.6.139" PrivateAssets="All" />
+    <PackageReference Include="DotNet.ReproducibleBuilds" Version="1.2.25" PrivateAssets="All" />
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.6.143" PrivateAssets="All" />
   </ItemGroup>
 
 </Project>
