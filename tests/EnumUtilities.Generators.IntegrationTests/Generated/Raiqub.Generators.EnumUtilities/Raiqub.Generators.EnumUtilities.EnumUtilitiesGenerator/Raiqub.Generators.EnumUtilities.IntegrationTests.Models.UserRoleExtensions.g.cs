@@ -11,22 +11,21 @@ using Raiqub.Generators.EnumUtilities.Formatters;
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.9.0.0")]
     public static partial class UserRoleExtensions
     {
-        private static readonly UserRoleMetadata.StringFormatter s_stringFormatter = UserRoleMetadata.StringFormatter.Instance;
-        private static readonly UserRoleMetadata.SerializationStringFormatter s_serializationStringFormatter = UserRoleMetadata.SerializationStringFormatter.Instance;
-
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
         /// <returns>The string representation of the value of this instance.</returns>
         public static string ToStringFast(this UserRole value)
         {
-            return EnumStringFormatter.GetString((ulong)value, s_stringFormatter);
+            return FormatFlagNames((ulong)value)
+                ?? ((ulong)value).ToString();
         }
 
         /// <summary>Determines whether one or more bit fields are set in the current instance.</summary>
         /// <param name="flag">An enumeration value.</param>
         /// <returns><see langword="true"/> if the bit field or bit fields that are set in flag are also set in the current instance; otherwise, <see langword="false"/>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool HasFlagFast(this UserRole value, UserRole flag)
         {
             return (value & flag) == flag;
@@ -37,14 +36,178 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns>The number of characters produced by converting the specified value to string.</returns>
         public static int GetStringLength(this UserRole value)
         {
-            return EnumStringFormatter.GetStringLength((ulong)value, s_stringFormatter);
+            return FormatFlagNamesLength((ulong)value)
+                ?? EnumNumericFormatter.GetStringLength((ulong)value);
         }
 
         /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
         /// <returns><c>true</c> if the value of this instance exists in the enumeration; <c>false</c> otherwise.</returns>
         public static bool IsDefined(this UserRole value)
         {
-            return UserRoleValidation.IsDefined(value);
+            return (ulong)value switch
+            {
+                0 => true,
+                1 => true,
+                2 => true,
+                4 => true,
+                6 => true,
+                7 => true,
+                _ => false
+            };
+        }
+
+        private static int? FormatFlagNamesLength(ulong value)
+        {
+            int? fastResult = GetNameLengthInlined(value);
+            if (fastResult is not null)
+            {
+                return fastResult.Value;
+            }
+
+            if (value == 0)
+            {
+                return 1;
+            }
+
+            int count = 0, foundItemsCount = 0;
+            if (true)
+            {
+                if ((value & 7) == 7)
+                {
+                    value -= 7;
+                    count = checked(count + 3);
+                    foundItemsCount++;
+                    if (value == 0) goto CountLength;
+                }
+                if ((value & 6) == 6)
+                {
+                    value -= 6;
+                    count = checked(count + 9);
+                    foundItemsCount++;
+                    if (value == 0) goto CountLength;
+                }
+                if ((value & 4) == 4)
+                {
+                    value -= 4;
+                    count = checked(count + 7);
+                    foundItemsCount++;
+                    if (value == 0) goto CountLength;
+                }
+                if ((value & 2) == 2)
+                {
+                    value -= 2;
+                    count = checked(count + 9);
+                    foundItemsCount++;
+                    if (value == 0) goto CountLength;
+                }
+                if ((value & 1) == 1)
+                {
+                    value -= 1;
+                    count = checked(count + 10);
+                    foundItemsCount++;
+                    if (value == 0) goto CountLength;
+                }
+            }
+
+            if (value != 0)
+            {
+                return null;
+            }
+
+    CountLength:
+            const int separatorStringLength = 2;
+            return checked(count + (separatorStringLength * (foundItemsCount - 1)));
+        }
+
+        private static readonly string[] s_formatNames = new string[6] { "All", "SuperUser", "Finance", "Custodian", "NormalUser", "None" };
+
+        private static string? FormatFlagNames(ulong value)
+        {
+            string? result = GetNameInlined(value);
+            if (result is null)
+            {
+                Span<int> foundItems = stackalloc int[3];
+                if (TryFindFlagsNames(value, foundItems, out int foundItemsCount, out int resultLength))
+                {
+                    result = EnumStringFormatter.WriteMultipleFoundFlagsNames(s_formatNames, foundItems, foundItemsCount, resultLength);
+                }
+            }
+
+            return result;
+        }
+
+        private static bool TryFindFlagsNames(ulong value, Span<int> foundItems, out int foundItemsCount, out int resultLength)
+        {
+            resultLength = 0;
+            foundItemsCount = 0;
+            if (true)
+            {
+                if ((value & 7) == 7)
+                {
+                    value -= 7;
+                    resultLength = checked(resultLength + 3);
+                    foundItems[foundItemsCount++] = 0;
+                    if (value == 0) return true;
+                }
+                if ((value & 6) == 6)
+                {
+                    value -= 6;
+                    resultLength = checked(resultLength + 9);
+                    foundItems[foundItemsCount++] = 1;
+                    if (value == 0) return true;
+                }
+                if ((value & 4) == 4)
+                {
+                    value -= 4;
+                    resultLength = checked(resultLength + 7);
+                    foundItems[foundItemsCount++] = 2;
+                    if (value == 0) return true;
+                }
+                if ((value & 2) == 2)
+                {
+                    value -= 2;
+                    resultLength = checked(resultLength + 9);
+                    foundItems[foundItemsCount++] = 3;
+                    if (value == 0) return true;
+                }
+                if ((value & 1) == 1)
+                {
+                    value -= 1;
+                    resultLength = checked(resultLength + 10);
+                    foundItems[foundItemsCount++] = 4;
+                    if (value == 0) return true;
+                }
+            }
+
+            return value == 0;
+        }
+
+        private static int? GetNameLengthInlined(ulong value)
+        {
+            return value switch
+            {
+                0 => 4,
+                1 => 10,
+                2 => 9,
+                4 => 7,
+                6 => 9,
+                7 => 3,
+                _ => null
+            };
+        }
+
+        private static string? GetNameInlined(ulong value)
+        {
+            return value switch
+            {
+                0 => "None",
+                1 => "NormalUser",
+                2 => "Custodian",
+                4 => "Finance",
+                6 => "SuperUser",
+                7 => "All",
+                _ => null
+            };
         }
 
     #if NET5_0_OR_GREATER
@@ -106,12 +269,168 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
         public static string ToEnumMemberValue(this UserRole value)
         {
-            return EnumStringFormatter.GetString((ulong)value, s_serializationStringFormatter);
+            return FormatFlagEnumMemberValues((ulong)value)
+                ?? ((ulong)value).ToString();
         }
 
         public static int GetEnumMemberValueStringLength(this UserRole value)
         {
-            return EnumStringFormatter.GetStringLength((ulong)value, s_serializationStringFormatter);
+            return FormatFlagEnumMemberValuesLength((ulong)value)
+                ?? EnumNumericFormatter.GetStringLength((ulong)value);
+        }
+
+        private static int? FormatFlagEnumMemberValuesLength(ulong value)
+        {
+            int? fastResult = GetEnumMemberValueLengthInlined(value);
+            if (fastResult is not null)
+            {
+                return fastResult.Value;
+            }
+
+            if (value == 0)
+            {
+                return 1;
+            }
+
+            int count = 0, foundItemsCount = 0;
+            if (true)
+            {
+                if ((value & 7) == 7)
+                {
+                    value -= 7;
+                    count = checked(count + 3);
+                    foundItemsCount++;
+                    if (value == 0) goto CountLength;
+                }
+                if ((value & 6) == 6)
+                {
+                    value -= 6;
+                    count = checked(count + 10);
+                    foundItemsCount++;
+                    if (value == 0) goto CountLength;
+                }
+                if ((value & 4) == 4)
+                {
+                    value -= 4;
+                    count = checked(count + 7);
+                    foundItemsCount++;
+                    if (value == 0) goto CountLength;
+                }
+                if ((value & 2) == 2)
+                {
+                    value -= 2;
+                    count = checked(count + 9);
+                    foundItemsCount++;
+                    if (value == 0) goto CountLength;
+                }
+                if ((value & 1) == 1)
+                {
+                    value -= 1;
+                    count = checked(count + 11);
+                    foundItemsCount++;
+                    if (value == 0) goto CountLength;
+                }
+            }
+
+            if (value != 0)
+            {
+                return null;
+            }
+
+    CountLength:
+            const int separatorStringLength = 2;
+            return checked(count + (separatorStringLength * (foundItemsCount - 1)));
+        }
+
+        private static readonly string[] s_formatEnumMemberValues = new string[6] { "All", "Super User", "Finance", "Custodian", "Normal User", "None" };
+
+        private static string? FormatFlagEnumMemberValues(ulong value)
+        {
+            string? result = GetEnumMemberValueInlined(value);
+            if (result is null)
+            {
+                Span<int> foundItems = stackalloc int[3];
+                if (TryFindFlagsEnumMemberValues(value, foundItems, out int foundItemsCount, out int resultLength))
+                {
+                    result = EnumStringFormatter.WriteMultipleFoundFlagsNames(s_formatEnumMemberValues, foundItems, foundItemsCount, resultLength);
+                }
+            }
+
+            return result;
+        }
+
+        private static bool TryFindFlagsEnumMemberValues(ulong value, Span<int> foundItems, out int foundItemsCount, out int resultLength)
+        {
+            resultLength = 0;
+            foundItemsCount = 0;
+            if (true)
+            {
+                if ((value & 7) == 7)
+                {
+                    value -= 7;
+                    resultLength = checked(resultLength + 3);
+                    foundItems[foundItemsCount++] = 0;
+                    if (value == 0) return true;
+                }
+                if ((value & 6) == 6)
+                {
+                    value -= 6;
+                    resultLength = checked(resultLength + 10);
+                    foundItems[foundItemsCount++] = 1;
+                    if (value == 0) return true;
+                }
+                if ((value & 4) == 4)
+                {
+                    value -= 4;
+                    resultLength = checked(resultLength + 7);
+                    foundItems[foundItemsCount++] = 2;
+                    if (value == 0) return true;
+                }
+                if ((value & 2) == 2)
+                {
+                    value -= 2;
+                    resultLength = checked(resultLength + 9);
+                    foundItems[foundItemsCount++] = 3;
+                    if (value == 0) return true;
+                }
+                if ((value & 1) == 1)
+                {
+                    value -= 1;
+                    resultLength = checked(resultLength + 11);
+                    foundItems[foundItemsCount++] = 4;
+                    if (value == 0) return true;
+                }
+            }
+
+            return value == 0;
+        }
+
+        private static int? GetEnumMemberValueLengthInlined(ulong value)
+        {
+            return value switch
+            {
+                0 => 4,
+                1 => 11,
+                2 => 9,
+                4 => 7,
+                6 => 10,
+                7 => 3,
+                _ => null
+            };
+        }
+
+        private static string? GetEnumMemberValueInlined(ulong value)
+        {
+            return value switch
+            {
+                0 => "None",
+                1 => "Normal User",
+                2 => "Custodian",
+                4 => "Finance",
+                6 => "Super User",
+                7 => "All",
+                _ => null
+            };
         }
     }
 }

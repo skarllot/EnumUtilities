@@ -5,6 +5,7 @@ namespace Raiqub.Generators.EnumUtilities.Models;
 
 public sealed record JsonConverterGeneratorOptions(
     bool AllowIntegerValues,
+    bool IgnoreCase,
     object? DeserializationFailureFallbackValue)
 {
     public static JsonConverterGeneratorOptions? FromSymbol(INamedTypeSymbol typeSymbol)
@@ -17,6 +18,8 @@ public sealed record JsonConverterGeneratorOptions(
         return new JsonConverterGeneratorOptions(
             attributeData.GetNamedArgument(
                 nameof(JsonConverterGeneratorAttribute.AllowIntegerValues)) as bool? ?? true,
+            attributeData.GetNamedArgument(
+                nameof(JsonConverterGeneratorAttribute.IgnoreCase)) as bool? ?? false,
             attributeData.GetNamedArgument(
                 nameof(JsonConverterGeneratorAttribute.DeserializationFailureFallbackValue)));
     }

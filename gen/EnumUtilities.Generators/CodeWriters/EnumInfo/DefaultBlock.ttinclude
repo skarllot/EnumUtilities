@@ -3,82 +3,36 @@
 
     private void WriteDefaultBlock()
     {
-        if (!HasMainGenerator)
-            return;
-#>
-    /// <summary>Provides constant values for <see cref="<#= Model.Name #>" /> members names.</summary>
-    public static partial class Name
-    {
-        /// <summary>Represents the largest possible number of characters produced by converting an <see cref="<#= Model.Name #>" /> value to string, based on defined members. This field is constant.</summary>
-        public const int MaxCharsLength = <#= Model.Values.Max(x => x.MemberName.Length) #>;
-<#+
-        foreach (var curr in Model.Values)
+        if (HasMainGenerator)
         {
-#>
-
-        /// <summary>The string representation of <see cref="<#= Model.Name #>.<#= curr.MemberName #>" /> name.</summary>
-        public const string <#= curr.MemberName #> = "<#= curr.MemberName #>";
-<#+
+            WriteNames(
+                "Name",
+                "members names",
+                "name",
+                "converting",
+                x => x.MemberName);
         }
-#>
-    }
 
-    /// <summary>Provides static values for <see cref="<#= Model.Name #>" /> UTF-8 encoded members names.</summary>
-    public static partial class Utf8Name
-    {
-        /// <summary>Represents the largest possible number of bytes produced by converting an <see cref="<#= Model.Name #>" /> value to UTF-8 string, based on defined members. This field is constant.</summary>
-        public const int MaxBytesLength = <#= Model.Values.Max(x => _utf8Encoding.GetByteCount(x.MemberName)) #>;
-<#+
-        foreach (var curr in Model.Values)
-        {
-#>
-
-        /// <summary>The UTF-8 representation of <see cref="<#= Model.Name #>.<#= curr.MemberName #>" /> name.</summary>
-        public static ReadOnlySpan<byte> <#= curr.MemberName #> => new byte[<#= _utf8Encoding.GetByteCount(curr.MemberName) #>] { <#= _utf8Encoding.GetBytes(curr.MemberName).JoinToString() #> };
-<#+
-        }
-#>
-    }
-<#+
         if (HasMainGenerator && Model.HasSerializationValue)
         {
-#>
+            WriteLine();
+            WriteNames(
+                "SerializedValue",
+                "serialized members values",
+                "serialized value",
+                "serializing",
+                x => x.ResolvedSerializedValue);
+        }
 
-    /// <summary>Provides constant values for <see cref="<#= Model.Name #>" /> serialized members values.</summary>
-    public static partial class SerializedValue
-    {
-        /// <summary>Represents the largest possible number of characters produced by converting an <see cref="<#= Model.Name #>" /> value to string, based on defined members. This field is constant.</summary>
-        public const int MaxCharsLength = <#= Model.Values.Max(x => x.ResolvedSerializedValue.Length) #>;
-<#+
-        foreach (var curr in Model.Values)
+        if (HasMainGenerator && Model.HasJsonProperty)
         {
-#>
-
-        /// <summary>The string representation of serialized <see cref="<#= Model.Name #>.<#= curr.MemberName #>" /> value.</summary>
-        public const string <#= curr.MemberName #> = "<#= curr.ResolvedSerializedValue #>";
-<#+
+            WriteLine();
+            WriteNames(
+                "JsonValue",
+                "serialized members values",
+                "serialized value",
+                "serializing",
+                x => x.ResolvedJsonValue);
         }
-#>
-    }
-
-    /// <summary>Provides static values for <see cref="<#= Model.Name #>" /> UTF-8 encoded members serialized values.</summary>
-    public static partial class Utf8SerializedValue
-    {
-        /// <summary>Represents the largest possible number of bytes produced by converting an <see cref="<#= Model.Name #>" /> value to UTF-8 string, based on defined members. This field is constant.</summary>
-        public const int MaxBytesLength = <#= Model.Values.Max(x => _utf8Encoding.GetByteCount(x.ResolvedSerializedValue)) #>;
-<#+
-        foreach (var curr in Model.Values)
-        {
-#>
-
-        /// <summary>The UTF-8 representation of serialized <see cref="<#= Model.Name #>.<#= curr.MemberName #>" /> value.</summary>
-        public static ReadOnlySpan<byte> <#= curr.MemberName #> => new byte[<#= _utf8Encoding.GetByteCount(curr.ResolvedSerializedValue) #>] { <#= _utf8Encoding.GetBytes(curr.ResolvedSerializedValue).JoinToString() #> };
-<#+
-        }
-#>
-    }
-<#+
-        }
-        WriteLine();
     }
 #>

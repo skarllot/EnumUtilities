@@ -1,0 +1,183 @@
+﻿<#+
+    private void WriteFormatString(Func<EnumValue, string?> keySelector, string type)
+    {
+        if (Model.IsFlags)
+        {
+            WriteFormatStringLookup(keySelector, type);
+            WriteLine();
+        }
+
+        WriteInlineFormatString(keySelector, type);
+    }
+
+    private void WriteFormatStringLookup(Func<EnumValue, string?> keySelector, string type)
+    {
+        var valuesRanges = Model.GetEnumValueRangesByBitRange();
+#>
+    private static int? FormatFlag<#= type #>sLength(<#= Model.UnderlyingType #> value)
+    {
+        int? fastResult = Get<#= type #>LengthInlined(value);
+        if (fastResult is not null)
+        {
+            return fastResult.Value;
+        }
+<#+
+        if (Model.Values.All(x => keySelector(x) != "0"))
+        {
+#>
+
+        if (value == 0)
+        {
+            return 1;
+        }
+<#+
+        }
+#>
+
+        int count = 0, foundItemsCount = 0;
+<#+
+        foreach (var (i, vRange) in valuesRanges.Index())
+        {
+            if (vRange.Count == 0)
+                continue;
+#>
+        if (<#= EnumToGenerate.BitRangeConditionStrings[i] #>)
+        {
+<#+
+            foreach (var curr in vRange)
+            {
+#>
+            if ((value & <#= curr.MemberValue #>) == <#= curr.MemberValue #>)
+            {
+                value -= <#= curr.MemberValue #>;
+                count = checked(count + <#= keySelector(curr)!.Length #>);
+                foundItemsCount++;
+                if (value == 0) goto CountLength;
+            }
+<#+
+            }
+#>
+        }
+<#+
+        }
+#>
+
+        if (value != 0)
+        {
+            return null;
+        }
+
+CountLength:
+        const int separatorStringLength = 2;
+        return checked(count + (separatorStringLength * (foundItemsCount - 1)));
+    }
+
+    private static readonly string[] s_format<#= type #>s = new string[<#= Model.InvertedValues.Count #>] { <#+
+        foreach (var (index, curr) in Model.InvertedValues.Index())
+        {
+            if (index > 0)
+                Write(", ");
+            Write($"\"{keySelector(curr)}\"");
+        }
+#> };
+
+    private static string? FormatFlag<#= type #>s(<#= Model.UnderlyingType #> value)
+    {
+        string? result = Get<#= type #>Inlined(value);
+        if (result is null)
+        {
+            Span<int> foundItems = stackalloc int[<#= Model.GetMappedBitCount() #>];
+            if (TryFindFlags<#= type #>s(value, foundItems, out int foundItemsCount, out int resultLength))
+            {
+                result = EnumStringFormatter.WriteMultipleFoundFlagsNames(s_format<#= type #>s, foundItems, foundItemsCount, resultLength);
+            }
+        }
+
+        return result;
+    }
+
+    private static bool TryFindFlags<#= type #>s(<#= Model.UnderlyingType #> value, Span<int> foundItems, out int foundItemsCount, out int resultLength)
+    {
+        resultLength = 0;
+        foundItemsCount = 0;
+<#+
+        foreach (var (i, vRange) in valuesRanges.Index())
+        {
+            if (vRange.Count == 0)
+                continue;
+#>
+        if (<#= EnumToGenerate.BitRangeConditionStrings[i] #>)
+        {
+<#+
+            foreach (var curr in vRange)
+            {
+#>
+            if ((value & <#= curr.MemberValue #>) == <#= curr.MemberValue #>)
+            {
+                value -= <#= curr.MemberValue #>;
+                resultLength = checked(resultLength + <#= keySelector(curr)!.Length #>);
+                foundItems[foundItemsCount++] = <#= Model.InvertedValues.IndexOf(curr) #>;
+                if (value == 0) return true;
+            }
+<#+
+            }
+#>
+        }
+<#+
+        }
+#>
+
+        return value == 0;
+    }
+<#+
+    }
+
+    private void WriteInlineFormatString(Func<EnumValue, string?> keySelector, string type)
+    {
+#>
+    private static int? Get<#= type #>LengthInlined(<#= Model.UnderlyingType #> value)
+    {
+        return value switch
+        {
+<#+
+        if (!Model.HasZeroMember)
+        {
+#>
+            0 => 1,
+<#+
+        }
+        foreach (var curr in Model.UniqueValues)
+        {
+#>
+            <#= curr.MemberValue #> => <#= keySelector(curr)!.Length #>,
+<#+
+        }
+#>
+            _ => null
+        };
+    }
+
+    private static string? Get<#= type #>Inlined(<#= Model.UnderlyingType #> value)
+    {
+        return value switch
+        {
+<#+
+        if (!Model.HasZeroMember)
+        {
+#>
+            0 => "0",
+<#+
+        }
+        foreach (var curr in Model.UniqueValues)
+        {
+#>
+            <#= curr.MemberValue #> => "<#= keySelector(curr) #>",
+<#+
+        }
+#>
+            _ => null
+        };
+    }
+<#+
+    }
+#>

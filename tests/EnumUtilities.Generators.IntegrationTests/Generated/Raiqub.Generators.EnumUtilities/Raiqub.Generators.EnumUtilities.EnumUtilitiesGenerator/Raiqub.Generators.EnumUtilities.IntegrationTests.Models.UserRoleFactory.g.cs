@@ -12,12 +12,9 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.9.0.0")]
     public static partial class UserRoleFactory
     {
-        private static readonly UserRoleMetadata.StringParser s_stringParser = UserRoleMetadata.StringParser.Instance;
-        private static readonly UserRoleMetadata.SerializationStringParser s_serializationStringParser = UserRoleMetadata.SerializationStringParser.Instance;
-
         /// <summary>
         /// Converts the string representation of the name or numeric value of one or more enumerated constants to
         /// an equivalent enumerated object.
@@ -29,9 +26,9 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
         public static UserRole Parse(string value, bool ignoreCase = false)
         {
-            if (value is null) ThrowArgumentNullException(nameof(value));
-            TryParse(value.AsSpan(), ignoreCase, throwOnFailure: true, out var result);
-            return result;
+            if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
+            TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
+            return (UserRole)result;
         }
 
         /// <summary>
@@ -44,8 +41,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
         public static UserRole Parse(ReadOnlySpan<char> value, bool ignoreCase = false)
         {
-            TryParse(value, ignoreCase, throwOnFailure: true, out var result);
-            return result;
+            TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
+            return (UserRole)result;
         }
 
         /// <summary>
@@ -60,8 +57,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         public static UserRole? ParseOrNull(string? value, bool ignoreCase = false)
         {
             if (value is null) return null;
-            TryParse(value.AsSpan(), ignoreCase, throwOnFailure: true, out var result);
-            return result;
+            TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
+            return (UserRole)result;
         }
 
         /// <summary>
@@ -78,7 +75,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
         public static bool TryParse([NotNullWhen(true)] string? value, bool ignoreCase, out UserRole result)
         {
-            return TryParse(value.AsSpan(), ignoreCase, throwOnFailure: false, out result);
+            Unsafe.SkipInit(out result);
+            return TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<UserRole, ulong>(ref result));
         }
 
         /// <summary>
@@ -94,7 +92,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
         public static bool TryParse([NotNullWhen(true)] string? value, out UserRole result)
         {
-            return TryParse(value.AsSpan(), ignoreCase: false, throwOnFailure: false, out result);
+            Unsafe.SkipInit(out result);
+            return TryParseName(value.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<UserRole, ulong>(ref result));
         }
 
         /// <summary>
@@ -109,7 +108,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// </returns>
         public static UserRole? TryParse(string? value, bool ignoreCase = false)
         {
-            return TryParse(value.AsSpan(), ignoreCase, throwOnFailure: false, out UserRole result) ? result : null;
+            return TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (UserRole?)result : null;
         }
 
         /// <summary>
@@ -126,7 +125,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
         public static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, out UserRole result)
         {
-            return TryParse(value, ignoreCase, throwOnFailure: false, out result);
+            Unsafe.SkipInit(out result);
+            return TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<UserRole, ulong>(ref result));
         }
 
         /// <summary>
@@ -142,7 +142,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
         public static bool TryParse(ReadOnlySpan<char> value, out UserRole result)
         {
-            return TryParse(value, ignoreCase: false, throwOnFailure: false, out result);
+            Unsafe.SkipInit(out result);
+            return TryParseName(value, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<UserRole, ulong>(ref result));
         }
 
         /// <summary>
@@ -157,21 +158,142 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// </returns>
         public static UserRole? TryParse(ReadOnlySpan<char> value, bool ignoreCase = false)
         {
-            return TryParse(value, ignoreCase, throwOnFailure: false, out UserRole result) ? result : null;
+            return TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (UserRole?)result : null;
         }
 
-        private static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, bool throwOnFailure, out UserRole result)
+        private static bool TryParseName(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out ulong result)
         {
-            var comparisonType = ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
-            bool success = EnumStringParser.TryParse(value, s_stringParser, comparisonType, throwOnFailure, out ulong number);
-            if (!success)
+            if (!value.IsEmpty)
+            {
+                char c = value[0];
+                if (char.IsWhiteSpace(c))
+                {
+                    value = value.TrimStart();
+                    if (value.IsEmpty)
+                    {
+                        goto ParseFailure;
+                    }
+
+                    c = value[0];
+                }
+
+                if ((c < '0' || c > '9') && c != '-' && c != '+')
+                {
+                    return TryParseNonNumericName(value, comparisonType, throwOnFailure, out result);
+                }
+
+                bool success = EnumNumericParser.TryParse(value, out result);
+                if (success)
+                {
+                    return true;
+                }
+
+                return TryParseNonNumericName(value, comparisonType, throwOnFailure, out result);
+            }
+
+            ParseFailure:
+            if (throwOnFailure)
+            {
+                ThrowHelper.ThrowInvalidEmptyParseArgument(nameof(value));
+            }
+
+            result = 0;
+            return false;
+        }
+
+        private static bool TryParseNonNumericName(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out ulong result)
+        {
+            bool parsed = true;
+            ulong localResult = 0;
+            foreach (var item in new FlagsEnumTokenizer(value))
+            {
+                bool success = TryParseSingleName(item, comparisonType, out ulong singleValue);
+                if (!success)
+                {
+                    parsed = false;
+                    break;
+                }
+
+                localResult |= singleValue;
+            }
+
+            if (parsed)
+            {
+                result = localResult;
+                return true;
+            }
+
+            if (throwOnFailure)
+            {
+                ThrowHelper.ThrowValueNotFound(value, nameof(value));
+            }
+
+            result = 0;
+            return false;
+        }
+
+        private static bool TryParseSingleName(ReadOnlySpan<char> value, StringComparison comparisonType, out ulong result)
+        {
+            if (value.IsEmpty)
             {
                 result = 0;
                 return false;
             }
 
-            result = (UserRole)number;
-            return true;
+            switch (value[0])
+            {
+                case 'A':
+                case 'a':
+                    switch (value)
+                    {
+                        case { } when value.Equals("All", comparisonType):
+                            result = 7;
+                            return true;
+                    }
+                    break;
+                case 'C':
+                case 'c':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Custodian", comparisonType):
+                            result = 2;
+                            return true;
+                    }
+                    break;
+                case 'F':
+                case 'f':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Finance", comparisonType):
+                            result = 4;
+                            return true;
+                    }
+                    break;
+                case 'N':
+                case 'n':
+                    switch (value)
+                    {
+                        case { } when value.Equals("None", comparisonType):
+                            result = 0;
+                            return true;
+                        case { } when value.Equals("NormalUser", comparisonType):
+                            result = 1;
+                            return true;
+                    }
+                    break;
+                case 'S':
+                case 's':
+                    switch (value)
+                    {
+                        case { } when value.Equals("SuperUser", comparisonType):
+                            result = 6;
+                            return true;
+                    }
+                    break;
+            }
+
+            result = 0;
+            return false;
         }
 
         /// <summary>
@@ -193,15 +315,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out UserRole result)
         {
-            bool success = EnumStringParser.TryParse(name, s_stringParser, comparisonType, throwOnFailure: false, out ulong number);
-            if (!success)
-            {
-                result = 0;
-                return false;
-            }
-
-            result = (UserRole)number;
-            return true;
+            Unsafe.SkipInit(out result);
+            return TryParseName(name.AsSpan(), comparisonType, throwOnFailure: false, out Unsafe.As<UserRole, ulong>(ref result));
         }
 
         /// <summary>
@@ -220,7 +335,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             [NotNullWhen(true)] string? name,
             out UserRole result)
         {
-            return TryParse(name.AsSpan(), ignoreCase: true, out result);
+            Unsafe.SkipInit(out result);
+            return TryParseName(name.AsSpan(), StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out Unsafe.As<UserRole, ulong>(ref result));
         }
 
         /// <summary>
@@ -235,7 +351,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
         public static UserRole? TryParseIgnoreCase(string? name)
         {
-            return TryParse(name.AsSpan(), ignoreCase: true, out UserRole result) ? result : null;
+            return TryParseName(name.AsSpan(), StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out var result) ? (UserRole?)result : null;
         }
 
         /// <summary>
@@ -252,7 +368,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
         public static UserRole? TryParse(string? name, StringComparison comparisonType)
         {
-            return TryParse(name, comparisonType, out UserRole result) ? result : null;
+            return TryParseName(name.AsSpan(), comparisonType, throwOnFailure: false, out var result) ? (UserRole?)result : null;
         }
 
         /// <summary>
@@ -265,9 +381,9 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
         public static UserRole ParseFromEnumMemberValue(string value, bool ignoreCase = false)
         {
-            if (value is null) ThrowArgumentNullException(nameof(value));
-            TryParseFromEnumMemberValue(value.AsSpan(), ignoreCase, throwOnFailure: true, out var result);
-            return result;
+            if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
+            TryParseEnumMemberValue(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
+            return (UserRole)result;
         }
 
         /// <summary>
@@ -279,8 +395,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
         public static UserRole ParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase = false)
         {
-            TryParseFromEnumMemberValue(value, ignoreCase, throwOnFailure: true, out var result);
-            return result;
+            TryParseEnumMemberValue(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
+            return (UserRole)result;
         }
 
         /// <summary>
@@ -294,8 +410,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         public static UserRole? ParseFromEnumMemberValueOrNull(string? value, bool ignoreCase = false)
         {
             if (value is null) return null;
-            TryParseFromEnumMemberValue(value.AsSpan(), ignoreCase, throwOnFailure: true, out var result);
-            return result;
+            TryParseEnumMemberValue(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
+            return (UserRole)result;
         }
 
         /// <summary>
@@ -312,7 +428,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
         public static bool TryParseFromEnumMemberValue([NotNullWhen(true)] string? value, bool ignoreCase, out UserRole result)
         {
-            return TryParseFromEnumMemberValue(value.AsSpan(), ignoreCase, throwOnFailure: false, out result);
+            Unsafe.SkipInit(out result);
+            return TryParseEnumMemberValue(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<UserRole, ulong>(ref result));
         }
 
         /// <summary>
@@ -328,7 +445,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
         public static bool TryParseFromEnumMemberValue([NotNullWhen(true)] string? value, out UserRole result)
         {
-            return TryParseFromEnumMemberValue(value.AsSpan(), ignoreCase: false, throwOnFailure: false, out result);
+            Unsafe.SkipInit(out result);
+            return TryParseEnumMemberValue(value.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<UserRole, ulong>(ref result));
         }
 
         /// <summary>
@@ -342,7 +460,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// </returns>
         public static UserRole? TryParseFromEnumMemberValue(string? value, bool ignoreCase = false)
         {
-            return TryParseFromEnumMemberValue(value.AsSpan(), ignoreCase, throwOnFailure: false, out UserRole result) ? result : null;
+            return TryParseEnumMemberValue(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (UserRole?)result : null;
         }
 
         /// <summary>
@@ -359,7 +477,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
         public static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase, out UserRole result)
         {
-            return TryParseFromEnumMemberValue(value, ignoreCase, throwOnFailure: false, out result);
+            Unsafe.SkipInit(out result);
+            return TryParseEnumMemberValue(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<UserRole, ulong>(ref result));
         }
 
         /// <summary>
@@ -375,7 +494,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
         public static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, out UserRole result)
         {
-            return TryParseFromEnumMemberValue(value, ignoreCase: false, throwOnFailure: false, out result);
+            Unsafe.SkipInit(out result);
+            return TryParseEnumMemberValue(value, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<UserRole, ulong>(ref result));
         }
 
         /// <summary>
@@ -389,25 +509,142 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// </returns>
         public static UserRole? TryParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase = false)
         {
-            return TryParseFromEnumMemberValue(value, ignoreCase, throwOnFailure: false, out UserRole result) ? result : null;
+            return TryParseEnumMemberValue(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (UserRole?)result : null;
         }
 
-        private static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase, bool throwOnFailure, out UserRole result)
+        private static bool TryParseEnumMemberValue(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out ulong result)
         {
-            return TryParseFromEnumMemberValue(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure, out result);
+            if (!value.IsEmpty)
+            {
+                char c = value[0];
+                if (char.IsWhiteSpace(c))
+                {
+                    value = value.TrimStart();
+                    if (value.IsEmpty)
+                    {
+                        goto ParseFailure;
+                    }
+
+                    c = value[0];
+                }
+
+                if ((c < '0' || c > '9') && c != '-' && c != '+')
+                {
+                    return TryParseNonNumericEnumMemberValue(value, comparisonType, throwOnFailure, out result);
+                }
+
+                bool success = EnumNumericParser.TryParse(value, out result);
+                if (success)
+                {
+                    return true;
+                }
+
+                return TryParseNonNumericEnumMemberValue(value, comparisonType, throwOnFailure, out result);
+            }
+
+            ParseFailure:
+            if (throwOnFailure)
+            {
+                ThrowHelper.ThrowInvalidEmptyParseArgument(nameof(value));
+            }
+
+            result = 0;
+            return false;
         }
 
-        private static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out UserRole result)
+        private static bool TryParseNonNumericEnumMemberValue(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out ulong result)
         {
-            bool success = EnumStringParser.TryParse(value, s_serializationStringParser, comparisonType, throwOnFailure, out ulong number);
-            if (!success)
+            bool parsed = true;
+            ulong localResult = 0;
+            foreach (var item in new FlagsEnumTokenizer(value))
+            {
+                bool success = TryParseSingleEnumMemberValue(item, comparisonType, out ulong singleValue);
+                if (!success)
+                {
+                    parsed = false;
+                    break;
+                }
+
+                localResult |= singleValue;
+            }
+
+            if (parsed)
+            {
+                result = localResult;
+                return true;
+            }
+
+            if (throwOnFailure)
+            {
+                ThrowHelper.ThrowValueNotFound(value, nameof(value));
+            }
+
+            result = 0;
+            return false;
+        }
+
+        private static bool TryParseSingleEnumMemberValue(ReadOnlySpan<char> value, StringComparison comparisonType, out ulong result)
+        {
+            if (value.IsEmpty)
             {
                 result = 0;
                 return false;
             }
 
-            result = (UserRole)number;
-            return true;
+            switch (value[0])
+            {
+                case 'A':
+                case 'a':
+                    switch (value)
+                    {
+                        case { } when value.Equals("All", comparisonType):
+                            result = 7;
+                            return true;
+                    }
+                    break;
+                case 'C':
+                case 'c':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Custodian", comparisonType):
+                            result = 2;
+                            return true;
+                    }
+                    break;
+                case 'F':
+                case 'f':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Finance", comparisonType):
+                            result = 4;
+                            return true;
+                    }
+                    break;
+                case 'N':
+                case 'n':
+                    switch (value)
+                    {
+                        case { } when value.Equals("None", comparisonType):
+                            result = 0;
+                            return true;
+                        case { } when value.Equals("Normal User", comparisonType):
+                            result = 1;
+                            return true;
+                    }
+                    break;
+                case 'S':
+                case 's':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Super User", comparisonType):
+                            result = 6;
+                            return true;
+                    }
+                    break;
+            }
+
+            result = 0;
+            return false;
         }
 
         /// <summary>
@@ -429,7 +666,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out UserRole result)
         {
-            return TryParseFromEnumMemberValue(value.AsSpan(), comparisonType, throwOnFailure: false, out result);
+            Unsafe.SkipInit(out result);
+            return TryParseEnumMemberValue(value.AsSpan(), comparisonType, throwOnFailure: false, out Unsafe.As<UserRole, ulong>(ref result));
         }
 
         /// <summary>
@@ -446,7 +684,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         [Obsolete("Use TryParseFromEnumMemberValue overload with 'ignoreCase' parameter")]
         public static UserRole? TryParseFromEnumMemberValue(string? value, StringComparison comparisonType)
         {
-            return TryParseFromEnumMemberValue(value.AsSpan(), comparisonType, throwOnFailure: false, out UserRole result) ? result : null;
+            return TryParseEnumMemberValue(value.AsSpan(), comparisonType, throwOnFailure: false, out var result) ? (UserRole?)result : null;
         }
 
         /// <summary>Retrieves an array of the values of the constants in the UserRole enumeration.</summary>
@@ -477,12 +715,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 "SuperUser",
                 "All",
             };
-        }
-
-        [DoesNotReturn]
-        private static void ThrowArgumentNullException(string paramName)
-        {
-            throw new ArgumentNullException(paramName);
         }
     }
 }

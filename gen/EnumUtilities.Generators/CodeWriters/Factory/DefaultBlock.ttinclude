@@ -13,9 +13,9 @@
     /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
     public static <#= Model.RefName #> Parse(string value, bool ignoreCase = false)
     {
-        if (value is null) ThrowArgumentNullException(nameof(value));
-        TryParse(value.AsSpan(), ignoreCase, throwOnFailure: true, out var result);
-        return result;
+        if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
+        TryParseName(value.AsSpan(), <#= GetIgnoreCaseToComparisonExpression() #>, throwOnFailure: true, out var result);
+        return (<#= Model.RefName #>)result;
     }
 
     /// <summary>
@@ -28,8 +28,8 @@
     /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
     public static <#= Model.RefName #> Parse(ReadOnlySpan<char> value, bool ignoreCase = false)
     {
-        TryParse(value, ignoreCase, throwOnFailure: true, out var result);
-        return result;
+        TryParseName(value, <#= GetIgnoreCaseToComparisonExpression() #>, throwOnFailure: true, out var result);
+        return (<#= Model.RefName #>)result;
     }
 
     /// <summary>
@@ -44,8 +44,8 @@
     public static <#= Model.RefName #>? ParseOrNull(string? value, bool ignoreCase = false)
     {
         if (value is null) return null;
-        TryParse(value.AsSpan(), ignoreCase, throwOnFailure: true, out var result);
-        return result;
+        TryParseName(value.AsSpan(), <#= GetIgnoreCaseToComparisonExpression() #>, throwOnFailure: true, out var result);
+        return (<#= Model.RefName #>)result;
     }
 
     /// <summary>
@@ -62,7 +62,8 @@
     /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
     public static bool TryParse([NotNullWhen(true)] string? value, bool ignoreCase, out <#= Model.RefName #> result)
     {
-        return TryParse(value.AsSpan(), ignoreCase, throwOnFailure: false, out result);
+        Unsafe.SkipInit(out result);
+        return TryParseName(value.AsSpan(), <#= GetIgnoreCaseToComparisonExpression() #>, throwOnFailure: false, out Unsafe.As<<#= Model.RefName #>, <#= Model.UnderlyingType #>>(ref result));
     }
 
     /// <summary>
@@ -78,7 +79,8 @@
     /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
     public static bool TryParse([NotNullWhen(true)] string? value, out <#= Model.RefName #> result)
     {
-        return TryParse(value.AsSpan(), ignoreCase: false, throwOnFailure: false, out result);
+        Unsafe.SkipInit(out result);
+        return TryParseName(value.AsSpan(), <#= GetComparisonExpression(false) #>, throwOnFailure: false, out Unsafe.As<<#= Model.RefName #>, <#= Model.UnderlyingType #>>(ref result));
     }
 
     /// <summary>
@@ -93,7 +95,7 @@
     /// </returns>
     public static <#= Model.RefName #>? TryParse(string? value, bool ignoreCase = false)
     {
-        return TryParse(value.AsSpan(), ignoreCase, throwOnFailure: false, out <#= Model.RefName #> result) ? result : null;
+        return TryParseName(value.AsSpan(), <#= GetIgnoreCaseToComparisonExpression() #>, throwOnFailure: false, out var result) ? (<#= Model.RefName #>?)result : null;
     }
 
     /// <summary>
@@ -110,7 +112,8 @@
     /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
     public static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, out <#= Model.RefName #> result)
     {
-        return TryParse(value, ignoreCase, throwOnFailure: false, out result);
+        Unsafe.SkipInit(out result);
+        return TryParseName(value, <#= GetIgnoreCaseToComparisonExpression() #>, throwOnFailure: false, out Unsafe.As<<#= Model.RefName #>, <#= Model.UnderlyingType #>>(ref result));
     }
 
     /// <summary>
@@ -126,7 +129,8 @@
     /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
     public static bool TryParse(ReadOnlySpan<char> value, out <#= Model.RefName #> result)
     {
-        return TryParse(value, ignoreCase: false, throwOnFailure: false, out result);
+        Unsafe.SkipInit(out result);
+        return TryParseName(value, <#= GetComparisonExpression(false) #>, throwOnFailure: false, out Unsafe.As<<#= Model.RefName #>, <#= Model.UnderlyingType #>>(ref result));
     }
 
     /// <summary>
@@ -141,21 +145,86 @@
     /// </returns>
     public static <#= Model.RefName #>? TryParse(ReadOnlySpan<char> value, bool ignoreCase = false)
     {
-        return TryParse(value, ignoreCase, throwOnFailure: false, out <#= Model.RefName #> result) ? result : null;
+        return TryParseName(value, <#= GetIgnoreCaseToComparisonExpression() #>, throwOnFailure: false, out var result) ? (<#= Model.RefName #>?)result : null;
     }
 
-    private static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, bool throwOnFailure, out <#= Model.RefName #> result)
-    {
-        var comparisonType = ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
-        bool success = EnumStringParser.TryParse(value, s_stringParser, comparisonType, throwOnFailure, out <#= Model.UnderlyingType #> number);
-        if (!success)
-        {
-            result = 0;
-            return false;
-        }
+<#+
+        WriteTryParse(x => x.MemberName, "Name");
+#>
 
-        result = (<#= Model.RefName #>)number;
-        return true;
+    /// <summary>
+    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+    /// </summary>
+    /// <param name="name">The string representation of the enumeration name or underlying value to convert.</param>
+    /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
+    /// <param name="result">
+    /// When this method returns, result contains an object of type <#= Model.Name #> whose value is represented by value
+    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+    /// underlying type of <#= Model.Name #>. Note that this value need not be a member of the <#= Model.Name #> enumeration.
+    /// </param>
+    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
+    [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
+    public static bool TryParse(
+        [NotNullWhen(true)] string? name,
+        StringComparison comparisonType,
+        out <#= Model.RefName #> result)
+    {
+        Unsafe.SkipInit(out result);
+        return TryParseName(name.AsSpan(), comparisonType, throwOnFailure: false, out Unsafe.As<<#= Model.RefName #>, <#= Model.UnderlyingType #>>(ref result));
+    }
+
+    /// <summary>
+    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+    /// </summary>
+    /// <param name="name">The case-insensitive string representation of the enumeration name or underlying value to convert.</param>
+    /// <param name="result">
+    /// When this method returns, result contains an object of type <#= Model.Name #> whose value is represented by value
+    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+    /// underlying type of <#= Model.Name #>. Note that this value need not be a member of the <#= Model.Name #> enumeration.
+    /// </param>
+    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
+    public static bool TryParseIgnoreCase(
+        [NotNullWhen(true)] string? name,
+        out <#= Model.RefName #> result)
+    {
+        Unsafe.SkipInit(out result);
+        return TryParseName(name.AsSpan(), <#= GetComparisonExpression(true) #>, throwOnFailure: false, out Unsafe.As<<#= Model.RefName #>, <#= Model.UnderlyingType #>>(ref result));
+    }
+
+    /// <summary>
+    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+    /// an equivalent enumerated object.
+    /// </summary>
+    /// <param name="name">The case-insensitive string representation of the enumeration name or underlying value to convert.</param>
+    /// <returns>
+    /// Contains an object of type <#= Model.Name #> whose value is represented by value if the parse operation succeeds.
+    /// If the parse operation fails, result contains <c>null</c> value.
+    /// </returns>
+    [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
+    public static <#= Model.RefName #>? TryParseIgnoreCase(string? name)
+    {
+        return TryParseName(name.AsSpan(), <#= GetComparisonExpression(true) #>, throwOnFailure: false, out var result) ? (<#= Model.RefName #>?)result : null;
+    }
+
+    /// <summary>
+    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+    /// an equivalent enumerated object.
+    /// </summary>
+    /// <param name="name">The string representation of the enumeration name or underlying value to convert.</param>
+    /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
+    /// <returns>
+    /// Contains an object of type <#= Model.Name #> whose value is represented by value if the parse operation succeeds.
+    /// If the parse operation fails, result contains <c>null</c> value.
+    /// </returns>
+    /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
+    [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
+    public static <#= Model.RefName #>? TryParse(string? name, StringComparison comparisonType)
+    {
+        return TryParseName(name.AsSpan(), comparisonType, throwOnFailure: false, out var result) ? (<#= Model.RefName #>?)result : null;
     }
 <#+
     }

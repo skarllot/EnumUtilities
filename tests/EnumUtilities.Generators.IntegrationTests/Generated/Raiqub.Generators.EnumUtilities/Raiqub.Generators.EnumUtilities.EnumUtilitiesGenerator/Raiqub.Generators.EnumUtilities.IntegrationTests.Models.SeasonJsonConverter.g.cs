@@ -2,6 +2,7 @@
 #nullable enable
 
 using System;
+using System.Buffers;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Raiqub.Generators.EnumUtilities.Formatters;
@@ -12,106 +13,76 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.9.0.0")]
     public sealed class SeasonJsonConverter : JsonConverter<Season>
     {
-        private const int MaxBytesLength = 12;
-        private const int MaxCharsLength = 2;
-
-        private static readonly SeasonMetadata.StringFormatter s_stringFormatter = SeasonMetadata.StringFormatter.Instance;
-        private static readonly SeasonMetadata.StringParser s_stringParser = SeasonMetadata.StringParser.Instance;
+        private const int MaxCharStack = 256;
 
         public override Season Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             if (reader.TokenType == JsonTokenType.String)
-                return (Season)ReadFromString(ref reader);
+                return ReadFromString(ref reader);
             if (reader.TokenType == JsonTokenType.Number)
                 return (Season)ReadFromNumber(ref reader);
 
             throw new JsonException();
         }
 
-    #if NET7_0_OR_GREATER
-
         public override void Write(Utf8JsonWriter writer, Season value, JsonSerializerOptions options)
         {
-            switch ((int)value)
+            string? jsonString = value.ToJsonString();
+            if (jsonString is not null)
             {
-                case 1:
-                    writer.WriteStringValue("🌱"u8);
-                    break;
-                case 2:
-                    writer.WriteStringValue("☀️"u8);
-                    break;
-                case 3:
-                    writer.WriteStringValue("🍂"u8);
-                    break;
-                case 4:
-                    writer.WriteStringValue("⛄"u8);
-                    break;
-                default:
-                    string strValue = EnumStringFormatter.GetString((int)value, s_stringFormatter);
-                    writer.WriteStringValue(strValue);
-                    break;
+                writer.WriteStringValue(jsonString);
+            }
+            else
+            {
+                writer.WriteNumberValue((int)value);
             }
         }
 
-        private int ReadFromString(ref Utf8JsonReader reader)
+    #if NET7_0_OR_GREATER
+
+        private Season ReadFromString(ref Utf8JsonReader reader)
         {
             int length = reader.HasValueSequence ? checked((int)reader.ValueSequence.Length) : reader.ValueSpan.Length;
-            if (length > MaxBytesLength)
-                throw new JsonException();
 
-            Span<char> name = stackalloc char[MaxBytesLength];
-            int charsWritten = reader.CopyString(name);
-            name = name.Slice(0, charsWritten);
-
-            return name switch
+            char[]? rented = null;
+            Span<char> name = length <= MaxCharStack ? stackalloc char[MaxCharStack] : (rented = ArrayPool<char>.Shared.Rent(length));
+            try
             {
-                "🌱" => 1,
-                "☀️" => 2,
-                "🍂" => 3,
-                "⛄" => 4,
-                _ => EnumStringParser.TryParse(name, s_stringParser, StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out int result) ? result : throw new JsonException()
-            };
+                int charsWritten = reader.CopyString(name);
+                name = name.Slice(0, charsWritten);
+
+                bool isParsed = SeasonFactory.TryParseJsonString(name, ignoreCase: false, out Season result);
+                if (!isParsed)
+                {
+                    throw new JsonException();
+                }
+
+                return result;
+            }
+            finally
+            {
+                if (rented != null)
+                {
+                    ArrayPool<char>.Shared.Return(rented);
+                }
+            }
         }
 
     #else
 
-        public override void Write(Utf8JsonWriter writer, Season value, JsonSerializerOptions options)
-        {
-            switch ((int)value)
-            {
-                case 1:
-                    writer.WriteStringValue("🌱");
-                    break;
-                case 2:
-                    writer.WriteStringValue("☀️");
-                    break;
-                case 3:
-                    writer.WriteStringValue("🍂");
-                    break;
-                case 4:
-                    writer.WriteStringValue("⛄");
-                    break;
-                default:
-                    string strValue = EnumStringFormatter.GetString((int)value, s_stringFormatter);
-                    writer.WriteStringValue(strValue);
-                    break;
-            }
-        }
-
-        private int ReadFromString(ref Utf8JsonReader reader)
+        private Season ReadFromString(ref Utf8JsonReader reader)
         {
             var name = reader.GetString();
-            return name switch
+            bool isParsed = SeasonFactory.TryParseJsonString(name, ignoreCase: false, out Season result);
+            if (!isParsed)
             {
-                "🌱" => 1,
-                "☀️" => 2,
-                "🍂" => 3,
-                "⛄" => 4,
-                _ => EnumStringParser.TryParse(name, s_stringParser, StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out int result) ? result : throw new JsonException()
-            };
+                throw new JsonException();
+            }
+
+            return result;
         }
 
     #endif

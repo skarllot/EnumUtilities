@@ -3,11 +3,13 @@
 <#@ import namespace="Models" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="T4CodeWriter" #>
+<#@ include file="$(ProjectDir)CodeWriters\Extensions\FormatStringInternal.ttinclude" #>
 <#@ include file="$(ProjectDir)CodeWriters\Extensions\DefaultBlock.ttinclude" #>
 <#@ include file="$(ProjectDir)CodeWriters\Extensions\InterlockedBlock.ttinclude" #>
 <#@ include file="$(ProjectDir)CodeWriters\Extensions\EnumMemberBlock.ttinclude" #>
 <#@ include file="$(ProjectDir)CodeWriters\Extensions\DescriptionBlock.ttinclude" #>
 <#@ include file="$(ProjectDir)CodeWriters\Extensions\DisplayBlock.ttinclude" #>
+<#@ include file="$(ProjectDir)CodeWriters\Extensions\JsonBlock.ttinclude" #>
 <#
 #nullable enable
 #>
@@ -17,7 +19,7 @@
 using System;
 using System.Runtime.CompilerServices;
 <#
-            if (IsInterlockedSupported())
+            if (Model.IsInterlockedSupported())
             {
 #>
 using System.Threading;
@@ -40,22 +42,16 @@ using Raiqub.Generators.EnumUtilities.Formatters;
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("<#= CurrentAssemblyName.Name #>", "<#= Append($"{CurrentAssemblyName.Version}") #>")]
 <#= Model.IsPublic ? "public" : "internal" #> static partial class <#= Model.Name #>Extensions
 {
-    private static readonly <#= Model.MetadataClassName #>.StringFormatter s_stringFormatter = <#= Model.MetadataClassName #>.StringFormatter.Instance;
 <#
-            if (Model.HasSerializationValue)
+            if ((Model.SelectedGenerators & SelectedGenerators.MainGenerator) != 0)
             {
-#>
-    private static readonly <#= Model.MetadataClassName #>.SerializationStringFormatter s_serializationStringFormatter = <#= Model.MetadataClassName #>.SerializationStringFormatter.Instance;
-<#
+                WriteDefaultBlock();
+                WriteInterlockedBlock();
+                WriteEnumMemberBlock();
+                WriteDescriptionBlock();
+                WriteDisplayBlock();
             }
-#>
-
-<#
-            WriteDefaultBlock();
-            WriteInterlockedBlock();
-            WriteEnumMemberBlock();
-            WriteDescriptionBlock();
-            WriteDisplayBlock();
+            WriteJsonBlock();
 #>
 }
 <#
@@ -73,5 +69,5 @@ using Raiqub.Generators.EnumUtilities.Formatters;
     public override string GetFileName() => $"{Model.Namespace ?? "_"}.{Model.Name}Extensions.g.cs";
 
     protected override bool CanGenerateFor(EnumToGenerate model) =>
-        (model.SelectedGenerators & SelectedGenerators.MainGenerator) != 0;
+        (model.SelectedGenerators & (SelectedGenerators.MainGenerator | SelectedGenerators.JsonConverter)) != 0;
 #>

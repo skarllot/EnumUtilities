@@ -11,21 +11,21 @@ using Raiqub.Generators.EnumUtilities.Formatters;
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.9.0.0")]
     public static partial class ColoursExtensions
     {
-        private static readonly ColoursMetadata.StringFormatter s_stringFormatter = ColoursMetadata.StringFormatter.Instance;
-
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
         /// <returns>The string representation of the value of this instance.</returns>
         public static string ToStringFast(this Colours value)
         {
-            return EnumStringFormatter.GetString((int)value, s_stringFormatter);
+            return FormatFlagNames((int)value)
+                ?? ((int)value).ToString();
         }
 
         /// <summary>Determines whether one or more bit fields are set in the current instance.</summary>
         /// <param name="flag">An enumeration value.</param>
         /// <returns><see langword="true"/> if the bit field or bit fields that are set in flag are also set in the current instance; otherwise, <see langword="false"/>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool HasFlagFast(this Colours value, Colours flag)
         {
             return (value & flag) == flag;
@@ -36,14 +36,143 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns>The number of characters produced by converting the specified value to string.</returns>
         public static int GetStringLength(this Colours value)
         {
-            return EnumStringFormatter.GetStringLength((int)value, s_stringFormatter);
+            return FormatFlagNamesLength((int)value)
+                ?? EnumNumericFormatter.GetStringLength((int)value);
         }
 
         /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
         /// <returns><c>true</c> if the value of this instance exists in the enumeration; <c>false</c> otherwise.</returns>
         public static bool IsDefined(this Colours value)
         {
-            return ColoursValidation.IsDefined(value);
+            return (int)value switch
+            {
+                1 => true,
+                2 => true,
+                4 => true,
+                _ => false
+            };
+        }
+
+        private static int? FormatFlagNamesLength(int value)
+        {
+            int? fastResult = GetNameLengthInlined(value);
+            if (fastResult is not null)
+            {
+                return fastResult.Value;
+            }
+
+            if (value == 0)
+            {
+                return 1;
+            }
+
+            int count = 0, foundItemsCount = 0;
+            if (true)
+            {
+                if ((value & 4) == 4)
+                {
+                    value -= 4;
+                    count = checked(count + 5);
+                    foundItemsCount++;
+                    if (value == 0) goto CountLength;
+                }
+                if ((value & 2) == 2)
+                {
+                    value -= 2;
+                    count = checked(count + 4);
+                    foundItemsCount++;
+                    if (value == 0) goto CountLength;
+                }
+                if ((value & 1) == 1)
+                {
+                    value -= 1;
+                    count = checked(count + 3);
+                    foundItemsCount++;
+                    if (value == 0) goto CountLength;
+                }
+            }
+
+            if (value != 0)
+            {
+                return null;
+            }
+
+    CountLength:
+            const int separatorStringLength = 2;
+            return checked(count + (separatorStringLength * (foundItemsCount - 1)));
+        }
+
+        private static readonly string[] s_formatNames = new string[3] { "Green", "Blue", "Red" };
+
+        private static string? FormatFlagNames(int value)
+        {
+            string? result = GetNameInlined(value);
+            if (result is null)
+            {
+                Span<int> foundItems = stackalloc int[3];
+                if (TryFindFlagsNames(value, foundItems, out int foundItemsCount, out int resultLength))
+                {
+                    result = EnumStringFormatter.WriteMultipleFoundFlagsNames(s_formatNames, foundItems, foundItemsCount, resultLength);
+                }
+            }
+
+            return result;
+        }
+
+        private static bool TryFindFlagsNames(int value, Span<int> foundItems, out int foundItemsCount, out int resultLength)
+        {
+            resultLength = 0;
+            foundItemsCount = 0;
+            if (true)
+            {
+                if ((value & 4) == 4)
+                {
+                    value -= 4;
+                    resultLength = checked(resultLength + 5);
+                    foundItems[foundItemsCount++] = 0;
+                    if (value == 0) return true;
+                }
+                if ((value & 2) == 2)
+                {
+                    value -= 2;
+                    resultLength = checked(resultLength + 4);
+                    foundItems[foundItemsCount++] = 1;
+                    if (value == 0) return true;
+                }
+                if ((value & 1) == 1)
+                {
+                    value -= 1;
+                    resultLength = checked(resultLength + 3);
+                    foundItems[foundItemsCount++] = 2;
+                    if (value == 0) return true;
+                }
+            }
+
+            return value == 0;
+        }
+
+        private static int? GetNameLengthInlined(int value)
+        {
+            return value switch
+            {
+                0 => 1,
+                1 => 3,
+                2 => 4,
+                4 => 5,
+                _ => null
+            };
+        }
+
+        private static string? GetNameInlined(int value)
+        {
+            return value switch
+            {
+                0 => "0",
+                1 => "Red",
+                2 => "Blue",
+                4 => "Green",
+                _ => null
+            };
         }
 
     #if NET5_0_OR_GREATER

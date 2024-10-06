@@ -10,14 +10,15 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
+    /// <summary>Provides metadata for <see cref="StatusCode" /> enumeration.</summary>
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.9.0.0")]
     public static partial class StatusCodeMetadata
     {
         /// <summary>Provides constant values for <see cref="StatusCode" /> members names.</summary>
         public static partial class Name
         {
-            /// <summary>Represents the largest possible number of characters produced by converting an <see cref="StatusCode" /> value to string, based on defined members. This field is constant.</summary>
+            /// <summary>Represents the largest possible number of characters produced by converting a <see cref="StatusCode" /> value to string, based on defined members.</summary>
             public const int MaxCharsLength = 14;
 
             /// <summary>The string representation of <see cref="StatusCode.Unknown" /> name.</summary>
@@ -57,7 +58,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <summary>Provides static values for <see cref="StatusCode" /> UTF-8 encoded members names.</summary>
         public static partial class Utf8Name
         {
-            /// <summary>Represents the largest possible number of bytes produced by converting an <see cref="StatusCode" /> value to UTF-8 string, based on defined members. This field is constant.</summary>
+            /// <summary>Represents the largest possible number of bytes produced by converting a <see cref="StatusCode" /> value to UTF-8 string, based on defined members.</summary>
             public const int MaxBytesLength = 14;
 
             /// <summary>The UTF-8 representation of <see cref="StatusCode.Unknown" /> name.</summary>
@@ -97,428 +98,81 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <summary>Provides constant values for <see cref="StatusCode" /> serialized members values.</summary>
         public static partial class SerializedValue
         {
-            /// <summary>Represents the largest possible number of characters produced by converting an <see cref="StatusCode" /> value to string, based on defined members. This field is constant.</summary>
+            /// <summary>Represents the largest possible number of characters produced by serializing a <see cref="StatusCode" /> value to string, based on defined members.</summary>
             public const int MaxCharsLength = 14;
 
-            /// <summary>The string representation of serialized <see cref="StatusCode.Unknown" /> value.</summary>
+            /// <summary>The string representation of <see cref="StatusCode.Unknown" /> serialized value.</summary>
             public const string Unknown = "Unknown";
 
-            /// <summary>The string representation of serialized <see cref="StatusCode.Success" /> value.</summary>
+            /// <summary>The string representation of <see cref="StatusCode.Success" /> serialized value.</summary>
             public const string Success = "Success";
 
-            /// <summary>The string representation of serialized <see cref="StatusCode.Error" /> value.</summary>
+            /// <summary>The string representation of <see cref="StatusCode.Error" /> serialized value.</summary>
             public const string Error = "Error";
 
-            /// <summary>The string representation of serialized <see cref="StatusCode.NotFound" /> value.</summary>
+            /// <summary>The string representation of <see cref="StatusCode.NotFound" /> serialized value.</summary>
             public const string NotFound = "Not Found";
 
-            /// <summary>The string representation of serialized <see cref="StatusCode.Timeout" /> value.</summary>
+            /// <summary>The string representation of <see cref="StatusCode.Timeout" /> serialized value.</summary>
             public const string Timeout = "Timeout";
 
-            /// <summary>The string representation of serialized <see cref="StatusCode.Unauthorized" /> value.</summary>
+            /// <summary>The string representation of <see cref="StatusCode.Unauthorized" /> serialized value.</summary>
             public const string Unauthorized = "Unauthorized";
 
-            /// <summary>The string representation of serialized <see cref="StatusCode.Forbidden" /> value.</summary>
+            /// <summary>The string representation of <see cref="StatusCode.Forbidden" /> serialized value.</summary>
             public const string Forbidden = "Forbidden";
 
-            /// <summary>The string representation of serialized <see cref="StatusCode.Conflict" /> value.</summary>
+            /// <summary>The string representation of <see cref="StatusCode.Conflict" /> serialized value.</summary>
             public const string Conflict = "Conflict";
 
-            /// <summary>The string representation of serialized <see cref="StatusCode.Gone" /> value.</summary>
+            /// <summary>The string representation of <see cref="StatusCode.Gone" /> serialized value.</summary>
             public const string Gone = "Gone";
 
-            /// <summary>The string representation of serialized <see cref="StatusCode.InvalidRequest" /> value.</summary>
+            /// <summary>The string representation of <see cref="StatusCode.InvalidRequest" /> serialized value.</summary>
             public const string InvalidRequest = "InvalidRequest";
 
-            /// <summary>The string representation of serialized <see cref="StatusCode.ServerError" /> value.</summary>
+            /// <summary>The string representation of <see cref="StatusCode.ServerError" /> serialized value.</summary>
             public const string ServerError = "ServerError";
         }
 
-        /// <summary>Provides static values for <see cref="StatusCode" /> UTF-8 encoded members serialized values.</summary>
+        /// <summary>Provides static values for <see cref="StatusCode" /> UTF-8 encoded serialized members values.</summary>
         public static partial class Utf8SerializedValue
         {
-            /// <summary>Represents the largest possible number of bytes produced by converting an <see cref="StatusCode" /> value to UTF-8 string, based on defined members. This field is constant.</summary>
+            /// <summary>Represents the largest possible number of bytes produced by serializing a <see cref="StatusCode" /> value to UTF-8 string, based on defined members.</summary>
             public const int MaxBytesLength = 14;
 
-            /// <summary>The UTF-8 representation of serialized <see cref="StatusCode.Unknown" /> value.</summary>
+            /// <summary>The UTF-8 representation of <see cref="StatusCode.Unknown" /> serialized value.</summary>
             public static ReadOnlySpan<byte> Unknown => new byte[7] { 85, 110, 107, 110, 111, 119, 110 };
 
-            /// <summary>The UTF-8 representation of serialized <see cref="StatusCode.Success" /> value.</summary>
+            /// <summary>The UTF-8 representation of <see cref="StatusCode.Success" /> serialized value.</summary>
             public static ReadOnlySpan<byte> Success => new byte[7] { 83, 117, 99, 99, 101, 115, 115 };
 
-            /// <summary>The UTF-8 representation of serialized <see cref="StatusCode.Error" /> value.</summary>
+            /// <summary>The UTF-8 representation of <see cref="StatusCode.Error" /> serialized value.</summary>
             public static ReadOnlySpan<byte> Error => new byte[5] { 69, 114, 114, 111, 114 };
 
-            /// <summary>The UTF-8 representation of serialized <see cref="StatusCode.NotFound" /> value.</summary>
+            /// <summary>The UTF-8 representation of <see cref="StatusCode.NotFound" /> serialized value.</summary>
             public static ReadOnlySpan<byte> NotFound => new byte[9] { 78, 111, 116, 32, 70, 111, 117, 110, 100 };
 
-            /// <summary>The UTF-8 representation of serialized <see cref="StatusCode.Timeout" /> value.</summary>
+            /// <summary>The UTF-8 representation of <see cref="StatusCode.Timeout" /> serialized value.</summary>
             public static ReadOnlySpan<byte> Timeout => new byte[7] { 84, 105, 109, 101, 111, 117, 116 };
 
-            /// <summary>The UTF-8 representation of serialized <see cref="StatusCode.Unauthorized" /> value.</summary>
+            /// <summary>The UTF-8 representation of <see cref="StatusCode.Unauthorized" /> serialized value.</summary>
             public static ReadOnlySpan<byte> Unauthorized => new byte[12] { 85, 110, 97, 117, 116, 104, 111, 114, 105, 122, 101, 100 };
 
-            /// <summary>The UTF-8 representation of serialized <see cref="StatusCode.Forbidden" /> value.</summary>
+            /// <summary>The UTF-8 representation of <see cref="StatusCode.Forbidden" /> serialized value.</summary>
             public static ReadOnlySpan<byte> Forbidden => new byte[9] { 70, 111, 114, 98, 105, 100, 100, 101, 110 };
 
-            /// <summary>The UTF-8 representation of serialized <see cref="StatusCode.Conflict" /> value.</summary>
+            /// <summary>The UTF-8 representation of <see cref="StatusCode.Conflict" /> serialized value.</summary>
             public static ReadOnlySpan<byte> Conflict => new byte[8] { 67, 111, 110, 102, 108, 105, 99, 116 };
 
-            /// <summary>The UTF-8 representation of serialized <see cref="StatusCode.Gone" /> value.</summary>
+            /// <summary>The UTF-8 representation of <see cref="StatusCode.Gone" /> serialized value.</summary>
             public static ReadOnlySpan<byte> Gone => new byte[4] { 71, 111, 110, 101 };
 
-            /// <summary>The UTF-8 representation of serialized <see cref="StatusCode.InvalidRequest" /> value.</summary>
+            /// <summary>The UTF-8 representation of <see cref="StatusCode.InvalidRequest" /> serialized value.</summary>
             public static ReadOnlySpan<byte> InvalidRequest => new byte[14] { 73, 110, 118, 97, 108, 105, 100, 82, 101, 113, 117, 101, 115, 116 };
 
-            /// <summary>The UTF-8 representation of serialized <see cref="StatusCode.ServerError" /> value.</summary>
+            /// <summary>The UTF-8 representation of <see cref="StatusCode.ServerError" /> serialized value.</summary>
             public static ReadOnlySpan<byte> ServerError => new byte[11] { 83, 101, 114, 118, 101, 114, 69, 114, 114, 111, 114 };
-        }
-
-        /// <summary>Provides support for formatting <see cref="StatusCode"/> values.</summary>
-        internal sealed partial class StringFormatter : IEnumFormatter<int>
-        {
-            /// <summary>Gets the singleton instance of the <see cref="StringFormatter"/> class.</summary>
-            public static StringFormatter Instance = new StringFormatter();
-
-            /// <inheritdoc />
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public int GetStringLengthForNumber(int value) => EnumNumericFormatter.GetStringLength(value);
-
-            /// <inheritdoc />
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public string GetStringForNumber(int value) => value.ToString();
-
-            /// <inheritdoc />
-            public int? TryGetStringLengthForMember(int value)
-            {
-                return value switch
-                {
-                    -1 => 7,
-                    0 => 7,
-                    -2 => 5,
-                    -3 => 8,
-                    -4 => 7,
-                    -5 => 12,
-                    -6 => 9,
-                    -7 => 8,
-                    -8 => 4,
-                    -9 => 14,
-                    -10 => 11,
-                    _ => null
-                };
-            }
-
-            /// <inheritdoc />
-            public string? TryGetStringForMember(int value)
-            {
-                return value switch
-                {
-                    -1 => "Unknown",
-                    0 => "Success",
-                    -2 => "Error",
-                    -3 => "NotFound",
-                    -4 => "Timeout",
-                    -5 => "Unauthorized",
-                    -6 => "Forbidden",
-                    -7 => "Conflict",
-                    -8 => "Gone",
-                    -9 => "InvalidRequest",
-                    -10 => "ServerError",
-                    _ => null
-                };
-            }
-        }
-
-        /// <summary>Provides support for formatting <see cref="StatusCode"/> serialized values.</summary>
-        internal sealed partial class SerializationStringFormatter : IEnumFormatter<int>
-        {
-            /// <summary>Gets the singleton instance of the <see cref="SerializationStringFormatter"/> class.</summary>
-            public static SerializationStringFormatter Instance = new SerializationStringFormatter();
-
-            /// <inheritdoc />
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public int GetStringLengthForNumber(int value) => EnumNumericFormatter.GetStringLength(value);
-
-            /// <inheritdoc />
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public string GetStringForNumber(int value) => value.ToString();
-
-            /// <inheritdoc />
-            public int? TryGetStringLengthForMember(int value)
-            {
-                return value switch
-                {
-                    -1 => 7,
-                    0 => 7,
-                    -2 => 5,
-                    -3 => 9,
-                    -4 => 7,
-                    -5 => 12,
-                    -6 => 9,
-                    -7 => 8,
-                    -8 => 4,
-                    -9 => 14,
-                    -10 => 11,
-                    _ => null
-                };
-            }
-
-            /// <inheritdoc />
-            public string? TryGetStringForMember(int value)
-            {
-                return value switch
-                {
-                    -1 => "Unknown",
-                    0 => "Success",
-                    -2 => "Error",
-                    -3 => "Not Found",
-                    -4 => "Timeout",
-                    -5 => "Unauthorized",
-                    -6 => "Forbidden",
-                    -7 => "Conflict",
-                    -8 => "Gone",
-                    -9 => "InvalidRequest",
-                    -10 => "ServerError",
-                    _ => null
-                };
-            }
-        }
-
-        /// <summary>Provides support for parsing <see cref="StatusCode"/> values.</summary>
-        internal sealed partial class StringParser
-            : IEnumParser<int>
-        {
-            /// <summary>Gets the singleton instance of the <see cref="StringParser"/> class.</summary>
-            public static StringParser Instance = new StringParser();
-
-            /// <inheritdoc />
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public int BitwiseOr(int value1, int value2) => unchecked((int)(value1 | value2));
-
-            /// <inheritdoc />
-            public bool TryParseNumber(ReadOnlySpan<char> value, out int result) => EnumNumericParser.TryParse(value, out result);
-
-            /// <inheritdoc />
-            public bool TryParseSingleName(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
-            {
-                if (value.IsEmpty)
-                {
-                    result = 0;
-                    return false;
-                }
-
-                switch (value[0])
-                {
-                    case 'U':
-                    case 'u':
-                        switch (value)
-                        {
-                            case { } when value.Equals("Unknown", comparisonType):
-                                result = -1;
-                                return true;
-                            case { } when value.Equals("Unauthorized", comparisonType):
-                                result = -5;
-                                return true;
-                        }
-                        goto default;
-                    case 'S':
-                    case 's':
-                        switch (value)
-                        {
-                            case { } when value.Equals("Success", comparisonType):
-                                result = 0;
-                                return true;
-                            case { } when value.Equals("ServerError", comparisonType):
-                                result = -10;
-                                return true;
-                        }
-                        goto default;
-                    case 'E':
-                    case 'e':
-                        switch (value)
-                        {
-                            case { } when value.Equals("Error", comparisonType):
-                                result = -2;
-                                return true;
-                        }
-                        goto default;
-                    case 'N':
-                    case 'n':
-                        switch (value)
-                        {
-                            case { } when value.Equals("NotFound", comparisonType):
-                                result = -3;
-                                return true;
-                        }
-                        goto default;
-                    case 'T':
-                    case 't':
-                        switch (value)
-                        {
-                            case { } when value.Equals("Timeout", comparisonType):
-                                result = -4;
-                                return true;
-                        }
-                        goto default;
-                    case 'F':
-                    case 'f':
-                        switch (value)
-                        {
-                            case { } when value.Equals("Forbidden", comparisonType):
-                                result = -6;
-                                return true;
-                        }
-                        goto default;
-                    case 'C':
-                    case 'c':
-                        switch (value)
-                        {
-                            case { } when value.Equals("Conflict", comparisonType):
-                                result = -7;
-                                return true;
-                        }
-                        goto default;
-                    case 'G':
-                    case 'g':
-                        switch (value)
-                        {
-                            case { } when value.Equals("Gone", comparisonType):
-                                result = -8;
-                                return true;
-                        }
-                        goto default;
-                    case 'I':
-                    case 'i':
-                        switch (value)
-                        {
-                            case { } when value.Equals("InvalidRequest", comparisonType):
-                                result = -9;
-                                return true;
-                        }
-                        goto default;
-                    default:
-                        result = 0;
-                        return false;
-                }
-            }
-        }
-
-        /// <summary>Provides support for parsing serialized <see cref="StatusCode"/> values.</summary>
-        internal sealed partial class SerializationStringParser : IEnumParser<int>
-        {
-            /// <summary>Gets the singleton instance of the <see cref="StringParser"/> class.</summary>
-            public static SerializationStringParser Instance = new SerializationStringParser();
-
-            /// <inheritdoc />
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public int BitwiseOr(int value1, int value2) => unchecked((int)(value1 | value2));
-
-            /// <inheritdoc />
-            public bool TryParseNumber(ReadOnlySpan<char> value, out int result) => EnumNumericParser.TryParse(value, out result);
-
-            /// <inheritdoc />
-            public bool TryParseSingleName(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
-            {
-                if (value.IsEmpty)
-                {
-                    result = 0;
-                    return false;
-                }
-
-                switch (value[0])
-                {
-                    case 'U':
-                    case 'u':
-                        switch (value)
-                        {
-                            case { } when value.Equals("Unknown", comparisonType):
-                                result = -1;
-                                return true;
-                            case { } when value.Equals("Unauthorized", comparisonType):
-                                result = -5;
-                                return true;
-                        }
-                        goto default;
-                    case 'S':
-                    case 's':
-                        switch (value)
-                        {
-                            case { } when value.Equals("Success", comparisonType):
-                                result = 0;
-                                return true;
-                            case { } when value.Equals("ServerError", comparisonType):
-                                result = -10;
-                                return true;
-                        }
-                        goto default;
-                    case 'E':
-                    case 'e':
-                        switch (value)
-                        {
-                            case { } when value.Equals("Error", comparisonType):
-                                result = -2;
-                                return true;
-                        }
-                        goto default;
-                    case 'N':
-                    case 'n':
-                        switch (value)
-                        {
-                            case { } when value.Equals("Not Found", comparisonType):
-                                result = -3;
-                                return true;
-                        }
-                        goto default;
-                    case 'T':
-                    case 't':
-                        switch (value)
-                        {
-                            case { } when value.Equals("Timeout", comparisonType):
-                                result = -4;
-                                return true;
-                        }
-                        goto default;
-                    case 'F':
-                    case 'f':
-                        switch (value)
-                        {
-                            case { } when value.Equals("Forbidden", comparisonType):
-                                result = -6;
-                                return true;
-                        }
-                        goto default;
-                    case 'C':
-                    case 'c':
-                        switch (value)
-                        {
-                            case { } when value.Equals("Conflict", comparisonType):
-                                result = -7;
-                                return true;
-                        }
-                        goto default;
-                    case 'G':
-                    case 'g':
-                        switch (value)
-                        {
-                            case { } when value.Equals("Gone", comparisonType):
-                                result = -8;
-                                return true;
-                        }
-                        goto default;
-                    case 'I':
-                    case 'i':
-                        switch (value)
-                        {
-                            case { } when value.Equals("InvalidRequest", comparisonType):
-                                result = -9;
-                                return true;
-                        }
-                        goto default;
-                    default:
-                        result = 0;
-                        return false;
-                }
-            }
         }
     }
 }

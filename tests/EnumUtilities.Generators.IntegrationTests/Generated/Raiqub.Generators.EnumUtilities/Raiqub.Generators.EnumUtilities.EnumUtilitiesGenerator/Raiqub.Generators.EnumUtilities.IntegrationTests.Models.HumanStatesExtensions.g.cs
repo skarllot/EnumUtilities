@@ -11,16 +11,15 @@ using Raiqub.Generators.EnumUtilities.Formatters;
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.9.0.0")]
     public static partial class HumanStatesExtensions
     {
-        private static readonly HumanStatesMetadata.StringFormatter s_stringFormatter = HumanStatesMetadata.StringFormatter.Instance;
-
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
         /// <returns>The string representation of the value of this instance.</returns>
         public static string ToStringFast(this HumanStates value)
         {
-            return EnumStringFormatter.GetString((int)value, s_stringFormatter);
+            return GetNameInlined((int)value)
+                ?? ((int)value).ToString();
         }
 
         /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
@@ -28,14 +27,51 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns>The number of characters produced by converting the specified value to string.</returns>
         public static int GetStringLength(this HumanStates value)
         {
-            return EnumStringFormatter.GetStringLength((int)value, s_stringFormatter);
+            return GetNameLengthInlined((int)value)
+                ?? EnumNumericFormatter.GetStringLength((int)value);
         }
 
         /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
         /// <returns><c>true</c> if the value of this instance exists in the enumeration; <c>false</c> otherwise.</returns>
         public static bool IsDefined(this HumanStates value)
         {
-            return HumanStatesValidation.IsDefined(value);
+            return (int)value switch
+            {
+                1 => true,
+                2 => true,
+                3 => true,
+                4 => true,
+                5 => true,
+                _ => false
+            };
+        }
+
+        private static int? GetNameLengthInlined(int value)
+        {
+            return value switch
+            {
+                0 => 1,
+                1 => 4,
+                2 => 7,
+                3 => 8,
+                4 => 6,
+                5 => 4,
+                _ => null
+            };
+        }
+
+        private static string? GetNameInlined(int value)
+        {
+            return value switch
+            {
+                0 => "0",
+                1 => "Idle",
+                2 => "Working",
+                3 => "Sleeping",
+                4 => "Eating",
+                5 => "Dead",
+                _ => null
+            };
         }
 
         /// <summary>Adds two enumerations and replaces the first integer with the sum, as an atomic operation.</summary>

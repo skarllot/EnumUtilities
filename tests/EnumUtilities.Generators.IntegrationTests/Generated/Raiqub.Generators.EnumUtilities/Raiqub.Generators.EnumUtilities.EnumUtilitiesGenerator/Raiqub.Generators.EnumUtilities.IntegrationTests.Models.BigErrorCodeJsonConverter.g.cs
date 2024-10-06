@@ -2,6 +2,7 @@
 #nullable enable
 
 using System;
+using System.Buffers;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Raiqub.Generators.EnumUtilities.Formatters;
@@ -12,104 +13,78 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.9.0.0")]
     internal sealed class BigErrorCodeJsonConverter : JsonConverter<BigErrorCode>
     {
-        private const int MaxBytesLength = 3;
-        private const int MaxCharsLength = 3;
-
-        private static readonly BigErrorCodeMetadata.StringFormatter s_stringFormatter = BigErrorCodeMetadata.StringFormatter.Instance;
-        private static readonly BigErrorCodeMetadata.StringParser s_stringParser = BigErrorCodeMetadata.StringParser.Instance;
+        private const int MaxCharStack = 256;
 
         public override BigErrorCode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             if (reader.TokenType == JsonTokenType.String)
-                return (BigErrorCode)ReadFromString(ref reader);
+                return ReadFromString(ref reader);
 
             return (BigErrorCode)0;
         }
 
-    #if NET7_0_OR_GREATER
-
         public override void Write(Utf8JsonWriter writer, BigErrorCode value, JsonSerializerOptions options)
         {
-            switch ((ulong)value)
+            string? jsonString = value.ToJsonString();
+            if (jsonString is not null)
             {
-                case 0:
-                    writer.WriteStringValue("NON"u8);
-                    break;
-                case 1:
-                    writer.WriteStringValue("UNK"u8);
-                    break;
-                case 100:
-                    writer.WriteStringValue("CNX"u8);
-                    break;
-                case 200000000000:
-                    writer.WriteStringValue("OUT"u8);
-                    break;
-                default:
-                    string strValue = EnumStringFormatter.GetString((ulong)value, s_stringFormatter);
-                    writer.WriteStringValue(strValue);
-                    break;
+                writer.WriteStringValue(jsonString);
+            }
+            else
+            {
+                jsonString = ((BigErrorCode)0).ToJsonString();
+                if (jsonString is not null)
+                    writer.WriteStringValue(jsonString);
+                else
+                    throw new JsonException();
             }
         }
 
-        private ulong ReadFromString(ref Utf8JsonReader reader)
+    #if NET7_0_OR_GREATER
+
+        private BigErrorCode ReadFromString(ref Utf8JsonReader reader)
         {
             int length = reader.HasValueSequence ? checked((int)reader.ValueSequence.Length) : reader.ValueSpan.Length;
-            if (length > MaxBytesLength)
-                return 0;
 
-            Span<char> name = stackalloc char[MaxBytesLength];
-            int charsWritten = reader.CopyString(name);
-            name = name.Slice(0, charsWritten);
-
-            return name switch
+            char[]? rented = null;
+            Span<char> name = length <= MaxCharStack ? stackalloc char[MaxCharStack] : (rented = ArrayPool<char>.Shared.Rent(length));
+            try
             {
-                "NON" => 0,
-                "UNK" => 1,
-                "CNX" => 100,
-                "OUT" => 200000000000,
-                _ => EnumStringParser.TryParse(name, s_stringParser, StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out ulong result) ? result : 0
-            };
+                int charsWritten = reader.CopyString(name);
+                name = name.Slice(0, charsWritten);
+
+                bool isParsed = BigErrorCodeFactory.TryParseJsonString(name, ignoreCase: false, out BigErrorCode result);
+                if (!isParsed)
+                {
+                    return (BigErrorCode)0;
+                }
+
+                return result;
+            }
+            finally
+            {
+                if (rented != null)
+                {
+                    ArrayPool<char>.Shared.Return(rented);
+                }
+            }
         }
 
     #else
 
-        public override void Write(Utf8JsonWriter writer, BigErrorCode value, JsonSerializerOptions options)
-        {
-            switch ((ulong)value)
-            {
-                case 0:
-                    writer.WriteStringValue("NON");
-                    break;
-                case 1:
-                    writer.WriteStringValue("UNK");
-                    break;
-                case 100:
-                    writer.WriteStringValue("CNX");
-                    break;
-                case 200000000000:
-                    writer.WriteStringValue("OUT");
-                    break;
-                default:
-                    string strValue = EnumStringFormatter.GetString((ulong)value, s_stringFormatter);
-                    writer.WriteStringValue(strValue);
-                    break;
-            }
-        }
-
-        private ulong ReadFromString(ref Utf8JsonReader reader)
+        private BigErrorCode ReadFromString(ref Utf8JsonReader reader)
         {
             var name = reader.GetString();
-            return name switch
+            bool isParsed = BigErrorCodeFactory.TryParseJsonString(name, ignoreCase: false, out BigErrorCode result);
+            if (!isParsed)
             {
-                "NON" => 0,
-                "UNK" => 1,
-                "CNX" => 100,
-                "OUT" => 200000000000,
-                _ => EnumStringParser.TryParse(name, s_stringParser, StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out ulong result) ? result : 0
-            };
+                return (BigErrorCode)0;
+            }
+
+            return result;
         }
 
     #endif

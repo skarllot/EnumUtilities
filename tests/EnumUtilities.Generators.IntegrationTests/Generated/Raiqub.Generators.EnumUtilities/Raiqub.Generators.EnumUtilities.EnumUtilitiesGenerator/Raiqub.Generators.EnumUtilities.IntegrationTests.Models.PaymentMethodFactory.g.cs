@@ -12,12 +12,9 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.9.0.0")]
     public static partial class PaymentMethodFactory
     {
-        private static readonly PaymentMethodMetadata.StringParser s_stringParser = PaymentMethodMetadata.StringParser.Instance;
-        private static readonly PaymentMethodMetadata.SerializationStringParser s_serializationStringParser = PaymentMethodMetadata.SerializationStringParser.Instance;
-
         /// <summary>
         /// Converts the string representation of the name or numeric value of one or more enumerated constants to
         /// an equivalent enumerated object.
@@ -29,9 +26,9 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
         public static PaymentMethod Parse(string value, bool ignoreCase = false)
         {
-            if (value is null) ThrowArgumentNullException(nameof(value));
-            TryParse(value.AsSpan(), ignoreCase, throwOnFailure: true, out var result);
-            return result;
+            if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
+            TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
+            return (PaymentMethod)result;
         }
 
         /// <summary>
@@ -44,8 +41,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
         public static PaymentMethod Parse(ReadOnlySpan<char> value, bool ignoreCase = false)
         {
-            TryParse(value, ignoreCase, throwOnFailure: true, out var result);
-            return result;
+            TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
+            return (PaymentMethod)result;
         }
 
         /// <summary>
@@ -60,8 +57,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         public static PaymentMethod? ParseOrNull(string? value, bool ignoreCase = false)
         {
             if (value is null) return null;
-            TryParse(value.AsSpan(), ignoreCase, throwOnFailure: true, out var result);
-            return result;
+            TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
+            return (PaymentMethod)result;
         }
 
         /// <summary>
@@ -78,7 +75,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
         public static bool TryParse([NotNullWhen(true)] string? value, bool ignoreCase, out PaymentMethod result)
         {
-            return TryParse(value.AsSpan(), ignoreCase, throwOnFailure: false, out result);
+            Unsafe.SkipInit(out result);
+            return TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<PaymentMethod, int>(ref result));
         }
 
         /// <summary>
@@ -94,7 +92,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
         public static bool TryParse([NotNullWhen(true)] string? value, out PaymentMethod result)
         {
-            return TryParse(value.AsSpan(), ignoreCase: false, throwOnFailure: false, out result);
+            Unsafe.SkipInit(out result);
+            return TryParseName(value.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<PaymentMethod, int>(ref result));
         }
 
         /// <summary>
@@ -109,7 +108,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// </returns>
         public static PaymentMethod? TryParse(string? value, bool ignoreCase = false)
         {
-            return TryParse(value.AsSpan(), ignoreCase, throwOnFailure: false, out PaymentMethod result) ? result : null;
+            return TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (PaymentMethod?)result : null;
         }
 
         /// <summary>
@@ -126,7 +125,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
         public static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, out PaymentMethod result)
         {
-            return TryParse(value, ignoreCase, throwOnFailure: false, out result);
+            Unsafe.SkipInit(out result);
+            return TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<PaymentMethod, int>(ref result));
         }
 
         /// <summary>
@@ -142,7 +142,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
         public static bool TryParse(ReadOnlySpan<char> value, out PaymentMethod result)
         {
-            return TryParse(value, ignoreCase: false, throwOnFailure: false, out result);
+            Unsafe.SkipInit(out result);
+            return TryParseName(value, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<PaymentMethod, int>(ref result));
         }
 
         /// <summary>
@@ -157,21 +158,103 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// </returns>
         public static PaymentMethod? TryParse(ReadOnlySpan<char> value, bool ignoreCase = false)
         {
-            return TryParse(value, ignoreCase, throwOnFailure: false, out PaymentMethod result) ? result : null;
+            return TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (PaymentMethod?)result : null;
         }
 
-        private static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, bool throwOnFailure, out PaymentMethod result)
+        private static bool TryParseName(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out int result)
         {
-            var comparisonType = ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
-            bool success = EnumStringParser.TryParse(value, s_stringParser, comparisonType, throwOnFailure, out int number);
-            if (!success)
+            if (!value.IsEmpty)
+            {
+                char c = value[0];
+                if (char.IsWhiteSpace(c))
+                {
+                    value = value.TrimStart();
+                    if (value.IsEmpty)
+                    {
+                        goto ParseFailure;
+                    }
+
+                    c = value[0];
+                }
+
+                if ((c < '0' || c > '9') && c != '-' && c != '+')
+                {
+                    return TryParseNonNumericName(value, comparisonType, throwOnFailure, out result);
+                }
+
+                bool success = EnumNumericParser.TryParse(value, out result);
+                if (success)
+                {
+                    return true;
+                }
+
+                return TryParseNonNumericName(value, comparisonType, throwOnFailure, out result);
+            }
+
+            ParseFailure:
+            if (throwOnFailure)
+            {
+                ThrowHelper.ThrowInvalidEmptyParseArgument(nameof(value));
+            }
+
+            result = 0;
+            return false;
+        }
+
+        private static bool TryParseNonNumericName(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out int result)
+        {
+            bool success = TryParseSingleName(value, comparisonType, out result);
+            if (success)
+            {
+                return true;
+            }
+
+            if (throwOnFailure)
+            {
+                ThrowHelper.ThrowValueNotFound(value, nameof(value));
+            }
+
+            return false;
+        }
+
+        private static bool TryParseSingleName(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
+        {
+            if (value.IsEmpty)
             {
                 result = 0;
                 return false;
             }
 
-            result = (PaymentMethod)number;
-            return true;
+            switch (value[0])
+            {
+                case 'C':
+                case 'c':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Credit", comparisonType):
+                            result = 0;
+                            return true;
+                        case { } when value.Equals("Cash", comparisonType):
+                            result = 2;
+                            return true;
+                        case { } when value.Equals("Cheque", comparisonType):
+                            result = 3;
+                            return true;
+                    }
+                    break;
+                case 'D':
+                case 'd':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Debit", comparisonType):
+                            result = 1;
+                            return true;
+                    }
+                    break;
+            }
+
+            result = 0;
+            return false;
         }
 
         /// <summary>
@@ -193,15 +276,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out PaymentMethod result)
         {
-            bool success = EnumStringParser.TryParse(name, s_stringParser, comparisonType, throwOnFailure: false, out int number);
-            if (!success)
-            {
-                result = 0;
-                return false;
-            }
-
-            result = (PaymentMethod)number;
-            return true;
+            Unsafe.SkipInit(out result);
+            return TryParseName(name.AsSpan(), comparisonType, throwOnFailure: false, out Unsafe.As<PaymentMethod, int>(ref result));
         }
 
         /// <summary>
@@ -220,7 +296,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             [NotNullWhen(true)] string? name,
             out PaymentMethod result)
         {
-            return TryParse(name.AsSpan(), ignoreCase: true, out result);
+            Unsafe.SkipInit(out result);
+            return TryParseName(name.AsSpan(), StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out Unsafe.As<PaymentMethod, int>(ref result));
         }
 
         /// <summary>
@@ -235,7 +312,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
         public static PaymentMethod? TryParseIgnoreCase(string? name)
         {
-            return TryParse(name.AsSpan(), ignoreCase: true, out PaymentMethod result) ? result : null;
+            return TryParseName(name.AsSpan(), StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out var result) ? (PaymentMethod?)result : null;
         }
 
         /// <summary>
@@ -252,7 +329,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
         public static PaymentMethod? TryParse(string? name, StringComparison comparisonType)
         {
-            return TryParse(name, comparisonType, out PaymentMethod result) ? result : null;
+            return TryParseName(name.AsSpan(), comparisonType, throwOnFailure: false, out var result) ? (PaymentMethod?)result : null;
         }
 
         /// <summary>
@@ -265,9 +342,9 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
         public static PaymentMethod ParseFromEnumMemberValue(string value, bool ignoreCase = false)
         {
-            if (value is null) ThrowArgumentNullException(nameof(value));
-            TryParseFromEnumMemberValue(value.AsSpan(), ignoreCase, throwOnFailure: true, out var result);
-            return result;
+            if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
+            TryParseEnumMemberValue(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
+            return (PaymentMethod)result;
         }
 
         /// <summary>
@@ -279,8 +356,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
         public static PaymentMethod ParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase = false)
         {
-            TryParseFromEnumMemberValue(value, ignoreCase, throwOnFailure: true, out var result);
-            return result;
+            TryParseEnumMemberValue(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
+            return (PaymentMethod)result;
         }
 
         /// <summary>
@@ -294,8 +371,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         public static PaymentMethod? ParseFromEnumMemberValueOrNull(string? value, bool ignoreCase = false)
         {
             if (value is null) return null;
-            TryParseFromEnumMemberValue(value.AsSpan(), ignoreCase, throwOnFailure: true, out var result);
-            return result;
+            TryParseEnumMemberValue(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
+            return (PaymentMethod)result;
         }
 
         /// <summary>
@@ -312,7 +389,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
         public static bool TryParseFromEnumMemberValue([NotNullWhen(true)] string? value, bool ignoreCase, out PaymentMethod result)
         {
-            return TryParseFromEnumMemberValue(value.AsSpan(), ignoreCase, throwOnFailure: false, out result);
+            Unsafe.SkipInit(out result);
+            return TryParseEnumMemberValue(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<PaymentMethod, int>(ref result));
         }
 
         /// <summary>
@@ -328,7 +406,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
         public static bool TryParseFromEnumMemberValue([NotNullWhen(true)] string? value, out PaymentMethod result)
         {
-            return TryParseFromEnumMemberValue(value.AsSpan(), ignoreCase: false, throwOnFailure: false, out result);
+            Unsafe.SkipInit(out result);
+            return TryParseEnumMemberValue(value.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<PaymentMethod, int>(ref result));
         }
 
         /// <summary>
@@ -342,7 +421,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// </returns>
         public static PaymentMethod? TryParseFromEnumMemberValue(string? value, bool ignoreCase = false)
         {
-            return TryParseFromEnumMemberValue(value.AsSpan(), ignoreCase, throwOnFailure: false, out PaymentMethod result) ? result : null;
+            return TryParseEnumMemberValue(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (PaymentMethod?)result : null;
         }
 
         /// <summary>
@@ -359,7 +438,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
         public static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase, out PaymentMethod result)
         {
-            return TryParseFromEnumMemberValue(value, ignoreCase, throwOnFailure: false, out result);
+            Unsafe.SkipInit(out result);
+            return TryParseEnumMemberValue(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<PaymentMethod, int>(ref result));
         }
 
         /// <summary>
@@ -375,7 +455,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
         public static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, out PaymentMethod result)
         {
-            return TryParseFromEnumMemberValue(value, ignoreCase: false, throwOnFailure: false, out result);
+            Unsafe.SkipInit(out result);
+            return TryParseEnumMemberValue(value, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<PaymentMethod, int>(ref result));
         }
 
         /// <summary>
@@ -389,25 +470,103 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// </returns>
         public static PaymentMethod? TryParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase = false)
         {
-            return TryParseFromEnumMemberValue(value, ignoreCase, throwOnFailure: false, out PaymentMethod result) ? result : null;
+            return TryParseEnumMemberValue(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (PaymentMethod?)result : null;
         }
 
-        private static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase, bool throwOnFailure, out PaymentMethod result)
+        private static bool TryParseEnumMemberValue(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out int result)
         {
-            return TryParseFromEnumMemberValue(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure, out result);
+            if (!value.IsEmpty)
+            {
+                char c = value[0];
+                if (char.IsWhiteSpace(c))
+                {
+                    value = value.TrimStart();
+                    if (value.IsEmpty)
+                    {
+                        goto ParseFailure;
+                    }
+
+                    c = value[0];
+                }
+
+                if ((c < '0' || c > '9') && c != '-' && c != '+')
+                {
+                    return TryParseNonNumericEnumMemberValue(value, comparisonType, throwOnFailure, out result);
+                }
+
+                bool success = EnumNumericParser.TryParse(value, out result);
+                if (success)
+                {
+                    return true;
+                }
+
+                return TryParseNonNumericEnumMemberValue(value, comparisonType, throwOnFailure, out result);
+            }
+
+            ParseFailure:
+            if (throwOnFailure)
+            {
+                ThrowHelper.ThrowInvalidEmptyParseArgument(nameof(value));
+            }
+
+            result = 0;
+            return false;
         }
 
-        private static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out PaymentMethod result)
+        private static bool TryParseNonNumericEnumMemberValue(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out int result)
         {
-            bool success = EnumStringParser.TryParse(value, s_serializationStringParser, comparisonType, throwOnFailure, out int number);
-            if (!success)
+            bool success = TryParseSingleEnumMemberValue(value, comparisonType, out result);
+            if (success)
+            {
+                return true;
+            }
+
+            if (throwOnFailure)
+            {
+                ThrowHelper.ThrowValueNotFound(value, nameof(value));
+            }
+
+            return false;
+        }
+
+        private static bool TryParseSingleEnumMemberValue(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
+        {
+            if (value.IsEmpty)
             {
                 result = 0;
                 return false;
             }
 
-            result = (PaymentMethod)number;
-            return true;
+            switch (value[0])
+            {
+                case 'C':
+                case 'c':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Credit card", comparisonType):
+                            result = 0;
+                            return true;
+                        case { } when value.Equals("Cash", comparisonType):
+                            result = 2;
+                            return true;
+                        case { } when value.Equals("Cheque", comparisonType):
+                            result = 3;
+                            return true;
+                    }
+                    break;
+                case 'D':
+                case 'd':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Debit card", comparisonType):
+                            result = 1;
+                            return true;
+                    }
+                    break;
+            }
+
+            result = 0;
+            return false;
         }
 
         /// <summary>
@@ -429,7 +588,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out PaymentMethod result)
         {
-            return TryParseFromEnumMemberValue(value.AsSpan(), comparisonType, throwOnFailure: false, out result);
+            Unsafe.SkipInit(out result);
+            return TryParseEnumMemberValue(value.AsSpan(), comparisonType, throwOnFailure: false, out Unsafe.As<PaymentMethod, int>(ref result));
         }
 
         /// <summary>
@@ -446,71 +606,119 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         [Obsolete("Use TryParseFromEnumMemberValue overload with 'ignoreCase' parameter")]
         public static PaymentMethod? TryParseFromEnumMemberValue(string? value, StringComparison comparisonType)
         {
-            return TryParseFromEnumMemberValue(value.AsSpan(), comparisonType, throwOnFailure: false, out PaymentMethod result) ? result : null;
+            return TryParseEnumMemberValue(value.AsSpan(), comparisonType, throwOnFailure: false, out var result) ? (PaymentMethod?)result : null;
         }
 
         public static PaymentMethod CreateFromDescription(string description, StringComparison comparisonType = StringComparison.Ordinal)
         {
-            if (description is null) ThrowArgumentNullException(nameof(description));
-            TryCreateFromDescription(description.AsSpan(), comparisonType, throwOnFailure: true, out var result);
-            return result;
+            if (description is null) ThrowHelper.ThrowArgumentNullException(nameof(description));
+            TryParseDescription(description.AsSpan(), comparisonType, throwOnFailure: true, out var result);
+            return (PaymentMethod)result;
         }
 
         public static PaymentMethod CreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType = StringComparison.Ordinal)
         {
-            TryCreateFromDescription(description, comparisonType, throwOnFailure: true, out var result);
-            return result;
+            TryParseDescription(description, comparisonType, throwOnFailure: true, out var result);
+            return (PaymentMethod)result;
         }
 
         [return: NotNullIfNotNull("description")]
         public static PaymentMethod? CreateFromDescriptionOrNull(string? description, StringComparison comparisonType = StringComparison.Ordinal)
         {
             if (description is null) return null;
-            TryCreateFromDescription(description.AsSpan(), comparisonType, throwOnFailure: true, out var result);
-            return result;
+            TryParseDescription(description.AsSpan(), comparisonType, throwOnFailure: true, out var result);
+            return (PaymentMethod)result;
         }
 
         public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, StringComparison comparisonType, out PaymentMethod result)
         {
-            return TryCreateFromDescription(description.AsSpan(), comparisonType, throwOnFailure: false, out result);
+            Unsafe.SkipInit(out result);
+            return TryParseDescription(description.AsSpan(), comparisonType, throwOnFailure: false, out Unsafe.As<PaymentMethod, int>(ref result));
         }
 
         public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, out PaymentMethod result)
         {
-            return TryCreateFromDescription(description.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out result);
+            Unsafe.SkipInit(out result);
+            return TryParseDescription(description.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<PaymentMethod, int>(ref result));
         }
 
         public static PaymentMethod? TryCreateFromDescription(string? description, StringComparison comparisonType = StringComparison.Ordinal)
         {
-            return TryCreateFromDescription(description.AsSpan(), comparisonType, throwOnFailure: false, out PaymentMethod result) ? result : null;
+            return TryParseDescription(description.AsSpan(), comparisonType, throwOnFailure: false, out var result) ? (PaymentMethod?)result : null;
         }
 
         public static bool TryCreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType, out PaymentMethod result)
         {
-            return TryCreateFromDescription(description, comparisonType, throwOnFailure: false, out result);
+            Unsafe.SkipInit(out result);
+            return TryParseDescription(description, comparisonType, throwOnFailure: false, out Unsafe.As<PaymentMethod, int>(ref result));
         }
 
         public static bool TryCreateFromDescription(ReadOnlySpan<char> description, out PaymentMethod result)
         {
-            return TryCreateFromDescription(description, StringComparison.Ordinal, throwOnFailure: false, out result);
+            Unsafe.SkipInit(out result);
+            return TryParseDescription(description, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<PaymentMethod, int>(ref result));
         }
 
         public static PaymentMethod? TryCreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType = StringComparison.Ordinal)
         {
-            return TryCreateFromDescription(description, comparisonType, throwOnFailure: false, out PaymentMethod result) ? result : null;
+            return TryParseDescription(description, comparisonType, throwOnFailure: false, out var result) ? (PaymentMethod?)result : null;
         }
 
-        private static bool TryCreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType, bool throwOnFailure, out PaymentMethod result)
+        private static bool TryParseDescription(ReadOnlySpan<char> description, StringComparison comparisonType, bool throwOnFailure, out int result)
         {
-            bool success = EnumStringParser.TryParseDescription(description, s_stringParser, comparisonType, throwOnFailure, out int number);
-            if (!success)
+            if (!description.IsEmpty)
+            {
+                return TryParseNonNumericDescription(description, comparisonType, throwOnFailure, out result);
+            }
+
+            if (throwOnFailure)
+            {
+                ThrowHelper.ThrowInvalidEmptyParseArgument(nameof(description));
+            }
+
+            result = 0;
+            return false;
+        }
+
+        private static bool TryParseNonNumericDescription(ReadOnlySpan<char> description, StringComparison comparisonType, bool throwOnFailure, out int result)
+        {
+            bool success = TryParseSingleDescription(description, comparisonType, out result);
+            if (success)
+            {
+                return true;
+            }
+
+            if (throwOnFailure)
+            {
+                ThrowHelper.ThrowValueNotFound(description, nameof(description));
+            }
+
+            return false;
+        }
+
+        private static bool TryParseSingleDescription(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
+        {
+            if (value.IsEmpty)
             {
                 result = 0;
                 return false;
             }
 
-            result = (PaymentMethod)number;
-            return true;
+            switch (value[0])
+            {
+                case 'T':
+                case 't':
+                    switch (value)
+                    {
+                        case { } when value.Equals("The payment by using physical cash", comparisonType):
+                            result = 2;
+                            return true;
+                    }
+                    break;
+            }
+
+            result = 0;
+            return false;
         }
 
         public static bool TryCreateFromDisplayShortName(
@@ -604,12 +812,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 "Cash",
                 "Cheque",
             };
-        }
-
-        [DoesNotReturn]
-        private static void ThrowArgumentNullException(string paramName)
-        {
-            throw new ArgumentNullException(paramName);
         }
     }
 }

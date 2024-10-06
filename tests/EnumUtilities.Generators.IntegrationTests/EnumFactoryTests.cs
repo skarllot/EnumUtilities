@@ -34,7 +34,6 @@ public class EnumFactoryTests
     [InlineData(nameof(Categories.Arts))]
     [InlineData(nameof(Categories.Fashion))]
     [InlineData($" {nameof(Categories.Automotive)}")]
-    [InlineData($"{nameof(Categories.Electronics)}, {nameof(Categories.BeautyCare)}")]
     [InlineData($"{nameof(Categories.BeautyCare)},")]
     [InlineData($"{nameof(Categories.Arts)}, ")]
     [InlineData("15")]

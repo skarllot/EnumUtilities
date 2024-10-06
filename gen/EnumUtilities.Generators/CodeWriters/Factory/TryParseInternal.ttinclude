@@ -1,0 +1,214 @@
+﻿<#+
+    private static string GetIgnoreCaseToComparisonExpression()
+        => "ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal";
+
+    private static string GetComparisonExpression(bool ignoreCase)
+        => ignoreCase ? "StringComparison.OrdinalIgnoreCase" : "StringComparison.Ordinal";
+
+    private void WriteTryParse(
+        Func<EnumValue, string?> keySelector,
+        string type,
+        string parameterName = "value",
+        bool allowNumbers = true)
+    {
+#>
+    private static bool TryParse<#= type #>(ReadOnlySpan<char> <#= parameterName #>, StringComparison comparisonType, bool throwOnFailure, out <#= Model.UnderlyingType #> result)
+    {
+        if (!<#= parameterName #>.IsEmpty)
+        {
+<#+
+        if (allowNumbers)
+        {
+#>
+            char c = <#= parameterName #>[0];
+            if (char.IsWhiteSpace(c))
+            {
+                <#= parameterName #> = <#= parameterName #>.TrimStart();
+                if (<#= parameterName #>.IsEmpty)
+                {
+                    goto ParseFailure;
+                }
+
+                c = <#= parameterName #>[0];
+            }
+
+            if ((c < '0' || c > '9') && c != '-' && c != '+')
+            {
+                return TryParseNonNumeric<#= type #>(<#= parameterName #>, comparisonType, throwOnFailure, out result);
+            }
+
+            bool success = EnumNumericParser.TryParse(<#= parameterName #>, out result);
+            if (success)
+            {
+                return true;
+            }
+
+<#+
+        }
+#>
+            return TryParseNonNumeric<#= type #>(<#= parameterName #>, comparisonType, throwOnFailure, out result);
+        }
+
+<#+
+        if (allowNumbers)
+        {
+#>
+        ParseFailure:
+<#+
+        }
+#>
+        if (throwOnFailure)
+        {
+            ThrowHelper.ThrowInvalidEmptyParseArgument(nameof(<#= parameterName #>));
+        }
+
+        result = 0;
+        return false;
+    }
+<#+
+        WriteLine();
+        WriteTryParseNonNumeric(type, parameterName);
+        WriteLine();
+        WriteTryParseLookup(keySelector, type);
+    }
+
+    private void WriteTryParseNonNumeric(string type, string parameterName = "value")
+    {
+        if (Model.IsFlags)
+        {
+#>
+    private static bool TryParseNonNumeric<#= type #>(ReadOnlySpan<char> <#= parameterName #>, StringComparison comparisonType, bool throwOnFailure, out <#= Model.UnderlyingType #> result)
+    {
+        bool parsed = true;
+        <#= Model.UnderlyingType #> localResult = 0;
+        foreach (var item in new FlagsEnumTokenizer(<#= parameterName #>))
+        {
+            bool success = TryParseSingle<#= type #>(item, comparisonType, out <#= Model.UnderlyingType #> singleValue);
+            if (!success)
+            {
+                parsed = false;
+                break;
+            }
+
+            localResult |= singleValue;
+        }
+
+        if (parsed)
+        {
+            result = localResult;
+            return true;
+        }
+
+        if (throwOnFailure)
+        {
+            ThrowHelper.ThrowValueNotFound(<#= parameterName #>, nameof(<#= parameterName #>));
+        }
+
+        result = 0;
+        return false;
+    }
+<#+
+        }
+        else
+        {
+#>
+    private static bool TryParseNonNumeric<#= type #>(ReadOnlySpan<char> <#= parameterName #>, StringComparison comparisonType, bool throwOnFailure, out <#= Model.UnderlyingType #> result)
+    {
+        bool success = TryParseSingle<#= type #>(<#= parameterName #>, comparisonType, out result);
+        if (success)
+        {
+            return true;
+        }
+
+        if (throwOnFailure)
+        {
+            ThrowHelper.ThrowValueNotFound(<#= parameterName #>, nameof(<#= parameterName #>));
+        }
+
+        return false;
+    }
+<#+
+        }
+    }
+
+    private void WriteTryParseLookup(
+        Func<EnumValue, string?> keySelector,
+        string type)
+    {
+#>
+    private static bool TryParseSingle<#= type #>(ReadOnlySpan<char> value, StringComparison comparisonType, out <#= Model.UnderlyingType #> result)
+    {
+        if (value.IsEmpty)
+        {
+<#+
+        var binEmptyValue = Model.Values.FirstOrDefault(x => keySelector(x)?.Length == 0);
+        if (binEmptyValue != null)
+        {
+#>
+            result = <#= binEmptyValue.MemberValue #>;
+            return true;
+<#+
+        }
+        else
+        {
+#>
+            result = 0;
+            return false;
+<#+
+        }
+#>
+        }
+
+<#+
+        var lookupTable = Model.Values.Where(x => keySelector(x)?.Length > 0).ToLookup(x => keySelector(x)![0]);
+#>
+        switch (value[0])
+        {
+<#+
+        foreach (var curr in lookupTable.OrderBy(x => x.Key))
+        {
+            if (char.IsSurrogate(curr.Key) || char.IsControl(curr.Key))
+            {
+#>
+            case '\u<#= ((int)curr.Key).ToString("x4") #>':
+<#+
+            }
+            else if (char.ToUpperInvariant(curr.Key) == curr.Key && char.ToLowerInvariant(curr.Key) == curr.Key)
+            {
+#>
+            case '<#= curr.Key #>':
+<#+
+            }
+            else
+            {
+#>
+            case '<#= char.ToUpperInvariant(curr.Key) #>':
+            case '<#= char.ToLowerInvariant(curr.Key) #>':
+<#+
+            }
+#>
+                switch (value)
+                {
+<#+
+            foreach (var enumValue in curr)
+            {
+#>
+                    case { } when value.Equals("<#= keySelector(enumValue) #>", comparisonType):
+                        result = <#= enumValue.MemberValue #>;
+                        return true;
+<#+
+            }
+#>
+                }
+                break;
+<#+
+        }
+#>
+        }
+
+        result = 0;
+        return false;
+    }
+<#+
+    }
+#>

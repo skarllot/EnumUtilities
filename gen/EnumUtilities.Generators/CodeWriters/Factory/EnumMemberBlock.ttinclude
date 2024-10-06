@@ -15,9 +15,9 @@
     /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
     public static <#= Model.RefName #> ParseFromEnumMemberValue(string value, bool ignoreCase = false)
     {
-        if (value is null) ThrowArgumentNullException(nameof(value));
-        TryParseFromEnumMemberValue(value.AsSpan(), ignoreCase, throwOnFailure: true, out var result);
-        return result;
+        if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
+        TryParseEnumMemberValue(value.AsSpan(), <#= GetIgnoreCaseToComparisonExpression() #>, throwOnFailure: true, out var result);
+        return (<#= Model.RefName #>)result;
     }
 
     /// <summary>
@@ -29,8 +29,8 @@
     /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
     public static <#= Model.RefName #> ParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase = false)
     {
-        TryParseFromEnumMemberValue(value, ignoreCase, throwOnFailure: true, out var result);
-        return result;
+        TryParseEnumMemberValue(value, <#= GetIgnoreCaseToComparisonExpression() #>, throwOnFailure: true, out var result);
+        return (<#= Model.RefName #>)result;
     }
 
     /// <summary>
@@ -44,8 +44,8 @@
     public static <#= Model.RefName #>? ParseFromEnumMemberValueOrNull(string? value, bool ignoreCase = false)
     {
         if (value is null) return null;
-        TryParseFromEnumMemberValue(value.AsSpan(), ignoreCase, throwOnFailure: true, out var result);
-        return result;
+        TryParseEnumMemberValue(value.AsSpan(), <#= GetIgnoreCaseToComparisonExpression() #>, throwOnFailure: true, out var result);
+        return (<#= Model.RefName #>)result;
     }
 
     /// <summary>
@@ -62,7 +62,8 @@
     /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
     public static bool TryParseFromEnumMemberValue([NotNullWhen(true)] string? value, bool ignoreCase, out <#= Model.RefName #> result)
     {
-        return TryParseFromEnumMemberValue(value.AsSpan(), ignoreCase, throwOnFailure: false, out result);
+        Unsafe.SkipInit(out result);
+        return TryParseEnumMemberValue(value.AsSpan(), <#= GetIgnoreCaseToComparisonExpression() #>, throwOnFailure: false, out Unsafe.As<<#= Model.RefName #>, <#= Model.UnderlyingType #>>(ref result));
     }
 
     /// <summary>
@@ -78,7 +79,8 @@
     /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
     public static bool TryParseFromEnumMemberValue([NotNullWhen(true)] string? value, out <#= Model.RefName #> result)
     {
-        return TryParseFromEnumMemberValue(value.AsSpan(), ignoreCase: false, throwOnFailure: false, out result);
+        Unsafe.SkipInit(out result);
+        return TryParseEnumMemberValue(value.AsSpan(), <#= GetComparisonExpression(false) #>, throwOnFailure: false, out Unsafe.As<<#= Model.RefName #>, <#= Model.UnderlyingType #>>(ref result));
     }
 
     /// <summary>
@@ -92,7 +94,7 @@
     /// </returns>
     public static <#= Model.RefName #>? TryParseFromEnumMemberValue(string? value, bool ignoreCase = false)
     {
-        return TryParseFromEnumMemberValue(value.AsSpan(), ignoreCase, throwOnFailure: false, out <#= Model.RefName #> result) ? result : null;
+        return TryParseEnumMemberValue(value.AsSpan(), <#= GetIgnoreCaseToComparisonExpression() #>, throwOnFailure: false, out var result) ? (<#= Model.RefName #>?)result : null;
     }
 
     /// <summary>
@@ -109,7 +111,8 @@
     /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
     public static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase, out <#= Model.RefName #> result)
     {
-        return TryParseFromEnumMemberValue(value, ignoreCase, throwOnFailure: false, out result);
+        Unsafe.SkipInit(out result);
+        return TryParseEnumMemberValue(value, <#= GetIgnoreCaseToComparisonExpression() #>, throwOnFailure: false, out Unsafe.As<<#= Model.RefName #>, <#= Model.UnderlyingType #>>(ref result));
     }
 
     /// <summary>
@@ -125,7 +128,8 @@
     /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
     public static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, out <#= Model.RefName #> result)
     {
-        return TryParseFromEnumMemberValue(value, ignoreCase: false, throwOnFailure: false, out result);
+        Unsafe.SkipInit(out result);
+        return TryParseEnumMemberValue(value, <#= GetComparisonExpression(false) #>, throwOnFailure: false, out Unsafe.As<<#= Model.RefName #>, <#= Model.UnderlyingType #>>(ref result));
     }
 
     /// <summary>
@@ -139,26 +143,12 @@
     /// </returns>
     public static <#= Model.RefName #>? TryParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase = false)
     {
-        return TryParseFromEnumMemberValue(value, ignoreCase, throwOnFailure: false, out <#= Model.RefName #> result) ? result : null;
+        return TryParseEnumMemberValue(value, <#= GetIgnoreCaseToComparisonExpression() #>, throwOnFailure: false, out var result) ? (<#= Model.RefName #>?)result : null;
     }
 
-    private static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase, bool throwOnFailure, out <#= Model.RefName #> result)
-    {
-        return TryParseFromEnumMemberValue(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure, out result);
-    }
-
-    private static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out <#= Model.RefName #> result)
-    {
-        bool success = EnumStringParser.TryParse(value, s_serializationStringParser, comparisonType, throwOnFailure, out <#= Model.UnderlyingType #> number);
-        if (!success)
-        {
-            result = 0;
-            return false;
-        }
-
-        result = (<#= Model.RefName #>)number;
-        return true;
-    }
+<#+
+        WriteTryParse(x => x.ResolvedSerializedValue, "EnumMemberValue");
+#>
 
     /// <summary>
     /// Converts the string representation of the serialized value to an equivalent enumerated object.
@@ -179,7 +169,8 @@
         StringComparison comparisonType,
         out <#= Model.RefName #> result)
     {
-        return TryParseFromEnumMemberValue(value.AsSpan(), comparisonType, throwOnFailure: false, out result);
+        Unsafe.SkipInit(out result);
+        return TryParseEnumMemberValue(value.AsSpan(), comparisonType, throwOnFailure: false, out Unsafe.As<<#= Model.RefName #>, <#= Model.UnderlyingType #>>(ref result));
     }
 
     /// <summary>
@@ -196,7 +187,7 @@
     [Obsolete("Use TryParseFromEnumMemberValue overload with 'ignoreCase' parameter")]
     public static <#= Model.RefName #>? TryParseFromEnumMemberValue(string? value, StringComparison comparisonType)
     {
-        return TryParseFromEnumMemberValue(value.AsSpan(), comparisonType, throwOnFailure: false, out <#= Model.RefName #> result) ? result : null;
+        return TryParseEnumMemberValue(value.AsSpan(), comparisonType, throwOnFailure: false, out var result) ? (<#= Model.RefName #>?)result : null;
     }
 <#+
     }

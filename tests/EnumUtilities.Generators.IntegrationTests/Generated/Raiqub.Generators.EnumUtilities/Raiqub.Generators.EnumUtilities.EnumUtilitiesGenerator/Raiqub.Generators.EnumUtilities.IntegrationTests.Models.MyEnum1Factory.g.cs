@@ -12,11 +12,9 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.9.0.0")]
     internal static partial class MyEnum1Factory
     {
-        private static readonly MyEnum1Metadata.StringParser s_stringParser = MyEnum1Metadata.StringParser.Instance;
-
         /// <summary>
         /// Converts the string representation of the name or numeric value of one or more enumerated constants to
         /// an equivalent enumerated object.
@@ -28,9 +26,9 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
         public static NestedInClass.MyEnum1 Parse(string value, bool ignoreCase = false)
         {
-            if (value is null) ThrowArgumentNullException(nameof(value));
-            TryParse(value.AsSpan(), ignoreCase, throwOnFailure: true, out var result);
-            return result;
+            if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
+            TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
+            return (NestedInClass.MyEnum1)result;
         }
 
         /// <summary>
@@ -43,8 +41,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
         public static NestedInClass.MyEnum1 Parse(ReadOnlySpan<char> value, bool ignoreCase = false)
         {
-            TryParse(value, ignoreCase, throwOnFailure: true, out var result);
-            return result;
+            TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
+            return (NestedInClass.MyEnum1)result;
         }
 
         /// <summary>
@@ -59,8 +57,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         public static NestedInClass.MyEnum1? ParseOrNull(string? value, bool ignoreCase = false)
         {
             if (value is null) return null;
-            TryParse(value.AsSpan(), ignoreCase, throwOnFailure: true, out var result);
-            return result;
+            TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
+            return (NestedInClass.MyEnum1)result;
         }
 
         /// <summary>
@@ -77,7 +75,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
         public static bool TryParse([NotNullWhen(true)] string? value, bool ignoreCase, out NestedInClass.MyEnum1 result)
         {
-            return TryParse(value.AsSpan(), ignoreCase, throwOnFailure: false, out result);
+            Unsafe.SkipInit(out result);
+            return TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<NestedInClass.MyEnum1, int>(ref result));
         }
 
         /// <summary>
@@ -93,7 +92,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
         public static bool TryParse([NotNullWhen(true)] string? value, out NestedInClass.MyEnum1 result)
         {
-            return TryParse(value.AsSpan(), ignoreCase: false, throwOnFailure: false, out result);
+            Unsafe.SkipInit(out result);
+            return TryParseName(value.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<NestedInClass.MyEnum1, int>(ref result));
         }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// </returns>
         public static NestedInClass.MyEnum1? TryParse(string? value, bool ignoreCase = false)
         {
-            return TryParse(value.AsSpan(), ignoreCase, throwOnFailure: false, out NestedInClass.MyEnum1 result) ? result : null;
+            return TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (NestedInClass.MyEnum1?)result : null;
         }
 
         /// <summary>
@@ -125,7 +125,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
         public static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, out NestedInClass.MyEnum1 result)
         {
-            return TryParse(value, ignoreCase, throwOnFailure: false, out result);
+            Unsafe.SkipInit(out result);
+            return TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<NestedInClass.MyEnum1, int>(ref result));
         }
 
         /// <summary>
@@ -141,7 +142,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
         public static bool TryParse(ReadOnlySpan<char> value, out NestedInClass.MyEnum1 result)
         {
-            return TryParse(value, ignoreCase: false, throwOnFailure: false, out result);
+            Unsafe.SkipInit(out result);
+            return TryParseName(value, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<NestedInClass.MyEnum1, int>(ref result));
         }
 
         /// <summary>
@@ -156,21 +158,106 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// </returns>
         public static NestedInClass.MyEnum1? TryParse(ReadOnlySpan<char> value, bool ignoreCase = false)
         {
-            return TryParse(value, ignoreCase, throwOnFailure: false, out NestedInClass.MyEnum1 result) ? result : null;
+            return TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (NestedInClass.MyEnum1?)result : null;
         }
 
-        private static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, bool throwOnFailure, out NestedInClass.MyEnum1 result)
+        private static bool TryParseName(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out int result)
         {
-            var comparisonType = ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
-            bool success = EnumStringParser.TryParse(value, s_stringParser, comparisonType, throwOnFailure, out int number);
-            if (!success)
+            if (!value.IsEmpty)
+            {
+                char c = value[0];
+                if (char.IsWhiteSpace(c))
+                {
+                    value = value.TrimStart();
+                    if (value.IsEmpty)
+                    {
+                        goto ParseFailure;
+                    }
+
+                    c = value[0];
+                }
+
+                if ((c < '0' || c > '9') && c != '-' && c != '+')
+                {
+                    return TryParseNonNumericName(value, comparisonType, throwOnFailure, out result);
+                }
+
+                bool success = EnumNumericParser.TryParse(value, out result);
+                if (success)
+                {
+                    return true;
+                }
+
+                return TryParseNonNumericName(value, comparisonType, throwOnFailure, out result);
+            }
+
+            ParseFailure:
+            if (throwOnFailure)
+            {
+                ThrowHelper.ThrowInvalidEmptyParseArgument(nameof(value));
+            }
+
+            result = 0;
+            return false;
+        }
+
+        private static bool TryParseNonNumericName(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out int result)
+        {
+            bool success = TryParseSingleName(value, comparisonType, out result);
+            if (success)
+            {
+                return true;
+            }
+
+            if (throwOnFailure)
+            {
+                ThrowHelper.ThrowValueNotFound(value, nameof(value));
+            }
+
+            return false;
+        }
+
+        private static bool TryParseSingleName(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
+        {
+            if (value.IsEmpty)
             {
                 result = 0;
                 return false;
             }
 
-            result = (NestedInClass.MyEnum1)number;
-            return true;
+            switch (value[0])
+            {
+                case 'O':
+                case 'o':
+                    switch (value)
+                    {
+                        case { } when value.Equals("One", comparisonType):
+                            result = 1;
+                            return true;
+                    }
+                    break;
+                case 'T':
+                case 't':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Two", comparisonType):
+                            result = 2;
+                            return true;
+                    }
+                    break;
+                case 'Z':
+                case 'z':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Zero", comparisonType):
+                            result = 0;
+                            return true;
+                    }
+                    break;
+            }
+
+            result = 0;
+            return false;
         }
 
         /// <summary>
@@ -192,15 +279,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             StringComparison comparisonType,
             out NestedInClass.MyEnum1 result)
         {
-            bool success = EnumStringParser.TryParse(name, s_stringParser, comparisonType, throwOnFailure: false, out int number);
-            if (!success)
-            {
-                result = 0;
-                return false;
-            }
-
-            result = (NestedInClass.MyEnum1)number;
-            return true;
+            Unsafe.SkipInit(out result);
+            return TryParseName(name.AsSpan(), comparisonType, throwOnFailure: false, out Unsafe.As<NestedInClass.MyEnum1, int>(ref result));
         }
 
         /// <summary>
@@ -219,7 +299,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             [NotNullWhen(true)] string? name,
             out NestedInClass.MyEnum1 result)
         {
-            return TryParse(name.AsSpan(), ignoreCase: true, out result);
+            Unsafe.SkipInit(out result);
+            return TryParseName(name.AsSpan(), StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out Unsafe.As<NestedInClass.MyEnum1, int>(ref result));
         }
 
         /// <summary>
@@ -234,7 +315,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
         public static NestedInClass.MyEnum1? TryParseIgnoreCase(string? name)
         {
-            return TryParse(name.AsSpan(), ignoreCase: true, out NestedInClass.MyEnum1 result) ? result : null;
+            return TryParseName(name.AsSpan(), StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out var result) ? (NestedInClass.MyEnum1?)result : null;
         }
 
         /// <summary>
@@ -251,7 +332,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
         public static NestedInClass.MyEnum1? TryParse(string? name, StringComparison comparisonType)
         {
-            return TryParse(name, comparisonType, out NestedInClass.MyEnum1 result) ? result : null;
+            return TryParseName(name.AsSpan(), comparisonType, throwOnFailure: false, out var result) ? (NestedInClass.MyEnum1?)result : null;
         }
 
         /// <summary>Retrieves an array of the values of the constants in the MyEnum1 enumeration.</summary>
@@ -276,12 +357,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 "One",
                 "Two",
             };
-        }
-
-        [DoesNotReturn]
-        private static void ThrowArgumentNullException(string paramName)
-        {
-            throw new ArgumentNullException(paramName);
         }
     }
 }

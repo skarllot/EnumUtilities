@@ -10,14 +10,15 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
+    /// <summary>Provides metadata for <see cref="Colours" /> enumeration.</summary>
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.9.0.0")]
     public static partial class ColoursMetadata
     {
         /// <summary>Provides constant values for <see cref="Colours" /> members names.</summary>
         public static partial class Name
         {
-            /// <summary>Represents the largest possible number of characters produced by converting an <see cref="Colours" /> value to string, based on defined members. This field is constant.</summary>
+            /// <summary>Represents the largest possible number of characters produced by converting a <see cref="Colours" /> value to string, based on defined members.</summary>
             public const int MaxCharsLength = 5;
 
             /// <summary>The string representation of <see cref="Colours.Red" /> name.</summary>
@@ -33,7 +34,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <summary>Provides static values for <see cref="Colours" /> UTF-8 encoded members names.</summary>
         public static partial class Utf8Name
         {
-            /// <summary>Represents the largest possible number of bytes produced by converting an <see cref="Colours" /> value to UTF-8 string, based on defined members. This field is constant.</summary>
+            /// <summary>Represents the largest possible number of bytes produced by converting a <see cref="Colours" /> value to UTF-8 string, based on defined members.</summary>
             public const int MaxBytesLength = 5;
 
             /// <summary>The UTF-8 representation of <see cref="Colours.Red" /> name.</summary>
@@ -44,170 +45,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
             /// <summary>The UTF-8 representation of <see cref="Colours.Green" /> name.</summary>
             public static ReadOnlySpan<byte> Green => new byte[5] { 71, 114, 101, 101, 110 };
-        }
-
-        /// <summary>Provides support for formatting <see cref="Colours"/> values.</summary>
-        internal sealed partial class StringFormatter : IEnumFlagsFormatter<int>
-        {
-            /// <summary>Gets the singleton instance of the <see cref="StringFormatter"/> class.</summary>
-            public static StringFormatter Instance = new StringFormatter();
-
-            /// <inheritdoc />
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public int GetStringLengthForNumber(int value) => EnumNumericFormatter.GetStringLength(value);
-
-            /// <inheritdoc />
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public string GetStringForNumber(int value) => value.ToString();
-
-            /// <inheritdoc />
-            public int? TryGetStringLengthForMember(int value)
-            {
-                if (value == 0)
-                {
-                    return 1;
-                }
-
-                int count = 0, foundItemsCount = 0;
-                if ((value & 4) == 4)
-                {
-                    value -= 4;
-                    count = checked(count + 5);
-                    foundItemsCount++;
-                }
-                if ((value & 2) == 2)
-                {
-                    value -= 2;
-                    count = checked(count + 4);
-                    foundItemsCount++;
-                }
-                if ((value & 1) == 1)
-                {
-                    value -= 1;
-                    count = checked(count + 3);
-                    foundItemsCount++;
-                }
-
-                if (value != 0)
-                {
-                    return null;
-                }
-
-                const int separatorStringLength = 2;
-                return checked(count + (separatorStringLength * (foundItemsCount - 1)));
-            }
-
-            /// <inheritdoc />
-            public string? TryGetStringForMember(int value)
-            {
-                if (value == 0)
-                {
-                    return "0";
-                }
-
-                Span<int> foundItems = stackalloc int[3];
-                int count = 0, foundItemsCount = 0;
-                if ((value & 4) == 4)
-                {
-                    value -= 4;
-                    count = checked(count + 5);
-                    foundItems[foundItemsCount++] = 4;
-                }
-                if ((value & 2) == 2)
-                {
-                    value -= 2;
-                    count = checked(count + 4);
-                    foundItems[foundItemsCount++] = 2;
-                }
-                if ((value & 1) == 1)
-                {
-                    value -= 1;
-                    count = checked(count + 3);
-                    foundItems[foundItemsCount++] = 1;
-                }
-
-                if (value != 0)
-                {
-                    return null;
-                }
-
-                if (foundItemsCount == 1)
-                {
-                    return GetStringForSingleMember(foundItems[0]);
-                }
-
-                return EnumStringFormatter.WriteMultipleFoundFlagsNames(this, count, foundItemsCount, foundItems);
-            }
-
-            public string GetStringForSingleMember(int value)
-            {
-                return value switch
-                {
-                    1 => "Red",
-                    2 => "Blue",
-                    4 => "Green",
-                    _ => throw new ArgumentOutOfRangeException()
-                };
-            }
-        }
-
-        /// <summary>Provides support for parsing <see cref="Colours"/> values.</summary>
-        internal sealed partial class StringParser
-            : IEnumParser<int>
-        {
-            /// <summary>Gets the singleton instance of the <see cref="StringParser"/> class.</summary>
-            public static StringParser Instance = new StringParser();
-
-            /// <inheritdoc />
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public int BitwiseOr(int value1, int value2) => unchecked((int)(value1 | value2));
-
-            /// <inheritdoc />
-            public bool TryParseNumber(ReadOnlySpan<char> value, out int result) => EnumNumericParser.TryParse(value, out result);
-
-            /// <inheritdoc />
-            public bool TryParseSingleName(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
-            {
-                if (value.IsEmpty)
-                {
-                    result = 0;
-                    return false;
-                }
-
-                switch (value[0])
-                {
-                    case 'R':
-                    case 'r':
-                        switch (value)
-                        {
-                            case { } when value.Equals("Red", comparisonType):
-                                result = 1;
-                                return true;
-                        }
-                        goto default;
-                    case 'B':
-                    case 'b':
-                        switch (value)
-                        {
-                            case { } when value.Equals("Blue", comparisonType):
-                                result = 2;
-                                return true;
-                        }
-                        goto default;
-                    case 'G':
-                    case 'g':
-                        switch (value)
-                        {
-                            case { } when value.Equals("Green", comparisonType):
-                                result = 4;
-                                return true;
-                        }
-                        goto default;
-                    default:
-                        result = 0;
-                        return false;
-                }
-            }
         }
     }
 }

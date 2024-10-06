@@ -1,7 +1,7 @@
 ﻿<#+
     private void WriteInterlockedBlock()
     {
-        string? underlyingType = GetInterlockedUnderlyingType();
+        string? underlyingType = Model.InterlockedUnderlyingType;
         if (underlyingType is null)
             return;
 
@@ -112,18 +112,4 @@
 <#+
         }
     }
-
-    private string? GetInterlockedUnderlyingType()
-    {
-        return Model.UnderlyingType switch
-        {
-            "int" => "int",
-            "long" => "long",
-            "uint" => "int",
-            "ulong" => "long",
-            _ => null
-            };
-    }
-
-    private bool IsInterlockedSupported() => GetInterlockedUnderlyingType() != null;
 #>

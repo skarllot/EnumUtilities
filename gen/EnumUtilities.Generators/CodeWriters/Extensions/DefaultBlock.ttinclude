@@ -6,7 +6,8 @@
     /// <returns>The string representation of the value of this instance.</returns>
     public static string ToStringFast(this <#= Model.RefName #> value)
     {
-        return EnumStringFormatter.GetString((<#= Model.UnderlyingType #>)value, s_stringFormatter);
+        return <#= Model.IsFlags ? "FormatFlagNames" : "GetNameInlined" #>((<#= Model.UnderlyingType #>)value)
+            ?? ((<#= Model.UnderlyingType #>)value).ToString();
     }
 <#+
         if (Model.IsFlags)
@@ -16,6 +17,7 @@
     /// <summary>Determines whether one or more bit fields are set in the current instance.</summary>
     /// <param name="flag">An enumeration value.</param>
     /// <returns><see langword="true"/> if the bit field or bit fields that are set in flag are also set in the current instance; otherwise, <see langword="false"/>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool HasFlagFast(this <#= Model.RefName #> value, <#= Model.RefName #> flag)
     {
         return (value & flag) == flag;
@@ -29,15 +31,29 @@
     /// <returns>The number of characters produced by converting the specified value to string.</returns>
     public static int GetStringLength(this <#= Model.RefName #> value)
     {
-        return EnumStringFormatter.GetStringLength((<#= Model.UnderlyingType #>)value, s_stringFormatter);
+        return <#= Model.IsFlags ? "FormatFlagNamesLength" : "GetNameLengthInlined" #>((<#= Model.UnderlyingType #>)value)
+            ?? EnumNumericFormatter.GetStringLength((<#= Model.UnderlyingType #>)value);
     }
 
     /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
     /// <returns><c>true</c> if the value of this instance exists in the enumeration; <c>false</c> otherwise.</returns>
     public static bool IsDefined(this <#= Model.RefName #> value)
     {
-        return <#= Model.Name #>Validation.IsDefined(value);
-    }
+        return (<#= Model.UnderlyingType #>)value switch
+        {
 <#+
+        foreach (var curr in Model.UniqueValues)
+        {
+#>
+            <#= curr.MemberValue #> => true,
+<#+
+        }
+#>
+            _ => false
+        };
+    }
+
+<#+
+        WriteFormatString(x => x.MemberName, "Name");
     }
 #>

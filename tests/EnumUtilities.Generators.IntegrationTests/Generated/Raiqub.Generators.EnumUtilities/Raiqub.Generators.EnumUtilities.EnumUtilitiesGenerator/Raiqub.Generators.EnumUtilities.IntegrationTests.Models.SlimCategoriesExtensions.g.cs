@@ -10,16 +10,15 @@ using Raiqub.Generators.EnumUtilities.Formatters;
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.9.0.0")]
     public static partial class SlimCategoriesExtensions
     {
-        private static readonly SlimCategoriesMetadata.StringFormatter s_stringFormatter = SlimCategoriesMetadata.StringFormatter.Instance;
-
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
         /// <returns>The string representation of the value of this instance.</returns>
         public static string ToStringFast(this SlimCategories value)
         {
-            return EnumStringFormatter.GetString((byte)value, s_stringFormatter);
+            return GetNameInlined((byte)value)
+                ?? ((byte)value).ToString();
         }
 
         /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
@@ -27,14 +26,52 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns>The number of characters produced by converting the specified value to string.</returns>
         public static int GetStringLength(this SlimCategories value)
         {
-            return EnumStringFormatter.GetStringLength((byte)value, s_stringFormatter);
+            return GetNameLengthInlined((byte)value)
+                ?? EnumNumericFormatter.GetStringLength((byte)value);
         }
 
         /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
         /// <returns><c>true</c> if the value of this instance exists in the enumeration; <c>false</c> otherwise.</returns>
         public static bool IsDefined(this SlimCategories value)
         {
-            return SlimCategoriesValidation.IsDefined(value);
+            return (byte)value switch
+            {
+                0 => true,
+                1 => true,
+                2 => true,
+                3 => true,
+                4 => true,
+                5 => true,
+                _ => false
+            };
+        }
+
+        private static int? GetNameLengthInlined(byte value)
+        {
+            return value switch
+            {
+                0 => 11,
+                1 => 4,
+                2 => 10,
+                3 => 4,
+                4 => 10,
+                5 => 7,
+                _ => null
+            };
+        }
+
+        private static string? GetNameInlined(byte value)
+        {
+            return value switch
+            {
+                0 => "Electronics",
+                1 => "Food",
+                2 => "Automotive",
+                3 => "Arts",
+                4 => "BeautyCare",
+                5 => "Fashion",
+                _ => null
+            };
         }
     }
 }
