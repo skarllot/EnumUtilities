@@ -742,7 +742,7 @@ this.Write(" result)\r\n    {\r\n        if (value.IsEmpty)\r\n        {\r\n");
         #line hidden
         
         #line 148 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\TryParseInternal.ttinclude"
-this.Write("                result = ");
+this.Write("            result = ");
 
         
         #line default
@@ -756,7 +756,7 @@ this.Write(this.ToStringHelper.ToStringWithCulture(binEmptyValue.MemberValue));
         #line hidden
         
         #line 148 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\TryParseInternal.ttinclude"
-this.Write(";\r\n                return true;\r\n");
+this.Write(";\r\n            return true;\r\n");
 
         
         #line default
@@ -773,7 +773,7 @@ this.Write(";\r\n                return true;\r\n");
         #line hidden
         
         #line 155 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\TryParseInternal.ttinclude"
-this.Write("                result = 0;\r\n                return false;\r\n");
+this.Write("            result = 0;\r\n            return false;\r\n");
 
         
         #line default

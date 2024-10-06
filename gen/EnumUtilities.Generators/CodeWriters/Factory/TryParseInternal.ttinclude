@@ -145,15 +145,15 @@
         if (binEmptyValue != null)
         {
 #>
-                result = <#= binEmptyValue.MemberValue #>;
-                return true;
+            result = <#= binEmptyValue.MemberValue #>;
+            return true;
 <#+
         }
         else
         {
 #>
-                result = 0;
-                return false;
+            result = 0;
+            return false;
 <#+
         }
 #>

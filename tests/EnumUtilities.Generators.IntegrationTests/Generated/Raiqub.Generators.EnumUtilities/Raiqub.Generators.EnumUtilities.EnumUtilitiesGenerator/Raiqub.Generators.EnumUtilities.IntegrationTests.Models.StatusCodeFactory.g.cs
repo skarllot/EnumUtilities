@@ -12,7 +12,7 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.9.0.0")]
     public static partial class StatusCodeFactory
     {
         /// <summary>
@@ -221,8 +221,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             if (value.IsEmpty)
             {
-                    result = 0;
-                    return false;
+                result = 0;
+                return false;
             }
 
             switch (value[0])
@@ -596,8 +596,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         {
             if (value.IsEmpty)
             {
-                    result = 0;
-                    return false;
+                result = 0;
+                return false;
             }
 
             switch (value[0])
