@@ -14,14 +14,12 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.8.0.0")]
     public static partial class StatusCodeExtensions
     {
-        private static readonly StatusCodeMetadata.StringFormatter s_stringFormatter = StatusCodeMetadata.StringFormatter.Instance;
-        private static readonly StatusCodeMetadata.SerializationStringFormatter s_serializationStringFormatter = StatusCodeMetadata.SerializationStringFormatter.Instance;
-
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
         /// <returns>The string representation of the value of this instance.</returns>
         public static string ToStringFast(this StatusCode value)
         {
-            return EnumStringFormatter.GetString((int)value, s_stringFormatter);
+            return GetNameInlined((int)value)
+                ?? ((int)value).ToString();
         }
 
         /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
@@ -29,14 +27,67 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
         /// <returns>The number of characters produced by converting the specified value to string.</returns>
         public static int GetStringLength(this StatusCode value)
         {
-            return EnumStringFormatter.GetStringLength((int)value, s_stringFormatter);
+            return GetNameLengthInlined((int)value)
+                ?? EnumNumericFormatter.GetStringLength((int)value);
         }
 
         /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
         /// <returns><c>true</c> if the value of this instance exists in the enumeration; <c>false</c> otherwise.</returns>
         public static bool IsDefined(this StatusCode value)
         {
-            return StatusCodeValidation.IsDefined(value);
+            return (int)value switch
+            {
+                -1 => true,
+                0 => true,
+                -2 => true,
+                -3 => true,
+                -4 => true,
+                -5 => true,
+                -6 => true,
+                -7 => true,
+                -8 => true,
+                -9 => true,
+                -10 => true,
+                _ => false
+            };
+        }
+
+        private static int? GetNameLengthInlined(int value)
+        {
+            return value switch
+            {
+                -1 => 7,
+                0 => 7,
+                -2 => 5,
+                -3 => 8,
+                -4 => 7,
+                -5 => 12,
+                -6 => 9,
+                -7 => 8,
+                -8 => 4,
+                -9 => 14,
+                -10 => 11,
+                _ => null
+            };
+        }
+
+        private static string? GetNameInlined(int value)
+        {
+            return value switch
+            {
+                -1 => "Unknown",
+                0 => "Success",
+                -2 => "Error",
+                -3 => "NotFound",
+                -4 => "Timeout",
+                -5 => "Unauthorized",
+                -6 => "Forbidden",
+                -7 => "Conflict",
+                -8 => "Gone",
+                -9 => "InvalidRequest",
+                -10 => "ServerError",
+                _ => null
+            };
         }
 
         /// <summary>Adds two enumerations and replaces the first integer with the sum, as an atomic operation.</summary>
@@ -95,12 +146,52 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
         public static string ToEnumMemberValue(this StatusCode value)
         {
-            return EnumStringFormatter.GetString((int)value, s_serializationStringFormatter);
+            return GetEnumMemberValueInlined((int)value)
+                ?? ((int)value).ToString();
         }
 
         public static int GetEnumMemberValueStringLength(this StatusCode value)
         {
-            return EnumStringFormatter.GetStringLength((int)value, s_serializationStringFormatter);
+            return GetEnumMemberValueLengthInlined((int)value)
+                ?? EnumNumericFormatter.GetStringLength((int)value);
+        }
+
+        private static int? GetEnumMemberValueLengthInlined(int value)
+        {
+            return value switch
+            {
+                -1 => 7,
+                0 => 7,
+                -2 => 5,
+                -3 => 9,
+                -4 => 7,
+                -5 => 12,
+                -6 => 9,
+                -7 => 8,
+                -8 => 4,
+                -9 => 14,
+                -10 => 11,
+                _ => null
+            };
+        }
+
+        private static string? GetEnumMemberValueInlined(int value)
+        {
+            return value switch
+            {
+                -1 => "Unknown",
+                0 => "Success",
+                -2 => "Error",
+                -3 => "Not Found",
+                -4 => "Timeout",
+                -5 => "Unauthorized",
+                -6 => "Forbidden",
+                -7 => "Conflict",
+                -8 => "Gone",
+                -9 => "InvalidRequest",
+                -10 => "ServerError",
+                _ => null
+            };
         }
 
         public static string GetDisplayShortName(this StatusCode value)
