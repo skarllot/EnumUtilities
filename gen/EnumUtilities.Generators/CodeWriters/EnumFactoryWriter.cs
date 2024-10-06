@@ -828,7 +828,7 @@ this.Write("            case '\\u");
         #line hidden
         
         #line 173 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators\CodeWriters\Factory\TryParseInternal.ttinclude"
-this.Write(this.ToStringHelper.ToStringWithCulture(((int)curr.Key).ToString("x")));
+this.Write(this.ToStringHelper.ToStringWithCulture(((int)curr.Key).ToString("x4")));
 
         
         #line default

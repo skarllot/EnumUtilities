@@ -170,7 +170,7 @@
             if (char.IsSurrogate(curr.Key) || char.IsControl(curr.Key))
             {
 #>
-            case '\u<#= ((int)curr.Key).ToString("x") #>':
+            case '\u<#= ((int)curr.Key).ToString("x4") #>':
 <#+
             }
             else if (char.ToUpperInvariant(curr.Key) == curr.Key && char.ToLowerInvariant(curr.Key) == curr.Key)
