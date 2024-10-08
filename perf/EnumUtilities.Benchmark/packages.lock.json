@@ -34,9 +34,13 @@
       },
       "FastEnum": {
         "type": "Direct",
-        "requested": "[1.8.0, )",
-        "resolved": "1.8.0",
-        "contentHash": "cBVeGWLPPHyrVcJKpANXtw0CbVyb1Ltr7Lqc/HE/WktAgxKpVD3mFMbLT4IAa5cuM5oKv2zPt6ovT7AhZf4zsg=="
+        "requested": "[2.0.1, )",
+        "resolved": "2.0.1",
+        "contentHash": "qvIKReTDikp8DJehkw1iRA4bKKEZyNM1bt/nWuUIa2nuWuNARJplgNkVE/HS+Eg0GXQyYPoVgOivUDX+5K/heg==",
+        "dependencies": {
+          "FastEnum.Core": "2.0.1",
+          "FastEnum.Generators": "2.0.1"
+        }
       },
       "Nerdbank.GitVersioning": {
         "type": "Direct",
@@ -59,6 +63,16 @@
         "type": "Transitive",
         "resolved": "2.9.1",
         "contentHash": "OE0sl1/sQ37bjVsPKKtwQlWDgqaxWgtme3xZz7JssWUzg5JpMIyHgCTY9MVMxOg48fJ1AgGT3tgdH5m/kQ5xhA=="
+      },
+      "FastEnum.Core": {
+        "type": "Transitive",
+        "resolved": "2.0.1",
+        "contentHash": "e3BLJznyKus1j8kHdyMGaqhH3ZyoNjh5EJ4rgdkY+OxHDuExdemrwfHviluksyD49MchpBS+zJuEhx5UReVCJA=="
+      },
+      "FastEnum.Generators": {
+        "type": "Transitive",
+        "resolved": "2.0.1",
+        "contentHash": "YG2ShCKWwqVHBgbanUz/FoDhlW6oEZc3I61sWUxr8dtQbj/U7bWCfVGpGSknpyuWqbYDa8UvJQ3AQNZwVSSoAw=="
       },
       "Gee.External.Capstone": {
         "type": "Transitive",
