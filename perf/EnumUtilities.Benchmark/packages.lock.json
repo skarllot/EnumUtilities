@@ -50,9 +50,9 @@
       },
       "NetEscapades.EnumGenerators": {
         "type": "Direct",
-        "requested": "[1.0.0-beta09, )",
-        "resolved": "1.0.0-beta09",
-        "contentHash": "HD7y2pNBOw0bhBBs/hnFJJP2fg4b+qTWLvyfqIZTIoZ1Ha1VC2J8PinTSz8jr8o3kxxuF36Cx1t4WOwCZkO76w=="
+        "requested": "[1.0.0-beta11, )",
+        "resolved": "1.0.0-beta11",
+        "contentHash": "37btDZQX5OzwUmF6xvqxDb0mRTXi3O/h3nVKjvri2XEwyUnHsY5g43jbPJo8Sp2gxbfJd2lto7fLLQujw5aT5Q=="
       },
       "BenchmarkDotNet.Annotations": {
         "type": "Transitive",

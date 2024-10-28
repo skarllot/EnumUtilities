@@ -10,7 +10,7 @@
     <PackageReference Include="BenchmarkDotNet" Version="0.14.0" />
     <PackageReference Include="Enums.NET" Version="5.0.0" />
     <PackageReference Include="FastEnum" Version="2.0.1" />
-    <PackageReference Include="NetEscapades.EnumGenerators" Version="1.0.0-beta09" />
+    <PackageReference Include="NetEscapades.EnumGenerators" Version="1.0.0-beta11" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\gen\EnumUtilities.Generators\EnumUtilities.Generators.csproj"
