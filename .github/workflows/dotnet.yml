@@ -72,6 +72,6 @@ jobs:
       run: dotnet test --no-build --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
 
     - name: ☂️ Upload coverage reports to Codecov
-      uses: codecov/codecov-action@968872560f81e7bdde9272853e65f2507c0eca7c # v5.0.0
+      uses: codecov/codecov-action@015f24e6818733317a2da2edd6290ab26238649a # v5.0.7
       env:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
