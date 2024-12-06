@@ -23,7 +23,7 @@
       <IncludeAssets>runtime; native; contentfiles; analyzers</IncludeAssets>
       <ExcludeAssets>build; buildTransitive</ExcludeAssets>
     </PackageReference>
-    <PackageReference Include="System.Memory" Version="4.5.5" />
+    <PackageReference Include="System.Memory" Version="4.6.0" />
   </ItemGroup>
 
   <ItemGroup>

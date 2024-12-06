@@ -497,8 +497,8 @@
       },
       "System.Memory": {
         "type": "Transitive",
-        "resolved": "4.5.5",
-        "contentHash": "XIWiDvKPXaTveaB7HVganDlOCRoj03l+jrwNvcge/t8vhGYKvqV+dMv6G4SAX2NoNmN0wZfVPTAlFwZcZvVOUw=="
+        "resolved": "4.6.0",
+        "contentHash": "OEkbBQoklHngJ8UD8ez2AERSk2g+/qpAaSWWCBFbpH727HxDq5ydVkuncBaKcKfwRqXGWx64dS6G1SUScMsitg=="
       },
       "System.ObjectModel": {
         "type": "Transitive",
@@ -778,7 +778,7 @@
       "Raiqub.Generators.EnumUtilities": {
         "type": "Project",
         "dependencies": {
-          "System.Memory": "[4.5.5, )"
+          "System.Memory": "[4.6.0, )"
         }
       }
     }
