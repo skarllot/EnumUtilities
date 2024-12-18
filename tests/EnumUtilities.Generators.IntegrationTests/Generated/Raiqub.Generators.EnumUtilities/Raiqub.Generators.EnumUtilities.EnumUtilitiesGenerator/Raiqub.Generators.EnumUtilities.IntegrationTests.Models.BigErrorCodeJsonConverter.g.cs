@@ -14,7 +14,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.9.0.0")]
-    internal sealed class BigErrorCodeJsonConverter : JsonConverter<BigErrorCode>
+    internal sealed partial class BigErrorCodeJsonConverter : JsonConverter<BigErrorCode>
     {
         private const int MaxCharStack = 256;
 

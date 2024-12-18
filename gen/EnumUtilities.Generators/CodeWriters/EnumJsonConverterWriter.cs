@@ -57,7 +57,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             
             #line default
             #line hidden
-            this.Write(" sealed class ");
+            this.Write(" sealed partial class ");
             
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
