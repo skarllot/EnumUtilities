@@ -7,10 +7,10 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="BenchmarkDotNet" Version="0.14.0" />
-    <PackageReference Include="Enums.NET" Version="5.0.0" />
-    <PackageReference Include="FastEnum" Version="2.0.2" />
-    <PackageReference Include="NetEscapades.EnumGenerators" Version="1.0.0-beta11" />
+    <PackageReference Include="BenchmarkDotNet" />
+    <PackageReference Include="Enums.NET" />
+    <PackageReference Include="FastEnum" />
+    <PackageReference Include="NetEscapades.EnumGenerators" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\gen\EnumUtilities.Generators\EnumUtilities.Generators.csproj"

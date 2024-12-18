@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "dependencies": {
     "net8.0": {
       "BenchmarkDotNet": {
@@ -20,12 +20,6 @@
           "System.Management": "5.0.0"
         }
       },
-      "DotNet.ReproducibleBuilds": {
-        "type": "Direct",
-        "requested": "[1.2.25, )",
-        "resolved": "1.2.25",
-        "contentHash": "xCXiw7BCxHJ8pF6wPepRUddlh2dlQlbr81gXA72hdk4FLHkKXas7EH/n+fk5UCA/YfMqG1Z6XaPiUjDbUNBUzg=="
-      },
       "Enums.NET": {
         "type": "Direct",
         "requested": "[5.0.0, )",
@@ -41,12 +35,6 @@
           "FastEnum.Core": "2.0.2",
           "FastEnum.Generators": "2.0.2"
         }
-      },
-      "Nerdbank.GitVersioning": {
-        "type": "Direct",
-        "requested": "[3.6.143, )",
-        "resolved": "3.6.143",
-        "contentHash": "N24MtdLq4PmdJ2woTQd9515q0I1jeO/DlimYCB/GoRd510Fc9dk9H6YaN8MPPrVF8RHrIalCUfWbWvcoarYeoQ=="
       },
       "NetEscapades.EnumGenerators": {
         "type": "Direct",
