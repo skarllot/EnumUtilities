@@ -29,7 +29,7 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 #>
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("<#= CurrentAssemblyName.Name #>", "<#= Append($"{CurrentAssemblyName.Version}") #>")]
-<#= Model.IsPublic ? "public" : "internal" #> sealed class <#= Model.Name #>JsonConverter : JsonConverter<<#= Model.Name #>>
+<#= Model.IsPublic ? "public" : "internal" #> sealed partial class <#= Model.Name #>JsonConverter : JsonConverter<<#= Model.Name #>>
 {
     private const int MaxCharStack = 256;
 

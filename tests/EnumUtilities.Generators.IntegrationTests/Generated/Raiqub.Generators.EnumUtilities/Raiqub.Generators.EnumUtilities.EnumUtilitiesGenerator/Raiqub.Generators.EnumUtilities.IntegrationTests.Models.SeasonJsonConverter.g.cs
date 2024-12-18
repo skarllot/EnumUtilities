@@ -14,7 +14,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.9.0.0")]
-    public sealed class SeasonJsonConverter : JsonConverter<Season>
+    public sealed partial class SeasonJsonConverter : JsonConverter<Season>
     {
         private const int MaxCharStack = 256;
 
