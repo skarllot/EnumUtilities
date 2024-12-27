@@ -52,9 +52,9 @@
       },
       "Polyfill": {
         "type": "Direct",
-        "requested": "[7.7.1, )",
-        "resolved": "7.7.1",
-        "contentHash": "tj5PM0qyqqi279k0XG+wtKe+O5JSaa1Y/dCLZKkPclvXoraz2+qo9fLOcF7QTCRDhBqhPVHLhlDec0RlcdtdiQ=="
+        "requested": "[7.8.0, )",
+        "resolved": "7.8.0",
+        "contentHash": "jKvbkhnnzUJF+yzj3nLySCImRMBoAWCKrgTdHUNz0EH1T2VWiaEZLsenc4DJUgvsEHphYtMRXLeWT4c5crnz5Q=="
       },
       "Raiqub.Generators.T4CodeWriter.Sources": {
         "type": "Direct",
