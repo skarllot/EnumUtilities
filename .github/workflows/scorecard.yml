@@ -37,15 +37,14 @@ jobs:
           disable-sudo: true
           egress-policy: block
           allowed-endpoints: >
+            *.sigstore.dev:443
+            api.deps.dev:443
             api.github.com:443
             api.osv.dev:443
             api.scorecard.dev:443
             api.securityscorecards.dev:443
-            fulcio.sigstore.dev:443
             github.com:443
             oss-fuzz-build-logs.storage.googleapis.com:443
-            rekor.sigstore.dev:443
-            tuf-repo-cdn.sigstore.dev:443
             www.bestpractices.dev:443
 
       - name: "Checkout code"

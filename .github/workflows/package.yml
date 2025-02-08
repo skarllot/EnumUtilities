@@ -25,11 +25,14 @@ jobs:
           disable-sudo: true
           egress-policy: block
           allowed-endpoints: >
+            *.azureedge.net:443
+            *.digicert.com:80
+            *.nuget.org:443
             aka.ms:443
-            api.nuget.org:443
-            dotnetcli.azureedge.net:443
             github.com:443
-            www.nuget.org:443
+            builds.dotnet.microsoft.com:443
+            ci.dot.net:443
+            dc.services.visualstudio.com:443
 
       - name: 🛒 Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
