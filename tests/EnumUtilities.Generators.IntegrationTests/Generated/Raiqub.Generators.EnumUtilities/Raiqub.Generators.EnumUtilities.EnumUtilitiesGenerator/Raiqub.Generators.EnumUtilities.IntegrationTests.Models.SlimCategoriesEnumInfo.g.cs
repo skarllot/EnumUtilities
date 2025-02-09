@@ -12,7 +12,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     /// <summary>Provides metadata for <see cref="SlimCategories" /> enumeration.</summary>
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.9.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.10.0.0")]
     public static partial class SlimCategoriesMetadata
     {
         /// <summary>Provides constant values for <see cref="SlimCategories" /> members names.</summary>

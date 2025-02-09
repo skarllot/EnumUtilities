@@ -59,10 +59,9 @@ public partial class EnumUtilitiesGenerator
                 {
                     try
                     {
-                        return ModelExtensions.GetDeclaredSymbol(
-                                compilation.GetSemanticModel(t.SyntaxTree),
-                                t,
-                                context.CancellationToken)
+                        return compilation
+                            .GetSemanticModel(t.SyntaxTree)
+                            .GetDeclaredSymbol(t, context.CancellationToken)
                             .Map(EnumToGenerate.FromSymbol);
                     }
                     catch (Exception e)
