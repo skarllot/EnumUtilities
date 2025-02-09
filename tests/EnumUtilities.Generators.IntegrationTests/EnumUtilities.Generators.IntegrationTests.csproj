@@ -32,7 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="$(CompilerGeneratedFilesOutputPath)/**/*.cs" />
+    <Compile Remove="Generated/**/*.cs" />
     <ProjectReference Include="..\..\src\EnumUtilities\EnumUtilities.csproj" />
   </ItemGroup>
 
