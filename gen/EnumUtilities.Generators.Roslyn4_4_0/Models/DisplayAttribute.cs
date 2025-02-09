@@ -3,15 +3,14 @@ using Raiqub.Generators.EnumUtilities.Common;
 
 namespace Raiqub.Generators.EnumUtilities.Models;
 
-public sealed class DisplayAttribute
+public sealed record DisplayAttribute(
+    string? ShortName,
+    string? Name,
+    string? Description,
+    string? Prompt,
+    string? GroupName,
+    string? ResourceType)
 {
-    public string? ShortName { get; set; }
-    public string? Name { get; set; }
-    public string? Description { get; set; }
-    public string? Prompt { get; set; }
-    public string? GroupName { get; set; }
-    public string? ResourceType { get; set; }
-
     public bool HasResource => ResourceType is not null;
     public string? ResourceShortName => GetPropertyWithResource(ShortName);
     public string? ResourceName => GetPropertyWithResource(Name);
@@ -21,15 +20,13 @@ public sealed class DisplayAttribute
 
     public static DisplayAttribute FromAttribute(AttributeData attribute)
     {
-        return new DisplayAttribute
-        {
-            ShortName = attribute.GetNamedArgument(nameof(ShortName))?.ToString(),
-            Name = attribute.GetNamedArgument(nameof(Name))?.ToString(),
-            Description = attribute.GetNamedArgument(nameof(Description))?.ToString(),
-            Prompt = attribute.GetNamedArgument(nameof(Prompt))?.ToString(),
-            GroupName = attribute.GetNamedArgument(nameof(GroupName))?.ToString(),
-            ResourceType = attribute.GetNamedArgument(nameof(ResourceType))?.ToString()
-        };
+        return new DisplayAttribute(
+            ShortName: attribute.GetNamedArgument(nameof(ShortName))?.ToString(),
+            Name: attribute.GetNamedArgument(nameof(Name))?.ToString(),
+            Description: attribute.GetNamedArgument(nameof(Description))?.ToString(),
+            Prompt: attribute.GetNamedArgument(nameof(Prompt))?.ToString(),
+            GroupName: attribute.GetNamedArgument(nameof(GroupName))?.ToString(),
+            ResourceType: attribute.GetNamedArgument(nameof(ResourceType))?.ToString());
     }
 
     private string? GetPropertyWithResource(string? propertyName)

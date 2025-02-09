@@ -39,4 +39,9 @@ public static class CSharpExtensions
             _ => keyword
         };
     }
+
+    public static Location GetDefaultLocation(this ISymbol symbol)
+    {
+        return symbol.Locations.FirstOrDefault(l => l.Kind == LocationKind.SourceFile) ?? Location.None;
+    }
 }

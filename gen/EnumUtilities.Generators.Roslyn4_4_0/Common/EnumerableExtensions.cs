@@ -1,7 +1,22 @@
-﻿namespace Raiqub.Generators.EnumUtilities.Common;
+﻿using System.Diagnostics.CodeAnalysis;
+using Raiqub.Generators.T4CodeWriter.Collections;
+
+namespace Raiqub.Generators.EnumUtilities.Common;
 
 public static class EnumerableExtensions
 {
+    public static bool Exists<T>(this EquatableArray<T> array, Func<T, bool> match)
+        where T : IEquatable<T>
+    {
+        foreach (T item in array.AsSpan())
+        {
+            if (match(item))
+                return true;
+        }
+
+        return false;
+    }
+
     public static string JoinToString(this byte[] source)
     {
         Span<char> result = stackalloc char[source.Sum(GetStringLength) + (2 * (source.Length - 1))];

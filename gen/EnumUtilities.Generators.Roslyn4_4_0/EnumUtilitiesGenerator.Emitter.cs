@@ -102,7 +102,7 @@ public partial class EnumUtilitiesGenerator
     {
         return Diagnostic.Create(
             DiagnosticDescriptors.UnexpectedErrorGenerating,
-            model.GetDefaultLocation(),
+            model.DefaultLocations,
             exception.ToString().Replace("\n", " "));
     }
 }

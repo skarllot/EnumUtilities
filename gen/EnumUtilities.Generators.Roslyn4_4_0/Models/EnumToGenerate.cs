@@ -1,6 +1,6 @@
-﻿using System.Collections.Immutable;
-using Microsoft.CodeAnalysis;
+﻿using Microsoft.CodeAnalysis;
 using Raiqub.Generators.EnumUtilities.Common;
+using Raiqub.Generators.T4CodeWriter.Collections;
 
 namespace Raiqub.Generators.EnumUtilities.Models;
 
@@ -13,20 +13,24 @@ public sealed record EnumToGenerate(
     bool IsFlags,
     string Name,
     string UnderlyingType,
-    List<EnumValue> Values,
-    ImmutableArray<Location> Locations)
-    : ILocalizableSource
+    EquatableArray<EnumValue> Values,
+    Location DefaultLocations)
 {
     private List<EnumValue>? _invertedValues;
+    private string? _refName;
+    private List<EnumValue>? _uniqueValues;
 
     public string MetadataClassName => Name.Contains("Metadata") ? $"{Name}Info" : $"{Name}Metadata";
-    public string RefName { get; } = ContainingType is not null ? $"{ContainingType.Name}.{Name}" : Name;
 
-    public List<EnumValue> UniqueValues { get; } =
-        Values.DistinctBy(static it => it.MemberValue, StringComparer.Ordinal).ToList();
+    public string RefName => _refName ??= ContainingType is not null ? $"{ContainingType.Name}.{Name}" : Name;
+
+    public List<EnumValue> UniqueValues =>
+        _uniqueValues ??= Values.AsEnumerable()
+            .DistinctBy(static it => it.MemberValue, StringComparer.Ordinal)
+            .ToList();
 
     public List<EnumValue> InvertedValues =>
-        _invertedValues ??= Values
+        _invertedValues ??= Values.AsEnumerable()
             .DistinctBy(x => x.RealMemberValue)
             .OrderByDescending(x => x.RealMemberValue)
             .ToList();
@@ -53,7 +57,7 @@ public sealed record EnumToGenerate(
         Values.Exists(static it => it.JsonPropertyName != null);
 
     public bool HasZeroMember { get; } =
-        Values.Any(x => x.RealMemberValue == 0);
+        Values.AsEnumerable().Any(x => x.RealMemberValue == 0);
 
     private int BitCount { get; } = UnderlyingType switch
     {
@@ -84,9 +88,9 @@ public sealed record EnumToGenerate(
             .GetMembers()
             .Select(EnumValue.FromSymbol)
             .WhereNotNull()
-            .ToList();
+            .ToArray();
 
-        if (enumValues.Count == 0)
+        if (enumValues.Length == 0)
             return null;
 
         string? ns = typeSymbol.ContainingNamespace?.ToString();
@@ -107,8 +111,8 @@ public sealed record EnumToGenerate(
             attributes.Any(x => x.AttributeClass?.Name == nameof(FlagsAttribute)),
             typeSymbol.Name,
             typeSymbol.EnumUnderlyingType?.GetNumericCSharpKeyword() ?? "int",
-            enumValues,
-            typeSymbol.Locations);
+            EquatableArray<EnumValue>.FromArrayWithoutCopy(enumValues),
+            typeSymbol.GetDefaultLocation());
     }
 
     public static string[] BitRangeConditionStrings { get; } =
@@ -144,11 +148,11 @@ public sealed record EnumToGenerate(
 
     public int GetMappedBitCount()
     {
-        if (Values.Any(x => x.MemberValue[0] == '-'))
+        if (Values.AsEnumerable().Any(x => x.MemberValue[0] == '-'))
             return BitCount;
 
         return BitCount -
-               (BitOperations.LeadingZeroCount(Values.Select(x => x.RealMemberValue).Max()) -
+               (BitOperations.LeadingZeroCount(Values.AsEnumerable().Select(x => x.RealMemberValue).Max()) -
                 (64 - BitCount));
     }
 

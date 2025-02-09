@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.3.1" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" VersionOverride="4.3.1" PrivateAssets="all" />
     <PackageReference Include="Polyfill" PrivateAssets="all" />
     <PackageReference Include="Raiqub.Generators.T4CodeWriter.Sources">
       <PrivateAssets>all</PrivateAssets>
@@ -26,8 +26,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\EnumUtilities.Generators.Roslyn4_4_0\**\*.cs" Exclude="**\obj\**;**\bin\**" />
-    <AdditionalFiles Include="..\\EnumUtilities.Generators.Roslyn4_4_0\AnalyzerReleases.*.md" />
+    <Compile Include="..\EnumUtilities.Generators.Roslyn4_4_0\**\*.cs" Exclude="**\obj\**" />
+    <AdditionalFiles Include="..\EnumUtilities.Generators.Roslyn4_4_0\AnalyzerReleases.*.md" />
     <Compile Include="..\..\src\EnumUtilities\EnumGeneratorAttribute.cs" Link="Attributes\EnumGeneratorAttribute.cs" />
     <Compile Include="..\..\src\EnumUtilities\JsonConverterGeneratorAttribute.cs" Link="Attributes\JsonConverterGeneratorAttribute.cs" />
   </ItemGroup>
