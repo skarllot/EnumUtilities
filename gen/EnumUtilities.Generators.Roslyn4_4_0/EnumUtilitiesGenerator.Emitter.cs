@@ -1,5 +1,6 @@
 ﻿using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Raiqub.Generators.EnumUtilities.CodeWriters;
 using Raiqub.Generators.EnumUtilities.Common;
@@ -19,15 +20,32 @@ public partial class EnumUtilitiesGenerator
             sb => new EnumValidationWriter(sb),
             sb => new EnumJsonConverterWriter(sb));
 
+#if Roslyn_440
     private static void Emit(
         SourceProductionContext context,
-        (ImmutableArray<EnumDeclarationSyntax> Types, Compilation Compilation) data)
+        ImmutableArray<EnumToGenerate> enumsToGenerate)
     {
+        if (enumsToGenerate.IsDefaultOrEmpty)
+        {
+            return;
+        }
+
+        s_dispatcher.GenerateSources(enumsToGenerate, context);
+    }
+
+#else
+    private static void Emit(
+        SourceProductionContext context,
+        (ImmutableArray<EnumDeclarationSyntax> Types, CSharpCompilation? Compilation) data)
+    {
+        if (data.Compilation is null)
+            return;
+
         Emit(data.Compilation, context, data.Types);
     }
 
     private static void Emit(
-        Compilation compilation,
+        CSharpCompilation compilation,
         SourceProductionContext context,
         ImmutableArray<EnumDeclarationSyntax> types)
     {
@@ -58,9 +76,11 @@ public partial class EnumUtilitiesGenerator
                 {
                     try
                     {
-                        return compilation
-                            .GetSemanticModel(t.SyntaxTree)
-                            .GetDeclaredSymbol(t, context.CancellationToken)
+                        return ModelExtensions.GetDeclaredSymbol(
+                                compilation
+                                    .GetSemanticModel(t.SyntaxTree),
+                                t,
+                                context.CancellationToken)
                             .Map(EnumToGenerate.FromSymbol);
                     }
                     catch (Exception e)
@@ -76,6 +96,7 @@ public partial class EnumUtilitiesGenerator
             .WhereNotNull()
             .ToList();
     }
+#endif
 
     private static Diagnostic HandleCodeWriterException(Exception exception, EnumToGenerate model)
     {
