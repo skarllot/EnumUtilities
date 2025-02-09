@@ -22,11 +22,8 @@ public partial class EnumUtilitiesGenerator
 
     private static void Emit(
         SourceProductionContext context,
-        (ImmutableArray<EnumDeclarationSyntax> Types, Compilation? Compilation) data)
+        (ImmutableArray<EnumDeclarationSyntax> Types, Compilation Compilation) data)
     {
-        if (data.Compilation is null)
-            return;
-
         Emit((CSharpCompilation)data.Compilation, context, data.Types);
     }
 
