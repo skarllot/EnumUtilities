@@ -1,7 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Raiqub.Generators.EnumUtilities.Models;
 
 namespace Raiqub.Generators.EnumUtilities;
 
@@ -17,15 +16,6 @@ public partial class EnumUtilitiesGenerator
                !enumNode.Modifiers.Any(SyntaxKind.PrivateKeyword);
     }
 
-#if Roslyn_440
-    private static EnumToGenerate? GetSemanticTargetForGeneration(
-        GeneratorAttributeSyntaxContext context,
-        CancellationToken cancellationToken)
-    {
-        return EnumToGenerate.FromSymbol(context.TargetSymbol);
-    }
-
-#else
     private static EnumDeclarationSyntax? GetSemanticTargetForGeneration(
         GeneratorSyntaxContext context,
         CancellationToken cancellationToken)
@@ -67,5 +57,4 @@ public partial class EnumUtilitiesGenerator
 
         return false;
     }
-#endif
 }

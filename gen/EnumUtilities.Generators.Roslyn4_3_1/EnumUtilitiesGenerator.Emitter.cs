@@ -20,20 +20,6 @@ public partial class EnumUtilitiesGenerator
             sb => new EnumValidationWriter(sb),
             sb => new EnumJsonConverterWriter(sb));
 
-#if Roslyn_440
-    private static void Emit(
-        SourceProductionContext context,
-        ImmutableArray<EnumToGenerate> enumsToGenerate)
-    {
-        if (enumsToGenerate.IsDefaultOrEmpty)
-        {
-            return;
-        }
-
-        s_dispatcher.GenerateSources(enumsToGenerate, context);
-    }
-
-#else
     private static void Emit(
         SourceProductionContext context,
         (ImmutableArray<EnumDeclarationSyntax> Types, Compilation? Compilation) data)
@@ -95,7 +81,6 @@ public partial class EnumUtilitiesGenerator
             .WhereNotNull()
             .ToList();
     }
-#endif
 
     private static Diagnostic HandleCodeWriterException(Exception exception, EnumToGenerate model)
     {

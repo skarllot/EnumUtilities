@@ -26,7 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\EnumUtilities.Generators.Roslyn4_4_0\**\*.cs" Exclude="**\obj\**" />
+    <Compile Include="..\EnumUtilities.Generators.Roslyn4_4_0\*\*.cs" Exclude="**\obj\**" />
+    <Compile Include="..\EnumUtilities.Generators.Roslyn4_4_0\DiagnosticDescriptors.cs" />
+    <Compile Include="..\EnumUtilities.Generators.Roslyn4_4_0\TrackingNames.cs" />
     <AdditionalFiles Include="..\EnumUtilities.Generators.Roslyn4_4_0\AnalyzerReleases.*.md" />
     <Compile Include="..\..\src\EnumUtilities\EnumGeneratorAttribute.cs" Link="Attributes\EnumGeneratorAttribute.cs" />
     <Compile Include="..\..\src\EnumUtilities\JsonConverterGeneratorAttribute.cs" Link="Attributes\JsonConverterGeneratorAttribute.cs" />
