@@ -1,6 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Raiqub.Generators.EnumUtilities.Common;
+using Raiqub.Generators.EnumUtilities.Models;
 
 namespace Raiqub.Generators.EnumUtilities;
 
@@ -28,6 +29,7 @@ public partial class EnumUtilitiesGenerator : IIncrementalGenerator
             .WithTrackingName(TrackingNames.ExtractForJsonConverterGeneratorAttribute)
             .WhereNotNull()
             .WithTrackingName(TrackingNames.RemoveNulls)
+            .Where(x => (x.SelectedGenerators & SelectedGenerators.MainGenerator) == 0)
             .Collect();
 
         context.RegisterImplementationSourceOutput(providerForEnumGenerator, Emit);
