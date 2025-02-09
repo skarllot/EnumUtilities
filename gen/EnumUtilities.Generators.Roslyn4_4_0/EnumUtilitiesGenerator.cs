@@ -35,14 +35,11 @@ public partial class EnumUtilitiesGenerator : IIncrementalGenerator
         context.RegisterImplementationSourceOutput(providerForEnumGenerator, Emit);
         context.RegisterImplementationSourceOutput(providerForJsonConverterGenerator, Emit);
 #else
-        var compilation = context.CompilationProvider
-            .Select((c, _) => c as CSharpCompilation);
-
         var provider = context.SyntaxProvider
             .CreateSyntaxProvider(IsSyntaxTargetForGeneration, GetSemanticTargetForGeneration)
             .WhereNotNull()
             .Collect()
-            .Combine(compilation);
+            .Combine(context.CompilationProvider);
 
         context.RegisterImplementationSourceOutput(provider, Emit);
 #endif

@@ -68,7 +68,7 @@
         out <#= Model.RefName #> result)
     {
 <#+
-            if (Model.Values.Count == 0)
+            if (Model.Values.AsSpan().Length == 0)
             {
 #>
         result = default;

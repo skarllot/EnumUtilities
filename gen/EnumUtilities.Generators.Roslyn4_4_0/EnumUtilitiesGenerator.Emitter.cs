@@ -36,12 +36,12 @@ public partial class EnumUtilitiesGenerator
 #else
     private static void Emit(
         SourceProductionContext context,
-        (ImmutableArray<EnumDeclarationSyntax> Types, CSharpCompilation? Compilation) data)
+        (ImmutableArray<EnumDeclarationSyntax> Types, Compilation? Compilation) data)
     {
         if (data.Compilation is null)
             return;
 
-        Emit(data.Compilation, context, data.Types);
+        Emit((CSharpCompilation)data.Compilation, context, data.Types);
     }
 
     private static void Emit(
@@ -77,8 +77,7 @@ public partial class EnumUtilitiesGenerator
                     try
                     {
                         return ModelExtensions.GetDeclaredSymbol(
-                                compilation
-                                    .GetSemanticModel(t.SyntaxTree),
+                                compilation.GetSemanticModel(t.SyntaxTree),
                                 t,
                                 context.CancellationToken)
                             .Map(EnumToGenerate.FromSymbol);
