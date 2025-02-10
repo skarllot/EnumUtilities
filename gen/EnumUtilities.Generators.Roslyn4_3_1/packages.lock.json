@@ -46,9 +46,9 @@
       },
       "Raiqub.Generators.T4CodeWriter.Sources": {
         "type": "Direct",
-        "requested": "[1.1.4, )",
-        "resolved": "1.1.4",
-        "contentHash": "BwQsA4FgNtYa9kiXpa1hgM8z0k3oLZKI723JRYMnfxcWXQMzOWi3p+GeHHikQchXHAHCY1jVJUEjzEHYwcnMWA=="
+        "requested": "[1.2.3, )",
+        "resolved": "1.2.3",
+        "contentHash": "5BGHGx9zZbrM7BRQlXudV2qfCugvnJMvMEbJGfOri1jlicoWzSRrbrkmseBEGu2R6R0JDlE8UzAIZL2G4XJOtw=="
       },
       "System.Memory": {
         "type": "Direct",

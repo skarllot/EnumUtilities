@@ -7,8 +7,8 @@
     <IsRoslynComponent>true</IsRoslynComponent>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <AnalyzerLanguage>cs</AnalyzerLanguage>
-    <AnalyzerRoslynVersion>4.3.1</AnalyzerRoslynVersion>
-    <DefineConstants>$(DefineConstants);AllowUnsafeBlocks</DefineConstants>
+    <AnalyzerRoslynVersion>4.4.0</AnalyzerRoslynVersion>
+    <DefineConstants>$(DefineConstants);Roslyn_440;AllowUnsafeBlocks</DefineConstants>
     <RootNamespace>Raiqub.Generators.EnumUtilities</RootNamespace>
     <AssemblyName>Raiqub.Generators.EnumUtilities</AssemblyName>
   </PropertyGroup>
@@ -16,7 +16,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" PrivateAssets="all" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" PrivateAssets="all" />
     <PackageReference Include="Polyfill" PrivateAssets="all" />
     <PackageReference Include="Raiqub.Generators.T4CodeWriter.Sources">
       <PrivateAssets>all</PrivateAssets>

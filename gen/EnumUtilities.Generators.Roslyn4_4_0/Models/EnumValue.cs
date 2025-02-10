@@ -4,24 +4,16 @@ using Raiqub.Generators.EnumUtilities.Common;
 
 namespace Raiqub.Generators.EnumUtilities.Models;
 
-public sealed class EnumValue
+public sealed record EnumValue(
+    string MemberName,
+    string MemberValue,
+    ulong RealMemberValue,
+    int Index,
+    string? SerializationValue,
+    string? Description,
+    DisplayAttribute? Display,
+    string? JsonPropertyName)
 {
-    private EnumValue(string memberName, string memberValue, object realMemberValue, int index)
-    {
-        MemberName = memberName;
-        MemberValue = memberValue;
-        RealMemberValue = ConvertToUInt64(realMemberValue);
-        Index = index;
-    }
-
-    public string MemberName { get; }
-    public string MemberValue { get; }
-    public ulong RealMemberValue { get; set; }
-    public int Index { get; }
-    public string? SerializationValue { get; set; }
-    public string? Description { get; set; }
-    public DisplayAttribute? Display { get; set; }
-    public string? JsonPropertyName { get; set; }
     public string ResolvedSerializedValue => SerializationValue ?? MemberName;
     public string ResolvedJsonValue => JsonPropertyName ?? SerializationValue ?? MemberName;
 
@@ -30,28 +22,39 @@ public sealed class EnumValue
         if (symbol is not IFieldSymbol { ConstantValue: not null } field)
             return null;
 
-        var result = new EnumValue(field.Name, field.ConstantValue.ToString(), field.ConstantValue, index);
+        string? serializationValue = null;
+        string? description = null;
+        DisplayAttribute? display = null;
+        string? jsonPropertyName = null;
 
         foreach (var attribute in field.GetAttributes())
         {
-            result.SerializationValue ??= attribute
+            serializationValue ??= attribute
                 .WhereClassNameIs("EnumMemberAttribute")
                 ?.GetNamedArgument("Value")?.ToString();
 
-            result.Description ??= attribute
+            description ??= attribute
                 .WhereClassNameIs("DescriptionAttribute")
                 ?.GetConstructorArgument(0)?.ToString();
 
-            result.Display ??= attribute
+            display ??= attribute
                 .WhereClassNameIs("DisplayAttribute")
                 .Map(DisplayAttribute.FromAttribute);
 
-            result.JsonPropertyName ??= attribute
+            jsonPropertyName ??= attribute
                 .WhereClassNameIs("JsonPropertyNameAttribute")
                 ?.GetConstructorArgument(0)?.ToString();
         }
 
-        return result;
+        return new EnumValue(
+            MemberName: field.Name,
+            MemberValue: field.ConstantValue.ToString(),
+            RealMemberValue: ConvertToUInt64(field.ConstantValue),
+            Index: index,
+            SerializationValue: serializationValue,
+            Description: description,
+            Display: display,
+            JsonPropertyName: jsonPropertyName);
     }
 
     private static ulong ConvertToUInt64(object realMemberValue)

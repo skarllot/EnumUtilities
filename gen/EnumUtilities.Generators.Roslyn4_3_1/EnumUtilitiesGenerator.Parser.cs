@@ -6,8 +6,9 @@ namespace Raiqub.Generators.EnumUtilities;
 
 public partial class EnumUtilitiesGenerator
 {
-    private const string EnumGeneratorAttributeName = "Raiqub.Generators.EnumUtilities.EnumGeneratorAttribute";
-    private const string JsonConverterGeneratorAttribute = "Raiqub.Generators.EnumUtilities.JsonConverterGeneratorAttribute";
+    private const string BaseAttributeNamespace = "Raiqub.Generators.EnumUtilities";
+    private const string EnumGeneratorAttributeName = $"{BaseAttributeNamespace}.EnumGeneratorAttribute";
+    private const string JsonConverterGeneratorAttribute = $"{BaseAttributeNamespace}.JsonConverterGeneratorAttribute";
 
     private static bool IsSyntaxTargetForGeneration(SyntaxNode node, CancellationToken cancellationToken)
     {

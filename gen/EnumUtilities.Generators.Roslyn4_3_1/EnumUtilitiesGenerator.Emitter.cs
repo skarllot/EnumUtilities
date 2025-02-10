@@ -1,5 +1,6 @@
 ﻿using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Raiqub.Generators.EnumUtilities.CodeWriters;
 using Raiqub.Generators.EnumUtilities.Common;
@@ -23,11 +24,11 @@ public partial class EnumUtilitiesGenerator
         SourceProductionContext context,
         (ImmutableArray<EnumDeclarationSyntax> Types, Compilation Compilation) data)
     {
-        Emit(data.Compilation, context, data.Types);
+        Emit((CSharpCompilation)data.Compilation, context, data.Types);
     }
 
     private static void Emit(
-        Compilation compilation,
+        CSharpCompilation compilation,
         SourceProductionContext context,
         ImmutableArray<EnumDeclarationSyntax> types)
     {
@@ -81,7 +82,7 @@ public partial class EnumUtilitiesGenerator
     {
         return Diagnostic.Create(
             DiagnosticDescriptors.UnexpectedErrorGenerating,
-            model.GetDefaultLocation(),
+            model.DefaultLocations,
             exception.ToString().Replace("\n", " "));
     }
 }
