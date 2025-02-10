@@ -47,7 +47,7 @@ using Raiqub.Generators.EnumUtilities.Parsers;
     private bool HasMainGenerator => (Model.SelectedGenerators & SelectedGenerators.MainGenerator) ==
                                      SelectedGenerators.MainGenerator;
 
-    public override string GetFileName() => $"{Model.Namespace ?? "_"}.{Model.Name}EnumInfo.g.cs";
+    public override string GetFileName() => CodeWriterHelper.GetFileName(Model, "EnumInfo");
 
     protected override bool CanGenerateFor(EnumToGenerate model) =>
         (model.SelectedGenerators & SelectedGenerators.MainGenerator) != 0;

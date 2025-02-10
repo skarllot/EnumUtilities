@@ -143,7 +143,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
     {
     }
 
-    public override string GetFileName() => $"{Model.Namespace ?? "_"}.{Model.Name}Validation.g.cs";
+    public override string GetFileName() => CodeWriterHelper.GetFileName(Model, "Validation");
 
     protected override bool CanGenerateFor(EnumToGenerate model) =>
         (model.SelectedGenerators & SelectedGenerators.MainGenerator) != 0;
