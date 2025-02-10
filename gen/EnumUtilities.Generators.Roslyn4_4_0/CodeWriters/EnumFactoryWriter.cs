@@ -4798,7 +4798,7 @@ this.Write("        };\r\n    }\r\n");
     {
     }
 
-    public override string GetFileName() => $"{Model.Namespace ?? "_"}.{Model.Name}Factory.g.cs";
+    public override string GetFileName() => CodeWriterHelper.GetFileName(Model, "Factory");
 
     protected override bool CanGenerateFor(EnumToGenerate model) =>
         (model.SelectedGenerators & (SelectedGenerators.MainGenerator | SelectedGenerators.JsonConverter)) != 0;
