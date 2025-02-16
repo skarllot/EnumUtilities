@@ -29,8 +29,8 @@ public enum Categories
 
 ## Next Steps
 
-- Explore the [Members Attributes](./members-attributes/) section to see how `[EnumMember]`, `[Description]`, and `[Display]` can enrich your enums.
-- Check out the [JSON Serialization](./json) docs for details on adding an advanced JSON converter to your enums.
+- Explore the [Members Attributes](../members-attributes/) section to see how `[EnumMember]`, `[Description]`, and `[Display]` can enrich your enums.
+- Check out the [JSON Serialization](../json/) docs for details on adding an advanced JSON converter to your enums.
 - Have fun simplifying your enums with Enum Utilities!
 
 ## Support

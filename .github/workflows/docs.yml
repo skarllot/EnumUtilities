@@ -4,6 +4,9 @@ on:
   push:
     branches: [ main ]
     paths: [ 'docs/**', '.github/workflows/docs.yml' ]
+  pull_request:
+    branches: [ "main" ]
+    paths: [ 'docs/**', '.github/workflows/docs.yml' ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -55,12 +58,14 @@ jobs:
           npm run docs:build
           touch .vitepress/dist/.nojekyll
       - name: 📤 Upload artifact
+        if: github.ref == 'refs/heads/main'
         uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
         with:
           path: docs/.vitepress/dist
 
   # Deployment job
   deploy:
+    if: github.ref == 'refs/heads/main'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
