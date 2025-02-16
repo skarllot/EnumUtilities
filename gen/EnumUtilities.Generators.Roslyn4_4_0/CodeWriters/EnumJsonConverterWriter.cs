@@ -250,7 +250,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
     {
     }
 
-    public override string GetFileName() => $"{Model.Namespace ?? "_"}.{Model.Name}JsonConverter.g.cs";
+    public override string GetFileName() => CodeWriterHelper.GetFileName(Model, "JsonConverter");
 
     protected override bool CanGenerateFor(EnumToGenerate model) =>
         (model.SelectedGenerators & SelectedGenerators.JsonConverter) != 0;

@@ -45,7 +45,7 @@ public enum Categories
 ```
 
 This will generate 3 classes with the following methods:
-- [CategoriesExtensions](./tests/EnumUtilities.Generators.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Raiqub.Generators.EnumUtilities.IntegrationTests.Models.CategoriesExtensions.g.cs)
+- [CategoriesExtensions](./tests/EnumUtilities.Generators.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Models.CategoriesExtensions.g.cs)
   - ToStringFast(this Categories)
   - GetStringCount(this Categories)
   - IsDefined(this Categories)
@@ -54,7 +54,7 @@ This will generate 3 classes with the following methods:
   - InterlockedIncrement(this ref Categories)
   - InterlockedCompareExchange(this ref Categories, Categories, Categories)
   - InterlockedExchange(this ref Categories, Categories)
-- [CategoriesFactory](./tests/EnumUtilities.Generators.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Raiqub.Generators.EnumUtilities.IntegrationTests.Models.CategoriesFactory.g.cs)
+- [CategoriesFactory](./tests/EnumUtilities.Generators.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Models.CategoriesFactory.g.cs)
   - Parse(string, bool = false)
   - Parse(ReadOnlySpan<char>, bool = false)
   - ParseOrNull(string?, bool = false)
@@ -66,7 +66,7 @@ This will generate 3 classes with the following methods:
   - TryParse(ReadOnlySpan<char>, bool = false)
   - GetValues()
   - GetNames()
-- [CategoriesValidation](./tests/EnumUtilities.Generators.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Raiqub.Generators.EnumUtilities.IntegrationTests.Models.CategoriesValidation.g.cs)
+- [CategoriesValidation](./tests/EnumUtilities.Generators.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Models.CategoriesValidation.g.cs)
   - IsDefined(Categories)
   - IsDefined(string?, StringComparison)
   - IsDefinedIgnoreCase(string?)
@@ -85,7 +85,7 @@ public enum Colours
 ```
 
 Then 3 classes will be generated with the following methods:
-- [ColoursExtensions](./tests/EnumUtilities.Generators.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Raiqub.Generators.EnumUtilities.IntegrationTests.Models.ColoursExtensions.g.cs)
+- [ColoursExtensions](./tests/EnumUtilities.Generators.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Models.ColoursExtensions.g.cs)
   - ToStringFast(this Colours)
   - HasFlagFast(this Colours, Colours)
   - GetStringCount(this Colours)
@@ -94,7 +94,7 @@ Then 3 classes will be generated with the following methods:
   - InterlockedOr(this ref Colours, Colours)
   - InterlockedCompareExchange(this ref Colours, Colours, Colours)
   - InterlockedExchange(this ref Colours, Colours)
-- [ColoursFactory](./tests/EnumUtilities.Generators.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Raiqub.Generators.EnumUtilities.IntegrationTests.Models.ColoursFactory.g.cs)
+- [ColoursFactory](./tests/EnumUtilities.Generators.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Models.ColoursFactory.g.cs)
   - Parse(string, bool = false)
   - Parse(ReadOnlySpan<char>, bool = false)
   - ParseOrNull(string?, bool = false)
@@ -106,7 +106,7 @@ Then 3 classes will be generated with the following methods:
   - TryParse(ReadOnlySpan<char>, bool = false)
   - GetValues()
   - GetNames()
-- [ColoursValidation](./tests/EnumUtilities.Generators.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Raiqub.Generators.EnumUtilities.IntegrationTests.Models.ColoursValidation.g.cs)
+- [ColoursValidation](./tests/EnumUtilities.Generators.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Models.ColoursValidation.g.cs)
   - IsDefined(Colours)
   - IsDefined(string?, StringComparison)
   - IsDefinedIgnoreCase(string?)
@@ -135,9 +135,9 @@ public enum PaymentMethod
 ```
 
 This will generate the following methods:
-- [PaymentMethodExtensions](./tests/EnumUtilities.Generators.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Raiqub.Generators.EnumUtilities.IntegrationTests.Models.PaymentMethodExtensions.g.cs)
+- [PaymentMethodExtensions](./tests/EnumUtilities.Generators.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Models.PaymentMethodExtensions.g.cs)
   - ToEnumMemberValue(this PaymentMethod)
-- [PaymentMethodFactory](./tests/EnumUtilities.Generators.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Raiqub.Generators.EnumUtilities.IntegrationTests.Models.PaymentMethodFactory.g.cs)
+- [PaymentMethodFactory](./tests/EnumUtilities.Generators.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Models.PaymentMethodFactory.g.cs)
   - TryParseFromEnumMemberValue(string?, StringComparison, out PaymentMethod)
   - TryParseFromEnumMemberValue(string?, out PaymentMethod)
   - TryParseFromEnumMemberValue(string?, StringComparison)
@@ -160,9 +160,9 @@ public enum PaymentMethod
 ```
 
 This will generate the following methods:
-- [PaymentMethodExtensions](./tests/EnumUtilities.Generators.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Raiqub.Generators.EnumUtilities.IntegrationTests.Models.PaymentMethodExtensions.g.cs)
+- [PaymentMethodExtensions](./tests/EnumUtilities.Generators.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Models.PaymentMethodExtensions.g.cs)
   - GetDescription(this PaymentMethod)
-- [PaymentMethodFactory](./tests/EnumUtilities.Generators.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Raiqub.Generators.EnumUtilities.IntegrationTests.Models.PaymentMethodFactory.g.cs)
+- [PaymentMethodFactory](./tests/EnumUtilities.Generators.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Models.PaymentMethodFactory.g.cs)
   - TryCreateFromDescription(string?, StringComparison, out PaymentMethod)
   - TryCreateFromDescription(string?, out PaymentMethod)
   - TryCreateFromDescription(string?, StringComparison)
@@ -200,11 +200,11 @@ public enum WeekDays
 Note that if `ResourceType` is provided the generated code will correctly get the value from resource.
 
 This will generate the following methods:
-- [WeekDaysExtensions](./tests/EnumUtilities.Generators.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Raiqub.Generators.EnumUtilities.IntegrationTests.Models.WeekDaysExtensions.g.cs)
+- [WeekDaysExtensions](./tests/EnumUtilities.Generators.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Models.WeekDaysExtensions.g.cs)
   - GetDisplayShortName(this WeekDays)
   - GetDisplayName(this WeekDays)
   - GetDescription(this WeekDays)
-- [WeekDaysFactory](./tests/EnumUtilities.Generators.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Raiqub.Generators.EnumUtilities.IntegrationTests.Models.WeekDaysFactory.g.cs)
+- [WeekDaysFactory](./tests/EnumUtilities.Generators.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Models.WeekDaysFactory.g.cs)
   - TryCreateFromDisplayShortName(string?, StringComparison, out WeekDays)
   - TryCreateFromDisplayShortName(string?, out WeekDays)
   - TryCreateFromDisplayShortName(string?, StringComparison)
@@ -240,7 +240,7 @@ public enum Season
 }
 ```
 
-This will generate the following JSON converter: [SeasonJsonConverter](./tests/EnumUtilities.Generators.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Raiqub.Generators.EnumUtilities.IntegrationTests.Models.SeasonJsonConverter.g.cs).
+This will generate the following JSON converter: [SeasonJsonConverter](./tests/EnumUtilities.Generators.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Models.SeasonJsonConverter.g.cs).
 
 ## Contributing
 

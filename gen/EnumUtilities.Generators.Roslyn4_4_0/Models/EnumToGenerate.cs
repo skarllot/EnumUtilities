@@ -14,7 +14,8 @@ public sealed record EnumToGenerate(
     string Name,
     string UnderlyingType,
     EquatableArray<EnumValue> Values,
-    Location DefaultLocations)
+    Location DefaultLocations,
+    string? RootNamespace = null)
 {
     private List<EnumValue>? _invertedValues;
     private string? _refName;

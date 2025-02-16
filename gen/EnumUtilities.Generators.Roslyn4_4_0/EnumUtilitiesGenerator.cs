@@ -27,6 +27,14 @@ public class EnumUtilitiesGenerator : IIncrementalGenerator
 
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
+        var rootNamespace = context
+            .AnalyzerConfigOptionsProvider
+            .Select(
+                (c, _) =>
+                    c.GlobalOptions.TryGetValue("build_property.RootNamespace", out var ns)
+                        ? ns
+                        : null);
+
         var providerForEnumGenerator = context.SyntaxProvider
             .ForAttributeWithMetadataName(
                 EnumGeneratorAttributeName,
@@ -35,6 +43,9 @@ public class EnumUtilitiesGenerator : IIncrementalGenerator
             .WithTrackingName(TrackingNames.ExtractForEnumGeneratorAttribute)
             .WhereNotNull()
             .WithTrackingName(TrackingNames.RemoveNulls)
+            .Combine(rootNamespace)
+            .Select((x, _) => x.Right != null ? x.Left with { RootNamespace = x.Right } : x.Left)
+            .WithTrackingName(TrackingNames.FillRootNamespace)
             .Collect();
 
         var providerForJsonConverterGenerator = context.SyntaxProvider
@@ -46,6 +57,10 @@ public class EnumUtilitiesGenerator : IIncrementalGenerator
             .WhereNotNull()
             .WithTrackingName(TrackingNames.RemoveNulls)
             .Where(x => (x.SelectedGenerators & SelectedGenerators.MainGenerator) == 0)
+            .WithTrackingName(TrackingNames.SkipGeneratedByMainGenerator)
+            .Combine(rootNamespace)
+            .Select((x, _) => x.Right != null ? x.Left with { RootNamespace = x.Right } : x.Left)
+            .WithTrackingName(TrackingNames.FillRootNamespace)
             .Collect();
 
         context.RegisterImplementationSourceOutput(providerForEnumGenerator, Emit);
