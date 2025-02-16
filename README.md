@@ -8,7 +8,7 @@
 
 _A source generator for C# that uses Roslyn to create extensions and parsers for enumerations_
 
-[🏃 Quickstart](#quickstart) &nbsp; | &nbsp; [📗 Guide](#guide) &nbsp; | &nbsp; [📦 NuGet](https://www.nuget.org/packages/Raiqub.Generators.EnumUtilities)
+[🏃 Quickstart](#quickstart) &nbsp; | &nbsp; [📖 Documentation](https://fgodoy.me/EnumUtilities/) &nbsp; | &nbsp; [📦 NuGet](https://www.nuget.org/packages/Raiqub.Generators.EnumUtilities)
 
 <hr />
 
@@ -19,6 +19,9 @@ A source generator for C# that uses Roslyn to create extensions and parsers for 
 Raiqub.Generators.EnumUtilities runs with Roslyn compiler so does not introduce a new dependency to your project besides a library containing the EnumGenerator attribute.
 
 It requires at least the .NET 6 SDK to run, but you can target earlier frameworks.
+
+## Documentation
+This README aims to give a quick overview of some Raiqub Enum Utilities features. For deeper detail of available features, be sure also to check out [Documentation Page](https://fgodoy.me/EnumUtilities/).
 
 ## Quickstart
 
@@ -114,109 +117,12 @@ Then 3 classes will be generated with the following methods:
 
 All generated code are properly nullable annotated and removed from code coverage.
 
-## Guide
+## Supported members attributes
+
 The following attributes are supported:
-
-### [EnumMemberAttribute](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.enummemberattribute)
-
-Example:
-
-```csharp
-[EnumGenerator]
-public enum PaymentMethod
-{
-    [EnumMember(Value = "Credit card")]
-    Credit,
-    [EnumMember(Value = "Debit card")]
-    Debit,
-    Cash,
-    Cheque
-}
-```
-
-This will generate the following methods:
-- [PaymentMethodExtensions](./tests/EnumUtilities.Generators.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Models.PaymentMethodExtensions.g.cs)
-  - ToEnumMemberValue(this PaymentMethod)
-- [PaymentMethodFactory](./tests/EnumUtilities.Generators.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Models.PaymentMethodFactory.g.cs)
-  - TryParseFromEnumMemberValue(string?, StringComparison, out PaymentMethod)
-  - TryParseFromEnumMemberValue(string?, out PaymentMethod)
-  - TryParseFromEnumMemberValue(string?, StringComparison)
-  - TryParseFromEnumMemberValue(string?)
-
-### [DescriptionAttribute](https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.descriptionattribute)
-
-Example:
-
-```csharp
-[EnumGenerator]
-public enum PaymentMethod
-{
-    Credit,
-    Debit,
-    [Description("The payment by using physical cash")]
-    Cash,
-    Cheque
-}
-```
-
-This will generate the following methods:
-- [PaymentMethodExtensions](./tests/EnumUtilities.Generators.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Models.PaymentMethodExtensions.g.cs)
-  - GetDescription(this PaymentMethod)
-- [PaymentMethodFactory](./tests/EnumUtilities.Generators.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Models.PaymentMethodFactory.g.cs)
-  - TryCreateFromDescription(string?, StringComparison, out PaymentMethod)
-  - TryCreateFromDescription(string?, out PaymentMethod)
-  - TryCreateFromDescription(string?, StringComparison)
-  - TryCreateFromDescription(string?)
-
-### [DisplayAttribute](https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations.displayattribute)
-
-Example:
-
-```csharp
-[EnumGenerator]
-public enum WeekDays
-{
-    [Display(
-        Name = nameof(Strings.MondayFull),
-        ShortName = nameof(Strings.MondayShort),
-        Description = nameof(Strings.MondayDescription),
-        ResourceType = typeof(Strings))]
-    Monday,
-    [Display(ShortName = "Tue")]
-    Tuesday,
-    [Display]
-    Wednesday,
-    [Display(Name = "Thursday")]
-    Thursday,
-    [Display(Name = "Friday", ShortName = "Fri")]
-    Friday,
-    [Display(ShortName = "Sat", Description = "Almost the last day of the week")]
-    Saturday,
-    [Display(Description = "The last day of the week")]
-    Sunday
-}
-```
-
-Note that if `ResourceType` is provided the generated code will correctly get the value from resource.
-
-This will generate the following methods:
-- [WeekDaysExtensions](./tests/EnumUtilities.Generators.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Models.WeekDaysExtensions.g.cs)
-  - GetDisplayShortName(this WeekDays)
-  - GetDisplayName(this WeekDays)
-  - GetDescription(this WeekDays)
-- [WeekDaysFactory](./tests/EnumUtilities.Generators.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Models.WeekDaysFactory.g.cs)
-  - TryCreateFromDisplayShortName(string?, StringComparison, out WeekDays)
-  - TryCreateFromDisplayShortName(string?, out WeekDays)
-  - TryCreateFromDisplayShortName(string?, StringComparison)
-  - TryCreateFromDisplayShortName(string?)
-  - TryCreateFromDisplayName(string?, StringComparison, out WeekDays)
-  - TryCreateFromDisplayName(string?, out WeekDays)
-  - TryCreateFromDisplayName(string?, StringComparison)
-  - TryCreateFromDisplayName(string?)
-  - TryCreateFromDescription(string?, StringComparison, out WeekDays)
-  - TryCreateFromDescription(string?, out WeekDays)
-  - TryCreateFromDescription(string?, StringComparison)
-  - TryCreateFromDescription(string?)
+- [`[EnumMember]`](https://fgodoy.me/EnumUtilities/members-attributes/enum-member-attribute.html)
+- [`[Description]`](https://fgodoy.me/EnumUtilities/members-attributes/description-attribute.html)
+- [`[Display]`](https://fgodoy.me/EnumUtilities/members-attributes/display-attribute.html)
 
 ### JSON Serialization
 

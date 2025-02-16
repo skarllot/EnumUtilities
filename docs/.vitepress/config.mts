@@ -25,7 +25,7 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' }
+      { text: 'Examples', link: '/examples' }
     ],
 
     logo: '/favicon-128x128.png',
@@ -36,10 +36,27 @@ export default defineConfig({
 
     sidebar: [
       {
-        text: 'Examples',
+        text: 'Introduction',
         items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' }
+          { text: 'Getting Started', link: '/introduction/' },
+          { text: 'Basic Usage', link: '/introduction/basic-usage' },
+          { text: 'Flags Enums', link: '/introduction/bit-flags' },
+          { text: 'Metadata', link: '/introduction/metadata' }
+        ]
+      },
+      {
+        text: 'Members Attributes',
+        items: [
+          { text: 'Overview', link: '/members-attributes/' },
+          { text: 'EnumMember', link: '/members-attributes/enum-member-attribute' },
+          { text: 'Description', link: '/members-attributes/description-attribute' },
+          { text: 'Dispaly', link: '/members-attributes/display-attribute' }
+        ]
+      },
+      {
+        text: 'JSON Serialization',
+        items: [
+          { text: 'Overview', link: '/json/' }
         ]
       }
     ],

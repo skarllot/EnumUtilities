@@ -10,10 +10,10 @@ hero:
   actions:
     - theme: brand
       text: Get Started
-      link: /introduction
+      link: /introduction/
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: Basic Usage
+      link: /introduction/basic-usage
 
 features:
   - title: 🧩 Extensions & Parsers
