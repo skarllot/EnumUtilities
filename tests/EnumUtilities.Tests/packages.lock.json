@@ -4,9 +4,9 @@
     "net8.0": {
       "AwesomeAssertions": {
         "type": "Direct",
-        "requested": "[7.0.0, )",
-        "resolved": "7.0.0",
-        "contentHash": "/jKSCFl+hHMfczZ/u4UZP3G3HHZ8slCtkNneB+/WheYrbWMfT8QzO/HiWYg0PVU87VqS0/gK41eW05hofjQ3PA==",
+        "requested": "[7.2.0, )",
+        "resolved": "7.2.0",
+        "contentHash": "ahhSqKWCcW4k+00aVyjZJZVkWsP5UXUZx3DjYLgsBzmzIj1E+0YcxC9rioxopO6i/NL9DuBUXb2bBf8hovMfPw==",
         "dependencies": {
           "System.Configuration.ConfigurationManager": "6.0.0"
         }
