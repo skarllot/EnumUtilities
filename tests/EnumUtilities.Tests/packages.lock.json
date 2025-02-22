@@ -4,9 +4,9 @@
     "net8.0": {
       "AwesomeAssertions": {
         "type": "Direct",
-        "requested": "[8.0.0, )",
-        "resolved": "8.0.0",
-        "contentHash": "6fWiV7mGZUzZXzeiW3hWF0nJokuuNm4hnzuqbM3IXHqGYkWnHl65+wNpuQ73xfJXClX0fmfKcTdQ2Ula719IDg=="
+        "requested": "[8.0.1, )",
+        "resolved": "8.0.1",
+        "contentHash": "ImDIS3Jf8PYtjI1i0Vx24VBTzq0w7SVnBYx/nxyRUSU6QolouLtAtkFM+P5NUlrBEOV1Q2LbR4+rmdkoni8dEg=="
       },
       "coverlet.collector": {
         "type": "Direct",
