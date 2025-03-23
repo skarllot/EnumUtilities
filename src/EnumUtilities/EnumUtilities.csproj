@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net6.0;net8.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net6.0;net8.0;net9.0</TargetFrameworks>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>icon.png</PackageIcon>
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
@@ -9,6 +9,7 @@
     <DefineConstants>$(DefineConstants);AllowUnsafeBlocks</DefineConstants>
     <AssemblyName>Raiqub.Generators.EnumUtilities.Abstractions</AssemblyName>
     <PackageId>Raiqub.Generators.EnumUtilities</PackageId>
+    <IsAotCompatible Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))">true</IsAotCompatible>
   </PropertyGroup>
 
   <ItemGroup>

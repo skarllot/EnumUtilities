@@ -1,29 +1,26 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-      <TargetFramework>net8.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
+  <PropertyGroup>
+    <TargetFrameworks>net6.0;net8.0;net9.0</TargetFrameworks>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
 
-        <IsPackable>false</IsPackable>
-        <IsTestProject>true</IsTestProject>
-    </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" />
+    <PackageReference Include="AwesomeAssertions" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="Xunit.Combinatorial" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+  </ItemGroup>
 
-    <ItemGroup>
-        <PackageReference Include="coverlet.collector" />
-        <PackageReference Include="AwesomeAssertions" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" />
-        <PackageReference Include="xunit" />
-        <PackageReference Include="Xunit.Combinatorial" />
-        <PackageReference Include="xunit.runner.visualstudio" />
-    </ItemGroup>
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
 
-    <ItemGroup>
-        <Using Include="Xunit" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\..\src\EnumUtilities\EnumUtilities.csproj" />
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\EnumUtilities\EnumUtilities.csproj" />
+  </ItemGroup>
 
 </Project>

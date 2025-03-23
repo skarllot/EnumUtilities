@@ -41,12 +41,28 @@ public class StringCreation
     public string ZeroedString() => new string('\0', 100);
 
     [Benchmark]
+    public string DirectCreation()
+    {
+        return string.Create(
+            s_lotrInspiredTexts.Sum(x => x.Length),
+            s_lotrInspiredTexts.AsSpan(),
+            static (span, col) =>
+            {
+                foreach (var text in col)
+                {
+                    text.AsSpan().CopyTo(span);
+                    span = span.Slice(text.Length);
+                }
+            });
+    }
+
+    [Benchmark]
     public string MemoryMarshalReference()
     {
-        int strlen = s_lotrInspiredTexts.Sum(x => x.Length);
+        var strlen = s_lotrInspiredTexts.Sum(x => x.Length);
         var result = string.Create(strlen, 0, static (_, _) => { });
         var span = MemoryMarshal.CreateSpan(ref MemoryMarshal.GetReference(result.AsSpan()), strlen);
-        foreach (string text in s_lotrInspiredTexts)
+        foreach (var text in s_lotrInspiredTexts)
         {
             text.AsSpan().CopyTo(span);
             span = span.Slice(text.Length);
@@ -58,12 +74,12 @@ public class StringCreation
     [Benchmark]
     public unsafe string UnsafePointer()
     {
-        int strlen = s_lotrInspiredTexts.Sum(x => x.Length);
+        var strlen = s_lotrInspiredTexts.Sum(x => x.Length);
         var result = string.Create(strlen, 0, static (_, _) => { });
         fixed (char* ptr = result)
         {
             var span = new Span<char>(ptr, strlen);
-            foreach (string text in s_lotrInspiredTexts)
+            foreach (var text in s_lotrInspiredTexts)
             {
                 text.AsSpan().CopyTo(span);
                 span = span.Slice(text.Length);

@@ -1,4 +1,6 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿#if NET8_0_OR_GREATER
+
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Numerics;
 using FluentAssertions;
@@ -109,3 +111,5 @@ public class EnumNumericFormatterTest
             .Should().Be(value.ToString(CultureInfo.InvariantCulture).Length);
     }
 }
+
+#endif
