@@ -21,34 +21,80 @@ public static class EnumStringFormatter
         int count)
     {
         const int separatorStringLength = 2;
-        int strlen = checked(count + (separatorStringLength * (foundItemsCount - 1)));
+        var strlen = checked(count + (separatorStringLength * (foundItemsCount - 1)));
 
-#if NET6_0_OR_GREATER
+#if NET9_0_OR_GREATER
+        var result = string.Create(
+            length: strlen,
+            state: new FlagsNamesStringCreationContext(names, foundItems, foundItemsCount),
+            action: FlagsNamesStringCreationContext.Fill);
+#elif NET6_0_OR_GREATER
         var result = string.Create(strlen, 0, static (_, _) => { });
-        var span = MemoryMarshal.CreateSpan(ref MemoryMarshal.GetReference(result.AsSpan()), strlen);
-        {
+        FlagsNamesStringCreationContext.Fill(
+            MemoryMarshal.CreateSpan(ref MemoryMarshal.GetReference(result.AsSpan()), strlen),
+            names,
+            foundItems,
+            foundItemsCount);
 #else
         var result = new string('\0', strlen);
         fixed (char* ptr = result)
         {
-            var span = new Span<char>(ptr, strlen);
+            FlagsNamesStringCreationContext.Fill(
+                new Span<char>(ptr, strlen),
+                names,
+                foundItems,
+                foundItemsCount);
+        }
 #endif
 
-            string name = names[foundItems[--foundItemsCount]];
-            name.AsSpan().CopyTo(span);
-            span = span.Slice(name.Length);
-            while (--foundItemsCount >= 0)
-            {
-                span[0] = ',';
-                span[1] = ' ';
-                span = span.Slice(2);
+        return result;
+    }
 
-                name = names[foundItems[foundItemsCount]];
-                name.AsSpan().CopyTo(span);
-                span = span.Slice(name.Length);
-            }
+    private readonly ref struct FlagsNamesStringCreationContext
+    {
+        private readonly ReadOnlySpan<string> _names;
+        private readonly Span<int> _foundItems;
+        private readonly int _foundItemsCount;
+
+        public FlagsNamesStringCreationContext(ReadOnlySpan<string> names, Span<int> foundItems, int foundItemsCount)
+        {
+            _names = names;
+            _foundItems = foundItems;
+            _foundItemsCount = foundItemsCount;
         }
 
-        return result;
+#if NET9_0_OR_GREATER
+        public static void Fill(Span<char> destination, FlagsNamesStringCreationContext context)
+        {
+            context.Fill(destination);
+        }
+#else
+        public static void Fill(
+            Span<char> destination,
+            ReadOnlySpan<string> names,
+            Span<int> foundItems,
+            int foundItemsCount)
+        {
+            new FlagsNamesStringCreationContext(names, foundItems, foundItemsCount).Fill(destination);
+        }
+#endif
+
+        private void Fill(Span<char> destination)
+        {
+            var foundItemsCount = _foundItemsCount;
+            var name = _names[_foundItems[--foundItemsCount]];
+            name.AsSpan().CopyTo(destination);
+            destination = destination.Slice(name.Length);
+            while (--foundItemsCount >= 0)
+            {
+                destination[0] = ',';
+                destination[1] = ' ';
+                destination = destination.Slice(2);
+
+                name = _names[_foundItems[foundItemsCount]];
+                name.AsSpan().CopyTo(destination);
+                destination = destination.Slice(name.Length);
+            }
+        }
     }
 }

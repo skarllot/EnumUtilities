@@ -8,7 +8,7 @@
     <SolutionDir Condition="'$(SolutionDir)' == ''">$(MSBuildThisFileDirectory)</SolutionDir>
     <PackageOutputPath>$(SolutionDir)artifacts</PackageOutputPath>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
-    <LangVersion>12</LangVersion>
+    <LangVersion>13</LangVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>true</ImplicitUsings>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>

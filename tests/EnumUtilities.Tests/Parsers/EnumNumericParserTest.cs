@@ -1,4 +1,6 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿#if NET8_0_OR_GREATER
+
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Numerics;
 using FluentAssertions;
@@ -118,3 +120,5 @@ public class EnumNumericParserTest
         result.Should().Be(ulong.Parse(value, CultureInfo.InvariantCulture));
     }
 }
+
+#endif
