@@ -9,6 +9,7 @@
     <DefineConstants>$(DefineConstants);AllowUnsafeBlocks</DefineConstants>
     <AssemblyName>Raiqub.Generators.EnumUtilities.Abstractions</AssemblyName>
     <PackageId>Raiqub.Generators.EnumUtilities</PackageId>
+    <IsAotCompatible Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))">true</IsAotCompatible>
   </PropertyGroup>
 
   <ItemGroup>
