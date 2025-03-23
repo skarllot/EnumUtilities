@@ -12,6 +12,6 @@
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.4.0" />
     <PackageVersion Include="Polyfill" Version="7.9.1" />
     <PackageVersion Include="Raiqub.Generators.T4CodeWriter.Sources" Version="1.2.3" />
-    <PackageVersion Include="System.Memory" Version="4.6.0" />
+    <PackageVersion Include="System.Memory" Version="4.6.2" />
   </ItemGroup>
 </Project>
