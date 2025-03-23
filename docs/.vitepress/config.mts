@@ -50,7 +50,7 @@ export default defineConfig({
           { text: 'Overview', link: '/members-attributes/' },
           { text: 'EnumMember', link: '/members-attributes/enum-member-attribute' },
           { text: 'Description', link: '/members-attributes/description-attribute' },
-          { text: 'Dispaly', link: '/members-attributes/display-attribute' }
+          { text: 'Display', link: '/members-attributes/display-attribute' }
         ]
       },
       {
