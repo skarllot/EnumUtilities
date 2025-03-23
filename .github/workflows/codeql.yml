@@ -43,7 +43,7 @@ jobs:
       fail-fast: false
       matrix:
         # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
-        language: [ 'csharp' ]
+        language: [ 'csharp', 'javascript-typescript' ]
 
     steps:
     - name: 🛡️ Harden Runner
@@ -58,13 +58,13 @@ jobs:
           *.ws.symantec.com:80
           aka.ms:443
           github.com:443
-          api.ipify.org:443
           api.nuget.org:443
           builds.dotnet.microsoft.com:443
           cdn.fwupd.org:443
           ci.dot.net:443
           dc.services.visualstudio.com:443
           objects.githubusercontent.com:443
+          registry.npmjs.org:443
           s.symcb.com:80
           s.symcd.com:80
           www.microsoft.com:80
@@ -81,6 +81,7 @@ jobs:
           6.x
           8.x
         global-json-file: global.json
+      if: matrix.language == 'csharp'
 
     - name: 🗃️ Setup NuGet cache
       uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
@@ -88,6 +89,15 @@ jobs:
         path: ~/.nuget/packages
         key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
         restore-keys: ${{ runner.os }}-nuget-
+      if: matrix.language == 'csharp'
+
+    - name: 🧰 Setup Node
+      uses: actions/setup-node@1d0ff469b7ec7b3cb9d8673fde0c81c44821de2a # v4.2.0
+      with:
+        node-version: 20
+        cache: npm
+        cache-dependency-path: docs/package-lock.json
+      if: matrix.language == 'javascript-typescript'
 
     # Initializes the CodeQL tools for scanning.
     - name: 🛠️ Initialize CodeQL
@@ -103,9 +113,21 @@ jobs:
 
     - name: 📥 Restore dependencies
       run: dotnet restore --locked-mode
+      if: matrix.language == 'csharp'
 
     - name: 🏗️ Build
       run: dotnet build --no-restore -c Release
+      if: matrix.language == 'csharp'
+
+    - name: 📥 Install dependencies
+      run: npm ci
+      working-directory: docs
+      if: matrix.language == 'javascript-typescript'
+
+    - name: 🏗️ Build with VitePress
+      run: npm run docs:build
+      working-directory: docs
+      if: matrix.language == 'javascript-typescript'
 
     - name: 🔍 Perform CodeQL Analysis
       uses: github/codeql-action/analyze@5f8171a638ada777af81d42b55959a643bb29017 # v3.28.12
