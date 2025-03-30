@@ -8,7 +8,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <AnalyzerLanguage>cs</AnalyzerLanguage>
     <AnalyzerRoslynVersion>4.3.1</AnalyzerRoslynVersion>
-    <DefineConstants>$(DefineConstants);Roslyn_431;AllowUnsafeBlocks</DefineConstants>
+    <DefineConstants>$(DefineConstants);Roslyn_431;AllowUnsafeBlocks;FeatureMemory</DefineConstants>
     <RootNamespace>Raiqub.Generators.EnumUtilities</RootNamespace>
     <AssemblyName>Raiqub.Generators.EnumUtilities</AssemblyName>
   </PropertyGroup>
@@ -22,7 +22,6 @@
       <IncludeAssets>runtime; native; contentfiles; analyzers</IncludeAssets>
       <ExcludeAssets>build; buildTransitive</ExcludeAssets>
     </PackageReference>
-    <PackageReference Include="System.Memory" />
   </ItemGroup>
 
   <ItemGroup>
