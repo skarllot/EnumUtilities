@@ -468,8 +468,8 @@
       },
       "System.Memory": {
         "type": "Transitive",
-        "resolved": "4.6.2",
-        "contentHash": "Eq99oXEjWicekXb8AaqwYA6p+am0XrUMenq5RB6OYIL7oYY5gUzRas9+i2zcNsRNB75MpDhFsYX+uV6y89a0Eg=="
+        "resolved": "4.5.5",
+        "contentHash": "XIWiDvKPXaTveaB7HVganDlOCRoj03l+jrwNvcge/t8vhGYKvqV+dMv6G4SAX2NoNmN0wZfVPTAlFwZcZvVOUw=="
       },
       "System.ObjectModel": {
         "type": "Transitive",
@@ -747,10 +747,7 @@
         }
       },
       "Raiqub.Generators.EnumUtilities": {
-        "type": "Project",
-        "dependencies": {
-          "System.Memory": "[4.6.2, )"
-        }
+        "type": "Project"
       },
       "Microsoft.CodeAnalysis.CSharp.Workspaces": {
         "type": "CentralTransitive",
