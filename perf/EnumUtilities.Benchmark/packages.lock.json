@@ -38,9 +38,9 @@
       },
       "NetEscapades.EnumGenerators": {
         "type": "Direct",
-        "requested": "[1.0.0-beta11, )",
-        "resolved": "1.0.0-beta11",
-        "contentHash": "37btDZQX5OzwUmF6xvqxDb0mRTXi3O/h3nVKjvri2XEwyUnHsY5g43jbPJo8Sp2gxbfJd2lto7fLLQujw5aT5Q=="
+        "requested": "[1.0.0-beta12, )",
+        "resolved": "1.0.0-beta12",
+        "contentHash": "DvhI+7nTsMRIEJrYrMxXLe3YwJj3jyPezGqr4sf7JM/nuf6zOnzdXOyYr3IHbj86KZlYYEOCdBLO5/2okugvGQ=="
       },
       "BenchmarkDotNet.Annotations": {
         "type": "Transitive",
