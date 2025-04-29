@@ -4,9 +4,9 @@
     "net6.0": {
       "AwesomeAssertions": {
         "type": "Direct",
-        "requested": "[8.0.2, )",
-        "resolved": "8.0.2",
-        "contentHash": "iCtzS7gKw/pnLtsF2IKw3dnIASIlApA6dzzIinf5eQvxj5LJ3mjuXYUC8urKg81f8vew6NI7l7iIqTbKtthB/A=="
+        "requested": "[8.1.0, )",
+        "resolved": "8.1.0",
+        "contentHash": "IfNC4cpXPi9tclWvuNO9lfkuIxJsUTLTS1NXto55jDrAUQJYl0zLI9ByISrfkbBE2Xtg+IWaAXQ6jnUx3anDuw=="
       },
       "coverlet.collector": {
         "type": "Direct",
@@ -129,9 +129,9 @@
     "net8.0": {
       "AwesomeAssertions": {
         "type": "Direct",
-        "requested": "[8.0.2, )",
-        "resolved": "8.0.2",
-        "contentHash": "iCtzS7gKw/pnLtsF2IKw3dnIASIlApA6dzzIinf5eQvxj5LJ3mjuXYUC8urKg81f8vew6NI7l7iIqTbKtthB/A=="
+        "requested": "[8.1.0, )",
+        "resolved": "8.1.0",
+        "contentHash": "IfNC4cpXPi9tclWvuNO9lfkuIxJsUTLTS1NXto55jDrAUQJYl0zLI9ByISrfkbBE2Xtg+IWaAXQ6jnUx3anDuw=="
       },
       "coverlet.collector": {
         "type": "Direct",
@@ -254,9 +254,9 @@
     "net9.0": {
       "AwesomeAssertions": {
         "type": "Direct",
-        "requested": "[8.0.2, )",
-        "resolved": "8.0.2",
-        "contentHash": "iCtzS7gKw/pnLtsF2IKw3dnIASIlApA6dzzIinf5eQvxj5LJ3mjuXYUC8urKg81f8vew6NI7l7iIqTbKtthB/A=="
+        "requested": "[8.1.0, )",
+        "resolved": "8.1.0",
+        "contentHash": "IfNC4cpXPi9tclWvuNO9lfkuIxJsUTLTS1NXto55jDrAUQJYl0zLI9ByISrfkbBE2Xtg+IWaAXQ6jnUx3anDuw=="
       },
       "coverlet.collector": {
         "type": "Direct",
