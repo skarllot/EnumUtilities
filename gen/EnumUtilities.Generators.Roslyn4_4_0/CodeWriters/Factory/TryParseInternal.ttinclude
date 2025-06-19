@@ -160,7 +160,9 @@
         }
 
 <#+
-        var lookupTable = Model.Values.Where(x => keySelector(x)?.Length > 0).ToLookup(x => keySelector(x)![0]);
+        var lookupTable = Model.Values.Where(x => keySelector(x)?.Length > 0).ToLookup(
+            x => keySelector(x)![0],
+            CharIgnoreCaseEqualityComparer.Instance);
 #>
         switch (value[0])
         {
