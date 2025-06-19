@@ -796,20 +796,22 @@ this.Write("        }\r\n\r\n");
         
         #line 162 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
 
-        var lookupTable = Model.Values.Where(x => keySelector(x)?.Length > 0).ToLookup(x => keySelector(x)![0]);
-
-        
-        #line default
-        #line hidden
-        
-        #line 165 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
-this.Write("        switch (value[0])\r\n        {\r\n");
+        var lookupTable = Model.Values.Where(x => keySelector(x)?.Length > 0).ToLookup(
+            x => keySelector(x)![0],
+            CharIgnoreCaseEqualityComparer.Instance);
 
         
         #line default
         #line hidden
         
         #line 167 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
+this.Write("        switch (value[0])\r\n        {\r\n");
+
+        
+        #line default
+        #line hidden
+        
+        #line 169 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
 
         foreach (var curr in lookupTable.OrderBy(x => x.Key))
         {
@@ -820,28 +822,28 @@ this.Write("        switch (value[0])\r\n        {\r\n");
         #line default
         #line hidden
         
-        #line 173 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
+        #line 175 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
 this.Write("            case '\\u");
 
         
         #line default
         #line hidden
         
-        #line 173 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
+        #line 175 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(((int)curr.Key).ToString("x4")));
 
         
         #line default
         #line hidden
         
-        #line 173 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
+        #line 175 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
 this.Write("':\r\n");
 
         
         #line default
         #line hidden
         
-        #line 174 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
+        #line 176 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
 
             }
             else if (char.ToUpperInvariant(curr.Key) == curr.Key && char.ToLowerInvariant(curr.Key) == curr.Key)
@@ -851,28 +853,28 @@ this.Write("':\r\n");
         #line default
         #line hidden
         
-        #line 179 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
+        #line 181 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
 this.Write("            case '");
 
         
         #line default
         #line hidden
         
-        #line 179 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
+        #line 181 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(curr.Key));
 
         
         #line default
         #line hidden
         
-        #line 179 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
+        #line 181 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
 this.Write("':\r\n");
 
         
         #line default
         #line hidden
         
-        #line 180 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
+        #line 182 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
 
             }
             else
@@ -882,42 +884,42 @@ this.Write("':\r\n");
         #line default
         #line hidden
         
-        #line 185 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
+        #line 187 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
 this.Write("            case '");
 
         
         #line default
         #line hidden
         
-        #line 185 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
+        #line 187 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(char.ToUpperInvariant(curr.Key)));
 
         
         #line default
         #line hidden
         
-        #line 185 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
+        #line 187 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
 this.Write("':\r\n            case '");
 
         
         #line default
         #line hidden
         
-        #line 186 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
+        #line 188 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(char.ToLowerInvariant(curr.Key)));
 
         
         #line default
         #line hidden
         
-        #line 186 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
+        #line 188 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
 this.Write("':\r\n");
 
         
         #line default
         #line hidden
         
-        #line 187 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
+        #line 189 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
 
             }
 
@@ -925,14 +927,14 @@ this.Write("':\r\n");
         #line default
         #line hidden
         
-        #line 190 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
+        #line 192 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
 this.Write("                switch (value)\r\n                {\r\n");
 
         
         #line default
         #line hidden
         
-        #line 192 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
+        #line 194 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
 
             foreach (var enumValue in curr)
             {
@@ -941,42 +943,42 @@ this.Write("                switch (value)\r\n                {\r\n");
         #line default
         #line hidden
         
-        #line 196 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
+        #line 198 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
 this.Write("                    case { } when value.Equals(\"");
 
         
         #line default
         #line hidden
         
-        #line 196 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
+        #line 198 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(keySelector(enumValue)));
 
         
         #line default
         #line hidden
         
-        #line 196 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
+        #line 198 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
 this.Write("\", comparisonType):\r\n                        result = ");
 
         
         #line default
         #line hidden
         
-        #line 197 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
+        #line 199 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
 this.Write(this.ToStringHelper.ToStringWithCulture(enumValue.MemberValue));
 
         
         #line default
         #line hidden
         
-        #line 197 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
+        #line 199 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
 this.Write(";\r\n                        return true;\r\n");
 
         
         #line default
         #line hidden
         
-        #line 199 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
+        #line 201 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
 
             }
 
@@ -984,14 +986,14 @@ this.Write(";\r\n                        return true;\r\n");
         #line default
         #line hidden
         
-        #line 202 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
+        #line 204 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
 this.Write("                }\r\n                break;\r\n");
 
         
         #line default
         #line hidden
         
-        #line 204 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
+        #line 206 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
 
         }
 
@@ -999,14 +1001,14 @@ this.Write("                }\r\n                break;\r\n");
         #line default
         #line hidden
         
-        #line 207 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
+        #line 209 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
 this.Write("        }\r\n\r\n        result = 0;\r\n        return false;\r\n    }\r\n");
 
         
         #line default
         #line hidden
         
-        #line 212 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
+        #line 214 "C:\Users\skarl\source\repos\github\skarllot\EnumUtilities\gen\EnumUtilities.Generators.Roslyn4_4_0\CodeWriters\Factory\TryParseInternal.ttinclude"
 
     }
 
