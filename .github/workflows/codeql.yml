@@ -80,7 +80,6 @@ jobs:
         dotnet-version: |
           6.x
           8.x
-          9.x
         global-json-file: global.json
       if: matrix.language == 'csharp'
 
