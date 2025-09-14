@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+﻿using AwesomeAssertions;
 using Raiqub.Generators.EnumUtilities.Formatters;
 
 namespace Raiqub.Generators.EnumUtilities.Tests.Formatters;

@@ -3,7 +3,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Numerics;
-using FluentAssertions;
+using AwesomeAssertions;
 using Raiqub.Generators.EnumUtilities.Formatters;
 
 namespace Raiqub.Generators.EnumUtilities.Tests.Formatters;
