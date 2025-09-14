@@ -169,5 +169,79 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 _ => null
             };
         }
+
+        /// <summary>
+        /// Provides pattern matching functionality for the <see cref="NestedInClass.MyEnum3"/> enum by returning the corresponding value based on the enum value.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result to return for each member match.</typeparam>
+        /// <param name="value">The <see cref="NestedInClass.MyEnum3"/> enum value to match against.</param>
+        /// <param name="Monday">The value to return when the enum value is Monday.</param>
+        /// <param name="Tuesday">The value to return when the enum value is Tuesday.</param>
+        /// <param name="Wednesday">The value to return when the enum value is Wednesday.</param>
+        /// <param name="Thursday">The value to return when the enum value is Thursday.</param>
+        /// <param name="Friday">The value to return when the enum value is Friday.</param>
+        /// <param name="Saturday">The value to return when the enum value is Saturday.</param>
+        /// <param name="Sunday">The value to return when the enum value is Sunday.</param>
+        /// <returns>The corresponding result value based on the enum value.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected member values.</exception>
+        public static TResult Match<TResult>(
+            this NestedInClass.MyEnum3 value,
+            TResult Monday,
+            TResult Tuesday,
+            TResult Wednesday,
+            TResult Thursday,
+            TResult Friday,
+            TResult Saturday,
+            TResult Sunday)
+        {
+            return (int)value switch
+            {
+                0 => Monday,
+                1 => Tuesday,
+                2 => Wednesday,
+                3 => Thursday,
+                4 => Friday,
+                5 => Saturday,
+                6 => Sunday,
+                _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
+            };
+        }
+
+        /// <summary>
+        /// Provides pattern matching functionality for the <see cref="NestedInClass.MyEnum3"/> enum by executing the corresponding function based on the enum value.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result to return from the executed function.</typeparam>
+        /// <param name="value">The <see cref="NestedInClass.MyEnum3"/> enum value to match against.</param>
+        /// <param name="Monday">The function to execute when the enum value is Monday.</param>
+        /// <param name="Tuesday">The function to execute when the enum value is Tuesday.</param>
+        /// <param name="Wednesday">The function to execute when the enum value is Wednesday.</param>
+        /// <param name="Thursday">The function to execute when the enum value is Thursday.</param>
+        /// <param name="Friday">The function to execute when the enum value is Friday.</param>
+        /// <param name="Saturday">The function to execute when the enum value is Saturday.</param>
+        /// <param name="Sunday">The function to execute when the enum value is Sunday.</param>
+        /// <returns>The result of executing the corresponding function based on the enum value.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected <see cref="NestedInClass.MyEnum3"/> values.</exception>
+        public static TResult Match<TResult>(
+            this NestedInClass.MyEnum3 value,
+            Func<NestedInClass.MyEnum3, TResult> Monday,
+            Func<NestedInClass.MyEnum3, TResult> Tuesday,
+            Func<NestedInClass.MyEnum3, TResult> Wednesday,
+            Func<NestedInClass.MyEnum3, TResult> Thursday,
+            Func<NestedInClass.MyEnum3, TResult> Friday,
+            Func<NestedInClass.MyEnum3, TResult> Saturday,
+            Func<NestedInClass.MyEnum3, TResult> Sunday)
+        {
+            return (int)value switch
+            {
+                0 => Monday((NestedInClass.MyEnum3)value),
+                1 => Tuesday((NestedInClass.MyEnum3)value),
+                2 => Wednesday((NestedInClass.MyEnum3)value),
+                3 => Thursday((NestedInClass.MyEnum3)value),
+                4 => Friday((NestedInClass.MyEnum3)value),
+                5 => Saturday((NestedInClass.MyEnum3)value),
+                6 => Sunday((NestedInClass.MyEnum3)value),
+                _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
+            };
+        }
     }
 }

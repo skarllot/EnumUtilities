@@ -57,6 +57,7 @@ This will generate 3 classes with the following methods:
   - InterlockedIncrement(this ref Categories)
   - InterlockedCompareExchange(this ref Categories, Categories, Categories)
   - InterlockedExchange(this ref Categories, Categories)
+  - Match(this Categories, ...)
 - [CategoriesFactory](./tests/EnumUtilities.Generators.IntegrationTests/Generated/Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator/Models.CategoriesFactory.g.cs)
   - Parse(string, bool = false)
   - Parse(ReadOnlySpan<char>, bool = false)

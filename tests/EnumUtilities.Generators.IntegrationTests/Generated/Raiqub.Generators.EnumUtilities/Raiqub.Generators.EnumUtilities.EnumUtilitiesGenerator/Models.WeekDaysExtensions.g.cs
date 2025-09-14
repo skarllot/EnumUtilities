@@ -169,5 +169,79 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 _ => null
             };
         }
+
+        /// <summary>
+        /// Provides pattern matching functionality for the <see cref="WeekDays"/> enum by returning the corresponding value based on the enum value.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result to return for each member match.</typeparam>
+        /// <param name="value">The <see cref="WeekDays"/> enum value to match against.</param>
+        /// <param name="Monday">The value to return when the enum value is Monday.</param>
+        /// <param name="Tuesday">The value to return when the enum value is Tuesday.</param>
+        /// <param name="Wednesday">The value to return when the enum value is Wednesday.</param>
+        /// <param name="Thursday">The value to return when the enum value is Thursday.</param>
+        /// <param name="Friday">The value to return when the enum value is Friday.</param>
+        /// <param name="Saturday">The value to return when the enum value is Saturday.</param>
+        /// <param name="Sunday">The value to return when the enum value is Sunday.</param>
+        /// <returns>The corresponding result value based on the enum value.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected member values.</exception>
+        public static TResult Match<TResult>(
+            this WeekDays value,
+            TResult Monday,
+            TResult Tuesday,
+            TResult Wednesday,
+            TResult Thursday,
+            TResult Friday,
+            TResult Saturday,
+            TResult Sunday)
+        {
+            return (int)value switch
+            {
+                0 => Monday,
+                1 => Tuesday,
+                2 => Wednesday,
+                3 => Thursday,
+                4 => Friday,
+                5 => Saturday,
+                6 => Sunday,
+                _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
+            };
+        }
+
+        /// <summary>
+        /// Provides pattern matching functionality for the <see cref="WeekDays"/> enum by executing the corresponding function based on the enum value.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result to return from the executed function.</typeparam>
+        /// <param name="value">The <see cref="WeekDays"/> enum value to match against.</param>
+        /// <param name="Monday">The function to execute when the enum value is Monday.</param>
+        /// <param name="Tuesday">The function to execute when the enum value is Tuesday.</param>
+        /// <param name="Wednesday">The function to execute when the enum value is Wednesday.</param>
+        /// <param name="Thursday">The function to execute when the enum value is Thursday.</param>
+        /// <param name="Friday">The function to execute when the enum value is Friday.</param>
+        /// <param name="Saturday">The function to execute when the enum value is Saturday.</param>
+        /// <param name="Sunday">The function to execute when the enum value is Sunday.</param>
+        /// <returns>The result of executing the corresponding function based on the enum value.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected <see cref="WeekDays"/> values.</exception>
+        public static TResult Match<TResult>(
+            this WeekDays value,
+            Func<WeekDays, TResult> Monday,
+            Func<WeekDays, TResult> Tuesday,
+            Func<WeekDays, TResult> Wednesday,
+            Func<WeekDays, TResult> Thursday,
+            Func<WeekDays, TResult> Friday,
+            Func<WeekDays, TResult> Saturday,
+            Func<WeekDays, TResult> Sunday)
+        {
+            return (int)value switch
+            {
+                0 => Monday((WeekDays)value),
+                1 => Tuesday((WeekDays)value),
+                2 => Wednesday((WeekDays)value),
+                3 => Thursday((WeekDays)value),
+                4 => Friday((WeekDays)value),
+                5 => Saturday((WeekDays)value),
+                6 => Sunday((WeekDays)value),
+                _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
+            };
+        }
     }
 }

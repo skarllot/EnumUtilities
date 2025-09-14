@@ -73,5 +73,73 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 _ => null
             };
         }
+
+        /// <summary>
+        /// Provides pattern matching functionality for the <see cref="SlimCategories"/> enum by returning the corresponding value based on the enum value.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result to return for each member match.</typeparam>
+        /// <param name="value">The <see cref="SlimCategories"/> enum value to match against.</param>
+        /// <param name="Electronics">The value to return when the enum value is Electronics.</param>
+        /// <param name="Food">The value to return when the enum value is Food.</param>
+        /// <param name="Automotive">The value to return when the enum value is Automotive.</param>
+        /// <param name="Arts">The value to return when the enum value is Arts.</param>
+        /// <param name="BeautyCare">The value to return when the enum value is BeautyCare.</param>
+        /// <param name="Fashion">The value to return when the enum value is Fashion.</param>
+        /// <returns>The corresponding result value based on the enum value.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected member values.</exception>
+        public static TResult Match<TResult>(
+            this SlimCategories value,
+            TResult Electronics,
+            TResult Food,
+            TResult Automotive,
+            TResult Arts,
+            TResult BeautyCare,
+            TResult Fashion)
+        {
+            return (byte)value switch
+            {
+                0 => Electronics,
+                1 => Food,
+                2 => Automotive,
+                3 => Arts,
+                4 => BeautyCare,
+                5 => Fashion,
+                _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
+            };
+        }
+
+        /// <summary>
+        /// Provides pattern matching functionality for the <see cref="SlimCategories"/> enum by executing the corresponding function based on the enum value.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result to return from the executed function.</typeparam>
+        /// <param name="value">The <see cref="SlimCategories"/> enum value to match against.</param>
+        /// <param name="Electronics">The function to execute when the enum value is Electronics.</param>
+        /// <param name="Food">The function to execute when the enum value is Food.</param>
+        /// <param name="Automotive">The function to execute when the enum value is Automotive.</param>
+        /// <param name="Arts">The function to execute when the enum value is Arts.</param>
+        /// <param name="BeautyCare">The function to execute when the enum value is BeautyCare.</param>
+        /// <param name="Fashion">The function to execute when the enum value is Fashion.</param>
+        /// <returns>The result of executing the corresponding function based on the enum value.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected <see cref="SlimCategories"/> values.</exception>
+        public static TResult Match<TResult>(
+            this SlimCategories value,
+            Func<SlimCategories, TResult> Electronics,
+            Func<SlimCategories, TResult> Food,
+            Func<SlimCategories, TResult> Automotive,
+            Func<SlimCategories, TResult> Arts,
+            Func<SlimCategories, TResult> BeautyCare,
+            Func<SlimCategories, TResult> Fashion)
+        {
+            return (byte)value switch
+            {
+                0 => Electronics((SlimCategories)value),
+                1 => Food((SlimCategories)value),
+                2 => Automotive((SlimCategories)value),
+                3 => Arts((SlimCategories)value),
+                4 => BeautyCare((SlimCategories)value),
+                5 => Fashion((SlimCategories)value),
+                _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
+            };
+        }
     }
 }

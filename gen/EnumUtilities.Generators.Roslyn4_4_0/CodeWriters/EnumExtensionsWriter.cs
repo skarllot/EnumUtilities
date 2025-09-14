@@ -34,6 +34,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             this.Write("\r\n");
             this.Write("\r\n");
             this.Write("\r\n");
+            this.Write("\r\n");
 
 #nullable enable
 
@@ -80,6 +81,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
                 WriteEnumMemberBlock();
                 WriteDescriptionBlock();
                 WriteDisplayBlock();
+                WriteMatchBlock();
             }
             WriteJsonBlock();
 
@@ -972,6 +974,151 @@ this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
 this.Write(")value);\r\n    }\r\n\r\n");
 
         WriteFormatString(x => x.ResolvedJsonValue, "JsonString");
+    }
+
+    private void WriteMatchBlock()
+    {
+        if (Model.Values.IsEmpty || Model.IsFlags)
+        {
+            return;
+        }
+
+this.Write("\r\n    /// <summary>\r\n    /// Provides pattern matching functionality for the <see cref=\"");
+
+this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
+
+this.Write("\"/> enum by returning the corresponding value based on the enum value.\r\n    /// </summary>\r\n    /// <typeparam name=\"TResult\">The type of the result to return for each member match.</typeparam>\r\n    /// <param name=\"value\">The <see cref=\"");
+
+this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
+
+this.Write("\"/> enum value to match against.</param>\r\n");
+
+        foreach (var curr in Model.UniqueValues)
+        {
+
+this.Write("    /// <param name=\"");
+
+this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
+
+this.Write("\">The value to return when the enum value is ");
+
+this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
+
+this.Write(".</param>\r\n");
+
+        }
+
+this.Write("    /// <returns>The corresponding result value based on the enum value.</returns>\r\n    /// <exception cref=\"ArgumentOutOfRangeException\">Thrown when the enum value does not match any of the expected member values.</exception>\r\n    public static TResult Match<TResult>(\r\n        this ");
+
+this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
+
+this.Write(" value");
+
+        foreach (var curr in Model.UniqueValues)
+        {
+
+this.Write(",\r\n        TResult ");
+
+this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
+
+        }
+
+this.Write(")\r\n    {\r\n        return (");
+
+this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
+
+this.Write(")value switch\r\n        {\r\n");
+
+        foreach (var curr in Model.UniqueValues)
+        {
+
+this.Write("            ");
+
+this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberValue));
+
+this.Write(" => ");
+
+this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
+
+this.Write(",\r\n");
+
+        }
+
+this.Write("            _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)\r\n        };\r\n    }\r\n\r\n    /// <summary>\r\n    /// Provides pattern matching functionality for the <see cref=\"");
+
+this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
+
+this.Write("\"/> enum by executing the corresponding function based on the enum value.\r\n    /// </summary>\r\n    /// <typeparam name=\"TResult\">The type of the result to return from the executed function.</typeparam>\r\n    /// <param name=\"value\">The <see cref=\"");
+
+this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
+
+this.Write("\"/> enum value to match against.</param>\r\n");
+
+        foreach (var curr in Model.UniqueValues)
+        {
+
+this.Write("    /// <param name=\"");
+
+this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
+
+this.Write("\">The function to execute when the enum value is ");
+
+this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
+
+this.Write(".</param>\r\n");
+
+        }
+
+this.Write("    /// <returns>The result of executing the corresponding function based on the enum value.</returns>\r\n    /// <exception cref=\"ArgumentOutOfRangeException\">Thrown when the enum value does not match any of the expected <see cref=\"");
+
+this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
+
+this.Write("\"/> values.</exception>\r\n    public static TResult Match<TResult>(\r\n        this ");
+
+this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
+
+this.Write(" value");
+
+        foreach (var curr in Model.UniqueValues)
+        {
+
+this.Write(",\r\n        Func<");
+
+this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
+
+this.Write(", TResult> ");
+
+this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
+
+        }
+
+this.Write(")\r\n    {\r\n        return (");
+
+this.Write(this.ToStringHelper.ToStringWithCulture(Model.UnderlyingType));
+
+this.Write(")value switch\r\n        {\r\n");
+
+        foreach (var curr in Model.UniqueValues)
+        {
+
+this.Write("            ");
+
+this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberValue));
+
+this.Write(" => ");
+
+this.Write(this.ToStringHelper.ToStringWithCulture(curr.MemberName));
+
+this.Write("((");
+
+this.Write(this.ToStringHelper.ToStringWithCulture(Model.RefName));
+
+this.Write(")value),\r\n");
+
+        }
+
+this.Write("            _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)\r\n        };\r\n    }\r\n");
+
     }
 
     public EnumExtensionsWriter(StringBuilder builder) : base(builder)
