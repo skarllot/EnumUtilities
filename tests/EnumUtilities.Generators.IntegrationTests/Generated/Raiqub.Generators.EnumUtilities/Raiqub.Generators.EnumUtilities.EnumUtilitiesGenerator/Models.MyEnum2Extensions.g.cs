@@ -11,7 +11,7 @@ using Raiqub.Generators.EnumUtilities.Formatters;
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.11.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.12.0.0")]
     internal static partial class MyEnum2Extensions
     {
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
@@ -185,6 +185,62 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 2 => "Physical Cash",
                 3 => "Cheque",
                 _ => ToStringFast(value)
+            };
+        }
+
+        /// <summary>
+        /// Provides pattern matching functionality for the <see cref="NestedInClass.MyEnum2"/> enum by returning the corresponding value based on the enum value.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result to return for each member match.</typeparam>
+        /// <param name="value">The <see cref="NestedInClass.MyEnum2"/> enum value to match against.</param>
+        /// <param name="Credit">The value to return when the enum value is Credit.</param>
+        /// <param name="Debit">The value to return when the enum value is Debit.</param>
+        /// <param name="Cash">The value to return when the enum value is Cash.</param>
+        /// <param name="Cheque">The value to return when the enum value is Cheque.</param>
+        /// <returns>The corresponding result value based on the enum value.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected member values.</exception>
+        public static TResult Match<TResult>(
+            this NestedInClass.MyEnum2 value,
+            TResult Credit,
+            TResult Debit,
+            TResult Cash,
+            TResult Cheque)
+        {
+            return (int)value switch
+            {
+                0 => Credit,
+                1 => Debit,
+                2 => Cash,
+                3 => Cheque,
+                _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
+            };
+        }
+
+        /// <summary>
+        /// Provides pattern matching functionality for the <see cref="NestedInClass.MyEnum2"/> enum by executing the corresponding function based on the enum value.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result to return from the executed function.</typeparam>
+        /// <param name="value">The <see cref="NestedInClass.MyEnum2"/> enum value to match against.</param>
+        /// <param name="Credit">The function to execute when the enum value is Credit.</param>
+        /// <param name="Debit">The function to execute when the enum value is Debit.</param>
+        /// <param name="Cash">The function to execute when the enum value is Cash.</param>
+        /// <param name="Cheque">The function to execute when the enum value is Cheque.</param>
+        /// <returns>The result of executing the corresponding function based on the enum value.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected <see cref="NestedInClass.MyEnum2"/> values.</exception>
+        public static TResult Match<TResult>(
+            this NestedInClass.MyEnum2 value,
+            Func<NestedInClass.MyEnum2, TResult> Credit,
+            Func<NestedInClass.MyEnum2, TResult> Debit,
+            Func<NestedInClass.MyEnum2, TResult> Cash,
+            Func<NestedInClass.MyEnum2, TResult> Cheque)
+        {
+            return (int)value switch
+            {
+                0 => Credit((NestedInClass.MyEnum2)value),
+                1 => Debit((NestedInClass.MyEnum2)value),
+                2 => Cash((NestedInClass.MyEnum2)value),
+                3 => Cheque((NestedInClass.MyEnum2)value),
+                _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
             };
         }
     }

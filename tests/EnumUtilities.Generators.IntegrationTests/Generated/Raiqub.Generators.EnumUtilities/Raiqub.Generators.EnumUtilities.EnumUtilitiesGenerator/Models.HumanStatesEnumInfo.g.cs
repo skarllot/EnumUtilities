@@ -12,7 +12,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     /// <summary>Provides metadata for <see cref="HumanStates" /> enumeration.</summary>
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.11.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.12.0.0")]
     public static partial class HumanStatesMetadata
     {
         /// <summary>Provides constant values for <see cref="HumanStates" /> members names.</summary>

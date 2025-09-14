@@ -10,6 +10,7 @@
 <#@ include file="$(ProjectDir)CodeWriters\Extensions\DescriptionBlock.ttinclude" #>
 <#@ include file="$(ProjectDir)CodeWriters\Extensions\DisplayBlock.ttinclude" #>
 <#@ include file="$(ProjectDir)CodeWriters\Extensions\JsonBlock.ttinclude" #>
+<#@ include file="$(ProjectDir)CodeWriters\Extensions\MatchBlock.ttinclude" #>
 <#
 #nullable enable
 #>
@@ -50,6 +51,7 @@ using Raiqub.Generators.EnumUtilities.Formatters;
                 WriteEnumMemberBlock();
                 WriteDescriptionBlock();
                 WriteDisplayBlock();
+                WriteMatchBlock();
             }
             WriteJsonBlock();
 #>

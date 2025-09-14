@@ -1,0 +1,87 @@
+﻿<#+
+    private void WriteMatchBlock()
+    {
+        if (Model.Values.IsEmpty || Model.IsFlags)
+        {
+            return;
+        }
+#>
+
+    /// <summary>
+    /// Provides pattern matching functionality for the <see cref="<#= Model.RefName #>"/> enum by returning the corresponding value based on the enum value.
+    /// </summary>
+    /// <typeparam name="TResult">The type of the result to return for each member match.</typeparam>
+    /// <param name="value">The <see cref="<#= Model.RefName #>"/> enum value to match against.</param>
+<#+
+        foreach (var curr in Model.UniqueValues)
+        {
+#>
+    /// <param name="<#= curr.MemberName #>">The value to return when the enum value is <#= curr.MemberName #>.</param>
+<#+
+        }
+#>
+    /// <returns>The corresponding result value based on the enum value.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected member values.</exception>
+    public static TResult Match<TResult>(
+        this <#= Model.RefName #> value<#+
+        foreach (var curr in Model.UniqueValues)
+        {
+#>,
+        TResult <#= curr.MemberName #><#+
+        }
+#>)
+    {
+        return (<#= Model.UnderlyingType #>)value switch
+        {
+<#+
+        foreach (var curr in Model.UniqueValues)
+        {
+#>
+            <#= curr.MemberValue #> => <#= curr.MemberName #>,
+<#+
+        }
+#>
+            _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
+        };
+    }
+
+    /// <summary>
+    /// Provides pattern matching functionality for the <see cref="<#= Model.RefName #>"/> enum by executing the corresponding function based on the enum value.
+    /// </summary>
+    /// <typeparam name="TResult">The type of the result to return from the executed function.</typeparam>
+    /// <param name="value">The <see cref="<#= Model.RefName #>"/> enum value to match against.</param>
+<#+
+        foreach (var curr in Model.UniqueValues)
+        {
+#>
+    /// <param name="<#= curr.MemberName #>">The function to execute when the enum value is <#= curr.MemberName #>.</param>
+<#+
+        }
+#>
+    /// <returns>The result of executing the corresponding function based on the enum value.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected <see cref="<#= Model.RefName #>"/> values.</exception>
+    public static TResult Match<TResult>(
+        this <#= Model.RefName #> value<#+
+        foreach (var curr in Model.UniqueValues)
+        {
+#>,
+        Func<<#= Model.RefName #>, TResult> <#= curr.MemberName #><#+
+        }
+#>)
+    {
+        return (<#= Model.UnderlyingType #>)value switch
+        {
+<#+
+        foreach (var curr in Model.UniqueValues)
+        {
+#>
+            <#= curr.MemberValue #> => <#= curr.MemberName #>((<#= Model.RefName #>)value),
+<#+
+        }
+#>
+            _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
+        };
+    }
+<#+
+    }
+#>

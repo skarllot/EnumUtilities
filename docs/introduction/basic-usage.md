@@ -6,7 +6,7 @@ This section takes a closer look at the code generated for a straightforward enu
 
 When you add `[EnumGenerator]` to an enum, a set of classes is automatically generated:
 
-- **&lt;EnumName>Extensions** – Provides extension methods for rapid string conversions and concurrency utilities.
+- **&lt;EnumName>Extensions** – Provides extension methods for rapid string conversions, pattern matching, and concurrency utilities.
 - **&lt;EnumName>Factory** – Offers versatile parsing methods for `string` and `ReadOnlySpan<char>`, and also enables you to list all members.
 - **&lt;EnumName>Validation** – Helps verify whether specific string or numeric inputs match defined members.
 
@@ -82,6 +82,35 @@ int len = Categories.Electronics.GetStringLength();
 ```
 
 This method is useful for buffer management, logging, or any scenario where you need precise control over allocations.
+
+### Pattern Matching
+
+The generator provides `Match` extension methods for functional-style pattern matching, eliminating the need for verbose switch statements or if-else chains:
+
+```csharp
+// Direct value matching
+var message = Categories.Food.Match(
+    Electronics: "Tech products available",
+    Food: "Fresh food items",
+    Automotive: "Car parts and accessories",
+    Arts: "Creative supplies",
+    BeautyCare: "Beauty products",
+    Fashion: "Clothing and accessories"
+);
+// returns "Fresh food items"
+
+// Function-based matching for more complex logic
+var discount = Categories.Electronics.Match(
+    Electronics: v => CalculateDiscount(v, 0.15),
+    Food: v => CalculateDiscount(v, 0.05),
+    Automotive: v => CalculateDiscount(v, 0.10),
+    Arts: v => CalculateDiscount(v, 0.20),
+    BeautyCare: v => CalculateDiscount(v, 0.12),
+    Fashion: v => CalculateDiscount(v, 0.25)
+);
+```
+
+The `Match` methods are only generated for non-flag enumerations, providing a clean and type-safe alternative to traditional conditional logic.
 
 ### Concurrent/Atomic Operations
 

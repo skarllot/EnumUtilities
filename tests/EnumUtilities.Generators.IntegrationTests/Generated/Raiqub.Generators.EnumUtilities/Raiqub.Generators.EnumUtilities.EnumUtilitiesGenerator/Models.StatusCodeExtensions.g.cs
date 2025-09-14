@@ -11,7 +11,7 @@ using Raiqub.Generators.EnumUtilities.Formatters;
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.11.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.12.0.0")]
     public static partial class StatusCodeExtensions
     {
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
@@ -227,6 +227,104 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             {
                 -9 => "The request is invalid",
                 _ => null
+            };
+        }
+
+        /// <summary>
+        /// Provides pattern matching functionality for the <see cref="StatusCode"/> enum by returning the corresponding value based on the enum value.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result to return for each member match.</typeparam>
+        /// <param name="value">The <see cref="StatusCode"/> enum value to match against.</param>
+        /// <param name="Unknown">The value to return when the enum value is Unknown.</param>
+        /// <param name="Success">The value to return when the enum value is Success.</param>
+        /// <param name="Error">The value to return when the enum value is Error.</param>
+        /// <param name="NotFound">The value to return when the enum value is NotFound.</param>
+        /// <param name="Timeout">The value to return when the enum value is Timeout.</param>
+        /// <param name="Unauthorized">The value to return when the enum value is Unauthorized.</param>
+        /// <param name="Forbidden">The value to return when the enum value is Forbidden.</param>
+        /// <param name="Conflict">The value to return when the enum value is Conflict.</param>
+        /// <param name="Gone">The value to return when the enum value is Gone.</param>
+        /// <param name="InvalidRequest">The value to return when the enum value is InvalidRequest.</param>
+        /// <param name="ServerError">The value to return when the enum value is ServerError.</param>
+        /// <returns>The corresponding result value based on the enum value.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected member values.</exception>
+        public static TResult Match<TResult>(
+            this StatusCode value,
+            TResult Unknown,
+            TResult Success,
+            TResult Error,
+            TResult NotFound,
+            TResult Timeout,
+            TResult Unauthorized,
+            TResult Forbidden,
+            TResult Conflict,
+            TResult Gone,
+            TResult InvalidRequest,
+            TResult ServerError)
+        {
+            return (int)value switch
+            {
+                -1 => Unknown,
+                0 => Success,
+                -2 => Error,
+                -3 => NotFound,
+                -4 => Timeout,
+                -5 => Unauthorized,
+                -6 => Forbidden,
+                -7 => Conflict,
+                -8 => Gone,
+                -9 => InvalidRequest,
+                -10 => ServerError,
+                _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
+            };
+        }
+
+        /// <summary>
+        /// Provides pattern matching functionality for the <see cref="StatusCode"/> enum by executing the corresponding function based on the enum value.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result to return from the executed function.</typeparam>
+        /// <param name="value">The <see cref="StatusCode"/> enum value to match against.</param>
+        /// <param name="Unknown">The function to execute when the enum value is Unknown.</param>
+        /// <param name="Success">The function to execute when the enum value is Success.</param>
+        /// <param name="Error">The function to execute when the enum value is Error.</param>
+        /// <param name="NotFound">The function to execute when the enum value is NotFound.</param>
+        /// <param name="Timeout">The function to execute when the enum value is Timeout.</param>
+        /// <param name="Unauthorized">The function to execute when the enum value is Unauthorized.</param>
+        /// <param name="Forbidden">The function to execute when the enum value is Forbidden.</param>
+        /// <param name="Conflict">The function to execute when the enum value is Conflict.</param>
+        /// <param name="Gone">The function to execute when the enum value is Gone.</param>
+        /// <param name="InvalidRequest">The function to execute when the enum value is InvalidRequest.</param>
+        /// <param name="ServerError">The function to execute when the enum value is ServerError.</param>
+        /// <returns>The result of executing the corresponding function based on the enum value.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected <see cref="StatusCode"/> values.</exception>
+        public static TResult Match<TResult>(
+            this StatusCode value,
+            Func<StatusCode, TResult> Unknown,
+            Func<StatusCode, TResult> Success,
+            Func<StatusCode, TResult> Error,
+            Func<StatusCode, TResult> NotFound,
+            Func<StatusCode, TResult> Timeout,
+            Func<StatusCode, TResult> Unauthorized,
+            Func<StatusCode, TResult> Forbidden,
+            Func<StatusCode, TResult> Conflict,
+            Func<StatusCode, TResult> Gone,
+            Func<StatusCode, TResult> InvalidRequest,
+            Func<StatusCode, TResult> ServerError)
+        {
+            return (int)value switch
+            {
+                -1 => Unknown((StatusCode)value),
+                0 => Success((StatusCode)value),
+                -2 => Error((StatusCode)value),
+                -3 => NotFound((StatusCode)value),
+                -4 => Timeout((StatusCode)value),
+                -5 => Unauthorized((StatusCode)value),
+                -6 => Forbidden((StatusCode)value),
+                -7 => Conflict((StatusCode)value),
+                -8 => Gone((StatusCode)value),
+                -9 => InvalidRequest((StatusCode)value),
+                -10 => ServerError((StatusCode)value),
+                _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
             };
         }
     }

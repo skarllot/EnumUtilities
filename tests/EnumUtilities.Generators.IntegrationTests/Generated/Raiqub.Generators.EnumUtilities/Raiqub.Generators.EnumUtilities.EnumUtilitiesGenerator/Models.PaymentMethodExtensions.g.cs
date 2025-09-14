@@ -11,7 +11,7 @@ using Raiqub.Generators.EnumUtilities.Formatters;
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.11.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.12.0.0")]
     public static partial class PaymentMethodExtensions
     {
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
@@ -185,6 +185,62 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 2 => "Physical Cash",
                 3 => "Cheque",
                 _ => ToStringFast(value)
+            };
+        }
+
+        /// <summary>
+        /// Provides pattern matching functionality for the <see cref="PaymentMethod"/> enum by returning the corresponding value based on the enum value.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result to return for each member match.</typeparam>
+        /// <param name="value">The <see cref="PaymentMethod"/> enum value to match against.</param>
+        /// <param name="Credit">The value to return when the enum value is Credit.</param>
+        /// <param name="Debit">The value to return when the enum value is Debit.</param>
+        /// <param name="Cash">The value to return when the enum value is Cash.</param>
+        /// <param name="Cheque">The value to return when the enum value is Cheque.</param>
+        /// <returns>The corresponding result value based on the enum value.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected member values.</exception>
+        public static TResult Match<TResult>(
+            this PaymentMethod value,
+            TResult Credit,
+            TResult Debit,
+            TResult Cash,
+            TResult Cheque)
+        {
+            return (int)value switch
+            {
+                0 => Credit,
+                1 => Debit,
+                2 => Cash,
+                3 => Cheque,
+                _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
+            };
+        }
+
+        /// <summary>
+        /// Provides pattern matching functionality for the <see cref="PaymentMethod"/> enum by executing the corresponding function based on the enum value.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result to return from the executed function.</typeparam>
+        /// <param name="value">The <see cref="PaymentMethod"/> enum value to match against.</param>
+        /// <param name="Credit">The function to execute when the enum value is Credit.</param>
+        /// <param name="Debit">The function to execute when the enum value is Debit.</param>
+        /// <param name="Cash">The function to execute when the enum value is Cash.</param>
+        /// <param name="Cheque">The function to execute when the enum value is Cheque.</param>
+        /// <returns>The result of executing the corresponding function based on the enum value.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected <see cref="PaymentMethod"/> values.</exception>
+        public static TResult Match<TResult>(
+            this PaymentMethod value,
+            Func<PaymentMethod, TResult> Credit,
+            Func<PaymentMethod, TResult> Debit,
+            Func<PaymentMethod, TResult> Cash,
+            Func<PaymentMethod, TResult> Cheque)
+        {
+            return (int)value switch
+            {
+                0 => Credit((PaymentMethod)value),
+                1 => Debit((PaymentMethod)value),
+                2 => Cash((PaymentMethod)value),
+                3 => Cheque((PaymentMethod)value),
+                _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
             };
         }
     }

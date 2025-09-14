@@ -172,4 +172,40 @@ public class EnumExtensionsTests
 
         Assert.Equal(expected, actual);
     }
+
+    [Theory]
+    [InlineData(HumanStates.Idle, "1")]
+    [InlineData(HumanStates.Working, "2")]
+    [InlineData(HumanStates.Sleeping, "3")]
+    [InlineData(HumanStates.Eating, "4")]
+    [InlineData(HumanStates.Dead, "5")]
+    public void MatchReturnsInlinedValue(HumanStates value, string expected)
+    {
+        var result = value.Match(
+            Idle: "1",
+            Working: "2",
+            Sleeping: "3",
+            Eating: "4",
+            Dead: "5");
+
+        Assert.Equal(expected, result);
+    }
+
+    [Theory]
+    [InlineData(HumanStates.Idle)]
+    [InlineData(HumanStates.Working)]
+    [InlineData(HumanStates.Sleeping)]
+    [InlineData(HumanStates.Eating)]
+    [InlineData(HumanStates.Dead)]
+    public void MatchReturnsCalculatedValue(HumanStates value)
+    {
+        var result = value.Match(
+            Idle: v => v + "1",
+            Working: v => v + "2",
+            Sleeping: v => v + "3",
+            Eating: v => v + "4",
+            Dead: v => v + "5");
+
+        Assert.Equal($"{value.ToString()}{(int)value}", result);
+    }
 }
