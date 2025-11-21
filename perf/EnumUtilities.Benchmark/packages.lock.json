@@ -28,12 +28,12 @@
       },
       "FastEnum": {
         "type": "Direct",
-        "requested": "[2.0.5, )",
-        "resolved": "2.0.5",
-        "contentHash": "P5nnvUTIE+uiapYV1HPIxAt3B7CQx6jnIDXUARYjOLoJvjn+XjWw5n99t+Ie2/DNc00gr6689URok3lmxXgN3w==",
+        "requested": "[2.0.6, )",
+        "resolved": "2.0.6",
+        "contentHash": "R5iVHk/hC7aTj/+kHWWQ6zyqGS0fHyvnvjKBoKsYG2NW4/oZYzbW9cu1M7tADbyMKQ9mV4ibhrvXglkpnUfDdw==",
         "dependencies": {
-          "FastEnum.Core": "2.0.5",
-          "FastEnum.Generators": "2.0.5"
+          "FastEnum.Core": "2.0.6",
+          "FastEnum.Generators": "2.0.6"
         }
       },
       "NetEscapades.EnumGenerators": {
@@ -54,13 +54,13 @@
       },
       "FastEnum.Core": {
         "type": "Transitive",
-        "resolved": "2.0.5",
-        "contentHash": "Gd1sGE6u37tVv+UtrmryZYbdmqSd+AMF2eXylCYAcVD6uJNEQlnH3QTj88D8uawZugIyQIqwOK5tCMEZhqZXig=="
+        "resolved": "2.0.6",
+        "contentHash": "qtumBzs1baLfSvXTqAJgbPD2WIp4Om7d1NfVYY0XEGXOOkL+0wTf/J6WrY2jYcaLyHU8snM5KNm0oWoNjZa/JA=="
       },
       "FastEnum.Generators": {
         "type": "Transitive",
-        "resolved": "2.0.5",
-        "contentHash": "8xgIOhUyYknVX35gv8sgAN1CNRLIR+vmOvM6PqGZH3CNZwbl0Pr06s54n2M2HWozc18rVHKnFfivSyREJOIKJg=="
+        "resolved": "2.0.6",
+        "contentHash": "JF/zidWZSftVTG/1N4ndc6qgh2QarBcGAc5nZFhrb0/jFIo6yf1YyLSXB56vpuReg1zy8KHASfkMvWKztt1XXA=="
       },
       "Gee.External.Capstone": {
         "type": "Transitive",
