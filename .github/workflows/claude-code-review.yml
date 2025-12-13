@@ -35,6 +35,7 @@ jobs:
             api.anthropic.com:443
             api.github.com:443
             github.com:443
+            registry.npmjs.org:443
 
       - name: Checkout repository
         uses: actions/checkout@v4
