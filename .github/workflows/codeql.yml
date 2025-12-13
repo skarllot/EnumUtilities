@@ -43,7 +43,7 @@ jobs:
       fail-fast: false
       matrix:
         # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
-        language: [ 'csharp', 'javascript-typescript' ]
+        language: [ 'csharp' ]
 
     steps:
     - name: 🛡️ Harden Runner
@@ -81,7 +81,6 @@ jobs:
           6.x
           8.x
         global-json-file: global.json
-      if: matrix.language == 'csharp'
 
     - name: 🗃️ Setup NuGet cache
       uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
@@ -89,22 +88,12 @@ jobs:
         path: ~/.nuget/packages
         key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
         restore-keys: ${{ runner.os }}-nuget-
-      if: matrix.language == 'csharp'
-
-    - name: 🧰 Setup Node
-      uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
-      with:
-        node-version: 22
-        cache: npm
-        cache-dependency-path: docs/package-lock.json
-      if: matrix.language == 'javascript-typescript'
 
     # Initializes the CodeQL tools for scanning.
     - name: 🛠️ Initialize CodeQL
       uses: github/codeql-action/init@014f16e7ab1402f30e7c3329d33797e7948572db # v4.31.3
       with:
         languages: ${{ matrix.language }}
-        build-mode: none
         # If you wish to specify custom queries, you can do so here or in a config file.
         # By default, queries listed here will override any specified in a config file.
         # Prefix the list here with "+" to use these queries and those in the config file.
@@ -114,21 +103,9 @@ jobs:
 
     - name: 📥 Restore dependencies
       run: dotnet restore --locked-mode
-      if: matrix.language == 'csharp'
 
     - name: 🏗️ Build
       run: dotnet build --no-restore -c Release
-      if: matrix.language == 'csharp'
-
-    - name: 📥 Install dependencies
-      run: npm ci
-      working-directory: docs
-      if: matrix.language == 'javascript-typescript'
-
-    - name: 🏗️ Build with VitePress
-      run: npm run docs:build
-      working-directory: docs
-      if: matrix.language == 'javascript-typescript'
 
     - name: 🔍 Perform CodeQL Analysis
       uses: github/codeql-action/analyze@014f16e7ab1402f30e7c3329d33797e7948572db # v4.31.3
