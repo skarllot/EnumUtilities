@@ -54,6 +54,8 @@ jobs:
           cache-dependency-path: docs/package-lock.json
       - name: 📥 Install dependencies
         run: npm ci
+      - name: 🔍 Run security audit
+        run: npm audit --audit-level=moderate
       - name: 🏗️ Build with VitePress
         run: |
           npm run docs:build
