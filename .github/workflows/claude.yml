@@ -29,15 +29,17 @@ jobs:
         uses: step-security/harden-runner@95d9a5deda9de15063e7595e9719c11c38c90ae2 # v2.13.2
         with:
           disable-sudo: true
-          egress-policy: block
+          egress-policy: audit
           allowed-endpoints: >
-            api.anthropic.com:443
+            *.anthropic.com:443
+            *.githubapp.com:443
             api.github.com:443
             bun.sh:443
             claude.ai:443
             github.com:443
             registry.npmjs.org:443
             release-assets.githubusercontent.com:443
+            storage.googleapis.com:443
 
       - name: Checkout repository
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
