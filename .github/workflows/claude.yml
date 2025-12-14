@@ -28,17 +28,24 @@ jobs:
       - name: 🛡️ Harden Runner
         uses: step-security/harden-runner@95d9a5deda9de15063e7595e9719c11c38c90ae2 # v2.13.2
         with:
-          disable-sudo: true
-          egress-policy: audit
+          egress-policy: block
           allowed-endpoints: >
-            *.anthropic.com:443
-            *.githubapp.com:443
+            *.azureedge.net:443
+            aka.ms:443
+            api.anthropic.com:443
             api.github.com:443
+            api.nuget.org:443
+            builds.dotnet.microsoft.com:443
             bun.sh:443
             claude.ai:443
+            downloads.claude.ai:443
+            github.com:22
             github.com:443
+            http-intake.logs.datadoghq.com:443
+            learn.microsoft.com:443
             registry.npmjs.org:443
             release-assets.githubusercontent.com:443
+            statsig.anthropic.com:443
             storage.googleapis.com:443
 
       - name: Checkout repository
@@ -62,5 +69,5 @@ jobs:
           # Optional: Add claude_args to customize behavior and configuration
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
           # or https://code.claude.com/docs/en/cli-reference for available options
-          # claude_args: '--allowed-tools Bash(gh pr:*)'
+          claude_args: '--allowed-tools "Bash(dotnet:*)"'
 
