@@ -28,24 +28,34 @@ jobs:
       - name: 🛡️ Harden Runner
         uses: step-security/harden-runner@20cf305ff2072d973412fa9b1e3a4f227bda3c76 # v2.14.0
         with:
-          disable-sudo: true
           egress-policy: block
           allowed-endpoints: >
+            *.azureedge.net:443
+            aka.ms:443
             api.anthropic.com:443
             api.github.com:443
+            api.nuget.org:443
+            builds.dotnet.microsoft.com:443
             bun.sh:443
+            claude.ai:443
+            downloads.claude.ai:443
+            github.com:22
             github.com:443
+            http-intake.logs.datadoghq.com:443
+            learn.microsoft.com:443
             registry.npmjs.org:443
             release-assets.githubusercontent.com:443
+            statsig.anthropic.com:443
+            storage.googleapis.com:443
 
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
         with:
           fetch-depth: 1
 
       - name: Run Claude Code
         id: claude
-        uses: anthropics/claude-code-action@v1
+        uses: anthropics/claude-code-action@f0c8eb29807907de7f5412d04afceb5e24817127 # v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
 
@@ -59,5 +69,5 @@ jobs:
           # Optional: Add claude_args to customize behavior and configuration
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
           # or https://code.claude.com/docs/en/cli-reference for available options
-          # claude_args: '--allowed-tools Bash(gh pr:*)'
+          claude_args: '--allowed-tools "Bash(dotnet:*)"'
 
