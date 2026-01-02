@@ -21,6 +21,10 @@
       Include="..\..\gen\EnumUtilities.Generators.Roslyn4_4_0\EnumUtilities.Generators.Roslyn4_4_0.csproj"
       PackAsAnalyzer="true"
       ReferenceOutputAssembly="false" />
+    <ProjectReference
+      Include="..\..\gen\EnumUtilities.Generators.Roslyn5_0_0\EnumUtilities.Generators.Roslyn5_0_0.csproj"
+      PackAsAnalyzer="true"
+      ReferenceOutputAssembly="false" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
