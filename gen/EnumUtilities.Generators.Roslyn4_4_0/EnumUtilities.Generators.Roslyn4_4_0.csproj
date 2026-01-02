@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" VersionOverride="4.4.0" PrivateAssets="all" />
     <PackageReference Include="Polyfill" PrivateAssets="all" />
     <PackageReference Include="Raiqub.Generators.T4CodeWriter.Sources">
       <PrivateAssets>all</PrivateAssets>
@@ -30,54 +30,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="CodeWriters\EnumExtensionsWriter.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>EnumExtensionsWriter.cs</LastGenOutput>
-    </None>
-    <None Update="CodeWriters\EnumFactoryWriter.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>EnumFactoryWriter.cs</LastGenOutput>
-    </None>
-    <None Update="CodeWriters\EnumValidationWriter.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>EnumValidationWriter.cs</LastGenOutput>
-    </None>
-    <None Update="CodeWriters\EnumJsonConverterWriter.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>EnumJsonConverterWriter.cs</LastGenOutput>
-    </None>
-    <None Update="CodeWriters\EnumInfoWriter.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>EnumInfoWriter.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="CodeWriters\EnumExtensionsWriter.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EnumExtensionsWriter.tt</DependentUpon>
-    </Compile>
-    <Compile Update="CodeWriters\EnumFactoryWriter.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EnumFactoryWriter.tt</DependentUpon>
-    </Compile>
-    <Compile Update="CodeWriters\EnumValidationWriter.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EnumValidationWriter.tt</DependentUpon>
-    </Compile>
-    <Compile Update="CodeWriters\EnumJsonConverterWriter.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EnumJsonConverterWriter.tt</DependentUpon>
-    </Compile>
-    <Compile Update="CodeWriters\EnumInfoWriter.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EnumInfoWriter.tt</DependentUpon>
-    </Compile>
+    <Compile Include="..\EnumUtilities.Generators.Roslyn5_0_0\*\*.cs" Exclude="**\obj\**" />
+    <Compile Include="..\EnumUtilities.Generators.Roslyn5_0_0\DiagnosticDescriptors.cs" />
+    <Compile Include="..\EnumUtilities.Generators.Roslyn5_0_0\TrackingNames.cs" />
+    <AdditionalFiles Include="..\EnumUtilities.Generators.Roslyn5_0_0\AnalyzerReleases.*.md" />
   </ItemGroup>
 
 </Project>
