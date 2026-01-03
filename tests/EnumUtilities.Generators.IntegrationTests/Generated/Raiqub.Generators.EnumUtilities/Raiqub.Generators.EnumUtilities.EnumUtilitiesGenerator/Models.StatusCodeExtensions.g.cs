@@ -8,324 +8,323 @@ using Raiqub.Generators.EnumUtilities.Formatters;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
-namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
+namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
+
+[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
+public static partial class StatusCodeExtensions
 {
-    [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
-    public static partial class StatusCodeExtensions
+    /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
+    /// <returns>The string representation of the value of this instance.</returns>
+    public static string ToStringFast(this StatusCode value)
     {
-        /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
-        /// <returns>The string representation of the value of this instance.</returns>
-        public static string ToStringFast(this StatusCode value)
-        {
-            return GetNameInlined((int)value)
-                ?? ((int)value).ToString();
-        }
+        return GetNameInlined((int)value)
+            ?? ((int)value).ToString();
+    }
 
-        /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
-        /// <param name="value">The value to calculate the number of characters.</param>
-        /// <returns>The number of characters produced by converting the specified value to string.</returns>
-        public static int GetStringLength(this StatusCode value)
-        {
-            return GetNameLengthInlined((int)value)
-                ?? EnumNumericFormatter.GetStringLength((int)value);
-        }
+    /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
+    /// <param name="value">The value to calculate the number of characters.</param>
+    /// <returns>The number of characters produced by converting the specified value to string.</returns>
+    public static int GetStringLength(this StatusCode value)
+    {
+        return GetNameLengthInlined((int)value)
+            ?? EnumNumericFormatter.GetStringLength((int)value);
+    }
 
-        /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
-        /// <returns><c>true</c> if the value of this instance exists in the enumeration; <c>false</c> otherwise.</returns>
-        public static bool IsDefined(this StatusCode value)
+    /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
+    /// <returns><c>true</c> if the value of this instance exists in the enumeration; <c>false</c> otherwise.</returns>
+    public static bool IsDefined(this StatusCode value)
+    {
+        return (int)value switch
         {
-            return (int)value switch
-            {
-                -1 => true,
-                0 => true,
-                -2 => true,
-                -3 => true,
-                -4 => true,
-                -5 => true,
-                -6 => true,
-                -7 => true,
-                -8 => true,
-                -9 => true,
-                -10 => true,
-                _ => false
-            };
-        }
+            -1 => true,
+            0 => true,
+            -2 => true,
+            -3 => true,
+            -4 => true,
+            -5 => true,
+            -6 => true,
+            -7 => true,
+            -8 => true,
+            -9 => true,
+            -10 => true,
+            _ => false
+        };
+    }
 
-        private static int? GetNameLengthInlined(int value)
+    private static int? GetNameLengthInlined(int value)
+    {
+        return value switch
         {
-            return value switch
-            {
-                -1 => 7,
-                0 => 7,
-                -2 => 5,
-                -3 => 8,
-                -4 => 7,
-                -5 => 12,
-                -6 => 9,
-                -7 => 8,
-                -8 => 4,
-                -9 => 14,
-                -10 => 11,
-                _ => null
-            };
-        }
+            -1 => 7,
+            0 => 7,
+            -2 => 5,
+            -3 => 8,
+            -4 => 7,
+            -5 => 12,
+            -6 => 9,
+            -7 => 8,
+            -8 => 4,
+            -9 => 14,
+            -10 => 11,
+            _ => null
+        };
+    }
 
-        private static string? GetNameInlined(int value)
+    private static string? GetNameInlined(int value)
+    {
+        return value switch
         {
-            return value switch
-            {
-                -1 => "Unknown",
-                0 => "Success",
-                -2 => "Error",
-                -3 => "NotFound",
-                -4 => "Timeout",
-                -5 => "Unauthorized",
-                -6 => "Forbidden",
-                -7 => "Conflict",
-                -8 => "Gone",
-                -9 => "InvalidRequest",
-                -10 => "ServerError",
-                _ => null
-            };
-        }
+            -1 => "Unknown",
+            0 => "Success",
+            -2 => "Error",
+            -3 => "NotFound",
+            -4 => "Timeout",
+            -5 => "Unauthorized",
+            -6 => "Forbidden",
+            -7 => "Conflict",
+            -8 => "Gone",
+            -9 => "InvalidRequest",
+            -10 => "ServerError",
+            _ => null
+        };
+    }
 
-        /// <summary>Adds two enumerations and replaces the first integer with the sum, as an atomic operation.</summary>
-        /// <param name="location">A variable containing the first value to be added.</param>
-        /// <param name="value">The value to be added to the enumeration at <paramref name="location" />.</param>
-        /// <returns>The new value that was stored at <paramref name="location" /> by this operation.</returns>
-        public static StatusCode InterlockedAdd(this ref StatusCode location, int value)
-        {
-            ref int locationRaw = ref Unsafe.As<StatusCode, int>(ref location);
-            int resultRaw = Interlocked.Add(ref locationRaw, value);
-            return Unsafe.As<int, StatusCode>(ref resultRaw);
-        }
+    /// <summary>Adds two enumerations and replaces the first integer with the sum, as an atomic operation.</summary>
+    /// <param name="location">A variable containing the first value to be added.</param>
+    /// <param name="value">The value to be added to the enumeration at <paramref name="location" />.</param>
+    /// <returns>The new value that was stored at <paramref name="location" /> by this operation.</returns>
+    public static StatusCode InterlockedAdd(this ref StatusCode location, int value)
+    {
+        ref int locationRaw = ref Unsafe.As<StatusCode, int>(ref location);
+        int resultRaw = Interlocked.Add(ref locationRaw, value);
+        return Unsafe.As<int, StatusCode>(ref resultRaw);
+    }
 
-        /// <summary>Decrements enumeration and stores the result, as an atomic operation.</summary>
-        /// <param name="location">The variable whose value is to be decremented.</param>
-        /// <returns>The value of the variable immediately after the decrement operation finished.</returns>
-        public static StatusCode InterlockedDecrement(this ref StatusCode location)
-        {
-            ref int locationRaw = ref Unsafe.As<StatusCode, int>(ref location);
-            int resultRaw = Interlocked.Decrement(ref locationRaw);
-            return Unsafe.As<int, StatusCode>(ref resultRaw);
-        }
+    /// <summary>Decrements enumeration and stores the result, as an atomic operation.</summary>
+    /// <param name="location">The variable whose value is to be decremented.</param>
+    /// <returns>The value of the variable immediately after the decrement operation finished.</returns>
+    public static StatusCode InterlockedDecrement(this ref StatusCode location)
+    {
+        ref int locationRaw = ref Unsafe.As<StatusCode, int>(ref location);
+        int resultRaw = Interlocked.Decrement(ref locationRaw);
+        return Unsafe.As<int, StatusCode>(ref resultRaw);
+    }
 
-        /// <summary>Increments enumeration and stores the result, as an atomic operation.</summary>
-        /// <param name="location">The variable whose value is to be incremented.</param>
-        /// <returns>The value of the variable immediately after the increment operation finished.</returns>
-        public static StatusCode InterlockedIncrement(this ref StatusCode location)
-        {
-            ref int locationRaw = ref Unsafe.As<StatusCode, int>(ref location);
-            int resultRaw = Interlocked.Increment(ref locationRaw);
-            return Unsafe.As<int, StatusCode>(ref resultRaw);
-        }
+    /// <summary>Increments enumeration and stores the result, as an atomic operation.</summary>
+    /// <param name="location">The variable whose value is to be incremented.</param>
+    /// <returns>The value of the variable immediately after the increment operation finished.</returns>
+    public static StatusCode InterlockedIncrement(this ref StatusCode location)
+    {
+        ref int locationRaw = ref Unsafe.As<StatusCode, int>(ref location);
+        int resultRaw = Interlocked.Increment(ref locationRaw);
+        return Unsafe.As<int, StatusCode>(ref resultRaw);
+    }
 
-        /// <summary>Compares two enumerations for equality and, if they are equal, replaces the first value.</summary>
-        /// <param name="location">The destination, whose value is compared with <paramref name="comparand" /> and possibly replaced.</param>
-        /// <param name="value">The value that replaces the destination value if the comparison results in equality.</param>
-        /// <param name="comparand">The value that is compared to the value at <paramref name="location" />.</param>
-        /// <returns>The original value in <paramref name="location" />.</returns>
-        public static StatusCode InterlockedCompareExchange(this ref StatusCode location, StatusCode value, StatusCode comparand)
-        {
-            ref int locationRaw = ref Unsafe.As<StatusCode, int>(ref location);
-            int resultRaw = Interlocked.CompareExchange(ref locationRaw, Unsafe.As<StatusCode, int>(ref value), Unsafe.As<StatusCode, int>(ref comparand));
-            return Unsafe.As<int, StatusCode>(ref resultRaw);
-        }
+    /// <summary>Compares two enumerations for equality and, if they are equal, replaces the first value.</summary>
+    /// <param name="location">The destination, whose value is compared with <paramref name="comparand" /> and possibly replaced.</param>
+    /// <param name="value">The value that replaces the destination value if the comparison results in equality.</param>
+    /// <param name="comparand">The value that is compared to the value at <paramref name="location" />.</param>
+    /// <returns>The original value in <paramref name="location" />.</returns>
+    public static StatusCode InterlockedCompareExchange(this ref StatusCode location, StatusCode value, StatusCode comparand)
+    {
+        ref int locationRaw = ref Unsafe.As<StatusCode, int>(ref location);
+        int resultRaw = Interlocked.CompareExchange(ref locationRaw, Unsafe.As<StatusCode, int>(ref value), Unsafe.As<StatusCode, int>(ref comparand));
+        return Unsafe.As<int, StatusCode>(ref resultRaw);
+    }
 
-        /// <summary>Sets an enumeration value to a specified value and returns the original value, as an atomic operation.</summary>
-        /// <param name="location">The variable to set to the specified value.</param>
-        /// <param name="value">The value to which the <paramref name="location" /> parameter is set.</param>
-        /// <returns>The original value of <paramref name="location" />.</returns>
-        public static StatusCode InterlockedExchange(this ref StatusCode location, StatusCode value)
-        {
-            ref int locationRaw = ref Unsafe.As<StatusCode, int>(ref location);
-            int resultRaw = Interlocked.Exchange(ref locationRaw, Unsafe.As<StatusCode, int>(ref value));
-            return Unsafe.As<int, StatusCode>(ref resultRaw);
-        }
+    /// <summary>Sets an enumeration value to a specified value and returns the original value, as an atomic operation.</summary>
+    /// <param name="location">The variable to set to the specified value.</param>
+    /// <param name="value">The value to which the <paramref name="location" /> parameter is set.</param>
+    /// <returns>The original value of <paramref name="location" />.</returns>
+    public static StatusCode InterlockedExchange(this ref StatusCode location, StatusCode value)
+    {
+        ref int locationRaw = ref Unsafe.As<StatusCode, int>(ref location);
+        int resultRaw = Interlocked.Exchange(ref locationRaw, Unsafe.As<StatusCode, int>(ref value));
+        return Unsafe.As<int, StatusCode>(ref resultRaw);
+    }
 
-        public static string ToEnumMemberValue(this StatusCode value)
-        {
-            return GetEnumMemberValueInlined((int)value)
-                ?? ((int)value).ToString();
-        }
+    public static string ToEnumMemberValue(this StatusCode value)
+    {
+        return GetEnumMemberValueInlined((int)value)
+            ?? ((int)value).ToString();
+    }
 
-        public static int GetEnumMemberValueStringLength(this StatusCode value)
-        {
-            return GetEnumMemberValueLengthInlined((int)value)
-                ?? EnumNumericFormatter.GetStringLength((int)value);
-        }
+    public static int GetEnumMemberValueStringLength(this StatusCode value)
+    {
+        return GetEnumMemberValueLengthInlined((int)value)
+            ?? EnumNumericFormatter.GetStringLength((int)value);
+    }
 
-        private static int? GetEnumMemberValueLengthInlined(int value)
+    private static int? GetEnumMemberValueLengthInlined(int value)
+    {
+        return value switch
         {
-            return value switch
-            {
-                -1 => 7,
-                0 => 7,
-                -2 => 5,
-                -3 => 9,
-                -4 => 7,
-                -5 => 12,
-                -6 => 9,
-                -7 => 8,
-                -8 => 4,
-                -9 => 14,
-                -10 => 11,
-                _ => null
-            };
-        }
+            -1 => 7,
+            0 => 7,
+            -2 => 5,
+            -3 => 9,
+            -4 => 7,
+            -5 => 12,
+            -6 => 9,
+            -7 => 8,
+            -8 => 4,
+            -9 => 14,
+            -10 => 11,
+            _ => null
+        };
+    }
 
-        private static string? GetEnumMemberValueInlined(int value)
+    private static string? GetEnumMemberValueInlined(int value)
+    {
+        return value switch
         {
-            return value switch
-            {
-                -1 => "Unknown",
-                0 => "Success",
-                -2 => "Error",
-                -3 => "Not Found",
-                -4 => "Timeout",
-                -5 => "Unauthorized",
-                -6 => "Forbidden",
-                -7 => "Conflict",
-                -8 => "Gone",
-                -9 => "InvalidRequest",
-                -10 => "ServerError",
-                _ => null
-            };
-        }
+            -1 => "Unknown",
+            0 => "Success",
+            -2 => "Error",
+            -3 => "Not Found",
+            -4 => "Timeout",
+            -5 => "Unauthorized",
+            -6 => "Forbidden",
+            -7 => "Conflict",
+            -8 => "Gone",
+            -9 => "InvalidRequest",
+            -10 => "ServerError",
+            _ => null
+        };
+    }
 
-        public static string GetDisplayShortName(this StatusCode value)
+    public static string GetDisplayShortName(this StatusCode value)
+    {
+        return (int)value switch
         {
-            return (int)value switch
-            {
-                _ => GetDisplayName(value)
-            };
-        }
+            _ => GetDisplayName(value)
+        };
+    }
 
-        public static string GetDisplayName(this StatusCode value)
+    public static string GetDisplayName(this StatusCode value)
+    {
+        return (int)value switch
         {
-            return (int)value switch
-            {
-                -1 => "Unknown",
-                0 => "Success",
-                -2 => "Error",
-                -3 => "NotFound",
-                -4 => "Timeout",
-                -5 => "Unauthorized",
-                -6 => "Forbidden",
-                -7 => "Conflict",
-                -8 => "Gone",
-                -9 => "Invalid request",
-                -10 => "ServerError",
-                _ => ToStringFast(value)
-            };
-        }
+            -1 => "Unknown",
+            0 => "Success",
+            -2 => "Error",
+            -3 => "NotFound",
+            -4 => "Timeout",
+            -5 => "Unauthorized",
+            -6 => "Forbidden",
+            -7 => "Conflict",
+            -8 => "Gone",
+            -9 => "Invalid request",
+            -10 => "ServerError",
+            _ => ToStringFast(value)
+        };
+    }
 
-        public static string? GetDescription(this StatusCode value)
+    public static string? GetDescription(this StatusCode value)
+    {
+        return (int)value switch
         {
-            return (int)value switch
-            {
-                -9 => "The request is invalid",
-                _ => null
-            };
-        }
+            -9 => "The request is invalid",
+            _ => null
+        };
+    }
 
-        /// <summary>
-        /// Provides pattern matching functionality for the <see cref="StatusCode"/> enum by returning the corresponding value based on the enum value.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result to return for each member match.</typeparam>
-        /// <param name="value">The <see cref="StatusCode"/> enum value to match against.</param>
-        /// <param name="Unknown">The value to return when the enum value is Unknown.</param>
-        /// <param name="Success">The value to return when the enum value is Success.</param>
-        /// <param name="Error">The value to return when the enum value is Error.</param>
-        /// <param name="NotFound">The value to return when the enum value is NotFound.</param>
-        /// <param name="Timeout">The value to return when the enum value is Timeout.</param>
-        /// <param name="Unauthorized">The value to return when the enum value is Unauthorized.</param>
-        /// <param name="Forbidden">The value to return when the enum value is Forbidden.</param>
-        /// <param name="Conflict">The value to return when the enum value is Conflict.</param>
-        /// <param name="Gone">The value to return when the enum value is Gone.</param>
-        /// <param name="InvalidRequest">The value to return when the enum value is InvalidRequest.</param>
-        /// <param name="ServerError">The value to return when the enum value is ServerError.</param>
-        /// <returns>The corresponding result value based on the enum value.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected member values.</exception>
-        public static TResult Match<TResult>(
-            this StatusCode value,
-            TResult Unknown,
-            TResult Success,
-            TResult Error,
-            TResult NotFound,
-            TResult Timeout,
-            TResult Unauthorized,
-            TResult Forbidden,
-            TResult Conflict,
-            TResult Gone,
-            TResult InvalidRequest,
-            TResult ServerError)
+    /// <summary>
+    /// Provides pattern matching functionality for the <see cref="StatusCode"/> enum by returning the corresponding value based on the enum value.
+    /// </summary>
+    /// <typeparam name="TResult">The type of the result to return for each member match.</typeparam>
+    /// <param name="value">The <see cref="StatusCode"/> enum value to match against.</param>
+    /// <param name="Unknown">The value to return when the enum value is Unknown.</param>
+    /// <param name="Success">The value to return when the enum value is Success.</param>
+    /// <param name="Error">The value to return when the enum value is Error.</param>
+    /// <param name="NotFound">The value to return when the enum value is NotFound.</param>
+    /// <param name="Timeout">The value to return when the enum value is Timeout.</param>
+    /// <param name="Unauthorized">The value to return when the enum value is Unauthorized.</param>
+    /// <param name="Forbidden">The value to return when the enum value is Forbidden.</param>
+    /// <param name="Conflict">The value to return when the enum value is Conflict.</param>
+    /// <param name="Gone">The value to return when the enum value is Gone.</param>
+    /// <param name="InvalidRequest">The value to return when the enum value is InvalidRequest.</param>
+    /// <param name="ServerError">The value to return when the enum value is ServerError.</param>
+    /// <returns>The corresponding result value based on the enum value.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected member values.</exception>
+    public static TResult Match<TResult>(
+        this StatusCode value,
+        TResult Unknown,
+        TResult Success,
+        TResult Error,
+        TResult NotFound,
+        TResult Timeout,
+        TResult Unauthorized,
+        TResult Forbidden,
+        TResult Conflict,
+        TResult Gone,
+        TResult InvalidRequest,
+        TResult ServerError)
+    {
+        return (int)value switch
         {
-            return (int)value switch
-            {
-                -1 => Unknown,
-                0 => Success,
-                -2 => Error,
-                -3 => NotFound,
-                -4 => Timeout,
-                -5 => Unauthorized,
-                -6 => Forbidden,
-                -7 => Conflict,
-                -8 => Gone,
-                -9 => InvalidRequest,
-                -10 => ServerError,
-                _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
-            };
-        }
+            -1 => Unknown,
+            0 => Success,
+            -2 => Error,
+            -3 => NotFound,
+            -4 => Timeout,
+            -5 => Unauthorized,
+            -6 => Forbidden,
+            -7 => Conflict,
+            -8 => Gone,
+            -9 => InvalidRequest,
+            -10 => ServerError,
+            _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
+        };
+    }
 
-        /// <summary>
-        /// Provides pattern matching functionality for the <see cref="StatusCode"/> enum by executing the corresponding function based on the enum value.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result to return from the executed function.</typeparam>
-        /// <param name="value">The <see cref="StatusCode"/> enum value to match against.</param>
-        /// <param name="Unknown">The function to execute when the enum value is Unknown.</param>
-        /// <param name="Success">The function to execute when the enum value is Success.</param>
-        /// <param name="Error">The function to execute when the enum value is Error.</param>
-        /// <param name="NotFound">The function to execute when the enum value is NotFound.</param>
-        /// <param name="Timeout">The function to execute when the enum value is Timeout.</param>
-        /// <param name="Unauthorized">The function to execute when the enum value is Unauthorized.</param>
-        /// <param name="Forbidden">The function to execute when the enum value is Forbidden.</param>
-        /// <param name="Conflict">The function to execute when the enum value is Conflict.</param>
-        /// <param name="Gone">The function to execute when the enum value is Gone.</param>
-        /// <param name="InvalidRequest">The function to execute when the enum value is InvalidRequest.</param>
-        /// <param name="ServerError">The function to execute when the enum value is ServerError.</param>
-        /// <returns>The result of executing the corresponding function based on the enum value.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected <see cref="StatusCode"/> values.</exception>
-        public static TResult Match<TResult>(
-            this StatusCode value,
-            Func<StatusCode, TResult> Unknown,
-            Func<StatusCode, TResult> Success,
-            Func<StatusCode, TResult> Error,
-            Func<StatusCode, TResult> NotFound,
-            Func<StatusCode, TResult> Timeout,
-            Func<StatusCode, TResult> Unauthorized,
-            Func<StatusCode, TResult> Forbidden,
-            Func<StatusCode, TResult> Conflict,
-            Func<StatusCode, TResult> Gone,
-            Func<StatusCode, TResult> InvalidRequest,
-            Func<StatusCode, TResult> ServerError)
+    /// <summary>
+    /// Provides pattern matching functionality for the <see cref="StatusCode"/> enum by executing the corresponding function based on the enum value.
+    /// </summary>
+    /// <typeparam name="TResult">The type of the result to return from the executed function.</typeparam>
+    /// <param name="value">The <see cref="StatusCode"/> enum value to match against.</param>
+    /// <param name="Unknown">The function to execute when the enum value is Unknown.</param>
+    /// <param name="Success">The function to execute when the enum value is Success.</param>
+    /// <param name="Error">The function to execute when the enum value is Error.</param>
+    /// <param name="NotFound">The function to execute when the enum value is NotFound.</param>
+    /// <param name="Timeout">The function to execute when the enum value is Timeout.</param>
+    /// <param name="Unauthorized">The function to execute when the enum value is Unauthorized.</param>
+    /// <param name="Forbidden">The function to execute when the enum value is Forbidden.</param>
+    /// <param name="Conflict">The function to execute when the enum value is Conflict.</param>
+    /// <param name="Gone">The function to execute when the enum value is Gone.</param>
+    /// <param name="InvalidRequest">The function to execute when the enum value is InvalidRequest.</param>
+    /// <param name="ServerError">The function to execute when the enum value is ServerError.</param>
+    /// <returns>The result of executing the corresponding function based on the enum value.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected <see cref="StatusCode"/> values.</exception>
+    public static TResult Match<TResult>(
+        this StatusCode value,
+        Func<StatusCode, TResult> Unknown,
+        Func<StatusCode, TResult> Success,
+        Func<StatusCode, TResult> Error,
+        Func<StatusCode, TResult> NotFound,
+        Func<StatusCode, TResult> Timeout,
+        Func<StatusCode, TResult> Unauthorized,
+        Func<StatusCode, TResult> Forbidden,
+        Func<StatusCode, TResult> Conflict,
+        Func<StatusCode, TResult> Gone,
+        Func<StatusCode, TResult> InvalidRequest,
+        Func<StatusCode, TResult> ServerError)
+    {
+        return (int)value switch
         {
-            return (int)value switch
-            {
-                -1 => Unknown((StatusCode)value),
-                0 => Success((StatusCode)value),
-                -2 => Error((StatusCode)value),
-                -3 => NotFound((StatusCode)value),
-                -4 => Timeout((StatusCode)value),
-                -5 => Unauthorized((StatusCode)value),
-                -6 => Forbidden((StatusCode)value),
-                -7 => Conflict((StatusCode)value),
-                -8 => Gone((StatusCode)value),
-                -9 => InvalidRequest((StatusCode)value),
-                -10 => ServerError((StatusCode)value),
-                _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
-            };
-        }
+            -1 => Unknown((StatusCode)value),
+            0 => Success((StatusCode)value),
+            -2 => Error((StatusCode)value),
+            -3 => NotFound((StatusCode)value),
+            -4 => Timeout((StatusCode)value),
+            -5 => Unauthorized((StatusCode)value),
+            -6 => Forbidden((StatusCode)value),
+            -7 => Conflict((StatusCode)value),
+            -8 => Gone((StatusCode)value),
+            -9 => InvalidRequest((StatusCode)value),
+            -10 => ServerError((StatusCode)value),
+            _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
+        };
     }
 }

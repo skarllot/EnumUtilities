@@ -66,9 +66,9 @@
         return false;
     }
 <#+
-        WriteLine();
+        Write('\n');
         WriteTryParseNonNumeric(type, parameterName);
-        WriteLine();
+        Write('\n');
         WriteTryParseLookup(keySelector, type);
     }
 

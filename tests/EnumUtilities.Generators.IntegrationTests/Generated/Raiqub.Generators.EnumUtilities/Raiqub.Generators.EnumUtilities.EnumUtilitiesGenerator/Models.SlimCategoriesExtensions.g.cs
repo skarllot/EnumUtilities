@@ -7,139 +7,138 @@ using Raiqub.Generators.EnumUtilities.Formatters;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
-namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
+namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
+
+[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
+public static partial class SlimCategoriesExtensions
 {
-    [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
-    public static partial class SlimCategoriesExtensions
+    /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
+    /// <returns>The string representation of the value of this instance.</returns>
+    public static string ToStringFast(this SlimCategories value)
     {
-        /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
-        /// <returns>The string representation of the value of this instance.</returns>
-        public static string ToStringFast(this SlimCategories value)
-        {
-            return GetNameInlined((byte)value)
-                ?? ((byte)value).ToString();
-        }
+        return GetNameInlined((byte)value)
+            ?? ((byte)value).ToString();
+    }
 
-        /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
-        /// <param name="value">The value to calculate the number of characters.</param>
-        /// <returns>The number of characters produced by converting the specified value to string.</returns>
-        public static int GetStringLength(this SlimCategories value)
-        {
-            return GetNameLengthInlined((byte)value)
-                ?? EnumNumericFormatter.GetStringLength((byte)value);
-        }
+    /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
+    /// <param name="value">The value to calculate the number of characters.</param>
+    /// <returns>The number of characters produced by converting the specified value to string.</returns>
+    public static int GetStringLength(this SlimCategories value)
+    {
+        return GetNameLengthInlined((byte)value)
+            ?? EnumNumericFormatter.GetStringLength((byte)value);
+    }
 
-        /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
-        /// <returns><c>true</c> if the value of this instance exists in the enumeration; <c>false</c> otherwise.</returns>
-        public static bool IsDefined(this SlimCategories value)
+    /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
+    /// <returns><c>true</c> if the value of this instance exists in the enumeration; <c>false</c> otherwise.</returns>
+    public static bool IsDefined(this SlimCategories value)
+    {
+        return (byte)value switch
         {
-            return (byte)value switch
-            {
-                0 => true,
-                1 => true,
-                2 => true,
-                3 => true,
-                4 => true,
-                5 => true,
-                _ => false
-            };
-        }
+            0 => true,
+            1 => true,
+            2 => true,
+            3 => true,
+            4 => true,
+            5 => true,
+            _ => false
+        };
+    }
 
-        private static int? GetNameLengthInlined(byte value)
+    private static int? GetNameLengthInlined(byte value)
+    {
+        return value switch
         {
-            return value switch
-            {
-                0 => 11,
-                1 => 4,
-                2 => 10,
-                3 => 4,
-                4 => 10,
-                5 => 7,
-                _ => null
-            };
-        }
+            0 => 11,
+            1 => 4,
+            2 => 10,
+            3 => 4,
+            4 => 10,
+            5 => 7,
+            _ => null
+        };
+    }
 
-        private static string? GetNameInlined(byte value)
+    private static string? GetNameInlined(byte value)
+    {
+        return value switch
         {
-            return value switch
-            {
-                0 => "Electronics",
-                1 => "Food",
-                2 => "Automotive",
-                3 => "Arts",
-                4 => "BeautyCare",
-                5 => "Fashion",
-                _ => null
-            };
-        }
+            0 => "Electronics",
+            1 => "Food",
+            2 => "Automotive",
+            3 => "Arts",
+            4 => "BeautyCare",
+            5 => "Fashion",
+            _ => null
+        };
+    }
 
-        /// <summary>
-        /// Provides pattern matching functionality for the <see cref="SlimCategories"/> enum by returning the corresponding value based on the enum value.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result to return for each member match.</typeparam>
-        /// <param name="value">The <see cref="SlimCategories"/> enum value to match against.</param>
-        /// <param name="Electronics">The value to return when the enum value is Electronics.</param>
-        /// <param name="Food">The value to return when the enum value is Food.</param>
-        /// <param name="Automotive">The value to return when the enum value is Automotive.</param>
-        /// <param name="Arts">The value to return when the enum value is Arts.</param>
-        /// <param name="BeautyCare">The value to return when the enum value is BeautyCare.</param>
-        /// <param name="Fashion">The value to return when the enum value is Fashion.</param>
-        /// <returns>The corresponding result value based on the enum value.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected member values.</exception>
-        public static TResult Match<TResult>(
-            this SlimCategories value,
-            TResult Electronics,
-            TResult Food,
-            TResult Automotive,
-            TResult Arts,
-            TResult BeautyCare,
-            TResult Fashion)
+    /// <summary>
+    /// Provides pattern matching functionality for the <see cref="SlimCategories"/> enum by returning the corresponding value based on the enum value.
+    /// </summary>
+    /// <typeparam name="TResult">The type of the result to return for each member match.</typeparam>
+    /// <param name="value">The <see cref="SlimCategories"/> enum value to match against.</param>
+    /// <param name="Electronics">The value to return when the enum value is Electronics.</param>
+    /// <param name="Food">The value to return when the enum value is Food.</param>
+    /// <param name="Automotive">The value to return when the enum value is Automotive.</param>
+    /// <param name="Arts">The value to return when the enum value is Arts.</param>
+    /// <param name="BeautyCare">The value to return when the enum value is BeautyCare.</param>
+    /// <param name="Fashion">The value to return when the enum value is Fashion.</param>
+    /// <returns>The corresponding result value based on the enum value.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected member values.</exception>
+    public static TResult Match<TResult>(
+        this SlimCategories value,
+        TResult Electronics,
+        TResult Food,
+        TResult Automotive,
+        TResult Arts,
+        TResult BeautyCare,
+        TResult Fashion)
+    {
+        return (byte)value switch
         {
-            return (byte)value switch
-            {
-                0 => Electronics,
-                1 => Food,
-                2 => Automotive,
-                3 => Arts,
-                4 => BeautyCare,
-                5 => Fashion,
-                _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
-            };
-        }
+            0 => Electronics,
+            1 => Food,
+            2 => Automotive,
+            3 => Arts,
+            4 => BeautyCare,
+            5 => Fashion,
+            _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
+        };
+    }
 
-        /// <summary>
-        /// Provides pattern matching functionality for the <see cref="SlimCategories"/> enum by executing the corresponding function based on the enum value.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result to return from the executed function.</typeparam>
-        /// <param name="value">The <see cref="SlimCategories"/> enum value to match against.</param>
-        /// <param name="Electronics">The function to execute when the enum value is Electronics.</param>
-        /// <param name="Food">The function to execute when the enum value is Food.</param>
-        /// <param name="Automotive">The function to execute when the enum value is Automotive.</param>
-        /// <param name="Arts">The function to execute when the enum value is Arts.</param>
-        /// <param name="BeautyCare">The function to execute when the enum value is BeautyCare.</param>
-        /// <param name="Fashion">The function to execute when the enum value is Fashion.</param>
-        /// <returns>The result of executing the corresponding function based on the enum value.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected <see cref="SlimCategories"/> values.</exception>
-        public static TResult Match<TResult>(
-            this SlimCategories value,
-            Func<SlimCategories, TResult> Electronics,
-            Func<SlimCategories, TResult> Food,
-            Func<SlimCategories, TResult> Automotive,
-            Func<SlimCategories, TResult> Arts,
-            Func<SlimCategories, TResult> BeautyCare,
-            Func<SlimCategories, TResult> Fashion)
+    /// <summary>
+    /// Provides pattern matching functionality for the <see cref="SlimCategories"/> enum by executing the corresponding function based on the enum value.
+    /// </summary>
+    /// <typeparam name="TResult">The type of the result to return from the executed function.</typeparam>
+    /// <param name="value">The <see cref="SlimCategories"/> enum value to match against.</param>
+    /// <param name="Electronics">The function to execute when the enum value is Electronics.</param>
+    /// <param name="Food">The function to execute when the enum value is Food.</param>
+    /// <param name="Automotive">The function to execute when the enum value is Automotive.</param>
+    /// <param name="Arts">The function to execute when the enum value is Arts.</param>
+    /// <param name="BeautyCare">The function to execute when the enum value is BeautyCare.</param>
+    /// <param name="Fashion">The function to execute when the enum value is Fashion.</param>
+    /// <returns>The result of executing the corresponding function based on the enum value.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected <see cref="SlimCategories"/> values.</exception>
+    public static TResult Match<TResult>(
+        this SlimCategories value,
+        Func<SlimCategories, TResult> Electronics,
+        Func<SlimCategories, TResult> Food,
+        Func<SlimCategories, TResult> Automotive,
+        Func<SlimCategories, TResult> Arts,
+        Func<SlimCategories, TResult> BeautyCare,
+        Func<SlimCategories, TResult> Fashion)
+    {
+        return (byte)value switch
         {
-            return (byte)value switch
-            {
-                0 => Electronics((SlimCategories)value),
-                1 => Food((SlimCategories)value),
-                2 => Automotive((SlimCategories)value),
-                3 => Arts((SlimCategories)value),
-                4 => BeautyCare((SlimCategories)value),
-                5 => Fashion((SlimCategories)value),
-                _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
-            };
-        }
+            0 => Electronics((SlimCategories)value),
+            1 => Food((SlimCategories)value),
+            2 => Automotive((SlimCategories)value),
+            3 => Arts((SlimCategories)value),
+            4 => BeautyCare((SlimCategories)value),
+            5 => Fashion((SlimCategories)value),
+            _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
+        };
     }
 }

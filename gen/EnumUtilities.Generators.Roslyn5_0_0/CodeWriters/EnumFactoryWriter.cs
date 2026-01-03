@@ -26,14 +26,6 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
         /// </summary>
         public override string TransformText()
         {
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-
 #nullable enable
 
             this.Write(
@@ -42,9 +34,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
 
             if (!string.IsNullOrEmpty(Model.Namespace))
             {
-                WriteLine($"namespace {Model.Namespace}");
-                WriteLine("{");
-                PushIndent();
+                Write($"namespace {Model.Namespace};\n\n");
             }
 
             this.Write(
@@ -70,13 +60,6 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             WriteJsonBlock();
 
             this.Write("}\n");
-
-            if (!string.IsNullOrEmpty(Model.Namespace))
-            {
-                PopIndent();
-                WriteLine("}");
-            }
-
             return this.GenerationEnvironment.ToString();
         }
 
@@ -149,9 +132,9 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             this.Write((parameterName));
             this.Write("));\n        }\n\n        result = 0;\n        return false;\n    }\n");
 
-            WriteLine();
+            Write('\n');
             WriteTryParseNonNumeric(type, parameterName);
-            WriteLine();
+            Write('\n');
             WriteTryParseLookup(keySelector, type);
         }
 

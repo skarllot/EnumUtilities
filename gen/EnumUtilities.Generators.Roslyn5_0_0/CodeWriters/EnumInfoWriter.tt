@@ -18,9 +18,7 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 <#
     if (!string.IsNullOrEmpty(Model.Namespace))
     {
-        WriteLine($"namespace {Model.Namespace}");
-        WriteLine("{");
-        PushIndent();
+        Write($"namespace {Model.Namespace};\n\n");
     }
 #>
 /// <summary>Provides metadata for <see cref="<#= Model.Name #>" /> enumeration.</summary>
@@ -32,13 +30,6 @@ using Raiqub.Generators.EnumUtilities.Parsers;
     WriteDefaultBlock();
 #>
 }
-<#
-    if (!string.IsNullOrEmpty(Model.Namespace))
-    {
-        PopIndent();
-        WriteLine("}");
-    }
-#>
 <#+
     public EnumInfoWriter(StringBuilder builder) : base(builder)
     {

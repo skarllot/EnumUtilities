@@ -29,13 +29,14 @@ public class EnumUtilitiesGenerator : IIncrementalGenerator
     {
         var rootNamespace = context
             .AnalyzerConfigOptionsProvider
-            .Select(
-                (c, _) =>
-                    c.GlobalOptions.TryGetValue("build_property.RootNamespace", out var ns)
-                        ? ns
-                        : null);
+            .Select((c, _) =>
+                c.GlobalOptions.TryGetValue("build_property.RootNamespace", out var ns)
+                    ? ns
+                    : null);
 
-        var providerForEnumGenerator = context.SyntaxProvider
+        var csharpVersion = context.CompilationProvider.Select((c, _) => ((CSharpCompilation)c).LanguageVersion);
+
+        var enumsWithVersion = context.SyntaxProvider
             .ForAttributeWithMetadataName(
                 EnumGeneratorAttributeName,
                 IsSyntaxTargetForGeneration,
@@ -43,12 +44,22 @@ public class EnumUtilitiesGenerator : IIncrementalGenerator
             .WithTrackingName(TrackingNames.ExtractForEnumGeneratorAttribute)
             .WhereNotNull()
             .WithTrackingName(TrackingNames.RemoveNulls)
+            .Combine(csharpVersion);
+
+        var oldCsharpVersionEnums = enumsWithVersion
+            .Where(t => t.Right < LanguageVersion.CSharp10)
+            .Collect();
+
+        var providerForEnumGenerator = enumsWithVersion
+            .Where(t => t.Right >= LanguageVersion.CSharp10)
+            .Select((x, _) => x.Left)
+            .WithTrackingName(TrackingNames.IgnoreOldCsharpVersion)
             .Combine(rootNamespace)
             .Select((x, _) => x.Right != null ? x.Left with { RootNamespace = x.Right } : x.Left)
             .WithTrackingName(TrackingNames.FillRootNamespace)
             .Collect();
 
-        var providerForJsonConverterGenerator = context.SyntaxProvider
+        var jsonConverterEnumsWithVersion = context.SyntaxProvider
             .ForAttributeWithMetadataName(
                 JsonConverterGeneratorAttribute,
                 IsSyntaxTargetForGeneration,
@@ -58,11 +69,23 @@ public class EnumUtilitiesGenerator : IIncrementalGenerator
             .WithTrackingName(TrackingNames.RemoveNulls)
             .Where(x => (x.SelectedGenerators & SelectedGenerators.MainGenerator) == 0)
             .WithTrackingName(TrackingNames.SkipGeneratedByMainGenerator)
+            .Combine(csharpVersion);
+
+        var oldCsharpVersionJsonConverterEnums = jsonConverterEnumsWithVersion
+            .Where(t => t.Right < LanguageVersion.CSharp10)
+            .Collect();
+
+        var providerForJsonConverterGenerator = jsonConverterEnumsWithVersion
+            .Where(t => t.Right >= LanguageVersion.CSharp10)
+            .Select((x, _) => x.Left)
+            .WithTrackingName(TrackingNames.IgnoreOldCsharpVersion)
             .Combine(rootNamespace)
             .Select((x, _) => x.Right != null ? x.Left with { RootNamespace = x.Right } : x.Left)
             .WithTrackingName(TrackingNames.FillRootNamespace)
             .Collect();
 
+        context.RegisterImplementationSourceOutput(oldCsharpVersionEnums, ReportCSharpVersionDiagnostic);
+        context.RegisterImplementationSourceOutput(oldCsharpVersionJsonConverterEnums, ReportCSharpVersionDiagnostic);
         context.RegisterImplementationSourceOutput(providerForEnumGenerator, Emit);
         context.RegisterImplementationSourceOutput(providerForJsonConverterGenerator, Emit);
     }
@@ -90,6 +113,20 @@ public class EnumUtilitiesGenerator : IIncrementalGenerator
         }
 
         s_dispatcher.GenerateSources(enumsToGenerate, context);
+    }
+
+    private static void ReportCSharpVersionDiagnostic(
+        SourceProductionContext context,
+        ImmutableArray<(EnumToGenerate Enum, LanguageVersion Version)> enumsWithVersion)
+    {
+        foreach (var (enumToGenerate, version) in enumsWithVersion)
+        {
+            var diagnostic = Diagnostic.Create(
+                DiagnosticDescriptors.CSharpVersionNotSupported,
+                enumToGenerate.DefaultLocations,
+                version.ToDisplayString());
+            context.ReportDiagnostic(diagnostic);
+        }
     }
 
     private static Diagnostic HandleCodeWriterException(Exception exception, EnumToGenerate model)
