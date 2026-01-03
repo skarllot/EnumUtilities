@@ -12,7 +12,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     /// <summary>Provides metadata for <see cref="MyEnum3" /> enumeration.</summary>
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.12.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
     public static partial class MyEnum3Metadata
     {
         /// <summary>Provides constant values for <see cref="MyEnum3" /> members names.</summary>

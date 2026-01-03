@@ -12,11 +12,10 @@ public class EnumStringFormatterTest
         var names = new[] { "Green", "Blue", "Red" };
         Span<int> foundItems = stackalloc int[1];
         foundItems[0] = 1; // "Blue"
-        var foundItemsCount = 1;
         var count = names[1].Length;
 
         // Act
-        var result = EnumStringFormatter.WriteMultipleFoundFlagsNames(names, foundItems, foundItemsCount, count);
+        var result = EnumStringFormatter.WriteMultipleFoundFlagsNames(names, foundItems, count);
 
         // Assert
         result.Should().Be("Blue");
@@ -31,11 +30,10 @@ public class EnumStringFormatterTest
         foundItems[0] = 0; // "Green"
         foundItems[1] = 1; // "Blue"
         foundItems[2] = 2; // "Red"
-        var foundItemsCount = 3;
         var count = names[0].Length + names[1].Length + names[2].Length;
 
         // Act
-        var result = EnumStringFormatter.WriteMultipleFoundFlagsNames(names, foundItems, foundItemsCount, count);
+        var result = EnumStringFormatter.WriteMultipleFoundFlagsNames(names, foundItems, count);
 
         // Assert
         result.Should().Be("Red, Blue, Green"); // Note: reverse order of write
@@ -49,11 +47,10 @@ public class EnumStringFormatterTest
         Span<int> foundItems = stackalloc int[2];
         foundItems[0] = 1; // "Blue"
         foundItems[1] = 2; // "Red"
-        var foundItemsCount = 2;
         var count = names[1].Length + names[2].Length;
 
         // Act
-        var result = EnumStringFormatter.WriteMultipleFoundFlagsNames(names, foundItems, foundItemsCount, count);
+        var result = EnumStringFormatter.WriteMultipleFoundFlagsNames(names, foundItems, count);
 
         // Assert
         result.Should().Be("Red, Blue");
@@ -71,10 +68,9 @@ public class EnumStringFormatterTest
                 foundItems[0] = 0;
                 foundItems[1] = 1;
 
-                var foundItemsCount = 2;
                 var count = int.MaxValue; // Force overflow in `checked`
 
-                EnumStringFormatter.WriteMultipleFoundFlagsNames(names, foundItems, foundItemsCount, count);
+                EnumStringFormatter.WriteMultipleFoundFlagsNames(names, foundItems, count);
             });
     }
 }
