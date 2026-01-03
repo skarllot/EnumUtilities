@@ -213,7 +213,7 @@ this.Write("s(value, foundItems, out int foundItemsCount, out int resultLength))
 
 this.Write(this.ToStringHelper.ToStringWithCulture(type));
 
-this.Write("s, foundItems, foundItemsCount, resultLength);\r\n            }\r\n        }\r\n\r\n        return result;\r\n    }\r\n\r\n    private static bool TryFindFlags");
+this.Write("s, foundItems.Slice(0, foundItemsCount), resultLength);\r\n            }\r\n        }\r\n\r\n        return result;\r\n    }\r\n\r\n    private static bool TryFindFlags");
 
 this.Write(this.ToStringHelper.ToStringWithCulture(type));
 

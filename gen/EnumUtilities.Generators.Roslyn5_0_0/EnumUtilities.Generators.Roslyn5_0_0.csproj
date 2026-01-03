@@ -1,5 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <IsPackable>false</IsPackable>
@@ -7,12 +6,11 @@
     <IsRoslynComponent>true</IsRoslynComponent>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <AnalyzerLanguage>cs</AnalyzerLanguage>
-    <AnalyzerRoslynVersion>4.4.0</AnalyzerRoslynVersion>
-    <DefineConstants>$(DefineConstants);Roslyn_440;AllowUnsafeBlocks;FeatureMemory</DefineConstants>
+    <AnalyzerRoslynVersion>5.0.0</AnalyzerRoslynVersion>
+    <DefineConstants>$(DefineConstants);Roslyn_500;AllowUnsafeBlocks;FeatureMemory</DefineConstants>
     <RootNamespace>Raiqub.Generators.EnumUtilities</RootNamespace>
     <AssemblyName>Raiqub.Generators.EnumUtilities</AssemblyName>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" PrivateAssets="all" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all" />
@@ -23,12 +21,13 @@
       <ExcludeAssets>build; buildTransitive</ExcludeAssets>
     </PackageReference>
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="..\..\src\EnumUtilities\EnumGeneratorAttribute.cs" Link="Attributes\EnumGeneratorAttribute.cs" />
-    <Compile Include="..\..\src\EnumUtilities\JsonConverterGeneratorAttribute.cs" Link="Attributes\JsonConverterGeneratorAttribute.cs" />
+    <Compile
+      Include="..\..\src\EnumUtilities\JsonConverterGeneratorAttribute.cs"
+      Link="Attributes\JsonConverterGeneratorAttribute.cs"
+    />
   </ItemGroup>
-
   <ItemGroup>
     <None Update="CodeWriters\EnumExtensionsWriter.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
@@ -51,7 +50,6 @@
       <LastGenOutput>EnumInfoWriter.cs</LastGenOutput>
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <Compile Update="CodeWriters\EnumExtensionsWriter.cs">
       <AutoGen>True</AutoGen>
@@ -79,5 +77,4 @@
       <DependentUpon>EnumInfoWriter.tt</DependentUpon>
     </Compile>
   </ItemGroup>
-
 </Project>

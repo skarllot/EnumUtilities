@@ -3,12 +3,18 @@ name: Claude Code Review
 on:
   pull_request:
     types: [opened, synchronize]
+    paths-ignore:
+      - '.github/workflows/claude.yml'
+      - '.github/workflows/claude-code-review.yml'
     # Optional: Only run on specific file changes
     # paths:
     #   - "src/**/*.ts"
     #   - "src/**/*.tsx"
     #   - "src/**/*.js"
     #   - "src/**/*.jsx"
+
+permissions:
+  contents: read
 
 jobs:
   claude-review:
