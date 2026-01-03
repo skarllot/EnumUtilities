@@ -35,9 +35,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
 
             if (!string.IsNullOrEmpty(Model.Namespace))
             {
-                WriteLine($"namespace {Model.Namespace}");
-                WriteLine("{");
-                PushIndent();
+                Write($"namespace {Model.Namespace};\n\n");
             }
 
             this.Write(
@@ -136,13 +134,6 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             }
 
             this.Write("}\n");
-
-            if (!string.IsNullOrEmpty(Model.Namespace))
-            {
-                PopIndent();
-                WriteLine("}");
-            }
-
             return this.GenerationEnvironment.ToString();
         }
 

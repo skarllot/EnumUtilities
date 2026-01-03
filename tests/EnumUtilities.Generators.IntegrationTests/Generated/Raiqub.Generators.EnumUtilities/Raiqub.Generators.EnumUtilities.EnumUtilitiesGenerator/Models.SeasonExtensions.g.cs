@@ -8,49 +8,48 @@ using Raiqub.Generators.EnumUtilities.Formatters;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
-namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
+namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
+
+[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
+public static partial class SeasonExtensions
 {
-    [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
-    public static partial class SeasonExtensions
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static string? ToJsonString(this Season value)
     {
+        return GetJsonStringInlined((int)value);
+    }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string? ToJsonString(this Season value)
-        {
-            return GetJsonStringInlined((int)value);
-        }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static int? GetJsonStringLength(this Season value)
+    {
+        return GetJsonStringLengthInlined((int)value);
+    }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int? GetJsonStringLength(this Season value)
+    private static int? GetJsonStringLengthInlined(int value)
+    {
+        return value switch
         {
-            return GetJsonStringLengthInlined((int)value);
-        }
+            0 => 1,
+            1 => 2,
+            2 => 2,
+            3 => 2,
+            4 => 1,
+            _ => null
+        };
+    }
 
-        private static int? GetJsonStringLengthInlined(int value)
+    private static string? GetJsonStringInlined(int value)
+    {
+        return value switch
         {
-            return value switch
-            {
-                0 => 1,
-                1 => 2,
-                2 => 2,
-                3 => 2,
-                4 => 1,
-                _ => null
-            };
-        }
-
-        private static string? GetJsonStringInlined(int value)
-        {
-            return value switch
-            {
-                0 => "0",
-                1 => "🌱",
-                2 => "☀️",
-                3 => "🍂",
-                4 => "⛄",
-                _ => null
-            };
-        }
+            0 => "0",
+            1 => "🌱",
+            2 => "☀️",
+            3 => "🍂",
+            4 => "⛄",
+            _ => null
+        };
     }
 }

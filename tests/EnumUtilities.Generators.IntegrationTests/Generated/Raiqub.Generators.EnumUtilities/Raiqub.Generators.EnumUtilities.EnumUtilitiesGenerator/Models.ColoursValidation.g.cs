@@ -6,52 +6,51 @@ using System.Diagnostics.CodeAnalysis;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
-namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
+namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
+
+[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
+public static partial class ColoursValidation
 {
-    [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
-    public static partial class ColoursValidation
+    /// <summary>Returns a boolean telling whether the value of <see cref="Colours"/> instance exists in the enumeration.</summary>
+    /// <returns><c>true</c> if the value of <see cref="Colours"/> instance exists in the enumeration; <c>false</c> otherwise.</returns>
+    public static bool IsDefined(Colours value)
     {
-        /// <summary>Returns a boolean telling whether the value of <see cref="Colours"/> instance exists in the enumeration.</summary>
-        /// <returns><c>true</c> if the value of <see cref="Colours"/> instance exists in the enumeration; <c>false</c> otherwise.</returns>
-        public static bool IsDefined(Colours value)
+        return (int)value switch
         {
-            return (int)value switch
-            {
-                1 => true,
-                2 => true,
-                4 => true,
-                _ => false
-            };
-        }
+            1 => true,
+            2 => true,
+            4 => true,
+            _ => false
+        };
+    }
 
-        public static bool IsDefined(
-            [NotNullWhen(true)] string? name,
-            StringComparison comparisonType)
+    public static bool IsDefined(
+        [NotNullWhen(true)] string? name,
+        StringComparison comparisonType)
+    {
+        return name switch
         {
-            return name switch
-            {
-                { } s when s.Equals("Red", comparisonType) => true,
-                { } s when s.Equals("Blue", comparisonType) => true,
-                { } s when s.Equals("Green", comparisonType) => true,
-                _ => false
-            };
-        }
+            { } s when s.Equals("Red", comparisonType) => true,
+            { } s when s.Equals("Blue", comparisonType) => true,
+            { } s when s.Equals("Green", comparisonType) => true,
+            _ => false
+        };
+    }
 
-        public static bool IsDefinedIgnoreCase([NotNullWhen(true)] string? name)
-        {
-            return IsDefined(name, StringComparison.OrdinalIgnoreCase);
-        }
+    public static bool IsDefinedIgnoreCase([NotNullWhen(true)] string? name)
+    {
+        return IsDefined(name, StringComparison.OrdinalIgnoreCase);
+    }
 
-        public static bool IsDefined([NotNullWhen(true)] string? name)
+    public static bool IsDefined([NotNullWhen(true)] string? name)
+    {
+        return name switch
         {
-            return name switch
-            {
-                "Red" => true,
-                "Blue" => true,
-                "Green" => true,
-                _ => false
-            };
-        }
+            "Red" => true,
+            "Blue" => true,
+            "Green" => true,
+            _ => false
+        };
     }
 }

@@ -8,186 +8,185 @@ using Raiqub.Generators.EnumUtilities.Formatters;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
-namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
+namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
+
+[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
+public static partial class HumanStatesExtensions
 {
-    [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
-    public static partial class HumanStatesExtensions
+    /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
+    /// <returns>The string representation of the value of this instance.</returns>
+    public static string ToStringFast(this HumanStates value)
     {
-        /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
-        /// <returns>The string representation of the value of this instance.</returns>
-        public static string ToStringFast(this HumanStates value)
-        {
-            return GetNameInlined((int)value)
-                ?? ((int)value).ToString();
-        }
+        return GetNameInlined((int)value)
+            ?? ((int)value).ToString();
+    }
 
-        /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
-        /// <param name="value">The value to calculate the number of characters.</param>
-        /// <returns>The number of characters produced by converting the specified value to string.</returns>
-        public static int GetStringLength(this HumanStates value)
-        {
-            return GetNameLengthInlined((int)value)
-                ?? EnumNumericFormatter.GetStringLength((int)value);
-        }
+    /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
+    /// <param name="value">The value to calculate the number of characters.</param>
+    /// <returns>The number of characters produced by converting the specified value to string.</returns>
+    public static int GetStringLength(this HumanStates value)
+    {
+        return GetNameLengthInlined((int)value)
+            ?? EnumNumericFormatter.GetStringLength((int)value);
+    }
 
-        /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
-        /// <returns><c>true</c> if the value of this instance exists in the enumeration; <c>false</c> otherwise.</returns>
-        public static bool IsDefined(this HumanStates value)
+    /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
+    /// <returns><c>true</c> if the value of this instance exists in the enumeration; <c>false</c> otherwise.</returns>
+    public static bool IsDefined(this HumanStates value)
+    {
+        return (int)value switch
         {
-            return (int)value switch
-            {
-                1 => true,
-                2 => true,
-                3 => true,
-                4 => true,
-                5 => true,
-                _ => false
-            };
-        }
+            1 => true,
+            2 => true,
+            3 => true,
+            4 => true,
+            5 => true,
+            _ => false
+        };
+    }
 
-        private static int? GetNameLengthInlined(int value)
+    private static int? GetNameLengthInlined(int value)
+    {
+        return value switch
         {
-            return value switch
-            {
-                0 => 1,
-                1 => 4,
-                2 => 7,
-                3 => 8,
-                4 => 6,
-                5 => 4,
-                _ => null
-            };
-        }
+            0 => 1,
+            1 => 4,
+            2 => 7,
+            3 => 8,
+            4 => 6,
+            5 => 4,
+            _ => null
+        };
+    }
 
-        private static string? GetNameInlined(int value)
+    private static string? GetNameInlined(int value)
+    {
+        return value switch
         {
-            return value switch
-            {
-                0 => "0",
-                1 => "Idle",
-                2 => "Working",
-                3 => "Sleeping",
-                4 => "Eating",
-                5 => "Dead",
-                _ => null
-            };
-        }
+            0 => "0",
+            1 => "Idle",
+            2 => "Working",
+            3 => "Sleeping",
+            4 => "Eating",
+            5 => "Dead",
+            _ => null
+        };
+    }
 
-        /// <summary>Adds two enumerations and replaces the first integer with the sum, as an atomic operation.</summary>
-        /// <param name="location">A variable containing the first value to be added.</param>
-        /// <param name="value">The value to be added to the enumeration at <paramref name="location" />.</param>
-        /// <returns>The new value that was stored at <paramref name="location" /> by this operation.</returns>
-        public static HumanStates InterlockedAdd(this ref HumanStates location, int value)
-        {
-            ref int locationRaw = ref Unsafe.As<HumanStates, int>(ref location);
-            int resultRaw = Interlocked.Add(ref locationRaw, value);
-            return Unsafe.As<int, HumanStates>(ref resultRaw);
-        }
+    /// <summary>Adds two enumerations and replaces the first integer with the sum, as an atomic operation.</summary>
+    /// <param name="location">A variable containing the first value to be added.</param>
+    /// <param name="value">The value to be added to the enumeration at <paramref name="location" />.</param>
+    /// <returns>The new value that was stored at <paramref name="location" /> by this operation.</returns>
+    public static HumanStates InterlockedAdd(this ref HumanStates location, int value)
+    {
+        ref int locationRaw = ref Unsafe.As<HumanStates, int>(ref location);
+        int resultRaw = Interlocked.Add(ref locationRaw, value);
+        return Unsafe.As<int, HumanStates>(ref resultRaw);
+    }
 
-        /// <summary>Decrements enumeration and stores the result, as an atomic operation.</summary>
-        /// <param name="location">The variable whose value is to be decremented.</param>
-        /// <returns>The value of the variable immediately after the decrement operation finished.</returns>
-        public static HumanStates InterlockedDecrement(this ref HumanStates location)
-        {
-            ref int locationRaw = ref Unsafe.As<HumanStates, int>(ref location);
-            int resultRaw = Interlocked.Decrement(ref locationRaw);
-            return Unsafe.As<int, HumanStates>(ref resultRaw);
-        }
+    /// <summary>Decrements enumeration and stores the result, as an atomic operation.</summary>
+    /// <param name="location">The variable whose value is to be decremented.</param>
+    /// <returns>The value of the variable immediately after the decrement operation finished.</returns>
+    public static HumanStates InterlockedDecrement(this ref HumanStates location)
+    {
+        ref int locationRaw = ref Unsafe.As<HumanStates, int>(ref location);
+        int resultRaw = Interlocked.Decrement(ref locationRaw);
+        return Unsafe.As<int, HumanStates>(ref resultRaw);
+    }
 
-        /// <summary>Increments enumeration and stores the result, as an atomic operation.</summary>
-        /// <param name="location">The variable whose value is to be incremented.</param>
-        /// <returns>The value of the variable immediately after the increment operation finished.</returns>
-        public static HumanStates InterlockedIncrement(this ref HumanStates location)
-        {
-            ref int locationRaw = ref Unsafe.As<HumanStates, int>(ref location);
-            int resultRaw = Interlocked.Increment(ref locationRaw);
-            return Unsafe.As<int, HumanStates>(ref resultRaw);
-        }
+    /// <summary>Increments enumeration and stores the result, as an atomic operation.</summary>
+    /// <param name="location">The variable whose value is to be incremented.</param>
+    /// <returns>The value of the variable immediately after the increment operation finished.</returns>
+    public static HumanStates InterlockedIncrement(this ref HumanStates location)
+    {
+        ref int locationRaw = ref Unsafe.As<HumanStates, int>(ref location);
+        int resultRaw = Interlocked.Increment(ref locationRaw);
+        return Unsafe.As<int, HumanStates>(ref resultRaw);
+    }
 
-        /// <summary>Compares two enumerations for equality and, if they are equal, replaces the first value.</summary>
-        /// <param name="location">The destination, whose value is compared with <paramref name="comparand" /> and possibly replaced.</param>
-        /// <param name="value">The value that replaces the destination value if the comparison results in equality.</param>
-        /// <param name="comparand">The value that is compared to the value at <paramref name="location" />.</param>
-        /// <returns>The original value in <paramref name="location" />.</returns>
-        public static HumanStates InterlockedCompareExchange(this ref HumanStates location, HumanStates value, HumanStates comparand)
-        {
-            ref int locationRaw = ref Unsafe.As<HumanStates, int>(ref location);
-            int resultRaw = Interlocked.CompareExchange(ref locationRaw, Unsafe.As<HumanStates, int>(ref value), Unsafe.As<HumanStates, int>(ref comparand));
-            return Unsafe.As<int, HumanStates>(ref resultRaw);
-        }
+    /// <summary>Compares two enumerations for equality and, if they are equal, replaces the first value.</summary>
+    /// <param name="location">The destination, whose value is compared with <paramref name="comparand" /> and possibly replaced.</param>
+    /// <param name="value">The value that replaces the destination value if the comparison results in equality.</param>
+    /// <param name="comparand">The value that is compared to the value at <paramref name="location" />.</param>
+    /// <returns>The original value in <paramref name="location" />.</returns>
+    public static HumanStates InterlockedCompareExchange(this ref HumanStates location, HumanStates value, HumanStates comparand)
+    {
+        ref int locationRaw = ref Unsafe.As<HumanStates, int>(ref location);
+        int resultRaw = Interlocked.CompareExchange(ref locationRaw, Unsafe.As<HumanStates, int>(ref value), Unsafe.As<HumanStates, int>(ref comparand));
+        return Unsafe.As<int, HumanStates>(ref resultRaw);
+    }
 
-        /// <summary>Sets an enumeration value to a specified value and returns the original value, as an atomic operation.</summary>
-        /// <param name="location">The variable to set to the specified value.</param>
-        /// <param name="value">The value to which the <paramref name="location" /> parameter is set.</param>
-        /// <returns>The original value of <paramref name="location" />.</returns>
-        public static HumanStates InterlockedExchange(this ref HumanStates location, HumanStates value)
-        {
-            ref int locationRaw = ref Unsafe.As<HumanStates, int>(ref location);
-            int resultRaw = Interlocked.Exchange(ref locationRaw, Unsafe.As<HumanStates, int>(ref value));
-            return Unsafe.As<int, HumanStates>(ref resultRaw);
-        }
+    /// <summary>Sets an enumeration value to a specified value and returns the original value, as an atomic operation.</summary>
+    /// <param name="location">The variable to set to the specified value.</param>
+    /// <param name="value">The value to which the <paramref name="location" /> parameter is set.</param>
+    /// <returns>The original value of <paramref name="location" />.</returns>
+    public static HumanStates InterlockedExchange(this ref HumanStates location, HumanStates value)
+    {
+        ref int locationRaw = ref Unsafe.As<HumanStates, int>(ref location);
+        int resultRaw = Interlocked.Exchange(ref locationRaw, Unsafe.As<HumanStates, int>(ref value));
+        return Unsafe.As<int, HumanStates>(ref resultRaw);
+    }
 
-        /// <summary>
-        /// Provides pattern matching functionality for the <see cref="HumanStates"/> enum by returning the corresponding value based on the enum value.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result to return for each member match.</typeparam>
-        /// <param name="value">The <see cref="HumanStates"/> enum value to match against.</param>
-        /// <param name="Idle">The value to return when the enum value is Idle.</param>
-        /// <param name="Working">The value to return when the enum value is Working.</param>
-        /// <param name="Sleeping">The value to return when the enum value is Sleeping.</param>
-        /// <param name="Eating">The value to return when the enum value is Eating.</param>
-        /// <param name="Dead">The value to return when the enum value is Dead.</param>
-        /// <returns>The corresponding result value based on the enum value.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected member values.</exception>
-        public static TResult Match<TResult>(
-            this HumanStates value,
-            TResult Idle,
-            TResult Working,
-            TResult Sleeping,
-            TResult Eating,
-            TResult Dead)
+    /// <summary>
+    /// Provides pattern matching functionality for the <see cref="HumanStates"/> enum by returning the corresponding value based on the enum value.
+    /// </summary>
+    /// <typeparam name="TResult">The type of the result to return for each member match.</typeparam>
+    /// <param name="value">The <see cref="HumanStates"/> enum value to match against.</param>
+    /// <param name="Idle">The value to return when the enum value is Idle.</param>
+    /// <param name="Working">The value to return when the enum value is Working.</param>
+    /// <param name="Sleeping">The value to return when the enum value is Sleeping.</param>
+    /// <param name="Eating">The value to return when the enum value is Eating.</param>
+    /// <param name="Dead">The value to return when the enum value is Dead.</param>
+    /// <returns>The corresponding result value based on the enum value.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected member values.</exception>
+    public static TResult Match<TResult>(
+        this HumanStates value,
+        TResult Idle,
+        TResult Working,
+        TResult Sleeping,
+        TResult Eating,
+        TResult Dead)
+    {
+        return (int)value switch
         {
-            return (int)value switch
-            {
-                1 => Idle,
-                2 => Working,
-                3 => Sleeping,
-                4 => Eating,
-                5 => Dead,
-                _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
-            };
-        }
+            1 => Idle,
+            2 => Working,
+            3 => Sleeping,
+            4 => Eating,
+            5 => Dead,
+            _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
+        };
+    }
 
-        /// <summary>
-        /// Provides pattern matching functionality for the <see cref="HumanStates"/> enum by executing the corresponding function based on the enum value.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result to return from the executed function.</typeparam>
-        /// <param name="value">The <see cref="HumanStates"/> enum value to match against.</param>
-        /// <param name="Idle">The function to execute when the enum value is Idle.</param>
-        /// <param name="Working">The function to execute when the enum value is Working.</param>
-        /// <param name="Sleeping">The function to execute when the enum value is Sleeping.</param>
-        /// <param name="Eating">The function to execute when the enum value is Eating.</param>
-        /// <param name="Dead">The function to execute when the enum value is Dead.</param>
-        /// <returns>The result of executing the corresponding function based on the enum value.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected <see cref="HumanStates"/> values.</exception>
-        public static TResult Match<TResult>(
-            this HumanStates value,
-            Func<HumanStates, TResult> Idle,
-            Func<HumanStates, TResult> Working,
-            Func<HumanStates, TResult> Sleeping,
-            Func<HumanStates, TResult> Eating,
-            Func<HumanStates, TResult> Dead)
+    /// <summary>
+    /// Provides pattern matching functionality for the <see cref="HumanStates"/> enum by executing the corresponding function based on the enum value.
+    /// </summary>
+    /// <typeparam name="TResult">The type of the result to return from the executed function.</typeparam>
+    /// <param name="value">The <see cref="HumanStates"/> enum value to match against.</param>
+    /// <param name="Idle">The function to execute when the enum value is Idle.</param>
+    /// <param name="Working">The function to execute when the enum value is Working.</param>
+    /// <param name="Sleeping">The function to execute when the enum value is Sleeping.</param>
+    /// <param name="Eating">The function to execute when the enum value is Eating.</param>
+    /// <param name="Dead">The function to execute when the enum value is Dead.</param>
+    /// <returns>The result of executing the corresponding function based on the enum value.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected <see cref="HumanStates"/> values.</exception>
+    public static TResult Match<TResult>(
+        this HumanStates value,
+        Func<HumanStates, TResult> Idle,
+        Func<HumanStates, TResult> Working,
+        Func<HumanStates, TResult> Sleeping,
+        Func<HumanStates, TResult> Eating,
+        Func<HumanStates, TResult> Dead)
+    {
+        return (int)value switch
         {
-            return (int)value switch
-            {
-                1 => Idle((HumanStates)value),
-                2 => Working((HumanStates)value),
-                3 => Sleeping((HumanStates)value),
-                4 => Eating((HumanStates)value),
-                5 => Dead((HumanStates)value),
-                _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
-            };
-        }
+            1 => Idle((HumanStates)value),
+            2 => Working((HumanStates)value),
+            3 => Sleeping((HumanStates)value),
+            4 => Eating((HumanStates)value),
+            5 => Dead((HumanStates)value),
+            _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
+        };
     }
 }

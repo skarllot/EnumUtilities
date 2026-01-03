@@ -4,7 +4,7 @@
         if (Model.IsFlags)
         {
             WriteFormatStringLookup(keySelector, type);
-            WriteLine();
+            Write('\n');
         }
 
         WriteInlineFormatString(keySelector, type);

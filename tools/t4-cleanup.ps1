@@ -72,6 +72,37 @@ function Normalize-LineEndings {
     }
 }
 
+function Remove-InitialWriteLineBreaks {
+    param([string[]]$Lines)
+
+    $result = @()
+    $i = 0
+
+    while ($i -lt $Lines.Length) {
+        $currentLine = $Lines[$i]
+
+        # Check if this is the opening brace of TransformText method
+        if ($currentLine -match '^\s*\{\s*$' -and
+            $i -gt 0 -and
+            $Lines[$i - 1] -match 'public override string TransformText\(\)') {
+            # Add the opening brace
+            $result += $currentLine
+            $i++
+
+            # Skip all consecutive this.Write("\r\n"); lines
+            while ($i -lt $Lines.Length -and $Lines[$i] -match '^\s*this\.Write\("\\r\\n"\);\s*$') {
+                $i++
+            }
+            continue
+        }
+
+        $result += $currentLine
+        $i++
+    }
+
+    return $result
+}
+
 function Remove-BlankLinesBetweenWrites {
     param([string[]]$Lines)
 
@@ -124,8 +155,11 @@ function Process-CsFile {
         # Remove blank lines between consecutive this.Write calls
         $linesWithoutWriteGaps = Remove-BlankLinesBetweenWrites -Lines $linesCollapsed
 
+        # Remove initial Write("\r\n") calls in TransformText method
+        $linesWithoutInitialWrites = Remove-InitialWriteLineBreaks -Lines $linesWithoutWriteGaps
+
         # Normalize line endings (\r\n to \n)
-        $finalLines = Normalize-LineEndings -Lines $linesWithoutWriteGaps
+        $finalLines = Normalize-LineEndings -Lines $linesWithoutInitialWrites
 
         # Extract auto-generated header (from start to second "// --------------")
         $header = @()

@@ -8,193 +8,192 @@ using Raiqub.Generators.EnumUtilities.Formatters;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
-namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
+namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
+
+[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
+public static partial class CategoriesExtensions
 {
-    [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
-    public static partial class CategoriesExtensions
+    /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
+    /// <returns>The string representation of the value of this instance.</returns>
+    public static string ToStringFast(this Categories value)
     {
-        /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
-        /// <returns>The string representation of the value of this instance.</returns>
-        public static string ToStringFast(this Categories value)
-        {
-            return GetNameInlined((int)value)
-                ?? ((int)value).ToString();
-        }
+        return GetNameInlined((int)value)
+            ?? ((int)value).ToString();
+    }
 
-        /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
-        /// <param name="value">The value to calculate the number of characters.</param>
-        /// <returns>The number of characters produced by converting the specified value to string.</returns>
-        public static int GetStringLength(this Categories value)
-        {
-            return GetNameLengthInlined((int)value)
-                ?? EnumNumericFormatter.GetStringLength((int)value);
-        }
+    /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
+    /// <param name="value">The value to calculate the number of characters.</param>
+    /// <returns>The number of characters produced by converting the specified value to string.</returns>
+    public static int GetStringLength(this Categories value)
+    {
+        return GetNameLengthInlined((int)value)
+            ?? EnumNumericFormatter.GetStringLength((int)value);
+    }
 
-        /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
-        /// <returns><c>true</c> if the value of this instance exists in the enumeration; <c>false</c> otherwise.</returns>
-        public static bool IsDefined(this Categories value)
+    /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
+    /// <returns><c>true</c> if the value of this instance exists in the enumeration; <c>false</c> otherwise.</returns>
+    public static bool IsDefined(this Categories value)
+    {
+        return (int)value switch
         {
-            return (int)value switch
-            {
-                0 => true,
-                1 => true,
-                2 => true,
-                3 => true,
-                4 => true,
-                5 => true,
-                _ => false
-            };
-        }
+            0 => true,
+            1 => true,
+            2 => true,
+            3 => true,
+            4 => true,
+            5 => true,
+            _ => false
+        };
+    }
 
-        private static int? GetNameLengthInlined(int value)
+    private static int? GetNameLengthInlined(int value)
+    {
+        return value switch
         {
-            return value switch
-            {
-                0 => 11,
-                1 => 4,
-                2 => 10,
-                3 => 4,
-                4 => 10,
-                5 => 7,
-                _ => null
-            };
-        }
+            0 => 11,
+            1 => 4,
+            2 => 10,
+            3 => 4,
+            4 => 10,
+            5 => 7,
+            _ => null
+        };
+    }
 
-        private static string? GetNameInlined(int value)
+    private static string? GetNameInlined(int value)
+    {
+        return value switch
         {
-            return value switch
-            {
-                0 => "Electronics",
-                1 => "Food",
-                2 => "Automotive",
-                3 => "Arts",
-                4 => "BeautyCare",
-                5 => "Fashion",
-                _ => null
-            };
-        }
+            0 => "Electronics",
+            1 => "Food",
+            2 => "Automotive",
+            3 => "Arts",
+            4 => "BeautyCare",
+            5 => "Fashion",
+            _ => null
+        };
+    }
 
-        /// <summary>Adds two enumerations and replaces the first integer with the sum, as an atomic operation.</summary>
-        /// <param name="location">A variable containing the first value to be added.</param>
-        /// <param name="value">The value to be added to the enumeration at <paramref name="location" />.</param>
-        /// <returns>The new value that was stored at <paramref name="location" /> by this operation.</returns>
-        public static Categories InterlockedAdd(this ref Categories location, int value)
-        {
-            ref int locationRaw = ref Unsafe.As<Categories, int>(ref location);
-            int resultRaw = Interlocked.Add(ref locationRaw, value);
-            return Unsafe.As<int, Categories>(ref resultRaw);
-        }
+    /// <summary>Adds two enumerations and replaces the first integer with the sum, as an atomic operation.</summary>
+    /// <param name="location">A variable containing the first value to be added.</param>
+    /// <param name="value">The value to be added to the enumeration at <paramref name="location" />.</param>
+    /// <returns>The new value that was stored at <paramref name="location" /> by this operation.</returns>
+    public static Categories InterlockedAdd(this ref Categories location, int value)
+    {
+        ref int locationRaw = ref Unsafe.As<Categories, int>(ref location);
+        int resultRaw = Interlocked.Add(ref locationRaw, value);
+        return Unsafe.As<int, Categories>(ref resultRaw);
+    }
 
-        /// <summary>Decrements enumeration and stores the result, as an atomic operation.</summary>
-        /// <param name="location">The variable whose value is to be decremented.</param>
-        /// <returns>The value of the variable immediately after the decrement operation finished.</returns>
-        public static Categories InterlockedDecrement(this ref Categories location)
-        {
-            ref int locationRaw = ref Unsafe.As<Categories, int>(ref location);
-            int resultRaw = Interlocked.Decrement(ref locationRaw);
-            return Unsafe.As<int, Categories>(ref resultRaw);
-        }
+    /// <summary>Decrements enumeration and stores the result, as an atomic operation.</summary>
+    /// <param name="location">The variable whose value is to be decremented.</param>
+    /// <returns>The value of the variable immediately after the decrement operation finished.</returns>
+    public static Categories InterlockedDecrement(this ref Categories location)
+    {
+        ref int locationRaw = ref Unsafe.As<Categories, int>(ref location);
+        int resultRaw = Interlocked.Decrement(ref locationRaw);
+        return Unsafe.As<int, Categories>(ref resultRaw);
+    }
 
-        /// <summary>Increments enumeration and stores the result, as an atomic operation.</summary>
-        /// <param name="location">The variable whose value is to be incremented.</param>
-        /// <returns>The value of the variable immediately after the increment operation finished.</returns>
-        public static Categories InterlockedIncrement(this ref Categories location)
-        {
-            ref int locationRaw = ref Unsafe.As<Categories, int>(ref location);
-            int resultRaw = Interlocked.Increment(ref locationRaw);
-            return Unsafe.As<int, Categories>(ref resultRaw);
-        }
+    /// <summary>Increments enumeration and stores the result, as an atomic operation.</summary>
+    /// <param name="location">The variable whose value is to be incremented.</param>
+    /// <returns>The value of the variable immediately after the increment operation finished.</returns>
+    public static Categories InterlockedIncrement(this ref Categories location)
+    {
+        ref int locationRaw = ref Unsafe.As<Categories, int>(ref location);
+        int resultRaw = Interlocked.Increment(ref locationRaw);
+        return Unsafe.As<int, Categories>(ref resultRaw);
+    }
 
-        /// <summary>Compares two enumerations for equality and, if they are equal, replaces the first value.</summary>
-        /// <param name="location">The destination, whose value is compared with <paramref name="comparand" /> and possibly replaced.</param>
-        /// <param name="value">The value that replaces the destination value if the comparison results in equality.</param>
-        /// <param name="comparand">The value that is compared to the value at <paramref name="location" />.</param>
-        /// <returns>The original value in <paramref name="location" />.</returns>
-        public static Categories InterlockedCompareExchange(this ref Categories location, Categories value, Categories comparand)
-        {
-            ref int locationRaw = ref Unsafe.As<Categories, int>(ref location);
-            int resultRaw = Interlocked.CompareExchange(ref locationRaw, Unsafe.As<Categories, int>(ref value), Unsafe.As<Categories, int>(ref comparand));
-            return Unsafe.As<int, Categories>(ref resultRaw);
-        }
+    /// <summary>Compares two enumerations for equality and, if they are equal, replaces the first value.</summary>
+    /// <param name="location">The destination, whose value is compared with <paramref name="comparand" /> and possibly replaced.</param>
+    /// <param name="value">The value that replaces the destination value if the comparison results in equality.</param>
+    /// <param name="comparand">The value that is compared to the value at <paramref name="location" />.</param>
+    /// <returns>The original value in <paramref name="location" />.</returns>
+    public static Categories InterlockedCompareExchange(this ref Categories location, Categories value, Categories comparand)
+    {
+        ref int locationRaw = ref Unsafe.As<Categories, int>(ref location);
+        int resultRaw = Interlocked.CompareExchange(ref locationRaw, Unsafe.As<Categories, int>(ref value), Unsafe.As<Categories, int>(ref comparand));
+        return Unsafe.As<int, Categories>(ref resultRaw);
+    }
 
-        /// <summary>Sets an enumeration value to a specified value and returns the original value, as an atomic operation.</summary>
-        /// <param name="location">The variable to set to the specified value.</param>
-        /// <param name="value">The value to which the <paramref name="location" /> parameter is set.</param>
-        /// <returns>The original value of <paramref name="location" />.</returns>
-        public static Categories InterlockedExchange(this ref Categories location, Categories value)
-        {
-            ref int locationRaw = ref Unsafe.As<Categories, int>(ref location);
-            int resultRaw = Interlocked.Exchange(ref locationRaw, Unsafe.As<Categories, int>(ref value));
-            return Unsafe.As<int, Categories>(ref resultRaw);
-        }
+    /// <summary>Sets an enumeration value to a specified value and returns the original value, as an atomic operation.</summary>
+    /// <param name="location">The variable to set to the specified value.</param>
+    /// <param name="value">The value to which the <paramref name="location" /> parameter is set.</param>
+    /// <returns>The original value of <paramref name="location" />.</returns>
+    public static Categories InterlockedExchange(this ref Categories location, Categories value)
+    {
+        ref int locationRaw = ref Unsafe.As<Categories, int>(ref location);
+        int resultRaw = Interlocked.Exchange(ref locationRaw, Unsafe.As<Categories, int>(ref value));
+        return Unsafe.As<int, Categories>(ref resultRaw);
+    }
 
-        /// <summary>
-        /// Provides pattern matching functionality for the <see cref="Categories"/> enum by returning the corresponding value based on the enum value.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result to return for each member match.</typeparam>
-        /// <param name="value">The <see cref="Categories"/> enum value to match against.</param>
-        /// <param name="Electronics">The value to return when the enum value is Electronics.</param>
-        /// <param name="Food">The value to return when the enum value is Food.</param>
-        /// <param name="Automotive">The value to return when the enum value is Automotive.</param>
-        /// <param name="Arts">The value to return when the enum value is Arts.</param>
-        /// <param name="BeautyCare">The value to return when the enum value is BeautyCare.</param>
-        /// <param name="Fashion">The value to return when the enum value is Fashion.</param>
-        /// <returns>The corresponding result value based on the enum value.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected member values.</exception>
-        public static TResult Match<TResult>(
-            this Categories value,
-            TResult Electronics,
-            TResult Food,
-            TResult Automotive,
-            TResult Arts,
-            TResult BeautyCare,
-            TResult Fashion)
+    /// <summary>
+    /// Provides pattern matching functionality for the <see cref="Categories"/> enum by returning the corresponding value based on the enum value.
+    /// </summary>
+    /// <typeparam name="TResult">The type of the result to return for each member match.</typeparam>
+    /// <param name="value">The <see cref="Categories"/> enum value to match against.</param>
+    /// <param name="Electronics">The value to return when the enum value is Electronics.</param>
+    /// <param name="Food">The value to return when the enum value is Food.</param>
+    /// <param name="Automotive">The value to return when the enum value is Automotive.</param>
+    /// <param name="Arts">The value to return when the enum value is Arts.</param>
+    /// <param name="BeautyCare">The value to return when the enum value is BeautyCare.</param>
+    /// <param name="Fashion">The value to return when the enum value is Fashion.</param>
+    /// <returns>The corresponding result value based on the enum value.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected member values.</exception>
+    public static TResult Match<TResult>(
+        this Categories value,
+        TResult Electronics,
+        TResult Food,
+        TResult Automotive,
+        TResult Arts,
+        TResult BeautyCare,
+        TResult Fashion)
+    {
+        return (int)value switch
         {
-            return (int)value switch
-            {
-                0 => Electronics,
-                1 => Food,
-                2 => Automotive,
-                3 => Arts,
-                4 => BeautyCare,
-                5 => Fashion,
-                _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
-            };
-        }
+            0 => Electronics,
+            1 => Food,
+            2 => Automotive,
+            3 => Arts,
+            4 => BeautyCare,
+            5 => Fashion,
+            _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
+        };
+    }
 
-        /// <summary>
-        /// Provides pattern matching functionality for the <see cref="Categories"/> enum by executing the corresponding function based on the enum value.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result to return from the executed function.</typeparam>
-        /// <param name="value">The <see cref="Categories"/> enum value to match against.</param>
-        /// <param name="Electronics">The function to execute when the enum value is Electronics.</param>
-        /// <param name="Food">The function to execute when the enum value is Food.</param>
-        /// <param name="Automotive">The function to execute when the enum value is Automotive.</param>
-        /// <param name="Arts">The function to execute when the enum value is Arts.</param>
-        /// <param name="BeautyCare">The function to execute when the enum value is BeautyCare.</param>
-        /// <param name="Fashion">The function to execute when the enum value is Fashion.</param>
-        /// <returns>The result of executing the corresponding function based on the enum value.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected <see cref="Categories"/> values.</exception>
-        public static TResult Match<TResult>(
-            this Categories value,
-            Func<Categories, TResult> Electronics,
-            Func<Categories, TResult> Food,
-            Func<Categories, TResult> Automotive,
-            Func<Categories, TResult> Arts,
-            Func<Categories, TResult> BeautyCare,
-            Func<Categories, TResult> Fashion)
+    /// <summary>
+    /// Provides pattern matching functionality for the <see cref="Categories"/> enum by executing the corresponding function based on the enum value.
+    /// </summary>
+    /// <typeparam name="TResult">The type of the result to return from the executed function.</typeparam>
+    /// <param name="value">The <see cref="Categories"/> enum value to match against.</param>
+    /// <param name="Electronics">The function to execute when the enum value is Electronics.</param>
+    /// <param name="Food">The function to execute when the enum value is Food.</param>
+    /// <param name="Automotive">The function to execute when the enum value is Automotive.</param>
+    /// <param name="Arts">The function to execute when the enum value is Arts.</param>
+    /// <param name="BeautyCare">The function to execute when the enum value is BeautyCare.</param>
+    /// <param name="Fashion">The function to execute when the enum value is Fashion.</param>
+    /// <returns>The result of executing the corresponding function based on the enum value.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected <see cref="Categories"/> values.</exception>
+    public static TResult Match<TResult>(
+        this Categories value,
+        Func<Categories, TResult> Electronics,
+        Func<Categories, TResult> Food,
+        Func<Categories, TResult> Automotive,
+        Func<Categories, TResult> Arts,
+        Func<Categories, TResult> BeautyCare,
+        Func<Categories, TResult> Fashion)
+    {
+        return (int)value switch
         {
-            return (int)value switch
-            {
-                0 => Electronics((Categories)value),
-                1 => Food((Categories)value),
-                2 => Automotive((Categories)value),
-                3 => Arts((Categories)value),
-                4 => BeautyCare((Categories)value),
-                5 => Fashion((Categories)value),
-                _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
-            };
-        }
+            0 => Electronics((Categories)value),
+            1 => Food((Categories)value),
+            2 => Automotive((Categories)value),
+            3 => Arts((Categories)value),
+            4 => BeautyCare((Categories)value),
+            5 => Fashion((Categories)value),
+            _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
+        };
     }
 }

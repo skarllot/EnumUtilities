@@ -10,72 +10,50 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
-namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
+namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
+
+[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
+public sealed partial class Bug357JsonConverter : JsonConverter<Bug357>
 {
-    [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
-    public sealed partial class Bug357JsonConverter : JsonConverter<Bug357>
+    private const int MaxCharStack = 256;
+
+    public override Bug357 Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        private const int MaxCharStack = 256;
+        if (reader.TokenType == JsonTokenType.String)
+            return ReadFromString(ref reader);
+        if (reader.TokenType == JsonTokenType.Number)
+            return (Bug357)ReadFromNumber(ref reader);
 
-        public override Bug357 Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        throw new JsonException();
+    }
+
+    public override void Write(Utf8JsonWriter writer, Bug357 value, JsonSerializerOptions options)
+    {
+        string? jsonString = value.ToJsonString();
+        if (jsonString is not null)
         {
-            if (reader.TokenType == JsonTokenType.String)
-                return ReadFromString(ref reader);
-            if (reader.TokenType == JsonTokenType.Number)
-                return (Bug357)ReadFromNumber(ref reader);
-
-            throw new JsonException();
+            writer.WriteStringValue(jsonString);
         }
-
-        public override void Write(Utf8JsonWriter writer, Bug357 value, JsonSerializerOptions options)
+        else
         {
-            string? jsonString = value.ToJsonString();
-            if (jsonString is not null)
-            {
-                writer.WriteStringValue(jsonString);
-            }
-            else
-            {
-                writer.WriteNumberValue((int)value);
-            }
+            writer.WriteNumberValue((int)value);
         }
+    }
 
-    #if NET7_0_OR_GREATER
+#if NET7_0_OR_GREATER
 
-        private Bug357 ReadFromString(ref Utf8JsonReader reader)
+    private Bug357 ReadFromString(ref Utf8JsonReader reader)
+    {
+        int length = reader.HasValueSequence ? checked((int)reader.ValueSequence.Length) : reader.ValueSpan.Length;
+
+        char[]? rented = null;
+        Span<char> name = length <= MaxCharStack ? stackalloc char[MaxCharStack] : (rented = ArrayPool<char>.Shared.Rent(length));
+        try
         {
-            int length = reader.HasValueSequence ? checked((int)reader.ValueSequence.Length) : reader.ValueSpan.Length;
+            int charsWritten = reader.CopyString(name);
+            name = name.Slice(0, charsWritten);
 
-            char[]? rented = null;
-            Span<char> name = length <= MaxCharStack ? stackalloc char[MaxCharStack] : (rented = ArrayPool<char>.Shared.Rent(length));
-            try
-            {
-                int charsWritten = reader.CopyString(name);
-                name = name.Slice(0, charsWritten);
-
-                bool isParsed = Bug357Factory.TryParseJsonString(name, ignoreCase: false, out Bug357 result);
-                if (!isParsed)
-                {
-                    throw new JsonException();
-                }
-
-                return result;
-            }
-            finally
-            {
-                if (rented != null)
-                {
-                    ArrayPool<char>.Shared.Return(rented);
-                }
-            }
-        }
-
-    #else
-
-        private Bug357 ReadFromString(ref Utf8JsonReader reader)
-        {
-            var name = reader.GetString();
             bool isParsed = Bug357Factory.TryParseJsonString(name, ignoreCase: false, out Bug357 result);
             if (!isParsed)
             {
@@ -84,14 +62,35 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
             return result;
         }
-
-    #endif
-
-        private int ReadFromNumber(ref Utf8JsonReader reader)
+        finally
         {
-            return reader.TryGetInt32(out int value)
-                ? value
-                : throw new JsonException();
+            if (rented != null)
+            {
+                ArrayPool<char>.Shared.Return(rented);
+            }
         }
+    }
+
+#else
+
+    private Bug357 ReadFromString(ref Utf8JsonReader reader)
+    {
+        var name = reader.GetString();
+        bool isParsed = Bug357Factory.TryParseJsonString(name, ignoreCase: false, out Bug357 result);
+        if (!isParsed)
+        {
+            throw new JsonException();
+        }
+
+        return result;
+    }
+
+#endif
+
+    private int ReadFromNumber(ref Utf8JsonReader reader)
+    {
+        return reader.TryGetInt32(out int value)
+            ? value
+            : throw new JsonException();
     }
 }

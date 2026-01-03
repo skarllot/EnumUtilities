@@ -22,9 +22,7 @@ using System.Runtime.CompilerServices;
 <#
             if (Model.IsInterlockedSupported())
             {
-#>
-using System.Threading;
-<#
+                Write("using System.Threading;\n");
             }
 #>
 using Raiqub.Generators.EnumUtilities.Formatters;
@@ -34,9 +32,7 @@ using Raiqub.Generators.EnumUtilities.Formatters;
 <#
             if (!string.IsNullOrEmpty(Model.Namespace))
             {
-                WriteLine($"namespace {Model.Namespace}");
-                WriteLine("{");
-                PushIndent();
+                Write($"namespace {Model.Namespace};\n\n");
             }
 #>
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
@@ -56,13 +52,6 @@ using Raiqub.Generators.EnumUtilities.Formatters;
             WriteJsonBlock();
 #>
 }
-<#
-            if (!string.IsNullOrEmpty(Model.Namespace))
-            {
-                PopIndent();
-                WriteLine("}");
-            }
-#>
 <#+
     public EnumExtensionsWriter(StringBuilder builder) : base(builder)
     {

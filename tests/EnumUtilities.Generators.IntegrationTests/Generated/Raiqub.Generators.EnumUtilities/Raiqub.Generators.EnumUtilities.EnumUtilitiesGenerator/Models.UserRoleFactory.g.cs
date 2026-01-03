@@ -9,712 +9,711 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
-namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
+namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
+
+[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
+public static partial class UserRoleFactory
 {
-    [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
-    public static partial class UserRoleFactory
+    /// <summary>
+    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+    /// an equivalent enumerated object.
+    /// </summary>
+    /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
+    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+    /// <returns>The value represented by the specified name or numeric value. Note that this value need not be a member of the UserRole enumeration.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+    public static UserRole Parse(string value, bool ignoreCase = false)
     {
-        /// <summary>
-        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-        /// an equivalent enumerated object.
-        /// </summary>
-        /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
-        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-        /// <returns>The value represented by the specified name or numeric value. Note that this value need not be a member of the UserRole enumeration.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
-        public static UserRole Parse(string value, bool ignoreCase = false)
-        {
-            if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
-            TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
-            return (UserRole)result;
-        }
+        if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
+        TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
+        return (UserRole)result;
+    }
 
-        /// <summary>
-        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-        /// an equivalent enumerated object.
-        /// </summary>
-        /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
-        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-        /// <returns>The value represented by the specified name or numeric value. Note that this value need not be a member of the UserRole enumeration.</returns>
-        /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
-        public static UserRole Parse(ReadOnlySpan<char> value, bool ignoreCase = false)
-        {
-            TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
-            return (UserRole)result;
-        }
+    /// <summary>
+    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+    /// an equivalent enumerated object.
+    /// </summary>
+    /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
+    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+    /// <returns>The value represented by the specified name or numeric value. Note that this value need not be a member of the UserRole enumeration.</returns>
+    /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+    public static UserRole Parse(ReadOnlySpan<char> value, bool ignoreCase = false)
+    {
+        TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
+        return (UserRole)result;
+    }
 
-        /// <summary>
-        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-        /// an equivalent enumerated object.
-        /// </summary>
-        /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
-        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-        /// <returns>The value represented by the specified name or numeric value or null. Note that this value need not be a member of the UserRole enumeration.</returns>
-        /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
-        [return: NotNullIfNotNull("value")]
-        public static UserRole? ParseOrNull(string? value, bool ignoreCase = false)
-        {
-            if (value is null) return null;
-            TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
-            return (UserRole)result;
-        }
+    /// <summary>
+    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+    /// an equivalent enumerated object.
+    /// </summary>
+    /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
+    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+    /// <returns>The value represented by the specified name or numeric value or null. Note that this value need not be a member of the UserRole enumeration.</returns>
+    /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+    [return: NotNullIfNotNull("value")]
+    public static UserRole? ParseOrNull(string? value, bool ignoreCase = false)
+    {
+        if (value is null) return null;
+        TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
+        return (UserRole)result;
+    }
 
-        /// <summary>
-        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
-        /// </summary>
-        /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
-        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-        /// <param name="result">
-        /// When this method returns, result contains an object of type UserRole whose value is represented by value
-        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-        /// underlying type of UserRole. Note that this value need not be a member of the UserRole enumeration.
-        /// </param>
-        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-        public static bool TryParse([NotNullWhen(true)] string? value, bool ignoreCase, out UserRole result)
-        {
-            Unsafe.SkipInit(out result);
-            return TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<UserRole, ulong>(ref result));
-        }
+    /// <summary>
+    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+    /// </summary>
+    /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
+    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+    /// <param name="result">
+    /// When this method returns, result contains an object of type UserRole whose value is represented by value
+    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+    /// underlying type of UserRole. Note that this value need not be a member of the UserRole enumeration.
+    /// </param>
+    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    public static bool TryParse([NotNullWhen(true)] string? value, bool ignoreCase, out UserRole result)
+    {
+        Unsafe.SkipInit(out result);
+        return TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<UserRole, ulong>(ref result));
+    }
 
-        /// <summary>
-        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
-        /// </summary>
-        /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
-        /// <param name="result">
-        /// When this method returns, result contains an object of type UserRole whose value is represented by value
-        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-        /// underlying type of UserRole. Note that this value need not be a member of the UserRole enumeration.
-        /// </param>
-        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-        public static bool TryParse([NotNullWhen(true)] string? value, out UserRole result)
-        {
-            Unsafe.SkipInit(out result);
-            return TryParseName(value.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<UserRole, ulong>(ref result));
-        }
+    /// <summary>
+    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+    /// </summary>
+    /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
+    /// <param name="result">
+    /// When this method returns, result contains an object of type UserRole whose value is represented by value
+    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+    /// underlying type of UserRole. Note that this value need not be a member of the UserRole enumeration.
+    /// </param>
+    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    public static bool TryParse([NotNullWhen(true)] string? value, out UserRole result)
+    {
+        Unsafe.SkipInit(out result);
+        return TryParseName(value.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<UserRole, ulong>(ref result));
+    }
 
-        /// <summary>
-        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-        /// an equivalent enumerated object.
-        /// </summary>
-        /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
-        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-        /// <returns>
-        /// Contains an object of type UserRole whose value is represented by value if the parse operation succeeds.
-        /// If the parse operation fails, result contains <c>null</c> value.
-        /// </returns>
-        public static UserRole? TryParse(string? value, bool ignoreCase = false)
-        {
-            return TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (UserRole?)result : null;
-        }
+    /// <summary>
+    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+    /// an equivalent enumerated object.
+    /// </summary>
+    /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
+    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+    /// <returns>
+    /// Contains an object of type UserRole whose value is represented by value if the parse operation succeeds.
+    /// If the parse operation fails, result contains <c>null</c> value.
+    /// </returns>
+    public static UserRole? TryParse(string? value, bool ignoreCase = false)
+    {
+        return TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (UserRole?)result : null;
+    }
 
-        /// <summary>
-        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
-        /// </summary>
-        /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
-        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-        /// <param name="result">
-        /// When this method returns, result contains an object of type UserRole whose value is represented by value
-        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-        /// underlying type of UserRole. Note that this value need not be a member of the UserRole enumeration.
-        /// </param>
-        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-        public static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, out UserRole result)
-        {
-            Unsafe.SkipInit(out result);
-            return TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<UserRole, ulong>(ref result));
-        }
+    /// <summary>
+    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+    /// </summary>
+    /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
+    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+    /// <param name="result">
+    /// When this method returns, result contains an object of type UserRole whose value is represented by value
+    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+    /// underlying type of UserRole. Note that this value need not be a member of the UserRole enumeration.
+    /// </param>
+    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    public static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, out UserRole result)
+    {
+        Unsafe.SkipInit(out result);
+        return TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<UserRole, ulong>(ref result));
+    }
 
-        /// <summary>
-        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
-        /// </summary>
-        /// <param name="value">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
-        /// <param name="result">
-        /// When this method returns, result contains an object of type UserRole whose value is represented by value
-        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-        /// underlying type of UserRole. Note that this value need not be a member of the UserRole enumeration.
-        /// </param>
-        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-        public static bool TryParse(ReadOnlySpan<char> value, out UserRole result)
-        {
-            Unsafe.SkipInit(out result);
-            return TryParseName(value, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<UserRole, ulong>(ref result));
-        }
+    /// <summary>
+    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+    /// </summary>
+    /// <param name="value">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
+    /// <param name="result">
+    /// When this method returns, result contains an object of type UserRole whose value is represented by value
+    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+    /// underlying type of UserRole. Note that this value need not be a member of the UserRole enumeration.
+    /// </param>
+    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    public static bool TryParse(ReadOnlySpan<char> value, out UserRole result)
+    {
+        Unsafe.SkipInit(out result);
+        return TryParseName(value, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<UserRole, ulong>(ref result));
+    }
 
-        /// <summary>
-        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-        /// an equivalent enumerated object.
-        /// </summary>
-        /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
-        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-        /// <returns>
-        /// Contains an object of type UserRole whose value is represented by value if the parse operation succeeds.
-        /// If the parse operation fails, result contains <c>null</c> value.
-        /// </returns>
-        public static UserRole? TryParse(ReadOnlySpan<char> value, bool ignoreCase = false)
-        {
-            return TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (UserRole?)result : null;
-        }
+    /// <summary>
+    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+    /// an equivalent enumerated object.
+    /// </summary>
+    /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
+    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+    /// <returns>
+    /// Contains an object of type UserRole whose value is represented by value if the parse operation succeeds.
+    /// If the parse operation fails, result contains <c>null</c> value.
+    /// </returns>
+    public static UserRole? TryParse(ReadOnlySpan<char> value, bool ignoreCase = false)
+    {
+        return TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (UserRole?)result : null;
+    }
 
-        private static bool TryParseName(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out ulong result)
+    private static bool TryParseName(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out ulong result)
+    {
+        if (!value.IsEmpty)
         {
-            if (!value.IsEmpty)
+            char c = value[0];
+            if (char.IsWhiteSpace(c))
             {
-                char c = value[0];
-                if (char.IsWhiteSpace(c))
+                value = value.TrimStart();
+                if (value.IsEmpty)
                 {
-                    value = value.TrimStart();
-                    if (value.IsEmpty)
-                    {
-                        goto ParseFailure;
-                    }
-
-                    c = value[0];
+                    goto ParseFailure;
                 }
 
-                if ((c < '0' || c > '9') && c != '-' && c != '+')
-                {
-                    return TryParseNonNumericName(value, comparisonType, throwOnFailure, out result);
-                }
+                c = value[0];
+            }
 
-                bool success = EnumNumericParser.TryParse(value, out result);
-                if (success)
-                {
-                    return true;
-                }
-
+            if ((c < '0' || c > '9') && c != '-' && c != '+')
+            {
                 return TryParseNonNumericName(value, comparisonType, throwOnFailure, out result);
             }
 
-            ParseFailure:
-            if (throwOnFailure)
+            bool success = EnumNumericParser.TryParse(value, out result);
+            if (success)
             {
-                ThrowHelper.ThrowInvalidEmptyParseArgument(nameof(value));
-            }
-
-            result = 0;
-            return false;
-        }
-
-        private static bool TryParseNonNumericName(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out ulong result)
-        {
-            bool parsed = true;
-            ulong localResult = 0;
-            foreach (var item in new FlagsEnumTokenizer(value))
-            {
-                bool success = TryParseSingleName(item, comparisonType, out ulong singleValue);
-                if (!success)
-                {
-                    parsed = false;
-                    break;
-                }
-
-                localResult |= singleValue;
-            }
-
-            if (parsed)
-            {
-                result = localResult;
                 return true;
             }
 
-            if (throwOnFailure)
+            return TryParseNonNumericName(value, comparisonType, throwOnFailure, out result);
+        }
+
+        ParseFailure:
+        if (throwOnFailure)
+        {
+            ThrowHelper.ThrowInvalidEmptyParseArgument(nameof(value));
+        }
+
+        result = 0;
+        return false;
+    }
+
+    private static bool TryParseNonNumericName(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out ulong result)
+    {
+        bool parsed = true;
+        ulong localResult = 0;
+        foreach (var item in new FlagsEnumTokenizer(value))
+        {
+            bool success = TryParseSingleName(item, comparisonType, out ulong singleValue);
+            if (!success)
             {
-                ThrowHelper.ThrowValueNotFound(value, nameof(value));
+                parsed = false;
+                break;
             }
 
+            localResult |= singleValue;
+        }
+
+        if (parsed)
+        {
+            result = localResult;
+            return true;
+        }
+
+        if (throwOnFailure)
+        {
+            ThrowHelper.ThrowValueNotFound(value, nameof(value));
+        }
+
+        result = 0;
+        return false;
+    }
+
+    private static bool TryParseSingleName(ReadOnlySpan<char> value, StringComparison comparisonType, out ulong result)
+    {
+        if (value.IsEmpty)
+        {
             result = 0;
             return false;
         }
 
-        private static bool TryParseSingleName(ReadOnlySpan<char> value, StringComparison comparisonType, out ulong result)
+        switch (value[0])
         {
-            if (value.IsEmpty)
+            case 'A':
+            case 'a':
+                switch (value)
+                {
+                    case { } when value.Equals("All", comparisonType):
+                        result = 7;
+                        return true;
+                }
+                break;
+            case 'C':
+            case 'c':
+                switch (value)
+                {
+                    case { } when value.Equals("Custodian", comparisonType):
+                        result = 2;
+                        return true;
+                }
+                break;
+            case 'F':
+            case 'f':
+                switch (value)
+                {
+                    case { } when value.Equals("Finance", comparisonType):
+                        result = 4;
+                        return true;
+                }
+                break;
+            case 'N':
+            case 'n':
+                switch (value)
+                {
+                    case { } when value.Equals("None", comparisonType):
+                        result = 0;
+                        return true;
+                    case { } when value.Equals("NormalUser", comparisonType):
+                        result = 1;
+                        return true;
+                }
+                break;
+            case 'S':
+            case 's':
+                switch (value)
+                {
+                    case { } when value.Equals("SuperUser", comparisonType):
+                        result = 6;
+                        return true;
+                }
+                break;
+        }
+
+        result = 0;
+        return false;
+    }
+
+    /// <summary>
+    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+    /// </summary>
+    /// <param name="name">The string representation of the enumeration name or underlying value to convert.</param>
+    /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
+    /// <param name="result">
+    /// When this method returns, result contains an object of type UserRole whose value is represented by value
+    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+    /// underlying type of UserRole. Note that this value need not be a member of the UserRole enumeration.
+    /// </param>
+    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
+    [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
+    public static bool TryParse(
+        [NotNullWhen(true)] string? name,
+        StringComparison comparisonType,
+        out UserRole result)
+    {
+        Unsafe.SkipInit(out result);
+        return TryParseName(name.AsSpan(), comparisonType, throwOnFailure: false, out Unsafe.As<UserRole, ulong>(ref result));
+    }
+
+    /// <summary>
+    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+    /// </summary>
+    /// <param name="name">The case-insensitive string representation of the enumeration name or underlying value to convert.</param>
+    /// <param name="result">
+    /// When this method returns, result contains an object of type UserRole whose value is represented by value
+    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+    /// underlying type of UserRole. Note that this value need not be a member of the UserRole enumeration.
+    /// </param>
+    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
+    public static bool TryParseIgnoreCase(
+        [NotNullWhen(true)] string? name,
+        out UserRole result)
+    {
+        Unsafe.SkipInit(out result);
+        return TryParseName(name.AsSpan(), StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out Unsafe.As<UserRole, ulong>(ref result));
+    }
+
+    /// <summary>
+    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+    /// an equivalent enumerated object.
+    /// </summary>
+    /// <param name="name">The case-insensitive string representation of the enumeration name or underlying value to convert.</param>
+    /// <returns>
+    /// Contains an object of type UserRole whose value is represented by value if the parse operation succeeds.
+    /// If the parse operation fails, result contains <c>null</c> value.
+    /// </returns>
+    [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
+    public static UserRole? TryParseIgnoreCase(string? name)
+    {
+        return TryParseName(name.AsSpan(), StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out var result) ? (UserRole?)result : null;
+    }
+
+    /// <summary>
+    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+    /// an equivalent enumerated object.
+    /// </summary>
+    /// <param name="name">The string representation of the enumeration name or underlying value to convert.</param>
+    /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
+    /// <returns>
+    /// Contains an object of type UserRole whose value is represented by value if the parse operation succeeds.
+    /// If the parse operation fails, result contains <c>null</c> value.
+    /// </returns>
+    /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
+    [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
+    public static UserRole? TryParse(string? name, StringComparison comparisonType)
+    {
+        return TryParseName(name.AsSpan(), comparisonType, throwOnFailure: false, out var result) ? (UserRole?)result : null;
+    }
+
+    /// <summary>
+    /// Converts the string representation of the serialized value to an equivalent enumerated object.
+    /// </summary>
+    /// <param name="value">The string representation of the enumeration serialized value to convert.</param>
+    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+    /// <returns>The value represented by the specified serialized value. Note that this value need not be a member of the UserRole enumeration.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+    public static UserRole ParseFromEnumMemberValue(string value, bool ignoreCase = false)
+    {
+        if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
+        TryParseEnumMemberValue(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
+        return (UserRole)result;
+    }
+
+    /// <summary>
+    /// Converts the string representation of the serialized value to an equivalent enumerated object.
+    /// </summary>
+    /// <param name="value">The string representation of the enumeration serialized value to convert.</param>
+    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+    /// <returns>The value represented by the specified serialized value. Note that this value need not be a member of the UserRole enumeration.</returns>
+    /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+    public static UserRole ParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase = false)
+    {
+        TryParseEnumMemberValue(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
+        return (UserRole)result;
+    }
+
+    /// <summary>
+    /// Converts the string representation of the serialized value to an equivalent enumerated object.
+    /// </summary>
+    /// <param name="value">The string representation of the enumeration serialized value to convert.</param>
+    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+    /// <returns>The value represented by the specified serialized value or null. Note that this value need not be a member of the UserRole enumeration.</returns>
+    /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+    [return: NotNullIfNotNull("value")]
+    public static UserRole? ParseFromEnumMemberValueOrNull(string? value, bool ignoreCase = false)
+    {
+        if (value is null) return null;
+        TryParseEnumMemberValue(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
+        return (UserRole)result;
+    }
+
+    /// <summary>
+    /// Converts the string representation of the serialized value to an equivalent enumerated object.
+    /// The return value indicates whether the conversion succeeded.
+    /// </summary>
+    /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
+    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+    /// <param name="result">
+    /// When this method returns, result contains an object of type UserRole whose value is represented by a
+    /// serialized value if the parse operation succeeds. If the parse operation fails, result contains the default
+    /// value of the underlying type of UserRole. Note that this value need not be a member of the UserRole enumeration.
+    /// </param>
+    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    public static bool TryParseFromEnumMemberValue([NotNullWhen(true)] string? value, bool ignoreCase, out UserRole result)
+    {
+        Unsafe.SkipInit(out result);
+        return TryParseEnumMemberValue(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<UserRole, ulong>(ref result));
+    }
+
+    /// <summary>
+    /// Converts the string representation of the serialized value to an equivalent enumerated object.
+    /// The return value indicates whether the conversion succeeded.
+    /// </summary>
+    /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
+    /// <param name="result">
+    /// When this method returns, result contains an object of type UserRole whose value is represented by a
+    /// serialized value if the parse operation succeeds. If the parse operation fails, result contains the default
+    /// value of the underlying type of UserRole. Note that this value need not be a member of the UserRole enumeration.
+    /// </param>
+    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    public static bool TryParseFromEnumMemberValue([NotNullWhen(true)] string? value, out UserRole result)
+    {
+        Unsafe.SkipInit(out result);
+        return TryParseEnumMemberValue(value.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<UserRole, ulong>(ref result));
+    }
+
+    /// <summary>
+    /// Converts the string representation of the serialized value to an equivalent enumerated object.
+    /// </summary>
+    /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
+    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+    /// <returns>
+    /// Contains an object of type UserRole whose value is represented by value if the parse operation succeeds.
+    /// If the parse operation fails, result contains a null value.
+    /// </returns>
+    public static UserRole? TryParseFromEnumMemberValue(string? value, bool ignoreCase = false)
+    {
+        return TryParseEnumMemberValue(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (UserRole?)result : null;
+    }
+
+    /// <summary>
+    /// Converts the string representation of the serialized value to an equivalent enumerated object.
+    /// The return value indicates whether the conversion succeeded.
+    /// </summary>
+    /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
+    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+    /// <param name="result">
+    /// When this method returns, result contains an object of type UserRole whose value is represented by a
+    /// serialized value if the parse operation succeeds. If the parse operation fails, result contains the default
+    /// value of the underlying type of UserRole. Note that this value need not be a member of the UserRole enumeration.
+    /// </param>
+    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    public static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase, out UserRole result)
+    {
+        Unsafe.SkipInit(out result);
+        return TryParseEnumMemberValue(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<UserRole, ulong>(ref result));
+    }
+
+    /// <summary>
+    /// Converts the string representation of the serialized value to an equivalent enumerated object.
+    /// The return value indicates whether the conversion succeeded.
+    /// </summary>
+    /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
+    /// <param name="result">
+    /// When this method returns, result contains an object of type UserRole whose value is represented by a
+    /// serialized value if the parse operation succeeds. If the parse operation fails, result contains the default
+    /// value of the underlying type of UserRole. Note that this value need not be a member of the UserRole enumeration.
+    /// </param>
+    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    public static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, out UserRole result)
+    {
+        Unsafe.SkipInit(out result);
+        return TryParseEnumMemberValue(value, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<UserRole, ulong>(ref result));
+    }
+
+    /// <summary>
+    /// Converts the string representation of the serialized value to an equivalent enumerated object.
+    /// </summary>
+    /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
+    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+    /// <returns>
+    /// Contains an object of type UserRole whose value is represented by value if the parse operation succeeds.
+    /// If the parse operation fails, result contains a null value.
+    /// </returns>
+    public static UserRole? TryParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase = false)
+    {
+        return TryParseEnumMemberValue(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (UserRole?)result : null;
+    }
+
+    private static bool TryParseEnumMemberValue(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out ulong result)
+    {
+        if (!value.IsEmpty)
+        {
+            char c = value[0];
+            if (char.IsWhiteSpace(c))
             {
-                result = 0;
-                return false;
+                value = value.TrimStart();
+                if (value.IsEmpty)
+                {
+                    goto ParseFailure;
+                }
+
+                c = value[0];
             }
 
-            switch (value[0])
+            if ((c < '0' || c > '9') && c != '-' && c != '+')
             {
-                case 'A':
-                case 'a':
-                    switch (value)
-                    {
-                        case { } when value.Equals("All", comparisonType):
-                            result = 7;
-                            return true;
-                    }
-                    break;
-                case 'C':
-                case 'c':
-                    switch (value)
-                    {
-                        case { } when value.Equals("Custodian", comparisonType):
-                            result = 2;
-                            return true;
-                    }
-                    break;
-                case 'F':
-                case 'f':
-                    switch (value)
-                    {
-                        case { } when value.Equals("Finance", comparisonType):
-                            result = 4;
-                            return true;
-                    }
-                    break;
-                case 'N':
-                case 'n':
-                    switch (value)
-                    {
-                        case { } when value.Equals("None", comparisonType):
-                            result = 0;
-                            return true;
-                        case { } when value.Equals("NormalUser", comparisonType):
-                            result = 1;
-                            return true;
-                    }
-                    break;
-                case 'S':
-                case 's':
-                    switch (value)
-                    {
-                        case { } when value.Equals("SuperUser", comparisonType):
-                            result = 6;
-                            return true;
-                    }
-                    break;
-            }
-
-            result = 0;
-            return false;
-        }
-
-        /// <summary>
-        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
-        /// </summary>
-        /// <param name="name">The string representation of the enumeration name or underlying value to convert.</param>
-        /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
-        /// <param name="result">
-        /// When this method returns, result contains an object of type UserRole whose value is represented by value
-        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-        /// underlying type of UserRole. Note that this value need not be a member of the UserRole enumeration.
-        /// </param>
-        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-        /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
-        [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
-        public static bool TryParse(
-            [NotNullWhen(true)] string? name,
-            StringComparison comparisonType,
-            out UserRole result)
-        {
-            Unsafe.SkipInit(out result);
-            return TryParseName(name.AsSpan(), comparisonType, throwOnFailure: false, out Unsafe.As<UserRole, ulong>(ref result));
-        }
-
-        /// <summary>
-        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
-        /// </summary>
-        /// <param name="name">The case-insensitive string representation of the enumeration name or underlying value to convert.</param>
-        /// <param name="result">
-        /// When this method returns, result contains an object of type UserRole whose value is represented by value
-        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-        /// underlying type of UserRole. Note that this value need not be a member of the UserRole enumeration.
-        /// </param>
-        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-        [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
-        public static bool TryParseIgnoreCase(
-            [NotNullWhen(true)] string? name,
-            out UserRole result)
-        {
-            Unsafe.SkipInit(out result);
-            return TryParseName(name.AsSpan(), StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out Unsafe.As<UserRole, ulong>(ref result));
-        }
-
-        /// <summary>
-        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-        /// an equivalent enumerated object.
-        /// </summary>
-        /// <param name="name">The case-insensitive string representation of the enumeration name or underlying value to convert.</param>
-        /// <returns>
-        /// Contains an object of type UserRole whose value is represented by value if the parse operation succeeds.
-        /// If the parse operation fails, result contains <c>null</c> value.
-        /// </returns>
-        [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
-        public static UserRole? TryParseIgnoreCase(string? name)
-        {
-            return TryParseName(name.AsSpan(), StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out var result) ? (UserRole?)result : null;
-        }
-
-        /// <summary>
-        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-        /// an equivalent enumerated object.
-        /// </summary>
-        /// <param name="name">The string representation of the enumeration name or underlying value to convert.</param>
-        /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
-        /// <returns>
-        /// Contains an object of type UserRole whose value is represented by value if the parse operation succeeds.
-        /// If the parse operation fails, result contains <c>null</c> value.
-        /// </returns>
-        /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
-        [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
-        public static UserRole? TryParse(string? name, StringComparison comparisonType)
-        {
-            return TryParseName(name.AsSpan(), comparisonType, throwOnFailure: false, out var result) ? (UserRole?)result : null;
-        }
-
-        /// <summary>
-        /// Converts the string representation of the serialized value to an equivalent enumerated object.
-        /// </summary>
-        /// <param name="value">The string representation of the enumeration serialized value to convert.</param>
-        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-        /// <returns>The value represented by the specified serialized value. Note that this value need not be a member of the UserRole enumeration.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
-        public static UserRole ParseFromEnumMemberValue(string value, bool ignoreCase = false)
-        {
-            if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
-            TryParseEnumMemberValue(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
-            return (UserRole)result;
-        }
-
-        /// <summary>
-        /// Converts the string representation of the serialized value to an equivalent enumerated object.
-        /// </summary>
-        /// <param name="value">The string representation of the enumeration serialized value to convert.</param>
-        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-        /// <returns>The value represented by the specified serialized value. Note that this value need not be a member of the UserRole enumeration.</returns>
-        /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
-        public static UserRole ParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase = false)
-        {
-            TryParseEnumMemberValue(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
-            return (UserRole)result;
-        }
-
-        /// <summary>
-        /// Converts the string representation of the serialized value to an equivalent enumerated object.
-        /// </summary>
-        /// <param name="value">The string representation of the enumeration serialized value to convert.</param>
-        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-        /// <returns>The value represented by the specified serialized value or null. Note that this value need not be a member of the UserRole enumeration.</returns>
-        /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
-        [return: NotNullIfNotNull("value")]
-        public static UserRole? ParseFromEnumMemberValueOrNull(string? value, bool ignoreCase = false)
-        {
-            if (value is null) return null;
-            TryParseEnumMemberValue(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
-            return (UserRole)result;
-        }
-
-        /// <summary>
-        /// Converts the string representation of the serialized value to an equivalent enumerated object.
-        /// The return value indicates whether the conversion succeeded.
-        /// </summary>
-        /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
-        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-        /// <param name="result">
-        /// When this method returns, result contains an object of type UserRole whose value is represented by a
-        /// serialized value if the parse operation succeeds. If the parse operation fails, result contains the default
-        /// value of the underlying type of UserRole. Note that this value need not be a member of the UserRole enumeration.
-        /// </param>
-        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-        public static bool TryParseFromEnumMemberValue([NotNullWhen(true)] string? value, bool ignoreCase, out UserRole result)
-        {
-            Unsafe.SkipInit(out result);
-            return TryParseEnumMemberValue(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<UserRole, ulong>(ref result));
-        }
-
-        /// <summary>
-        /// Converts the string representation of the serialized value to an equivalent enumerated object.
-        /// The return value indicates whether the conversion succeeded.
-        /// </summary>
-        /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
-        /// <param name="result">
-        /// When this method returns, result contains an object of type UserRole whose value is represented by a
-        /// serialized value if the parse operation succeeds. If the parse operation fails, result contains the default
-        /// value of the underlying type of UserRole. Note that this value need not be a member of the UserRole enumeration.
-        /// </param>
-        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-        public static bool TryParseFromEnumMemberValue([NotNullWhen(true)] string? value, out UserRole result)
-        {
-            Unsafe.SkipInit(out result);
-            return TryParseEnumMemberValue(value.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<UserRole, ulong>(ref result));
-        }
-
-        /// <summary>
-        /// Converts the string representation of the serialized value to an equivalent enumerated object.
-        /// </summary>
-        /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
-        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-        /// <returns>
-        /// Contains an object of type UserRole whose value is represented by value if the parse operation succeeds.
-        /// If the parse operation fails, result contains a null value.
-        /// </returns>
-        public static UserRole? TryParseFromEnumMemberValue(string? value, bool ignoreCase = false)
-        {
-            return TryParseEnumMemberValue(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (UserRole?)result : null;
-        }
-
-        /// <summary>
-        /// Converts the string representation of the serialized value to an equivalent enumerated object.
-        /// The return value indicates whether the conversion succeeded.
-        /// </summary>
-        /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
-        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-        /// <param name="result">
-        /// When this method returns, result contains an object of type UserRole whose value is represented by a
-        /// serialized value if the parse operation succeeds. If the parse operation fails, result contains the default
-        /// value of the underlying type of UserRole. Note that this value need not be a member of the UserRole enumeration.
-        /// </param>
-        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-        public static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase, out UserRole result)
-        {
-            Unsafe.SkipInit(out result);
-            return TryParseEnumMemberValue(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<UserRole, ulong>(ref result));
-        }
-
-        /// <summary>
-        /// Converts the string representation of the serialized value to an equivalent enumerated object.
-        /// The return value indicates whether the conversion succeeded.
-        /// </summary>
-        /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
-        /// <param name="result">
-        /// When this method returns, result contains an object of type UserRole whose value is represented by a
-        /// serialized value if the parse operation succeeds. If the parse operation fails, result contains the default
-        /// value of the underlying type of UserRole. Note that this value need not be a member of the UserRole enumeration.
-        /// </param>
-        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-        public static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, out UserRole result)
-        {
-            Unsafe.SkipInit(out result);
-            return TryParseEnumMemberValue(value, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<UserRole, ulong>(ref result));
-        }
-
-        /// <summary>
-        /// Converts the string representation of the serialized value to an equivalent enumerated object.
-        /// </summary>
-        /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
-        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-        /// <returns>
-        /// Contains an object of type UserRole whose value is represented by value if the parse operation succeeds.
-        /// If the parse operation fails, result contains a null value.
-        /// </returns>
-        public static UserRole? TryParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase = false)
-        {
-            return TryParseEnumMemberValue(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (UserRole?)result : null;
-        }
-
-        private static bool TryParseEnumMemberValue(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out ulong result)
-        {
-            if (!value.IsEmpty)
-            {
-                char c = value[0];
-                if (char.IsWhiteSpace(c))
-                {
-                    value = value.TrimStart();
-                    if (value.IsEmpty)
-                    {
-                        goto ParseFailure;
-                    }
-
-                    c = value[0];
-                }
-
-                if ((c < '0' || c > '9') && c != '-' && c != '+')
-                {
-                    return TryParseNonNumericEnumMemberValue(value, comparisonType, throwOnFailure, out result);
-                }
-
-                bool success = EnumNumericParser.TryParse(value, out result);
-                if (success)
-                {
-                    return true;
-                }
-
                 return TryParseNonNumericEnumMemberValue(value, comparisonType, throwOnFailure, out result);
             }
 
-            ParseFailure:
-            if (throwOnFailure)
+            bool success = EnumNumericParser.TryParse(value, out result);
+            if (success)
             {
-                ThrowHelper.ThrowInvalidEmptyParseArgument(nameof(value));
-            }
-
-            result = 0;
-            return false;
-        }
-
-        private static bool TryParseNonNumericEnumMemberValue(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out ulong result)
-        {
-            bool parsed = true;
-            ulong localResult = 0;
-            foreach (var item in new FlagsEnumTokenizer(value))
-            {
-                bool success = TryParseSingleEnumMemberValue(item, comparisonType, out ulong singleValue);
-                if (!success)
-                {
-                    parsed = false;
-                    break;
-                }
-
-                localResult |= singleValue;
-            }
-
-            if (parsed)
-            {
-                result = localResult;
                 return true;
             }
 
-            if (throwOnFailure)
+            return TryParseNonNumericEnumMemberValue(value, comparisonType, throwOnFailure, out result);
+        }
+
+        ParseFailure:
+        if (throwOnFailure)
+        {
+            ThrowHelper.ThrowInvalidEmptyParseArgument(nameof(value));
+        }
+
+        result = 0;
+        return false;
+    }
+
+    private static bool TryParseNonNumericEnumMemberValue(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out ulong result)
+    {
+        bool parsed = true;
+        ulong localResult = 0;
+        foreach (var item in new FlagsEnumTokenizer(value))
+        {
+            bool success = TryParseSingleEnumMemberValue(item, comparisonType, out ulong singleValue);
+            if (!success)
             {
-                ThrowHelper.ThrowValueNotFound(value, nameof(value));
+                parsed = false;
+                break;
             }
 
+            localResult |= singleValue;
+        }
+
+        if (parsed)
+        {
+            result = localResult;
+            return true;
+        }
+
+        if (throwOnFailure)
+        {
+            ThrowHelper.ThrowValueNotFound(value, nameof(value));
+        }
+
+        result = 0;
+        return false;
+    }
+
+    private static bool TryParseSingleEnumMemberValue(ReadOnlySpan<char> value, StringComparison comparisonType, out ulong result)
+    {
+        if (value.IsEmpty)
+        {
             result = 0;
             return false;
         }
 
-        private static bool TryParseSingleEnumMemberValue(ReadOnlySpan<char> value, StringComparison comparisonType, out ulong result)
+        switch (value[0])
         {
-            if (value.IsEmpty)
-            {
-                result = 0;
-                return false;
-            }
-
-            switch (value[0])
-            {
-                case 'A':
-                case 'a':
-                    switch (value)
-                    {
-                        case { } when value.Equals("All", comparisonType):
-                            result = 7;
-                            return true;
-                    }
-                    break;
-                case 'C':
-                case 'c':
-                    switch (value)
-                    {
-                        case { } when value.Equals("Custodian", comparisonType):
-                            result = 2;
-                            return true;
-                    }
-                    break;
-                case 'F':
-                case 'f':
-                    switch (value)
-                    {
-                        case { } when value.Equals("Finance", comparisonType):
-                            result = 4;
-                            return true;
-                    }
-                    break;
-                case 'N':
-                case 'n':
-                    switch (value)
-                    {
-                        case { } when value.Equals("None", comparisonType):
-                            result = 0;
-                            return true;
-                        case { } when value.Equals("Normal User", comparisonType):
-                            result = 1;
-                            return true;
-                    }
-                    break;
-                case 'S':
-                case 's':
-                    switch (value)
-                    {
-                        case { } when value.Equals("Super User", comparisonType):
-                            result = 6;
-                            return true;
-                    }
-                    break;
-            }
-
-            result = 0;
-            return false;
+            case 'A':
+            case 'a':
+                switch (value)
+                {
+                    case { } when value.Equals("All", comparisonType):
+                        result = 7;
+                        return true;
+                }
+                break;
+            case 'C':
+            case 'c':
+                switch (value)
+                {
+                    case { } when value.Equals("Custodian", comparisonType):
+                        result = 2;
+                        return true;
+                }
+                break;
+            case 'F':
+            case 'f':
+                switch (value)
+                {
+                    case { } when value.Equals("Finance", comparisonType):
+                        result = 4;
+                        return true;
+                }
+                break;
+            case 'N':
+            case 'n':
+                switch (value)
+                {
+                    case { } when value.Equals("None", comparisonType):
+                        result = 0;
+                        return true;
+                    case { } when value.Equals("Normal User", comparisonType):
+                        result = 1;
+                        return true;
+                }
+                break;
+            case 'S':
+            case 's':
+                switch (value)
+                {
+                    case { } when value.Equals("Super User", comparisonType):
+                        result = 6;
+                        return true;
+                }
+                break;
         }
 
-        /// <summary>
-        /// Converts the string representation of the serialized value to an equivalent enumerated object.
-        /// The return value indicates whether the conversion succeeded.
-        /// </summary>
-        /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
-        /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
-        /// <param name="result">
-        /// When this method returns, result contains an object of type UserRole whose value is represented by value
-        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-        /// underlying type of UserRole. Note that this value need not be a member of the UserRole enumeration.
-        /// </param>
-        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-        /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
-        [Obsolete("Use TryParseFromEnumMemberValue overload with 'ignoreCase' parameter")]
-        public static bool TryParseFromEnumMemberValue(
-            [NotNullWhen(true)] string? value,
-            StringComparison comparisonType,
-            out UserRole result)
-        {
-            Unsafe.SkipInit(out result);
-            return TryParseEnumMemberValue(value.AsSpan(), comparisonType, throwOnFailure: false, out Unsafe.As<UserRole, ulong>(ref result));
-        }
+        result = 0;
+        return false;
+    }
 
-        /// <summary>
-        /// Converts the string representation of the value associated with one enumerated constant to
-        /// an equivalent enumerated object.
-        /// </summary>
-        /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
-        /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
-        /// <returns>
-        /// Contains an object of type UserRole whose value is represented by value if the parse operation succeeds.
-        /// If the parse operation fails, result contains a null value.
-        /// </returns>
-        /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
-        [Obsolete("Use TryParseFromEnumMemberValue overload with 'ignoreCase' parameter")]
-        public static UserRole? TryParseFromEnumMemberValue(string? value, StringComparison comparisonType)
-        {
-            return TryParseEnumMemberValue(value.AsSpan(), comparisonType, throwOnFailure: false, out var result) ? (UserRole?)result : null;
-        }
+    /// <summary>
+    /// Converts the string representation of the serialized value to an equivalent enumerated object.
+    /// The return value indicates whether the conversion succeeded.
+    /// </summary>
+    /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
+    /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
+    /// <param name="result">
+    /// When this method returns, result contains an object of type UserRole whose value is represented by value
+    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+    /// underlying type of UserRole. Note that this value need not be a member of the UserRole enumeration.
+    /// </param>
+    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
+    [Obsolete("Use TryParseFromEnumMemberValue overload with 'ignoreCase' parameter")]
+    public static bool TryParseFromEnumMemberValue(
+        [NotNullWhen(true)] string? value,
+        StringComparison comparisonType,
+        out UserRole result)
+    {
+        Unsafe.SkipInit(out result);
+        return TryParseEnumMemberValue(value.AsSpan(), comparisonType, throwOnFailure: false, out Unsafe.As<UserRole, ulong>(ref result));
+    }
 
-        /// <summary>Retrieves an array of the values of the constants in the UserRole enumeration.</summary>
-        /// <returns>An array that contains the values of the constants in UserRole.</returns>
-        public static UserRole[] GetValues()
-        {
-            return new[]
-            {
-                (UserRole)(0),
-                (UserRole)(1),
-                (UserRole)(2),
-                (UserRole)(4),
-                (UserRole)(6),
-                (UserRole)(7),
-            };
-        }
+    /// <summary>
+    /// Converts the string representation of the value associated with one enumerated constant to
+    /// an equivalent enumerated object.
+    /// </summary>
+    /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
+    /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
+    /// <returns>
+    /// Contains an object of type UserRole whose value is represented by value if the parse operation succeeds.
+    /// If the parse operation fails, result contains a null value.
+    /// </returns>
+    /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
+    [Obsolete("Use TryParseFromEnumMemberValue overload with 'ignoreCase' parameter")]
+    public static UserRole? TryParseFromEnumMemberValue(string? value, StringComparison comparisonType)
+    {
+        return TryParseEnumMemberValue(value.AsSpan(), comparisonType, throwOnFailure: false, out var result) ? (UserRole?)result : null;
+    }
 
-        /// <summary>Retrieves an array of the names of the constants in UserRole enumeration.</summary>
-        /// <returns>A string array of the names of the constants in UserRole.</returns>
-        public static string[] GetNames()
+    /// <summary>Retrieves an array of the values of the constants in the UserRole enumeration.</summary>
+    /// <returns>An array that contains the values of the constants in UserRole.</returns>
+    public static UserRole[] GetValues()
+    {
+        return new[]
         {
-            return new[]
-            {
-                "None",
-                "NormalUser",
-                "Custodian",
-                "Finance",
-                "SuperUser",
-                "All",
-            };
-        }
+            (UserRole)(0),
+            (UserRole)(1),
+            (UserRole)(2),
+            (UserRole)(4),
+            (UserRole)(6),
+            (UserRole)(7),
+        };
+    }
+
+    /// <summary>Retrieves an array of the names of the constants in UserRole enumeration.</summary>
+    /// <returns>A string array of the names of the constants in UserRole.</returns>
+    public static string[] GetNames()
+    {
+        return new[]
+        {
+            "None",
+            "NormalUser",
+            "Custodian",
+            "Finance",
+            "SuperUser",
+            "All",
+        };
     }
 }

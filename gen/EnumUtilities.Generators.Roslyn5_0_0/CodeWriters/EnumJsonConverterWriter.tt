@@ -22,9 +22,7 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 <#
     if (!string.IsNullOrEmpty(Model.Namespace))
     {
-        WriteLine($"namespace {Model.Namespace}");
-        WriteLine("{");
-        PushIndent();
+        Write($"namespace {Model.Namespace};\n\n");
     }
 #>
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
@@ -152,13 +150,6 @@ using Raiqub.Generators.EnumUtilities.Parsers;
     }
 #>
 }
-<#
-    if (!string.IsNullOrEmpty(Model.Namespace))
-    {
-        PopIndent();
-        WriteLine("}");
-    }
-#>
 <#+
 #nullable enable
     public EnumJsonConverterWriter(StringBuilder builder) : base(builder)

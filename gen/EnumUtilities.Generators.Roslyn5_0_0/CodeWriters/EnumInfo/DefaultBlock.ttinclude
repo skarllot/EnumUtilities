@@ -15,7 +15,7 @@
 
         if (HasMainGenerator && Model.HasSerializationValue)
         {
-            WriteLine();
+            Write('\n');
             WriteNames(
                 "SerializedValue",
                 "serialized members values",
@@ -26,7 +26,7 @@
 
         if (HasMainGenerator && Model.HasJsonProperty)
         {
-            WriteLine();
+            Write('\n');
             WriteNames(
                 "JsonValue",
                 "serialized members values",
