@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net6.0;net8.0;net9.0</TargetFrameworks>
+    <TargetFrameworks>net6.0;net8.0;net9.0</TargetFrameworks>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>icon.png</PackageIcon>
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
@@ -10,25 +10,18 @@
     <AssemblyName>Raiqub.Generators.EnumUtilities.Abstractions</AssemblyName>
     <PackageId>Raiqub.Generators.EnumUtilities</PackageId>
     <IsAotCompatible Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))">true</IsAotCompatible>
+    <IsAotCompatible>true</IsAotCompatible>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference
-      Include="..\..\gen\EnumUtilities.Generators.Roslyn4_3_1\EnumUtilities.Generators.Roslyn4_3_1.csproj"
-      PackAsAnalyzer="true"
-      ReferenceOutputAssembly="false" />
-    <ProjectReference
-      Include="..\..\gen\EnumUtilities.Generators.Roslyn4_4_0\EnumUtilities.Generators.Roslyn4_4_0.csproj"
+      Include="..\..\gen\EnumUtilities.Generators.Roslyn4_8_0\EnumUtilities.Generators.Roslyn4_8_0.csproj"
       PackAsAnalyzer="true"
       ReferenceOutputAssembly="false" />
     <ProjectReference
       Include="..\..\gen\EnumUtilities.Generators.Roslyn5_0_0\EnumUtilities.Generators.Roslyn5_0_0.csproj"
       PackAsAnalyzer="true"
       ReferenceOutputAssembly="false" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-    <PackageReference Include="System.Memory" />
   </ItemGroup>
 
   <ItemGroup>

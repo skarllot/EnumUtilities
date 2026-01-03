@@ -7,8 +7,7 @@
     <File Path="version.json" />
   </Folder>
   <Folder Name="/gen/">
-    <Project Path="gen/EnumUtilities.Generators.Roslyn4_3_1/EnumUtilities.Generators.Roslyn4_3_1.csproj" />
-    <Project Path="gen/EnumUtilities.Generators.Roslyn4_4_0/EnumUtilities.Generators.Roslyn4_4_0.csproj" />
+    <Project Path="gen/EnumUtilities.Generators.Roslyn4_8_0/EnumUtilities.Generators.Roslyn4_8_0.csproj" />
     <Project Path="gen/EnumUtilities.Generators.Roslyn5_0_0/EnumUtilities.Generators.Roslyn5_0_0.csproj" />
   </Folder>
   <Folder Name="/perf/">

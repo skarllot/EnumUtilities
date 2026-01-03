@@ -35,16 +35,6 @@ public static class EnumStringFormatter
             names,
             foundItems,
             foundItemsCount);
-#else
-        var result = new string('\0', strlen);
-        fixed (char* ptr = result)
-        {
-            FlagsNamesStringCreationContext.Fill(
-                new Span<char>(ptr, strlen),
-                names,
-                foundItems,
-                foundItemsCount);
-        }
 #endif
 
         return result;
