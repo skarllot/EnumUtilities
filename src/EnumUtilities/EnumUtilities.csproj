@@ -5,11 +5,9 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>icon.png</PackageIcon>
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DefineConstants>$(DefineConstants);AllowUnsafeBlocks</DefineConstants>
     <AssemblyName>Raiqub.Generators.EnumUtilities.Abstractions</AssemblyName>
     <PackageId>Raiqub.Generators.EnumUtilities</PackageId>
-    <IsAotCompatible Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))">true</IsAotCompatible>
     <IsAotCompatible>true</IsAotCompatible>
   </PropertyGroup>
 

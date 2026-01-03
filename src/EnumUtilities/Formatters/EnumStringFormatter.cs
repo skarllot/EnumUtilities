@@ -14,7 +14,7 @@ public static class EnumStringFormatter
     /// <param name="count">The total length of the resulting string, excluding separators.</param>
     /// <returns>A string that represents the names of the found flags, separated by commas.</returns>
     /// <exception cref="OverflowException">Thrown if the computed string length exceeds the capacity of an <see cref="int"/>.</exception>
-    public static unsafe string WriteMultipleFoundFlagsNames(
+    public static string WriteMultipleFoundFlagsNames(
         ReadOnlySpan<string> names,
         Span<int> foundItems,
         int foundItemsCount,
@@ -28,7 +28,7 @@ public static class EnumStringFormatter
             length: strlen,
             state: new FlagsNamesStringCreationContext(names, foundItems, foundItemsCount),
             action: FlagsNamesStringCreationContext.Fill);
-#elif NET6_0_OR_GREATER
+#else
         var result = string.Create(strlen, 0, static (_, _) => { });
         FlagsNamesStringCreationContext.Fill(
             MemoryMarshal.CreateSpan(ref MemoryMarshal.GetReference(result.AsSpan()), strlen),
