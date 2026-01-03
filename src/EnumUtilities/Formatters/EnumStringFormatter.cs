@@ -1,16 +1,18 @@
-﻿using System.Diagnostics;
+﻿using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 namespace Raiqub.Generators.EnumUtilities.Formatters;
 
 /// <summary>Provides utility methods for formatting enumerations as strings.</summary>
+[EditorBrowsable(EditorBrowsableState.Never)]
 public static class EnumStringFormatter
 {
     /// <summary>
     /// Writes the names of multiple found flags into a single string, separated by commas.
     /// </summary>
     /// <param name="names">A span containing all enumeration names.</param>
-    /// <param name="foundItems">A span containing the string of found enum values.</param>
+    /// <param name="foundItems">A span containing the indices of found enum values.</param>
     /// <param name="count">The total length of the resulting string, excluding separators.</param>
     /// <returns>A string that represents the names of the found flags, separated by commas.</returns>
     /// <exception cref="OverflowException">Thrown if the computed string length exceeds the capacity of an <see cref="int"/>.</exception>

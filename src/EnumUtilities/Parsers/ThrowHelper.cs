@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.ComponentModel;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Raiqub.Generators.EnumUtilities.Parsers;
@@ -7,6 +8,7 @@ namespace Raiqub.Generators.EnumUtilities.Parsers;
 /// Provides helper methods to throw exceptions with standardized messages.
 /// </summary>
 [StackTraceHidden]
+[EditorBrowsable(EditorBrowsableState.Never)]
 public static class ThrowHelper
 {
     /// <summary>
