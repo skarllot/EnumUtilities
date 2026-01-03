@@ -1,14 +1,20 @@
 {
-    "version": 1,
-    "isRoot": true,
-    "tools": {
-      "nbgv": {
-        "version": "3.9.50",
-        "commands": [
-          "nbgv"
-        ],
-        "rollForward": false
-      }
+  "version": 1,
+  "isRoot": true,
+  "tools": {
+    "nbgv": {
+      "version": "3.9.50",
+      "commands": [
+        "nbgv"
+      ],
+      "rollForward": false
+    },
+    "csharpier": {
+      "version": "1.2.5",
+      "commands": [
+        "csharpier"
+      ],
+      "rollForward": false
     }
   }
-  
+}

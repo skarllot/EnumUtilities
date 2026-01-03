@@ -56,6 +56,40 @@ function Collapse-BlankLines {
     return $result
 }
 
+function Remove-ToStringHelperCalls {
+    param([string[]]$Lines)
+
+    return $Lines | ForEach-Object {
+        $_ -replace 'this\.ToStringHelper\.ToStringWithCulture', ''
+    }
+}
+
+function Remove-BlankLinesBetweenWrites {
+    param([string[]]$Lines)
+
+    $result = @()
+    $i = 0
+
+    while ($i -lt $Lines.Length) {
+        $currentLine = $Lines[$i]
+
+        # Check if current line contains this.Write, next line is blank, and line after is this.Write
+        if ($currentLine -match 'this\.Write' -and
+            $i + 2 -lt $Lines.Length -and
+            [string]::IsNullOrWhiteSpace($Lines[$i + 1]) -and
+            $Lines[$i + 2] -match 'this\.Write') {
+            # Add current line and skip the blank line
+            $result += $currentLine
+            $i += 2
+        } else {
+            $result += $currentLine
+            $i++
+        }
+    }
+
+    return $result
+}
+
 function Process-CsFile {
     param([string]$CsFilePath)
 
@@ -73,11 +107,51 @@ function Process-CsFile {
         # Remove #line directives
         $linesWithoutDirectives = Remove-LineDirectives -Lines $lines
 
-        # Collapse multiple blank lines
-        $finalLines = Collapse-BlankLines -Lines $linesWithoutDirectives
+        # Remove ToStringHelper calls
+        $linesWithoutToStringHelper = Remove-ToStringHelperCalls -Lines $linesWithoutDirectives
 
-        # Write back to the file (overwrite)
-        $finalLines | Set-Content $CsFilePath -Encoding UTF8
+        # Collapse multiple blank lines
+        $linesCollapsed = Collapse-BlankLines -Lines $linesWithoutToStringHelper
+
+        # Remove blank lines between consecutive this.Write calls
+        $finalLines = Remove-BlankLinesBetweenWrites -Lines $linesCollapsed
+
+        # Extract auto-generated header (from start to second "// --------------")
+        $header = @()
+        $contentStartIndex = 0
+        $dashLineCount = 0
+
+        for ($i = 0; $i -lt $finalLines.Length; $i++) {
+            if ($finalLines[$i] -match '^// --------------') {
+                $dashLineCount++
+                if ($dashLineCount -eq 2) {
+                    $header = $finalLines[0..$i]
+                    $contentStartIndex = $i + 1
+                    break
+                }
+            }
+        }
+
+        # Write content without header to file
+        if ($contentStartIndex -gt 0) {
+            $finalLines[$contentStartIndex..($finalLines.Length - 1)] | Set-Content $CsFilePath -Encoding UTF8
+        } else {
+            $finalLines | Set-Content $CsFilePath -Encoding UTF8
+        }
+
+        # Format the file with CSharpier
+        Write-Host "Formatting with CSharpier: $CsFilePath"
+        $formatResult = & dotnet tool run csharpier format $CsFilePath --include-generated 2>&1
+        if ($LASTEXITCODE -ne 0) {
+            Write-Warning "CSharpier formatting failed for $CsFilePath`: $formatResult"
+        }
+
+        # Restore header if it was extracted
+        if ($contentStartIndex -gt 0) {
+            $formattedContent = Get-Content $CsFilePath -Encoding UTF8
+            $finalContent = $header + $formattedContent
+            $finalContent | Set-Content $CsFilePath -Encoding UTF8
+        }
 
         Write-Host "Successfully processed: $CsFilePath"
     }
