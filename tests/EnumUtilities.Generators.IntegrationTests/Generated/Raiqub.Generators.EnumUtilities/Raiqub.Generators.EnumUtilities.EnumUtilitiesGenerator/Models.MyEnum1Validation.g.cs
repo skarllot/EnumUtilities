@@ -9,7 +9,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.12.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
     internal static partial class MyEnum1Validation
     {
         /// <summary>Returns a boolean telling whether the value of <see cref="MyEnum1"/> instance exists in the enumeration.</summary>

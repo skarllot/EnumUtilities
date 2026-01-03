@@ -89,7 +89,7 @@ CountLength:
             Span<int> foundItems = stackalloc int[<#= Model.GetMappedBitCount() #>];
             if (TryFindFlags<#= type #>s(value, foundItems, out int foundItemsCount, out int resultLength))
             {
-                result = EnumStringFormatter.WriteMultipleFoundFlagsNames(s_format<#= type #>s, foundItems, foundItemsCount, resultLength);
+                result = EnumStringFormatter.WriteMultipleFoundFlagsNames(s_format<#= type #>s, foundItems.Slice(0, foundItemsCount), resultLength);
             }
         }
 

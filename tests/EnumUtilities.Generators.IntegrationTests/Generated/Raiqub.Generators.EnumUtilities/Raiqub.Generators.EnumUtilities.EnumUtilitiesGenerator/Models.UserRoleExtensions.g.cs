@@ -11,7 +11,7 @@ using Raiqub.Generators.EnumUtilities.Formatters;
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.12.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
     public static partial class UserRoleExtensions
     {
         /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
@@ -129,7 +129,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 Span<int> foundItems = stackalloc int[3];
                 if (TryFindFlagsNames(value, foundItems, out int foundItemsCount, out int resultLength))
                 {
-                    result = EnumStringFormatter.WriteMultipleFoundFlagsNames(s_formatNames, foundItems, foundItemsCount, resultLength);
+                    result = EnumStringFormatter.WriteMultipleFoundFlagsNames(s_formatNames, foundItems.Slice(0, foundItemsCount), resultLength);
                 }
             }
 
@@ -352,7 +352,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
                 Span<int> foundItems = stackalloc int[3];
                 if (TryFindFlagsEnumMemberValues(value, foundItems, out int foundItemsCount, out int resultLength))
                 {
-                    result = EnumStringFormatter.WriteMultipleFoundFlagsNames(s_formatEnumMemberValues, foundItems, foundItemsCount, resultLength);
+                    result = EnumStringFormatter.WriteMultipleFoundFlagsNames(s_formatEnumMemberValues, foundItems.Slice(0, foundItemsCount), resultLength);
                 }
             }
 

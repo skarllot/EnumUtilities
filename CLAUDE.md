@@ -8,7 +8,7 @@ EnumUtilities is a C# Roslyn source generator that creates extension methods, fa
 
 **Package:** Raiqub.Generators.EnumUtilities (distributed via NuGet)
 **Language:** C# 13
-**Targets:** netstandard2.0, net6.0, net8.0, net9.0, net10.0
+**Targets:** net6.0, net8.0, net9.0, net10.0
 
 ## Build Commands
 
@@ -63,10 +63,9 @@ The code writers use T4 templates (`.tt` files). When modifying templates in `ge
 
 ### Project Structure
 
-- **gen/** - Source generators (three Roslyn versions for compatibility)
-  - `EnumUtilities.Generators.Roslyn4_3_1/` - Legacy generator (Roslyn 4.3.1, used with net6.0)
-  - `EnumUtilities.Generators.Roslyn4_4_0/` - Mid-tier generator (Roslyn 4.4.0, used with net8.0/net9.0)
-  - `EnumUtilities.Generators.Roslyn5_0_0/` - **Canonical implementation** (Roslyn 5.0.0, used with net10.0+, referenced by older versions)
+- **gen/** - Source generators (two Roslyn versions for compatibility)
+  - `EnumUtilities.Generators.Roslyn4_8_0/` - Legacy generator (Roslyn 4.8.0, used with net6.0/net8.0/net9.0)
+  - `EnumUtilities.Generators.Roslyn5_0_0/` - **Canonical implementation** (Roslyn 5.0.0, used with net10.0+, referenced by older version)
 - **src/** - Runtime library
   - `EnumUtilities/` - Marker attributes and runtime helper utilities
 - **tests/** - Test projects
@@ -111,27 +110,26 @@ The source generator follows this execution flow:
 
 ### Multi-Version Support
 
-The project maintains three generator implementations for compatibility:
+The project maintains two generator implementations for compatibility:
 
-- **Roslyn 4.3.1** - Legacy API using `CreateSyntaxProvider`, used with .NET 6.0
-- **Roslyn 4.4.0** - Mid-tier API using `ForAttributeWithMetadataName`, used with .NET 8.0/9.0
+- **Roslyn 4.8.0** - Legacy API using `ForAttributeWithMetadataName`, used with .NET 6.0/8.0/9.0
 - **Roslyn 5.0.0** - **Canonical implementation**, used with .NET 10.0+
 
-All versions:
+Both versions:
 - Generate identical output code
 - Use the same namespace (`Raiqub.Generators.EnumUtilities`)
 - Are packaged together in the NuGet package
 - Only one is activated per compilation (based on Roslyn version)
 
-**Important:** Roslyn5_0_0 is the canonical implementation. Roslyn4_3_1 and Roslyn4_4_0 reference the Roslyn5_0_0 code writers via linked files to avoid duplication. When making changes, update templates in Roslyn5_0_0.
+**Important:** Roslyn5_0_0 is the canonical implementation. Roslyn4_8_0 references the Roslyn5_0_0 code writers via linked files to avoid duplication. When making changes, update templates in Roslyn5_0_0.
 
 ### Testing Architecture
 
 **Integration Tests Special Configuration:**
-- Target frameworks: net6.0 (uses Roslyn 4.3.1), net8.0 (uses Roslyn 4.4.0), and net10.0 (uses Roslyn 5.0.0)
+- Target frameworks: net6.0 (uses Roslyn 4.8.0), net8.0 (uses Roslyn 4.8.0), and net10.0 (uses Roslyn 5.0.0)
 - `EmitCompilerGeneratedFiles=true` on net10.0 to output generated files to `Generated/` folder
 - Generated files are excluded from compilation but committed for inspection
-- Each target framework tests a different generator version
+- net10.0 tests the Roslyn 5.0.0 generator, while net6.0/net8.0 test the Roslyn 4.8.0 generator
 
 ## Code Patterns and Conventions
 
@@ -167,7 +165,7 @@ Changes to these pipelines should maintain cache invalidation correctness.
 
 ### When Modifying Generators
 
-1. **Canonical Version:** Changes should be made to **Roslyn5_0_0** (the canonical implementation). Roslyn4_3_1 and Roslyn4_4_0 reference these files via links.
+1. **Canonical Version:** Changes should be made to **Roslyn5_0_0** (the canonical implementation). Roslyn4_8_0 references these files via links.
 2. **Model Changes:** Changes to `Models/` typically require updates to code writers
 3. **Template Changes:** Edit `.tt` files in **Roslyn5_0_0**, not generated `.cs` files. After T4 regeneration, run `.\tools\t4-cleanup.ps1` to clean up the generated `.cs` files
 4. **Test Coverage:** Add integration tests in `tests/EnumUtilities.Generators.IntegrationTests/Models/`
