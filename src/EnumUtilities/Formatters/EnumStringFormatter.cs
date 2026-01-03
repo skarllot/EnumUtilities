@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace Raiqub.Generators.EnumUtilities.Formatters;
 
@@ -20,6 +21,8 @@ public static class EnumStringFormatter
         int foundItemsCount,
         int count)
     {
+        Debug.Assert(foundItemsCount > 0, "foundItemsCount must be greater than zero");
+
         const int separatorStringLength = 2;
         var strlen = checked(count + (separatorStringLength * (foundItemsCount - 1)));
 
