@@ -64,6 +64,14 @@ function Remove-ToStringHelperCalls {
     }
 }
 
+function Normalize-LineEndings {
+    param([string[]]$Lines)
+
+    return $Lines | ForEach-Object {
+        $_ -replace '\\r\\n', '\n'
+    }
+}
+
 function Remove-BlankLinesBetweenWrites {
     param([string[]]$Lines)
 
@@ -114,7 +122,10 @@ function Process-CsFile {
         $linesCollapsed = Collapse-BlankLines -Lines $linesWithoutToStringHelper
 
         # Remove blank lines between consecutive this.Write calls
-        $finalLines = Remove-BlankLinesBetweenWrites -Lines $linesCollapsed
+        $linesWithoutWriteGaps = Remove-BlankLinesBetweenWrites -Lines $linesCollapsed
+
+        # Normalize line endings (\r\n to \n)
+        $finalLines = Normalize-LineEndings -Lines $linesWithoutWriteGaps
 
         # Extract auto-generated header (from start to second "// --------------")
         $header = @()
