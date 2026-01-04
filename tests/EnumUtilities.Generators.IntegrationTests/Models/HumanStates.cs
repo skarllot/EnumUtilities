@@ -10,5 +10,5 @@ public enum HumanStates
     Sleeping,
     Eating,
     Dead,
-    Relaxing = 1
+    Relaxing = 1,
 }

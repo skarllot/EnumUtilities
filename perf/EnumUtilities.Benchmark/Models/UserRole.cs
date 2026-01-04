@@ -13,5 +13,5 @@ public enum UserRole
     Custodian = 1 << 1,
     Finance = 1 << 2,
     SuperUser = Custodian | Finance,
-    All = Custodian | Finance | NormalUser
+    All = Custodian | Finance | NormalUser,
 }

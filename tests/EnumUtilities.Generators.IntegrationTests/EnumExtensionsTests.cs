@@ -181,12 +181,7 @@ public class EnumExtensionsTests
     [InlineData(HumanStates.Dead, "5")]
     public void MatchReturnsInlinedValue(HumanStates value, string expected)
     {
-        var result = value.Match(
-            Idle: "1",
-            Working: "2",
-            Sleeping: "3",
-            Eating: "4",
-            Dead: "5");
+        var result = value.Match(Idle: "1", Working: "2", Sleeping: "3", Eating: "4", Dead: "5");
 
         Assert.Equal(expected, result);
     }
@@ -204,7 +199,8 @@ public class EnumExtensionsTests
             Working: v => v + "2",
             Sleeping: v => v + "3",
             Eating: v => v + "4",
-            Dead: v => v + "5");
+            Dead: v => v + "5"
+        );
 
         Assert.Equal($"{value.ToString()}{(int)value}", result);
     }

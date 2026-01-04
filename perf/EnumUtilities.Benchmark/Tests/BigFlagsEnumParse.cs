@@ -10,14 +10,18 @@ namespace EnumUtilities.Benchmark.Tests;
 public class BigFlagsEnumParse
 {
     public IEnumerable<string> Values =>
-    [
-        "0", "Restore", "Read, Write", "Delete, Create, View, Share, Copy, Move",
-        "Read, Write, Execute, Delete, Modify, Create, View, Share, Copy, Move, Rename, Download, Upload, Sync, " +
-        "Archive, Restore, Print, Preview, Search, Tag, Annotate, Comment, Approve, Reject, Publish, Subscribe, " +
-        "Unsubscribe, Manage, Edit, Lock, Unlock",
-    ];
+        [
+            "0",
+            "Restore",
+            "Read, Write",
+            "Delete, Create, View, Share, Copy, Move",
+            "Read, Write, Execute, Delete, Modify, Create, View, Share, Copy, Move, Rename, Download, Upload, Sync, "
+                + "Archive, Restore, Print, Preview, Search, Tag, Annotate, Comment, Approve, Reject, Publish, "
+                + "Subscribe, Unsubscribe, Manage, Edit, Lock, Unlock",
+        ];
 
-    [ParamsSource(nameof(Values))] public string Permissions = string.Empty;
+    [ParamsSource(nameof(Values))]
+    public string Permissions = string.Empty;
 
     [Benchmark(Baseline = true)]
     public Permissions BuiltInParse() => Enum.Parse<Permissions>(Permissions);

@@ -15,7 +15,8 @@ public sealed record EnumToGenerate(
     string UnderlyingType,
     EquatableArray<EnumValue> Values,
     Location DefaultLocations,
-    string? RootNamespace = null)
+    string? RootNamespace = null
+)
 {
     private List<EnumValue>? _invertedValues;
     private string? _refName;
@@ -26,70 +27,63 @@ public sealed record EnumToGenerate(
     public string RefName => _refName ??= ContainingType is not null ? $"{ContainingType.Name}.{Name}" : Name;
 
     public List<EnumValue> UniqueValues =>
-        _uniqueValues ??= Values.AsEnumerable()
+        _uniqueValues ??= Values
+            .AsEnumerable()
             .DistinctBy(static it => it.MemberValue, StringComparer.Ordinal)
             .ToList();
 
     public List<EnumValue> InvertedValues =>
-        _invertedValues ??= Values.AsEnumerable()
+        _invertedValues ??= Values
+            .AsEnumerable()
             .DistinctBy(x => x.RealMemberValue)
             .OrderByDescending(x => x.RealMemberValue)
             .ToList();
 
-    public bool HasSerializationValue =>
-        Values.Exists(static it => it.SerializationValue != null);
+    public bool HasSerializationValue => Values.Exists(static it => it.SerializationValue != null);
 
-    public bool HasDescription =>
-        Values.Exists(static it => it.Description != null);
+    public bool HasDescription => Values.Exists(static it => it.Description != null);
 
-    public bool HasDisplayName => Values.Exists(
-        static it => it.Display?.Name != null || it.Display?.ShortName != null);
+    public bool HasDisplayName => Values.Exists(static it => it.Display?.Name != null || it.Display?.ShortName != null);
 
-    public bool HasDisplayDescription =>
-        Values.Exists(static it => it.Display?.Description != null);
+    public bool HasDisplayDescription => Values.Exists(static it => it.Display?.Description != null);
 
-    public bool HasDisplayPrompt =>
-        Values.Exists(static it => it.Display?.Prompt != null);
+    public bool HasDisplayPrompt => Values.Exists(static it => it.Display?.Prompt != null);
 
-    public bool HasDisplayGroupName =>
-        Values.Exists(static it => it.Display?.GroupName != null);
+    public bool HasDisplayGroupName => Values.Exists(static it => it.Display?.GroupName != null);
 
-    public bool HasJsonProperty =>
-        Values.Exists(static it => it.JsonPropertyName != null);
+    public bool HasJsonProperty => Values.Exists(static it => it.JsonPropertyName != null);
 
-    public bool HasZeroMember { get; } =
-        Values.AsEnumerable().Any(x => x.RealMemberValue == 0);
+    public bool HasZeroMember { get; } = Values.AsEnumerable().Any(x => x.RealMemberValue == 0);
 
-    private int BitCount { get; } = UnderlyingType switch
-    {
-        "byte" => 8,
-        "sbyte" => 8,
-        "short" => 16,
-        "ushort" => 16,
-        "int" => 32,
-        "uint" => 32,
-        "long" => 64,
-        "ulong" => 64,
-        _ => 64,
-    };
+    private int BitCount { get; } =
+        UnderlyingType switch
+        {
+            "byte" => 8,
+            "sbyte" => 8,
+            "short" => 16,
+            "ushort" => 16,
+            "int" => 32,
+            "uint" => 32,
+            "long" => 64,
+            "ulong" => 64,
+            _ => 64,
+        };
 
     public static EnumToGenerate? FromSymbol(ISymbol symbol)
     {
-        if (symbol is not INamedTypeSymbol typeSymbol ||
-            typeSymbol.DeclaredAccessibility is not Accessibility.Public and not Accessibility.Internal ||
-            typeSymbol.ContainingType is
-                { DeclaredAccessibility: not Accessibility.Public and not Accessibility.Internal })
+        if (
+            symbol is not INamedTypeSymbol typeSymbol
+            || typeSymbol.DeclaredAccessibility is not Accessibility.Public and not Accessibility.Internal
+            || typeSymbol.ContainingType
+                is { DeclaredAccessibility: not Accessibility.Public and not Accessibility.Internal }
+        )
         {
             return null;
         }
 
         var attributes = typeSymbol.GetAttributes();
 
-        var enumValues = typeSymbol
-            .GetMembers()
-            .Select(EnumValue.FromSymbol)
-            .WhereNotNull()
-            .ToArray();
+        var enumValues = typeSymbol.GetMembers().Select(EnumValue.FromSymbol).WhereNotNull().ToArray();
 
         if (enumValues.Length == 0)
             return null;
@@ -99,12 +93,16 @@ public sealed record EnumToGenerate(
             ns = null;
 
         return new EnumToGenerate(
-            (attributes.Any(x => x.AttributeClass?.Name == nameof(EnumGeneratorAttribute))
-                ? SelectedGenerators.MainGenerator
-                : 0) |
-            (attributes.Any(x => x.AttributeClass?.Name == nameof(JsonConverterGeneratorAttribute))
-                ? SelectedGenerators.JsonConverter
-                : 0),
+            (
+                attributes.Any(x => x.AttributeClass?.Name == nameof(EnumGeneratorAttribute))
+                    ? SelectedGenerators.MainGenerator
+                    : 0
+            )
+                | (
+                    attributes.Any(x => x.AttributeClass?.Name == nameof(JsonConverterGeneratorAttribute))
+                        ? SelectedGenerators.JsonConverter
+                        : 0
+                ),
             JsonConverterGeneratorOptions.FromSymbol(typeSymbol),
             string.IsNullOrWhiteSpace(ns) ? null : ns,
             typeSymbol.ContainingType is not null ? ContainingType.FromSymbol(typeSymbol.ContainingType) : null,
@@ -113,37 +111,41 @@ public sealed record EnumToGenerate(
             typeSymbol.Name,
             typeSymbol.EnumUnderlyingType?.GetNumericCSharpKeyword() ?? "int",
             EquatableArray<EnumValue>.FromArrayWithoutCopy(enumValues),
-            typeSymbol.GetDefaultLocation());
+            typeSymbol.GetDefaultLocation()
+        );
     }
 
     public static string[] BitRangeConditionStrings { get; } =
-        ["value > 0xffff_ffff_ffff", "value > 0xffff_ffff", "value > 0xffff", "true"];
+    ["value > 0xffff_ffff_ffff", "value > 0xffff_ffff", "value > 0xffff", "true"];
 
     public List<EnumValue>[] GetEnumValueRangesByBitRange()
     {
-        var h2Values = BitCount == 64
-            ? InvertedValues
-                .Where(x => x.RealMemberValue > 0x0000_ffff_ffff_ffffUL)
-                .ToList()
-            : [];
-        var h1Values = BitCount == 64
-            ? InvertedValues
-                .Where(
-                    x => x.RealMemberValue > 0x0000_0000_ffff_ffffUL & x.RealMemberValue <= 0x0000_ffff_ffff_ffffUL)
-                .ToList()
-            : [];
-        var l2Values = BitCount >= 32
-            ? InvertedValues
-                .Where(
-                    x => x.RealMemberValue > 0x0000_0000_0000_ffffUL & x.RealMemberValue <= 0x0000_0000_ffff_ffffUL)
-                .ToList()
-            : [];
-        var l1Values = BitCount >= 16
-            ? InvertedValues
-                .Where(
-                    x => x.RealMemberValue > 0x0000_0000_0000_0000UL & x.RealMemberValue <= 0x0000_0000_0000_ffffUL)
-                .ToList()
-            : [];
+        var h2Values =
+            BitCount == 64 ? InvertedValues.Where(x => x.RealMemberValue > 0x0000_ffff_ffff_ffffUL).ToList() : [];
+        var h1Values =
+            BitCount == 64
+                ? InvertedValues
+                    .Where(x =>
+                        x.RealMemberValue > 0x0000_0000_ffff_ffffUL & x.RealMemberValue <= 0x0000_ffff_ffff_ffffUL
+                    )
+                    .ToList()
+                : [];
+        var l2Values =
+            BitCount >= 32
+                ? InvertedValues
+                    .Where(x =>
+                        x.RealMemberValue > 0x0000_0000_0000_ffffUL & x.RealMemberValue <= 0x0000_0000_ffff_ffffUL
+                    )
+                    .ToList()
+                : [];
+        var l1Values =
+            BitCount >= 16
+                ? InvertedValues
+                    .Where(x =>
+                        x.RealMemberValue > 0x0000_0000_0000_0000UL & x.RealMemberValue <= 0x0000_0000_0000_ffffUL
+                    )
+                    .ToList()
+                : [];
         return [h2Values, h1Values, l2Values, l1Values];
     }
 
@@ -152,9 +154,11 @@ public sealed record EnumToGenerate(
         if (Values.AsEnumerable().Any(x => x.MemberValue[0] == '-'))
             return BitCount;
 
-        return BitCount -
-               (BitOperations.LeadingZeroCount(Values.AsEnumerable().Select(x => x.RealMemberValue).Max()) -
-                (64 - BitCount));
+        return BitCount
+            - (
+                BitOperations.LeadingZeroCount(Values.AsEnumerable().Select(x => x.RealMemberValue).Max())
+                - (64 - BitCount)
+            );
     }
 
     public string? InterlockedUnderlyingType =>

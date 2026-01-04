@@ -9,12 +9,10 @@ namespace EnumUtilities.Benchmark.Tests;
 [MediumRunJob]
 public class SmallEnumParse
 {
-    public IEnumerable<string> Values =>
-    [
-        "0", "Manwe", "Orome", "1000",
-    ];
+    public IEnumerable<string> Values => ["0", "Manwe", "Orome", "1000"];
 
-    [ParamsSource(nameof(Values))] public string Valar = string.Empty;
+    [ParamsSource(nameof(Values))]
+    public string Valar = string.Empty;
 
     [Benchmark(Baseline = true)]
     public Valar BuiltInParse() => Enum.Parse<Valar>(Valar);

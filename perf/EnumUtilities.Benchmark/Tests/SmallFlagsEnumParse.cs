@@ -9,12 +9,10 @@ namespace EnumUtilities.Benchmark.Tests;
 [MediumRunJob]
 public class SmallFlagsEnumParse
 {
-    public IEnumerable<string> Values =>
-    [
-        "0", "Finance", "NormalUser, Custodian", "1000",
-    ];
+    public IEnumerable<string> Values => ["0", "Finance", "NormalUser, Custodian", "1000"];
 
-    [ParamsSource(nameof(Values))] public string UserRole = string.Empty;
+    [ParamsSource(nameof(Values))]
+    public string UserRole = string.Empty;
 
     [Benchmark(Baseline = true)]
     public UserRole BuiltInParse() => Enum.Parse<UserRole>(UserRole);

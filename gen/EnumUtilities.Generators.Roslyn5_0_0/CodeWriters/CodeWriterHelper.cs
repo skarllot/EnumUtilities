@@ -6,8 +6,10 @@ public static class CodeWriterHelper
 {
     public static string GetFileName(EnumToGenerate model, string generatorName)
     {
-        if (model is { RootNamespace: not null, Namespace: not null } &&
-            model.Namespace.Length >= model.RootNamespace.Length)
+        if (
+            model is { RootNamespace: not null, Namespace: not null }
+            && model.Namespace.Length >= model.RootNamespace.Length
+        )
         {
             if (model.RootNamespace == model.Namespace)
             {

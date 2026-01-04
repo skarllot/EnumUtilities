@@ -9,7 +9,8 @@ public sealed record DisplayAttribute(
     string? Description,
     string? Prompt,
     string? GroupName,
-    string? ResourceType)
+    string? ResourceType
+)
 {
     public bool HasResource => ResourceType is not null;
     public string? ResourceShortName => GetPropertyWithResource(ShortName);
@@ -26,7 +27,8 @@ public sealed record DisplayAttribute(
             Description: attribute.GetNamedArgument(nameof(Description))?.ToString(),
             Prompt: attribute.GetNamedArgument(nameof(Prompt))?.ToString(),
             GroupName: attribute.GetNamedArgument(nameof(GroupName))?.ToString(),
-            ResourceType: attribute.GetNamedArgument(nameof(ResourceType))?.ToString());
+            ResourceType: attribute.GetNamedArgument(nameof(ResourceType))?.ToString()
+        );
     }
 
     private string? GetPropertyWithResource(string? propertyName)

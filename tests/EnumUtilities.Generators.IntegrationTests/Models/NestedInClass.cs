@@ -11,7 +11,7 @@ public class NestedInClass
     {
         Zero,
         One,
-        Two
+        Two,
     }
 
     [EnumGenerator]
@@ -28,7 +28,7 @@ public class NestedInClass
         [Display(Name = "Physical Cash")]
         [Description("The payment by using physical cash")]
         Cash,
-        Cheque
+        Cheque,
     }
 
     [EnumGenerator]
@@ -38,7 +38,8 @@ public class NestedInClass
             Name = nameof(Strings.MondayFull),
             ShortName = nameof(Strings.MondayShort),
             Description = nameof(Strings.MondayDescription),
-            ResourceType = typeof(Strings))]
+            ResourceType = typeof(Strings)
+        )]
         Monday,
 
         [Display(ShortName = "Tue")]
@@ -57,7 +58,7 @@ public class NestedInClass
         Saturday,
 
         [Display(Description = "The last day of the week")]
-        Sunday
+        Sunday,
     }
 
     [EnumGenerator]
@@ -65,7 +66,7 @@ public class NestedInClass
     {
         Zero,
         One,
-        Two
+        Two,
     }
 
     [EnumGenerator]
@@ -73,6 +74,6 @@ public class NestedInClass
     {
         Zero,
         One,
-        Two
+        Two,
     }
 }

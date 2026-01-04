@@ -8,5 +8,5 @@ public enum Categories
     Automotive,
     Arts,
     BeautyCare,
-    Fashion
+    Fashion,
 }

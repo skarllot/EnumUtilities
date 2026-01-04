@@ -1,5 +1,4 @@
 ﻿<Project>
-
   <Sdk Name="ViHo.PackAsAnalyzer" Version="1.0.1" />
 
   <PropertyGroup>
@@ -34,5 +33,4 @@
       codegen;fast;json;jsonconverter;interlocked;atomic
     </PackageTags>
   </PropertyGroup>
-
 </Project>
