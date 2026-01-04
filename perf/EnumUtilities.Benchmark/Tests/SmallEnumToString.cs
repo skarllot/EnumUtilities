@@ -9,12 +9,10 @@ namespace EnumUtilities.Benchmark.Tests;
 [MediumRunJob]
 public class SmallEnumToString
 {
-    public IEnumerable<Valar> Values =>
-    [
-        0, (Valar)1, (Valar)8, (Valar)1000,
-    ];
+    public IEnumerable<Valar> Values => [0, (Valar)1, (Valar)8, (Valar)1000];
 
-    [ParamsSource(nameof(Values))] public Valar Valar;
+    [ParamsSource(nameof(Values))]
+    public Valar Valar;
 
     [Benchmark(Baseline = true)]
     public string BuiltInToString() => Valar.ToString();

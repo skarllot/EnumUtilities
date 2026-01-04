@@ -19,7 +19,8 @@ public static class EnumStringFormatter
     public static string WriteMultipleFoundFlagsNames(
         ReadOnlySpan<string> names,
         ReadOnlySpan<int> foundItems,
-        int count)
+        int count
+    )
     {
         Debug.Assert(!foundItems.IsEmpty, "foundItems must not be empty");
         Debug.Assert(count > 0, "count must be greater than zero");
@@ -31,13 +32,15 @@ public static class EnumStringFormatter
         var result = string.Create(
             length: strlen,
             state: new FlagsNamesStringCreationContext(names, foundItems),
-            action: FlagsNamesStringCreationContext.Fill);
+            action: FlagsNamesStringCreationContext.Fill
+        );
 #else
         var result = string.Create(strlen, 0, static (_, _) => { });
         FlagsNamesStringCreationContext.Fill(
             MemoryMarshal.CreateSpan(ref MemoryMarshal.GetReference(result.AsSpan()), strlen),
             names,
-            foundItems);
+            foundItems
+        );
 #endif
 
         return result;
@@ -48,9 +51,7 @@ public static class EnumStringFormatter
         private readonly ReadOnlySpan<string> _names;
         private readonly ReadOnlySpan<int> _foundItems;
 
-        public FlagsNamesStringCreationContext(
-            ReadOnlySpan<string> names,
-            ReadOnlySpan<int> foundItems)
+        public FlagsNamesStringCreationContext(ReadOnlySpan<string> names, ReadOnlySpan<int> foundItems)
         {
             _names = names;
             _foundItems = foundItems;
@@ -62,10 +63,7 @@ public static class EnumStringFormatter
             context.Fill(destination);
         }
 #else
-        public static void Fill(
-            Span<char> destination,
-            ReadOnlySpan<string> names,
-            ReadOnlySpan<int> foundItems)
+        public static void Fill(Span<char> destination, ReadOnlySpan<string> names, ReadOnlySpan<int> foundItems)
         {
             new FlagsNamesStringCreationContext(names, foundItems).Fill(destination);
         }

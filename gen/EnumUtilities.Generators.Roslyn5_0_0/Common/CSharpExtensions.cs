@@ -18,7 +18,7 @@ public static class CSharpExtensions
             "UInt64" => "ulong",
             "IntPtr" => "nint",
             "UIntPtr" => "nuint",
-            _ => typeSymbol.Name
+            _ => typeSymbol.Name,
         };
     }
 
@@ -36,7 +36,7 @@ public static class CSharpExtensions
             "ulong" => "UInt64",
             "nint" => "IntPtr",
             "nuint" => "UIntPtr",
-            _ => keyword
+            _ => keyword,
         };
     }
 

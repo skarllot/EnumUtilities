@@ -16,39 +16,35 @@ public class EnumUtilitiesGenerator : IIncrementalGenerator
     private const string EnumGeneratorAttributeName = $"{BaseAttributeNamespace}.EnumGeneratorAttribute";
     private const string JsonConverterGeneratorAttribute = $"{BaseAttributeNamespace}.JsonConverterGeneratorAttribute";
 
-    private static readonly CodeWriterDispatcher<EnumToGenerate> s_dispatcher =
-        new(
-            HandleCodeWriterException,
-            sb => new EnumInfoWriter(sb),
-            sb => new EnumExtensionsWriter(sb),
-            sb => new EnumFactoryWriter(sb),
-            sb => new EnumValidationWriter(sb),
-            sb => new EnumJsonConverterWriter(sb));
+    private static readonly CodeWriterDispatcher<EnumToGenerate> s_dispatcher = new(
+        HandleCodeWriterException,
+        sb => new EnumInfoWriter(sb),
+        sb => new EnumExtensionsWriter(sb),
+        sb => new EnumFactoryWriter(sb),
+        sb => new EnumValidationWriter(sb),
+        sb => new EnumJsonConverterWriter(sb)
+    );
 
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
-        var rootNamespace = context
-            .AnalyzerConfigOptionsProvider
-            .Select((c, _) =>
-                c.GlobalOptions.TryGetValue("build_property.RootNamespace", out var ns)
-                    ? ns
-                    : null);
+        var rootNamespace = context.AnalyzerConfigOptionsProvider.Select(
+            (c, _) => c.GlobalOptions.TryGetValue("build_property.RootNamespace", out var ns) ? ns : null
+        );
 
         var csharpVersion = context.CompilationProvider.Select((c, _) => ((CSharpCompilation)c).LanguageVersion);
 
-        var enumsWithVersion = context.SyntaxProvider
-            .ForAttributeWithMetadataName(
+        var enumsWithVersion = context
+            .SyntaxProvider.ForAttributeWithMetadataName(
                 EnumGeneratorAttributeName,
                 IsSyntaxTargetForGeneration,
-                GetSemanticTargetForGeneration)
+                GetSemanticTargetForGeneration
+            )
             .WithTrackingName(TrackingNames.ExtractForEnumGeneratorAttribute)
             .WhereNotNull()
             .WithTrackingName(TrackingNames.RemoveNulls)
             .Combine(csharpVersion);
 
-        var oldCsharpVersionEnums = enumsWithVersion
-            .Where(t => t.Right < LanguageVersion.CSharp10)
-            .Collect();
+        var oldCsharpVersionEnums = enumsWithVersion.Where(t => t.Right < LanguageVersion.CSharp10).Collect();
 
         var providerForEnumGenerator = enumsWithVersion
             .Where(t => t.Right >= LanguageVersion.CSharp10)
@@ -59,11 +55,12 @@ public class EnumUtilitiesGenerator : IIncrementalGenerator
             .WithTrackingName(TrackingNames.FillRootNamespace)
             .Collect();
 
-        var jsonConverterEnumsWithVersion = context.SyntaxProvider
-            .ForAttributeWithMetadataName(
+        var jsonConverterEnumsWithVersion = context
+            .SyntaxProvider.ForAttributeWithMetadataName(
                 JsonConverterGeneratorAttribute,
                 IsSyntaxTargetForGeneration,
-                GetSemanticTargetForGeneration)
+                GetSemanticTargetForGeneration
+            )
             .WithTrackingName(TrackingNames.ExtractForJsonConverterGeneratorAttribute)
             .WhereNotNull()
             .WithTrackingName(TrackingNames.RemoveNulls)
@@ -92,20 +89,19 @@ public class EnumUtilitiesGenerator : IIncrementalGenerator
 
     private static bool IsSyntaxTargetForGeneration(SyntaxNode node, CancellationToken cancellationToken)
     {
-        return node is EnumDeclarationSyntax { AttributeLists.Count: > 0 } enumNode &&
-               !enumNode.Modifiers.Any(SyntaxKind.PrivateKeyword);
+        return node is EnumDeclarationSyntax { AttributeLists.Count: > 0 } enumNode
+            && !enumNode.Modifiers.Any(SyntaxKind.PrivateKeyword);
     }
 
     private static EnumToGenerate? GetSemanticTargetForGeneration(
         GeneratorAttributeSyntaxContext context,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         return EnumToGenerate.FromSymbol(context.TargetSymbol);
     }
 
-    private static void Emit(
-        SourceProductionContext context,
-        ImmutableArray<EnumToGenerate> enumsToGenerate)
+    private static void Emit(SourceProductionContext context, ImmutableArray<EnumToGenerate> enumsToGenerate)
     {
         if (enumsToGenerate.IsDefaultOrEmpty)
         {
@@ -117,14 +113,16 @@ public class EnumUtilitiesGenerator : IIncrementalGenerator
 
     private static void ReportCSharpVersionDiagnostic(
         SourceProductionContext context,
-        ImmutableArray<(EnumToGenerate Enum, LanguageVersion Version)> enumsWithVersion)
+        ImmutableArray<(EnumToGenerate Enum, LanguageVersion Version)> enumsWithVersion
+    )
     {
         foreach (var (enumToGenerate, version) in enumsWithVersion)
         {
             var diagnostic = Diagnostic.Create(
                 DiagnosticDescriptors.CSharpVersionNotSupported,
                 enumToGenerate.DefaultLocations,
-                version.ToDisplayString());
+                version.ToDisplayString()
+            );
             context.ReportDiagnostic(diagnostic);
         }
     }
@@ -134,6 +132,7 @@ public class EnumUtilitiesGenerator : IIncrementalGenerator
         return Diagnostic.Create(
             DiagnosticDescriptors.UnexpectedErrorGenerating,
             model.DefaultLocations,
-            exception.ToString().Replace("\n", " "));
+            exception.ToString().Replace("\n", " ")
+        );
     }
 }

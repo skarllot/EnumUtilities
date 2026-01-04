@@ -40,5 +40,5 @@ public enum Permissions : uint
     Edit = 1 << 28,
     Lock = 1 << 29,
     Unlock = 1 << 30,
-    FullControl = 1u << 31
+    FullControl = 1u << 31,
 }

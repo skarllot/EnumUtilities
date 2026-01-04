@@ -1,26 +1,26 @@
 <Solution>
-  <Folder Name="/.root/">
-    <File Path=".gitignore" />
-    <File Path="Directory.Build.props" />
-    <File Path="LICENSE" />
-    <File Path="README.md" />
-    <File Path="version.json" />
-  </Folder>
-  <Folder Name="/gen/">
-    <Project Path="gen/EnumUtilities.Generators.Roslyn4_8_0/EnumUtilities.Generators.Roslyn4_8_0.csproj" />
-    <Project Path="gen/EnumUtilities.Generators.Roslyn5_0_0/EnumUtilities.Generators.Roslyn5_0_0.csproj" />
-  </Folder>
-  <Folder Name="/perf/">
-    <Project Path="perf/EnumUtilities.Benchmark/EnumUtilities.Benchmark.csproj">
-      <BuildType Project="Release" />
-    </Project>
-  </Folder>
-  <Folder Name="/src/">
-    <Project Path="src/EnumUtilities/EnumUtilities.csproj" />
-  </Folder>
-  <Folder Name="/tests/">
-    <Project Path="tests/EnumUtilities.Generators.IntegrationTests/EnumUtilities.Generators.IntegrationTests.csproj" />
-    <Project Path="tests/EnumUtilities.Generators.Tests/EnumUtilities.Generators.Tests.csproj" />
-    <Project Path="tests/EnumUtilities.Tests/EnumUtilities.Tests.csproj" />
-  </Folder>
+    <Folder Name="/.root/">
+        <File Path=".gitignore" />
+        <File Path="Directory.Build.props" />
+        <File Path="LICENSE" />
+        <File Path="README.md" />
+        <File Path="version.json" />
+    </Folder>
+    <Folder Name="/gen/">
+        <Project Path="gen/EnumUtilities.Generators.Roslyn4_8_0/EnumUtilities.Generators.Roslyn4_8_0.csproj" />
+        <Project Path="gen/EnumUtilities.Generators.Roslyn5_0_0/EnumUtilities.Generators.Roslyn5_0_0.csproj" />
+    </Folder>
+    <Folder Name="/perf/">
+        <Project Path="perf/EnumUtilities.Benchmark/EnumUtilities.Benchmark.csproj">
+            <BuildType Project="Release" />
+        </Project>
+    </Folder>
+    <Folder Name="/src/">
+        <Project Path="src/EnumUtilities/EnumUtilities.csproj" />
+    </Folder>
+    <Folder Name="/tests/">
+        <Project Path="tests/EnumUtilities.Generators.IntegrationTests/EnumUtilities.Generators.IntegrationTests.csproj" />
+        <Project Path="tests/EnumUtilities.Generators.Tests/EnumUtilities.Generators.Tests.csproj" />
+        <Project Path="tests/EnumUtilities.Tests/EnumUtilities.Tests.csproj" />
+    </Folder>
 </Solution>

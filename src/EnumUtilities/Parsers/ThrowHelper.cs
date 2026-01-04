@@ -19,9 +19,7 @@ public static class ThrowHelper
     [DoesNotReturn]
     public static void ThrowInvalidEmptyParseArgument(string parameterName)
     {
-        throw new ArgumentException(
-            "Must specify valid information for parsing in the string.",
-            parameterName);
+        throw new ArgumentException("Must specify valid information for parsing in the string.", parameterName);
     }
 
     /// <summary>

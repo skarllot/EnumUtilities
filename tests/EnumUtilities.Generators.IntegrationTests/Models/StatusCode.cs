@@ -9,7 +9,9 @@ public enum StatusCode
     Unknown = -1,
     Success = 0,
     Error = -2,
-    [EnumMember(Value = "Not Found")] NotFound = -3,
+
+    [EnumMember(Value = "Not Found")]
+    NotFound = -3,
     Timeout = -4,
     Unauthorized = -5,
     Forbidden = -6,

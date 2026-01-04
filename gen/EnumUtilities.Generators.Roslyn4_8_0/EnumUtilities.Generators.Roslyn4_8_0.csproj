@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <IsPackable>false</IsPackable>
@@ -25,16 +24,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\src\EnumUtilities\EnumGeneratorAttribute.cs" Link="Attributes\EnumGeneratorAttribute.cs" />
-    <Compile Include="..\..\src\EnumUtilities\JsonConverterGeneratorAttribute.cs" Link="Attributes\JsonConverterGeneratorAttribute.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <Compile Include="..\..\src\EnumUtilities\*Attribute.cs" LinkBase="Attributes" />
     <Compile Include="..\EnumUtilities.Generators.Roslyn5_0_0\*\*.cs" Exclude="**\obj\**" />
     <Compile Include="..\EnumUtilities.Generators.Roslyn5_0_0\DiagnosticDescriptors.cs" />
     <Compile Include="..\EnumUtilities.Generators.Roslyn5_0_0\EnumUtilitiesGenerator.cs" />
     <Compile Include="..\EnumUtilities.Generators.Roslyn5_0_0\TrackingNames.cs" />
     <AdditionalFiles Include="..\EnumUtilities.Generators.Roslyn5_0_0\AnalyzerReleases.*.md" />
   </ItemGroup>
-
 </Project>

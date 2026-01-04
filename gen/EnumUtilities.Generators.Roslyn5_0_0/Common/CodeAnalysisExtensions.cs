@@ -6,7 +6,8 @@ namespace Raiqub.Generators.EnumUtilities.Common;
 public static class CodeAnalysisExtensions
 {
     public static IncrementalValuesProvider<TSource> WhereNotNull<TSource>(
-        this IncrementalValuesProvider<TSource?> source)
+        this IncrementalValuesProvider<TSource?> source
+    )
     {
         return source.Where(static it => it is not null)!;
     }
@@ -16,9 +17,11 @@ public static class CodeAnalysisExtensions
         string? nameSpace = null;
         var potentialNamespaceParent = syntax.Parent;
 
-        while (potentialNamespaceParent != null &&
-               potentialNamespaceParent is not NamespaceDeclarationSyntax &&
-               potentialNamespaceParent is not FileScopedNamespaceDeclarationSyntax)
+        while (
+            potentialNamespaceParent != null
+            && potentialNamespaceParent is not NamespaceDeclarationSyntax
+            && potentialNamespaceParent is not FileScopedNamespaceDeclarationSyntax
+        )
         {
             potentialNamespaceParent = potentialNamespaceParent.Parent;
         }
@@ -46,9 +49,7 @@ public static class CodeAnalysisExtensions
 
     public static AttributeData? WhereClassNameIs(this AttributeData attribute, string name)
     {
-        return attribute.AttributeClass?.Name == name
-            ? attribute
-            : null;
+        return attribute.AttributeClass?.Name == name ? attribute : null;
     }
 
     public static object? GetConstructorArgument(this AttributeData attribute, int position)

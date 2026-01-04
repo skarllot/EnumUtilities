@@ -10,8 +10,7 @@ public class EnumUtilitiesGeneratorTests
         "Raiqub.Generators.EnumUtilities/Raiqub.Generators.EnumUtilities.EnumUtilitiesGenerator";
 
     [StringSyntax("C#")]
-    private const string WeekDaysEnumText =
-        """
+    private const string WeekDaysEnumText = """
         using System.ComponentModel.DataAnnotations;
         using System.Text.Json.Serialization;
         using Raiqub.Generators.EnumUtilities;
@@ -51,8 +50,7 @@ public class EnumUtilitiesGeneratorTests
         """;
 
     [StringSyntax("C#")]
-    private const string ColoursEnumText =
-        """
+    private const string ColoursEnumText = """
         using Raiqub.Generators.EnumUtilities;
 
         namespace Testing.Models;
@@ -68,8 +66,7 @@ public class EnumUtilitiesGeneratorTests
         """;
 
     [StringSyntax("C#")]
-    private const string PaymentMethodEnumText =
-        """
+    private const string PaymentMethodEnumText = """
         using Raiqub.Generators.EnumUtilities;
 
         namespace Testing.Models;
@@ -91,8 +88,7 @@ public class EnumUtilitiesGeneratorTests
         """;
 
     [StringSyntax("C#")]
-    private const string NoMembersEnumText =
-        """
+    private const string NoMembersEnumText = """
         using Raiqub.Generators.EnumUtilities;
 
         namespace Testing.Models;
@@ -113,10 +109,12 @@ public class EnumUtilitiesGeneratorTests
         var compilation = CSharpCompilation.Create(
             nameof(EnumUtilitiesGeneratorTests),
             [CSharpSyntaxTree.ParseText(WeekDaysEnumText)],
-            AppDomain.CurrentDomain.GetAssemblies()
+            AppDomain
+                .CurrentDomain.GetAssemblies()
                 .Append(typeof(EnumGeneratorAttribute).Assembly)
                 .Where(it => !it.IsDynamic && !string.IsNullOrWhiteSpace(it.Location))
-                .Select(it => MetadataReference.CreateFromFile(it.Location)));
+                .Select(it => MetadataReference.CreateFromFile(it.Location))
+        );
 
         var runResult = driver.RunGenerators(compilation).GetRunResult();
         var generatedFilesNames = runResult.GeneratedTrees.Select(t => t.FilePath);
@@ -127,9 +125,13 @@ public class EnumUtilitiesGeneratorTests
                 $"{GeneratorBasePath}/Testing.Models.WeekDaysExtensions.g.cs".Replace('/', Path.DirectorySeparatorChar),
                 $"{GeneratorBasePath}/Testing.Models.WeekDaysFactory.g.cs".Replace('/', Path.DirectorySeparatorChar),
                 $"{GeneratorBasePath}/Testing.Models.WeekDaysValidation.g.cs".Replace('/', Path.DirectorySeparatorChar),
-                $"{GeneratorBasePath}/Testing.Models.WeekDaysJsonConverter.g.cs".Replace('/', Path.DirectorySeparatorChar),
+                $"{GeneratorBasePath}/Testing.Models.WeekDaysJsonConverter.g.cs".Replace(
+                    '/',
+                    Path.DirectorySeparatorChar
+                ),
             ],
-            generatedFilesNames);
+            generatedFilesNames
+        );
         Assert.Empty(runResult.Diagnostics);
     }
 
@@ -142,10 +144,12 @@ public class EnumUtilitiesGeneratorTests
         var compilation = CSharpCompilation.Create(
             nameof(EnumUtilitiesGeneratorTests),
             [CSharpSyntaxTree.ParseText(ColoursEnumText)],
-            AppDomain.CurrentDomain.GetAssemblies()
+            AppDomain
+                .CurrentDomain.GetAssemblies()
                 .Append(typeof(EnumGeneratorAttribute).Assembly)
                 .Where(it => !it.IsDynamic && !string.IsNullOrWhiteSpace(it.Location))
-                .Select(it => MetadataReference.CreateFromFile(it.Location)));
+                .Select(it => MetadataReference.CreateFromFile(it.Location))
+        );
 
         var runResult = driver.RunGenerators(compilation).GetRunResult();
         var generatedFilesNames = runResult.GeneratedTrees.Select(t => t.FilePath);
@@ -157,7 +161,8 @@ public class EnumUtilitiesGeneratorTests
                 $"{GeneratorBasePath}/Testing.Models.ColoursFactory.g.cs".Replace('/', Path.DirectorySeparatorChar),
                 $"{GeneratorBasePath}/Testing.Models.ColoursValidation.g.cs".Replace('/', Path.DirectorySeparatorChar),
             ],
-            generatedFilesNames);
+            generatedFilesNames
+        );
         Assert.Empty(runResult.Diagnostics);
     }
 
@@ -170,22 +175,37 @@ public class EnumUtilitiesGeneratorTests
         var compilation = CSharpCompilation.Create(
             nameof(EnumUtilitiesGeneratorTests),
             [CSharpSyntaxTree.ParseText(PaymentMethodEnumText)],
-            AppDomain.CurrentDomain.GetAssemblies()
+            AppDomain
+                .CurrentDomain.GetAssemblies()
                 .Append(typeof(EnumGeneratorAttribute).Assembly)
                 .Where(it => !it.IsDynamic && !string.IsNullOrWhiteSpace(it.Location))
-                .Select(it => MetadataReference.CreateFromFile(it.Location)));
+                .Select(it => MetadataReference.CreateFromFile(it.Location))
+        );
 
         var runResult = driver.RunGenerators(compilation).GetRunResult();
         var generatedFilesNames = runResult.GeneratedTrees.Select(t => t.FilePath);
 
         Assert.Equal(
             [
-                $"{GeneratorBasePath}/Testing.Models.PaymentMethodEnumInfo.g.cs".Replace('/', Path.DirectorySeparatorChar),
-                $"{GeneratorBasePath}/Testing.Models.PaymentMethodExtensions.g.cs".Replace('/', Path.DirectorySeparatorChar),
-                $"{GeneratorBasePath}/Testing.Models.PaymentMethodFactory.g.cs".Replace('/', Path.DirectorySeparatorChar),
-                $"{GeneratorBasePath}/Testing.Models.PaymentMethodValidation.g.cs".Replace('/', Path.DirectorySeparatorChar),
+                $"{GeneratorBasePath}/Testing.Models.PaymentMethodEnumInfo.g.cs".Replace(
+                    '/',
+                    Path.DirectorySeparatorChar
+                ),
+                $"{GeneratorBasePath}/Testing.Models.PaymentMethodExtensions.g.cs".Replace(
+                    '/',
+                    Path.DirectorySeparatorChar
+                ),
+                $"{GeneratorBasePath}/Testing.Models.PaymentMethodFactory.g.cs".Replace(
+                    '/',
+                    Path.DirectorySeparatorChar
+                ),
+                $"{GeneratorBasePath}/Testing.Models.PaymentMethodValidation.g.cs".Replace(
+                    '/',
+                    Path.DirectorySeparatorChar
+                ),
             ],
-            generatedFilesNames);
+            generatedFilesNames
+        );
         Assert.Empty(runResult.Diagnostics);
     }
 
@@ -198,10 +218,12 @@ public class EnumUtilitiesGeneratorTests
         var compilation = CSharpCompilation.Create(
             nameof(EnumUtilitiesGeneratorTests),
             [CSharpSyntaxTree.ParseText(NoMembersEnumText)],
-            AppDomain.CurrentDomain.GetAssemblies()
+            AppDomain
+                .CurrentDomain.GetAssemblies()
                 .Append(typeof(EnumGeneratorAttribute).Assembly)
                 .Where(it => !it.IsDynamic && !string.IsNullOrWhiteSpace(it.Location))
-                .Select(it => MetadataReference.CreateFromFile(it.Location)));
+                .Select(it => MetadataReference.CreateFromFile(it.Location))
+        );
 
         var runResult = driver.RunGenerators(compilation).GetRunResult();
         var generatedFilesNames = runResult.GeneratedTrees.Select(t => t.FilePath);
@@ -220,10 +242,12 @@ public class EnumUtilitiesGeneratorTests
         var compilation = CSharpCompilation.Create(
             nameof(EnumUtilitiesGeneratorTests),
             [CSharpSyntaxTree.ParseText(WeekDaysEnumText, parseOptions)],
-            AppDomain.CurrentDomain.GetAssemblies()
+            AppDomain
+                .CurrentDomain.GetAssemblies()
                 .Append(typeof(EnumGeneratorAttribute).Assembly)
                 .Where(it => !it.IsDynamic && !string.IsNullOrWhiteSpace(it.Location))
-                .Select(it => MetadataReference.CreateFromFile(it.Location)));
+                .Select(it => MetadataReference.CreateFromFile(it.Location))
+        );
 
         var runResult = driver.RunGenerators(compilation).GetRunResult();
         var generatedFilesNames = runResult.GeneratedTrees.Select(t => t.FilePath);
@@ -233,6 +257,9 @@ public class EnumUtilitiesGeneratorTests
         var diagnostics = runResult.Diagnostics;
         var csharpVersionDiagnostic = Assert.Single(diagnostics, d => d.Id == "REU0003");
         Assert.Equal(DiagnosticSeverity.Warning, csharpVersionDiagnostic.Severity);
-        Assert.Contains("C# 10 or higher", csharpVersionDiagnostic.GetMessage(System.Globalization.CultureInfo.InvariantCulture));
+        Assert.Contains(
+            "C# 10 or higher",
+            csharpVersionDiagnostic.GetMessage(System.Globalization.CultureInfo.InvariantCulture)
+        );
     }
 }

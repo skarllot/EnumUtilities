@@ -10,7 +10,8 @@ internal static class DiagnosticDescriptors
         messageFormat: "Unexpected error occurred parsing source code: {0}",
         category: "Usage",
         defaultSeverity: DiagnosticSeverity.Error,
-        isEnabledByDefault: true);
+        isEnabledByDefault: true
+    );
 
     public static readonly DiagnosticDescriptor UnexpectedErrorGenerating = new(
         id: "REU0002",
@@ -18,7 +19,8 @@ internal static class DiagnosticDescriptors
         messageFormat: "Unexpected error occurred during code generation: {0}",
         category: "Usage",
         defaultSeverity: DiagnosticSeverity.Error,
-        isEnabledByDefault: true);
+        isEnabledByDefault: true
+    );
 
     public static readonly DiagnosticDescriptor CSharpVersionNotSupported = new(
         id: "REU0003",
@@ -26,5 +28,6 @@ internal static class DiagnosticDescriptors
         messageFormat: "EnumUtilities requires C# 10 or higher. Current version: {0}.",
         category: "Usage",
         defaultSeverity: DiagnosticSeverity.Warning,
-        isEnabledByDefault: true);
+        isEnabledByDefault: true
+    );
 }

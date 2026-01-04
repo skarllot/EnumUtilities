@@ -16,5 +16,5 @@ internal enum ErrorCode : ushort
     ConnectionLost = 100,
 
     [JsonPropertyName("OUT")]
-    OutlierReading = 200
+    OutlierReading = 200,
 }
