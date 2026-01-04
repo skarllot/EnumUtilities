@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net6.0;net8.0;net9.0</TargetFrameworks>
     <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -9,22 +8,27 @@
     <DefineConstants>$(DefineConstants);AllowUnsafeBlocks</DefineConstants>
     <AssemblyName>Raiqub.Generators.EnumUtilities.Abstractions</AssemblyName>
     <PackageId>Raiqub.Generators.EnumUtilities</PackageId>
-    <IsAotCompatible Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))">true</IsAotCompatible>
+    <IsAotCompatible Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))"
+      >true</IsAotCompatible
+    >
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference
       Include="..\..\gen\EnumUtilities.Generators.Roslyn4_3_1\EnumUtilities.Generators.Roslyn4_3_1.csproj"
       PackAsAnalyzer="true"
-      ReferenceOutputAssembly="false" />
+      ReferenceOutputAssembly="false"
+    />
     <ProjectReference
       Include="..\..\gen\EnumUtilities.Generators.Roslyn4_4_0\EnumUtilities.Generators.Roslyn4_4_0.csproj"
       PackAsAnalyzer="true"
-      ReferenceOutputAssembly="false" />
+      ReferenceOutputAssembly="false"
+    />
     <ProjectReference
       Include="..\..\gen\EnumUtilities.Generators.Roslyn5_0_0\EnumUtilities.Generators.Roslyn5_0_0.csproj"
       PackAsAnalyzer="true"
-      ReferenceOutputAssembly="false" />
+      ReferenceOutputAssembly="false"
+    />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
@@ -35,5 +39,4 @@
     <None Include="$(SolutionDir)README.md" Pack="true" PackagePath="" />
     <None Include="$(SolutionDir)logos\logo-128.png" Pack="true" PackagePath="icon.png" />
   </ItemGroup>
-
 </Project>

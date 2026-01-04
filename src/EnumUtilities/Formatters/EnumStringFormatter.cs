@@ -18,7 +18,8 @@ public static class EnumStringFormatter
         ReadOnlySpan<string> names,
         Span<int> foundItems,
         int foundItemsCount,
-        int count)
+        int count
+    )
     {
         const int separatorStringLength = 2;
         var strlen = checked(count + (separatorStringLength * (foundItemsCount - 1)));
@@ -27,23 +28,21 @@ public static class EnumStringFormatter
         var result = string.Create(
             length: strlen,
             state: new FlagsNamesStringCreationContext(names, foundItems, foundItemsCount),
-            action: FlagsNamesStringCreationContext.Fill);
+            action: FlagsNamesStringCreationContext.Fill
+        );
 #elif NET6_0_OR_GREATER
         var result = string.Create(strlen, 0, static (_, _) => { });
         FlagsNamesStringCreationContext.Fill(
             MemoryMarshal.CreateSpan(ref MemoryMarshal.GetReference(result.AsSpan()), strlen),
             names,
             foundItems,
-            foundItemsCount);
+            foundItemsCount
+        );
 #else
         var result = new string('\0', strlen);
         fixed (char* ptr = result)
         {
-            FlagsNamesStringCreationContext.Fill(
-                new Span<char>(ptr, strlen),
-                names,
-                foundItems,
-                foundItemsCount);
+            FlagsNamesStringCreationContext.Fill(new Span<char>(ptr, strlen), names, foundItems, foundItemsCount);
         }
 #endif
 
@@ -73,7 +72,8 @@ public static class EnumStringFormatter
             Span<char> destination,
             ReadOnlySpan<string> names,
             Span<int> foundItems,
-            int foundItemsCount)
+            int foundItemsCount
+        )
         {
             new FlagsNamesStringCreationContext(names, foundItems, foundItemsCount).Fill(destination);
         }

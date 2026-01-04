@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <IsPackable>false</IsPackable>
@@ -27,5 +26,4 @@
   <ItemGroup>
     <ProjectReference Include="..\..\gen\EnumUtilities.Generators.Roslyn5_0_0\EnumUtilities.Generators.Roslyn5_0_0.csproj" />
   </ItemGroup>
-
 </Project>

@@ -22,11 +22,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\src\EnumUtilities\EnumGeneratorAttribute.cs" Link="Attributes\EnumGeneratorAttribute.cs" />
-    <Compile
-      Include="..\..\src\EnumUtilities\JsonConverterGeneratorAttribute.cs"
-      Link="Attributes\JsonConverterGeneratorAttribute.cs"
-    />
+    <Compile Include="..\..\src\EnumUtilities\*Attribute.cs" LinkBase="Attributes" />
   </ItemGroup>
   <ItemGroup>
     <None Update="CodeWriters\EnumExtensionsWriter.tt">

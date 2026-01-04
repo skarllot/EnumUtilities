@@ -9,12 +9,10 @@ namespace EnumUtilities.Benchmark.Tests;
 [MediumRunJob]
 public class SmallFlagsEnumToString
 {
-    public IEnumerable<UserRole> Values =>
-    [
-        0, (UserRole)4, (UserRole)3, (UserRole)1000,
-    ];
+    public IEnumerable<UserRole> Values => [0, (UserRole)4, (UserRole)3, (UserRole)1000];
 
-    [ParamsSource(nameof(Values))] public UserRole UserRole;
+    [ParamsSource(nameof(Values))]
+    public UserRole UserRole;
 
     [Benchmark(Baseline = true)]
     public string BuiltInToString() => UserRole.ToString();

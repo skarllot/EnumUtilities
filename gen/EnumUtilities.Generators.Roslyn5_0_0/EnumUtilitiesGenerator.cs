@@ -16,30 +16,27 @@ public class EnumUtilitiesGenerator : IIncrementalGenerator
     private const string EnumGeneratorAttributeName = $"{BaseAttributeNamespace}.EnumGeneratorAttribute";
     private const string JsonConverterGeneratorAttribute = $"{BaseAttributeNamespace}.JsonConverterGeneratorAttribute";
 
-    private static readonly CodeWriterDispatcher<EnumToGenerate> s_dispatcher =
-        new(
-            HandleCodeWriterException,
-            sb => new EnumInfoWriter(sb),
-            sb => new EnumExtensionsWriter(sb),
-            sb => new EnumFactoryWriter(sb),
-            sb => new EnumValidationWriter(sb),
-            sb => new EnumJsonConverterWriter(sb));
+    private static readonly CodeWriterDispatcher<EnumToGenerate> s_dispatcher = new(
+        HandleCodeWriterException,
+        sb => new EnumInfoWriter(sb),
+        sb => new EnumExtensionsWriter(sb),
+        sb => new EnumFactoryWriter(sb),
+        sb => new EnumValidationWriter(sb),
+        sb => new EnumJsonConverterWriter(sb)
+    );
 
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
-        var rootNamespace = context
-            .AnalyzerConfigOptionsProvider
-            .Select(
-                (c, _) =>
-                    c.GlobalOptions.TryGetValue("build_property.RootNamespace", out var ns)
-                        ? ns
-                        : null);
+        var rootNamespace = context.AnalyzerConfigOptionsProvider.Select(
+            (c, _) => c.GlobalOptions.TryGetValue("build_property.RootNamespace", out var ns) ? ns : null
+        );
 
-        var providerForEnumGenerator = context.SyntaxProvider
-            .ForAttributeWithMetadataName(
+        var providerForEnumGenerator = context
+            .SyntaxProvider.ForAttributeWithMetadataName(
                 EnumGeneratorAttributeName,
                 IsSyntaxTargetForGeneration,
-                GetSemanticTargetForGeneration)
+                GetSemanticTargetForGeneration
+            )
             .WithTrackingName(TrackingNames.ExtractForEnumGeneratorAttribute)
             .WhereNotNull()
             .WithTrackingName(TrackingNames.RemoveNulls)
@@ -48,11 +45,12 @@ public class EnumUtilitiesGenerator : IIncrementalGenerator
             .WithTrackingName(TrackingNames.FillRootNamespace)
             .Collect();
 
-        var providerForJsonConverterGenerator = context.SyntaxProvider
-            .ForAttributeWithMetadataName(
+        var providerForJsonConverterGenerator = context
+            .SyntaxProvider.ForAttributeWithMetadataName(
                 JsonConverterGeneratorAttribute,
                 IsSyntaxTargetForGeneration,
-                GetSemanticTargetForGeneration)
+                GetSemanticTargetForGeneration
+            )
             .WithTrackingName(TrackingNames.ExtractForJsonConverterGeneratorAttribute)
             .WhereNotNull()
             .WithTrackingName(TrackingNames.RemoveNulls)
@@ -69,20 +67,19 @@ public class EnumUtilitiesGenerator : IIncrementalGenerator
 
     private static bool IsSyntaxTargetForGeneration(SyntaxNode node, CancellationToken cancellationToken)
     {
-        return node is EnumDeclarationSyntax { AttributeLists.Count: > 0 } enumNode &&
-               !enumNode.Modifiers.Any(SyntaxKind.PrivateKeyword);
+        return node is EnumDeclarationSyntax { AttributeLists.Count: > 0 } enumNode
+            && !enumNode.Modifiers.Any(SyntaxKind.PrivateKeyword);
     }
 
     private static EnumToGenerate? GetSemanticTargetForGeneration(
         GeneratorAttributeSyntaxContext context,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         return EnumToGenerate.FromSymbol(context.TargetSymbol);
     }
 
-    private static void Emit(
-        SourceProductionContext context,
-        ImmutableArray<EnumToGenerate> enumsToGenerate)
+    private static void Emit(SourceProductionContext context, ImmutableArray<EnumToGenerate> enumsToGenerate)
     {
         if (enumsToGenerate.IsDefaultOrEmpty)
         {
@@ -97,6 +94,7 @@ public class EnumUtilitiesGenerator : IIncrementalGenerator
         return Diagnostic.Create(
             DiagnosticDescriptors.UnexpectedErrorGenerating,
             model.DefaultLocations,
-            exception.ToString().Replace("\n", " "));
+            exception.ToString().Replace("\n", " ")
+        );
     }
 }

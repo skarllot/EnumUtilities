@@ -9,12 +9,10 @@ namespace EnumUtilities.Benchmark.Tests;
 [MediumRunJob]
 public class BigEnumParse
 {
-    public IEnumerable<string> Values =>
-    [
-        "0", "Galadriel", "Aredhel", "1000",
-    ];
+    public IEnumerable<string> Values => ["0", "Galadriel", "Aredhel", "1000"];
 
-    [ParamsSource(nameof(Values))] public string Elf = string.Empty;
+    [ParamsSource(nameof(Values))]
+    public string Elf = string.Empty;
 
     [Benchmark(Baseline = true)]
     public Elf BuiltInParse() => Enum.Parse<Elf>(Elf);

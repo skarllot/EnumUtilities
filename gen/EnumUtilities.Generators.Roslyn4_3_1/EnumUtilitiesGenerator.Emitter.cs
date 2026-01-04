@@ -11,18 +11,19 @@ namespace Raiqub.Generators.EnumUtilities;
 
 public partial class EnumUtilitiesGenerator
 {
-    private static readonly CodeWriterDispatcher<EnumToGenerate> s_dispatcher =
-        new(
-            HandleCodeWriterException,
-            sb => new EnumInfoWriter(sb),
-            sb => new EnumExtensionsWriter(sb),
-            sb => new EnumFactoryWriter(sb),
-            sb => new EnumValidationWriter(sb),
-            sb => new EnumJsonConverterWriter(sb));
+    private static readonly CodeWriterDispatcher<EnumToGenerate> s_dispatcher = new(
+        HandleCodeWriterException,
+        sb => new EnumInfoWriter(sb),
+        sb => new EnumExtensionsWriter(sb),
+        sb => new EnumFactoryWriter(sb),
+        sb => new EnumValidationWriter(sb),
+        sb => new EnumJsonConverterWriter(sb)
+    );
 
     private static void Emit(
         SourceProductionContext context,
-        (ImmutableArray<EnumDeclarationSyntax> Types, Compilation Compilation) data)
+        (ImmutableArray<EnumDeclarationSyntax> Types, Compilation Compilation) data
+    )
     {
         Emit((CSharpCompilation)data.Compilation, context, data.Types);
     }
@@ -30,7 +31,8 @@ public partial class EnumUtilitiesGenerator
     private static void Emit(
         CSharpCompilation compilation,
         SourceProductionContext context,
-        ImmutableArray<EnumDeclarationSyntax> types)
+        ImmutableArray<EnumDeclarationSyntax> types
+    )
     {
         if (types.IsDefaultOrEmpty)
         {
@@ -45,7 +47,8 @@ public partial class EnumUtilitiesGenerator
     private static List<EnumToGenerate> GetTypesToGenerate(
         Compilation compilation,
         SourceProductionContext context,
-        ImmutableArray<EnumDeclarationSyntax> types)
+        ImmutableArray<EnumDeclarationSyntax> types
+    )
     {
         var enumGeneratorAttribute = compilation.GetTypeByMetadataName(EnumGeneratorAttributeName);
         if (enumGeneratorAttribute is null)
@@ -54,26 +57,27 @@ public partial class EnumUtilitiesGenerator
         }
 
         return types
-            .Select(
-                t =>
+            .Select(t =>
+            {
+                try
                 {
-                    try
-                    {
-                        return compilation
-                            .GetSemanticModel(t.SyntaxTree)
-                            .GetDeclaredSymbol(t, context.CancellationToken)
-                            .Map(EnumToGenerate.FromSymbol);
-                    }
-                    catch (Exception e)
-                    {
-                        context.ReportDiagnostic(
-                            Diagnostic.Create(
-                                DiagnosticDescriptors.UnexpectedErrorParsingCode,
-                                t.GetLocation(),
-                                e.ToString().Replace("\n", " ")));
-                        return null;
-                    }
-                })
+                    return compilation
+                        .GetSemanticModel(t.SyntaxTree)
+                        .GetDeclaredSymbol(t, context.CancellationToken)
+                        .Map(EnumToGenerate.FromSymbol);
+                }
+                catch (Exception e)
+                {
+                    context.ReportDiagnostic(
+                        Diagnostic.Create(
+                            DiagnosticDescriptors.UnexpectedErrorParsingCode,
+                            t.GetLocation(),
+                            e.ToString().Replace("\n", " ")
+                        )
+                    );
+                    return null;
+                }
+            })
             .WhereNotNull()
             .ToList();
     }
@@ -83,6 +87,7 @@ public partial class EnumUtilitiesGenerator
         return Diagnostic.Create(
             DiagnosticDescriptors.UnexpectedErrorGenerating,
             model.DefaultLocations,
-            exception.ToString().Replace("\n", " "));
+            exception.ToString().Replace("\n", " ")
+        );
     }
 }

@@ -38,5 +38,5 @@ public enum Elf
     Amrod,
     Feanor,
     Galathil,
-    Aredhel
+    Aredhel,
 }

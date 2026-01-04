@@ -9,12 +9,10 @@ namespace EnumUtilities.Benchmark.Tests;
 [MediumRunJob]
 public class BigEnumToString
 {
-    public IEnumerable<Elf> Values =>
-    [
-        0, (Elf)1, (Elf)32, (Elf)1000
-    ];
+    public IEnumerable<Elf> Values => [0, (Elf)1, (Elf)32, (Elf)1000];
 
-    [ParamsSource(nameof(Values))] public Elf Elf;
+    [ParamsSource(nameof(Values))]
+    public Elf Elf;
 
     [Benchmark(Baseline = true)]
     public string BuiltInToString() => Elf.ToString();

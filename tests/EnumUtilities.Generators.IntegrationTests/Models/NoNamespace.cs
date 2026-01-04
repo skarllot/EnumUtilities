@@ -7,5 +7,5 @@ public enum NoNamespace
 {
     Zero,
     One,
-    Two
+    Two,
 }

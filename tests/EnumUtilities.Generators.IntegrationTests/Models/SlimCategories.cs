@@ -8,5 +8,5 @@ public enum SlimCategories : byte
     Automotive,
     Arts,
     BeautyCare,
-    Fashion
+    Fashion,
 }

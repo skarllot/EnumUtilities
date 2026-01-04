@@ -12,7 +12,8 @@ public sealed record EnumValue(
     string? SerializationValue,
     string? Description,
     DisplayAttribute? Display,
-    string? JsonPropertyName)
+    string? JsonPropertyName
+)
 {
     public string ResolvedSerializedValue => SerializationValue ?? MemberName;
     public string ResolvedJsonValue => JsonPropertyName ?? SerializationValue ?? MemberName;
@@ -31,19 +32,17 @@ public sealed record EnumValue(
         {
             serializationValue ??= attribute
                 .WhereClassNameIs("EnumMemberAttribute")
-                ?.GetNamedArgument("Value")?.ToString();
+                ?.GetNamedArgument("Value")
+                ?.ToString();
 
-            description ??= attribute
-                .WhereClassNameIs("DescriptionAttribute")
-                ?.GetConstructorArgument(0)?.ToString();
+            description ??= attribute.WhereClassNameIs("DescriptionAttribute")?.GetConstructorArgument(0)?.ToString();
 
-            display ??= attribute
-                .WhereClassNameIs("DisplayAttribute")
-                .Map(DisplayAttribute.FromAttribute);
+            display ??= attribute.WhereClassNameIs("DisplayAttribute").Map(DisplayAttribute.FromAttribute);
 
             jsonPropertyName ??= attribute
                 .WhereClassNameIs("JsonPropertyNameAttribute")
-                ?.GetConstructorArgument(0)?.ToString();
+                ?.GetConstructorArgument(0)
+                ?.ToString();
         }
 
         return new EnumValue(
@@ -54,7 +53,8 @@ public sealed record EnumValue(
             SerializationValue: serializationValue,
             Description: description,
             Display: display,
-            JsonPropertyName: jsonPropertyName);
+            JsonPropertyName: jsonPropertyName
+        );
     }
 
     private static ulong ConvertToUInt64(object realMemberValue)

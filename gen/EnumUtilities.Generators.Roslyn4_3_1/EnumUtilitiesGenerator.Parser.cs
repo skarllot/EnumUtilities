@@ -12,13 +12,14 @@ public partial class EnumUtilitiesGenerator
 
     private static bool IsSyntaxTargetForGeneration(SyntaxNode node, CancellationToken cancellationToken)
     {
-        return node is EnumDeclarationSyntax { AttributeLists.Count: > 0 } enumNode &&
-               !enumNode.Modifiers.Any(SyntaxKind.PrivateKeyword);
+        return node is EnumDeclarationSyntax { AttributeLists.Count: > 0 } enumNode
+            && !enumNode.Modifiers.Any(SyntaxKind.PrivateKeyword);
     }
 
     private static EnumDeclarationSyntax? GetSemanticTargetForGeneration(
         GeneratorSyntaxContext context,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         var semanticModel = context.SemanticModel;
         var syntax = (EnumDeclarationSyntax)context.Node;
@@ -34,7 +35,8 @@ public partial class EnumUtilitiesGenerator
     private static bool HasEnumGeneratorAttribute(
         SemanticModel semanticModel,
         MemberDeclarationSyntax syntax,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         foreach (var attributeList in syntax.AttributeLists)
         {

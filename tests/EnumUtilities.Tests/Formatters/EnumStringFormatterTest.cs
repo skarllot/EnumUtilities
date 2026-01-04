@@ -64,17 +64,16 @@ public class EnumStringFormatterTest
     {
         var names = new[] { "Green", "Blue", "Red" };
 
-        Assert.Throws<OverflowException>(
-            () =>
-            {
-                Span<int> foundItems = stackalloc int[2];
-                foundItems[0] = 0;
-                foundItems[1] = 1;
+        Assert.Throws<OverflowException>(() =>
+        {
+            Span<int> foundItems = stackalloc int[2];
+            foundItems[0] = 0;
+            foundItems[1] = 1;
 
-                var foundItemsCount = 2;
-                var count = int.MaxValue; // Force overflow in `checked`
+            var foundItemsCount = 2;
+            var count = int.MaxValue; // Force overflow in `checked`
 
-                EnumStringFormatter.WriteMultipleFoundFlagsNames(names, foundItems, foundItemsCount, count);
-            });
+            EnumStringFormatter.WriteMultipleFoundFlagsNames(names, foundItems, foundItemsCount, count);
+        });
     }
 }

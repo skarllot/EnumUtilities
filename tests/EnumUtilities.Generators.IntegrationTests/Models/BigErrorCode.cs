@@ -16,5 +16,5 @@ internal enum BigErrorCode : ulong
     ConnectionLost = 100,
 
     [JsonPropertyName("OUT")]
-    OutlierReading = 200_000_000_000
+    OutlierReading = 200_000_000_000,
 }
