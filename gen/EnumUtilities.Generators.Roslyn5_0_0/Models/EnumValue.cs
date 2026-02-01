@@ -18,6 +18,15 @@ public sealed record EnumValue(
     public string ResolvedSerializedValue => SerializationValue ?? MemberName;
     public string ResolvedJsonValue => JsonPropertyName ?? SerializationValue ?? MemberName;
 
+    public long RealMemberSignedValue
+    {
+        get
+        {
+            var tmp = RealMemberValue;
+            return Unsafe.As<ulong, long>(ref tmp);
+        }
+    }
+
     public static EnumValue? FromSymbol(ISymbol symbol, int index)
     {
         if (symbol is not IFieldSymbol { ConstantValue: not null } field)
