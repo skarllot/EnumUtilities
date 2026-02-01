@@ -13,6 +13,15 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
 public static partial class NoNamespaceMetadata
 {
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumMetadata.MinimumValue" />
+    public const int MinimumValue = 0;
+
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumMetadata.MaximumValue" />
+    public const int MaximumValue = 2;
+
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumMetadata.ValueCount" />
+    public const int ValueCount = 3;
+
     /// <summary>Provides constant values for <see cref="NoNamespace" /> members names.</summary>
     public static partial class Name
     {
