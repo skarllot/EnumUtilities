@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using Microsoft.CodeAnalysis;
+﻿using Microsoft.CodeAnalysis;
 using Raiqub.Generators.EnumUtilities.Common;
 using Raiqub.Generators.T4CodeWriter.Collections;
 
