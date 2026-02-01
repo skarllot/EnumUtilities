@@ -15,6 +15,15 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.12.0.0")]
     public static partial class SlimCategoriesMetadata
     {
+        /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumMetadata.MinimumValue" />
+        public const byte MinimumValue = 0;
+
+        /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumMetadata.MaximumValue" />
+        public const byte MaximumValue = 5;
+
+        /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumMetadata.ValueCount" />
+        public const int ValueCount = 6;
+
         /// <summary>Provides constant values for <see cref="SlimCategories" /> members names.</summary>
         public static partial class Name
         {

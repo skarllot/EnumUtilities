@@ -28,6 +28,15 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("<#= CurrentAssemblyName.Name #>", "<#= Append($"{CurrentAssemblyName.Version}") #>")]
 <#= Model.IsPublic ? "public" : "internal" #> static partial class <#= Model.MetadataClassName #>
 {
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumMetadata.MinimumValue" />
+    public const <#= Model.UnderlyingType #> MinimumValue = <#= Model.OrderedValues.First().MemberValue #>;
+
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumMetadata.MaximumValue" />
+    public const <#= Model.UnderlyingType #> MaximumValue = <#= Model.OrderedValues.Last().MemberValue #>;
+
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumMetadata.ValueCount" />
+    public const int ValueCount = <#= Model.UniqueValues.Count #>;
+
 <#
     WriteDefaultBlock();
 #>

@@ -50,7 +50,23 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             this.Write((Model.IsPublic ? "public" : "internal"));
             this.Write(" static partial class ");
             this.Write((Model.MetadataClassName));
-            this.Write("\n{\n");
+            this.Write(
+                "\n{\n    /// <inheritdoc cref=\"Raiqub.Generators.EnumUtilities.Contracts.IEnumMetadata.MinimumValue\" />\n    public const "
+            );
+            this.Write((Model.UnderlyingType));
+            this.Write(" MinimumValue = ");
+            this.Write((Model.OrderedValues.First().MemberValue));
+            this.Write(
+                ";\n\n    /// <inheritdoc cref=\"Raiqub.Generators.EnumUtilities.Contracts.IEnumMetadata.MaximumValue\" />\n    public const "
+            );
+            this.Write((Model.UnderlyingType));
+            this.Write(" MaximumValue = ");
+            this.Write((Model.OrderedValues.Last().MemberValue));
+            this.Write(
+                ";\n\n    /// <inheritdoc cref=\"Raiqub.Generators.EnumUtilities.Contracts.IEnumMetadata.ValueCount\" />\n    public const int ValueCount = "
+            );
+            this.Write((Model.UniqueValues.Count));
+            this.Write(";\n\n");
 
             WriteDefaultBlock();
 

@@ -15,6 +15,15 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.12.0.0")]
     public static partial class ColoursMetadata
     {
+        /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumMetadata.MinimumValue" />
+        public const int MinimumValue = 1;
+
+        /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumMetadata.MaximumValue" />
+        public const int MaximumValue = 4;
+
+        /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumMetadata.ValueCount" />
+        public const int ValueCount = 3;
+
         /// <summary>Provides constant values for <see cref="Colours" /> members names.</summary>
         public static partial class Name
         {
