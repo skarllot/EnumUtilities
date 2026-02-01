@@ -15,6 +15,15 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
 public static partial class PaymentMethodMetadata
 {
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumMetadata.MinimumValue" />
+    public const int MinimumValue = 0;
+
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumMetadata.MaximumValue" />
+    public const int MaximumValue = 3;
+
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumMetadata.ValueCount" />
+    public const int ValueCount = 4;
+
     /// <summary>Provides constant values for <see cref="PaymentMethod" /> members names.</summary>
     public static partial class Name
     {

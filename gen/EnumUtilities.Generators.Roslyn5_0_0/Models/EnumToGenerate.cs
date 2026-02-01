@@ -1,4 +1,5 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using System.Runtime.CompilerServices;
+using Microsoft.CodeAnalysis;
 using Raiqub.Generators.EnumUtilities.Common;
 using Raiqub.Generators.T4CodeWriter.Collections;
 
@@ -39,6 +40,11 @@ public sealed record EnumToGenerate(
             .OrderByDescending(x => x.RealMemberValue)
             .ToList();
 
+    public IEnumerable<EnumValue> OrderedValues =>
+        IsUnsigned
+            ? Values.AsEnumerable().OrderBy(x => x.RealMemberValue)
+            : Values.AsEnumerable().OrderBy(x => x.RealMemberSignedValue);
+
     public bool HasSerializationValue => Values.Exists(static it => it.SerializationValue != null);
 
     public bool HasDescription => Values.Exists(static it => it.Description != null);
@@ -54,6 +60,8 @@ public sealed record EnumToGenerate(
     public bool HasJsonProperty => Values.Exists(static it => it.JsonPropertyName != null);
 
     public bool HasZeroMember { get; } = Values.AsEnumerable().Any(x => x.RealMemberValue == 0);
+
+    public bool IsUnsigned { get; } = UnderlyingType is "byte" or "ushort" or "uint" or "ulong";
 
     private int BitCount { get; } =
         UnderlyingType switch
