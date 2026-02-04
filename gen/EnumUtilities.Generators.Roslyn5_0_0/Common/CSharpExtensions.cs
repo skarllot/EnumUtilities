@@ -1,4 +1,5 @@
 ﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace Raiqub.Generators.EnumUtilities.Common;
 
@@ -43,5 +44,20 @@ public static class CSharpExtensions
     public static Location GetDefaultLocation(this ISymbol symbol)
     {
         return symbol.Locations.FirstOrDefault(l => l.Kind == LocationKind.SourceFile) ?? Location.None;
+    }
+
+    public static string ToQuotedStringOrNullLiteral(this string? value)
+    {
+        return value is null ? "null" : SymbolDisplay.FormatLiteral(value, quote: true);
+    }
+
+    public static string ToQuotedStringLiteral(this string value)
+    {
+        return SymbolDisplay.FormatLiteral(value, quote: true);
+    }
+
+    public static string ToQuotedCharLiteral(this char value)
+    {
+        return SymbolDisplay.FormatLiteral(value, quote: true);
     }
 }

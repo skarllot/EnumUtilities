@@ -169,23 +169,17 @@
 <#+
         foreach (var curr in lookupTable.OrderBy(x => x.Key))
         {
-            if (char.IsSurrogate(curr.Key) || char.IsControl(curr.Key))
+            if (char.ToUpperInvariant(curr.Key) == curr.Key && char.ToLowerInvariant(curr.Key) == curr.Key)
             {
 #>
-            case '\u<#= ((int)curr.Key).ToString("x4") #>':
-<#+
-            }
-            else if (char.ToUpperInvariant(curr.Key) == curr.Key && char.ToLowerInvariant(curr.Key) == curr.Key)
-            {
-#>
-            case '<#= curr.Key #>':
+            case <#= curr.Key.ToQuotedCharLiteral() #>:
 <#+
             }
             else
             {
 #>
-            case '<#= char.ToUpperInvariant(curr.Key) #>':
-            case '<#= char.ToLowerInvariant(curr.Key) #>':
+            case <#= char.ToUpperInvariant(curr.Key).ToQuotedCharLiteral() #>:
+            case <#= char.ToLowerInvariant(curr.Key).ToQuotedCharLiteral() #>:
 <#+
             }
 #>
@@ -195,7 +189,7 @@
             foreach (var enumValue in curr)
             {
 #>
-                    case { } when value.Equals("<#= keySelector(enumValue) #>", comparisonType):
+                    case { } when value.Equals(<#= keySelector(enumValue)!.ToQuotedStringLiteral() #>, comparisonType):
                         result = <#= enumValue.MemberValue #>;
                         return true;
 <#+

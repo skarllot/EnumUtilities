@@ -216,34 +216,28 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
 
             foreach (var curr in lookupTable.OrderBy(x => x.Key))
             {
-                if (char.IsSurrogate(curr.Key) || char.IsControl(curr.Key))
+                if (char.ToUpperInvariant(curr.Key) == curr.Key && char.ToLowerInvariant(curr.Key) == curr.Key)
                 {
-                    this.Write("            case '\\u");
-                    this.Write((((int)curr.Key).ToString("x4")));
-                    this.Write("':\n");
-                }
-                else if (char.ToUpperInvariant(curr.Key) == curr.Key && char.ToLowerInvariant(curr.Key) == curr.Key)
-                {
-                    this.Write("            case '");
-                    this.Write((curr.Key));
-                    this.Write("':\n");
+                    this.Write("            case ");
+                    this.Write((curr.Key.ToQuotedCharLiteral()));
+                    this.Write(":\n");
                 }
                 else
                 {
-                    this.Write("            case '");
-                    this.Write((char.ToUpperInvariant(curr.Key)));
-                    this.Write("':\n            case '");
-                    this.Write((char.ToLowerInvariant(curr.Key)));
-                    this.Write("':\n");
+                    this.Write("            case ");
+                    this.Write((char.ToUpperInvariant(curr.Key).ToQuotedCharLiteral()));
+                    this.Write(":\n            case ");
+                    this.Write((char.ToLowerInvariant(curr.Key).ToQuotedCharLiteral()));
+                    this.Write(":\n");
                 }
 
                 this.Write("                switch (value)\n                {\n");
 
                 foreach (var enumValue in curr)
                 {
-                    this.Write("                    case { } when value.Equals(\"");
-                    this.Write((keySelector(enumValue)));
-                    this.Write("\", comparisonType):\n                        result = ");
+                    this.Write("                    case { } when value.Equals(");
+                    this.Write((keySelector(enumValue)!.ToQuotedStringLiteral()));
+                    this.Write(", comparisonType):\n                        result = ");
                     this.Write((enumValue.MemberValue));
                     this.Write(";\n                        return true;\n");
                 }
@@ -794,7 +788,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
                             (
                                 curr.Display!.ResourceShortName != null
                                     ? Append(curr.Display.ResourceShortName)
-                                    : Append($"\"{curr.Display.ShortName}\"")
+                                    : Append(curr.Display.ShortName!.ToQuotedStringLiteral())
                             )
                         );
 
@@ -849,9 +843,9 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
                         this.Write("            case { } s when s.Equals(");
                         this.Write(
                             (
-                                curr.Display?.ResourceName != null ? Append(curr.Display.ResourceName)
-                                : curr.Display?.Name != null ? Append($"\"{curr.Display.Name}\"")
-                                : Append($"\"{curr.MemberName}\"")
+                                curr.Display?.ResourceName != null
+                                    ? Append(curr.Display.ResourceName)
+                                    : Append((curr.Display?.Name ?? curr.MemberName).ToQuotedStringLiteral())
                             )
                         );
 
@@ -913,7 +907,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
                             (
                                 curr.Display!.ResourceDescription != null
                                     ? Append(curr.Display.ResourceDescription)
-                                    : Append($"\"{curr.Display.Description}\"")
+                                    : Append(curr.Display.Description!.ToQuotedStringLiteral())
                             )
                         );
 

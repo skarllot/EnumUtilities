@@ -30,7 +30,7 @@
             case { } s when s.Equals(<#=
                             curr.Display!.ResourceShortName != null
                                 ? Append(curr.Display.ResourceShortName)
-                                : Append($"\"{curr.Display.ShortName}\"") #>, comparisonType):
+                                : Append(curr.Display.ShortName!.ToQuotedStringLiteral()) #>, comparisonType):
                 numValue = <#= curr.MemberValue #>;
                 break;
 <#+
@@ -88,9 +88,7 @@
             case { } s when s.Equals(<#=
                             curr.Display?.ResourceName != null
                                 ? Append(curr.Display.ResourceName)
-                                : curr.Display?.Name != null
-                                    ? Append($"\"{curr.Display.Name}\"")
-                                    : Append($"\"{curr.MemberName}\"") #>, comparisonType):
+                                : Append((curr.Display?.Name ?? curr.MemberName).ToQuotedStringLiteral()) #>, comparisonType):
                 numValue = <#= curr.MemberValue #>;
                 break;
 <#+
@@ -156,7 +154,7 @@
             case { } s when s.Equals(<#=
                             curr.Display!.ResourceDescription != null
                                 ? Append(curr.Display.ResourceDescription)
-                                : Append($"\"{curr.Display.Description}\"") #>, comparisonType):
+                                : Append(curr.Display.Description!.ToQuotedStringLiteral()) #>, comparisonType):
                 numValue = <#= curr.MemberValue #>;
                 break;
 <#+
