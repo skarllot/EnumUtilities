@@ -13,7 +13,7 @@
         foreach (var curr in Model.UniqueValues.Where(x => x.Description != null))
         {
 #>
-            <#= curr.MemberValue #> => "<#= curr.Description #>",
+            <#= curr.MemberValue #> => <#= curr.Description.ToQuotedStringOrNullLiteral() #>,
 <#+
         }
 #>
