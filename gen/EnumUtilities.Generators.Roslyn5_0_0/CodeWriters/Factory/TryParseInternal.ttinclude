@@ -11,10 +11,29 @@
         string parameterName = "value",
         bool allowNumbers = true)
     {
+        var emptyMember = Model.Values.FirstOrDefault(x => keySelector(x)?.Length == 0);
 #>
     private static bool TryParse<#= type #>(ReadOnlySpan<char> <#= parameterName #>, StringComparison comparisonType, bool throwOnFailure, out <#= Model.UnderlyingType #> result)
     {
+<#+
+        if (emptyMember != null)
+        {
+#>
+        if (<#= parameterName #>.IsEmpty)
+        {
+            result = <#= emptyMember.MemberValue #>;
+            return true;
+        }
+        else
+<#+
+        }
+        else
+        {
+#>
         if (!<#= parameterName #>.IsEmpty)
+<#+
+        }
+#>
         {
 <#+
         if (allowNumbers)
@@ -56,6 +75,9 @@
         ParseFailure:
 <#+
         }
+
+        if (allowNumbers || emptyMember == null)
+        {
 #>
         if (throwOnFailure)
         {
@@ -64,6 +86,9 @@
 
         result = 0;
         return false;
+<#+
+        }
+#>
     }
 <#+
         Write('\n');

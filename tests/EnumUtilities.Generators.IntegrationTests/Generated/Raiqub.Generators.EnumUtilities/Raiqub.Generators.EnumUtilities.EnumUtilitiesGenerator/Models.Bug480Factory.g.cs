@@ -1145,18 +1145,16 @@ public static partial class Bug480Factory
 
     private static bool TryParseDescription(ReadOnlySpan<char> description, StringComparison comparisonType, bool throwOnFailure, out int result)
     {
-        if (!description.IsEmpty)
+        if (description.IsEmpty)
+        {
+            result = 36;
+            return true;
+        }
+        else
         {
             return TryParseNonNumericDescription(description, comparisonType, throwOnFailure, out result);
         }
 
-        if (throwOnFailure)
-        {
-            ThrowHelper.ThrowInvalidEmptyParseArgument(nameof(description));
-        }
-
-        result = 0;
-        return false;
     }
 
     private static bool TryParseNonNumericDescription(ReadOnlySpan<char> description, StringComparison comparisonType, bool throwOnFailure, out int result)

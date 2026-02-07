@@ -242,15 +242,6 @@ public static partial class Bug480FlagsFactory
 
         switch (value[0])
         {
-            case 'A':
-            case 'a':
-                switch (value)
-                {
-                    case { } when value.Equals("Ampersand", comparisonType):
-                        result = 13;
-                        return true;
-                }
-                break;
             case 'B':
             case 'b':
                 switch (value)
@@ -258,35 +249,14 @@ public static partial class Bug480FlagsFactory
                     case { } when value.Equals("Backslash", comparisonType):
                         result = 1;
                         return true;
-                    case { } when value.Equals("Backspace", comparisonType):
-                        result = 22;
-                        return true;
                 }
                 break;
             case 'C':
             case 'c':
                 switch (value)
                 {
-                    case { } when value.Equals("CarriageReturn", comparisonType):
-                        result = 5;
-                        return true;
-                    case { } when value.Equals("CrLf", comparisonType):
-                        result = 7;
-                        return true;
-                    case { } when value.Equals("Copyright", comparisonType):
-                        result = 17;
-                        return true;
-                    case { } when value.Equals("CData", comparisonType):
-                        result = 26;
-                        return true;
-                    case { } when value.Equals("CodeComment", comparisonType):
-                        result = 27;
-                        return true;
                     case { } when value.Equals("CombinedEscapes", comparisonType):
-                        result = 34;
-                        return true;
-                    case { } when value.Equals("ComplexError", comparisonType):
-                        result = 49;
+                        result = 128;
                         return true;
                 }
                 break;
@@ -297,62 +267,17 @@ public static partial class Bug480FlagsFactory
                     case { } when value.Equals("DoubleQuote", comparisonType):
                         result = 2;
                         return true;
-                    case { } when value.Equals("Degree", comparisonType):
-                        result = 16;
-                        return true;
-                    case { } when value.Equals("DoubleBackslash", comparisonType):
-                        result = 46;
-                        return true;
                 }
                 break;
             case 'E':
             case 'e':
                 switch (value)
                 {
-                    case { } when value.Equals("Euro", comparisonType):
-                        result = 18;
-                        return true;
-                    case { } when value.Equals("Emoji", comparisonType):
-                        result = 20;
-                        return true;
                     case { } when value.Equals("EnumMemberBackslash", comparisonType):
-                        result = 29;
+                        result = 16;
                         return true;
                     case { } when value.Equals("EnumMemberQuoted", comparisonType):
-                        result = 30;
-                        return true;
-                    case { } when value.Equals("EnumMemberNewline", comparisonType):
-                        result = 31;
-                        return true;
-                    case { } when value.Equals("EnumMemberTab", comparisonType):
-                        result = 35;
-                        return true;
-                    case { } when value.Equals("EmptyDescription", comparisonType):
-                        result = 36;
-                        return true;
-                    case { } when value.Equals("EmptyLine", comparisonType):
-                        result = 38;
-                        return true;
-                    case { } when value.Equals("EscapedJson", comparisonType):
-                        result = 50;
-                        return true;
-                }
-                break;
-            case 'F':
-            case 'f':
-                switch (value)
-                {
-                    case { } when value.Equals("FormFeed", comparisonType):
-                        result = 23;
-                        return true;
-                }
-                break;
-            case 'G':
-            case 'g':
-                switch (value)
-                {
-                    case { } when value.Equals("GreaterThan", comparisonType):
-                        result = 12;
+                        result = 32;
                         return true;
                 }
                 break;
@@ -360,38 +285,8 @@ public static partial class Bug480FlagsFactory
             case 'j':
                 switch (value)
                 {
-                    case { } when value.Equals("JsonLike", comparisonType):
-                        result = 25;
-                        return true;
                     case { } when value.Equals("JsonNameEscape", comparisonType):
-                        result = 32;
-                        return true;
-                    case { } when value.Equals("JsonNameQuoted", comparisonType):
-                        result = 33;
-                        return true;
-                }
-                break;
-            case 'L':
-            case 'l':
-                switch (value)
-                {
-                    case { } when value.Equals("LessThan", comparisonType):
-                        result = 11;
-                        return true;
-                    case { } when value.Equals("LeadingSpace", comparisonType):
-                        result = 40;
-                        return true;
-                }
-                break;
-            case 'M':
-            case 'm':
-                switch (value)
-                {
-                    case { } when value.Equals("MultipleNewlines", comparisonType):
-                        result = 8;
-                        return true;
-                    case { } when value.Equals("MixedQuotes", comparisonType):
-                        result = 10;
+                        result = 64;
                         return true;
                 }
                 break;
@@ -402,30 +297,6 @@ public static partial class Bug480FlagsFactory
                     case { } when value.Equals("Newline", comparisonType):
                         result = 4;
                         return true;
-                    case { } when value.Equals("NullChar", comparisonType):
-                        result = 21;
-                        return true;
-                }
-                break;
-            case 'R':
-            case 'r':
-                switch (value)
-                {
-                    case { } when value.Equals("RegexPattern", comparisonType):
-                        result = 43;
-                        return true;
-                }
-                break;
-            case 'S':
-            case 's':
-                switch (value)
-                {
-                    case { } when value.Equals("SingleQuote", comparisonType):
-                        result = 3;
-                        return true;
-                    case { } when value.Equals("SqlLike", comparisonType):
-                        result = 42;
-                        return true;
                 }
                 break;
             case 'T':
@@ -433,70 +304,7 @@ public static partial class Bug480FlagsFactory
                 switch (value)
                 {
                     case { } when value.Equals("Tab", comparisonType):
-                        result = 6;
-                        return true;
-                    case { } when value.Equals("TrailingSpace", comparisonType):
-                        result = 39;
-                        return true;
-                    case { } when value.Equals("TripleQuote", comparisonType):
-                        result = 47;
-                        return true;
-                    case { } when value.Equals("TripleNewline", comparisonType):
-                        result = 48;
-                        return true;
-                }
-                break;
-            case 'U':
-            case 'u':
-                switch (value)
-                {
-                    case { } when value.Equals("Unicode", comparisonType):
-                        result = 19;
-                        return true;
-                    case { } when value.Equals("Url", comparisonType):
-                        result = 41;
-                        return true;
-                    case { } when value.Equals("UncPath", comparisonType):
-                        result = 44;
-                        return true;
-                    case { } when value.Equals("UnixPath", comparisonType):
-                        result = 45;
-                        return true;
-                }
-                break;
-            case 'V':
-            case 'v':
-                switch (value)
-                {
-                    case { } when value.Equals("VerticalTab", comparisonType):
-                        result = 24;
-                        return true;
-                    case { } when value.Equals("VerbatimString", comparisonType):
-                        result = 28;
-                        return true;
-                }
-                break;
-            case 'W':
-            case 'w':
-                switch (value)
-                {
-                    case { } when value.Equals("WindowsPath", comparisonType):
-                        result = 9;
-                        return true;
-                    case { } when value.Equals("WhitespaceDescription", comparisonType):
-                        result = 37;
-                        return true;
-                }
-                break;
-            case 'X':
-            case 'x':
-                switch (value)
-                {
-                    case { } when value.Equals("XmlTag", comparisonType):
-                        result = 14;
-                        return true;
-                    case { } when value.Equals("XmlSpecialChars", comparisonType):
-                        result = 15;
+                        result = 8;
                         return true;
                 }
                 break;
@@ -807,16 +615,7 @@ public static partial class Bug480FlagsFactory
                 switch (value)
                 {
                     case { } when value.Equals("\"quoted\"", comparisonType):
-                        result = 30;
-                        return true;
-                }
-                break;
-            case 'A':
-            case 'a':
-                switch (value)
-                {
-                    case { } when value.Equals("Ampersand", comparisonType):
-                        result = 13;
+                        result = 32;
                         return true;
                 }
                 break;
@@ -827,36 +626,6 @@ public static partial class Bug480FlagsFactory
                     case { } when value.Equals("Backslash", comparisonType):
                         result = 1;
                         return true;
-                    case { } when value.Equals("Backspace", comparisonType):
-                        result = 22;
-                        return true;
-                }
-                break;
-            case 'C':
-            case 'c':
-                switch (value)
-                {
-                    case { } when value.Equals("CarriageReturn", comparisonType):
-                        result = 5;
-                        return true;
-                    case { } when value.Equals("CrLf", comparisonType):
-                        result = 7;
-                        return true;
-                    case { } when value.Equals("Copyright", comparisonType):
-                        result = 17;
-                        return true;
-                    case { } when value.Equals("CData", comparisonType):
-                        result = 26;
-                        return true;
-                    case { } when value.Equals("CodeComment", comparisonType):
-                        result = 27;
-                        return true;
-                    case { } when value.Equals("combined\\escape", comparisonType):
-                        result = 34;
-                        return true;
-                    case { } when value.Equals("ComplexError", comparisonType):
-                        result = 49;
-                        return true;
                 }
                 break;
             case 'D':
@@ -866,89 +635,14 @@ public static partial class Bug480FlagsFactory
                     case { } when value.Equals("DoubleQuote", comparisonType):
                         result = 2;
                         return true;
-                    case { } when value.Equals("Degree", comparisonType):
-                        result = 16;
-                        return true;
-                    case { } when value.Equals("DoubleBackslash", comparisonType):
-                        result = 46;
-                        return true;
-                }
-                break;
-            case 'E':
-            case 'e':
-                switch (value)
-                {
-                    case { } when value.Equals("Euro", comparisonType):
-                        result = 18;
-                        return true;
-                    case { } when value.Equals("Emoji", comparisonType):
-                        result = 20;
-                        return true;
-                    case { } when value.Equals("EmptyDescription", comparisonType):
-                        result = 36;
-                        return true;
-                    case { } when value.Equals("EmptyLine", comparisonType):
-                        result = 38;
-                        return true;
-                    case { } when value.Equals("EscapedJson", comparisonType):
-                        result = 50;
-                        return true;
-                }
-                break;
-            case 'F':
-            case 'f':
-                switch (value)
-                {
-                    case { } when value.Equals("FormFeed", comparisonType):
-                        result = 23;
-                        return true;
-                }
-                break;
-            case 'G':
-            case 'g':
-                switch (value)
-                {
-                    case { } when value.Equals("GreaterThan", comparisonType):
-                        result = 12;
-                        return true;
                 }
                 break;
             case 'J':
             case 'j':
                 switch (value)
                 {
-                    case { } when value.Equals("JsonLike", comparisonType):
-                        result = 25;
-                        return true;
                     case { } when value.Equals("JsonNameEscape", comparisonType):
-                        result = 32;
-                        return true;
-                    case { } when value.Equals("JsonNameQuoted", comparisonType):
-                        result = 33;
-                        return true;
-                }
-                break;
-            case 'L':
-            case 'l':
-                switch (value)
-                {
-                    case { } when value.Equals("LessThan", comparisonType):
-                        result = 11;
-                        return true;
-                    case { } when value.Equals("LeadingSpace", comparisonType):
-                        result = 40;
-                        return true;
-                }
-                break;
-            case 'M':
-            case 'm':
-                switch (value)
-                {
-                    case { } when value.Equals("MultipleNewlines", comparisonType):
-                        result = 8;
-                        return true;
-                    case { } when value.Equals("MixedQuotes", comparisonType):
-                        result = 10;
+                        result = 64;
                         return true;
                 }
                 break;
@@ -959,36 +653,6 @@ public static partial class Bug480FlagsFactory
                     case { } when value.Equals("Newline", comparisonType):
                         result = 4;
                         return true;
-                    case { } when value.Equals("NullChar", comparisonType):
-                        result = 21;
-                        return true;
-                    case { } when value.Equals("new\nline", comparisonType):
-                        result = 31;
-                        return true;
-                }
-                break;
-            case 'R':
-            case 'r':
-                switch (value)
-                {
-                    case { } when value.Equals("RegexPattern", comparisonType):
-                        result = 43;
-                        return true;
-                }
-                break;
-            case 'S':
-            case 's':
-                switch (value)
-                {
-                    case { } when value.Equals("SingleQuote", comparisonType):
-                        result = 3;
-                        return true;
-                    case { } when value.Equals("special\\value", comparisonType):
-                        result = 29;
-                        return true;
-                    case { } when value.Equals("SqlLike", comparisonType):
-                        result = 42;
-                        return true;
                 }
                 break;
             case 'T':
@@ -996,73 +660,25 @@ public static partial class Bug480FlagsFactory
                 switch (value)
                 {
                     case { } when value.Equals("Tab", comparisonType):
-                        result = 6;
-                        return true;
-                    case { } when value.Equals("tab\tvalue", comparisonType):
-                        result = 35;
-                        return true;
-                    case { } when value.Equals("TrailingSpace", comparisonType):
-                        result = 39;
-                        return true;
-                    case { } when value.Equals("TripleQuote", comparisonType):
-                        result = 47;
-                        return true;
-                    case { } when value.Equals("TripleNewline", comparisonType):
-                        result = 48;
+                        result = 8;
                         return true;
                 }
                 break;
-            case 'U':
-            case 'u':
+            case 'C':
+            case 'c':
                 switch (value)
                 {
-                    case { } when value.Equals("Unicode", comparisonType):
-                        result = 19;
-                        return true;
-                    case { } when value.Equals("Url", comparisonType):
-                        result = 41;
-                        return true;
-                    case { } when value.Equals("UncPath", comparisonType):
-                        result = 44;
-                        return true;
-                    case { } when value.Equals("UnixPath", comparisonType):
-                        result = 45;
+                    case { } when value.Equals("combined\\escape", comparisonType):
+                        result = 128;
                         return true;
                 }
                 break;
-            case 'V':
-            case 'v':
+            case 'S':
+            case 's':
                 switch (value)
                 {
-                    case { } when value.Equals("VerticalTab", comparisonType):
-                        result = 24;
-                        return true;
-                    case { } when value.Equals("VerbatimString", comparisonType):
-                        result = 28;
-                        return true;
-                }
-                break;
-            case 'W':
-            case 'w':
-                switch (value)
-                {
-                    case { } when value.Equals("WindowsPath", comparisonType):
-                        result = 9;
-                        return true;
-                    case { } when value.Equals("WhitespaceDescription", comparisonType):
-                        result = 37;
-                        return true;
-                }
-                break;
-            case 'X':
-            case 'x':
-                switch (value)
-                {
-                    case { } when value.Equals("XmlTag", comparisonType):
-                        result = 14;
-                        return true;
-                    case { } when value.Equals("XmlSpecialChars", comparisonType):
-                        result = 15;
+                    case { } when value.Equals("special\\value", comparisonType):
+                        result = 16;
                         return true;
                 }
                 break;
@@ -1218,33 +834,17 @@ public static partial class Bug480FlagsFactory
     {
         if (value.IsEmpty)
         {
-            result = 36;
-            return true;
+            result = 0;
+            return false;
         }
 
         switch (value[0])
         {
-            case '\0':
-                switch (value)
-                {
-                    case { } when value.Equals("\0", comparisonType):
-                        result = 21;
-                        return true;
-                }
-                break;
-            case '\b':
-                switch (value)
-                {
-                    case { } when value.Equals("\b", comparisonType):
-                        result = 22;
-                        return true;
-                }
-                break;
             case '\t':
                 switch (value)
                 {
                     case { } when value.Equals("\t", comparisonType):
-                        result = 6;
+                        result = 8;
                         return true;
                 }
                 break;
@@ -1254,47 +854,6 @@ public static partial class Bug480FlagsFactory
                     case { } when value.Equals("\n", comparisonType):
                         result = 4;
                         return true;
-                    case { } when value.Equals("\n\n\n", comparisonType):
-                        result = 48;
-                        return true;
-                }
-                break;
-            case '\v':
-                switch (value)
-                {
-                    case { } when value.Equals("\v", comparisonType):
-                        result = 24;
-                        return true;
-                }
-                break;
-            case '\f':
-                switch (value)
-                {
-                    case { } when value.Equals("\f", comparisonType):
-                        result = 23;
-                        return true;
-                }
-                break;
-            case '\r':
-                switch (value)
-                {
-                    case { } when value.Equals("\r", comparisonType):
-                        result = 5;
-                        return true;
-                    case { } when value.Equals("\r\n", comparisonType):
-                        result = 7;
-                        return true;
-                }
-                break;
-            case ' ':
-                switch (value)
-                {
-                    case { } when value.Equals("     ", comparisonType):
-                        result = 37;
-                        return true;
-                    case { } when value.Equals("   Leading space", comparisonType):
-                        result = 40;
-                        return true;
                 }
                 break;
             case '"':
@@ -1303,36 +862,6 @@ public static partial class Bug480FlagsFactory
                     case { } when value.Equals("\"", comparisonType):
                         result = 2;
                         return true;
-                    case { } when value.Equals("\"\"\"", comparisonType):
-                        result = 47;
-                        return true;
-                }
-                break;
-            case '\'':
-                switch (value)
-                {
-                    case { } when value.Equals("'", comparisonType):
-                        result = 3;
-                        return true;
-                }
-                break;
-            case '/':
-                switch (value)
-                {
-                    case { } when value.Equals("/* Comment */ // Another", comparisonType):
-                        result = 27;
-                        return true;
-                    case { } when value.Equals("/usr/local/bin", comparisonType):
-                        result = 45;
-                        return true;
-                }
-                break;
-            case '<':
-                switch (value)
-                {
-                    case { } when value.Equals("<![CDATA[Some <data> here]]>", comparisonType):
-                        result = 26;
-                        return true;
                 }
                 break;
             case 'A':
@@ -1340,7 +869,7 @@ public static partial class Bug480FlagsFactory
                 switch (value)
                 {
                     case { } when value.Equals("All three attributes with escapes", comparisonType):
-                        result = 34;
+                        result = 128;
                         return true;
                 }
                 break;
@@ -1348,44 +877,8 @@ public static partial class Bug480FlagsFactory
             case 'c':
                 switch (value)
                 {
-                    case { } when value.Equals("Copyright © 2024", comparisonType):
-                        result = 17;
-                        return true;
                     case { } when value.Equals("Custom value with backslash", comparisonType):
-                        result = 29;
-                        return true;
-                }
-                break;
-            case 'E':
-            case 'e':
-                switch (value)
-                {
-                    case { } when value.Equals("Emoji: 🚀", comparisonType):
-                        result = 20;
-                        return true;
-                    case { } when value.Equals("Error: \"File not found\" at C:\\Path\\To\\File.txt\nDetails: <none>", comparisonType):
-                        result = 49;
-                        return true;
-                }
-                break;
-            case 'F':
-            case 'f':
-                switch (value)
-                {
-                    case { } when value.Equals("Formula: 5 < x && x > 0", comparisonType):
-                        result = 15;
-                        return true;
-                }
-                break;
-            case 'H':
-            case 'h':
-                switch (value)
-                {
-                    case { } when value.Equals("Hello 世界", comparisonType):
-                        result = 19;
-                        return true;
-                    case { } when value.Equals("https://example.com/path?param=value&other=123", comparisonType):
-                        result = 41;
+                        result = 16;
                         return true;
                 }
                 break;
@@ -1394,46 +887,7 @@ public static partial class Bug480FlagsFactory
                 switch (value)
                 {
                     case { } when value.Equals("JSON name with escape", comparisonType):
-                        result = 32;
-                        return true;
-                    case { } when value.Equals("JSON name quoted", comparisonType):
-                        result = 33;
-                        return true;
-                    case { } when value.Equals("JSON: {\"key\": \"value with \\\"quotes\\\" and \\n newlines\"}", comparisonType):
-                        result = 50;
-                        return true;
-                }
-                break;
-            case 'L':
-            case 'l':
-                switch (value)
-                {
-                    case { } when value.Equals("Line 1\nLine 2\nLine 3", comparisonType):
-                        result = 8;
-                        return true;
-                    case { } when value.Equals("Line 1\n\nLine 3", comparisonType):
-                        result = 38;
-                        return true;
-                }
-                break;
-            case 'N':
-            case 'n':
-                switch (value)
-                {
-                    case { } when value.Equals("Newline in value", comparisonType):
-                        result = 31;
-                        return true;
-                }
-                break;
-            case 'P':
-            case 'p':
-                switch (value)
-                {
-                    case { } when value.Equals("Path: C:\\Users\\Documents\\File.txt", comparisonType):
-                        result = 9;
-                        return true;
-                    case { } when value.Equals("Price: €100", comparisonType):
-                        result = 18;
+                        result = 64;
                         return true;
                 }
                 break;
@@ -1442,61 +896,7 @@ public static partial class Bug480FlagsFactory
                 switch (value)
                 {
                     case { } when value.Equals("Quoted enum value", comparisonType):
-                        result = 30;
-                        return true;
-                }
-                break;
-            case 'S':
-            case 's':
-                switch (value)
-                {
-                    case { } when value.Equals("Say \"Hello\" to the 'world'", comparisonType):
-                        result = 10;
-                        return true;
-                    case { } when value.Equals("SELECT * FROM Users WHERE Name = 'O''Brien'", comparisonType):
-                        result = 42;
-                        return true;
-                }
-                break;
-            case 'T':
-            case 't':
-                switch (value)
-                {
-                    case { } when value.Equals("Tag: <xml>", comparisonType):
-                        result = 14;
-                        return true;
-                    case { } when value.Equals("Temperature: 25°C", comparisonType):
-                        result = 16;
-                        return true;
-                    case { } when value.Equals("Tab in EnumMember value", comparisonType):
-                        result = 35;
-                        return true;
-                    case { } when value.Equals("Trailing space   ", comparisonType):
-                        result = 39;
-                        return true;
-                }
-                break;
-            case 'V':
-            case 'v':
-                switch (value)
-                {
-                    case { } when value.Equals("Value < 10", comparisonType):
-                        result = 11;
-                        return true;
-                    case { } when value.Equals("Value > 10", comparisonType):
-                        result = 12;
-                        return true;
-                    case { } when value.Equals("Verbatim: \"quoted\"", comparisonType):
-                        result = 28;
-                        return true;
-                }
-                break;
-            case 'X':
-            case 'x':
-                switch (value)
-                {
-                    case { } when value.Equals("X & Y", comparisonType):
-                        result = 13;
+                        result = 32;
                         return true;
                 }
                 break;
@@ -1505,28 +905,6 @@ public static partial class Bug480FlagsFactory
                 {
                     case { } when value.Equals("\\", comparisonType):
                         result = 1;
-                        return true;
-                    case { } when value.Equals("\\\\server\\share\\folder\\file.txt", comparisonType):
-                        result = 44;
-                        return true;
-                    case { } when value.Equals("\\\\", comparisonType):
-                        result = 46;
-                        return true;
-                }
-                break;
-            case '^':
-                switch (value)
-                {
-                    case { } when value.Equals("^\\d{3}-\\d{2}-\\d{4}$", comparisonType):
-                        result = 43;
-                        return true;
-                }
-                break;
-            case '{':
-                switch (value)
-                {
-                    case { } when value.Equals("{\n\t\"key\": \"value\",\n\t\"escaped\": \"\\\"quoted\\\"\"\n}", comparisonType):
-                        result = 25;
                         return true;
                 }
                 break;
@@ -1544,54 +922,12 @@ public static partial class Bug480FlagsFactory
         {
             (Bug480Flags)(1),
             (Bug480Flags)(2),
-            (Bug480Flags)(3),
             (Bug480Flags)(4),
-            (Bug480Flags)(5),
-            (Bug480Flags)(6),
-            (Bug480Flags)(7),
             (Bug480Flags)(8),
-            (Bug480Flags)(9),
-            (Bug480Flags)(10),
-            (Bug480Flags)(11),
-            (Bug480Flags)(12),
-            (Bug480Flags)(13),
-            (Bug480Flags)(14),
-            (Bug480Flags)(15),
             (Bug480Flags)(16),
-            (Bug480Flags)(17),
-            (Bug480Flags)(18),
-            (Bug480Flags)(19),
-            (Bug480Flags)(20),
-            (Bug480Flags)(21),
-            (Bug480Flags)(22),
-            (Bug480Flags)(23),
-            (Bug480Flags)(24),
-            (Bug480Flags)(25),
-            (Bug480Flags)(26),
-            (Bug480Flags)(27),
-            (Bug480Flags)(28),
-            (Bug480Flags)(29),
-            (Bug480Flags)(30),
-            (Bug480Flags)(31),
             (Bug480Flags)(32),
-            (Bug480Flags)(33),
-            (Bug480Flags)(34),
-            (Bug480Flags)(35),
-            (Bug480Flags)(36),
-            (Bug480Flags)(37),
-            (Bug480Flags)(38),
-            (Bug480Flags)(39),
-            (Bug480Flags)(40),
-            (Bug480Flags)(41),
-            (Bug480Flags)(42),
-            (Bug480Flags)(43),
-            (Bug480Flags)(44),
-            (Bug480Flags)(45),
-            (Bug480Flags)(46),
-            (Bug480Flags)(47),
-            (Bug480Flags)(48),
-            (Bug480Flags)(49),
-            (Bug480Flags)(50),
+            (Bug480Flags)(64),
+            (Bug480Flags)(128),
         };
     }
 
@@ -1603,54 +939,12 @@ public static partial class Bug480FlagsFactory
         {
             "Backslash",
             "DoubleQuote",
-            "SingleQuote",
             "Newline",
-            "CarriageReturn",
             "Tab",
-            "CrLf",
-            "MultipleNewlines",
-            "WindowsPath",
-            "MixedQuotes",
-            "LessThan",
-            "GreaterThan",
-            "Ampersand",
-            "XmlTag",
-            "XmlSpecialChars",
-            "Degree",
-            "Copyright",
-            "Euro",
-            "Unicode",
-            "Emoji",
-            "NullChar",
-            "Backspace",
-            "FormFeed",
-            "VerticalTab",
-            "JsonLike",
-            "CData",
-            "CodeComment",
-            "VerbatimString",
             "EnumMemberBackslash",
             "EnumMemberQuoted",
-            "EnumMemberNewline",
             "JsonNameEscape",
-            "JsonNameQuoted",
             "CombinedEscapes",
-            "EnumMemberTab",
-            "EmptyDescription",
-            "WhitespaceDescription",
-            "EmptyLine",
-            "TrailingSpace",
-            "LeadingSpace",
-            "Url",
-            "SqlLike",
-            "RegexPattern",
-            "UncPath",
-            "UnixPath",
-            "DoubleBackslash",
-            "TripleQuote",
-            "TripleNewline",
-            "ComplexError",
-            "EscapedJson",
         };
     }
 
@@ -1856,19 +1150,7 @@ public static partial class Bug480FlagsFactory
                 switch (value)
                 {
                     case { } when value.Equals("\"quoted\"", comparisonType):
-                        result = 30;
-                        return true;
-                    case { } when value.Equals("\"json-quoted\"", comparisonType):
-                        result = 33;
-                        return true;
-                }
-                break;
-            case 'A':
-            case 'a':
-                switch (value)
-                {
-                    case { } when value.Equals("Ampersand", comparisonType):
-                        result = 13;
+                        result = 32;
                         return true;
                 }
                 break;
@@ -1879,33 +1161,6 @@ public static partial class Bug480FlagsFactory
                     case { } when value.Equals("Backslash", comparisonType):
                         result = 1;
                         return true;
-                    case { } when value.Equals("Backspace", comparisonType):
-                        result = 22;
-                        return true;
-                }
-                break;
-            case 'C':
-            case 'c':
-                switch (value)
-                {
-                    case { } when value.Equals("CarriageReturn", comparisonType):
-                        result = 5;
-                        return true;
-                    case { } when value.Equals("CrLf", comparisonType):
-                        result = 7;
-                        return true;
-                    case { } when value.Equals("Copyright", comparisonType):
-                        result = 17;
-                        return true;
-                    case { } when value.Equals("CData", comparisonType):
-                        result = 26;
-                        return true;
-                    case { } when value.Equals("CodeComment", comparisonType):
-                        result = 27;
-                        return true;
-                    case { } when value.Equals("ComplexError", comparisonType):
-                        result = 49;
-                        return true;
                 }
                 break;
             case 'D':
@@ -1914,90 +1169,6 @@ public static partial class Bug480FlagsFactory
                 {
                     case { } when value.Equals("DoubleQuote", comparisonType):
                         result = 2;
-                        return true;
-                    case { } when value.Equals("Degree", comparisonType):
-                        result = 16;
-                        return true;
-                    case { } when value.Equals("DoubleBackslash", comparisonType):
-                        result = 46;
-                        return true;
-                }
-                break;
-            case 'E':
-            case 'e':
-                switch (value)
-                {
-                    case { } when value.Equals("Euro", comparisonType):
-                        result = 18;
-                        return true;
-                    case { } when value.Equals("Emoji", comparisonType):
-                        result = 20;
-                        return true;
-                    case { } when value.Equals("EmptyDescription", comparisonType):
-                        result = 36;
-                        return true;
-                    case { } when value.Equals("EmptyLine", comparisonType):
-                        result = 38;
-                        return true;
-                    case { } when value.Equals("EscapedJson", comparisonType):
-                        result = 50;
-                        return true;
-                }
-                break;
-            case 'F':
-            case 'f':
-                switch (value)
-                {
-                    case { } when value.Equals("FormFeed", comparisonType):
-                        result = 23;
-                        return true;
-                }
-                break;
-            case 'G':
-            case 'g':
-                switch (value)
-                {
-                    case { } when value.Equals("GreaterThan", comparisonType):
-                        result = 12;
-                        return true;
-                }
-                break;
-            case 'J':
-            case 'j':
-                switch (value)
-                {
-                    case { } when value.Equals("JsonLike", comparisonType):
-                        result = 25;
-                        return true;
-                    case { } when value.Equals("json\\escape", comparisonType):
-                        result = 32;
-                        return true;
-                    case { } when value.Equals("json\\combined", comparisonType):
-                        result = 34;
-                        return true;
-                }
-                break;
-            case 'L':
-            case 'l':
-                switch (value)
-                {
-                    case { } when value.Equals("LessThan", comparisonType):
-                        result = 11;
-                        return true;
-                    case { } when value.Equals("LeadingSpace", comparisonType):
-                        result = 40;
-                        return true;
-                }
-                break;
-            case 'M':
-            case 'm':
-                switch (value)
-                {
-                    case { } when value.Equals("MultipleNewlines", comparisonType):
-                        result = 8;
-                        return true;
-                    case { } when value.Equals("MixedQuotes", comparisonType):
-                        result = 10;
                         return true;
                 }
                 break;
@@ -2008,36 +1179,6 @@ public static partial class Bug480FlagsFactory
                     case { } when value.Equals("Newline", comparisonType):
                         result = 4;
                         return true;
-                    case { } when value.Equals("NullChar", comparisonType):
-                        result = 21;
-                        return true;
-                    case { } when value.Equals("new\nline", comparisonType):
-                        result = 31;
-                        return true;
-                }
-                break;
-            case 'R':
-            case 'r':
-                switch (value)
-                {
-                    case { } when value.Equals("RegexPattern", comparisonType):
-                        result = 43;
-                        return true;
-                }
-                break;
-            case 'S':
-            case 's':
-                switch (value)
-                {
-                    case { } when value.Equals("SingleQuote", comparisonType):
-                        result = 3;
-                        return true;
-                    case { } when value.Equals("special\\value", comparisonType):
-                        result = 29;
-                        return true;
-                    case { } when value.Equals("SqlLike", comparisonType):
-                        result = 42;
-                        return true;
                 }
                 break;
             case 'T':
@@ -2045,73 +1186,28 @@ public static partial class Bug480FlagsFactory
                 switch (value)
                 {
                     case { } when value.Equals("Tab", comparisonType):
-                        result = 6;
-                        return true;
-                    case { } when value.Equals("tab\tvalue", comparisonType):
-                        result = 35;
-                        return true;
-                    case { } when value.Equals("TrailingSpace", comparisonType):
-                        result = 39;
-                        return true;
-                    case { } when value.Equals("TripleQuote", comparisonType):
-                        result = 47;
-                        return true;
-                    case { } when value.Equals("TripleNewline", comparisonType):
-                        result = 48;
+                        result = 8;
                         return true;
                 }
                 break;
-            case 'U':
-            case 'u':
+            case 'J':
+            case 'j':
                 switch (value)
                 {
-                    case { } when value.Equals("Unicode", comparisonType):
-                        result = 19;
+                    case { } when value.Equals("json\\escape", comparisonType):
+                        result = 64;
                         return true;
-                    case { } when value.Equals("Url", comparisonType):
-                        result = 41;
-                        return true;
-                    case { } when value.Equals("UncPath", comparisonType):
-                        result = 44;
-                        return true;
-                    case { } when value.Equals("UnixPath", comparisonType):
-                        result = 45;
+                    case { } when value.Equals("json\\combined", comparisonType):
+                        result = 128;
                         return true;
                 }
                 break;
-            case 'V':
-            case 'v':
+            case 'S':
+            case 's':
                 switch (value)
                 {
-                    case { } when value.Equals("VerticalTab", comparisonType):
-                        result = 24;
-                        return true;
-                    case { } when value.Equals("VerbatimString", comparisonType):
-                        result = 28;
-                        return true;
-                }
-                break;
-            case 'W':
-            case 'w':
-                switch (value)
-                {
-                    case { } when value.Equals("WindowsPath", comparisonType):
-                        result = 9;
-                        return true;
-                    case { } when value.Equals("WhitespaceDescription", comparisonType):
-                        result = 37;
-                        return true;
-                }
-                break;
-            case 'X':
-            case 'x':
-                switch (value)
-                {
-                    case { } when value.Equals("XmlTag", comparisonType):
-                        result = 14;
-                        return true;
-                    case { } when value.Equals("XmlSpecialChars", comparisonType):
-                        result = 15;
+                    case { } when value.Equals("special\\value", comparisonType):
+                        result = 16;
                         return true;
                 }
                 break;

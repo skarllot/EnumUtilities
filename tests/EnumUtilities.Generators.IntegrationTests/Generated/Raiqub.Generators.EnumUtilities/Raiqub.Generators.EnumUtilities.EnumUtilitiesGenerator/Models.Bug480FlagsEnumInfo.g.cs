@@ -19,16 +19,16 @@ public static partial class Bug480FlagsMetadata
     public const int MinimumValue = 1;
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumMetadata.MaximumValue" />
-    public const int MaximumValue = 50;
+    public const int MaximumValue = 128;
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumMetadata.ValueCount" />
-    public const int ValueCount = 50;
+    public const int ValueCount = 8;
 
     /// <summary>Provides constant values for <see cref="Bug480Flags" /> members names.</summary>
     public static partial class Name
     {
         /// <summary>Represents the largest possible number of characters produced by converting a <see cref="Bug480Flags" /> value to string, based on defined members.</summary>
-        public const int MaxCharsLength = 21;
+        public const int MaxCharsLength = 19;
 
         /// <summary>The string representation of <see cref="Bug480Flags.Backslash" /> name.</summary>
         public const string Backslash = "Backslash";
@@ -36,83 +36,11 @@ public static partial class Bug480FlagsMetadata
         /// <summary>The string representation of <see cref="Bug480Flags.DoubleQuote" /> name.</summary>
         public const string DoubleQuote = "DoubleQuote";
 
-        /// <summary>The string representation of <see cref="Bug480Flags.SingleQuote" /> name.</summary>
-        public const string SingleQuote = "SingleQuote";
-
         /// <summary>The string representation of <see cref="Bug480Flags.Newline" /> name.</summary>
         public const string Newline = "Newline";
 
-        /// <summary>The string representation of <see cref="Bug480Flags.CarriageReturn" /> name.</summary>
-        public const string CarriageReturn = "CarriageReturn";
-
         /// <summary>The string representation of <see cref="Bug480Flags.Tab" /> name.</summary>
         public const string Tab = "Tab";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.CrLf" /> name.</summary>
-        public const string CrLf = "CrLf";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.MultipleNewlines" /> name.</summary>
-        public const string MultipleNewlines = "MultipleNewlines";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.WindowsPath" /> name.</summary>
-        public const string WindowsPath = "WindowsPath";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.MixedQuotes" /> name.</summary>
-        public const string MixedQuotes = "MixedQuotes";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.LessThan" /> name.</summary>
-        public const string LessThan = "LessThan";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.GreaterThan" /> name.</summary>
-        public const string GreaterThan = "GreaterThan";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.Ampersand" /> name.</summary>
-        public const string Ampersand = "Ampersand";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.XmlTag" /> name.</summary>
-        public const string XmlTag = "XmlTag";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.XmlSpecialChars" /> name.</summary>
-        public const string XmlSpecialChars = "XmlSpecialChars";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.Degree" /> name.</summary>
-        public const string Degree = "Degree";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.Copyright" /> name.</summary>
-        public const string Copyright = "Copyright";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.Euro" /> name.</summary>
-        public const string Euro = "Euro";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.Unicode" /> name.</summary>
-        public const string Unicode = "Unicode";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.Emoji" /> name.</summary>
-        public const string Emoji = "Emoji";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.NullChar" /> name.</summary>
-        public const string NullChar = "NullChar";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.Backspace" /> name.</summary>
-        public const string Backspace = "Backspace";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.FormFeed" /> name.</summary>
-        public const string FormFeed = "FormFeed";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.VerticalTab" /> name.</summary>
-        public const string VerticalTab = "VerticalTab";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.JsonLike" /> name.</summary>
-        public const string JsonLike = "JsonLike";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.CData" /> name.</summary>
-        public const string CData = "CData";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.CodeComment" /> name.</summary>
-        public const string CodeComment = "CodeComment";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.VerbatimString" /> name.</summary>
-        public const string VerbatimString = "VerbatimString";
 
         /// <summary>The string representation of <see cref="Bug480Flags.EnumMemberBackslash" /> name.</summary>
         public const string EnumMemberBackslash = "EnumMemberBackslash";
@@ -120,72 +48,18 @@ public static partial class Bug480FlagsMetadata
         /// <summary>The string representation of <see cref="Bug480Flags.EnumMemberQuoted" /> name.</summary>
         public const string EnumMemberQuoted = "EnumMemberQuoted";
 
-        /// <summary>The string representation of <see cref="Bug480Flags.EnumMemberNewline" /> name.</summary>
-        public const string EnumMemberNewline = "EnumMemberNewline";
-
         /// <summary>The string representation of <see cref="Bug480Flags.JsonNameEscape" /> name.</summary>
         public const string JsonNameEscape = "JsonNameEscape";
 
-        /// <summary>The string representation of <see cref="Bug480Flags.JsonNameQuoted" /> name.</summary>
-        public const string JsonNameQuoted = "JsonNameQuoted";
-
         /// <summary>The string representation of <see cref="Bug480Flags.CombinedEscapes" /> name.</summary>
         public const string CombinedEscapes = "CombinedEscapes";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.EnumMemberTab" /> name.</summary>
-        public const string EnumMemberTab = "EnumMemberTab";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.EmptyDescription" /> name.</summary>
-        public const string EmptyDescription = "EmptyDescription";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.WhitespaceDescription" /> name.</summary>
-        public const string WhitespaceDescription = "WhitespaceDescription";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.EmptyLine" /> name.</summary>
-        public const string EmptyLine = "EmptyLine";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.TrailingSpace" /> name.</summary>
-        public const string TrailingSpace = "TrailingSpace";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.LeadingSpace" /> name.</summary>
-        public const string LeadingSpace = "LeadingSpace";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.Url" /> name.</summary>
-        public const string Url = "Url";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.SqlLike" /> name.</summary>
-        public const string SqlLike = "SqlLike";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.RegexPattern" /> name.</summary>
-        public const string RegexPattern = "RegexPattern";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.UncPath" /> name.</summary>
-        public const string UncPath = "UncPath";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.UnixPath" /> name.</summary>
-        public const string UnixPath = "UnixPath";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.DoubleBackslash" /> name.</summary>
-        public const string DoubleBackslash = "DoubleBackslash";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.TripleQuote" /> name.</summary>
-        public const string TripleQuote = "TripleQuote";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.TripleNewline" /> name.</summary>
-        public const string TripleNewline = "TripleNewline";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.ComplexError" /> name.</summary>
-        public const string ComplexError = "ComplexError";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.EscapedJson" /> name.</summary>
-        public const string EscapedJson = "EscapedJson";
     }
 
     /// <summary>Provides static values for <see cref="Bug480Flags" /> UTF-8 encoded members names.</summary>
     public static partial class Utf8Name
     {
         /// <summary>Represents the largest possible number of bytes produced by converting a <see cref="Bug480Flags" /> value to UTF-8 string, based on defined members.</summary>
-        public const int MaxBytesLength = 21;
+        public const int MaxBytesLength = 19;
 
         /// <summary>The UTF-8 representation of <see cref="Bug480Flags.Backslash" /> name.</summary>
         public static ReadOnlySpan<byte> Backslash => new byte[9] { 66, 97, 99, 107, 115, 108, 97, 115, 104 };
@@ -193,83 +67,11 @@ public static partial class Bug480FlagsMetadata
         /// <summary>The UTF-8 representation of <see cref="Bug480Flags.DoubleQuote" /> name.</summary>
         public static ReadOnlySpan<byte> DoubleQuote => new byte[11] { 68, 111, 117, 98, 108, 101, 81, 117, 111, 116, 101 };
 
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.SingleQuote" /> name.</summary>
-        public static ReadOnlySpan<byte> SingleQuote => new byte[11] { 83, 105, 110, 103, 108, 101, 81, 117, 111, 116, 101 };
-
         /// <summary>The UTF-8 representation of <see cref="Bug480Flags.Newline" /> name.</summary>
         public static ReadOnlySpan<byte> Newline => new byte[7] { 78, 101, 119, 108, 105, 110, 101 };
 
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.CarriageReturn" /> name.</summary>
-        public static ReadOnlySpan<byte> CarriageReturn => new byte[14] { 67, 97, 114, 114, 105, 97, 103, 101, 82, 101, 116, 117, 114, 110 };
-
         /// <summary>The UTF-8 representation of <see cref="Bug480Flags.Tab" /> name.</summary>
         public static ReadOnlySpan<byte> Tab => new byte[3] { 84, 97, 98 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.CrLf" /> name.</summary>
-        public static ReadOnlySpan<byte> CrLf => new byte[4] { 67, 114, 76, 102 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.MultipleNewlines" /> name.</summary>
-        public static ReadOnlySpan<byte> MultipleNewlines => new byte[16] { 77, 117, 108, 116, 105, 112, 108, 101, 78, 101, 119, 108, 105, 110, 101, 115 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.WindowsPath" /> name.</summary>
-        public static ReadOnlySpan<byte> WindowsPath => new byte[11] { 87, 105, 110, 100, 111, 119, 115, 80, 97, 116, 104 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.MixedQuotes" /> name.</summary>
-        public static ReadOnlySpan<byte> MixedQuotes => new byte[11] { 77, 105, 120, 101, 100, 81, 117, 111, 116, 101, 115 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.LessThan" /> name.</summary>
-        public static ReadOnlySpan<byte> LessThan => new byte[8] { 76, 101, 115, 115, 84, 104, 97, 110 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.GreaterThan" /> name.</summary>
-        public static ReadOnlySpan<byte> GreaterThan => new byte[11] { 71, 114, 101, 97, 116, 101, 114, 84, 104, 97, 110 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.Ampersand" /> name.</summary>
-        public static ReadOnlySpan<byte> Ampersand => new byte[9] { 65, 109, 112, 101, 114, 115, 97, 110, 100 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.XmlTag" /> name.</summary>
-        public static ReadOnlySpan<byte> XmlTag => new byte[6] { 88, 109, 108, 84, 97, 103 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.XmlSpecialChars" /> name.</summary>
-        public static ReadOnlySpan<byte> XmlSpecialChars => new byte[15] { 88, 109, 108, 83, 112, 101, 99, 105, 97, 108, 67, 104, 97, 114, 115 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.Degree" /> name.</summary>
-        public static ReadOnlySpan<byte> Degree => new byte[6] { 68, 101, 103, 114, 101, 101 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.Copyright" /> name.</summary>
-        public static ReadOnlySpan<byte> Copyright => new byte[9] { 67, 111, 112, 121, 114, 105, 103, 104, 116 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.Euro" /> name.</summary>
-        public static ReadOnlySpan<byte> Euro => new byte[4] { 69, 117, 114, 111 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.Unicode" /> name.</summary>
-        public static ReadOnlySpan<byte> Unicode => new byte[7] { 85, 110, 105, 99, 111, 100, 101 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.Emoji" /> name.</summary>
-        public static ReadOnlySpan<byte> Emoji => new byte[5] { 69, 109, 111, 106, 105 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.NullChar" /> name.</summary>
-        public static ReadOnlySpan<byte> NullChar => new byte[8] { 78, 117, 108, 108, 67, 104, 97, 114 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.Backspace" /> name.</summary>
-        public static ReadOnlySpan<byte> Backspace => new byte[9] { 66, 97, 99, 107, 115, 112, 97, 99, 101 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.FormFeed" /> name.</summary>
-        public static ReadOnlySpan<byte> FormFeed => new byte[8] { 70, 111, 114, 109, 70, 101, 101, 100 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.VerticalTab" /> name.</summary>
-        public static ReadOnlySpan<byte> VerticalTab => new byte[11] { 86, 101, 114, 116, 105, 99, 97, 108, 84, 97, 98 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.JsonLike" /> name.</summary>
-        public static ReadOnlySpan<byte> JsonLike => new byte[8] { 74, 115, 111, 110, 76, 105, 107, 101 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.CData" /> name.</summary>
-        public static ReadOnlySpan<byte> CData => new byte[5] { 67, 68, 97, 116, 97 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.CodeComment" /> name.</summary>
-        public static ReadOnlySpan<byte> CodeComment => new byte[11] { 67, 111, 100, 101, 67, 111, 109, 109, 101, 110, 116 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.VerbatimString" /> name.</summary>
-        public static ReadOnlySpan<byte> VerbatimString => new byte[14] { 86, 101, 114, 98, 97, 116, 105, 109, 83, 116, 114, 105, 110, 103 };
 
         /// <summary>The UTF-8 representation of <see cref="Bug480Flags.EnumMemberBackslash" /> name.</summary>
         public static ReadOnlySpan<byte> EnumMemberBackslash => new byte[19] { 69, 110, 117, 109, 77, 101, 109, 98, 101, 114, 66, 97, 99, 107, 115, 108, 97, 115, 104 };
@@ -277,72 +79,18 @@ public static partial class Bug480FlagsMetadata
         /// <summary>The UTF-8 representation of <see cref="Bug480Flags.EnumMemberQuoted" /> name.</summary>
         public static ReadOnlySpan<byte> EnumMemberQuoted => new byte[16] { 69, 110, 117, 109, 77, 101, 109, 98, 101, 114, 81, 117, 111, 116, 101, 100 };
 
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.EnumMemberNewline" /> name.</summary>
-        public static ReadOnlySpan<byte> EnumMemberNewline => new byte[17] { 69, 110, 117, 109, 77, 101, 109, 98, 101, 114, 78, 101, 119, 108, 105, 110, 101 };
-
         /// <summary>The UTF-8 representation of <see cref="Bug480Flags.JsonNameEscape" /> name.</summary>
         public static ReadOnlySpan<byte> JsonNameEscape => new byte[14] { 74, 115, 111, 110, 78, 97, 109, 101, 69, 115, 99, 97, 112, 101 };
 
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.JsonNameQuoted" /> name.</summary>
-        public static ReadOnlySpan<byte> JsonNameQuoted => new byte[14] { 74, 115, 111, 110, 78, 97, 109, 101, 81, 117, 111, 116, 101, 100 };
-
         /// <summary>The UTF-8 representation of <see cref="Bug480Flags.CombinedEscapes" /> name.</summary>
         public static ReadOnlySpan<byte> CombinedEscapes => new byte[15] { 67, 111, 109, 98, 105, 110, 101, 100, 69, 115, 99, 97, 112, 101, 115 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.EnumMemberTab" /> name.</summary>
-        public static ReadOnlySpan<byte> EnumMemberTab => new byte[13] { 69, 110, 117, 109, 77, 101, 109, 98, 101, 114, 84, 97, 98 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.EmptyDescription" /> name.</summary>
-        public static ReadOnlySpan<byte> EmptyDescription => new byte[16] { 69, 109, 112, 116, 121, 68, 101, 115, 99, 114, 105, 112, 116, 105, 111, 110 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.WhitespaceDescription" /> name.</summary>
-        public static ReadOnlySpan<byte> WhitespaceDescription => new byte[21] { 87, 104, 105, 116, 101, 115, 112, 97, 99, 101, 68, 101, 115, 99, 114, 105, 112, 116, 105, 111, 110 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.EmptyLine" /> name.</summary>
-        public static ReadOnlySpan<byte> EmptyLine => new byte[9] { 69, 109, 112, 116, 121, 76, 105, 110, 101 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.TrailingSpace" /> name.</summary>
-        public static ReadOnlySpan<byte> TrailingSpace => new byte[13] { 84, 114, 97, 105, 108, 105, 110, 103, 83, 112, 97, 99, 101 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.LeadingSpace" /> name.</summary>
-        public static ReadOnlySpan<byte> LeadingSpace => new byte[12] { 76, 101, 97, 100, 105, 110, 103, 83, 112, 97, 99, 101 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.Url" /> name.</summary>
-        public static ReadOnlySpan<byte> Url => new byte[3] { 85, 114, 108 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.SqlLike" /> name.</summary>
-        public static ReadOnlySpan<byte> SqlLike => new byte[7] { 83, 113, 108, 76, 105, 107, 101 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.RegexPattern" /> name.</summary>
-        public static ReadOnlySpan<byte> RegexPattern => new byte[12] { 82, 101, 103, 101, 120, 80, 97, 116, 116, 101, 114, 110 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.UncPath" /> name.</summary>
-        public static ReadOnlySpan<byte> UncPath => new byte[7] { 85, 110, 99, 80, 97, 116, 104 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.UnixPath" /> name.</summary>
-        public static ReadOnlySpan<byte> UnixPath => new byte[8] { 85, 110, 105, 120, 80, 97, 116, 104 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.DoubleBackslash" /> name.</summary>
-        public static ReadOnlySpan<byte> DoubleBackslash => new byte[15] { 68, 111, 117, 98, 108, 101, 66, 97, 99, 107, 115, 108, 97, 115, 104 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.TripleQuote" /> name.</summary>
-        public static ReadOnlySpan<byte> TripleQuote => new byte[11] { 84, 114, 105, 112, 108, 101, 81, 117, 111, 116, 101 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.TripleNewline" /> name.</summary>
-        public static ReadOnlySpan<byte> TripleNewline => new byte[13] { 84, 114, 105, 112, 108, 101, 78, 101, 119, 108, 105, 110, 101 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.ComplexError" /> name.</summary>
-        public static ReadOnlySpan<byte> ComplexError => new byte[12] { 67, 111, 109, 112, 108, 101, 120, 69, 114, 114, 111, 114 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.EscapedJson" /> name.</summary>
-        public static ReadOnlySpan<byte> EscapedJson => new byte[11] { 69, 115, 99, 97, 112, 101, 100, 74, 115, 111, 110 };
     }
 
     /// <summary>Provides constant values for <see cref="Bug480Flags" /> serialized members values.</summary>
     public static partial class SerializedValue
     {
         /// <summary>Represents the largest possible number of characters produced by serializing a <see cref="Bug480Flags" /> value to string, based on defined members.</summary>
-        public const int MaxCharsLength = 21;
+        public const int MaxCharsLength = 15;
 
         /// <summary>The string representation of <see cref="Bug480Flags.Backslash" /> serialized value.</summary>
         public const string Backslash = "Backslash";
@@ -350,83 +98,11 @@ public static partial class Bug480FlagsMetadata
         /// <summary>The string representation of <see cref="Bug480Flags.DoubleQuote" /> serialized value.</summary>
         public const string DoubleQuote = "DoubleQuote";
 
-        /// <summary>The string representation of <see cref="Bug480Flags.SingleQuote" /> serialized value.</summary>
-        public const string SingleQuote = "SingleQuote";
-
         /// <summary>The string representation of <see cref="Bug480Flags.Newline" /> serialized value.</summary>
         public const string Newline = "Newline";
 
-        /// <summary>The string representation of <see cref="Bug480Flags.CarriageReturn" /> serialized value.</summary>
-        public const string CarriageReturn = "CarriageReturn";
-
         /// <summary>The string representation of <see cref="Bug480Flags.Tab" /> serialized value.</summary>
         public const string Tab = "Tab";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.CrLf" /> serialized value.</summary>
-        public const string CrLf = "CrLf";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.MultipleNewlines" /> serialized value.</summary>
-        public const string MultipleNewlines = "MultipleNewlines";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.WindowsPath" /> serialized value.</summary>
-        public const string WindowsPath = "WindowsPath";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.MixedQuotes" /> serialized value.</summary>
-        public const string MixedQuotes = "MixedQuotes";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.LessThan" /> serialized value.</summary>
-        public const string LessThan = "LessThan";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.GreaterThan" /> serialized value.</summary>
-        public const string GreaterThan = "GreaterThan";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.Ampersand" /> serialized value.</summary>
-        public const string Ampersand = "Ampersand";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.XmlTag" /> serialized value.</summary>
-        public const string XmlTag = "XmlTag";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.XmlSpecialChars" /> serialized value.</summary>
-        public const string XmlSpecialChars = "XmlSpecialChars";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.Degree" /> serialized value.</summary>
-        public const string Degree = "Degree";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.Copyright" /> serialized value.</summary>
-        public const string Copyright = "Copyright";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.Euro" /> serialized value.</summary>
-        public const string Euro = "Euro";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.Unicode" /> serialized value.</summary>
-        public const string Unicode = "Unicode";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.Emoji" /> serialized value.</summary>
-        public const string Emoji = "Emoji";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.NullChar" /> serialized value.</summary>
-        public const string NullChar = "NullChar";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.Backspace" /> serialized value.</summary>
-        public const string Backspace = "Backspace";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.FormFeed" /> serialized value.</summary>
-        public const string FormFeed = "FormFeed";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.VerticalTab" /> serialized value.</summary>
-        public const string VerticalTab = "VerticalTab";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.JsonLike" /> serialized value.</summary>
-        public const string JsonLike = "JsonLike";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.CData" /> serialized value.</summary>
-        public const string CData = "CData";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.CodeComment" /> serialized value.</summary>
-        public const string CodeComment = "CodeComment";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.VerbatimString" /> serialized value.</summary>
-        public const string VerbatimString = "VerbatimString";
 
         /// <summary>The string representation of <see cref="Bug480Flags.EnumMemberBackslash" /> serialized value.</summary>
         public const string EnumMemberBackslash = "special\\value";
@@ -434,72 +110,18 @@ public static partial class Bug480FlagsMetadata
         /// <summary>The string representation of <see cref="Bug480Flags.EnumMemberQuoted" /> serialized value.</summary>
         public const string EnumMemberQuoted = "\"quoted\"";
 
-        /// <summary>The string representation of <see cref="Bug480Flags.EnumMemberNewline" /> serialized value.</summary>
-        public const string EnumMemberNewline = "new\nline";
-
         /// <summary>The string representation of <see cref="Bug480Flags.JsonNameEscape" /> serialized value.</summary>
         public const string JsonNameEscape = "JsonNameEscape";
 
-        /// <summary>The string representation of <see cref="Bug480Flags.JsonNameQuoted" /> serialized value.</summary>
-        public const string JsonNameQuoted = "JsonNameQuoted";
-
         /// <summary>The string representation of <see cref="Bug480Flags.CombinedEscapes" /> serialized value.</summary>
         public const string CombinedEscapes = "combined\\escape";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.EnumMemberTab" /> serialized value.</summary>
-        public const string EnumMemberTab = "tab\tvalue";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.EmptyDescription" /> serialized value.</summary>
-        public const string EmptyDescription = "EmptyDescription";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.WhitespaceDescription" /> serialized value.</summary>
-        public const string WhitespaceDescription = "WhitespaceDescription";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.EmptyLine" /> serialized value.</summary>
-        public const string EmptyLine = "EmptyLine";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.TrailingSpace" /> serialized value.</summary>
-        public const string TrailingSpace = "TrailingSpace";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.LeadingSpace" /> serialized value.</summary>
-        public const string LeadingSpace = "LeadingSpace";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.Url" /> serialized value.</summary>
-        public const string Url = "Url";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.SqlLike" /> serialized value.</summary>
-        public const string SqlLike = "SqlLike";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.RegexPattern" /> serialized value.</summary>
-        public const string RegexPattern = "RegexPattern";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.UncPath" /> serialized value.</summary>
-        public const string UncPath = "UncPath";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.UnixPath" /> serialized value.</summary>
-        public const string UnixPath = "UnixPath";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.DoubleBackslash" /> serialized value.</summary>
-        public const string DoubleBackslash = "DoubleBackslash";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.TripleQuote" /> serialized value.</summary>
-        public const string TripleQuote = "TripleQuote";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.TripleNewline" /> serialized value.</summary>
-        public const string TripleNewline = "TripleNewline";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.ComplexError" /> serialized value.</summary>
-        public const string ComplexError = "ComplexError";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.EscapedJson" /> serialized value.</summary>
-        public const string EscapedJson = "EscapedJson";
     }
 
     /// <summary>Provides static values for <see cref="Bug480Flags" /> UTF-8 encoded serialized members values.</summary>
     public static partial class Utf8SerializedValue
     {
         /// <summary>Represents the largest possible number of bytes produced by serializing a <see cref="Bug480Flags" /> value to UTF-8 string, based on defined members.</summary>
-        public const int MaxBytesLength = 21;
+        public const int MaxBytesLength = 15;
 
         /// <summary>The UTF-8 representation of <see cref="Bug480Flags.Backslash" /> serialized value.</summary>
         public static ReadOnlySpan<byte> Backslash => new byte[9] { 66, 97, 99, 107, 115, 108, 97, 115, 104 };
@@ -507,83 +129,11 @@ public static partial class Bug480FlagsMetadata
         /// <summary>The UTF-8 representation of <see cref="Bug480Flags.DoubleQuote" /> serialized value.</summary>
         public static ReadOnlySpan<byte> DoubleQuote => new byte[11] { 68, 111, 117, 98, 108, 101, 81, 117, 111, 116, 101 };
 
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.SingleQuote" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> SingleQuote => new byte[11] { 83, 105, 110, 103, 108, 101, 81, 117, 111, 116, 101 };
-
         /// <summary>The UTF-8 representation of <see cref="Bug480Flags.Newline" /> serialized value.</summary>
         public static ReadOnlySpan<byte> Newline => new byte[7] { 78, 101, 119, 108, 105, 110, 101 };
 
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.CarriageReturn" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> CarriageReturn => new byte[14] { 67, 97, 114, 114, 105, 97, 103, 101, 82, 101, 116, 117, 114, 110 };
-
         /// <summary>The UTF-8 representation of <see cref="Bug480Flags.Tab" /> serialized value.</summary>
         public static ReadOnlySpan<byte> Tab => new byte[3] { 84, 97, 98 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.CrLf" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> CrLf => new byte[4] { 67, 114, 76, 102 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.MultipleNewlines" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> MultipleNewlines => new byte[16] { 77, 117, 108, 116, 105, 112, 108, 101, 78, 101, 119, 108, 105, 110, 101, 115 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.WindowsPath" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> WindowsPath => new byte[11] { 87, 105, 110, 100, 111, 119, 115, 80, 97, 116, 104 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.MixedQuotes" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> MixedQuotes => new byte[11] { 77, 105, 120, 101, 100, 81, 117, 111, 116, 101, 115 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.LessThan" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> LessThan => new byte[8] { 76, 101, 115, 115, 84, 104, 97, 110 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.GreaterThan" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> GreaterThan => new byte[11] { 71, 114, 101, 97, 116, 101, 114, 84, 104, 97, 110 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.Ampersand" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> Ampersand => new byte[9] { 65, 109, 112, 101, 114, 115, 97, 110, 100 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.XmlTag" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> XmlTag => new byte[6] { 88, 109, 108, 84, 97, 103 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.XmlSpecialChars" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> XmlSpecialChars => new byte[15] { 88, 109, 108, 83, 112, 101, 99, 105, 97, 108, 67, 104, 97, 114, 115 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.Degree" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> Degree => new byte[6] { 68, 101, 103, 114, 101, 101 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.Copyright" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> Copyright => new byte[9] { 67, 111, 112, 121, 114, 105, 103, 104, 116 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.Euro" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> Euro => new byte[4] { 69, 117, 114, 111 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.Unicode" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> Unicode => new byte[7] { 85, 110, 105, 99, 111, 100, 101 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.Emoji" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> Emoji => new byte[5] { 69, 109, 111, 106, 105 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.NullChar" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> NullChar => new byte[8] { 78, 117, 108, 108, 67, 104, 97, 114 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.Backspace" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> Backspace => new byte[9] { 66, 97, 99, 107, 115, 112, 97, 99, 101 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.FormFeed" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> FormFeed => new byte[8] { 70, 111, 114, 109, 70, 101, 101, 100 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.VerticalTab" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> VerticalTab => new byte[11] { 86, 101, 114, 116, 105, 99, 97, 108, 84, 97, 98 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.JsonLike" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> JsonLike => new byte[8] { 74, 115, 111, 110, 76, 105, 107, 101 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.CData" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> CData => new byte[5] { 67, 68, 97, 116, 97 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.CodeComment" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> CodeComment => new byte[11] { 67, 111, 100, 101, 67, 111, 109, 109, 101, 110, 116 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.VerbatimString" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> VerbatimString => new byte[14] { 86, 101, 114, 98, 97, 116, 105, 109, 83, 116, 114, 105, 110, 103 };
 
         /// <summary>The UTF-8 representation of <see cref="Bug480Flags.EnumMemberBackslash" /> serialized value.</summary>
         public static ReadOnlySpan<byte> EnumMemberBackslash => new byte[13] { 115, 112, 101, 99, 105, 97, 108, 92, 118, 97, 108, 117, 101 };
@@ -591,72 +141,18 @@ public static partial class Bug480FlagsMetadata
         /// <summary>The UTF-8 representation of <see cref="Bug480Flags.EnumMemberQuoted" /> serialized value.</summary>
         public static ReadOnlySpan<byte> EnumMemberQuoted => new byte[8] { 34, 113, 117, 111, 116, 101, 100, 34 };
 
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.EnumMemberNewline" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> EnumMemberNewline => new byte[8] { 110, 101, 119, 10, 108, 105, 110, 101 };
-
         /// <summary>The UTF-8 representation of <see cref="Bug480Flags.JsonNameEscape" /> serialized value.</summary>
         public static ReadOnlySpan<byte> JsonNameEscape => new byte[14] { 74, 115, 111, 110, 78, 97, 109, 101, 69, 115, 99, 97, 112, 101 };
 
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.JsonNameQuoted" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> JsonNameQuoted => new byte[14] { 74, 115, 111, 110, 78, 97, 109, 101, 81, 117, 111, 116, 101, 100 };
-
         /// <summary>The UTF-8 representation of <see cref="Bug480Flags.CombinedEscapes" /> serialized value.</summary>
         public static ReadOnlySpan<byte> CombinedEscapes => new byte[15] { 99, 111, 109, 98, 105, 110, 101, 100, 92, 101, 115, 99, 97, 112, 101 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.EnumMemberTab" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> EnumMemberTab => new byte[9] { 116, 97, 98, 9, 118, 97, 108, 117, 101 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.EmptyDescription" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> EmptyDescription => new byte[16] { 69, 109, 112, 116, 121, 68, 101, 115, 99, 114, 105, 112, 116, 105, 111, 110 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.WhitespaceDescription" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> WhitespaceDescription => new byte[21] { 87, 104, 105, 116, 101, 115, 112, 97, 99, 101, 68, 101, 115, 99, 114, 105, 112, 116, 105, 111, 110 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.EmptyLine" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> EmptyLine => new byte[9] { 69, 109, 112, 116, 121, 76, 105, 110, 101 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.TrailingSpace" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> TrailingSpace => new byte[13] { 84, 114, 97, 105, 108, 105, 110, 103, 83, 112, 97, 99, 101 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.LeadingSpace" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> LeadingSpace => new byte[12] { 76, 101, 97, 100, 105, 110, 103, 83, 112, 97, 99, 101 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.Url" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> Url => new byte[3] { 85, 114, 108 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.SqlLike" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> SqlLike => new byte[7] { 83, 113, 108, 76, 105, 107, 101 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.RegexPattern" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> RegexPattern => new byte[12] { 82, 101, 103, 101, 120, 80, 97, 116, 116, 101, 114, 110 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.UncPath" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> UncPath => new byte[7] { 85, 110, 99, 80, 97, 116, 104 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.UnixPath" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> UnixPath => new byte[8] { 85, 110, 105, 120, 80, 97, 116, 104 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.DoubleBackslash" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> DoubleBackslash => new byte[15] { 68, 111, 117, 98, 108, 101, 66, 97, 99, 107, 115, 108, 97, 115, 104 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.TripleQuote" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> TripleQuote => new byte[11] { 84, 114, 105, 112, 108, 101, 81, 117, 111, 116, 101 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.TripleNewline" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> TripleNewline => new byte[13] { 84, 114, 105, 112, 108, 101, 78, 101, 119, 108, 105, 110, 101 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.ComplexError" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> ComplexError => new byte[12] { 67, 111, 109, 112, 108, 101, 120, 69, 114, 114, 111, 114 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.EscapedJson" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> EscapedJson => new byte[11] { 69, 115, 99, 97, 112, 101, 100, 74, 115, 111, 110 };
     }
 
     /// <summary>Provides constant values for <see cref="Bug480Flags" /> serialized members values.</summary>
     public static partial class JsonValue
     {
         /// <summary>Represents the largest possible number of characters produced by serializing a <see cref="Bug480Flags" /> value to string, based on defined members.</summary>
-        public const int MaxCharsLength = 21;
+        public const int MaxCharsLength = 13;
 
         /// <summary>The string representation of <see cref="Bug480Flags.Backslash" /> serialized value.</summary>
         public const string Backslash = "Backslash";
@@ -664,83 +160,11 @@ public static partial class Bug480FlagsMetadata
         /// <summary>The string representation of <see cref="Bug480Flags.DoubleQuote" /> serialized value.</summary>
         public const string DoubleQuote = "DoubleQuote";
 
-        /// <summary>The string representation of <see cref="Bug480Flags.SingleQuote" /> serialized value.</summary>
-        public const string SingleQuote = "SingleQuote";
-
         /// <summary>The string representation of <see cref="Bug480Flags.Newline" /> serialized value.</summary>
         public const string Newline = "Newline";
 
-        /// <summary>The string representation of <see cref="Bug480Flags.CarriageReturn" /> serialized value.</summary>
-        public const string CarriageReturn = "CarriageReturn";
-
         /// <summary>The string representation of <see cref="Bug480Flags.Tab" /> serialized value.</summary>
         public const string Tab = "Tab";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.CrLf" /> serialized value.</summary>
-        public const string CrLf = "CrLf";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.MultipleNewlines" /> serialized value.</summary>
-        public const string MultipleNewlines = "MultipleNewlines";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.WindowsPath" /> serialized value.</summary>
-        public const string WindowsPath = "WindowsPath";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.MixedQuotes" /> serialized value.</summary>
-        public const string MixedQuotes = "MixedQuotes";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.LessThan" /> serialized value.</summary>
-        public const string LessThan = "LessThan";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.GreaterThan" /> serialized value.</summary>
-        public const string GreaterThan = "GreaterThan";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.Ampersand" /> serialized value.</summary>
-        public const string Ampersand = "Ampersand";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.XmlTag" /> serialized value.</summary>
-        public const string XmlTag = "XmlTag";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.XmlSpecialChars" /> serialized value.</summary>
-        public const string XmlSpecialChars = "XmlSpecialChars";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.Degree" /> serialized value.</summary>
-        public const string Degree = "Degree";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.Copyright" /> serialized value.</summary>
-        public const string Copyright = "Copyright";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.Euro" /> serialized value.</summary>
-        public const string Euro = "Euro";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.Unicode" /> serialized value.</summary>
-        public const string Unicode = "Unicode";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.Emoji" /> serialized value.</summary>
-        public const string Emoji = "Emoji";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.NullChar" /> serialized value.</summary>
-        public const string NullChar = "NullChar";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.Backspace" /> serialized value.</summary>
-        public const string Backspace = "Backspace";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.FormFeed" /> serialized value.</summary>
-        public const string FormFeed = "FormFeed";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.VerticalTab" /> serialized value.</summary>
-        public const string VerticalTab = "VerticalTab";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.JsonLike" /> serialized value.</summary>
-        public const string JsonLike = "JsonLike";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.CData" /> serialized value.</summary>
-        public const string CData = "CData";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.CodeComment" /> serialized value.</summary>
-        public const string CodeComment = "CodeComment";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.VerbatimString" /> serialized value.</summary>
-        public const string VerbatimString = "VerbatimString";
 
         /// <summary>The string representation of <see cref="Bug480Flags.EnumMemberBackslash" /> serialized value.</summary>
         public const string EnumMemberBackslash = "special\\value";
@@ -748,72 +172,18 @@ public static partial class Bug480FlagsMetadata
         /// <summary>The string representation of <see cref="Bug480Flags.EnumMemberQuoted" /> serialized value.</summary>
         public const string EnumMemberQuoted = "\"quoted\"";
 
-        /// <summary>The string representation of <see cref="Bug480Flags.EnumMemberNewline" /> serialized value.</summary>
-        public const string EnumMemberNewline = "new\nline";
-
         /// <summary>The string representation of <see cref="Bug480Flags.JsonNameEscape" /> serialized value.</summary>
         public const string JsonNameEscape = "json\\escape";
 
-        /// <summary>The string representation of <see cref="Bug480Flags.JsonNameQuoted" /> serialized value.</summary>
-        public const string JsonNameQuoted = "\"json-quoted\"";
-
         /// <summary>The string representation of <see cref="Bug480Flags.CombinedEscapes" /> serialized value.</summary>
         public const string CombinedEscapes = "json\\combined";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.EnumMemberTab" /> serialized value.</summary>
-        public const string EnumMemberTab = "tab\tvalue";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.EmptyDescription" /> serialized value.</summary>
-        public const string EmptyDescription = "EmptyDescription";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.WhitespaceDescription" /> serialized value.</summary>
-        public const string WhitespaceDescription = "WhitespaceDescription";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.EmptyLine" /> serialized value.</summary>
-        public const string EmptyLine = "EmptyLine";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.TrailingSpace" /> serialized value.</summary>
-        public const string TrailingSpace = "TrailingSpace";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.LeadingSpace" /> serialized value.</summary>
-        public const string LeadingSpace = "LeadingSpace";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.Url" /> serialized value.</summary>
-        public const string Url = "Url";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.SqlLike" /> serialized value.</summary>
-        public const string SqlLike = "SqlLike";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.RegexPattern" /> serialized value.</summary>
-        public const string RegexPattern = "RegexPattern";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.UncPath" /> serialized value.</summary>
-        public const string UncPath = "UncPath";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.UnixPath" /> serialized value.</summary>
-        public const string UnixPath = "UnixPath";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.DoubleBackslash" /> serialized value.</summary>
-        public const string DoubleBackslash = "DoubleBackslash";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.TripleQuote" /> serialized value.</summary>
-        public const string TripleQuote = "TripleQuote";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.TripleNewline" /> serialized value.</summary>
-        public const string TripleNewline = "TripleNewline";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.ComplexError" /> serialized value.</summary>
-        public const string ComplexError = "ComplexError";
-
-        /// <summary>The string representation of <see cref="Bug480Flags.EscapedJson" /> serialized value.</summary>
-        public const string EscapedJson = "EscapedJson";
     }
 
     /// <summary>Provides static values for <see cref="Bug480Flags" /> UTF-8 encoded serialized members values.</summary>
     public static partial class Utf8JsonValue
     {
         /// <summary>Represents the largest possible number of bytes produced by serializing a <see cref="Bug480Flags" /> value to UTF-8 string, based on defined members.</summary>
-        public const int MaxBytesLength = 21;
+        public const int MaxBytesLength = 13;
 
         /// <summary>The UTF-8 representation of <see cref="Bug480Flags.Backslash" /> serialized value.</summary>
         public static ReadOnlySpan<byte> Backslash => new byte[9] { 66, 97, 99, 107, 115, 108, 97, 115, 104 };
@@ -821,83 +191,11 @@ public static partial class Bug480FlagsMetadata
         /// <summary>The UTF-8 representation of <see cref="Bug480Flags.DoubleQuote" /> serialized value.</summary>
         public static ReadOnlySpan<byte> DoubleQuote => new byte[11] { 68, 111, 117, 98, 108, 101, 81, 117, 111, 116, 101 };
 
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.SingleQuote" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> SingleQuote => new byte[11] { 83, 105, 110, 103, 108, 101, 81, 117, 111, 116, 101 };
-
         /// <summary>The UTF-8 representation of <see cref="Bug480Flags.Newline" /> serialized value.</summary>
         public static ReadOnlySpan<byte> Newline => new byte[7] { 78, 101, 119, 108, 105, 110, 101 };
 
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.CarriageReturn" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> CarriageReturn => new byte[14] { 67, 97, 114, 114, 105, 97, 103, 101, 82, 101, 116, 117, 114, 110 };
-
         /// <summary>The UTF-8 representation of <see cref="Bug480Flags.Tab" /> serialized value.</summary>
         public static ReadOnlySpan<byte> Tab => new byte[3] { 84, 97, 98 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.CrLf" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> CrLf => new byte[4] { 67, 114, 76, 102 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.MultipleNewlines" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> MultipleNewlines => new byte[16] { 77, 117, 108, 116, 105, 112, 108, 101, 78, 101, 119, 108, 105, 110, 101, 115 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.WindowsPath" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> WindowsPath => new byte[11] { 87, 105, 110, 100, 111, 119, 115, 80, 97, 116, 104 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.MixedQuotes" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> MixedQuotes => new byte[11] { 77, 105, 120, 101, 100, 81, 117, 111, 116, 101, 115 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.LessThan" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> LessThan => new byte[8] { 76, 101, 115, 115, 84, 104, 97, 110 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.GreaterThan" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> GreaterThan => new byte[11] { 71, 114, 101, 97, 116, 101, 114, 84, 104, 97, 110 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.Ampersand" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> Ampersand => new byte[9] { 65, 109, 112, 101, 114, 115, 97, 110, 100 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.XmlTag" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> XmlTag => new byte[6] { 88, 109, 108, 84, 97, 103 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.XmlSpecialChars" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> XmlSpecialChars => new byte[15] { 88, 109, 108, 83, 112, 101, 99, 105, 97, 108, 67, 104, 97, 114, 115 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.Degree" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> Degree => new byte[6] { 68, 101, 103, 114, 101, 101 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.Copyright" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> Copyright => new byte[9] { 67, 111, 112, 121, 114, 105, 103, 104, 116 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.Euro" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> Euro => new byte[4] { 69, 117, 114, 111 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.Unicode" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> Unicode => new byte[7] { 85, 110, 105, 99, 111, 100, 101 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.Emoji" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> Emoji => new byte[5] { 69, 109, 111, 106, 105 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.NullChar" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> NullChar => new byte[8] { 78, 117, 108, 108, 67, 104, 97, 114 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.Backspace" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> Backspace => new byte[9] { 66, 97, 99, 107, 115, 112, 97, 99, 101 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.FormFeed" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> FormFeed => new byte[8] { 70, 111, 114, 109, 70, 101, 101, 100 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.VerticalTab" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> VerticalTab => new byte[11] { 86, 101, 114, 116, 105, 99, 97, 108, 84, 97, 98 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.JsonLike" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> JsonLike => new byte[8] { 74, 115, 111, 110, 76, 105, 107, 101 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.CData" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> CData => new byte[5] { 67, 68, 97, 116, 97 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.CodeComment" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> CodeComment => new byte[11] { 67, 111, 100, 101, 67, 111, 109, 109, 101, 110, 116 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.VerbatimString" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> VerbatimString => new byte[14] { 86, 101, 114, 98, 97, 116, 105, 109, 83, 116, 114, 105, 110, 103 };
 
         /// <summary>The UTF-8 representation of <see cref="Bug480Flags.EnumMemberBackslash" /> serialized value.</summary>
         public static ReadOnlySpan<byte> EnumMemberBackslash => new byte[13] { 115, 112, 101, 99, 105, 97, 108, 92, 118, 97, 108, 117, 101 };
@@ -905,64 +203,10 @@ public static partial class Bug480FlagsMetadata
         /// <summary>The UTF-8 representation of <see cref="Bug480Flags.EnumMemberQuoted" /> serialized value.</summary>
         public static ReadOnlySpan<byte> EnumMemberQuoted => new byte[8] { 34, 113, 117, 111, 116, 101, 100, 34 };
 
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.EnumMemberNewline" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> EnumMemberNewline => new byte[8] { 110, 101, 119, 10, 108, 105, 110, 101 };
-
         /// <summary>The UTF-8 representation of <see cref="Bug480Flags.JsonNameEscape" /> serialized value.</summary>
         public static ReadOnlySpan<byte> JsonNameEscape => new byte[11] { 106, 115, 111, 110, 92, 101, 115, 99, 97, 112, 101 };
 
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.JsonNameQuoted" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> JsonNameQuoted => new byte[13] { 34, 106, 115, 111, 110, 45, 113, 117, 111, 116, 101, 100, 34 };
-
         /// <summary>The UTF-8 representation of <see cref="Bug480Flags.CombinedEscapes" /> serialized value.</summary>
         public static ReadOnlySpan<byte> CombinedEscapes => new byte[13] { 106, 115, 111, 110, 92, 99, 111, 109, 98, 105, 110, 101, 100 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.EnumMemberTab" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> EnumMemberTab => new byte[9] { 116, 97, 98, 9, 118, 97, 108, 117, 101 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.EmptyDescription" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> EmptyDescription => new byte[16] { 69, 109, 112, 116, 121, 68, 101, 115, 99, 114, 105, 112, 116, 105, 111, 110 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.WhitespaceDescription" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> WhitespaceDescription => new byte[21] { 87, 104, 105, 116, 101, 115, 112, 97, 99, 101, 68, 101, 115, 99, 114, 105, 112, 116, 105, 111, 110 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.EmptyLine" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> EmptyLine => new byte[9] { 69, 109, 112, 116, 121, 76, 105, 110, 101 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.TrailingSpace" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> TrailingSpace => new byte[13] { 84, 114, 97, 105, 108, 105, 110, 103, 83, 112, 97, 99, 101 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.LeadingSpace" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> LeadingSpace => new byte[12] { 76, 101, 97, 100, 105, 110, 103, 83, 112, 97, 99, 101 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.Url" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> Url => new byte[3] { 85, 114, 108 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.SqlLike" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> SqlLike => new byte[7] { 83, 113, 108, 76, 105, 107, 101 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.RegexPattern" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> RegexPattern => new byte[12] { 82, 101, 103, 101, 120, 80, 97, 116, 116, 101, 114, 110 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.UncPath" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> UncPath => new byte[7] { 85, 110, 99, 80, 97, 116, 104 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.UnixPath" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> UnixPath => new byte[8] { 85, 110, 105, 120, 80, 97, 116, 104 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.DoubleBackslash" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> DoubleBackslash => new byte[15] { 68, 111, 117, 98, 108, 101, 66, 97, 99, 107, 115, 108, 97, 115, 104 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.TripleQuote" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> TripleQuote => new byte[11] { 84, 114, 105, 112, 108, 101, 81, 117, 111, 116, 101 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.TripleNewline" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> TripleNewline => new byte[13] { 84, 114, 105, 112, 108, 101, 78, 101, 119, 108, 105, 110, 101 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.ComplexError" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> ComplexError => new byte[12] { 67, 111, 109, 112, 108, 101, 120, 69, 114, 114, 111, 114 };
-
-        /// <summary>The UTF-8 representation of <see cref="Bug480Flags.EscapedJson" /> serialized value.</summary>
-        public static ReadOnlySpan<byte> EscapedJson => new byte[11] { 69, 115, 99, 97, 112, 101, 100, 74, 115, 111, 110 };
     }
 }

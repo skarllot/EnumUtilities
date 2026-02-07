@@ -76,15 +76,32 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             bool allowNumbers = true
         )
         {
+            var emptyMember = Model.Values.FirstOrDefault(x => keySelector(x)?.Length == 0);
+
             this.Write("    private static bool TryParse");
             this.Write((type));
             this.Write("(ReadOnlySpan<char> ");
             this.Write((parameterName));
             this.Write(", StringComparison comparisonType, bool throwOnFailure, out ");
             this.Write((Model.UnderlyingType));
-            this.Write(" result)\n    {\n        if (!");
-            this.Write((parameterName));
-            this.Write(".IsEmpty)\n        {\n");
+            this.Write(" result)\n    {\n");
+
+            if (emptyMember != null)
+            {
+                this.Write("        if (");
+                this.Write((parameterName));
+                this.Write(".IsEmpty)\n        {\n            result = ");
+                this.Write((emptyMember.MemberValue));
+                this.Write(";\n            return true;\n        }\n        else\n");
+            }
+            else
+            {
+                this.Write("        if (!");
+                this.Write((parameterName));
+                this.Write(".IsEmpty)\n");
+            }
+
+            this.Write("        {\n");
 
             if (allowNumbers)
             {
@@ -126,11 +143,16 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
                 this.Write("        ParseFailure:\n");
             }
 
-            this.Write(
-                "        if (throwOnFailure)\n        {\n            ThrowHelper.ThrowInvalidEmptyParseArgument(nameof("
-            );
-            this.Write((parameterName));
-            this.Write("));\n        }\n\n        result = 0;\n        return false;\n    }\n");
+            if (allowNumbers || emptyMember == null)
+            {
+                this.Write(
+                    "        if (throwOnFailure)\n        {\n            ThrowHelper.ThrowInvalidEmptyParseArgument(nameof("
+                );
+                this.Write((parameterName));
+                this.Write("));\n        }\n\n        result = 0;\n        return false;\n");
+            }
+
+            this.Write("    }\n");
 
             Write('\n');
             WriteTryParseNonNumeric(type, parameterName);

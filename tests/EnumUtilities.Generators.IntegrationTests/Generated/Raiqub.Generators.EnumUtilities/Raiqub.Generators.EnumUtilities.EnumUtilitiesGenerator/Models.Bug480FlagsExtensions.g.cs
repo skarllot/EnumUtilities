@@ -48,54 +48,12 @@ public static partial class Bug480FlagsExtensions
         {
             1 => true,
             2 => true,
-            3 => true,
             4 => true,
-            5 => true,
-            6 => true,
-            7 => true,
             8 => true,
-            9 => true,
-            10 => true,
-            11 => true,
-            12 => true,
-            13 => true,
-            14 => true,
-            15 => true,
             16 => true,
-            17 => true,
-            18 => true,
-            19 => true,
-            20 => true,
-            21 => true,
-            22 => true,
-            23 => true,
-            24 => true,
-            25 => true,
-            26 => true,
-            27 => true,
-            28 => true,
-            29 => true,
-            30 => true,
-            31 => true,
             32 => true,
-            33 => true,
-            34 => true,
-            35 => true,
-            36 => true,
-            37 => true,
-            38 => true,
-            39 => true,
-            40 => true,
-            41 => true,
-            42 => true,
-            43 => true,
-            44 => true,
-            45 => true,
-            46 => true,
-            47 => true,
-            48 => true,
-            49 => true,
-            50 => true,
+            64 => true,
+            128 => true,
             _ => false
         };
     }
@@ -116,128 +74,16 @@ public static partial class Bug480FlagsExtensions
         int count = 0, foundItemsCount = 0;
         if (true)
         {
-            if ((value & 50) == 50)
+            if ((value & 128) == 128)
             {
-                value -= 50;
-                count = checked(count + 11);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 49) == 49)
-            {
-                value -= 49;
-                count = checked(count + 12);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 48) == 48)
-            {
-                value -= 48;
-                count = checked(count + 13);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 47) == 47)
-            {
-                value -= 47;
-                count = checked(count + 11);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 46) == 46)
-            {
-                value -= 46;
+                value -= 128;
                 count = checked(count + 15);
                 foundItemsCount++;
                 if (value == 0) goto CountLength;
             }
-            if ((value & 45) == 45)
+            if ((value & 64) == 64)
             {
-                value -= 45;
-                count = checked(count + 8);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 44) == 44)
-            {
-                value -= 44;
-                count = checked(count + 7);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 43) == 43)
-            {
-                value -= 43;
-                count = checked(count + 12);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 42) == 42)
-            {
-                value -= 42;
-                count = checked(count + 7);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 41) == 41)
-            {
-                value -= 41;
-                count = checked(count + 3);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 40) == 40)
-            {
-                value -= 40;
-                count = checked(count + 12);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 39) == 39)
-            {
-                value -= 39;
-                count = checked(count + 13);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 38) == 38)
-            {
-                value -= 38;
-                count = checked(count + 9);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 37) == 37)
-            {
-                value -= 37;
-                count = checked(count + 21);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 36) == 36)
-            {
-                value -= 36;
-                count = checked(count + 16);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 35) == 35)
-            {
-                value -= 35;
-                count = checked(count + 13);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 34) == 34)
-            {
-                value -= 34;
-                count = checked(count + 15);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 33) == 33)
-            {
-                value -= 33;
+                value -= 64;
                 count = checked(count + 14);
                 foundItemsCount++;
                 if (value == 0) goto CountLength;
@@ -245,196 +91,21 @@ public static partial class Bug480FlagsExtensions
             if ((value & 32) == 32)
             {
                 value -= 32;
-                count = checked(count + 14);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 31) == 31)
-            {
-                value -= 31;
-                count = checked(count + 17);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 30) == 30)
-            {
-                value -= 30;
                 count = checked(count + 16);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 29) == 29)
-            {
-                value -= 29;
-                count = checked(count + 19);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 28) == 28)
-            {
-                value -= 28;
-                count = checked(count + 14);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 27) == 27)
-            {
-                value -= 27;
-                count = checked(count + 11);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 26) == 26)
-            {
-                value -= 26;
-                count = checked(count + 5);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 25) == 25)
-            {
-                value -= 25;
-                count = checked(count + 8);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 24) == 24)
-            {
-                value -= 24;
-                count = checked(count + 11);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 23) == 23)
-            {
-                value -= 23;
-                count = checked(count + 8);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 22) == 22)
-            {
-                value -= 22;
-                count = checked(count + 9);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 21) == 21)
-            {
-                value -= 21;
-                count = checked(count + 8);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 20) == 20)
-            {
-                value -= 20;
-                count = checked(count + 5);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 19) == 19)
-            {
-                value -= 19;
-                count = checked(count + 7);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 18) == 18)
-            {
-                value -= 18;
-                count = checked(count + 4);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 17) == 17)
-            {
-                value -= 17;
-                count = checked(count + 9);
                 foundItemsCount++;
                 if (value == 0) goto CountLength;
             }
             if ((value & 16) == 16)
             {
                 value -= 16;
-                count = checked(count + 6);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 15) == 15)
-            {
-                value -= 15;
-                count = checked(count + 15);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 14) == 14)
-            {
-                value -= 14;
-                count = checked(count + 6);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 13) == 13)
-            {
-                value -= 13;
-                count = checked(count + 9);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 12) == 12)
-            {
-                value -= 12;
-                count = checked(count + 11);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 11) == 11)
-            {
-                value -= 11;
-                count = checked(count + 8);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 10) == 10)
-            {
-                value -= 10;
-                count = checked(count + 11);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 9) == 9)
-            {
-                value -= 9;
-                count = checked(count + 11);
+                count = checked(count + 19);
                 foundItemsCount++;
                 if (value == 0) goto CountLength;
             }
             if ((value & 8) == 8)
             {
                 value -= 8;
-                count = checked(count + 16);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 7) == 7)
-            {
-                value -= 7;
-                count = checked(count + 4);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 6) == 6)
-            {
-                value -= 6;
                 count = checked(count + 3);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 5) == 5)
-            {
-                value -= 5;
-                count = checked(count + 14);
                 foundItemsCount++;
                 if (value == 0) goto CountLength;
             }
@@ -442,13 +113,6 @@ public static partial class Bug480FlagsExtensions
             {
                 value -= 4;
                 count = checked(count + 7);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 3) == 3)
-            {
-                value -= 3;
-                count = checked(count + 11);
                 foundItemsCount++;
                 if (value == 0) goto CountLength;
             }
@@ -478,14 +142,14 @@ CountLength:
         return checked(count + (separatorStringLength * (foundItemsCount - 1)));
     }
 
-    private static readonly string[] s_formatNames = new string[50] { "EscapedJson", "ComplexError", "TripleNewline", "TripleQuote", "DoubleBackslash", "UnixPath", "UncPath", "RegexPattern", "SqlLike", "Url", "LeadingSpace", "TrailingSpace", "EmptyLine", "WhitespaceDescription", "EmptyDescription", "EnumMemberTab", "CombinedEscapes", "JsonNameQuoted", "JsonNameEscape", "EnumMemberNewline", "EnumMemberQuoted", "EnumMemberBackslash", "VerbatimString", "CodeComment", "CData", "JsonLike", "VerticalTab", "FormFeed", "Backspace", "NullChar", "Emoji", "Unicode", "Euro", "Copyright", "Degree", "XmlSpecialChars", "XmlTag", "Ampersand", "GreaterThan", "LessThan", "MixedQuotes", "WindowsPath", "MultipleNewlines", "CrLf", "Tab", "CarriageReturn", "Newline", "SingleQuote", "DoubleQuote", "Backslash" };
+    private static readonly string[] s_formatNames = new string[8] { "CombinedEscapes", "JsonNameEscape", "EnumMemberQuoted", "EnumMemberBackslash", "Tab", "Newline", "DoubleQuote", "Backslash" };
 
     private static string? FormatFlagNames(int value)
     {
         string? result = GetNameInlined(value);
         if (result is null)
         {
-            Span<int> foundItems = stackalloc int[6];
+            Span<int> foundItems = stackalloc int[8];
             if (TryFindFlagsNames(value, foundItems, out int foundItemsCount, out int resultLength))
             {
                 result = EnumStringFormatter.WriteMultipleFoundFlagsNames(s_formatNames, foundItems.Slice(0, foundItemsCount), resultLength);
@@ -501,354 +165,60 @@ CountLength:
         foundItemsCount = 0;
         if (true)
         {
-            if ((value & 50) == 50)
+            if ((value & 128) == 128)
             {
-                value -= 50;
-                resultLength = checked(resultLength + 11);
+                value -= 128;
+                resultLength = checked(resultLength + 15);
                 foundItems[foundItemsCount++] = 0;
                 if (value == 0) return true;
             }
-            if ((value & 49) == 49)
+            if ((value & 64) == 64)
             {
-                value -= 49;
-                resultLength = checked(resultLength + 12);
-                foundItems[foundItemsCount++] = 1;
-                if (value == 0) return true;
-            }
-            if ((value & 48) == 48)
-            {
-                value -= 48;
-                resultLength = checked(resultLength + 13);
-                foundItems[foundItemsCount++] = 2;
-                if (value == 0) return true;
-            }
-            if ((value & 47) == 47)
-            {
-                value -= 47;
-                resultLength = checked(resultLength + 11);
-                foundItems[foundItemsCount++] = 3;
-                if (value == 0) return true;
-            }
-            if ((value & 46) == 46)
-            {
-                value -= 46;
-                resultLength = checked(resultLength + 15);
-                foundItems[foundItemsCount++] = 4;
-                if (value == 0) return true;
-            }
-            if ((value & 45) == 45)
-            {
-                value -= 45;
-                resultLength = checked(resultLength + 8);
-                foundItems[foundItemsCount++] = 5;
-                if (value == 0) return true;
-            }
-            if ((value & 44) == 44)
-            {
-                value -= 44;
-                resultLength = checked(resultLength + 7);
-                foundItems[foundItemsCount++] = 6;
-                if (value == 0) return true;
-            }
-            if ((value & 43) == 43)
-            {
-                value -= 43;
-                resultLength = checked(resultLength + 12);
-                foundItems[foundItemsCount++] = 7;
-                if (value == 0) return true;
-            }
-            if ((value & 42) == 42)
-            {
-                value -= 42;
-                resultLength = checked(resultLength + 7);
-                foundItems[foundItemsCount++] = 8;
-                if (value == 0) return true;
-            }
-            if ((value & 41) == 41)
-            {
-                value -= 41;
-                resultLength = checked(resultLength + 3);
-                foundItems[foundItemsCount++] = 9;
-                if (value == 0) return true;
-            }
-            if ((value & 40) == 40)
-            {
-                value -= 40;
-                resultLength = checked(resultLength + 12);
-                foundItems[foundItemsCount++] = 10;
-                if (value == 0) return true;
-            }
-            if ((value & 39) == 39)
-            {
-                value -= 39;
-                resultLength = checked(resultLength + 13);
-                foundItems[foundItemsCount++] = 11;
-                if (value == 0) return true;
-            }
-            if ((value & 38) == 38)
-            {
-                value -= 38;
-                resultLength = checked(resultLength + 9);
-                foundItems[foundItemsCount++] = 12;
-                if (value == 0) return true;
-            }
-            if ((value & 37) == 37)
-            {
-                value -= 37;
-                resultLength = checked(resultLength + 21);
-                foundItems[foundItemsCount++] = 13;
-                if (value == 0) return true;
-            }
-            if ((value & 36) == 36)
-            {
-                value -= 36;
-                resultLength = checked(resultLength + 16);
-                foundItems[foundItemsCount++] = 14;
-                if (value == 0) return true;
-            }
-            if ((value & 35) == 35)
-            {
-                value -= 35;
-                resultLength = checked(resultLength + 13);
-                foundItems[foundItemsCount++] = 15;
-                if (value == 0) return true;
-            }
-            if ((value & 34) == 34)
-            {
-                value -= 34;
-                resultLength = checked(resultLength + 15);
-                foundItems[foundItemsCount++] = 16;
-                if (value == 0) return true;
-            }
-            if ((value & 33) == 33)
-            {
-                value -= 33;
+                value -= 64;
                 resultLength = checked(resultLength + 14);
-                foundItems[foundItemsCount++] = 17;
+                foundItems[foundItemsCount++] = 1;
                 if (value == 0) return true;
             }
             if ((value & 32) == 32)
             {
                 value -= 32;
-                resultLength = checked(resultLength + 14);
-                foundItems[foundItemsCount++] = 18;
-                if (value == 0) return true;
-            }
-            if ((value & 31) == 31)
-            {
-                value -= 31;
-                resultLength = checked(resultLength + 17);
-                foundItems[foundItemsCount++] = 19;
-                if (value == 0) return true;
-            }
-            if ((value & 30) == 30)
-            {
-                value -= 30;
                 resultLength = checked(resultLength + 16);
-                foundItems[foundItemsCount++] = 20;
-                if (value == 0) return true;
-            }
-            if ((value & 29) == 29)
-            {
-                value -= 29;
-                resultLength = checked(resultLength + 19);
-                foundItems[foundItemsCount++] = 21;
-                if (value == 0) return true;
-            }
-            if ((value & 28) == 28)
-            {
-                value -= 28;
-                resultLength = checked(resultLength + 14);
-                foundItems[foundItemsCount++] = 22;
-                if (value == 0) return true;
-            }
-            if ((value & 27) == 27)
-            {
-                value -= 27;
-                resultLength = checked(resultLength + 11);
-                foundItems[foundItemsCount++] = 23;
-                if (value == 0) return true;
-            }
-            if ((value & 26) == 26)
-            {
-                value -= 26;
-                resultLength = checked(resultLength + 5);
-                foundItems[foundItemsCount++] = 24;
-                if (value == 0) return true;
-            }
-            if ((value & 25) == 25)
-            {
-                value -= 25;
-                resultLength = checked(resultLength + 8);
-                foundItems[foundItemsCount++] = 25;
-                if (value == 0) return true;
-            }
-            if ((value & 24) == 24)
-            {
-                value -= 24;
-                resultLength = checked(resultLength + 11);
-                foundItems[foundItemsCount++] = 26;
-                if (value == 0) return true;
-            }
-            if ((value & 23) == 23)
-            {
-                value -= 23;
-                resultLength = checked(resultLength + 8);
-                foundItems[foundItemsCount++] = 27;
-                if (value == 0) return true;
-            }
-            if ((value & 22) == 22)
-            {
-                value -= 22;
-                resultLength = checked(resultLength + 9);
-                foundItems[foundItemsCount++] = 28;
-                if (value == 0) return true;
-            }
-            if ((value & 21) == 21)
-            {
-                value -= 21;
-                resultLength = checked(resultLength + 8);
-                foundItems[foundItemsCount++] = 29;
-                if (value == 0) return true;
-            }
-            if ((value & 20) == 20)
-            {
-                value -= 20;
-                resultLength = checked(resultLength + 5);
-                foundItems[foundItemsCount++] = 30;
-                if (value == 0) return true;
-            }
-            if ((value & 19) == 19)
-            {
-                value -= 19;
-                resultLength = checked(resultLength + 7);
-                foundItems[foundItemsCount++] = 31;
-                if (value == 0) return true;
-            }
-            if ((value & 18) == 18)
-            {
-                value -= 18;
-                resultLength = checked(resultLength + 4);
-                foundItems[foundItemsCount++] = 32;
-                if (value == 0) return true;
-            }
-            if ((value & 17) == 17)
-            {
-                value -= 17;
-                resultLength = checked(resultLength + 9);
-                foundItems[foundItemsCount++] = 33;
+                foundItems[foundItemsCount++] = 2;
                 if (value == 0) return true;
             }
             if ((value & 16) == 16)
             {
                 value -= 16;
-                resultLength = checked(resultLength + 6);
-                foundItems[foundItemsCount++] = 34;
-                if (value == 0) return true;
-            }
-            if ((value & 15) == 15)
-            {
-                value -= 15;
-                resultLength = checked(resultLength + 15);
-                foundItems[foundItemsCount++] = 35;
-                if (value == 0) return true;
-            }
-            if ((value & 14) == 14)
-            {
-                value -= 14;
-                resultLength = checked(resultLength + 6);
-                foundItems[foundItemsCount++] = 36;
-                if (value == 0) return true;
-            }
-            if ((value & 13) == 13)
-            {
-                value -= 13;
-                resultLength = checked(resultLength + 9);
-                foundItems[foundItemsCount++] = 37;
-                if (value == 0) return true;
-            }
-            if ((value & 12) == 12)
-            {
-                value -= 12;
-                resultLength = checked(resultLength + 11);
-                foundItems[foundItemsCount++] = 38;
-                if (value == 0) return true;
-            }
-            if ((value & 11) == 11)
-            {
-                value -= 11;
-                resultLength = checked(resultLength + 8);
-                foundItems[foundItemsCount++] = 39;
-                if (value == 0) return true;
-            }
-            if ((value & 10) == 10)
-            {
-                value -= 10;
-                resultLength = checked(resultLength + 11);
-                foundItems[foundItemsCount++] = 40;
-                if (value == 0) return true;
-            }
-            if ((value & 9) == 9)
-            {
-                value -= 9;
-                resultLength = checked(resultLength + 11);
-                foundItems[foundItemsCount++] = 41;
+                resultLength = checked(resultLength + 19);
+                foundItems[foundItemsCount++] = 3;
                 if (value == 0) return true;
             }
             if ((value & 8) == 8)
             {
                 value -= 8;
-                resultLength = checked(resultLength + 16);
-                foundItems[foundItemsCount++] = 42;
-                if (value == 0) return true;
-            }
-            if ((value & 7) == 7)
-            {
-                value -= 7;
-                resultLength = checked(resultLength + 4);
-                foundItems[foundItemsCount++] = 43;
-                if (value == 0) return true;
-            }
-            if ((value & 6) == 6)
-            {
-                value -= 6;
                 resultLength = checked(resultLength + 3);
-                foundItems[foundItemsCount++] = 44;
-                if (value == 0) return true;
-            }
-            if ((value & 5) == 5)
-            {
-                value -= 5;
-                resultLength = checked(resultLength + 14);
-                foundItems[foundItemsCount++] = 45;
+                foundItems[foundItemsCount++] = 4;
                 if (value == 0) return true;
             }
             if ((value & 4) == 4)
             {
                 value -= 4;
                 resultLength = checked(resultLength + 7);
-                foundItems[foundItemsCount++] = 46;
-                if (value == 0) return true;
-            }
-            if ((value & 3) == 3)
-            {
-                value -= 3;
-                resultLength = checked(resultLength + 11);
-                foundItems[foundItemsCount++] = 47;
+                foundItems[foundItemsCount++] = 5;
                 if (value == 0) return true;
             }
             if ((value & 2) == 2)
             {
                 value -= 2;
                 resultLength = checked(resultLength + 11);
-                foundItems[foundItemsCount++] = 48;
+                foundItems[foundItemsCount++] = 6;
                 if (value == 0) return true;
             }
             if ((value & 1) == 1)
             {
                 value -= 1;
                 resultLength = checked(resultLength + 9);
-                foundItems[foundItemsCount++] = 49;
+                foundItems[foundItemsCount++] = 7;
                 if (value == 0) return true;
             }
         }
@@ -863,54 +233,12 @@ CountLength:
             0 => 1,
             1 => 9,
             2 => 11,
-            3 => 11,
             4 => 7,
-            5 => 14,
-            6 => 3,
-            7 => 4,
-            8 => 16,
-            9 => 11,
-            10 => 11,
-            11 => 8,
-            12 => 11,
-            13 => 9,
-            14 => 6,
-            15 => 15,
-            16 => 6,
-            17 => 9,
-            18 => 4,
-            19 => 7,
-            20 => 5,
-            21 => 8,
-            22 => 9,
-            23 => 8,
-            24 => 11,
-            25 => 8,
-            26 => 5,
-            27 => 11,
-            28 => 14,
-            29 => 19,
-            30 => 16,
-            31 => 17,
-            32 => 14,
-            33 => 14,
-            34 => 15,
-            35 => 13,
-            36 => 16,
-            37 => 21,
-            38 => 9,
-            39 => 13,
-            40 => 12,
-            41 => 3,
-            42 => 7,
-            43 => 12,
-            44 => 7,
-            45 => 8,
-            46 => 15,
-            47 => 11,
-            48 => 13,
-            49 => 12,
-            50 => 11,
+            8 => 3,
+            16 => 19,
+            32 => 16,
+            64 => 14,
+            128 => 15,
             _ => null
         };
     }
@@ -922,54 +250,12 @@ CountLength:
             0 => "0",
             1 => "Backslash",
             2 => "DoubleQuote",
-            3 => "SingleQuote",
             4 => "Newline",
-            5 => "CarriageReturn",
-            6 => "Tab",
-            7 => "CrLf",
-            8 => "MultipleNewlines",
-            9 => "WindowsPath",
-            10 => "MixedQuotes",
-            11 => "LessThan",
-            12 => "GreaterThan",
-            13 => "Ampersand",
-            14 => "XmlTag",
-            15 => "XmlSpecialChars",
-            16 => "Degree",
-            17 => "Copyright",
-            18 => "Euro",
-            19 => "Unicode",
-            20 => "Emoji",
-            21 => "NullChar",
-            22 => "Backspace",
-            23 => "FormFeed",
-            24 => "VerticalTab",
-            25 => "JsonLike",
-            26 => "CData",
-            27 => "CodeComment",
-            28 => "VerbatimString",
-            29 => "EnumMemberBackslash",
-            30 => "EnumMemberQuoted",
-            31 => "EnumMemberNewline",
-            32 => "JsonNameEscape",
-            33 => "JsonNameQuoted",
-            34 => "CombinedEscapes",
-            35 => "EnumMemberTab",
-            36 => "EmptyDescription",
-            37 => "WhitespaceDescription",
-            38 => "EmptyLine",
-            39 => "TrailingSpace",
-            40 => "LeadingSpace",
-            41 => "Url",
-            42 => "SqlLike",
-            43 => "RegexPattern",
-            44 => "UncPath",
-            45 => "UnixPath",
-            46 => "DoubleBackslash",
-            47 => "TripleQuote",
-            48 => "TripleNewline",
-            49 => "ComplexError",
-            50 => "EscapedJson",
+            8 => "Tab",
+            16 => "EnumMemberBackslash",
+            32 => "EnumMemberQuoted",
+            64 => "JsonNameEscape",
+            128 => "CombinedEscapes",
             _ => null
         };
     }
@@ -1049,128 +335,16 @@ CountLength:
         int count = 0, foundItemsCount = 0;
         if (true)
         {
-            if ((value & 50) == 50)
+            if ((value & 128) == 128)
             {
-                value -= 50;
-                count = checked(count + 11);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 49) == 49)
-            {
-                value -= 49;
-                count = checked(count + 12);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 48) == 48)
-            {
-                value -= 48;
-                count = checked(count + 13);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 47) == 47)
-            {
-                value -= 47;
-                count = checked(count + 11);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 46) == 46)
-            {
-                value -= 46;
+                value -= 128;
                 count = checked(count + 15);
                 foundItemsCount++;
                 if (value == 0) goto CountLength;
             }
-            if ((value & 45) == 45)
+            if ((value & 64) == 64)
             {
-                value -= 45;
-                count = checked(count + 8);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 44) == 44)
-            {
-                value -= 44;
-                count = checked(count + 7);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 43) == 43)
-            {
-                value -= 43;
-                count = checked(count + 12);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 42) == 42)
-            {
-                value -= 42;
-                count = checked(count + 7);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 41) == 41)
-            {
-                value -= 41;
-                count = checked(count + 3);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 40) == 40)
-            {
-                value -= 40;
-                count = checked(count + 12);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 39) == 39)
-            {
-                value -= 39;
-                count = checked(count + 13);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 38) == 38)
-            {
-                value -= 38;
-                count = checked(count + 9);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 37) == 37)
-            {
-                value -= 37;
-                count = checked(count + 21);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 36) == 36)
-            {
-                value -= 36;
-                count = checked(count + 16);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 35) == 35)
-            {
-                value -= 35;
-                count = checked(count + 9);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 34) == 34)
-            {
-                value -= 34;
-                count = checked(count + 15);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 33) == 33)
-            {
-                value -= 33;
+                value -= 64;
                 count = checked(count + 14);
                 foundItemsCount++;
                 if (value == 0) goto CountLength;
@@ -1178,196 +352,21 @@ CountLength:
             if ((value & 32) == 32)
             {
                 value -= 32;
-                count = checked(count + 14);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 31) == 31)
-            {
-                value -= 31;
                 count = checked(count + 8);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 30) == 30)
-            {
-                value -= 30;
-                count = checked(count + 8);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 29) == 29)
-            {
-                value -= 29;
-                count = checked(count + 13);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 28) == 28)
-            {
-                value -= 28;
-                count = checked(count + 14);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 27) == 27)
-            {
-                value -= 27;
-                count = checked(count + 11);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 26) == 26)
-            {
-                value -= 26;
-                count = checked(count + 5);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 25) == 25)
-            {
-                value -= 25;
-                count = checked(count + 8);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 24) == 24)
-            {
-                value -= 24;
-                count = checked(count + 11);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 23) == 23)
-            {
-                value -= 23;
-                count = checked(count + 8);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 22) == 22)
-            {
-                value -= 22;
-                count = checked(count + 9);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 21) == 21)
-            {
-                value -= 21;
-                count = checked(count + 8);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 20) == 20)
-            {
-                value -= 20;
-                count = checked(count + 5);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 19) == 19)
-            {
-                value -= 19;
-                count = checked(count + 7);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 18) == 18)
-            {
-                value -= 18;
-                count = checked(count + 4);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 17) == 17)
-            {
-                value -= 17;
-                count = checked(count + 9);
                 foundItemsCount++;
                 if (value == 0) goto CountLength;
             }
             if ((value & 16) == 16)
             {
                 value -= 16;
-                count = checked(count + 6);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 15) == 15)
-            {
-                value -= 15;
-                count = checked(count + 15);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 14) == 14)
-            {
-                value -= 14;
-                count = checked(count + 6);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 13) == 13)
-            {
-                value -= 13;
-                count = checked(count + 9);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 12) == 12)
-            {
-                value -= 12;
-                count = checked(count + 11);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 11) == 11)
-            {
-                value -= 11;
-                count = checked(count + 8);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 10) == 10)
-            {
-                value -= 10;
-                count = checked(count + 11);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 9) == 9)
-            {
-                value -= 9;
-                count = checked(count + 11);
+                count = checked(count + 13);
                 foundItemsCount++;
                 if (value == 0) goto CountLength;
             }
             if ((value & 8) == 8)
             {
                 value -= 8;
-                count = checked(count + 16);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 7) == 7)
-            {
-                value -= 7;
-                count = checked(count + 4);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 6) == 6)
-            {
-                value -= 6;
                 count = checked(count + 3);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 5) == 5)
-            {
-                value -= 5;
-                count = checked(count + 14);
                 foundItemsCount++;
                 if (value == 0) goto CountLength;
             }
@@ -1375,13 +374,6 @@ CountLength:
             {
                 value -= 4;
                 count = checked(count + 7);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 3) == 3)
-            {
-                value -= 3;
-                count = checked(count + 11);
                 foundItemsCount++;
                 if (value == 0) goto CountLength;
             }
@@ -1411,14 +403,14 @@ CountLength:
         return checked(count + (separatorStringLength * (foundItemsCount - 1)));
     }
 
-    private static readonly string[] s_formatEnumMemberValues = new string[50] { "EscapedJson", "ComplexError", "TripleNewline", "TripleQuote", "DoubleBackslash", "UnixPath", "UncPath", "RegexPattern", "SqlLike", "Url", "LeadingSpace", "TrailingSpace", "EmptyLine", "WhitespaceDescription", "EmptyDescription", "tab\tvalue", "combined\\escape", "JsonNameQuoted", "JsonNameEscape", "new\nline", "\"quoted\"", "special\\value", "VerbatimString", "CodeComment", "CData", "JsonLike", "VerticalTab", "FormFeed", "Backspace", "NullChar", "Emoji", "Unicode", "Euro", "Copyright", "Degree", "XmlSpecialChars", "XmlTag", "Ampersand", "GreaterThan", "LessThan", "MixedQuotes", "WindowsPath", "MultipleNewlines", "CrLf", "Tab", "CarriageReturn", "Newline", "SingleQuote", "DoubleQuote", "Backslash" };
+    private static readonly string[] s_formatEnumMemberValues = new string[8] { "combined\\escape", "JsonNameEscape", "\"quoted\"", "special\\value", "Tab", "Newline", "DoubleQuote", "Backslash" };
 
     private static string? FormatFlagEnumMemberValues(int value)
     {
         string? result = GetEnumMemberValueInlined(value);
         if (result is null)
         {
-            Span<int> foundItems = stackalloc int[6];
+            Span<int> foundItems = stackalloc int[8];
             if (TryFindFlagsEnumMemberValues(value, foundItems, out int foundItemsCount, out int resultLength))
             {
                 result = EnumStringFormatter.WriteMultipleFoundFlagsNames(s_formatEnumMemberValues, foundItems.Slice(0, foundItemsCount), resultLength);
@@ -1434,354 +426,60 @@ CountLength:
         foundItemsCount = 0;
         if (true)
         {
-            if ((value & 50) == 50)
+            if ((value & 128) == 128)
             {
-                value -= 50;
-                resultLength = checked(resultLength + 11);
+                value -= 128;
+                resultLength = checked(resultLength + 15);
                 foundItems[foundItemsCount++] = 0;
                 if (value == 0) return true;
             }
-            if ((value & 49) == 49)
+            if ((value & 64) == 64)
             {
-                value -= 49;
-                resultLength = checked(resultLength + 12);
-                foundItems[foundItemsCount++] = 1;
-                if (value == 0) return true;
-            }
-            if ((value & 48) == 48)
-            {
-                value -= 48;
-                resultLength = checked(resultLength + 13);
-                foundItems[foundItemsCount++] = 2;
-                if (value == 0) return true;
-            }
-            if ((value & 47) == 47)
-            {
-                value -= 47;
-                resultLength = checked(resultLength + 11);
-                foundItems[foundItemsCount++] = 3;
-                if (value == 0) return true;
-            }
-            if ((value & 46) == 46)
-            {
-                value -= 46;
-                resultLength = checked(resultLength + 15);
-                foundItems[foundItemsCount++] = 4;
-                if (value == 0) return true;
-            }
-            if ((value & 45) == 45)
-            {
-                value -= 45;
-                resultLength = checked(resultLength + 8);
-                foundItems[foundItemsCount++] = 5;
-                if (value == 0) return true;
-            }
-            if ((value & 44) == 44)
-            {
-                value -= 44;
-                resultLength = checked(resultLength + 7);
-                foundItems[foundItemsCount++] = 6;
-                if (value == 0) return true;
-            }
-            if ((value & 43) == 43)
-            {
-                value -= 43;
-                resultLength = checked(resultLength + 12);
-                foundItems[foundItemsCount++] = 7;
-                if (value == 0) return true;
-            }
-            if ((value & 42) == 42)
-            {
-                value -= 42;
-                resultLength = checked(resultLength + 7);
-                foundItems[foundItemsCount++] = 8;
-                if (value == 0) return true;
-            }
-            if ((value & 41) == 41)
-            {
-                value -= 41;
-                resultLength = checked(resultLength + 3);
-                foundItems[foundItemsCount++] = 9;
-                if (value == 0) return true;
-            }
-            if ((value & 40) == 40)
-            {
-                value -= 40;
-                resultLength = checked(resultLength + 12);
-                foundItems[foundItemsCount++] = 10;
-                if (value == 0) return true;
-            }
-            if ((value & 39) == 39)
-            {
-                value -= 39;
-                resultLength = checked(resultLength + 13);
-                foundItems[foundItemsCount++] = 11;
-                if (value == 0) return true;
-            }
-            if ((value & 38) == 38)
-            {
-                value -= 38;
-                resultLength = checked(resultLength + 9);
-                foundItems[foundItemsCount++] = 12;
-                if (value == 0) return true;
-            }
-            if ((value & 37) == 37)
-            {
-                value -= 37;
-                resultLength = checked(resultLength + 21);
-                foundItems[foundItemsCount++] = 13;
-                if (value == 0) return true;
-            }
-            if ((value & 36) == 36)
-            {
-                value -= 36;
-                resultLength = checked(resultLength + 16);
-                foundItems[foundItemsCount++] = 14;
-                if (value == 0) return true;
-            }
-            if ((value & 35) == 35)
-            {
-                value -= 35;
-                resultLength = checked(resultLength + 9);
-                foundItems[foundItemsCount++] = 15;
-                if (value == 0) return true;
-            }
-            if ((value & 34) == 34)
-            {
-                value -= 34;
-                resultLength = checked(resultLength + 15);
-                foundItems[foundItemsCount++] = 16;
-                if (value == 0) return true;
-            }
-            if ((value & 33) == 33)
-            {
-                value -= 33;
+                value -= 64;
                 resultLength = checked(resultLength + 14);
-                foundItems[foundItemsCount++] = 17;
+                foundItems[foundItemsCount++] = 1;
                 if (value == 0) return true;
             }
             if ((value & 32) == 32)
             {
                 value -= 32;
-                resultLength = checked(resultLength + 14);
-                foundItems[foundItemsCount++] = 18;
-                if (value == 0) return true;
-            }
-            if ((value & 31) == 31)
-            {
-                value -= 31;
                 resultLength = checked(resultLength + 8);
-                foundItems[foundItemsCount++] = 19;
-                if (value == 0) return true;
-            }
-            if ((value & 30) == 30)
-            {
-                value -= 30;
-                resultLength = checked(resultLength + 8);
-                foundItems[foundItemsCount++] = 20;
-                if (value == 0) return true;
-            }
-            if ((value & 29) == 29)
-            {
-                value -= 29;
-                resultLength = checked(resultLength + 13);
-                foundItems[foundItemsCount++] = 21;
-                if (value == 0) return true;
-            }
-            if ((value & 28) == 28)
-            {
-                value -= 28;
-                resultLength = checked(resultLength + 14);
-                foundItems[foundItemsCount++] = 22;
-                if (value == 0) return true;
-            }
-            if ((value & 27) == 27)
-            {
-                value -= 27;
-                resultLength = checked(resultLength + 11);
-                foundItems[foundItemsCount++] = 23;
-                if (value == 0) return true;
-            }
-            if ((value & 26) == 26)
-            {
-                value -= 26;
-                resultLength = checked(resultLength + 5);
-                foundItems[foundItemsCount++] = 24;
-                if (value == 0) return true;
-            }
-            if ((value & 25) == 25)
-            {
-                value -= 25;
-                resultLength = checked(resultLength + 8);
-                foundItems[foundItemsCount++] = 25;
-                if (value == 0) return true;
-            }
-            if ((value & 24) == 24)
-            {
-                value -= 24;
-                resultLength = checked(resultLength + 11);
-                foundItems[foundItemsCount++] = 26;
-                if (value == 0) return true;
-            }
-            if ((value & 23) == 23)
-            {
-                value -= 23;
-                resultLength = checked(resultLength + 8);
-                foundItems[foundItemsCount++] = 27;
-                if (value == 0) return true;
-            }
-            if ((value & 22) == 22)
-            {
-                value -= 22;
-                resultLength = checked(resultLength + 9);
-                foundItems[foundItemsCount++] = 28;
-                if (value == 0) return true;
-            }
-            if ((value & 21) == 21)
-            {
-                value -= 21;
-                resultLength = checked(resultLength + 8);
-                foundItems[foundItemsCount++] = 29;
-                if (value == 0) return true;
-            }
-            if ((value & 20) == 20)
-            {
-                value -= 20;
-                resultLength = checked(resultLength + 5);
-                foundItems[foundItemsCount++] = 30;
-                if (value == 0) return true;
-            }
-            if ((value & 19) == 19)
-            {
-                value -= 19;
-                resultLength = checked(resultLength + 7);
-                foundItems[foundItemsCount++] = 31;
-                if (value == 0) return true;
-            }
-            if ((value & 18) == 18)
-            {
-                value -= 18;
-                resultLength = checked(resultLength + 4);
-                foundItems[foundItemsCount++] = 32;
-                if (value == 0) return true;
-            }
-            if ((value & 17) == 17)
-            {
-                value -= 17;
-                resultLength = checked(resultLength + 9);
-                foundItems[foundItemsCount++] = 33;
+                foundItems[foundItemsCount++] = 2;
                 if (value == 0) return true;
             }
             if ((value & 16) == 16)
             {
                 value -= 16;
-                resultLength = checked(resultLength + 6);
-                foundItems[foundItemsCount++] = 34;
-                if (value == 0) return true;
-            }
-            if ((value & 15) == 15)
-            {
-                value -= 15;
-                resultLength = checked(resultLength + 15);
-                foundItems[foundItemsCount++] = 35;
-                if (value == 0) return true;
-            }
-            if ((value & 14) == 14)
-            {
-                value -= 14;
-                resultLength = checked(resultLength + 6);
-                foundItems[foundItemsCount++] = 36;
-                if (value == 0) return true;
-            }
-            if ((value & 13) == 13)
-            {
-                value -= 13;
-                resultLength = checked(resultLength + 9);
-                foundItems[foundItemsCount++] = 37;
-                if (value == 0) return true;
-            }
-            if ((value & 12) == 12)
-            {
-                value -= 12;
-                resultLength = checked(resultLength + 11);
-                foundItems[foundItemsCount++] = 38;
-                if (value == 0) return true;
-            }
-            if ((value & 11) == 11)
-            {
-                value -= 11;
-                resultLength = checked(resultLength + 8);
-                foundItems[foundItemsCount++] = 39;
-                if (value == 0) return true;
-            }
-            if ((value & 10) == 10)
-            {
-                value -= 10;
-                resultLength = checked(resultLength + 11);
-                foundItems[foundItemsCount++] = 40;
-                if (value == 0) return true;
-            }
-            if ((value & 9) == 9)
-            {
-                value -= 9;
-                resultLength = checked(resultLength + 11);
-                foundItems[foundItemsCount++] = 41;
+                resultLength = checked(resultLength + 13);
+                foundItems[foundItemsCount++] = 3;
                 if (value == 0) return true;
             }
             if ((value & 8) == 8)
             {
                 value -= 8;
-                resultLength = checked(resultLength + 16);
-                foundItems[foundItemsCount++] = 42;
-                if (value == 0) return true;
-            }
-            if ((value & 7) == 7)
-            {
-                value -= 7;
-                resultLength = checked(resultLength + 4);
-                foundItems[foundItemsCount++] = 43;
-                if (value == 0) return true;
-            }
-            if ((value & 6) == 6)
-            {
-                value -= 6;
                 resultLength = checked(resultLength + 3);
-                foundItems[foundItemsCount++] = 44;
-                if (value == 0) return true;
-            }
-            if ((value & 5) == 5)
-            {
-                value -= 5;
-                resultLength = checked(resultLength + 14);
-                foundItems[foundItemsCount++] = 45;
+                foundItems[foundItemsCount++] = 4;
                 if (value == 0) return true;
             }
             if ((value & 4) == 4)
             {
                 value -= 4;
                 resultLength = checked(resultLength + 7);
-                foundItems[foundItemsCount++] = 46;
-                if (value == 0) return true;
-            }
-            if ((value & 3) == 3)
-            {
-                value -= 3;
-                resultLength = checked(resultLength + 11);
-                foundItems[foundItemsCount++] = 47;
+                foundItems[foundItemsCount++] = 5;
                 if (value == 0) return true;
             }
             if ((value & 2) == 2)
             {
                 value -= 2;
                 resultLength = checked(resultLength + 11);
-                foundItems[foundItemsCount++] = 48;
+                foundItems[foundItemsCount++] = 6;
                 if (value == 0) return true;
             }
             if ((value & 1) == 1)
             {
                 value -= 1;
                 resultLength = checked(resultLength + 9);
-                foundItems[foundItemsCount++] = 49;
+                foundItems[foundItemsCount++] = 7;
                 if (value == 0) return true;
             }
         }
@@ -1796,54 +494,12 @@ CountLength:
             0 => 1,
             1 => 9,
             2 => 11,
-            3 => 11,
             4 => 7,
-            5 => 14,
-            6 => 3,
-            7 => 4,
-            8 => 16,
-            9 => 11,
-            10 => 11,
-            11 => 8,
-            12 => 11,
-            13 => 9,
-            14 => 6,
-            15 => 15,
-            16 => 6,
-            17 => 9,
-            18 => 4,
-            19 => 7,
-            20 => 5,
-            21 => 8,
-            22 => 9,
-            23 => 8,
-            24 => 11,
-            25 => 8,
-            26 => 5,
-            27 => 11,
-            28 => 14,
-            29 => 13,
-            30 => 8,
-            31 => 8,
-            32 => 14,
-            33 => 14,
-            34 => 15,
-            35 => 9,
-            36 => 16,
-            37 => 21,
-            38 => 9,
-            39 => 13,
-            40 => 12,
-            41 => 3,
-            42 => 7,
-            43 => 12,
-            44 => 7,
-            45 => 8,
-            46 => 15,
-            47 => 11,
-            48 => 13,
-            49 => 12,
-            50 => 11,
+            8 => 3,
+            16 => 13,
+            32 => 8,
+            64 => 14,
+            128 => 15,
             _ => null
         };
     }
@@ -1855,54 +511,12 @@ CountLength:
             0 => "0",
             1 => "Backslash",
             2 => "DoubleQuote",
-            3 => "SingleQuote",
             4 => "Newline",
-            5 => "CarriageReturn",
-            6 => "Tab",
-            7 => "CrLf",
-            8 => "MultipleNewlines",
-            9 => "WindowsPath",
-            10 => "MixedQuotes",
-            11 => "LessThan",
-            12 => "GreaterThan",
-            13 => "Ampersand",
-            14 => "XmlTag",
-            15 => "XmlSpecialChars",
-            16 => "Degree",
-            17 => "Copyright",
-            18 => "Euro",
-            19 => "Unicode",
-            20 => "Emoji",
-            21 => "NullChar",
-            22 => "Backspace",
-            23 => "FormFeed",
-            24 => "VerticalTab",
-            25 => "JsonLike",
-            26 => "CData",
-            27 => "CodeComment",
-            28 => "VerbatimString",
-            29 => "special\\value",
-            30 => "\"quoted\"",
-            31 => "new\nline",
-            32 => "JsonNameEscape",
-            33 => "JsonNameQuoted",
-            34 => "combined\\escape",
-            35 => "tab\tvalue",
-            36 => "EmptyDescription",
-            37 => "WhitespaceDescription",
-            38 => "EmptyLine",
-            39 => "TrailingSpace",
-            40 => "LeadingSpace",
-            41 => "Url",
-            42 => "SqlLike",
-            43 => "RegexPattern",
-            44 => "UncPath",
-            45 => "UnixPath",
-            46 => "DoubleBackslash",
-            47 => "TripleQuote",
-            48 => "TripleNewline",
-            49 => "ComplexError",
-            50 => "EscapedJson",
+            8 => "Tab",
+            16 => "special\\value",
+            32 => "\"quoted\"",
+            64 => "JsonNameEscape",
+            128 => "combined\\escape",
             _ => null
         };
     }
@@ -1913,54 +527,12 @@ CountLength:
         {
             1 => "\\",
             2 => "\"",
-            3 => "'",
             4 => "\n",
-            5 => "\r",
-            6 => "\t",
-            7 => "\r\n",
-            8 => "Line 1\nLine 2\nLine 3",
-            9 => "Path: C:\\Users\\Documents\\File.txt",
-            10 => "Say \"Hello\" to the 'world'",
-            11 => "Value < 10",
-            12 => "Value > 10",
-            13 => "X & Y",
-            14 => "Tag: <xml>",
-            15 => "Formula: 5 < x && x > 0",
-            16 => "Temperature: 25°C",
-            17 => "Copyright © 2024",
-            18 => "Price: €100",
-            19 => "Hello 世界",
-            20 => "Emoji: 🚀",
-            21 => "\0",
-            22 => "\b",
-            23 => "\f",
-            24 => "\v",
-            25 => "{\n\t\"key\": \"value\",\n\t\"escaped\": \"\\\"quoted\\\"\"\n}",
-            26 => "<![CDATA[Some <data> here]]>",
-            27 => "/* Comment */ // Another",
-            28 => "Verbatim: \"quoted\"",
-            29 => "Custom value with backslash",
-            30 => "Quoted enum value",
-            31 => "Newline in value",
-            32 => "JSON name with escape",
-            33 => "JSON name quoted",
-            34 => "All three attributes with escapes",
-            35 => "Tab in EnumMember value",
-            36 => "",
-            37 => "     ",
-            38 => "Line 1\n\nLine 3",
-            39 => "Trailing space   ",
-            40 => "   Leading space",
-            41 => "https://example.com/path?param=value&other=123",
-            42 => "SELECT * FROM Users WHERE Name = 'O''Brien'",
-            43 => "^\\d{3}-\\d{2}-\\d{4}$",
-            44 => "\\\\server\\share\\folder\\file.txt",
-            45 => "/usr/local/bin",
-            46 => "\\\\",
-            47 => "\"\"\"",
-            48 => "\n\n\n",
-            49 => "Error: \"File not found\" at C:\\Path\\To\\File.txt\nDetails: <none>",
-            50 => "JSON: {\"key\": \"value with \\\"quotes\\\" and \\n newlines\"}",
+            8 => "\t",
+            16 => "Custom value with backslash",
+            32 => "Quoted enum value",
+            64 => "JSON name with escape",
+            128 => "All three attributes with escapes",
             _ => null
         };
     }
@@ -1993,325 +565,38 @@ CountLength:
         int count = 0, foundItemsCount = 0;
         if (true)
         {
-            if ((value & 50) == 50)
+            if ((value & 128) == 128)
             {
-                value -= 50;
+                value -= 128;
+                count = checked(count + 13);
+                foundItemsCount++;
+                if (value == 0) goto CountLength;
+            }
+            if ((value & 64) == 64)
+            {
+                value -= 64;
                 count = checked(count + 11);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 49) == 49)
-            {
-                value -= 49;
-                count = checked(count + 12);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 48) == 48)
-            {
-                value -= 48;
-                count = checked(count + 13);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 47) == 47)
-            {
-                value -= 47;
-                count = checked(count + 11);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 46) == 46)
-            {
-                value -= 46;
-                count = checked(count + 15);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 45) == 45)
-            {
-                value -= 45;
-                count = checked(count + 8);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 44) == 44)
-            {
-                value -= 44;
-                count = checked(count + 7);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 43) == 43)
-            {
-                value -= 43;
-                count = checked(count + 12);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 42) == 42)
-            {
-                value -= 42;
-                count = checked(count + 7);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 41) == 41)
-            {
-                value -= 41;
-                count = checked(count + 3);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 40) == 40)
-            {
-                value -= 40;
-                count = checked(count + 12);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 39) == 39)
-            {
-                value -= 39;
-                count = checked(count + 13);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 38) == 38)
-            {
-                value -= 38;
-                count = checked(count + 9);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 37) == 37)
-            {
-                value -= 37;
-                count = checked(count + 21);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 36) == 36)
-            {
-                value -= 36;
-                count = checked(count + 16);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 35) == 35)
-            {
-                value -= 35;
-                count = checked(count + 9);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 34) == 34)
-            {
-                value -= 34;
-                count = checked(count + 13);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 33) == 33)
-            {
-                value -= 33;
-                count = checked(count + 13);
                 foundItemsCount++;
                 if (value == 0) goto CountLength;
             }
             if ((value & 32) == 32)
             {
                 value -= 32;
-                count = checked(count + 11);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 31) == 31)
-            {
-                value -= 31;
                 count = checked(count + 8);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 30) == 30)
-            {
-                value -= 30;
-                count = checked(count + 8);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 29) == 29)
-            {
-                value -= 29;
-                count = checked(count + 13);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 28) == 28)
-            {
-                value -= 28;
-                count = checked(count + 14);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 27) == 27)
-            {
-                value -= 27;
-                count = checked(count + 11);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 26) == 26)
-            {
-                value -= 26;
-                count = checked(count + 5);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 25) == 25)
-            {
-                value -= 25;
-                count = checked(count + 8);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 24) == 24)
-            {
-                value -= 24;
-                count = checked(count + 11);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 23) == 23)
-            {
-                value -= 23;
-                count = checked(count + 8);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 22) == 22)
-            {
-                value -= 22;
-                count = checked(count + 9);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 21) == 21)
-            {
-                value -= 21;
-                count = checked(count + 8);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 20) == 20)
-            {
-                value -= 20;
-                count = checked(count + 5);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 19) == 19)
-            {
-                value -= 19;
-                count = checked(count + 7);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 18) == 18)
-            {
-                value -= 18;
-                count = checked(count + 4);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 17) == 17)
-            {
-                value -= 17;
-                count = checked(count + 9);
                 foundItemsCount++;
                 if (value == 0) goto CountLength;
             }
             if ((value & 16) == 16)
             {
                 value -= 16;
-                count = checked(count + 6);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 15) == 15)
-            {
-                value -= 15;
-                count = checked(count + 15);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 14) == 14)
-            {
-                value -= 14;
-                count = checked(count + 6);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 13) == 13)
-            {
-                value -= 13;
-                count = checked(count + 9);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 12) == 12)
-            {
-                value -= 12;
-                count = checked(count + 11);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 11) == 11)
-            {
-                value -= 11;
-                count = checked(count + 8);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 10) == 10)
-            {
-                value -= 10;
-                count = checked(count + 11);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 9) == 9)
-            {
-                value -= 9;
-                count = checked(count + 11);
+                count = checked(count + 13);
                 foundItemsCount++;
                 if (value == 0) goto CountLength;
             }
             if ((value & 8) == 8)
             {
                 value -= 8;
-                count = checked(count + 16);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 7) == 7)
-            {
-                value -= 7;
-                count = checked(count + 4);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 6) == 6)
-            {
-                value -= 6;
                 count = checked(count + 3);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 5) == 5)
-            {
-                value -= 5;
-                count = checked(count + 14);
                 foundItemsCount++;
                 if (value == 0) goto CountLength;
             }
@@ -2319,13 +604,6 @@ CountLength:
             {
                 value -= 4;
                 count = checked(count + 7);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 3) == 3)
-            {
-                value -= 3;
-                count = checked(count + 11);
                 foundItemsCount++;
                 if (value == 0) goto CountLength;
             }
@@ -2355,14 +633,14 @@ CountLength:
         return checked(count + (separatorStringLength * (foundItemsCount - 1)));
     }
 
-    private static readonly string[] s_formatJsonStrings = new string[50] { "EscapedJson", "ComplexError", "TripleNewline", "TripleQuote", "DoubleBackslash", "UnixPath", "UncPath", "RegexPattern", "SqlLike", "Url", "LeadingSpace", "TrailingSpace", "EmptyLine", "WhitespaceDescription", "EmptyDescription", "tab\tvalue", "json\\combined", "\"json-quoted\"", "json\\escape", "new\nline", "\"quoted\"", "special\\value", "VerbatimString", "CodeComment", "CData", "JsonLike", "VerticalTab", "FormFeed", "Backspace", "NullChar", "Emoji", "Unicode", "Euro", "Copyright", "Degree", "XmlSpecialChars", "XmlTag", "Ampersand", "GreaterThan", "LessThan", "MixedQuotes", "WindowsPath", "MultipleNewlines", "CrLf", "Tab", "CarriageReturn", "Newline", "SingleQuote", "DoubleQuote", "Backslash" };
+    private static readonly string[] s_formatJsonStrings = new string[8] { "json\\combined", "json\\escape", "\"quoted\"", "special\\value", "Tab", "Newline", "DoubleQuote", "Backslash" };
 
     private static string? FormatFlagJsonStrings(int value)
     {
         string? result = GetJsonStringInlined(value);
         if (result is null)
         {
-            Span<int> foundItems = stackalloc int[6];
+            Span<int> foundItems = stackalloc int[8];
             if (TryFindFlagsJsonStrings(value, foundItems, out int foundItemsCount, out int resultLength))
             {
                 result = EnumStringFormatter.WriteMultipleFoundFlagsNames(s_formatJsonStrings, foundItems.Slice(0, foundItemsCount), resultLength);
@@ -2378,354 +656,60 @@ CountLength:
         foundItemsCount = 0;
         if (true)
         {
-            if ((value & 50) == 50)
+            if ((value & 128) == 128)
             {
-                value -= 50;
-                resultLength = checked(resultLength + 11);
+                value -= 128;
+                resultLength = checked(resultLength + 13);
                 foundItems[foundItemsCount++] = 0;
                 if (value == 0) return true;
             }
-            if ((value & 49) == 49)
+            if ((value & 64) == 64)
             {
-                value -= 49;
-                resultLength = checked(resultLength + 12);
-                foundItems[foundItemsCount++] = 1;
-                if (value == 0) return true;
-            }
-            if ((value & 48) == 48)
-            {
-                value -= 48;
-                resultLength = checked(resultLength + 13);
-                foundItems[foundItemsCount++] = 2;
-                if (value == 0) return true;
-            }
-            if ((value & 47) == 47)
-            {
-                value -= 47;
+                value -= 64;
                 resultLength = checked(resultLength + 11);
-                foundItems[foundItemsCount++] = 3;
-                if (value == 0) return true;
-            }
-            if ((value & 46) == 46)
-            {
-                value -= 46;
-                resultLength = checked(resultLength + 15);
-                foundItems[foundItemsCount++] = 4;
-                if (value == 0) return true;
-            }
-            if ((value & 45) == 45)
-            {
-                value -= 45;
-                resultLength = checked(resultLength + 8);
-                foundItems[foundItemsCount++] = 5;
-                if (value == 0) return true;
-            }
-            if ((value & 44) == 44)
-            {
-                value -= 44;
-                resultLength = checked(resultLength + 7);
-                foundItems[foundItemsCount++] = 6;
-                if (value == 0) return true;
-            }
-            if ((value & 43) == 43)
-            {
-                value -= 43;
-                resultLength = checked(resultLength + 12);
-                foundItems[foundItemsCount++] = 7;
-                if (value == 0) return true;
-            }
-            if ((value & 42) == 42)
-            {
-                value -= 42;
-                resultLength = checked(resultLength + 7);
-                foundItems[foundItemsCount++] = 8;
-                if (value == 0) return true;
-            }
-            if ((value & 41) == 41)
-            {
-                value -= 41;
-                resultLength = checked(resultLength + 3);
-                foundItems[foundItemsCount++] = 9;
-                if (value == 0) return true;
-            }
-            if ((value & 40) == 40)
-            {
-                value -= 40;
-                resultLength = checked(resultLength + 12);
-                foundItems[foundItemsCount++] = 10;
-                if (value == 0) return true;
-            }
-            if ((value & 39) == 39)
-            {
-                value -= 39;
-                resultLength = checked(resultLength + 13);
-                foundItems[foundItemsCount++] = 11;
-                if (value == 0) return true;
-            }
-            if ((value & 38) == 38)
-            {
-                value -= 38;
-                resultLength = checked(resultLength + 9);
-                foundItems[foundItemsCount++] = 12;
-                if (value == 0) return true;
-            }
-            if ((value & 37) == 37)
-            {
-                value -= 37;
-                resultLength = checked(resultLength + 21);
-                foundItems[foundItemsCount++] = 13;
-                if (value == 0) return true;
-            }
-            if ((value & 36) == 36)
-            {
-                value -= 36;
-                resultLength = checked(resultLength + 16);
-                foundItems[foundItemsCount++] = 14;
-                if (value == 0) return true;
-            }
-            if ((value & 35) == 35)
-            {
-                value -= 35;
-                resultLength = checked(resultLength + 9);
-                foundItems[foundItemsCount++] = 15;
-                if (value == 0) return true;
-            }
-            if ((value & 34) == 34)
-            {
-                value -= 34;
-                resultLength = checked(resultLength + 13);
-                foundItems[foundItemsCount++] = 16;
-                if (value == 0) return true;
-            }
-            if ((value & 33) == 33)
-            {
-                value -= 33;
-                resultLength = checked(resultLength + 13);
-                foundItems[foundItemsCount++] = 17;
+                foundItems[foundItemsCount++] = 1;
                 if (value == 0) return true;
             }
             if ((value & 32) == 32)
             {
                 value -= 32;
-                resultLength = checked(resultLength + 11);
-                foundItems[foundItemsCount++] = 18;
-                if (value == 0) return true;
-            }
-            if ((value & 31) == 31)
-            {
-                value -= 31;
                 resultLength = checked(resultLength + 8);
-                foundItems[foundItemsCount++] = 19;
-                if (value == 0) return true;
-            }
-            if ((value & 30) == 30)
-            {
-                value -= 30;
-                resultLength = checked(resultLength + 8);
-                foundItems[foundItemsCount++] = 20;
-                if (value == 0) return true;
-            }
-            if ((value & 29) == 29)
-            {
-                value -= 29;
-                resultLength = checked(resultLength + 13);
-                foundItems[foundItemsCount++] = 21;
-                if (value == 0) return true;
-            }
-            if ((value & 28) == 28)
-            {
-                value -= 28;
-                resultLength = checked(resultLength + 14);
-                foundItems[foundItemsCount++] = 22;
-                if (value == 0) return true;
-            }
-            if ((value & 27) == 27)
-            {
-                value -= 27;
-                resultLength = checked(resultLength + 11);
-                foundItems[foundItemsCount++] = 23;
-                if (value == 0) return true;
-            }
-            if ((value & 26) == 26)
-            {
-                value -= 26;
-                resultLength = checked(resultLength + 5);
-                foundItems[foundItemsCount++] = 24;
-                if (value == 0) return true;
-            }
-            if ((value & 25) == 25)
-            {
-                value -= 25;
-                resultLength = checked(resultLength + 8);
-                foundItems[foundItemsCount++] = 25;
-                if (value == 0) return true;
-            }
-            if ((value & 24) == 24)
-            {
-                value -= 24;
-                resultLength = checked(resultLength + 11);
-                foundItems[foundItemsCount++] = 26;
-                if (value == 0) return true;
-            }
-            if ((value & 23) == 23)
-            {
-                value -= 23;
-                resultLength = checked(resultLength + 8);
-                foundItems[foundItemsCount++] = 27;
-                if (value == 0) return true;
-            }
-            if ((value & 22) == 22)
-            {
-                value -= 22;
-                resultLength = checked(resultLength + 9);
-                foundItems[foundItemsCount++] = 28;
-                if (value == 0) return true;
-            }
-            if ((value & 21) == 21)
-            {
-                value -= 21;
-                resultLength = checked(resultLength + 8);
-                foundItems[foundItemsCount++] = 29;
-                if (value == 0) return true;
-            }
-            if ((value & 20) == 20)
-            {
-                value -= 20;
-                resultLength = checked(resultLength + 5);
-                foundItems[foundItemsCount++] = 30;
-                if (value == 0) return true;
-            }
-            if ((value & 19) == 19)
-            {
-                value -= 19;
-                resultLength = checked(resultLength + 7);
-                foundItems[foundItemsCount++] = 31;
-                if (value == 0) return true;
-            }
-            if ((value & 18) == 18)
-            {
-                value -= 18;
-                resultLength = checked(resultLength + 4);
-                foundItems[foundItemsCount++] = 32;
-                if (value == 0) return true;
-            }
-            if ((value & 17) == 17)
-            {
-                value -= 17;
-                resultLength = checked(resultLength + 9);
-                foundItems[foundItemsCount++] = 33;
+                foundItems[foundItemsCount++] = 2;
                 if (value == 0) return true;
             }
             if ((value & 16) == 16)
             {
                 value -= 16;
-                resultLength = checked(resultLength + 6);
-                foundItems[foundItemsCount++] = 34;
-                if (value == 0) return true;
-            }
-            if ((value & 15) == 15)
-            {
-                value -= 15;
-                resultLength = checked(resultLength + 15);
-                foundItems[foundItemsCount++] = 35;
-                if (value == 0) return true;
-            }
-            if ((value & 14) == 14)
-            {
-                value -= 14;
-                resultLength = checked(resultLength + 6);
-                foundItems[foundItemsCount++] = 36;
-                if (value == 0) return true;
-            }
-            if ((value & 13) == 13)
-            {
-                value -= 13;
-                resultLength = checked(resultLength + 9);
-                foundItems[foundItemsCount++] = 37;
-                if (value == 0) return true;
-            }
-            if ((value & 12) == 12)
-            {
-                value -= 12;
-                resultLength = checked(resultLength + 11);
-                foundItems[foundItemsCount++] = 38;
-                if (value == 0) return true;
-            }
-            if ((value & 11) == 11)
-            {
-                value -= 11;
-                resultLength = checked(resultLength + 8);
-                foundItems[foundItemsCount++] = 39;
-                if (value == 0) return true;
-            }
-            if ((value & 10) == 10)
-            {
-                value -= 10;
-                resultLength = checked(resultLength + 11);
-                foundItems[foundItemsCount++] = 40;
-                if (value == 0) return true;
-            }
-            if ((value & 9) == 9)
-            {
-                value -= 9;
-                resultLength = checked(resultLength + 11);
-                foundItems[foundItemsCount++] = 41;
+                resultLength = checked(resultLength + 13);
+                foundItems[foundItemsCount++] = 3;
                 if (value == 0) return true;
             }
             if ((value & 8) == 8)
             {
                 value -= 8;
-                resultLength = checked(resultLength + 16);
-                foundItems[foundItemsCount++] = 42;
-                if (value == 0) return true;
-            }
-            if ((value & 7) == 7)
-            {
-                value -= 7;
-                resultLength = checked(resultLength + 4);
-                foundItems[foundItemsCount++] = 43;
-                if (value == 0) return true;
-            }
-            if ((value & 6) == 6)
-            {
-                value -= 6;
                 resultLength = checked(resultLength + 3);
-                foundItems[foundItemsCount++] = 44;
-                if (value == 0) return true;
-            }
-            if ((value & 5) == 5)
-            {
-                value -= 5;
-                resultLength = checked(resultLength + 14);
-                foundItems[foundItemsCount++] = 45;
+                foundItems[foundItemsCount++] = 4;
                 if (value == 0) return true;
             }
             if ((value & 4) == 4)
             {
                 value -= 4;
                 resultLength = checked(resultLength + 7);
-                foundItems[foundItemsCount++] = 46;
-                if (value == 0) return true;
-            }
-            if ((value & 3) == 3)
-            {
-                value -= 3;
-                resultLength = checked(resultLength + 11);
-                foundItems[foundItemsCount++] = 47;
+                foundItems[foundItemsCount++] = 5;
                 if (value == 0) return true;
             }
             if ((value & 2) == 2)
             {
                 value -= 2;
                 resultLength = checked(resultLength + 11);
-                foundItems[foundItemsCount++] = 48;
+                foundItems[foundItemsCount++] = 6;
                 if (value == 0) return true;
             }
             if ((value & 1) == 1)
             {
                 value -= 1;
                 resultLength = checked(resultLength + 9);
-                foundItems[foundItemsCount++] = 49;
+                foundItems[foundItemsCount++] = 7;
                 if (value == 0) return true;
             }
         }
@@ -2740,54 +724,12 @@ CountLength:
             0 => 1,
             1 => 9,
             2 => 11,
-            3 => 11,
             4 => 7,
-            5 => 14,
-            6 => 3,
-            7 => 4,
-            8 => 16,
-            9 => 11,
-            10 => 11,
-            11 => 8,
-            12 => 11,
-            13 => 9,
-            14 => 6,
-            15 => 15,
-            16 => 6,
-            17 => 9,
-            18 => 4,
-            19 => 7,
-            20 => 5,
-            21 => 8,
-            22 => 9,
-            23 => 8,
-            24 => 11,
-            25 => 8,
-            26 => 5,
-            27 => 11,
-            28 => 14,
-            29 => 13,
-            30 => 8,
-            31 => 8,
-            32 => 11,
-            33 => 13,
-            34 => 13,
-            35 => 9,
-            36 => 16,
-            37 => 21,
-            38 => 9,
-            39 => 13,
-            40 => 12,
-            41 => 3,
-            42 => 7,
-            43 => 12,
-            44 => 7,
-            45 => 8,
-            46 => 15,
-            47 => 11,
-            48 => 13,
-            49 => 12,
-            50 => 11,
+            8 => 3,
+            16 => 13,
+            32 => 8,
+            64 => 11,
+            128 => 13,
             _ => null
         };
     }
@@ -2799,54 +741,12 @@ CountLength:
             0 => "0",
             1 => "Backslash",
             2 => "DoubleQuote",
-            3 => "SingleQuote",
             4 => "Newline",
-            5 => "CarriageReturn",
-            6 => "Tab",
-            7 => "CrLf",
-            8 => "MultipleNewlines",
-            9 => "WindowsPath",
-            10 => "MixedQuotes",
-            11 => "LessThan",
-            12 => "GreaterThan",
-            13 => "Ampersand",
-            14 => "XmlTag",
-            15 => "XmlSpecialChars",
-            16 => "Degree",
-            17 => "Copyright",
-            18 => "Euro",
-            19 => "Unicode",
-            20 => "Emoji",
-            21 => "NullChar",
-            22 => "Backspace",
-            23 => "FormFeed",
-            24 => "VerticalTab",
-            25 => "JsonLike",
-            26 => "CData",
-            27 => "CodeComment",
-            28 => "VerbatimString",
-            29 => "special\\value",
-            30 => "\"quoted\"",
-            31 => "new\nline",
-            32 => "json\\escape",
-            33 => "\"json-quoted\"",
-            34 => "json\\combined",
-            35 => "tab\tvalue",
-            36 => "EmptyDescription",
-            37 => "WhitespaceDescription",
-            38 => "EmptyLine",
-            39 => "TrailingSpace",
-            40 => "LeadingSpace",
-            41 => "Url",
-            42 => "SqlLike",
-            43 => "RegexPattern",
-            44 => "UncPath",
-            45 => "UnixPath",
-            46 => "DoubleBackslash",
-            47 => "TripleQuote",
-            48 => "TripleNewline",
-            49 => "ComplexError",
-            50 => "EscapedJson",
+            8 => "Tab",
+            16 => "special\\value",
+            32 => "\"quoted\"",
+            64 => "json\\escape",
+            128 => "json\\combined",
             _ => null
         };
     }
