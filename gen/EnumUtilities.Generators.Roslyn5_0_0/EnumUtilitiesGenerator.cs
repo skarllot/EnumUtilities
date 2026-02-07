@@ -110,8 +110,6 @@ public class EnumUtilitiesGenerator : IIncrementalGenerator
             return;
         }
 
-        s_dispatcher.GenerateSources(enumsToGenerate, context);
-
         var sb = new StringBuilder(1024);
         foreach (var model in enumsToGenerate)
         {
@@ -125,6 +123,8 @@ public class EnumUtilitiesGenerator : IIncrementalGenerator
                 context.ReportDiagnostic(HandleCodeWriterException(e, model));
             }
         }
+
+        s_dispatcher.GenerateSources(enumsToGenerate, context);
     }
 
     private static void ReportCSharpVersionDiagnostic(
