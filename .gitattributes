@@ -1,0 +1,39 @@
+# Set default behavior to automatically normalize line endings
+* text=auto
+
+# Force LF line-endings for generated files
+tests/EnumUtilities.Generators.IntegrationTests/Generated/**/*.cs text eol=lf
+gen/EnumUtilities.Generators.Roslyn5_0_0/CodeWriters/**/*.cs eol=lf
+
+# Source code
+*.cs text diff=csharp
+*.csproj text
+*.slnx text
+*.props text
+*.resx text
+*.tt text
+*.ttinclude text
+
+# Scripts
+*.ps1 text
+
+# Documentation
+*.md text
+
+# Configuration
+*.json text
+*.yml text
+*.xml text
+*.editorconfig text
+*.gitignore text
+*.csharpierignore text
+*.DotSettings text
+*.mts text
+*.ts text
+*.css text
+*.mustache text
+
+# Binary files
+*.png binary
+*.jpeg binary
+*.ico binary
