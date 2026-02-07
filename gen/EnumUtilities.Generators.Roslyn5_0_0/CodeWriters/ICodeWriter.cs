@@ -4,6 +4,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters;
 
 public interface ICodeWriter<in T>
 {
-    string GetFileName(T context);
+    bool CanGenerateFor(T model);
+    string GetFileName(T model);
     void Write(StringBuilder builder, T model);
 }

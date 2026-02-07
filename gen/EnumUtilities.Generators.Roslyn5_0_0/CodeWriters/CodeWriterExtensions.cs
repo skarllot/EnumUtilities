@@ -8,13 +8,16 @@ public static class CodeWriterExtensions
 {
     public static void GenerateCompilationSource<T>(
         this ICodeWriter<T> writer,
-        SourceProductionContext sourceContext,
+        SourceProductionContext context,
         StringBuilder builder,
-        T context
+        T model
     )
     {
+        if (!writer.CanGenerateFor(model))
+            return;
+
         builder.Clear();
-        writer.Write(builder, context);
-        sourceContext.AddSource(writer.GetFileName(context), SourceText.From(builder.ToString(), Encoding.UTF8));
+        writer.Write(builder, model);
+        context.AddSource(writer.GetFileName(model), SourceText.From(builder.ToString(), Encoding.UTF8));
     }
 }
