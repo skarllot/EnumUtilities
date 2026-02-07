@@ -801,23 +801,9 @@ public static partial class Bug480FlagsFactory
 
     private static bool TryParseNonNumericDescription(ReadOnlySpan<char> description, StringComparison comparisonType, bool throwOnFailure, out int result)
     {
-        bool parsed = true;
-        int localResult = 0;
-        foreach (var item in new FlagsEnumTokenizer(description))
+        bool success = TryParseSingleDescription(description, comparisonType, out result);
+        if (success)
         {
-            bool success = TryParseSingleDescription(item, comparisonType, out int singleValue);
-            if (!success)
-            {
-                parsed = false;
-                break;
-            }
-
-            localResult |= singleValue;
-        }
-
-        if (parsed)
-        {
-            result = localResult;
             return true;
         }
 
@@ -826,7 +812,6 @@ public static partial class Bug480FlagsFactory
             ThrowHelper.ThrowValueNotFound(description, nameof(description));
         }
 
-        result = 0;
         return false;
     }
 

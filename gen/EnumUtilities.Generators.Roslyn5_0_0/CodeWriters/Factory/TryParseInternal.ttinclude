@@ -93,14 +93,14 @@
     }
 <#+
         Write('\n');
-        WriteTryParseNonNumeric(type, parameterName);
+        WriteTryParseNonNumeric(type, parameterName, allowFlags: !allowEmpty);
         Write('\n');
         WriteTryParseLookup(keySelector, type);
     }
 
-    private void WriteTryParseNonNumeric(string type, string parameterName = "value")
+    private void WriteTryParseNonNumeric(string type, string parameterName = "value", bool allowFlags = true)
     {
-        if (Model.IsFlags)
+        if (Model.IsFlags && allowFlags)
         {
 #>
     private static bool TryParseNonNumeric<#= type #>(ReadOnlySpan<char> <#= parameterName #>, StringComparison comparisonType, bool throwOnFailure, out <#= Model.UnderlyingType #> result)
