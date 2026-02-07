@@ -91,7 +91,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             return this.GenerationEnvironment.ToString();
         }
 
-        private void WriteFormatString(Func<EnumValue, string?> keySelector, string type)
+        private void WriteFormatString(Func<EnumValue, string> keySelector, string type)
         {
             if (Model.IsFlags)
             {
@@ -102,7 +102,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             WriteInlineFormatString(keySelector, type);
         }
 
-        private void WriteFormatStringLookup(Func<EnumValue, string?> keySelector, string type)
+        private void WriteFormatStringLookup(Func<EnumValue, string> keySelector, string type)
         {
             var valuesRanges = Model.GetEnumValueRangesByBitRange();
 
@@ -141,7 +141,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
                     this.Write(")\n            {\n                value -= ");
                     this.Write((curr.MemberValue));
                     this.Write(";\n                count = checked(count + ");
-                    this.Write((keySelector(curr)!.Length));
+                    this.Write((keySelector(curr).Length));
                     this.Write(
                         ");\n                foundItemsCount++;\n                if (value == 0) goto CountLength;\n            }\n"
                     );
@@ -162,7 +162,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             {
                 if (index > 0)
                     Write(", ");
-                Write($"\"{keySelector(curr)}\"");
+                Write(keySelector(curr).ToQuotedStringLiteral());
             }
 
             this.Write(" };\n\n    private static string? FormatFlag");
@@ -209,7 +209,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
                     this.Write(")\n            {\n                value -= ");
                     this.Write((curr.MemberValue));
                     this.Write(";\n                resultLength = checked(resultLength + ");
-                    this.Write((keySelector(curr)!.Length));
+                    this.Write((keySelector(curr).Length));
                     this.Write(");\n                foundItems[foundItemsCount++] = ");
                     this.Write((Model.InvertedValues.IndexOf(curr)));
                     this.Write(";\n                if (value == 0) return true;\n            }\n");
@@ -221,7 +221,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             this.Write("\n        return value == 0;\n    }\n");
         }
 
-        private void WriteInlineFormatString(Func<EnumValue, string?> keySelector, string type)
+        private void WriteInlineFormatString(Func<EnumValue, string> keySelector, string type)
         {
             this.Write("    private static int? Get");
             this.Write((type));
@@ -238,7 +238,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
                 this.Write("            ");
                 this.Write((curr.MemberValue));
                 this.Write(" => ");
-                this.Write((keySelector(curr)!.Length));
+                this.Write((keySelector(curr).Length));
                 this.Write(",\n");
             }
 
@@ -256,9 +256,9 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             {
                 this.Write("            ");
                 this.Write((curr.MemberValue));
-                this.Write(" => \"");
-                this.Write((keySelector(curr)));
-                this.Write("\",\n");
+                this.Write(" => ");
+                this.Write((keySelector(curr).ToQuotedStringLiteral()));
+                this.Write(",\n");
             }
 
             this.Write("            _ => null\n        };\n    }\n");
@@ -560,9 +560,9 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
             {
                 this.Write("            ");
                 this.Write((curr.MemberValue));
-                this.Write(" => \"");
-                this.Write((curr.Description));
-                this.Write("\",\n");
+                this.Write(" => ");
+                this.Write((curr.Description.ToQuotedStringOrNullLiteral()));
+                this.Write(",\n");
             }
 
             this.Write("            _ => null\n        };\n    }\n");
@@ -587,7 +587,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
                         (
                             curr.Display!.ResourceShortName != null
                                 ? Append(curr.Display.ResourceShortName)
-                                : Append($"\"{curr.Display.ShortName}\"")
+                                : Append(curr.Display.ShortName.ToQuotedStringOrNullLiteral())
                         )
                     );
 
@@ -609,9 +609,9 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
                     this.Write(" => ");
                     this.Write(
                         (
-                            curr.Display?.ResourceName != null ? Append(curr.Display.ResourceName)
-                            : curr.Display?.Name != null ? Append($"\"{curr.Display.Name}\"")
-                            : Append($"\"{curr.MemberName}\"")
+                            curr.Display?.ResourceName != null
+                                ? Append(curr.Display.ResourceName)
+                                : Append((curr.Display?.Name ?? curr.MemberName).ToQuotedStringLiteral())
                         )
                     );
 
@@ -638,7 +638,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
                         (
                             curr.Display!.ResourceDescription != null
                                 ? Append(curr.Display.ResourceDescription)
-                                : Append($"\"{curr.Display.Description}\"")
+                                : Append(curr.Display.Description.ToQuotedStringOrNullLiteral())
                         )
                     );
 

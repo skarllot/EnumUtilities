@@ -117,9 +117,9 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters
                 this.Write((xmlDocItemRef));
                 this.Write(".</summary>\n        public const string ");
                 this.Write((curr.MemberName));
-                this.Write(" = \"");
-                this.Write((keySelector(curr)));
-                this.Write("\";\n");
+                this.Write(" = ");
+                this.Write((keySelector(curr).ToQuotedStringLiteral()));
+                this.Write(";\n");
             }
 
             this.Write("    }\n\n    /// <summary>Provides static values for <see cref=\"");

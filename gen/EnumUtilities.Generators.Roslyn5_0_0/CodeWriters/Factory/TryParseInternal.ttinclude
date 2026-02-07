@@ -9,12 +9,32 @@
         Func<EnumValue, string?> keySelector,
         string type,
         string parameterName = "value",
-        bool allowNumbers = true)
+        bool allowNumbers = true,
+        bool allowEmpty = false)
     {
+        var emptyMember = allowEmpty ? Model.Values.FirstOrDefault(x => keySelector(x)?.Length == 0) : null;
 #>
     private static bool TryParse<#= type #>(ReadOnlySpan<char> <#= parameterName #>, StringComparison comparisonType, bool throwOnFailure, out <#= Model.UnderlyingType #> result)
     {
+<#+
+        if (emptyMember != null)
+        {
+#>
+        if (<#= parameterName #>.IsEmpty)
+        {
+            result = <#= emptyMember.MemberValue #>;
+            return true;
+        }
+        else
+<#+
+        }
+        else
+        {
+#>
         if (!<#= parameterName #>.IsEmpty)
+<#+
+        }
+#>
         {
 <#+
         if (allowNumbers)
@@ -56,6 +76,9 @@
         ParseFailure:
 <#+
         }
+
+        if (allowNumbers || emptyMember == null)
+        {
 #>
         if (throwOnFailure)
         {
@@ -64,17 +87,20 @@
 
         result = 0;
         return false;
+<#+
+        }
+#>
     }
 <#+
-        WriteLine();
-        WriteTryParseNonNumeric(type, parameterName);
-        WriteLine();
+        Write('\n');
+        WriteTryParseNonNumeric(type, parameterName, allowFlags: !allowEmpty);
+        Write('\n');
         WriteTryParseLookup(keySelector, type);
     }
 
-    private void WriteTryParseNonNumeric(string type, string parameterName = "value")
+    private void WriteTryParseNonNumeric(string type, string parameterName = "value", bool allowFlags = true)
     {
-        if (Model.IsFlags)
+        if (Model.IsFlags && allowFlags)
         {
 #>
     private static bool TryParseNonNumeric<#= type #>(ReadOnlySpan<char> <#= parameterName #>, StringComparison comparisonType, bool throwOnFailure, out <#= Model.UnderlyingType #> result)
@@ -169,23 +195,17 @@
 <#+
         foreach (var curr in lookupTable.OrderBy(x => x.Key))
         {
-            if (char.IsSurrogate(curr.Key) || char.IsControl(curr.Key))
+            if (char.ToUpperInvariant(curr.Key) == curr.Key && char.ToLowerInvariant(curr.Key) == curr.Key)
             {
 #>
-            case '\u<#= ((int)curr.Key).ToString("x4") #>':
-<#+
-            }
-            else if (char.ToUpperInvariant(curr.Key) == curr.Key && char.ToLowerInvariant(curr.Key) == curr.Key)
-            {
-#>
-            case '<#= curr.Key #>':
+            case <#= curr.Key.ToQuotedCharLiteral() #>:
 <#+
             }
             else
             {
 #>
-            case '<#= char.ToUpperInvariant(curr.Key) #>':
-            case '<#= char.ToLowerInvariant(curr.Key) #>':
+            case <#= char.ToUpperInvariant(curr.Key).ToQuotedCharLiteral() #>:
+            case <#= char.ToLowerInvariant(curr.Key).ToQuotedCharLiteral() #>:
 <#+
             }
 #>
@@ -195,7 +215,7 @@
             foreach (var enumValue in curr)
             {
 #>
-                    case { } when value.Equals("<#= keySelector(enumValue) #>", comparisonType):
+                    case { } when value.Equals(<#= keySelector(enumValue)!.ToQuotedStringLiteral() #>, comparisonType):
                         result = <#= enumValue.MemberValue #>;
                         return true;
 <#+
