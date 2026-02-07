@@ -9,9 +9,10 @@
         Func<EnumValue, string?> keySelector,
         string type,
         string parameterName = "value",
-        bool allowNumbers = true)
+        bool allowNumbers = true,
+        bool allowEmpty = false)
     {
-        var emptyMember = Model.Values.FirstOrDefault(x => keySelector(x)?.Length == 0);
+        var emptyMember = allowEmpty ? Model.Values.FirstOrDefault(x => keySelector(x)?.Length == 0) : null;
 #>
     private static bool TryParse<#= type #>(ReadOnlySpan<char> <#= parameterName #>, StringComparison comparisonType, bool throwOnFailure, out <#= Model.UnderlyingType #> result)
     {
