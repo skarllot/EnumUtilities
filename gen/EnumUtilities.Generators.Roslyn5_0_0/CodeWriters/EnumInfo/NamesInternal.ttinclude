@@ -18,7 +18,7 @@
 #>
 
         /// <summary>The string representation of <see cref="<#= Model.Name #>.<#= curr.MemberName #>" /> <#= xmlDocItemRef #>.</summary>
-        public const string <#= curr.MemberName #> = "<#= keySelector(curr) #>";
+        public const string <#= curr.MemberName #> = <#= keySelector(curr).ToQuotedStringLiteral() #>;
 <#+
         }
 #>
