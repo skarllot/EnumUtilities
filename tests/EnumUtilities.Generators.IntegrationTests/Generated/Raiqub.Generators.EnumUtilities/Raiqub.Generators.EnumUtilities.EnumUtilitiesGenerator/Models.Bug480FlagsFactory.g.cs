@@ -9,1196 +9,1197 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
-namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
-
-[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
-public static partial class Bug480FlagsFactory
+namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>The value represented by the specified name or numeric value. Note that this value need not be a member of the Bug480Flags enumeration.</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
-    public static Bug480Flags Parse(string value, bool ignoreCase = false)
+    [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.13.0.0")]
+    public static partial class Bug480FlagsFactory
     {
-        if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
-        TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
-        return (Bug480Flags)result;
-    }
-
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>The value represented by the specified name or numeric value. Note that this value need not be a member of the Bug480Flags enumeration.</returns>
-    /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
-    public static Bug480Flags Parse(ReadOnlySpan<char> value, bool ignoreCase = false)
-    {
-        TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
-        return (Bug480Flags)result;
-    }
-
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>The value represented by the specified name or numeric value or null. Note that this value need not be a member of the Bug480Flags enumeration.</returns>
-    /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
-    [return: NotNullIfNotNull("value")]
-    public static Bug480Flags? ParseOrNull(string? value, bool ignoreCase = false)
-    {
-        if (value is null) return null;
-        TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
-        return (Bug480Flags)result;
-    }
-
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type Bug480Flags whose value is represented by value
-    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-    /// underlying type of Bug480Flags. Note that this value need not be a member of the Bug480Flags enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-    public static bool TryParse([NotNullWhen(true)] string? value, bool ignoreCase, out Bug480Flags result)
-    {
-        Unsafe.SkipInit(out result);
-        return TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
-    }
-
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type Bug480Flags whose value is represented by value
-    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-    /// underlying type of Bug480Flags. Note that this value need not be a member of the Bug480Flags enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-    public static bool TryParse([NotNullWhen(true)] string? value, out Bug480Flags result)
-    {
-        Unsafe.SkipInit(out result);
-        return TryParseName(value.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
-    }
-
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>
-    /// Contains an object of type Bug480Flags whose value is represented by value if the parse operation succeeds.
-    /// If the parse operation fails, result contains <c>null</c> value.
-    /// </returns>
-    public static Bug480Flags? TryParse(string? value, bool ignoreCase = false)
-    {
-        return TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480Flags?)result : null;
-    }
-
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type Bug480Flags whose value is represented by value
-    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-    /// underlying type of Bug480Flags. Note that this value need not be a member of the Bug480Flags enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-    public static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, out Bug480Flags result)
-    {
-        Unsafe.SkipInit(out result);
-        return TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
-    }
-
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type Bug480Flags whose value is represented by value
-    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-    /// underlying type of Bug480Flags. Note that this value need not be a member of the Bug480Flags enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-    public static bool TryParse(ReadOnlySpan<char> value, out Bug480Flags result)
-    {
-        Unsafe.SkipInit(out result);
-        return TryParseName(value, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
-    }
-
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>
-    /// Contains an object of type Bug480Flags whose value is represented by value if the parse operation succeeds.
-    /// If the parse operation fails, result contains <c>null</c> value.
-    /// </returns>
-    public static Bug480Flags? TryParse(ReadOnlySpan<char> value, bool ignoreCase = false)
-    {
-        return TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480Flags?)result : null;
-    }
-
-    private static bool TryParseName(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out int result)
-    {
-        if (!value.IsEmpty)
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object.
+        /// </summary>
+        /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+        /// <returns>The value represented by the specified name or numeric value. Note that this value need not be a member of the Bug480Flags enumeration.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+        public static Bug480Flags Parse(string value, bool ignoreCase = false)
         {
-            char c = value[0];
-            if (char.IsWhiteSpace(c))
+            if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
+            TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
+            return (Bug480Flags)result;
+        }
+
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object.
+        /// </summary>
+        /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+        /// <returns>The value represented by the specified name or numeric value. Note that this value need not be a member of the Bug480Flags enumeration.</returns>
+        /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+        public static Bug480Flags Parse(ReadOnlySpan<char> value, bool ignoreCase = false)
+        {
+            TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
+            return (Bug480Flags)result;
+        }
+
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object.
+        /// </summary>
+        /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+        /// <returns>The value represented by the specified name or numeric value or null. Note that this value need not be a member of the Bug480Flags enumeration.</returns>
+        /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+        [return: NotNullIfNotNull("value")]
+        public static Bug480Flags? ParseOrNull(string? value, bool ignoreCase = false)
+        {
+            if (value is null) return null;
+            TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
+            return (Bug480Flags)result;
+        }
+
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type Bug480Flags whose value is represented by value
+        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+        /// underlying type of Bug480Flags. Note that this value need not be a member of the Bug480Flags enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        public static bool TryParse([NotNullWhen(true)] string? value, bool ignoreCase, out Bug480Flags result)
+        {
+            Unsafe.SkipInit(out result);
+            return TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
+        }
+
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type Bug480Flags whose value is represented by value
+        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+        /// underlying type of Bug480Flags. Note that this value need not be a member of the Bug480Flags enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        public static bool TryParse([NotNullWhen(true)] string? value, out Bug480Flags result)
+        {
+            Unsafe.SkipInit(out result);
+            return TryParseName(value.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
+        }
+
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object.
+        /// </summary>
+        /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+        /// <returns>
+        /// Contains an object of type Bug480Flags whose value is represented by value if the parse operation succeeds.
+        /// If the parse operation fails, result contains <c>null</c> value.
+        /// </returns>
+        public static Bug480Flags? TryParse(string? value, bool ignoreCase = false)
+        {
+            return TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480Flags?)result : null;
+        }
+
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type Bug480Flags whose value is represented by value
+        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+        /// underlying type of Bug480Flags. Note that this value need not be a member of the Bug480Flags enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        public static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, out Bug480Flags result)
+        {
+            Unsafe.SkipInit(out result);
+            return TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
+        }
+
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="value">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type Bug480Flags whose value is represented by value
+        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+        /// underlying type of Bug480Flags. Note that this value need not be a member of the Bug480Flags enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        public static bool TryParse(ReadOnlySpan<char> value, out Bug480Flags result)
+        {
+            Unsafe.SkipInit(out result);
+            return TryParseName(value, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
+        }
+
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object.
+        /// </summary>
+        /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+        /// <returns>
+        /// Contains an object of type Bug480Flags whose value is represented by value if the parse operation succeeds.
+        /// If the parse operation fails, result contains <c>null</c> value.
+        /// </returns>
+        public static Bug480Flags? TryParse(ReadOnlySpan<char> value, bool ignoreCase = false)
+        {
+            return TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480Flags?)result : null;
+        }
+
+        private static bool TryParseName(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out int result)
+        {
+            if (!value.IsEmpty)
             {
-                value = value.TrimStart();
-                if (value.IsEmpty)
+                char c = value[0];
+                if (char.IsWhiteSpace(c))
                 {
-                    goto ParseFailure;
+                    value = value.TrimStart();
+                    if (value.IsEmpty)
+                    {
+                        goto ParseFailure;
+                    }
+
+                    c = value[0];
                 }
 
-                c = value[0];
-            }
+                if ((c < '0' || c > '9') && c != '-' && c != '+')
+                {
+                    return TryParseNonNumericName(value, comparisonType, throwOnFailure, out result);
+                }
 
-            if ((c < '0' || c > '9') && c != '-' && c != '+')
-            {
+                bool success = EnumNumericParser.TryParse(value, out result);
+                if (success)
+                {
+                    return true;
+                }
+
                 return TryParseNonNumericName(value, comparisonType, throwOnFailure, out result);
             }
 
-            bool success = EnumNumericParser.TryParse(value, out result);
-            if (success)
+            ParseFailure:
+            if (throwOnFailure)
             {
+                ThrowHelper.ThrowInvalidEmptyParseArgument(nameof(value));
+            }
+
+            result = 0;
+            return false;
+        }
+    
+        private static bool TryParseNonNumericName(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out int result)
+        {
+            bool parsed = true;
+            int localResult = 0;
+            foreach (var item in new FlagsEnumTokenizer(value))
+            {
+                bool success = TryParseSingleName(item, comparisonType, out int singleValue);
+                if (!success)
+                {
+                    parsed = false;
+                    break;
+                }
+
+                localResult |= singleValue;
+            }
+
+            if (parsed)
+            {
+                result = localResult;
                 return true;
             }
 
-            return TryParseNonNumericName(value, comparisonType, throwOnFailure, out result);
-        }
-
-        ParseFailure:
-        if (throwOnFailure)
-        {
-            ThrowHelper.ThrowInvalidEmptyParseArgument(nameof(value));
-        }
-
-        result = 0;
-        return false;
-    }
-
-    private static bool TryParseNonNumericName(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out int result)
-    {
-        bool parsed = true;
-        int localResult = 0;
-        foreach (var item in new FlagsEnumTokenizer(value))
-        {
-            bool success = TryParseSingleName(item, comparisonType, out int singleValue);
-            if (!success)
+            if (throwOnFailure)
             {
-                parsed = false;
-                break;
+                ThrowHelper.ThrowValueNotFound(value, nameof(value));
             }
 
-            localResult |= singleValue;
+            result = 0;
+            return false;
         }
-
-        if (parsed)
+    
+        private static bool TryParseSingleName(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
         {
-            result = localResult;
-            return true;
-        }
+            if (value.IsEmpty)
+            {
+                result = 0;
+                return false;
+            }
 
-        if (throwOnFailure)
-        {
-            ThrowHelper.ThrowValueNotFound(value, nameof(value));
-        }
+            switch (value[0])
+            {
+                case 'B':
+                case 'b':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Backslash", comparisonType):
+                            result = 1;
+                            return true;
+                    }
+                    break;
+                case 'C':
+                case 'c':
+                    switch (value)
+                    {
+                        case { } when value.Equals("CombinedEscapes", comparisonType):
+                            result = 128;
+                            return true;
+                    }
+                    break;
+                case 'D':
+                case 'd':
+                    switch (value)
+                    {
+                        case { } when value.Equals("DoubleQuote", comparisonType):
+                            result = 2;
+                            return true;
+                    }
+                    break;
+                case 'E':
+                case 'e':
+                    switch (value)
+                    {
+                        case { } when value.Equals("EnumMemberBackslash", comparisonType):
+                            result = 16;
+                            return true;
+                        case { } when value.Equals("EnumMemberQuoted", comparisonType):
+                            result = 32;
+                            return true;
+                    }
+                    break;
+                case 'J':
+                case 'j':
+                    switch (value)
+                    {
+                        case { } when value.Equals("JsonNameEscape", comparisonType):
+                            result = 64;
+                            return true;
+                    }
+                    break;
+                case 'N':
+                case 'n':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Newline", comparisonType):
+                            result = 4;
+                            return true;
+                    }
+                    break;
+                case 'T':
+                case 't':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Tab", comparisonType):
+                            result = 8;
+                            return true;
+                    }
+                    break;
+            }
 
-        result = 0;
-        return false;
-    }
-
-    private static bool TryParseSingleName(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
-    {
-        if (value.IsEmpty)
-        {
             result = 0;
             return false;
         }
 
-        switch (value[0])
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="name">The string representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type Bug480Flags whose value is represented by value
+        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+        /// underlying type of Bug480Flags. Note that this value need not be a member of the Bug480Flags enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
+        [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
+        public static bool TryParse(
+            [NotNullWhen(true)] string? name,
+            StringComparison comparisonType,
+            out Bug480Flags result)
         {
-            case 'B':
-            case 'b':
-                switch (value)
-                {
-                    case { } when value.Equals("Backslash", comparisonType):
-                        result = 1;
-                        return true;
-                }
-                break;
-            case 'C':
-            case 'c':
-                switch (value)
-                {
-                    case { } when value.Equals("CombinedEscapes", comparisonType):
-                        result = 128;
-                        return true;
-                }
-                break;
-            case 'D':
-            case 'd':
-                switch (value)
-                {
-                    case { } when value.Equals("DoubleQuote", comparisonType):
-                        result = 2;
-                        return true;
-                }
-                break;
-            case 'E':
-            case 'e':
-                switch (value)
-                {
-                    case { } when value.Equals("EnumMemberBackslash", comparisonType):
-                        result = 16;
-                        return true;
-                    case { } when value.Equals("EnumMemberQuoted", comparisonType):
-                        result = 32;
-                        return true;
-                }
-                break;
-            case 'J':
-            case 'j':
-                switch (value)
-                {
-                    case { } when value.Equals("JsonNameEscape", comparisonType):
-                        result = 64;
-                        return true;
-                }
-                break;
-            case 'N':
-            case 'n':
-                switch (value)
-                {
-                    case { } when value.Equals("Newline", comparisonType):
-                        result = 4;
-                        return true;
-                }
-                break;
-            case 'T':
-            case 't':
-                switch (value)
-                {
-                    case { } when value.Equals("Tab", comparisonType):
-                        result = 8;
-                        return true;
-                }
-                break;
+            Unsafe.SkipInit(out result);
+            return TryParseName(name.AsSpan(), comparisonType, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
         }
 
-        result = 0;
-        return false;
-    }
-
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="name">The string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type Bug480Flags whose value is represented by value
-    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-    /// underlying type of Bug480Flags. Note that this value need not be a member of the Bug480Flags enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-    /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
-    [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
-    public static bool TryParse(
-        [NotNullWhen(true)] string? name,
-        StringComparison comparisonType,
-        out Bug480Flags result)
-    {
-        Unsafe.SkipInit(out result);
-        return TryParseName(name.AsSpan(), comparisonType, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
-    }
-
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="name">The case-insensitive string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type Bug480Flags whose value is represented by value
-    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-    /// underlying type of Bug480Flags. Note that this value need not be a member of the Bug480Flags enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-    [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
-    public static bool TryParseIgnoreCase(
-        [NotNullWhen(true)] string? name,
-        out Bug480Flags result)
-    {
-        Unsafe.SkipInit(out result);
-        return TryParseName(name.AsSpan(), StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
-    }
-
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object.
-    /// </summary>
-    /// <param name="name">The case-insensitive string representation of the enumeration name or underlying value to convert.</param>
-    /// <returns>
-    /// Contains an object of type Bug480Flags whose value is represented by value if the parse operation succeeds.
-    /// If the parse operation fails, result contains <c>null</c> value.
-    /// </returns>
-    [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
-    public static Bug480Flags? TryParseIgnoreCase(string? name)
-    {
-        return TryParseName(name.AsSpan(), StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out var result) ? (Bug480Flags?)result : null;
-    }
-
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object.
-    /// </summary>
-    /// <param name="name">The string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
-    /// <returns>
-    /// Contains an object of type Bug480Flags whose value is represented by value if the parse operation succeeds.
-    /// If the parse operation fails, result contains <c>null</c> value.
-    /// </returns>
-    /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
-    [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
-    public static Bug480Flags? TryParse(string? name, StringComparison comparisonType)
-    {
-        return TryParseName(name.AsSpan(), comparisonType, throwOnFailure: false, out var result) ? (Bug480Flags?)result : null;
-    }
-
-    /// <summary>
-    /// Converts the string representation of the serialized value to an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>The value represented by the specified serialized value. Note that this value need not be a member of the Bug480Flags enumeration.</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
-    public static Bug480Flags ParseFromEnumMemberValue(string value, bool ignoreCase = false)
-    {
-        if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
-        TryParseEnumMemberValue(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
-        return (Bug480Flags)result;
-    }
-
-    /// <summary>
-    /// Converts the string representation of the serialized value to an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>The value represented by the specified serialized value. Note that this value need not be a member of the Bug480Flags enumeration.</returns>
-    /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
-    public static Bug480Flags ParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase = false)
-    {
-        TryParseEnumMemberValue(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
-        return (Bug480Flags)result;
-    }
-
-    /// <summary>
-    /// Converts the string representation of the serialized value to an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>The value represented by the specified serialized value or null. Note that this value need not be a member of the Bug480Flags enumeration.</returns>
-    /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
-    [return: NotNullIfNotNull("value")]
-    public static Bug480Flags? ParseFromEnumMemberValueOrNull(string? value, bool ignoreCase = false)
-    {
-        if (value is null) return null;
-        TryParseEnumMemberValue(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
-        return (Bug480Flags)result;
-    }
-
-    /// <summary>
-    /// Converts the string representation of the serialized value to an equivalent enumerated object.
-    /// The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type Bug480Flags whose value is represented by a
-    /// serialized value if the parse operation succeeds. If the parse operation fails, result contains the default
-    /// value of the underlying type of Bug480Flags. Note that this value need not be a member of the Bug480Flags enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-    public static bool TryParseFromEnumMemberValue([NotNullWhen(true)] string? value, bool ignoreCase, out Bug480Flags result)
-    {
-        Unsafe.SkipInit(out result);
-        return TryParseEnumMemberValue(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
-    }
-
-    /// <summary>
-    /// Converts the string representation of the serialized value to an equivalent enumerated object.
-    /// The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type Bug480Flags whose value is represented by a
-    /// serialized value if the parse operation succeeds. If the parse operation fails, result contains the default
-    /// value of the underlying type of Bug480Flags. Note that this value need not be a member of the Bug480Flags enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-    public static bool TryParseFromEnumMemberValue([NotNullWhen(true)] string? value, out Bug480Flags result)
-    {
-        Unsafe.SkipInit(out result);
-        return TryParseEnumMemberValue(value.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
-    }
-
-    /// <summary>
-    /// Converts the string representation of the serialized value to an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>
-    /// Contains an object of type Bug480Flags whose value is represented by value if the parse operation succeeds.
-    /// If the parse operation fails, result contains a null value.
-    /// </returns>
-    public static Bug480Flags? TryParseFromEnumMemberValue(string? value, bool ignoreCase = false)
-    {
-        return TryParseEnumMemberValue(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480Flags?)result : null;
-    }
-
-    /// <summary>
-    /// Converts the string representation of the serialized value to an equivalent enumerated object.
-    /// The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type Bug480Flags whose value is represented by a
-    /// serialized value if the parse operation succeeds. If the parse operation fails, result contains the default
-    /// value of the underlying type of Bug480Flags. Note that this value need not be a member of the Bug480Flags enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-    public static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase, out Bug480Flags result)
-    {
-        Unsafe.SkipInit(out result);
-        return TryParseEnumMemberValue(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
-    }
-
-    /// <summary>
-    /// Converts the string representation of the serialized value to an equivalent enumerated object.
-    /// The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type Bug480Flags whose value is represented by a
-    /// serialized value if the parse operation succeeds. If the parse operation fails, result contains the default
-    /// value of the underlying type of Bug480Flags. Note that this value need not be a member of the Bug480Flags enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-    public static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, out Bug480Flags result)
-    {
-        Unsafe.SkipInit(out result);
-        return TryParseEnumMemberValue(value, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
-    }
-
-    /// <summary>
-    /// Converts the string representation of the serialized value to an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>
-    /// Contains an object of type Bug480Flags whose value is represented by value if the parse operation succeeds.
-    /// If the parse operation fails, result contains a null value.
-    /// </returns>
-    public static Bug480Flags? TryParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase = false)
-    {
-        return TryParseEnumMemberValue(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480Flags?)result : null;
-    }
-
-    private static bool TryParseEnumMemberValue(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out int result)
-    {
-        if (!value.IsEmpty)
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="name">The case-insensitive string representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type Bug480Flags whose value is represented by value
+        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+        /// underlying type of Bug480Flags. Note that this value need not be a member of the Bug480Flags enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
+        public static bool TryParseIgnoreCase(
+            [NotNullWhen(true)] string? name,
+            out Bug480Flags result)
         {
-            char c = value[0];
-            if (char.IsWhiteSpace(c))
+            Unsafe.SkipInit(out result);
+            return TryParseName(name.AsSpan(), StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
+        }
+
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object.
+        /// </summary>
+        /// <param name="name">The case-insensitive string representation of the enumeration name or underlying value to convert.</param>
+        /// <returns>
+        /// Contains an object of type Bug480Flags whose value is represented by value if the parse operation succeeds.
+        /// If the parse operation fails, result contains <c>null</c> value.
+        /// </returns>
+        [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
+        public static Bug480Flags? TryParseIgnoreCase(string? name)
+        {
+            return TryParseName(name.AsSpan(), StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out var result) ? (Bug480Flags?)result : null;
+        }
+
+        /// <summary>
+        /// Converts the string representation of the name or numeric value of one or more enumerated constants to
+        /// an equivalent enumerated object.
+        /// </summary>
+        /// <param name="name">The string representation of the enumeration name or underlying value to convert.</param>
+        /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
+        /// <returns>
+        /// Contains an object of type Bug480Flags whose value is represented by value if the parse operation succeeds.
+        /// If the parse operation fails, result contains <c>null</c> value.
+        /// </returns>
+        /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
+        [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
+        public static Bug480Flags? TryParse(string? name, StringComparison comparisonType)
+        {
+            return TryParseName(name.AsSpan(), comparisonType, throwOnFailure: false, out var result) ? (Bug480Flags?)result : null;
+        }
+
+        /// <summary>
+        /// Converts the string representation of the serialized value to an equivalent enumerated object.
+        /// </summary>
+        /// <param name="value">The string representation of the enumeration serialized value to convert.</param>
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+        /// <returns>The value represented by the specified serialized value. Note that this value need not be a member of the Bug480Flags enumeration.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+        public static Bug480Flags ParseFromEnumMemberValue(string value, bool ignoreCase = false)
+        {
+            if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
+            TryParseEnumMemberValue(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
+            return (Bug480Flags)result;
+        }
+
+        /// <summary>
+        /// Converts the string representation of the serialized value to an equivalent enumerated object.
+        /// </summary>
+        /// <param name="value">The string representation of the enumeration serialized value to convert.</param>
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+        /// <returns>The value represented by the specified serialized value. Note that this value need not be a member of the Bug480Flags enumeration.</returns>
+        /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+        public static Bug480Flags ParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase = false)
+        {
+            TryParseEnumMemberValue(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
+            return (Bug480Flags)result;
+        }
+
+        /// <summary>
+        /// Converts the string representation of the serialized value to an equivalent enumerated object.
+        /// </summary>
+        /// <param name="value">The string representation of the enumeration serialized value to convert.</param>
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+        /// <returns>The value represented by the specified serialized value or null. Note that this value need not be a member of the Bug480Flags enumeration.</returns>
+        /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+        [return: NotNullIfNotNull("value")]
+        public static Bug480Flags? ParseFromEnumMemberValueOrNull(string? value, bool ignoreCase = false)
+        {
+            if (value is null) return null;
+            TryParseEnumMemberValue(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
+            return (Bug480Flags)result;
+        }
+
+        /// <summary>
+        /// Converts the string representation of the serialized value to an equivalent enumerated object.
+        /// The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type Bug480Flags whose value is represented by a
+        /// serialized value if the parse operation succeeds. If the parse operation fails, result contains the default
+        /// value of the underlying type of Bug480Flags. Note that this value need not be a member of the Bug480Flags enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        public static bool TryParseFromEnumMemberValue([NotNullWhen(true)] string? value, bool ignoreCase, out Bug480Flags result)
+        {
+            Unsafe.SkipInit(out result);
+            return TryParseEnumMemberValue(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
+        }
+
+        /// <summary>
+        /// Converts the string representation of the serialized value to an equivalent enumerated object.
+        /// The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type Bug480Flags whose value is represented by a
+        /// serialized value if the parse operation succeeds. If the parse operation fails, result contains the default
+        /// value of the underlying type of Bug480Flags. Note that this value need not be a member of the Bug480Flags enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        public static bool TryParseFromEnumMemberValue([NotNullWhen(true)] string? value, out Bug480Flags result)
+        {
+            Unsafe.SkipInit(out result);
+            return TryParseEnumMemberValue(value.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
+        }
+
+        /// <summary>
+        /// Converts the string representation of the serialized value to an equivalent enumerated object.
+        /// </summary>
+        /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+        /// <returns>
+        /// Contains an object of type Bug480Flags whose value is represented by value if the parse operation succeeds.
+        /// If the parse operation fails, result contains a null value.
+        /// </returns>
+        public static Bug480Flags? TryParseFromEnumMemberValue(string? value, bool ignoreCase = false)
+        {
+            return TryParseEnumMemberValue(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480Flags?)result : null;
+        }
+
+        /// <summary>
+        /// Converts the string representation of the serialized value to an equivalent enumerated object.
+        /// The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type Bug480Flags whose value is represented by a
+        /// serialized value if the parse operation succeeds. If the parse operation fails, result contains the default
+        /// value of the underlying type of Bug480Flags. Note that this value need not be a member of the Bug480Flags enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        public static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase, out Bug480Flags result)
+        {
+            Unsafe.SkipInit(out result);
+            return TryParseEnumMemberValue(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
+        }
+
+        /// <summary>
+        /// Converts the string representation of the serialized value to an equivalent enumerated object.
+        /// The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type Bug480Flags whose value is represented by a
+        /// serialized value if the parse operation succeeds. If the parse operation fails, result contains the default
+        /// value of the underlying type of Bug480Flags. Note that this value need not be a member of the Bug480Flags enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        public static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, out Bug480Flags result)
+        {
+            Unsafe.SkipInit(out result);
+            return TryParseEnumMemberValue(value, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
+        }
+
+        /// <summary>
+        /// Converts the string representation of the serialized value to an equivalent enumerated object.
+        /// </summary>
+        /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+        /// <returns>
+        /// Contains an object of type Bug480Flags whose value is represented by value if the parse operation succeeds.
+        /// If the parse operation fails, result contains a null value.
+        /// </returns>
+        public static Bug480Flags? TryParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase = false)
+        {
+            return TryParseEnumMemberValue(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480Flags?)result : null;
+        }
+
+        private static bool TryParseEnumMemberValue(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out int result)
+        {
+            if (!value.IsEmpty)
             {
-                value = value.TrimStart();
-                if (value.IsEmpty)
+                char c = value[0];
+                if (char.IsWhiteSpace(c))
                 {
-                    goto ParseFailure;
+                    value = value.TrimStart();
+                    if (value.IsEmpty)
+                    {
+                        goto ParseFailure;
+                    }
+
+                    c = value[0];
                 }
 
-                c = value[0];
-            }
+                if ((c < '0' || c > '9') && c != '-' && c != '+')
+                {
+                    return TryParseNonNumericEnumMemberValue(value, comparisonType, throwOnFailure, out result);
+                }
 
-            if ((c < '0' || c > '9') && c != '-' && c != '+')
-            {
+                bool success = EnumNumericParser.TryParse(value, out result);
+                if (success)
+                {
+                    return true;
+                }
+
                 return TryParseNonNumericEnumMemberValue(value, comparisonType, throwOnFailure, out result);
             }
 
-            bool success = EnumNumericParser.TryParse(value, out result);
+            ParseFailure:
+            if (throwOnFailure)
+            {
+                ThrowHelper.ThrowInvalidEmptyParseArgument(nameof(value));
+            }
+
+            result = 0;
+            return false;
+        }
+    
+        private static bool TryParseNonNumericEnumMemberValue(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out int result)
+        {
+            bool parsed = true;
+            int localResult = 0;
+            foreach (var item in new FlagsEnumTokenizer(value))
+            {
+                bool success = TryParseSingleEnumMemberValue(item, comparisonType, out int singleValue);
+                if (!success)
+                {
+                    parsed = false;
+                    break;
+                }
+
+                localResult |= singleValue;
+            }
+
+            if (parsed)
+            {
+                result = localResult;
+                return true;
+            }
+
+            if (throwOnFailure)
+            {
+                ThrowHelper.ThrowValueNotFound(value, nameof(value));
+            }
+
+            result = 0;
+            return false;
+        }
+    
+        private static bool TryParseSingleEnumMemberValue(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
+        {
+            if (value.IsEmpty)
+            {
+                result = 0;
+                return false;
+            }
+
+            switch (value[0])
+            {
+                case '"':
+                    switch (value)
+                    {
+                        case { } when value.Equals("\"quoted\"", comparisonType):
+                            result = 32;
+                            return true;
+                    }
+                    break;
+                case 'B':
+                case 'b':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Backslash", comparisonType):
+                            result = 1;
+                            return true;
+                    }
+                    break;
+                case 'D':
+                case 'd':
+                    switch (value)
+                    {
+                        case { } when value.Equals("DoubleQuote", comparisonType):
+                            result = 2;
+                            return true;
+                    }
+                    break;
+                case 'J':
+                case 'j':
+                    switch (value)
+                    {
+                        case { } when value.Equals("JsonNameEscape", comparisonType):
+                            result = 64;
+                            return true;
+                    }
+                    break;
+                case 'N':
+                case 'n':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Newline", comparisonType):
+                            result = 4;
+                            return true;
+                    }
+                    break;
+                case 'T':
+                case 't':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Tab", comparisonType):
+                            result = 8;
+                            return true;
+                    }
+                    break;
+                case 'C':
+                case 'c':
+                    switch (value)
+                    {
+                        case { } when value.Equals("combined\\escape", comparisonType):
+                            result = 128;
+                            return true;
+                    }
+                    break;
+                case 'S':
+                case 's':
+                    switch (value)
+                    {
+                        case { } when value.Equals("special\\value", comparisonType):
+                            result = 16;
+                            return true;
+                    }
+                    break;
+            }
+
+            result = 0;
+            return false;
+        }
+
+        /// <summary>
+        /// Converts the string representation of the serialized value to an equivalent enumerated object.
+        /// The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
+        /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type Bug480Flags whose value is represented by value
+        /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
+        /// underlying type of Bug480Flags. Note that this value need not be a member of the Bug480Flags enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
+        [Obsolete("Use TryParseFromEnumMemberValue overload with 'ignoreCase' parameter")]
+        public static bool TryParseFromEnumMemberValue(
+            [NotNullWhen(true)] string? value,
+            StringComparison comparisonType,
+            out Bug480Flags result)
+        {
+            Unsafe.SkipInit(out result);
+            return TryParseEnumMemberValue(value.AsSpan(), comparisonType, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
+        }
+
+        /// <summary>
+        /// Converts the string representation of the value associated with one enumerated constant to
+        /// an equivalent enumerated object.
+        /// </summary>
+        /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
+        /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
+        /// <returns>
+        /// Contains an object of type Bug480Flags whose value is represented by value if the parse operation succeeds.
+        /// If the parse operation fails, result contains a null value.
+        /// </returns>
+        /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
+        [Obsolete("Use TryParseFromEnumMemberValue overload with 'ignoreCase' parameter")]
+        public static Bug480Flags? TryParseFromEnumMemberValue(string? value, StringComparison comparisonType)
+        {
+            return TryParseEnumMemberValue(value.AsSpan(), comparisonType, throwOnFailure: false, out var result) ? (Bug480Flags?)result : null;
+        }
+
+        public static Bug480Flags CreateFromDescription(string description, StringComparison comparisonType = StringComparison.Ordinal)
+        {
+            if (description is null) ThrowHelper.ThrowArgumentNullException(nameof(description));
+            TryParseDescription(description.AsSpan(), comparisonType, throwOnFailure: true, out var result);
+            return (Bug480Flags)result;
+        }
+
+        public static Bug480Flags CreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType = StringComparison.Ordinal)
+        {
+            TryParseDescription(description, comparisonType, throwOnFailure: true, out var result);
+            return (Bug480Flags)result;
+        }
+
+        [return: NotNullIfNotNull("description")]
+        public static Bug480Flags? CreateFromDescriptionOrNull(string? description, StringComparison comparisonType = StringComparison.Ordinal)
+        {
+            if (description is null) return null;
+            TryParseDescription(description.AsSpan(), comparisonType, throwOnFailure: true, out var result);
+            return (Bug480Flags)result;
+        }
+
+        public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, StringComparison comparisonType, out Bug480Flags result)
+        {
+            Unsafe.SkipInit(out result);
+            return TryParseDescription(description.AsSpan(), comparisonType, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
+        }
+
+        public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, out Bug480Flags result)
+        {
+            Unsafe.SkipInit(out result);
+            return TryParseDescription(description.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
+        }
+
+        public static Bug480Flags? TryCreateFromDescription(string? description, StringComparison comparisonType = StringComparison.Ordinal)
+        {
+            return TryParseDescription(description.AsSpan(), comparisonType, throwOnFailure: false, out var result) ? (Bug480Flags?)result : null;
+        }
+
+        public static bool TryCreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType, out Bug480Flags result)
+        {
+            Unsafe.SkipInit(out result);
+            return TryParseDescription(description, comparisonType, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
+        }
+
+        public static bool TryCreateFromDescription(ReadOnlySpan<char> description, out Bug480Flags result)
+        {
+            Unsafe.SkipInit(out result);
+            return TryParseDescription(description, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
+        }
+
+        public static Bug480Flags? TryCreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType = StringComparison.Ordinal)
+        {
+            return TryParseDescription(description, comparisonType, throwOnFailure: false, out var result) ? (Bug480Flags?)result : null;
+        }
+
+        private static bool TryParseDescription(ReadOnlySpan<char> description, StringComparison comparisonType, bool throwOnFailure, out int result)
+        {
+            if (!description.IsEmpty)
+            {
+                return TryParseNonNumericDescription(description, comparisonType, throwOnFailure, out result);
+            }
+
+            if (throwOnFailure)
+            {
+                ThrowHelper.ThrowInvalidEmptyParseArgument(nameof(description));
+            }
+
+            result = 0;
+            return false;
+        }
+    
+        private static bool TryParseNonNumericDescription(ReadOnlySpan<char> description, StringComparison comparisonType, bool throwOnFailure, out int result)
+        {
+            bool success = TryParseSingleDescription(description, comparisonType, out result);
             if (success)
             {
                 return true;
             }
 
-            return TryParseNonNumericEnumMemberValue(value, comparisonType, throwOnFailure, out result);
-        }
-
-        ParseFailure:
-        if (throwOnFailure)
-        {
-            ThrowHelper.ThrowInvalidEmptyParseArgument(nameof(value));
-        }
-
-        result = 0;
-        return false;
-    }
-
-    private static bool TryParseNonNumericEnumMemberValue(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out int result)
-    {
-        bool parsed = true;
-        int localResult = 0;
-        foreach (var item in new FlagsEnumTokenizer(value))
-        {
-            bool success = TryParseSingleEnumMemberValue(item, comparisonType, out int singleValue);
-            if (!success)
+            if (throwOnFailure)
             {
-                parsed = false;
-                break;
+                ThrowHelper.ThrowValueNotFound(description, nameof(description));
             }
 
-            localResult |= singleValue;
-        }
-
-        if (parsed)
-        {
-            result = localResult;
-            return true;
-        }
-
-        if (throwOnFailure)
-        {
-            ThrowHelper.ThrowValueNotFound(value, nameof(value));
-        }
-
-        result = 0;
-        return false;
-    }
-
-    private static bool TryParseSingleEnumMemberValue(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
-    {
-        if (value.IsEmpty)
-        {
-            result = 0;
             return false;
         }
-
-        switch (value[0])
+    
+        private static bool TryParseSingleDescription(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
         {
-            case '"':
-                switch (value)
-                {
-                    case { } when value.Equals("\"quoted\"", comparisonType):
-                        result = 32;
-                        return true;
-                }
-                break;
-            case 'B':
-            case 'b':
-                switch (value)
-                {
-                    case { } when value.Equals("Backslash", comparisonType):
-                        result = 1;
-                        return true;
-                }
-                break;
-            case 'D':
-            case 'd':
-                switch (value)
-                {
-                    case { } when value.Equals("DoubleQuote", comparisonType):
-                        result = 2;
-                        return true;
-                }
-                break;
-            case 'J':
-            case 'j':
-                switch (value)
-                {
-                    case { } when value.Equals("JsonNameEscape", comparisonType):
-                        result = 64;
-                        return true;
-                }
-                break;
-            case 'N':
-            case 'n':
-                switch (value)
-                {
-                    case { } when value.Equals("Newline", comparisonType):
-                        result = 4;
-                        return true;
-                }
-                break;
-            case 'T':
-            case 't':
-                switch (value)
-                {
-                    case { } when value.Equals("Tab", comparisonType):
-                        result = 8;
-                        return true;
-                }
-                break;
-            case 'C':
-            case 'c':
-                switch (value)
-                {
-                    case { } when value.Equals("combined\\escape", comparisonType):
-                        result = 128;
-                        return true;
-                }
-                break;
-            case 'S':
-            case 's':
-                switch (value)
-                {
-                    case { } when value.Equals("special\\value", comparisonType):
-                        result = 16;
-                        return true;
-                }
-                break;
-        }
-
-        result = 0;
-        return false;
-    }
-
-    /// <summary>
-    /// Converts the string representation of the serialized value to an equivalent enumerated object.
-    /// The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
-    /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type Bug480Flags whose value is represented by value
-    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-    /// underlying type of Bug480Flags. Note that this value need not be a member of the Bug480Flags enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-    /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
-    [Obsolete("Use TryParseFromEnumMemberValue overload with 'ignoreCase' parameter")]
-    public static bool TryParseFromEnumMemberValue(
-        [NotNullWhen(true)] string? value,
-        StringComparison comparisonType,
-        out Bug480Flags result)
-    {
-        Unsafe.SkipInit(out result);
-        return TryParseEnumMemberValue(value.AsSpan(), comparisonType, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
-    }
-
-    /// <summary>
-    /// Converts the string representation of the value associated with one enumerated constant to
-    /// an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
-    /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
-    /// <returns>
-    /// Contains an object of type Bug480Flags whose value is represented by value if the parse operation succeeds.
-    /// If the parse operation fails, result contains a null value.
-    /// </returns>
-    /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
-    [Obsolete("Use TryParseFromEnumMemberValue overload with 'ignoreCase' parameter")]
-    public static Bug480Flags? TryParseFromEnumMemberValue(string? value, StringComparison comparisonType)
-    {
-        return TryParseEnumMemberValue(value.AsSpan(), comparisonType, throwOnFailure: false, out var result) ? (Bug480Flags?)result : null;
-    }
-
-    public static Bug480Flags CreateFromDescription(string description, StringComparison comparisonType = StringComparison.Ordinal)
-    {
-        if (description is null) ThrowHelper.ThrowArgumentNullException(nameof(description));
-        TryParseDescription(description.AsSpan(), comparisonType, throwOnFailure: true, out var result);
-        return (Bug480Flags)result;
-    }
-
-    public static Bug480Flags CreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType = StringComparison.Ordinal)
-    {
-        TryParseDescription(description, comparisonType, throwOnFailure: true, out var result);
-        return (Bug480Flags)result;
-    }
-
-    [return: NotNullIfNotNull("description")]
-    public static Bug480Flags? CreateFromDescriptionOrNull(string? description, StringComparison comparisonType = StringComparison.Ordinal)
-    {
-        if (description is null) return null;
-        TryParseDescription(description.AsSpan(), comparisonType, throwOnFailure: true, out var result);
-        return (Bug480Flags)result;
-    }
-
-    public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, StringComparison comparisonType, out Bug480Flags result)
-    {
-        Unsafe.SkipInit(out result);
-        return TryParseDescription(description.AsSpan(), comparisonType, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
-    }
-
-    public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, out Bug480Flags result)
-    {
-        Unsafe.SkipInit(out result);
-        return TryParseDescription(description.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
-    }
-
-    public static Bug480Flags? TryCreateFromDescription(string? description, StringComparison comparisonType = StringComparison.Ordinal)
-    {
-        return TryParseDescription(description.AsSpan(), comparisonType, throwOnFailure: false, out var result) ? (Bug480Flags?)result : null;
-    }
-
-    public static bool TryCreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType, out Bug480Flags result)
-    {
-        Unsafe.SkipInit(out result);
-        return TryParseDescription(description, comparisonType, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
-    }
-
-    public static bool TryCreateFromDescription(ReadOnlySpan<char> description, out Bug480Flags result)
-    {
-        Unsafe.SkipInit(out result);
-        return TryParseDescription(description, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
-    }
-
-    public static Bug480Flags? TryCreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType = StringComparison.Ordinal)
-    {
-        return TryParseDescription(description, comparisonType, throwOnFailure: false, out var result) ? (Bug480Flags?)result : null;
-    }
-
-    private static bool TryParseDescription(ReadOnlySpan<char> description, StringComparison comparisonType, bool throwOnFailure, out int result)
-    {
-        if (!description.IsEmpty)
-        {
-            return TryParseNonNumericDescription(description, comparisonType, throwOnFailure, out result);
-        }
-
-        if (throwOnFailure)
-        {
-            ThrowHelper.ThrowInvalidEmptyParseArgument(nameof(description));
-        }
-
-        result = 0;
-        return false;
-    }
-
-    private static bool TryParseNonNumericDescription(ReadOnlySpan<char> description, StringComparison comparisonType, bool throwOnFailure, out int result)
-    {
-        bool success = TryParseSingleDescription(description, comparisonType, out result);
-        if (success)
-        {
-            return true;
-        }
-
-        if (throwOnFailure)
-        {
-            ThrowHelper.ThrowValueNotFound(description, nameof(description));
-        }
-
-        return false;
-    }
-
-    private static bool TryParseSingleDescription(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
-    {
-        if (value.IsEmpty)
-        {
-            result = 0;
-            return false;
-        }
-
-        switch (value[0])
-        {
-            case '\t':
-                switch (value)
-                {
-                    case { } when value.Equals("\t", comparisonType):
-                        result = 8;
-                        return true;
-                }
-                break;
-            case '\n':
-                switch (value)
-                {
-                    case { } when value.Equals("\n", comparisonType):
-                        result = 4;
-                        return true;
-                }
-                break;
-            case '"':
-                switch (value)
-                {
-                    case { } when value.Equals("\"", comparisonType):
-                        result = 2;
-                        return true;
-                }
-                break;
-            case 'A':
-            case 'a':
-                switch (value)
-                {
-                    case { } when value.Equals("All three attributes with escapes", comparisonType):
-                        result = 128;
-                        return true;
-                }
-                break;
-            case 'C':
-            case 'c':
-                switch (value)
-                {
-                    case { } when value.Equals("Custom value with backslash", comparisonType):
-                        result = 16;
-                        return true;
-                }
-                break;
-            case 'J':
-            case 'j':
-                switch (value)
-                {
-                    case { } when value.Equals("JSON name with escape", comparisonType):
-                        result = 64;
-                        return true;
-                }
-                break;
-            case 'Q':
-            case 'q':
-                switch (value)
-                {
-                    case { } when value.Equals("Quoted enum value", comparisonType):
-                        result = 32;
-                        return true;
-                }
-                break;
-            case '\\':
-                switch (value)
-                {
-                    case { } when value.Equals("\\", comparisonType):
-                        result = 1;
-                        return true;
-                }
-                break;
-        }
-
-        result = 0;
-        return false;
-    }
-
-    /// <summary>Retrieves an array of the values of the constants in the Bug480Flags enumeration.</summary>
-    /// <returns>An array that contains the values of the constants in Bug480Flags.</returns>
-    public static Bug480Flags[] GetValues()
-    {
-        return new[]
-        {
-            (Bug480Flags)(1),
-            (Bug480Flags)(2),
-            (Bug480Flags)(4),
-            (Bug480Flags)(8),
-            (Bug480Flags)(16),
-            (Bug480Flags)(32),
-            (Bug480Flags)(64),
-            (Bug480Flags)(128),
-        };
-    }
-
-    /// <summary>Retrieves an array of the names of the constants in Bug480Flags enumeration.</summary>
-    /// <returns>A string array of the names of the constants in Bug480Flags.</returns>
-    public static string[] GetNames()
-    {
-        return new[]
-        {
-            "Backslash",
-            "DoubleQuote",
-            "Newline",
-            "Tab",
-            "EnumMemberBackslash",
-            "EnumMemberQuoted",
-            "JsonNameEscape",
-            "CombinedEscapes",
-        };
-    }
-
-    /// <summary>
-    /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>The value represented by the specified serialized value. Note that this value need not be a member of the Bug480Flags enumeration.</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
-    public static Bug480Flags ParseJsonString(string value, bool ignoreCase = false)
-    {
-        if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
-        TryParseJsonString(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
-        return (Bug480Flags)result;
-    }
-
-    /// <summary>
-    /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>The value represented by the specified serialized value. Note that this value need not be a member of the Bug480Flags enumeration.</returns>
-    /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
-    public static Bug480Flags ParseJsonString(ReadOnlySpan<char> value, bool ignoreCase = false)
-    {
-        TryParseJsonString(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
-        return (Bug480Flags)result;
-    }
-
-    /// <summary>
-    /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>The value represented by the specified serialized value or null. Note that this value need not be a member of the Bug480Flags enumeration.</returns>
-    /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
-    [return: NotNullIfNotNull("value")]
-    public static Bug480Flags? ParseJsonStringOrNull(string? value, bool ignoreCase = false)
-    {
-        if (value is null) return null;
-        TryParseJsonString(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
-        return (Bug480Flags)result;
-    }
-
-    /// <summary>
-    /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
-    /// The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type Bug480Flags whose value is represented by a
-    /// serialized JSON value if the parse operation succeeds. If the parse operation fails, result contains the default
-    /// value of the underlying type of Bug480Flags. Note that this value need not be a member of the Bug480Flags enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-    public static bool TryParseJsonString([NotNullWhen(true)] string? value, bool ignoreCase, out Bug480Flags result)
-    {
-        Unsafe.SkipInit(out result);
-        return TryParseJsonString(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
-    }
-
-    /// <summary>
-    /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
-    /// The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type Bug480Flags whose value is represented by a
-    /// serialized JSON value if the parse operation succeeds. If the parse operation fails, result contains the default
-    /// value of the underlying type of Bug480Flags. Note that this value need not be a member of the Bug480Flags enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-    public static bool TryParseJsonString([NotNullWhen(true)] string? value, out Bug480Flags result)
-    {
-        Unsafe.SkipInit(out result);
-        return TryParseJsonString(value.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
-    }
-
-    /// <summary>
-    /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>
-    /// Contains an object of type Bug480Flags whose value is represented by value if the parse operation succeeds.
-    /// If the parse operation fails, result contains a null value.
-    /// </returns>
-    public static Bug480Flags? TryParseJsonString(string? value, bool ignoreCase = false)
-    {
-        return TryParseJsonString(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480Flags?)result : null;
-    }
-
-    /// <summary>
-    /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
-    /// The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type Bug480Flags whose value is represented by a
-    /// serialized JSON value if the parse operation succeeds. If the parse operation fails, result contains the default
-    /// value of the underlying type of Bug480Flags. Note that this value need not be a member of the Bug480Flags enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-    public static bool TryParseJsonString(ReadOnlySpan<char> value, bool ignoreCase, out Bug480Flags result)
-    {
-        Unsafe.SkipInit(out result);
-        return TryParseJsonString(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
-    }
-
-    /// <summary>
-    /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
-    /// The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type Bug480Flags whose value is represented by a
-    /// serialized JSON value if the parse operation succeeds. If the parse operation fails, result contains the default
-    /// value of the underlying type of Bug480Flags. Note that this value need not be a member of the Bug480Flags enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-    public static bool TryParseJsonString(ReadOnlySpan<char> value, out Bug480Flags result)
-    {
-        Unsafe.SkipInit(out result);
-        return TryParseJsonString(value, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
-    }
-
-    /// <summary>
-    /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>
-    /// Contains an object of type Bug480Flags whose value is represented by value if the parse operation succeeds.
-    /// If the parse operation fails, result contains a null value.
-    /// </returns>
-    public static Bug480Flags? TryParseJsonString(ReadOnlySpan<char> value, bool ignoreCase = false)
-    {
-        return TryParseJsonString(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480Flags?)result : null;
-    }
-
-    private static bool TryParseJsonString(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out int result)
-    {
-        if (!value.IsEmpty)
-        {
-            return TryParseNonNumericJsonString(value, comparisonType, throwOnFailure, out result);
-        }
-
-        if (throwOnFailure)
-        {
-            ThrowHelper.ThrowInvalidEmptyParseArgument(nameof(value));
-        }
-
-        result = 0;
-        return false;
-    }
-
-    private static bool TryParseNonNumericJsonString(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out int result)
-    {
-        bool parsed = true;
-        int localResult = 0;
-        foreach (var item in new FlagsEnumTokenizer(value))
-        {
-            bool success = TryParseSingleJsonString(item, comparisonType, out int singleValue);
-            if (!success)
+            if (value.IsEmpty)
             {
-                parsed = false;
-                break;
+                result = 0;
+                return false;
             }
 
-            localResult |= singleValue;
-        }
+            switch (value[0])
+            {
+                case '\t':
+                    switch (value)
+                    {
+                        case { } when value.Equals("\t", comparisonType):
+                            result = 8;
+                            return true;
+                    }
+                    break;
+                case '\n':
+                    switch (value)
+                    {
+                        case { } when value.Equals("\n", comparisonType):
+                            result = 4;
+                            return true;
+                    }
+                    break;
+                case '"':
+                    switch (value)
+                    {
+                        case { } when value.Equals("\"", comparisonType):
+                            result = 2;
+                            return true;
+                    }
+                    break;
+                case 'A':
+                case 'a':
+                    switch (value)
+                    {
+                        case { } when value.Equals("All three attributes with escapes", comparisonType):
+                            result = 128;
+                            return true;
+                    }
+                    break;
+                case 'C':
+                case 'c':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Custom value with backslash", comparisonType):
+                            result = 16;
+                            return true;
+                    }
+                    break;
+                case 'J':
+                case 'j':
+                    switch (value)
+                    {
+                        case { } when value.Equals("JSON name with escape", comparisonType):
+                            result = 64;
+                            return true;
+                    }
+                    break;
+                case 'Q':
+                case 'q':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Quoted enum value", comparisonType):
+                            result = 32;
+                            return true;
+                    }
+                    break;
+                case '\\':
+                    switch (value)
+                    {
+                        case { } when value.Equals("\\", comparisonType):
+                            result = 1;
+                            return true;
+                    }
+                    break;
+            }
 
-        if (parsed)
-        {
-            result = localResult;
-            return true;
-        }
-
-        if (throwOnFailure)
-        {
-            ThrowHelper.ThrowValueNotFound(value, nameof(value));
-        }
-
-        result = 0;
-        return false;
-    }
-
-    private static bool TryParseSingleJsonString(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
-    {
-        if (value.IsEmpty)
-        {
             result = 0;
             return false;
         }
 
-        switch (value[0])
+        /// <summary>Retrieves an array of the values of the constants in the Bug480Flags enumeration.</summary>
+        /// <returns>An array that contains the values of the constants in Bug480Flags.</returns>
+        public static Bug480Flags[] GetValues()
         {
-            case '"':
-                switch (value)
-                {
-                    case { } when value.Equals("\"quoted\"", comparisonType):
-                        result = 32;
-                        return true;
-                }
-                break;
-            case 'B':
-            case 'b':
-                switch (value)
-                {
-                    case { } when value.Equals("Backslash", comparisonType):
-                        result = 1;
-                        return true;
-                }
-                break;
-            case 'D':
-            case 'd':
-                switch (value)
-                {
-                    case { } when value.Equals("DoubleQuote", comparisonType):
-                        result = 2;
-                        return true;
-                }
-                break;
-            case 'N':
-            case 'n':
-                switch (value)
-                {
-                    case { } when value.Equals("Newline", comparisonType):
-                        result = 4;
-                        return true;
-                }
-                break;
-            case 'T':
-            case 't':
-                switch (value)
-                {
-                    case { } when value.Equals("Tab", comparisonType):
-                        result = 8;
-                        return true;
-                }
-                break;
-            case 'J':
-            case 'j':
-                switch (value)
-                {
-                    case { } when value.Equals("json\\escape", comparisonType):
-                        result = 64;
-                        return true;
-                    case { } when value.Equals("json\\combined", comparisonType):
-                        result = 128;
-                        return true;
-                }
-                break;
-            case 'S':
-            case 's':
-                switch (value)
-                {
-                    case { } when value.Equals("special\\value", comparisonType):
-                        result = 16;
-                        return true;
-                }
-                break;
+            return new[]
+            {
+                (Bug480Flags)(1),
+                (Bug480Flags)(2),
+                (Bug480Flags)(4),
+                (Bug480Flags)(8),
+                (Bug480Flags)(16),
+                (Bug480Flags)(32),
+                (Bug480Flags)(64),
+                (Bug480Flags)(128),
+            };
         }
 
-        result = 0;
-        return false;
+        /// <summary>Retrieves an array of the names of the constants in Bug480Flags enumeration.</summary>
+        /// <returns>A string array of the names of the constants in Bug480Flags.</returns>
+        public static string[] GetNames()
+        {
+            return new[]
+            {
+                "Backslash",
+                "DoubleQuote",
+                "Newline",
+                "Tab",
+                "EnumMemberBackslash",
+                "EnumMemberQuoted",
+                "JsonNameEscape",
+                "CombinedEscapes",
+            };
+        }
+
+        /// <summary>
+        /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
+        /// </summary>
+        /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+        /// <returns>The value represented by the specified serialized value. Note that this value need not be a member of the Bug480Flags enumeration.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+        public static Bug480Flags ParseJsonString(string value, bool ignoreCase = false)
+        {
+            if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
+            TryParseJsonString(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
+            return (Bug480Flags)result;
+        }
+
+        /// <summary>
+        /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
+        /// </summary>
+        /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+        /// <returns>The value represented by the specified serialized value. Note that this value need not be a member of the Bug480Flags enumeration.</returns>
+        /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+        public static Bug480Flags ParseJsonString(ReadOnlySpan<char> value, bool ignoreCase = false)
+        {
+            TryParseJsonString(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
+            return (Bug480Flags)result;
+        }
+
+        /// <summary>
+        /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
+        /// </summary>
+        /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+        /// <returns>The value represented by the specified serialized value or null. Note that this value need not be a member of the Bug480Flags enumeration.</returns>
+        /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+        [return: NotNullIfNotNull("value")]
+        public static Bug480Flags? ParseJsonStringOrNull(string? value, bool ignoreCase = false)
+        {
+            if (value is null) return null;
+            TryParseJsonString(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
+            return (Bug480Flags)result;
+        }
+
+        /// <summary>
+        /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
+        /// The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type Bug480Flags whose value is represented by a
+        /// serialized JSON value if the parse operation succeeds. If the parse operation fails, result contains the default
+        /// value of the underlying type of Bug480Flags. Note that this value need not be a member of the Bug480Flags enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        public static bool TryParseJsonString([NotNullWhen(true)] string? value, bool ignoreCase, out Bug480Flags result)
+        {
+            Unsafe.SkipInit(out result);
+            return TryParseJsonString(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
+        }
+
+        /// <summary>
+        /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
+        /// The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type Bug480Flags whose value is represented by a
+        /// serialized JSON value if the parse operation succeeds. If the parse operation fails, result contains the default
+        /// value of the underlying type of Bug480Flags. Note that this value need not be a member of the Bug480Flags enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        public static bool TryParseJsonString([NotNullWhen(true)] string? value, out Bug480Flags result)
+        {
+            Unsafe.SkipInit(out result);
+            return TryParseJsonString(value.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
+        }
+
+        /// <summary>
+        /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
+        /// </summary>
+        /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+        /// <returns>
+        /// Contains an object of type Bug480Flags whose value is represented by value if the parse operation succeeds.
+        /// If the parse operation fails, result contains a null value.
+        /// </returns>
+        public static Bug480Flags? TryParseJsonString(string? value, bool ignoreCase = false)
+        {
+            return TryParseJsonString(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480Flags?)result : null;
+        }
+
+        /// <summary>
+        /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
+        /// The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type Bug480Flags whose value is represented by a
+        /// serialized JSON value if the parse operation succeeds. If the parse operation fails, result contains the default
+        /// value of the underlying type of Bug480Flags. Note that this value need not be a member of the Bug480Flags enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        public static bool TryParseJsonString(ReadOnlySpan<char> value, bool ignoreCase, out Bug480Flags result)
+        {
+            Unsafe.SkipInit(out result);
+            return TryParseJsonString(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
+        }
+
+        /// <summary>
+        /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
+        /// The return value indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
+        /// <param name="result">
+        /// When this method returns, result contains an object of type Bug480Flags whose value is represented by a
+        /// serialized JSON value if the parse operation succeeds. If the parse operation fails, result contains the default
+        /// value of the underlying type of Bug480Flags. Note that this value need not be a member of the Bug480Flags enumeration.
+        /// </param>
+        /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        public static bool TryParseJsonString(ReadOnlySpan<char> value, out Bug480Flags result)
+        {
+            Unsafe.SkipInit(out result);
+            return TryParseJsonString(value, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
+        }
+
+        /// <summary>
+        /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
+        /// </summary>
+        /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
+        /// <returns>
+        /// Contains an object of type Bug480Flags whose value is represented by value if the parse operation succeeds.
+        /// If the parse operation fails, result contains a null value.
+        /// </returns>
+        public static Bug480Flags? TryParseJsonString(ReadOnlySpan<char> value, bool ignoreCase = false)
+        {
+            return TryParseJsonString(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480Flags?)result : null;
+        }
+
+        private static bool TryParseJsonString(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out int result)
+        {
+            if (!value.IsEmpty)
+            {
+                return TryParseNonNumericJsonString(value, comparisonType, throwOnFailure, out result);
+            }
+
+            if (throwOnFailure)
+            {
+                ThrowHelper.ThrowInvalidEmptyParseArgument(nameof(value));
+            }
+
+            result = 0;
+            return false;
+        }
+    
+        private static bool TryParseNonNumericJsonString(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out int result)
+        {
+            bool parsed = true;
+            int localResult = 0;
+            foreach (var item in new FlagsEnumTokenizer(value))
+            {
+                bool success = TryParseSingleJsonString(item, comparisonType, out int singleValue);
+                if (!success)
+                {
+                    parsed = false;
+                    break;
+                }
+
+                localResult |= singleValue;
+            }
+
+            if (parsed)
+            {
+                result = localResult;
+                return true;
+            }
+
+            if (throwOnFailure)
+            {
+                ThrowHelper.ThrowValueNotFound(value, nameof(value));
+            }
+
+            result = 0;
+            return false;
+        }
+    
+        private static bool TryParseSingleJsonString(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
+        {
+            if (value.IsEmpty)
+            {
+                result = 0;
+                return false;
+            }
+
+            switch (value[0])
+            {
+                case '"':
+                    switch (value)
+                    {
+                        case { } when value.Equals("\"quoted\"", comparisonType):
+                            result = 32;
+                            return true;
+                    }
+                    break;
+                case 'B':
+                case 'b':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Backslash", comparisonType):
+                            result = 1;
+                            return true;
+                    }
+                    break;
+                case 'D':
+                case 'd':
+                    switch (value)
+                    {
+                        case { } when value.Equals("DoubleQuote", comparisonType):
+                            result = 2;
+                            return true;
+                    }
+                    break;
+                case 'N':
+                case 'n':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Newline", comparisonType):
+                            result = 4;
+                            return true;
+                    }
+                    break;
+                case 'T':
+                case 't':
+                    switch (value)
+                    {
+                        case { } when value.Equals("Tab", comparisonType):
+                            result = 8;
+                            return true;
+                    }
+                    break;
+                case 'J':
+                case 'j':
+                    switch (value)
+                    {
+                        case { } when value.Equals("json\\escape", comparisonType):
+                            result = 64;
+                            return true;
+                        case { } when value.Equals("json\\combined", comparisonType):
+                            result = 128;
+                            return true;
+                    }
+                    break;
+                case 'S':
+                case 's':
+                    switch (value)
+                    {
+                        case { } when value.Equals("special\\value", comparisonType):
+                            result = 16;
+                            return true;
+                    }
+                    break;
+            }
+
+            result = 0;
+            return false;
+        }
     }
 }

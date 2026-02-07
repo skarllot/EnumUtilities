@@ -10,7 +10,7 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 
 /// <summary>Provides metadata for <see cref="NoNamespace" /> enumeration.</summary>
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.12.0.0")]
+[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.13.0.0")]
 public static partial class NoNamespaceMetadata
 {
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumMetadata.MinimumValue" />

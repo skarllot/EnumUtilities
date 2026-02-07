@@ -12,7 +12,7 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.12.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.13.0.0")]
     public static partial class HumanStatesFactory
     {
         /// <summary>
@@ -200,7 +200,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             result = 0;
             return false;
         }
-
+    
         private static bool TryParseNonNumericName(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out int result)
         {
             bool success = TryParseSingleName(value, comparisonType, out result);
@@ -216,7 +216,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 
             return false;
         }
-
+    
         private static bool TryParseSingleName(ReadOnlySpan<char> value, StringComparison comparisonType, out int result)
         {
             if (value.IsEmpty)

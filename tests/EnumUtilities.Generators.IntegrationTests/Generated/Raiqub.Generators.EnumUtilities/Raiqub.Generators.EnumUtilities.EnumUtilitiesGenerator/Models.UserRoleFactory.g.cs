@@ -12,7 +12,7 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
 {
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.12.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.13.0.0")]
     public static partial class UserRoleFactory
     {
         /// <summary>
@@ -200,7 +200,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             result = 0;
             return false;
         }
-
+    
         private static bool TryParseNonNumericName(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out ulong result)
         {
             bool parsed = true;
@@ -231,7 +231,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             result = 0;
             return false;
         }
-
+    
         private static bool TryParseSingleName(ReadOnlySpan<char> value, StringComparison comparisonType, out ulong result)
         {
             if (value.IsEmpty)
@@ -551,7 +551,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             result = 0;
             return false;
         }
-
+    
         private static bool TryParseNonNumericEnumMemberValue(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out ulong result)
         {
             bool parsed = true;
@@ -582,7 +582,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models
             result = 0;
             return false;
         }
-
+    
         private static bool TryParseSingleEnumMemberValue(ReadOnlySpan<char> value, StringComparison comparisonType, out ulong result)
         {
             if (value.IsEmpty)

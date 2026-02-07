@@ -7,7 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.12.0.0")]
+[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "1.13.0.0")]
 public static partial class NoNamespaceValidation
 {
     /// <summary>Returns a boolean telling whether the value of <see cref="NoNamespace"/> instance exists in the enumeration.</summary>
