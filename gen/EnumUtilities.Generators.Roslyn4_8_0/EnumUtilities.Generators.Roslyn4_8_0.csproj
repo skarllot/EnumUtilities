@@ -26,6 +26,7 @@
   <ItemGroup>
     <Compile Include="..\..\src\EnumUtilities\*Attribute.cs" LinkBase="Attributes" />
     <Compile Include="..\EnumUtilities.Generators.Roslyn5_0_0\*\*.cs" Exclude="**\obj\**" />
+    <Compile Include="..\EnumUtilities.Generators.Roslyn5_0_0\CodeWriters\*\*.cs" />
     <Compile Include="..\EnumUtilities.Generators.Roslyn5_0_0\DiagnosticDescriptors.cs" />
     <Compile Include="..\EnumUtilities.Generators.Roslyn5_0_0\EnumUtilitiesGenerator.cs" />
     <Compile Include="..\EnumUtilities.Generators.Roslyn5_0_0\TrackingNames.cs" />
