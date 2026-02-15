@@ -1,11 +1,11 @@
-﻿using System.Text;
-using Raiqub.Generators.EnumUtilities.Models;
+﻿using Raiqub.Generators.EnumUtilities.Models;
+using Raiqub.Generators.InterpolationCodeWriter;
 
 namespace Raiqub.Generators.EnumUtilities.CodeWriters.EnumInfo;
 
 public static class EnumInfoDefaultBlock
 {
-    public static void Write(StringBuilder builder, EnumToGenerate model)
+    public static void Write(SourceTextWriter writer, EnumToGenerate model)
     {
         var hasMainGenerator =
             (model.SelectedGenerators & SelectedGenerators.MainGenerator) == SelectedGenerators.MainGenerator;
@@ -13,7 +13,7 @@ public static class EnumInfoDefaultBlock
         if (hasMainGenerator)
         {
             EnumInfoNamesInternal.Write(
-                builder,
+                writer,
                 model,
                 "Name",
                 "members names",
@@ -25,9 +25,9 @@ public static class EnumInfoDefaultBlock
 
         if (hasMainGenerator && model.HasSerializationValue)
         {
-            builder.Append('\n');
+            writer.WriteLine();
             EnumInfoNamesInternal.Write(
-                builder,
+                writer,
                 model,
                 "SerializedValue",
                 "serialized members values",
@@ -39,9 +39,9 @@ public static class EnumInfoDefaultBlock
 
         if (hasMainGenerator && model.HasJsonProperty)
         {
-            builder.Append('\n');
+            writer.WriteLine();
             EnumInfoNamesInternal.Write(
-                builder,
+                writer,
                 model,
                 "JsonValue",
                 "serialized members values",

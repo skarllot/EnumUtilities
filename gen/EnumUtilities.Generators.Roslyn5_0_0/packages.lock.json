@@ -53,6 +53,12 @@
         "resolved": "7.33.0",
         "contentHash": "szDcLt4Xu8LLTUXlAq7Q6vq/pAcH0WgU9ldB3GF0XNpI48g9JaZUDNUIJS6h5VQA22cSzVIoc3laHhjOXKorfw=="
       },
+      "Raiqub.Generators.InterpolationCodeWriter.CSharp.Sources": {
+        "type": "Direct",
+        "requested": "[2.0.4, )",
+        "resolved": "2.0.4",
+        "contentHash": "1HiLrubKo+eoe1HhpAs6e8onbcDU4mrdbxF5e4VfXXgv7KrjX+3KfyhEPfuVLAvzelandS1EIQkFRWYvbWmQ/Q=="
+      },
       "Raiqub.Generators.T4CodeWriter.Sources": {
         "type": "Direct",
         "requested": "[1.2.12, )",

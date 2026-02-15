@@ -1,5 +1,4 @@
 ﻿using System.Collections.Immutable;
-using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -25,7 +24,10 @@ public class EnumUtilitiesGenerator : IIncrementalGenerator
         sb => new EnumJsonConverterWriter(sb)
     );
 
-    private static readonly EnumInfoWriter s_enumInfoWriter = new();
+    private static readonly InterpolationCodeWriter.CSharp.CodeWriterDispatcher<EnumToGenerate> s_dispatcher2 = new(
+        HandleCodeWriterException,
+        new EnumInfoWriter()
+    );
 
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
@@ -110,20 +112,7 @@ public class EnumUtilitiesGenerator : IIncrementalGenerator
             return;
         }
 
-        var sb = new StringBuilder(1024);
-        foreach (var model in enumsToGenerate)
-        {
-            context.CancellationToken.ThrowIfCancellationRequested();
-            try
-            {
-                s_enumInfoWriter.GenerateCompilationSource(context, sb, model);
-            }
-            catch (Exception e)
-            {
-                context.ReportDiagnostic(HandleCodeWriterException(e, model));
-            }
-        }
-
+        s_dispatcher2.GenerateSources(enumsToGenerate, context);
         s_dispatcher.GenerateSources(enumsToGenerate, context);
     }
 
