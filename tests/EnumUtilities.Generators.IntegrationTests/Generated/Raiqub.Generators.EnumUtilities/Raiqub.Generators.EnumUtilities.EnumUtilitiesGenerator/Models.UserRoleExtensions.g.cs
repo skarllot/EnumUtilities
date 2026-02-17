@@ -114,7 +114,7 @@ public static partial class UserRoleExtensions
             return null;
         }
 
-CountLength:
+    CountLength:
         const int separatorStringLength = 2;
         return checked(count + (separatorStringLength * (foundItemsCount - 1)));
     }
@@ -210,7 +210,6 @@ CountLength:
         };
     }
 
-#if NET5_0_OR_GREATER
     /// <summary>Bitwise "ands" two enumerations and replaces the first value with the result, as an atomic operation.</summary>
     /// <param name="location">A variable containing the first value to be combined.</param>
     /// <param name="value">The value to be combined with the value at <paramref name="location" />.</param>
@@ -232,7 +231,6 @@ CountLength:
         long resultRaw = Interlocked.Or(ref locationRaw, Unsafe.As<UserRole, long>(ref value));
         return Unsafe.As<long, UserRole>(ref resultRaw);
     }
-#endif
 
     /// <summary>Compares two enumerations for equality and, if they are equal, replaces the first value.</summary>
     /// <param name="location">The destination, whose value is compared with <paramref name="comparand" /> and possibly replaced.</param>
@@ -337,7 +335,7 @@ CountLength:
             return null;
         }
 
-CountLength:
+    CountLength:
         const int separatorStringLength = 2;
         return checked(count + (separatorStringLength * (foundItemsCount - 1)));
     }
