@@ -14,7 +14,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
 internal static partial class BigErrorCodeExtensions
 {
-
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static string? ToJsonString(this BigErrorCode value)
     {
