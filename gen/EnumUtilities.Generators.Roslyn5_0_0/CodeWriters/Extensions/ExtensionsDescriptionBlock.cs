@@ -21,8 +21,13 @@ public sealed class ExtensionsDescriptionBlock : ICodeWriterModule<EnumToGenerat
         );
 
         writer.PushIndent(levels: 2);
-        foreach (var curr in model.UniqueValues.Where(x => x.Description != null))
+        foreach (var curr in model.UniqueValues)
         {
+            if (curr.Description == null)
+            {
+                continue;
+            }
+
             writer.WriteLine($"{curr.MemberValue} => {curr.Description.ToQuotedStringOrNullLiteral()},");
         }
 

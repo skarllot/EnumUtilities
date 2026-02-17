@@ -7,7 +7,7 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters;
 
 public class EnumExtensionsWriter : ICodeWriter<EnumToGenerate>
 {
-    private readonly ICodeWriterModule<EnumToGenerate>[] _modules =
+    private static readonly ICodeWriterModule<EnumToGenerate>[] s_modules =
     [
         new ExtensionsDefaultBlock(),
         new ExtensionsInterlockedBlock(),
@@ -68,7 +68,7 @@ public class EnumExtensionsWriter : ICodeWriter<EnumToGenerate>
 
         writer.PushIndent();
 
-        writer.WriteAll(_modules, model, static w => w.WriteLine());
+        writer.WriteAll(s_modules, model, static w => w.WriteLine());
 
         writer.PopIndent();
         writer.WriteLine('}');
