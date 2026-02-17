@@ -29,10 +29,6 @@
     <Compile Include="..\..\src\EnumUtilities\*Attribute.cs" LinkBase="Attributes" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="CodeWriters\EnumExtensionsWriter.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>EnumExtensionsWriter.cs</LastGenOutput>
-    </None>
     <None Update="CodeWriters\EnumFactoryWriter.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>EnumFactoryWriter.cs</LastGenOutput>
@@ -47,11 +43,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="CodeWriters\EnumExtensionsWriter.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EnumExtensionsWriter.tt</DependentUpon>
-    </Compile>
     <Compile Update="CodeWriters\EnumFactoryWriter.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

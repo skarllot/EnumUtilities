@@ -14,7 +14,6 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
 public static partial class SeasonExtensions
 {
-
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static string? ToJsonString(this Season value)
     {
