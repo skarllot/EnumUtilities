@@ -10,7 +10,7 @@
   <ItemGroup>
     <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="3.11.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="5.0.0" />
-    <PackageVersion Include="Polyfill" Version="7.33.0" />
+    <PackageVersion Include="Polyfill" Version="9.8.1" />
     <PackageVersion Include="Raiqub.Generators.InterpolationCodeWriter.CSharp.Sources" Version="2.0.4" />
     <PackageVersion Include="Raiqub.Generators.T4CodeWriter.Sources" Version="1.2.12" />
   </ItemGroup>
