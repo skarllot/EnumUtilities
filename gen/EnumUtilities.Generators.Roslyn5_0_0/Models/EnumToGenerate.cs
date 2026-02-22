@@ -1,4 +1,5 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using System.Collections.Immutable;
+using Microsoft.CodeAnalysis;
 using Raiqub.Generators.EnumUtilities.Common;
 using Raiqub.Generators.T4CodeWriter.Collections;
 
@@ -95,30 +96,25 @@ public sealed record EnumToGenerate(
         if (enumValues.Length == 0)
             return null;
 
-        string? ns = typeSymbol.ContainingNamespace?.ToString();
-        if (ns == "<global namespace>")
+        var ns = typeSymbol.ContainingNamespace?.ToString();
+        if (string.Equals(ns, "<global namespace>", StringComparison.Ordinal))
             ns = null;
 
         return new EnumToGenerate(
-            (
-                attributes.Any(x => x.AttributeClass?.Name == nameof(EnumGeneratorAttribute))
-                    ? SelectedGenerators.MainGenerator
-                    : 0
-            )
-                | (
-                    attributes.Any(x => x.AttributeClass?.Name == nameof(JsonConverterGeneratorAttribute))
-                        ? SelectedGenerators.JsonConverter
-                        : 0
-                ),
-            JsonConverterGeneratorOptions.FromSymbol(typeSymbol),
-            string.IsNullOrWhiteSpace(ns) ? null : ns,
-            typeSymbol.ContainingType is not null ? ContainingType.FromSymbol(typeSymbol.ContainingType) : null,
-            typeSymbol.DeclaredAccessibility == Accessibility.Public,
-            attributes.Any(x => x.AttributeClass?.Name == nameof(FlagsAttribute)),
-            typeSymbol.Name,
-            typeSymbol.EnumUnderlyingType?.GetNumericCSharpKeyword() ?? "int",
-            EquatableArray<EnumValue>.FromArrayWithoutCopy(enumValues),
-            typeSymbol.GetDefaultLocation()
+            SelectedGenerators: ResolveSelectedGenerators(attributes),
+            JsonConverterGeneratorOptions: JsonConverterGeneratorOptions.FromSymbol(typeSymbol),
+            Namespace: string.IsNullOrWhiteSpace(ns) ? null : ns,
+            ContainingType: typeSymbol.ContainingType is not null
+                ? ContainingType.FromSymbol(typeSymbol.ContainingType)
+                : null,
+            IsPublic: typeSymbol.DeclaredAccessibility == Accessibility.Public,
+            IsFlags: attributes.Any(x =>
+                string.Equals(x.AttributeClass?.Name, nameof(FlagsAttribute), StringComparison.Ordinal)
+            ),
+            Name: typeSymbol.Name,
+            UnderlyingType: typeSymbol.EnumUnderlyingType?.GetNumericCSharpKeyword() ?? "int",
+            Values: EquatableArray<EnumValue>.FromArrayWithoutCopy(enumValues),
+            DefaultLocations: typeSymbol.GetDefaultLocation()
         );
     }
 
@@ -132,25 +128,19 @@ public sealed record EnumToGenerate(
         var h1Values =
             BitCount == 64
                 ? InvertedValues
-                    .Where(x =>
-                        x.RealMemberValue > 0x0000_0000_ffff_ffffUL & x.RealMemberValue <= 0x0000_ffff_ffff_ffffUL
-                    )
+                    .Where(x => x.RealMemberValue is > 0x0000_0000_ffff_ffffUL and <= 0x0000_ffff_ffff_ffffUL)
                     .ToList()
                 : [];
         var l2Values =
             BitCount >= 32
                 ? InvertedValues
-                    .Where(x =>
-                        x.RealMemberValue > 0x0000_0000_0000_ffffUL & x.RealMemberValue <= 0x0000_0000_ffff_ffffUL
-                    )
+                    .Where(x => x.RealMemberValue is > 0x0000_0000_0000_ffffUL and <= 0x0000_0000_ffff_ffffUL)
                     .ToList()
                 : [];
         var l1Values =
             BitCount >= 16
                 ? InvertedValues
-                    .Where(x =>
-                        x.RealMemberValue > 0x0000_0000_0000_0000UL & x.RealMemberValue <= 0x0000_0000_0000_ffffUL
-                    )
+                    .Where(x => x.RealMemberValue is > 0x0000_0000_0000_0000UL and <= 0x0000_0000_0000_ffffUL)
                     .ToList()
                 : [];
         return [h2Values, h1Values, l2Values, l1Values];
@@ -179,4 +169,20 @@ public sealed record EnumToGenerate(
         };
 
     public bool IsInterlockedSupported() => InterlockedUnderlyingType != null;
+
+    private static SelectedGenerators ResolveSelectedGenerators(ImmutableArray<AttributeData> attributes) =>
+        (
+            attributes.Any(x =>
+                string.Equals(x.AttributeClass?.Name, nameof(EnumGeneratorAttribute), StringComparison.Ordinal)
+            )
+                ? SelectedGenerators.MainGenerator
+                : SelectedGenerators.None
+        )
+        | (
+            attributes.Any(x =>
+                string.Equals(x.AttributeClass?.Name, nameof(JsonConverterGeneratorAttribute), StringComparison.Ordinal)
+            )
+                ? SelectedGenerators.JsonConverter
+                : SelectedGenerators.None
+        );
 }

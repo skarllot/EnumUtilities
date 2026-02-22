@@ -9,7 +9,8 @@ public sealed class ExtensionsDescriptionBlock : ICodeWriterModule<EnumToGenerat
     public IEnumerable<string> GetNamespacesImports(EnumToGenerate model) => [];
 
     public bool CanGenerateFor(EnumToGenerate model) =>
-        (model.SelectedGenerators & SelectedGenerators.MainGenerator) != 0 && model.HasDescription;
+        (model.SelectedGenerators & SelectedGenerators.MainGenerator) != SelectedGenerators.None
+        && model.HasDescription;
 
     public void Write(SourceTextWriter writer, EnumToGenerate model)
     {

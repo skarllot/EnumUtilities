@@ -13,7 +13,9 @@ public sealed record JsonConverterGeneratorOptions(
     {
         var attributeData = typeSymbol
             .GetAttributes()
-            .FirstOrDefault(x => x.AttributeClass?.Name == nameof(JsonConverterGeneratorAttribute));
+            .FirstOrDefault(x =>
+                string.Equals(x.AttributeClass?.Name, nameof(JsonConverterGeneratorAttribute), StringComparison.Ordinal)
+            );
         if (attributeData is null)
             return null;
 

@@ -11,7 +11,7 @@ public static class CodeWriterHelper
             && model.Namespace.Length >= model.RootNamespace.Length
         )
         {
-            if (model.RootNamespace == model.Namespace)
+            if (string.Equals(model.RootNamespace, model.Namespace, StringComparison.Ordinal))
             {
                 return $"{model.Name}{generatorName}.g.cs";
             }

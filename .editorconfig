@@ -19,6 +19,9 @@ generated_code = true
 
 # C# files
 [*.cs]
+dotnet_diagnostic.MA0016.severity = none
+MA0051.maximum_lines_per_method = 100
+
 # New line preferences
 csharp_new_line_before_open_brace = all
 csharp_new_line_before_else = true

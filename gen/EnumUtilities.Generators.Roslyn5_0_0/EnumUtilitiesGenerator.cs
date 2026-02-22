@@ -68,7 +68,7 @@ public class EnumUtilitiesGenerator : IIncrementalGenerator
             .WithTrackingName(TrackingNames.ExtractForJsonConverterGeneratorAttribute)
             .WhereNotNull()
             .WithTrackingName(TrackingNames.RemoveNulls)
-            .Where(x => (x.SelectedGenerators & SelectedGenerators.MainGenerator) == 0)
+            .Where(x => (x.SelectedGenerators & SelectedGenerators.MainGenerator) == SelectedGenerators.None)
             .WithTrackingName(TrackingNames.SkipGeneratedByMainGenerator)
             .Combine(csharpVersion);
 

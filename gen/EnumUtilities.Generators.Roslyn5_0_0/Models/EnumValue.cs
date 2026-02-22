@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Globalization;
+using System.Runtime.CompilerServices;
 using Microsoft.CodeAnalysis;
 using Raiqub.Generators.EnumUtilities.Common;
 
@@ -91,7 +92,7 @@ public sealed record EnumValue(
             case ushort v:
                 return v;
             default:
-                return Convert.ToUInt64(realMemberValue);
+                return Convert.ToUInt64(realMemberValue, CultureInfo.InvariantCulture);
         }
     }
 }

@@ -8,7 +8,8 @@ public sealed class ExtensionsEnumMemberBlock : ICodeWriterModule<EnumToGenerate
     public IEnumerable<string> GetNamespacesImports(EnumToGenerate model) => [];
 
     public bool CanGenerateFor(EnumToGenerate model) =>
-        (model.SelectedGenerators & SelectedGenerators.MainGenerator) != 0 && model.HasSerializationValue;
+        (model.SelectedGenerators & SelectedGenerators.MainGenerator) != SelectedGenerators.None
+        && model.HasSerializationValue;
 
     public void Write(SourceTextWriter writer, EnumToGenerate model)
     {

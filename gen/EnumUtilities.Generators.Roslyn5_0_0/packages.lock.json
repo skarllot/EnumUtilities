@@ -8,6 +8,12 @@
         "resolved": "2.0.2",
         "contentHash": "VaHoEN6YHp0jXucxm67vfuRy8zo9ufiKSuaZ4ZudRi8xmWcEFMKxfCsg2nvYNvdISFTURDu+IHqADGh53+Bamw=="
       },
+      "Meziantou.Analyzer": {
+        "type": "Direct",
+        "requested": "[3.0.13, )",
+        "resolved": "3.0.13",
+        "contentHash": "uoDyvrOtLJ4fc/AS6r6EnTUw5W+vcBqyqi2owQOH5aG4oAbsQfqsT4qITRqNvEoKGMsgikZRoXO8VYgG156L2w=="
+      },
       "Microsoft.CodeAnalysis.Analyzers": {
         "type": "Direct",
         "requested": "[3.11.0, )",

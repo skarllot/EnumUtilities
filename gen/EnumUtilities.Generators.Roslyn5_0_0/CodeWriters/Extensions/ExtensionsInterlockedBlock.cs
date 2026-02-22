@@ -8,8 +8,8 @@ public sealed class ExtensionsInterlockedBlock : ICodeWriterModule<EnumToGenerat
     public IEnumerable<string> GetNamespacesImports(EnumToGenerate model) => ["System.Threading"];
 
     public bool CanGenerateFor(EnumToGenerate model) =>
-        (model.SelectedGenerators & SelectedGenerators.MainGenerator) != 0
-        && model.InterlockedUnderlyingType is not null;
+        (model.SelectedGenerators & SelectedGenerators.MainGenerator) != SelectedGenerators.None
+        && model.IsInterlockedSupported();
 
     public void Write(SourceTextWriter writer, EnumToGenerate model)
     {
@@ -34,7 +34,7 @@ public sealed class ExtensionsInterlockedBlock : ICodeWriterModule<EnumToGenerat
         writer.WriteLine();
         WriteInterlockedExchange(writer, model, underlyingType);
 
-        if (underlyingType == "long")
+        if (string.Equals(underlyingType, "long", StringComparison.Ordinal))
         {
             writer.WriteLine();
             WriteInterlockedRead(writer, model, underlyingType);

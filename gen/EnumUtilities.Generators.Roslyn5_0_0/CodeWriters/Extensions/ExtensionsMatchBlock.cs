@@ -9,7 +9,9 @@ public sealed class ExtensionsMatchBlock : ICodeWriterModule<EnumToGenerate>
     public IEnumerable<string> GetNamespacesImports(EnumToGenerate model) => [];
 
     public bool CanGenerateFor(EnumToGenerate model) =>
-        (model.SelectedGenerators & SelectedGenerators.MainGenerator) != 0 && !model.Values.IsEmpty && !model.IsFlags;
+        (model.SelectedGenerators & SelectedGenerators.MainGenerator) != SelectedGenerators.None
+        && !model.Values.IsEmpty
+        && !model.IsFlags;
 
     public void Write(SourceTextWriter writer, EnumToGenerate model)
     {
