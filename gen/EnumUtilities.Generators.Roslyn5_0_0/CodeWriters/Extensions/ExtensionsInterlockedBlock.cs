@@ -5,6 +5,8 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters.Extensions;
 
 public sealed class ExtensionsInterlockedBlock : ICodeWriterModule<EnumToGenerate>
 {
+    public IEnumerable<string> GetNamespacesImports(EnumToGenerate model) => ["System.Threading"];
+
     public bool CanGenerateFor(EnumToGenerate model) =>
         (model.SelectedGenerators & SelectedGenerators.MainGenerator) != 0
         && model.InterlockedUnderlyingType is not null;
