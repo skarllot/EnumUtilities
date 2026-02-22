@@ -1,10 +1,13 @@
 ﻿using Raiqub.Generators.EnumUtilities.Models;
 using Raiqub.Generators.InterpolationCodeWriter;
+using Roslyn.Utilities;
 
 namespace Raiqub.Generators.EnumUtilities.CodeWriters.Extensions;
 
 public sealed class ExtensionsMatchBlock : ICodeWriterModule<EnumToGenerate>
 {
+    public IEnumerable<string> GetNamespacesImports(EnumToGenerate model) => [];
+
     public bool CanGenerateFor(EnumToGenerate model) =>
         (model.SelectedGenerators & SelectedGenerators.MainGenerator) != 0 && !model.Values.IsEmpty && !model.IsFlags;
 
@@ -15,6 +18,7 @@ public sealed class ExtensionsMatchBlock : ICodeWriterModule<EnumToGenerate>
         WriteMatchWithDelegate(writer, model);
     }
 
+    [PerformanceSensitive("")]
     private static void WriteMatch(SourceTextWriter writer, EnumToGenerate model)
     {
         writer.WriteLine(
@@ -79,6 +83,7 @@ public sealed class ExtensionsMatchBlock : ICodeWriterModule<EnumToGenerate>
         );
     }
 
+    [PerformanceSensitive("")]
     private static void WriteMatchWithDelegate(SourceTextWriter writer, EnumToGenerate model)
     {
         writer.WriteLine(

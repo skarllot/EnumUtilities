@@ -6,6 +6,8 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters.Extensions;
 
 public sealed class ExtensionsDescriptionBlock : ICodeWriterModule<EnumToGenerate>
 {
+    public IEnumerable<string> GetNamespacesImports(EnumToGenerate model) => [];
+
     public bool CanGenerateFor(EnumToGenerate model) =>
         (model.SelectedGenerators & SelectedGenerators.MainGenerator) != 0 && model.HasDescription;
 
