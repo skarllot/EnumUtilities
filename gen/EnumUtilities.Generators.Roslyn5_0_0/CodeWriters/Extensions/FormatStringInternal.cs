@@ -49,7 +49,7 @@ public static class FormatStringInternal
         );
         writer.PushIndent();
 
-        if (model.Values.All(x => keySelector(x) != "0"))
+        if (model.Values.All(x => !string.Equals(keySelector(x), "0", StringComparison.Ordinal)))
         {
             writer.WriteLine();
             writer.WriteLine(

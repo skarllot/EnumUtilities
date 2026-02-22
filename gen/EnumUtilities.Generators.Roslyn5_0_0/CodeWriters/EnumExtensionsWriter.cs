@@ -21,7 +21,8 @@ public class EnumExtensionsWriter : ICodeWriter<EnumToGenerate>
     private static AssemblyName CurrentAssemblyName { get; } = typeof(EnumExtensionsWriter).Assembly.GetName();
 
     public bool CanGenerateFor(EnumToGenerate model) =>
-        (model.SelectedGenerators & (SelectedGenerators.MainGenerator | SelectedGenerators.JsonConverter)) != 0;
+        (model.SelectedGenerators & (SelectedGenerators.MainGenerator | SelectedGenerators.JsonConverter))
+        != SelectedGenerators.None;
 
     public string GetFileName(EnumToGenerate model) => CodeWriterHelper.GetFileName(model, "Extensions");
 

@@ -10,7 +10,7 @@ public class EnumInfoWriter : ICodeWriter<EnumToGenerate>
     private static AssemblyName CurrentAssemblyName { get; } = typeof(EnumInfoWriter).Assembly.GetName();
 
     public bool CanGenerateFor(EnumToGenerate model) =>
-        (model.SelectedGenerators & SelectedGenerators.MainGenerator) != 0;
+        (model.SelectedGenerators & SelectedGenerators.MainGenerator) != SelectedGenerators.None;
 
     public string GetFileName(EnumToGenerate model) => CodeWriterHelper.GetFileName(model, "EnumInfo");
 

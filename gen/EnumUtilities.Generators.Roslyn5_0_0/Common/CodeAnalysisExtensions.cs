@@ -1,5 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Roslyn.Utilities;
 
 namespace Raiqub.Generators.EnumUtilities.Common;
 
@@ -49,7 +50,7 @@ public static class CodeAnalysisExtensions
 
     public static AttributeData? WhereClassNameIs(this AttributeData attribute, string name)
     {
-        return attribute.AttributeClass?.Name == name ? attribute : null;
+        return string.Equals(attribute.AttributeClass?.Name, name, StringComparison.Ordinal) ? attribute : null;
     }
 
     public static object? GetConstructorArgument(this AttributeData attribute, int position)
@@ -57,11 +58,12 @@ public static class CodeAnalysisExtensions
         return attribute.ConstructorArguments[position].Value;
     }
 
+    [PerformanceSensitive("")]
     public static object? GetNamedArgument(this AttributeData attribute, string argName)
     {
         foreach (var namedArgument in attribute.NamedArguments)
         {
-            if (namedArgument.Key == argName)
+            if (string.Equals(namedArgument.Key, argName, StringComparison.Ordinal))
                 return namedArgument.Value.Value;
         }
 

@@ -40,12 +40,17 @@ public static class CodeWriterExtensions
         var all = modules
             .SelectMany(m => m.CanGenerateFor(model) ? m.GetNamespacesImports(model) : [])
             .Concat(defaultImports ?? [])
-            .Distinct();
+            .Distinct(StringComparer.Ordinal);
 
         var sorted = sortSystemDirectivesFirst
-            ? all.OrderBy(x => x == "System" || x.StartsWith("System.", StringComparison.Ordinal) ? 0 : 1)
-                .ThenBy(x => x)
-            : all.OrderBy(x => x);
+            ? all.OrderBy(x =>
+                    string.Equals(x, "System", StringComparison.Ordinal)
+                    || x.StartsWith("System.", StringComparison.Ordinal)
+                        ? 0
+                        : 1
+                )
+                .ThenBy(x => x, StringComparer.Ordinal)
+            : all.OrderBy(x => x, StringComparer.Ordinal);
 
         foreach (var ns in sorted)
         {
