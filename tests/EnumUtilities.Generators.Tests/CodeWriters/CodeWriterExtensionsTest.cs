@@ -30,10 +30,7 @@ public class CodeWriterExtensionsTest
     public void WriteNamespaceImports_MixedImports_SystemDirectivesWrittenFirst()
     {
         var writer = new SourceTextWriter();
-        ICodeWriterModule<int>[] modules =
-        [
-            CreateModule("Raiqub.Stuff", "System.Text", "System"),
-        ];
+        ICodeWriterModule<int>[] modules = [CreateModule("Raiqub.Stuff", "System.Text", "System")];
 
         writer.WriteNamespaceImports(modules, 0);
 
@@ -44,10 +41,7 @@ public class CodeWriterExtensionsTest
     public void WriteNamespaceImports_SortSystemDirectivesFirstFalse_SortsAlphabetically()
     {
         var writer = new SourceTextWriter();
-        ICodeWriterModule<int>[] modules =
-        [
-            CreateModule("Raiqub.Stuff", "System.Text", "System"),
-        ];
+        ICodeWriterModule<int>[] modules = [CreateModule("Raiqub.Stuff", "System.Text", "System")];
 
         writer.WriteNamespaceImports(modules, 0, sortSystemDirectivesFirst: false);
 
@@ -58,11 +52,7 @@ public class CodeWriterExtensionsTest
     public void WriteNamespaceImports_DuplicateImportsAcrossModules_DeduplicatesImports()
     {
         var writer = new SourceTextWriter();
-        ICodeWriterModule<int>[] modules =
-        [
-            CreateModule("System", "Raiqub.Stuff"),
-            CreateModule("System", "Other"),
-        ];
+        ICodeWriterModule<int>[] modules = [CreateModule("System", "Raiqub.Stuff"), CreateModule("System", "Other")];
 
         writer.WriteNamespaceImports(modules, 0);
 
@@ -110,8 +100,7 @@ public class CodeWriterExtensionsTest
     private static string[] GetLines(SourceTextWriter writer) =>
         writer.ToString().Split('\n', StringSplitOptions.RemoveEmptyEntries);
 
-    private static StubModule CreateModule(params string[] imports) =>
-        new StubModule(canGenerateFor: true, imports);
+    private static StubModule CreateModule(params string[] imports) => new StubModule(canGenerateFor: true, imports);
 
     private static StubModule CreateModule(bool canGenerateFor, params string[] imports) =>
         new StubModule(canGenerateFor, imports);
@@ -119,7 +108,9 @@ public class CodeWriterExtensionsTest
     private sealed class StubModule(bool canGenerateFor, string[] imports) : ICodeWriterModule<int>
     {
         public IEnumerable<string> GetNamespacesImports(int model) => imports;
+
         public bool CanGenerateFor(int model) => canGenerateFor;
+
         public void Write(SourceTextWriter writer, int model) { }
     }
 }
