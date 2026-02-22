@@ -43,7 +43,8 @@ public static class CodeWriterExtensions
             .Distinct();
 
         var sorted = sortSystemDirectivesFirst
-            ? all.OrderBy(x => x == "System" || x.StartsWith("System.") ? 0 : 1).ThenBy(x => x)
+            ? all.OrderBy(x => x == "System" || x.StartsWith("System.", StringComparison.Ordinal) ? 0 : 1)
+                .ThenBy(x => x)
             : all.OrderBy(x => x);
 
         foreach (var ns in sorted)
