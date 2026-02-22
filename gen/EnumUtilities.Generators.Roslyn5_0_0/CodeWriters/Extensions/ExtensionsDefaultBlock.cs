@@ -5,6 +5,8 @@ namespace Raiqub.Generators.EnumUtilities.CodeWriters.Extensions;
 
 public sealed class ExtensionsDefaultBlock : ICodeWriterModule<EnumToGenerate>
 {
+    public IEnumerable<string> GetNamespacesImports(EnumToGenerate model) => [];
+
     public bool CanGenerateFor(EnumToGenerate model) =>
         (model.SelectedGenerators & SelectedGenerators.MainGenerator) != 0;
 
