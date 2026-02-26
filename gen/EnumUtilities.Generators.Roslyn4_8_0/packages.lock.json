@@ -52,9 +52,9 @@
       },
       "Raiqub.Generators.InterpolationCodeWriter.CSharp.Sources": {
         "type": "Direct",
-        "requested": "[2.0.4, )",
-        "resolved": "2.0.4",
-        "contentHash": "1HiLrubKo+eoe1HhpAs6e8onbcDU4mrdbxF5e4VfXXgv7KrjX+3KfyhEPfuVLAvzelandS1EIQkFRWYvbWmQ/Q=="
+        "requested": "[2.1.1, )",
+        "resolved": "2.1.1",
+        "contentHash": "9jj1NDNmD4dvcmLsHHG4RGupr15xEBPTJqQqGM6XxnIyJc0uas7WZ4437WW61xF08Misg//VzrPNE0oBjE6iUA=="
       },
       "Raiqub.Generators.T4CodeWriter.Sources": {
         "type": "Direct",
