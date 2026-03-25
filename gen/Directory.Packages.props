@@ -8,7 +8,7 @@
     <GlobalPackageReference Include="Nerdbank.GitVersioning" Version="3.9.50" PrivateAssets="All" />
   </ItemGroup>
   <ItemGroup>
-    <PackageVersion Include="Meziantou.Analyzer" Version="3.0.13" />
+    <PackageVersion Include="Meziantou.Analyzer" Version="3.0.15" />
     <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="3.11.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="5.0.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.PerformanceSensitiveAnalyzers" Version="3.3.1" />
