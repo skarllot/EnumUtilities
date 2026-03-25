@@ -75,7 +75,7 @@ jobs:
         fetch-depth: 0
 
     - name: 🧰 Setup .NET
-      uses: actions/setup-dotnet@baa11fbfe1d6520db94683bd5c7a3818018e4309 # v5.1.0
+      uses: actions/setup-dotnet@c2fa09f4bde5ebb9d1777cf28262a3eb3db3ced7 # v5.2.0
       with:
         dotnet-version: |
           6.x
@@ -83,7 +83,7 @@ jobs:
         global-json-file: global.json
 
     - name: 🗃️ Setup NuGet cache
-      uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+      uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
       with:
         path: ~/.nuget/packages
         key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
@@ -91,7 +91,7 @@ jobs:
 
     # Initializes the CodeQL tools for scanning.
     - name: 🛠️ Initialize CodeQL
-      uses: github/codeql-action/init@9e907b5e64f6b83e7804b09294d44122997950d6 # v4.32.3
+      uses: github/codeql-action/init@89a39a4e59826350b863aa6b6252a07ad50cf83e # v4.32.4
       with:
         languages: ${{ matrix.language }}
         # If you wish to specify custom queries, you can do so here or in a config file.
@@ -108,6 +108,6 @@ jobs:
       run: dotnet build --no-restore -c Release
 
     - name: 🔍 Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@9e907b5e64f6b83e7804b09294d44122997950d6 # v4.32.3
+      uses: github/codeql-action/analyze@89a39a4e59826350b863aa6b6252a07ad50cf83e # v4.32.4
       with:
         category: "/language:${{matrix.language}}"
