@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
@@ -19,11 +19,11 @@ public interface IEnumFactoryJson<TEnum>
     /// otherwise its <see cref="EnumMemberAttribute"/> value if defined, otherwise the member name.
     /// </summary>
     /// <param name="value">The string to convert.</param>
-    /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
+    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to consider case.</param>
     /// <returns>The enumeration value represented by <paramref name="value"/>.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not correspond to a defined member.</exception>
-    TEnum ParseJsonString(string value, StringComparison comparisonType = StringComparison.Ordinal);
+    TEnum ParseJsonString(string value, bool ignoreCase = false);
 
     /// <summary>
     /// Converts the character span representation of a JSON string value to the equivalent enumeration value.
@@ -31,10 +31,10 @@ public interface IEnumFactoryJson<TEnum>
     /// otherwise its <see cref="EnumMemberAttribute"/> value if defined, otherwise the member name.
     /// </summary>
     /// <param name="value">The character span to convert.</param>
-    /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
+    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to consider case.</param>
     /// <returns>The enumeration value represented by <paramref name="value"/>.</returns>
     /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not correspond to a defined member.</exception>
-    TEnum ParseJsonString(ReadOnlySpan<char> value, StringComparison comparisonType = StringComparison.Ordinal);
+    TEnum ParseJsonString(ReadOnlySpan<char> value, bool ignoreCase = false);
 
     /// <summary>
     /// Converts the string representation of a JSON string value to the equivalent enumeration value,
@@ -43,14 +43,14 @@ public interface IEnumFactoryJson<TEnum>
     /// otherwise its <see cref="EnumMemberAttribute"/> value if defined, otherwise the member name.
     /// </summary>
     /// <param name="value">The string to convert, or <see langword="null"/>.</param>
-    /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
+    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to consider case.</param>
     /// <returns>
     /// The enumeration value represented by <paramref name="value"/>,
     /// or <see langword="null"/> if <paramref name="value"/> is <see langword="null"/>.
     /// </returns>
     /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not correspond to a defined member.</exception>
     [return: NotNullIfNotNull("value")]
-    TEnum? ParseJsonStringOrNull(string? value, StringComparison comparisonType = StringComparison.Ordinal);
+    TEnum? ParseJsonStringOrNull(string? value, bool ignoreCase = false);
 
     /// <summary>
     /// Tries to convert the string representation of a JSON string value to the equivalent enumeration value,
@@ -59,13 +59,13 @@ public interface IEnumFactoryJson<TEnum>
     /// otherwise its <see cref="EnumMemberAttribute"/> value if defined, otherwise the member name.
     /// </summary>
     /// <param name="value">The string to convert.</param>
-    /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
+    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to consider case.</param>
     /// <param name="result">
     /// When this method returns <see langword="true"/>, contains the enumeration value represented by <paramref name="value"/>.
     /// When this method returns <see langword="false"/>, contains the default value of the underlying type.
     /// </param>
     /// <returns><see langword="true"/> if <paramref name="value"/> was converted successfully; otherwise, <see langword="false"/>.</returns>
-    bool TryParseJsonString([NotNullWhen(true)] string? value, StringComparison comparisonType, out TEnum result);
+    bool TryParseJsonString([NotNullWhen(true)] string? value, bool ignoreCase, out TEnum result);
 
     /// <summary>
     /// Tries to convert the string representation of a JSON string value to the equivalent enumeration value,
@@ -88,12 +88,12 @@ public interface IEnumFactoryJson<TEnum>
     /// otherwise its <see cref="EnumMemberAttribute"/> value if defined, otherwise the member name.
     /// </summary>
     /// <param name="value">The string to convert.</param>
-    /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
+    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to consider case.</param>
     /// <returns>
     /// The enumeration value represented by <paramref name="value"/> if the conversion succeeds;
     /// otherwise, <see langword="null"/>.
     /// </returns>
-    TEnum? TryParseJsonString(string? value, StringComparison comparisonType = StringComparison.Ordinal);
+    TEnum? TryParseJsonString(string? value, bool ignoreCase = false);
 
     /// <summary>
     /// Tries to convert the character span representation of a JSON string value to the equivalent enumeration value,
@@ -102,13 +102,13 @@ public interface IEnumFactoryJson<TEnum>
     /// otherwise its <see cref="EnumMemberAttribute"/> value if defined, otherwise the member name.
     /// </summary>
     /// <param name="value">The character span to convert.</param>
-    /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
+    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to consider case.</param>
     /// <param name="result">
     /// When this method returns <see langword="true"/>, contains the enumeration value represented by <paramref name="value"/>.
     /// When this method returns <see langword="false"/>, contains the default value of the underlying type.
     /// </param>
     /// <returns><see langword="true"/> if <paramref name="value"/> was converted successfully; otherwise, <see langword="false"/>.</returns>
-    bool TryParseJsonString(ReadOnlySpan<char> value, StringComparison comparisonType, out TEnum result);
+    bool TryParseJsonString(ReadOnlySpan<char> value, bool ignoreCase, out TEnum result);
 
     /// <summary>
     /// Tries to convert the character span representation of a JSON string value to the equivalent enumeration value,
@@ -131,10 +131,10 @@ public interface IEnumFactoryJson<TEnum>
     /// otherwise its <see cref="EnumMemberAttribute"/> value if defined, otherwise the member name.
     /// </summary>
     /// <param name="value">The character span to convert.</param>
-    /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
+    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to consider case.</param>
     /// <returns>
     /// The enumeration value represented by <paramref name="value"/> if the conversion succeeds;
     /// otherwise, <see langword="null"/>.
     /// </returns>
-    TEnum? TryParseJsonString(ReadOnlySpan<char> value, StringComparison comparisonType = StringComparison.Ordinal);
+    TEnum? TryParseJsonString(ReadOnlySpan<char> value, bool ignoreCase = false);
 }

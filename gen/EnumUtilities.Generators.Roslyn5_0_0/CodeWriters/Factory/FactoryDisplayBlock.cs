@@ -131,7 +131,7 @@ public class FactoryDisplayBlock : ICodeWriterModule<EnumToGenerate>
         );
         writer.PushIndent();
 
-        if (model.Values.AsSpan().Length == 0)
+        if (model.Values.IsEmpty)
         {
             writer.WriteLine(
                 """
