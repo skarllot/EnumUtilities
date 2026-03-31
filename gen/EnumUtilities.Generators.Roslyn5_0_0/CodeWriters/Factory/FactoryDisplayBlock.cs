@@ -28,7 +28,7 @@ public class FactoryDisplayBlock : ICodeWriterModule<EnumToGenerate>
 
         if (model.HasDisplayDescription)
         {
-            WriteTryCreateFromDescription(writer, model);
+            WriteTryCreateFromDescription(writer, model, model.HasDescription);
         }
     }
 
@@ -210,11 +210,16 @@ public class FactoryDisplayBlock : ICodeWriterModule<EnumToGenerate>
         );
     }
 
-    private static void WriteTryCreateFromDescription(SourceTextWriter writer, EnumToGenerate model)
+    private static void WriteTryCreateFromDescription(
+        SourceTextWriter writer,
+        EnumToGenerate model,
+        bool hasDescriptionAttribute
+    )
     {
+        var descriptionPrefix = hasDescriptionAttribute ? "Display" : "";
         writer.WriteLine(
             $$"""
-            public static bool TryCreateFromDescription(
+            public static bool TryCreateFrom{{descriptionPrefix}}Description(
                 [NotNullWhen(true)] string? description,
                 StringComparison comparisonType,
                 out {{model.RefName}} result)
@@ -284,19 +289,19 @@ public class FactoryDisplayBlock : ICodeWriterModule<EnumToGenerate>
         writer.WriteLine();
         writer.WriteLine(
             $$"""
-            public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, out {{model.RefName}} result)
+            public static bool TryCreateFrom{{descriptionPrefix}}Description([NotNullWhen(true)] string? description, out {{model.RefName}} result)
             {
-                return TryCreateFromDescription(description, StringComparison.Ordinal, out result);
+                return TryCreateFrom{{descriptionPrefix}}Description(description, StringComparison.Ordinal, out result);
             }
 
-            public static {{model.RefName}}? TryCreateFromDescription(string? description, StringComparison comparisonType)
+            public static {{model.RefName}}? TryCreateFrom{{descriptionPrefix}}Description(string? description, StringComparison comparisonType)
             {
-                return TryCreateFromDescription(description, comparisonType, out {{model.RefName}} result) ? result : null;
+                return TryCreateFrom{{descriptionPrefix}}Description(description, comparisonType, out {{model.RefName}} result) ? result : null;
             }
 
-            public static {{model.RefName}}? TryCreateFromDescription(string? description)
+            public static {{model.RefName}}? TryCreateFrom{{descriptionPrefix}}Description(string? description)
             {
-                return TryCreateFromDescription(description, StringComparison.Ordinal, out {{model.RefName}} result) ? result : null;
+                return TryCreateFrom{{descriptionPrefix}}Description(description, StringComparison.Ordinal, out {{model.RefName}} result) ? result : null;
             }
             """
         );
