@@ -3,7 +3,7 @@ using Raiqub.Generators.InterpolationCodeWriter;
 
 namespace Raiqub.Generators.EnumUtilities.CodeWriters.Factory;
 
-public class FactoryEnumMemberBlock : ICodeWriterModule<EnumToGenerate>
+public sealed class FactoryEnumMemberBlock : ICodeWriterModule<EnumToGenerate>
 {
     public IEnumerable<string> GetNamespacesImports(EnumToGenerate model) => [];
 

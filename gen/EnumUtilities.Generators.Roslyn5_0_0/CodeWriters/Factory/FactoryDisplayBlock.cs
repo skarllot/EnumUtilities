@@ -4,7 +4,7 @@ using Raiqub.Generators.InterpolationCodeWriter;
 
 namespace Raiqub.Generators.EnumUtilities.CodeWriters.Factory;
 
-public class FactoryDisplayBlock : ICodeWriterModule<EnumToGenerate>
+public sealed class FactoryDisplayBlock : ICodeWriterModule<EnumToGenerate>
 {
     public IEnumerable<string> GetNamespacesImports(EnumToGenerate model) => [];
 
