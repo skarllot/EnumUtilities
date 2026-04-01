@@ -7,7 +7,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <AnalyzerLanguage>cs</AnalyzerLanguage>
     <AnalyzerRoslynVersion>5.0.0</AnalyzerRoslynVersion>
-    <DefineConstants>$(DefineConstants);Roslyn_500;AllowUnsafeBlocks;FeatureMemory</DefineConstants>
+    <DefineConstants>$(DefineConstants);Roslyn_500;AllowUnsafeBlocks;FeatureMemory;NO_RAIQUB_SOURCEGENERATORS_POLYFILL</DefineConstants>
     <RootNamespace>Raiqub.Generators.EnumUtilities</RootNamespace>
     <AssemblyName>Raiqub.Generators.EnumUtilities</AssemblyName>
   </PropertyGroup>
@@ -37,10 +37,6 @@
     <Compile Include="..\..\src\EnumUtilities\*Attribute.cs" LinkBase="Attributes" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="CodeWriters\EnumFactoryWriter.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>EnumFactoryWriter.cs</LastGenOutput>
-    </None>
     <None Update="CodeWriters\EnumValidationWriter.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>EnumValidationWriter.cs</LastGenOutput>
@@ -51,11 +47,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="CodeWriters\EnumFactoryWriter.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EnumFactoryWriter.tt</DependentUpon>
-    </Compile>
     <Compile Update="CodeWriters\EnumValidationWriter.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

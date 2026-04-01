@@ -15,15 +15,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
 public static partial class PaymentMethodFactory
 {
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>The value represented by the specified name or numeric value. Note that this value need not be a member of the PaymentMethod enumeration.</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.Parse(string, bool)"/>
     public static PaymentMethod Parse(string value, bool ignoreCase = false)
     {
         if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
@@ -31,28 +23,14 @@ public static partial class PaymentMethodFactory
         return (PaymentMethod)result;
     }
 
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>The value represented by the specified name or numeric value. Note that this value need not be a member of the PaymentMethod enumeration.</returns>
-    /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.Parse(System.ReadOnlySpan{char}, bool)"/>
     public static PaymentMethod Parse(ReadOnlySpan<char> value, bool ignoreCase = false)
     {
         TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
         return (PaymentMethod)result;
     }
 
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>The value represented by the specified name or numeric value or null. Note that this value need not be a member of the PaymentMethod enumeration.</returns>
-    /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.ParseOrNull(string, bool)"/>
     [return: NotNullIfNotNull("value")]
     public static PaymentMethod? ParseOrNull(string? value, bool ignoreCase = false)
     {
@@ -61,101 +39,41 @@ public static partial class PaymentMethodFactory
         return (PaymentMethod)result;
     }
 
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type PaymentMethod whose value is represented by value
-    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-    /// underlying type of PaymentMethod. Note that this value need not be a member of the PaymentMethod enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.TryParse(string, bool, out TEnum)"/>
     public static bool TryParse([NotNullWhen(true)] string? value, bool ignoreCase, out PaymentMethod result)
     {
         Unsafe.SkipInit(out result);
         return TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<PaymentMethod, int>(ref result));
     }
 
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type PaymentMethod whose value is represented by value
-    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-    /// underlying type of PaymentMethod. Note that this value need not be a member of the PaymentMethod enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.TryParse(string, out TEnum)"/>
     public static bool TryParse([NotNullWhen(true)] string? value, out PaymentMethod result)
     {
         Unsafe.SkipInit(out result);
         return TryParseName(value.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<PaymentMethod, int>(ref result));
     }
 
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>
-    /// Contains an object of type PaymentMethod whose value is represented by value if the parse operation succeeds.
-    /// If the parse operation fails, result contains <c>null</c> value.
-    /// </returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.TryParse(string, bool)"/>
     public static PaymentMethod? TryParse(string? value, bool ignoreCase = false)
     {
         return TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (PaymentMethod?)result : null;
     }
 
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type PaymentMethod whose value is represented by value
-    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-    /// underlying type of PaymentMethod. Note that this value need not be a member of the PaymentMethod enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.TryParse(System.ReadOnlySpan{char}, bool, out TEnum)"/>
     public static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, out PaymentMethod result)
     {
         Unsafe.SkipInit(out result);
         return TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<PaymentMethod, int>(ref result));
     }
 
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type PaymentMethod whose value is represented by value
-    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-    /// underlying type of PaymentMethod. Note that this value need not be a member of the PaymentMethod enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.TryParse(System.ReadOnlySpan{char}, out TEnum)"/>
     public static bool TryParse(ReadOnlySpan<char> value, out PaymentMethod result)
     {
         Unsafe.SkipInit(out result);
         return TryParseName(value, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<PaymentMethod, int>(ref result));
     }
 
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>
-    /// Contains an object of type PaymentMethod whose value is represented by value if the parse operation succeeds.
-    /// If the parse operation fails, result contains <c>null</c> value.
-    /// </returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.TryParse(System.ReadOnlySpan{char}, bool)"/>
     public static PaymentMethod? TryParse(ReadOnlySpan<char> value, bool ignoreCase = false)
     {
         return TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (PaymentMethod?)result : null;
@@ -257,89 +175,7 @@ public static partial class PaymentMethodFactory
         return false;
     }
 
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="name">The string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type PaymentMethod whose value is represented by value
-    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-    /// underlying type of PaymentMethod. Note that this value need not be a member of the PaymentMethod enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-    /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
-    [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
-    public static bool TryParse(
-        [NotNullWhen(true)] string? name,
-        StringComparison comparisonType,
-        out PaymentMethod result)
-    {
-        Unsafe.SkipInit(out result);
-        return TryParseName(name.AsSpan(), comparisonType, throwOnFailure: false, out Unsafe.As<PaymentMethod, int>(ref result));
-    }
-
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="name">The case-insensitive string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type PaymentMethod whose value is represented by value
-    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-    /// underlying type of PaymentMethod. Note that this value need not be a member of the PaymentMethod enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-    [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
-    public static bool TryParseIgnoreCase(
-        [NotNullWhen(true)] string? name,
-        out PaymentMethod result)
-    {
-        Unsafe.SkipInit(out result);
-        return TryParseName(name.AsSpan(), StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out Unsafe.As<PaymentMethod, int>(ref result));
-    }
-
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object.
-    /// </summary>
-    /// <param name="name">The case-insensitive string representation of the enumeration name or underlying value to convert.</param>
-    /// <returns>
-    /// Contains an object of type PaymentMethod whose value is represented by value if the parse operation succeeds.
-    /// If the parse operation fails, result contains <c>null</c> value.
-    /// </returns>
-    [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
-    public static PaymentMethod? TryParseIgnoreCase(string? name)
-    {
-        return TryParseName(name.AsSpan(), StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out var result) ? (PaymentMethod?)result : null;
-    }
-
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object.
-    /// </summary>
-    /// <param name="name">The string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
-    /// <returns>
-    /// Contains an object of type PaymentMethod whose value is represented by value if the parse operation succeeds.
-    /// If the parse operation fails, result contains <c>null</c> value.
-    /// </returns>
-    /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
-    [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
-    public static PaymentMethod? TryParse(string? name, StringComparison comparisonType)
-    {
-        return TryParseName(name.AsSpan(), comparisonType, throwOnFailure: false, out var result) ? (PaymentMethod?)result : null;
-    }
-
-    /// <summary>
-    /// Converts the string representation of the serialized value to an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>The value represented by the specified serialized value. Note that this value need not be a member of the PaymentMethod enumeration.</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryEnumMember{TEnum}.ParseFromEnumMemberValue(string, bool)"/>
     public static PaymentMethod ParseFromEnumMemberValue(string value, bool ignoreCase = false)
     {
         if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
@@ -347,26 +183,14 @@ public static partial class PaymentMethodFactory
         return (PaymentMethod)result;
     }
 
-    /// <summary>
-    /// Converts the string representation of the serialized value to an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>The value represented by the specified serialized value. Note that this value need not be a member of the PaymentMethod enumeration.</returns>
-    /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryEnumMember{TEnum}.ParseFromEnumMemberValue(System.ReadOnlySpan{char}, bool)"/>
     public static PaymentMethod ParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase = false)
     {
         TryParseEnumMemberValue(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
         return (PaymentMethod)result;
     }
 
-    /// <summary>
-    /// Converts the string representation of the serialized value to an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>The value represented by the specified serialized value or null. Note that this value need not be a member of the PaymentMethod enumeration.</returns>
-    /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryEnumMember{TEnum}.ParseFromEnumMemberValueOrNull(string, bool)"/>
     [return: NotNullIfNotNull("value")]
     public static PaymentMethod? ParseFromEnumMemberValueOrNull(string? value, bool ignoreCase = false)
     {
@@ -375,99 +199,41 @@ public static partial class PaymentMethodFactory
         return (PaymentMethod)result;
     }
 
-    /// <summary>
-    /// Converts the string representation of the serialized value to an equivalent enumerated object.
-    /// The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type PaymentMethod whose value is represented by a
-    /// serialized value if the parse operation succeeds. If the parse operation fails, result contains the default
-    /// value of the underlying type of PaymentMethod. Note that this value need not be a member of the PaymentMethod enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryEnumMember{TEnum}.TryParseFromEnumMemberValue(string, bool, out TEnum)"/>
     public static bool TryParseFromEnumMemberValue([NotNullWhen(true)] string? value, bool ignoreCase, out PaymentMethod result)
     {
         Unsafe.SkipInit(out result);
         return TryParseEnumMemberValue(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<PaymentMethod, int>(ref result));
     }
 
-    /// <summary>
-    /// Converts the string representation of the serialized value to an equivalent enumerated object.
-    /// The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type PaymentMethod whose value is represented by a
-    /// serialized value if the parse operation succeeds. If the parse operation fails, result contains the default
-    /// value of the underlying type of PaymentMethod. Note that this value need not be a member of the PaymentMethod enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryEnumMember{TEnum}.TryParseFromEnumMemberValue(string, out TEnum)"/>
     public static bool TryParseFromEnumMemberValue([NotNullWhen(true)] string? value, out PaymentMethod result)
     {
         Unsafe.SkipInit(out result);
         return TryParseEnumMemberValue(value.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<PaymentMethod, int>(ref result));
     }
 
-    /// <summary>
-    /// Converts the string representation of the serialized value to an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>
-    /// Contains an object of type PaymentMethod whose value is represented by value if the parse operation succeeds.
-    /// If the parse operation fails, result contains a null value.
-    /// </returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryEnumMember{TEnum}.TryParseFromEnumMemberValue(string, bool)"/>
     public static PaymentMethod? TryParseFromEnumMemberValue(string? value, bool ignoreCase = false)
     {
         return TryParseEnumMemberValue(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (PaymentMethod?)result : null;
     }
 
-    /// <summary>
-    /// Converts the string representation of the serialized value to an equivalent enumerated object.
-    /// The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type PaymentMethod whose value is represented by a
-    /// serialized value if the parse operation succeeds. If the parse operation fails, result contains the default
-    /// value of the underlying type of PaymentMethod. Note that this value need not be a member of the PaymentMethod enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryEnumMember{TEnum}.TryParseFromEnumMemberValue(System.ReadOnlySpan{char}, bool, out TEnum)"/>
     public static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase, out PaymentMethod result)
     {
         Unsafe.SkipInit(out result);
         return TryParseEnumMemberValue(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<PaymentMethod, int>(ref result));
     }
 
-    /// <summary>
-    /// Converts the string representation of the serialized value to an equivalent enumerated object.
-    /// The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type PaymentMethod whose value is represented by a
-    /// serialized value if the parse operation succeeds. If the parse operation fails, result contains the default
-    /// value of the underlying type of PaymentMethod. Note that this value need not be a member of the PaymentMethod enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryEnumMember{TEnum}.TryParseFromEnumMemberValue(System.ReadOnlySpan{char}, out TEnum)"/>
     public static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, out PaymentMethod result)
     {
         Unsafe.SkipInit(out result);
         return TryParseEnumMemberValue(value, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<PaymentMethod, int>(ref result));
     }
 
-    /// <summary>
-    /// Converts the string representation of the serialized value to an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>
-    /// Contains an object of type PaymentMethod whose value is represented by value if the parse operation succeeds.
-    /// If the parse operation fails, result contains a null value.
-    /// </returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryEnumMember{TEnum}.TryParseFromEnumMemberValue(System.ReadOnlySpan{char}, bool)"/>
     public static PaymentMethod? TryParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase = false)
     {
         return TryParseEnumMemberValue(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (PaymentMethod?)result : null;
@@ -569,46 +335,7 @@ public static partial class PaymentMethodFactory
         return false;
     }
 
-    /// <summary>
-    /// Converts the string representation of the serialized value to an equivalent enumerated object.
-    /// The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
-    /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type PaymentMethod whose value is represented by value
-    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-    /// underlying type of PaymentMethod. Note that this value need not be a member of the PaymentMethod enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-    /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
-    [Obsolete("Use TryParseFromEnumMemberValue overload with 'ignoreCase' parameter")]
-    public static bool TryParseFromEnumMemberValue(
-        [NotNullWhen(true)] string? value,
-        StringComparison comparisonType,
-        out PaymentMethod result)
-    {
-        Unsafe.SkipInit(out result);
-        return TryParseEnumMemberValue(value.AsSpan(), comparisonType, throwOnFailure: false, out Unsafe.As<PaymentMethod, int>(ref result));
-    }
-
-    /// <summary>
-    /// Converts the string representation of the value associated with one enumerated constant to
-    /// an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
-    /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
-    /// <returns>
-    /// Contains an object of type PaymentMethod whose value is represented by value if the parse operation succeeds.
-    /// If the parse operation fails, result contains a null value.
-    /// </returns>
-    /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
-    [Obsolete("Use TryParseFromEnumMemberValue overload with 'ignoreCase' parameter")]
-    public static PaymentMethod? TryParseFromEnumMemberValue(string? value, StringComparison comparisonType)
-    {
-        return TryParseEnumMemberValue(value.AsSpan(), comparisonType, throwOnFailure: false, out var result) ? (PaymentMethod?)result : null;
-    }
-
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryDescription{TEnum}.CreateFromDescription(string, StringComparison)"/>
     public static PaymentMethod CreateFromDescription(string description, StringComparison comparisonType = StringComparison.Ordinal)
     {
         if (description is null) ThrowHelper.ThrowArgumentNullException(nameof(description));
@@ -616,12 +343,14 @@ public static partial class PaymentMethodFactory
         return (PaymentMethod)result;
     }
 
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryDescription{TEnum}.CreateFromDescription(System.ReadOnlySpan{char}, StringComparison)"/>
     public static PaymentMethod CreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType = StringComparison.Ordinal)
     {
         TryParseDescription(description, comparisonType, throwOnFailure: true, out var result);
         return (PaymentMethod)result;
     }
 
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryDescription{TEnum}.CreateFromDescriptionOrNull(string, StringComparison)"/>
     [return: NotNullIfNotNull("description")]
     public static PaymentMethod? CreateFromDescriptionOrNull(string? description, StringComparison comparisonType = StringComparison.Ordinal)
     {
@@ -630,35 +359,41 @@ public static partial class PaymentMethodFactory
         return (PaymentMethod)result;
     }
 
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryDescription{TEnum}.TryCreateFromDescription(string, StringComparison, out TEnum)"/>
     public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, StringComparison comparisonType, out PaymentMethod result)
     {
         Unsafe.SkipInit(out result);
         return TryParseDescription(description.AsSpan(), comparisonType, throwOnFailure: false, out Unsafe.As<PaymentMethod, int>(ref result));
     }
 
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryDescription{TEnum}.TryCreateFromDescription(string, out TEnum)"/>
     public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, out PaymentMethod result)
     {
         Unsafe.SkipInit(out result);
         return TryParseDescription(description.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<PaymentMethod, int>(ref result));
     }
 
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryDescription{TEnum}.TryCreateFromDescription(string, StringComparison)"/>
     public static PaymentMethod? TryCreateFromDescription(string? description, StringComparison comparisonType = StringComparison.Ordinal)
     {
         return TryParseDescription(description.AsSpan(), comparisonType, throwOnFailure: false, out var result) ? (PaymentMethod?)result : null;
     }
 
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryDescription{TEnum}.TryCreateFromDescription(System.ReadOnlySpan{char}, StringComparison, out TEnum)"/>
     public static bool TryCreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType, out PaymentMethod result)
     {
         Unsafe.SkipInit(out result);
         return TryParseDescription(description, comparisonType, throwOnFailure: false, out Unsafe.As<PaymentMethod, int>(ref result));
     }
 
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryDescription{TEnum}.TryCreateFromDescription(System.ReadOnlySpan{char}, out TEnum)"/>
     public static bool TryCreateFromDescription(ReadOnlySpan<char> description, out PaymentMethod result)
     {
         Unsafe.SkipInit(out result);
         return TryParseDescription(description, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<PaymentMethod, int>(ref result));
     }
 
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryDescription{TEnum}.TryCreateFromDescription(System.ReadOnlySpan{char}, StringComparison)"/>
     public static PaymentMethod? TryCreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType = StringComparison.Ordinal)
     {
         return TryParseDescription(description, comparisonType, throwOnFailure: false, out var result) ? (PaymentMethod?)result : null;
