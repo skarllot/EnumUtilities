@@ -15,15 +15,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
 public static partial class SeasonFactory
 {
-
-    /// <summary>
-    /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>The value represented by the specified serialized value. Note that this value need not be a member of the Season enumeration.</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.ParseJsonString(string, bool)"/>
     public static Season ParseJsonString(string value, bool ignoreCase = false)
     {
         if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
@@ -31,26 +23,14 @@ public static partial class SeasonFactory
         return (Season)result;
     }
 
-    /// <summary>
-    /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>The value represented by the specified serialized value. Note that this value need not be a member of the Season enumeration.</returns>
-    /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.ParseJsonString(System.ReadOnlySpan{char}, bool)"/>
     public static Season ParseJsonString(ReadOnlySpan<char> value, bool ignoreCase = false)
     {
         TryParseJsonString(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
         return (Season)result;
     }
 
-    /// <summary>
-    /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>The value represented by the specified serialized value or null. Note that this value need not be a member of the Season enumeration.</returns>
-    /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.ParseJsonStringOrNull(string, bool)"/>
     [return: NotNullIfNotNull("value")]
     public static Season? ParseJsonStringOrNull(string? value, bool ignoreCase = false)
     {
@@ -59,99 +39,41 @@ public static partial class SeasonFactory
         return (Season)result;
     }
 
-    /// <summary>
-    /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
-    /// The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type Season whose value is represented by a
-    /// serialized JSON value if the parse operation succeeds. If the parse operation fails, result contains the default
-    /// value of the underlying type of Season. Note that this value need not be a member of the Season enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.TryParseJsonString(string, bool, out TEnum)"/>
     public static bool TryParseJsonString([NotNullWhen(true)] string? value, bool ignoreCase, out Season result)
     {
         Unsafe.SkipInit(out result);
         return TryParseJsonString(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Season, int>(ref result));
     }
 
-    /// <summary>
-    /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
-    /// The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type Season whose value is represented by a
-    /// serialized JSON value if the parse operation succeeds. If the parse operation fails, result contains the default
-    /// value of the underlying type of Season. Note that this value need not be a member of the Season enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.TryParseJsonString(string, out TEnum)"/>
     public static bool TryParseJsonString([NotNullWhen(true)] string? value, out Season result)
     {
         Unsafe.SkipInit(out result);
         return TryParseJsonString(value.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Season, int>(ref result));
     }
 
-    /// <summary>
-    /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>
-    /// Contains an object of type Season whose value is represented by value if the parse operation succeeds.
-    /// If the parse operation fails, result contains a null value.
-    /// </returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.TryParseJsonString(string, bool)"/>
     public static Season? TryParseJsonString(string? value, bool ignoreCase = false)
     {
         return TryParseJsonString(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Season?)result : null;
     }
 
-    /// <summary>
-    /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
-    /// The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type Season whose value is represented by a
-    /// serialized JSON value if the parse operation succeeds. If the parse operation fails, result contains the default
-    /// value of the underlying type of Season. Note that this value need not be a member of the Season enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.TryParseJsonString(System.ReadOnlySpan{char}, bool, out TEnum)"/>
     public static bool TryParseJsonString(ReadOnlySpan<char> value, bool ignoreCase, out Season result)
     {
         Unsafe.SkipInit(out result);
         return TryParseJsonString(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Season, int>(ref result));
     }
 
-    /// <summary>
-    /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
-    /// The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type Season whose value is represented by a
-    /// serialized JSON value if the parse operation succeeds. If the parse operation fails, result contains the default
-    /// value of the underlying type of Season. Note that this value need not be a member of the Season enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.TryParseJsonString(System.ReadOnlySpan{char}, out TEnum)"/>
     public static bool TryParseJsonString(ReadOnlySpan<char> value, out Season result)
     {
         Unsafe.SkipInit(out result);
         return TryParseJsonString(value, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Season, int>(ref result));
     }
 
-    /// <summary>
-    /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>
-    /// Contains an object of type Season whose value is represented by value if the parse operation succeeds.
-    /// If the parse operation fails, result contains a null value.
-    /// </returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.TryParseJsonString(System.ReadOnlySpan{char}, bool)"/>
     public static Season? TryParseJsonString(ReadOnlySpan<char> value, bool ignoreCase = false)
     {
         return TryParseJsonString(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Season?)result : null;

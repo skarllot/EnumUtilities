@@ -55,7 +55,7 @@ jobs:
         fetch-depth: 0
 
     - name: 🧰 Setup .NET
-      uses: actions/setup-dotnet@baa11fbfe1d6520db94683bd5c7a3818018e4309 # v5.1.0
+      uses: actions/setup-dotnet@c2fa09f4bde5ebb9d1777cf28262a3eb3db3ced7 # v5.2.0
       with:
         dotnet-version: |
           6.x
@@ -63,7 +63,7 @@ jobs:
         global-json-file: global.json
 
     - name: 🗃️ Setup NuGet cache
-      uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+      uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
       with:
         path: ~/.nuget/packages
         key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
@@ -85,6 +85,6 @@ jobs:
       run: dotnet test --no-build --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
 
     - name: ☂️ Upload coverage reports to Codecov
-      uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de # v5.5.2
+      uses: codecov/codecov-action@1af58845a975a7985b0beb0cbe6fbbb71a41dbad # v5.5.3
       env:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
