@@ -15,15 +15,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
 public static partial class Bug480Factory
 {
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>The value represented by the specified name or numeric value. Note that this value need not be a member of the Bug480 enumeration.</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.Parse(string, bool)"/>
     public static Bug480 Parse(string value, bool ignoreCase = false)
     {
         if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
@@ -31,28 +23,14 @@ public static partial class Bug480Factory
         return (Bug480)result;
     }
 
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>The value represented by the specified name or numeric value. Note that this value need not be a member of the Bug480 enumeration.</returns>
-    /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.Parse(System.ReadOnlySpan{char}, bool)"/>
     public static Bug480 Parse(ReadOnlySpan<char> value, bool ignoreCase = false)
     {
         TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
         return (Bug480)result;
     }
 
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>The value represented by the specified name or numeric value or null. Note that this value need not be a member of the Bug480 enumeration.</returns>
-    /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.ParseOrNull(string, bool)"/>
     [return: NotNullIfNotNull("value")]
     public static Bug480? ParseOrNull(string? value, bool ignoreCase = false)
     {
@@ -61,101 +39,41 @@ public static partial class Bug480Factory
         return (Bug480)result;
     }
 
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type Bug480 whose value is represented by value
-    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-    /// underlying type of Bug480. Note that this value need not be a member of the Bug480 enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.TryParse(string, bool, out TEnum)"/>
     public static bool TryParse([NotNullWhen(true)] string? value, bool ignoreCase, out Bug480 result)
     {
         Unsafe.SkipInit(out result);
         return TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480, int>(ref result));
     }
 
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type Bug480 whose value is represented by value
-    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-    /// underlying type of Bug480. Note that this value need not be a member of the Bug480 enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.TryParse(string, out TEnum)"/>
     public static bool TryParse([NotNullWhen(true)] string? value, out Bug480 result)
     {
         Unsafe.SkipInit(out result);
         return TryParseName(value.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480, int>(ref result));
     }
 
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>
-    /// Contains an object of type Bug480 whose value is represented by value if the parse operation succeeds.
-    /// If the parse operation fails, result contains <c>null</c> value.
-    /// </returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.TryParse(string, bool)"/>
     public static Bug480? TryParse(string? value, bool ignoreCase = false)
     {
         return TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480?)result : null;
     }
 
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type Bug480 whose value is represented by value
-    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-    /// underlying type of Bug480. Note that this value need not be a member of the Bug480 enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.TryParse(System.ReadOnlySpan{char}, bool, out TEnum)"/>
     public static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, out Bug480 result)
     {
         Unsafe.SkipInit(out result);
         return TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480, int>(ref result));
     }
 
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The case-sensitive string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type Bug480 whose value is represented by value
-    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-    /// underlying type of Bug480. Note that this value need not be a member of the Bug480 enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.TryParse(System.ReadOnlySpan{char}, out TEnum)"/>
     public static bool TryParse(ReadOnlySpan<char> value, out Bug480 result)
     {
         Unsafe.SkipInit(out result);
         return TryParseName(value, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480, int>(ref result));
     }
 
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>
-    /// Contains an object of type Bug480 whose value is represented by value if the parse operation succeeds.
-    /// If the parse operation fails, result contains <c>null</c> value.
-    /// </returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.TryParse(System.ReadOnlySpan{char}, bool)"/>
     public static Bug480? TryParse(ReadOnlySpan<char> value, bool ignoreCase = false)
     {
         return TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480?)result : null;
@@ -494,89 +412,7 @@ public static partial class Bug480Factory
         return false;
     }
 
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="name">The string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type Bug480 whose value is represented by value
-    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-    /// underlying type of Bug480. Note that this value need not be a member of the Bug480 enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-    /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
-    [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
-    public static bool TryParse(
-        [NotNullWhen(true)] string? name,
-        StringComparison comparisonType,
-        out Bug480 result)
-    {
-        Unsafe.SkipInit(out result);
-        return TryParseName(name.AsSpan(), comparisonType, throwOnFailure: false, out Unsafe.As<Bug480, int>(ref result));
-    }
-
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object. The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="name">The case-insensitive string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type Bug480 whose value is represented by value
-    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-    /// underlying type of Bug480. Note that this value need not be a member of the Bug480 enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-    [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
-    public static bool TryParseIgnoreCase(
-        [NotNullWhen(true)] string? name,
-        out Bug480 result)
-    {
-        Unsafe.SkipInit(out result);
-        return TryParseName(name.AsSpan(), StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out Unsafe.As<Bug480, int>(ref result));
-    }
-
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object.
-    /// </summary>
-    /// <param name="name">The case-insensitive string representation of the enumeration name or underlying value to convert.</param>
-    /// <returns>
-    /// Contains an object of type Bug480 whose value is represented by value if the parse operation succeeds.
-    /// If the parse operation fails, result contains <c>null</c> value.
-    /// </returns>
-    [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
-    public static Bug480? TryParseIgnoreCase(string? name)
-    {
-        return TryParseName(name.AsSpan(), StringComparison.OrdinalIgnoreCase, throwOnFailure: false, out var result) ? (Bug480?)result : null;
-    }
-
-    /// <summary>
-    /// Converts the string representation of the name or numeric value of one or more enumerated constants to
-    /// an equivalent enumerated object.
-    /// </summary>
-    /// <param name="name">The string representation of the enumeration name or underlying value to convert.</param>
-    /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
-    /// <returns>
-    /// Contains an object of type Bug480 whose value is represented by value if the parse operation succeeds.
-    /// If the parse operation fails, result contains <c>null</c> value.
-    /// </returns>
-    /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
-    [Obsolete("Use TryParse overload with 'ignoreCase' parameter")]
-    public static Bug480? TryParse(string? name, StringComparison comparisonType)
-    {
-        return TryParseName(name.AsSpan(), comparisonType, throwOnFailure: false, out var result) ? (Bug480?)result : null;
-    }
-
-    /// <summary>
-    /// Converts the string representation of the serialized value to an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>The value represented by the specified serialized value. Note that this value need not be a member of the Bug480 enumeration.</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryEnumMember{TEnum}.ParseFromEnumMemberValue(string, bool)"/>
     public static Bug480 ParseFromEnumMemberValue(string value, bool ignoreCase = false)
     {
         if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
@@ -584,26 +420,14 @@ public static partial class Bug480Factory
         return (Bug480)result;
     }
 
-    /// <summary>
-    /// Converts the string representation of the serialized value to an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>The value represented by the specified serialized value. Note that this value need not be a member of the Bug480 enumeration.</returns>
-    /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryEnumMember{TEnum}.ParseFromEnumMemberValue(System.ReadOnlySpan{char}, bool)"/>
     public static Bug480 ParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase = false)
     {
         TryParseEnumMemberValue(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
         return (Bug480)result;
     }
 
-    /// <summary>
-    /// Converts the string representation of the serialized value to an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>The value represented by the specified serialized value or null. Note that this value need not be a member of the Bug480 enumeration.</returns>
-    /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryEnumMember{TEnum}.ParseFromEnumMemberValueOrNull(string, bool)"/>
     [return: NotNullIfNotNull("value")]
     public static Bug480? ParseFromEnumMemberValueOrNull(string? value, bool ignoreCase = false)
     {
@@ -612,99 +436,41 @@ public static partial class Bug480Factory
         return (Bug480)result;
     }
 
-    /// <summary>
-    /// Converts the string representation of the serialized value to an equivalent enumerated object.
-    /// The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type Bug480 whose value is represented by a
-    /// serialized value if the parse operation succeeds. If the parse operation fails, result contains the default
-    /// value of the underlying type of Bug480. Note that this value need not be a member of the Bug480 enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryEnumMember{TEnum}.TryParseFromEnumMemberValue(string, bool, out TEnum)"/>
     public static bool TryParseFromEnumMemberValue([NotNullWhen(true)] string? value, bool ignoreCase, out Bug480 result)
     {
         Unsafe.SkipInit(out result);
         return TryParseEnumMemberValue(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480, int>(ref result));
     }
 
-    /// <summary>
-    /// Converts the string representation of the serialized value to an equivalent enumerated object.
-    /// The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type Bug480 whose value is represented by a
-    /// serialized value if the parse operation succeeds. If the parse operation fails, result contains the default
-    /// value of the underlying type of Bug480. Note that this value need not be a member of the Bug480 enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryEnumMember{TEnum}.TryParseFromEnumMemberValue(string, out TEnum)"/>
     public static bool TryParseFromEnumMemberValue([NotNullWhen(true)] string? value, out Bug480 result)
     {
         Unsafe.SkipInit(out result);
         return TryParseEnumMemberValue(value.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480, int>(ref result));
     }
 
-    /// <summary>
-    /// Converts the string representation of the serialized value to an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>
-    /// Contains an object of type Bug480 whose value is represented by value if the parse operation succeeds.
-    /// If the parse operation fails, result contains a null value.
-    /// </returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryEnumMember{TEnum}.TryParseFromEnumMemberValue(string, bool)"/>
     public static Bug480? TryParseFromEnumMemberValue(string? value, bool ignoreCase = false)
     {
         return TryParseEnumMemberValue(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480?)result : null;
     }
 
-    /// <summary>
-    /// Converts the string representation of the serialized value to an equivalent enumerated object.
-    /// The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type Bug480 whose value is represented by a
-    /// serialized value if the parse operation succeeds. If the parse operation fails, result contains the default
-    /// value of the underlying type of Bug480. Note that this value need not be a member of the Bug480 enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryEnumMember{TEnum}.TryParseFromEnumMemberValue(System.ReadOnlySpan{char}, bool, out TEnum)"/>
     public static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase, out Bug480 result)
     {
         Unsafe.SkipInit(out result);
         return TryParseEnumMemberValue(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480, int>(ref result));
     }
 
-    /// <summary>
-    /// Converts the string representation of the serialized value to an equivalent enumerated object.
-    /// The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type Bug480 whose value is represented by a
-    /// serialized value if the parse operation succeeds. If the parse operation fails, result contains the default
-    /// value of the underlying type of Bug480. Note that this value need not be a member of the Bug480 enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryEnumMember{TEnum}.TryParseFromEnumMemberValue(System.ReadOnlySpan{char}, out TEnum)"/>
     public static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, out Bug480 result)
     {
         Unsafe.SkipInit(out result);
         return TryParseEnumMemberValue(value, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480, int>(ref result));
     }
 
-    /// <summary>
-    /// Converts the string representation of the serialized value to an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>
-    /// Contains an object of type Bug480 whose value is represented by value if the parse operation succeeds.
-    /// If the parse operation fails, result contains a null value.
-    /// </returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryEnumMember{TEnum}.TryParseFromEnumMemberValue(System.ReadOnlySpan{char}, bool)"/>
     public static Bug480? TryParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase = false)
     {
         return TryParseEnumMemberValue(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480?)result : null;
@@ -1048,46 +814,7 @@ public static partial class Bug480Factory
         return false;
     }
 
-    /// <summary>
-    /// Converts the string representation of the serialized value to an equivalent enumerated object.
-    /// The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
-    /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type Bug480 whose value is represented by value
-    /// if the parse operation succeeds. If the parse operation fails, result contains the default value of the
-    /// underlying type of Bug480. Note that this value need not be a member of the Bug480 enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
-    /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
-    [Obsolete("Use TryParseFromEnumMemberValue overload with 'ignoreCase' parameter")]
-    public static bool TryParseFromEnumMemberValue(
-        [NotNullWhen(true)] string? value,
-        StringComparison comparisonType,
-        out Bug480 result)
-    {
-        Unsafe.SkipInit(out result);
-        return TryParseEnumMemberValue(value.AsSpan(), comparisonType, throwOnFailure: false, out Unsafe.As<Bug480, int>(ref result));
-    }
-
-    /// <summary>
-    /// Converts the string representation of the value associated with one enumerated constant to
-    /// an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The value as defined with <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>.</param>
-    /// <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
-    /// <returns>
-    /// Contains an object of type Bug480 whose value is represented by value if the parse operation succeeds.
-    /// If the parse operation fails, result contains a null value.
-    /// </returns>
-    /// <exception cref="ArgumentException"><paramref name="comparisonType"/> is not a <see cref="StringComparison"/> value.</exception>
-    [Obsolete("Use TryParseFromEnumMemberValue overload with 'ignoreCase' parameter")]
-    public static Bug480? TryParseFromEnumMemberValue(string? value, StringComparison comparisonType)
-    {
-        return TryParseEnumMemberValue(value.AsSpan(), comparisonType, throwOnFailure: false, out var result) ? (Bug480?)result : null;
-    }
-
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryDescription{TEnum}.CreateFromDescription(string, StringComparison)"/>
     public static Bug480 CreateFromDescription(string description, StringComparison comparisonType = StringComparison.Ordinal)
     {
         if (description is null) ThrowHelper.ThrowArgumentNullException(nameof(description));
@@ -1095,12 +822,14 @@ public static partial class Bug480Factory
         return (Bug480)result;
     }
 
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryDescription{TEnum}.CreateFromDescription(System.ReadOnlySpan{char}, StringComparison)"/>
     public static Bug480 CreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType = StringComparison.Ordinal)
     {
         TryParseDescription(description, comparisonType, throwOnFailure: true, out var result);
         return (Bug480)result;
     }
 
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryDescription{TEnum}.CreateFromDescriptionOrNull(string, StringComparison)"/>
     [return: NotNullIfNotNull("description")]
     public static Bug480? CreateFromDescriptionOrNull(string? description, StringComparison comparisonType = StringComparison.Ordinal)
     {
@@ -1109,35 +838,41 @@ public static partial class Bug480Factory
         return (Bug480)result;
     }
 
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryDescription{TEnum}.TryCreateFromDescription(string, StringComparison, out TEnum)"/>
     public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, StringComparison comparisonType, out Bug480 result)
     {
         Unsafe.SkipInit(out result);
         return TryParseDescription(description.AsSpan(), comparisonType, throwOnFailure: false, out Unsafe.As<Bug480, int>(ref result));
     }
 
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryDescription{TEnum}.TryCreateFromDescription(string, out TEnum)"/>
     public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, out Bug480 result)
     {
         Unsafe.SkipInit(out result);
         return TryParseDescription(description.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480, int>(ref result));
     }
 
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryDescription{TEnum}.TryCreateFromDescription(string, StringComparison)"/>
     public static Bug480? TryCreateFromDescription(string? description, StringComparison comparisonType = StringComparison.Ordinal)
     {
         return TryParseDescription(description.AsSpan(), comparisonType, throwOnFailure: false, out var result) ? (Bug480?)result : null;
     }
 
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryDescription{TEnum}.TryCreateFromDescription(System.ReadOnlySpan{char}, StringComparison, out TEnum)"/>
     public static bool TryCreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType, out Bug480 result)
     {
         Unsafe.SkipInit(out result);
         return TryParseDescription(description, comparisonType, throwOnFailure: false, out Unsafe.As<Bug480, int>(ref result));
     }
 
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryDescription{TEnum}.TryCreateFromDescription(System.ReadOnlySpan{char}, out TEnum)"/>
     public static bool TryCreateFromDescription(ReadOnlySpan<char> description, out Bug480 result)
     {
         Unsafe.SkipInit(out result);
         return TryParseDescription(description, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480, int>(ref result));
     }
 
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryDescription{TEnum}.TryCreateFromDescription(System.ReadOnlySpan{char}, StringComparison)"/>
     public static Bug480? TryCreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType = StringComparison.Ordinal)
     {
         return TryParseDescription(description, comparisonType, throwOnFailure: false, out var result) ? (Bug480?)result : null;
@@ -1615,14 +1350,7 @@ public static partial class Bug480Factory
         };
     }
 
-    /// <summary>
-    /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>The value represented by the specified serialized value. Note that this value need not be a member of the Bug480 enumeration.</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.ParseJsonString(string, bool)"/>
     public static Bug480 ParseJsonString(string value, bool ignoreCase = false)
     {
         if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
@@ -1630,26 +1358,14 @@ public static partial class Bug480Factory
         return (Bug480)result;
     }
 
-    /// <summary>
-    /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>The value represented by the specified serialized value. Note that this value need not be a member of the Bug480 enumeration.</returns>
-    /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.ParseJsonString(System.ReadOnlySpan{char}, bool)"/>
     public static Bug480 ParseJsonString(ReadOnlySpan<char> value, bool ignoreCase = false)
     {
         TryParseJsonString(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
         return (Bug480)result;
     }
 
-    /// <summary>
-    /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>The value represented by the specified serialized value or null. Note that this value need not be a member of the Bug480 enumeration.</returns>
-    /// <exception cref="ArgumentException"><paramref name="value"/> is empty or does not represent a valid value.</exception>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.ParseJsonStringOrNull(string, bool)"/>
     [return: NotNullIfNotNull("value")]
     public static Bug480? ParseJsonStringOrNull(string? value, bool ignoreCase = false)
     {
@@ -1658,99 +1374,41 @@ public static partial class Bug480Factory
         return (Bug480)result;
     }
 
-    /// <summary>
-    /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
-    /// The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type Bug480 whose value is represented by a
-    /// serialized JSON value if the parse operation succeeds. If the parse operation fails, result contains the default
-    /// value of the underlying type of Bug480. Note that this value need not be a member of the Bug480 enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.TryParseJsonString(string, bool, out TEnum)"/>
     public static bool TryParseJsonString([NotNullWhen(true)] string? value, bool ignoreCase, out Bug480 result)
     {
         Unsafe.SkipInit(out result);
         return TryParseJsonString(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480, int>(ref result));
     }
 
-    /// <summary>
-    /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
-    /// The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type Bug480 whose value is represented by a
-    /// serialized JSON value if the parse operation succeeds. If the parse operation fails, result contains the default
-    /// value of the underlying type of Bug480. Note that this value need not be a member of the Bug480 enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.TryParseJsonString(string, out TEnum)"/>
     public static bool TryParseJsonString([NotNullWhen(true)] string? value, out Bug480 result)
     {
         Unsafe.SkipInit(out result);
         return TryParseJsonString(value.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480, int>(ref result));
     }
 
-    /// <summary>
-    /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>
-    /// Contains an object of type Bug480 whose value is represented by value if the parse operation succeeds.
-    /// If the parse operation fails, result contains a null value.
-    /// </returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.TryParseJsonString(string, bool)"/>
     public static Bug480? TryParseJsonString(string? value, bool ignoreCase = false)
     {
         return TryParseJsonString(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480?)result : null;
     }
 
-    /// <summary>
-    /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
-    /// The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type Bug480 whose value is represented by a
-    /// serialized JSON value if the parse operation succeeds. If the parse operation fails, result contains the default
-    /// value of the underlying type of Bug480. Note that this value need not be a member of the Bug480 enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.TryParseJsonString(System.ReadOnlySpan{char}, bool, out TEnum)"/>
     public static bool TryParseJsonString(ReadOnlySpan<char> value, bool ignoreCase, out Bug480 result)
     {
         Unsafe.SkipInit(out result);
         return TryParseJsonString(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480, int>(ref result));
     }
 
-    /// <summary>
-    /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
-    /// The return value indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
-    /// <param name="result">
-    /// When this method returns, result contains an object of type Bug480 whose value is represented by a
-    /// serialized JSON value if the parse operation succeeds. If the parse operation fails, result contains the default
-    /// value of the underlying type of Bug480. Note that this value need not be a member of the Bug480 enumeration.
-    /// </param>
-    /// <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.TryParseJsonString(System.ReadOnlySpan{char}, out TEnum)"/>
     public static bool TryParseJsonString(ReadOnlySpan<char> value, out Bug480 result)
     {
         Unsafe.SkipInit(out result);
         return TryParseJsonString(value, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480, int>(ref result));
     }
 
-    /// <summary>
-    /// Converts the string representation of the serialized JSON value to an equivalent enumerated object.
-    /// </summary>
-    /// <param name="value">The string representation of the enumeration serialized JSON value to convert.</param>
-    /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-    /// <returns>
-    /// Contains an object of type Bug480 whose value is represented by value if the parse operation succeeds.
-    /// If the parse operation fails, result contains a null value.
-    /// </returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.TryParseJsonString(System.ReadOnlySpan{char}, bool)"/>
     public static Bug480? TryParseJsonString(ReadOnlySpan<char> value, bool ignoreCase = false)
     {
         return TryParseJsonString(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480?)result : null;
