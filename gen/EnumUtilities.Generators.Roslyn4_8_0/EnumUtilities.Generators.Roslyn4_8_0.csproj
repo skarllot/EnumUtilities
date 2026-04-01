@@ -7,7 +7,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <AnalyzerLanguage>cs</AnalyzerLanguage>
     <AnalyzerRoslynVersion>4.8.0</AnalyzerRoslynVersion>
-    <DefineConstants>$(DefineConstants);Roslyn_480;AllowUnsafeBlocks;FeatureMemory</DefineConstants>
+    <DefineConstants>$(DefineConstants);Roslyn_480;AllowUnsafeBlocks;FeatureMemory;NO_RAIQUB_SOURCEGENERATORS_POLYFILL</DefineConstants>
     <RootNamespace>Raiqub.Generators.EnumUtilities</RootNamespace>
     <AssemblyName>Raiqub.Generators.EnumUtilities</AssemblyName>
   </PropertyGroup>
