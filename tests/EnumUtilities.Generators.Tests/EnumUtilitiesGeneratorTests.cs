@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Testing;
 
 namespace Raiqub.Generators.EnumUtilities.Generators.Tests;
 
@@ -101,7 +102,7 @@ public class EnumUtilitiesGeneratorTests
         """;
 
     [Fact]
-    public void GenerateFiles()
+    public async Task GenerateFiles()
     {
         var generator = new EnumUtilitiesGenerator();
         var driver = CSharpGeneratorDriver.Create(generator);
@@ -109,11 +110,7 @@ public class EnumUtilitiesGeneratorTests
         var compilation = CSharpCompilation.Create(
             nameof(EnumUtilitiesGeneratorTests),
             [CSharpSyntaxTree.ParseText(WeekDaysEnumText)],
-            AppDomain
-                .CurrentDomain.GetAssemblies()
-                .Append(typeof(EnumGeneratorAttribute).Assembly)
-                .Where(it => !it.IsDynamic && !string.IsNullOrWhiteSpace(it.Location))
-                .Select(it => MetadataReference.CreateFromFile(it.Location))
+            await ResolveReferenceAssemblies()
         );
 
         var runResult = driver.RunGenerators(compilation).GetRunResult();
@@ -136,7 +133,7 @@ public class EnumUtilitiesGeneratorTests
     }
 
     [Fact]
-    public void GenerateFlagsFiles()
+    public async Task GenerateFlagsFiles()
     {
         var generator = new EnumUtilitiesGenerator();
         var driver = CSharpGeneratorDriver.Create(generator);
@@ -144,11 +141,7 @@ public class EnumUtilitiesGeneratorTests
         var compilation = CSharpCompilation.Create(
             nameof(EnumUtilitiesGeneratorTests),
             [CSharpSyntaxTree.ParseText(ColoursEnumText)],
-            AppDomain
-                .CurrentDomain.GetAssemblies()
-                .Append(typeof(EnumGeneratorAttribute).Assembly)
-                .Where(it => !it.IsDynamic && !string.IsNullOrWhiteSpace(it.Location))
-                .Select(it => MetadataReference.CreateFromFile(it.Location))
+            await ResolveReferenceAssemblies()
         );
 
         var runResult = driver.RunGenerators(compilation).GetRunResult();
@@ -167,7 +160,7 @@ public class EnumUtilitiesGeneratorTests
     }
 
     [Fact]
-    public void GenerateDescriptionFiles()
+    public async Task GenerateDescriptionFiles()
     {
         var generator = new EnumUtilitiesGenerator();
         var driver = CSharpGeneratorDriver.Create(generator);
@@ -175,11 +168,7 @@ public class EnumUtilitiesGeneratorTests
         var compilation = CSharpCompilation.Create(
             nameof(EnumUtilitiesGeneratorTests),
             [CSharpSyntaxTree.ParseText(PaymentMethodEnumText)],
-            AppDomain
-                .CurrentDomain.GetAssemblies()
-                .Append(typeof(EnumGeneratorAttribute).Assembly)
-                .Where(it => !it.IsDynamic && !string.IsNullOrWhiteSpace(it.Location))
-                .Select(it => MetadataReference.CreateFromFile(it.Location))
+            await ResolveReferenceAssemblies()
         );
 
         var runResult = driver.RunGenerators(compilation).GetRunResult();
@@ -210,7 +199,64 @@ public class EnumUtilitiesGeneratorTests
     }
 
     [Fact]
-    public void NoGenerateFiles()
+    public async Task GenerateBothDescriptionAndDisplayDescriptionFiles()
+    {
+        // lang=c#
+        const string code = """
+            using System.ComponentModel;
+            using System.ComponentModel.DataAnnotations;
+            using Raiqub.Generators.EnumUtilities;
+
+            namespace Testing.Models;
+
+            [EnumGenerator]
+            public enum Status
+            {
+                [Display(Name = "Active", Description = "Currently active")]
+                [Description("Active status")]
+                Active,
+                [Display(Name = "Inactive", Description = "Currently inactive")]
+                [Description("Inactive status")]
+                Inactive,
+                Unknown
+            }
+            """;
+
+        var generator = new EnumUtilitiesGenerator();
+        var driver = CSharpGeneratorDriver.Create(generator);
+        var compilation = CSharpCompilation.Create(
+            nameof(EnumUtilitiesGeneratorTests),
+            [CSharpSyntaxTree.ParseText(code)],
+            await ResolveReferenceAssemblies()
+        );
+
+        var runResult = driver.RunGenerators(compilation).GetRunResult();
+        var generatedFilesNames = runResult.GeneratedTrees.Select(t => t.FilePath);
+
+        Assert.Equal(
+            [
+                $"{GeneratorBasePath}/Testing.Models.StatusEnumInfo.g.cs".Replace('/', Path.DirectorySeparatorChar),
+                $"{GeneratorBasePath}/Testing.Models.StatusExtensions.g.cs".Replace('/', Path.DirectorySeparatorChar),
+                $"{GeneratorBasePath}/Testing.Models.StatusFactory.g.cs".Replace('/', Path.DirectorySeparatorChar),
+                $"{GeneratorBasePath}/Testing.Models.StatusValidation.g.cs".Replace('/', Path.DirectorySeparatorChar),
+            ],
+            generatedFilesNames
+        );
+        Assert.Empty(runResult.Diagnostics);
+
+        var factoryTree = runResult.GeneratedTrees.Single(t => t.FilePath.Contains("Factory"));
+        var factorySource = (await factoryTree.GetTextAsync()).ToString();
+        Assert.Contains("TryCreateFromDescription", factorySource);
+        Assert.Contains("TryCreateFromDisplayDescription", factorySource);
+
+        var extensionsTree = runResult.GeneratedTrees.Single(t => t.FilePath.Contains("Extensions"));
+        var extensionsSource = (await extensionsTree.GetTextAsync()).ToString();
+        Assert.Contains("GetDescription", extensionsSource);
+        Assert.Contains("GetDisplayDescription", extensionsSource);
+    }
+
+    [Fact]
+    public async Task NoGenerateFiles()
     {
         var generator = new EnumUtilitiesGenerator();
         var driver = CSharpGeneratorDriver.Create(generator);
@@ -218,11 +264,7 @@ public class EnumUtilitiesGeneratorTests
         var compilation = CSharpCompilation.Create(
             nameof(EnumUtilitiesGeneratorTests),
             [CSharpSyntaxTree.ParseText(NoMembersEnumText)],
-            AppDomain
-                .CurrentDomain.GetAssemblies()
-                .Append(typeof(EnumGeneratorAttribute).Assembly)
-                .Where(it => !it.IsDynamic && !string.IsNullOrWhiteSpace(it.Location))
-                .Select(it => MetadataReference.CreateFromFile(it.Location))
+            await ResolveReferenceAssemblies()
         );
 
         var runResult = driver.RunGenerators(compilation).GetRunResult();
@@ -233,7 +275,7 @@ public class EnumUtilitiesGeneratorTests
     }
 
     [Fact]
-    public void NoGenerateFilesWhenCSharpVersionLowerThan10()
+    public async Task NoGenerateFilesWhenCSharpVersionLowerThan10()
     {
         var generator = new EnumUtilitiesGenerator();
         var driver = CSharpGeneratorDriver.Create(generator);
@@ -242,11 +284,7 @@ public class EnumUtilitiesGeneratorTests
         var compilation = CSharpCompilation.Create(
             nameof(EnumUtilitiesGeneratorTests),
             [CSharpSyntaxTree.ParseText(WeekDaysEnumText, parseOptions)],
-            AppDomain
-                .CurrentDomain.GetAssemblies()
-                .Append(typeof(EnumGeneratorAttribute).Assembly)
-                .Where(it => !it.IsDynamic && !string.IsNullOrWhiteSpace(it.Location))
-                .Select(it => MetadataReference.CreateFromFile(it.Location))
+            await ResolveReferenceAssemblies()
         );
 
         var runResult = driver.RunGenerators(compilation).GetRunResult();
@@ -262,4 +300,10 @@ public class EnumUtilitiesGeneratorTests
             csharpVersionDiagnostic.GetMessage(System.Globalization.CultureInfo.InvariantCulture)
         );
     }
+
+    private static async Task<IEnumerable<MetadataReference>> ResolveReferenceAssemblies() =>
+        [
+            .. await ReferenceAssemblies.Net.Net80.ResolveAsync(LanguageNames.CSharp, CancellationToken.None),
+            MetadataReference.CreateFromFile(typeof(EnumGeneratorAttribute).Assembly.Location),
+        ];
 }

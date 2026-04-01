@@ -28,7 +28,7 @@ public sealed class ExtensionsDisplayBlock : ICodeWriterModule<EnumToGenerate>
 
         if (model.HasDisplayDescription)
         {
-            WriteGetDescription(writer, model);
+            WriteGetDescription(writer, model, model.HasDescription);
         }
     }
 
@@ -94,11 +94,12 @@ public sealed class ExtensionsDisplayBlock : ICodeWriterModule<EnumToGenerate>
         );
     }
 
-    private static void WriteGetDescription(SourceTextWriter writer, EnumToGenerate model)
+    private static void WriteGetDescription(SourceTextWriter writer, EnumToGenerate model, bool hasDescriptionAttribute)
     {
+        var descriptionPrefix = hasDescriptionAttribute ? "Display" : "";
         writer.WriteLine(
             $$"""
-            public static string? GetDescription(this {{model.RefName}} value)
+            public static string? Get{{descriptionPrefix}}Description(this {{model.RefName}} value)
             {
                 return ({{model.UnderlyingType}})value switch
                 {
