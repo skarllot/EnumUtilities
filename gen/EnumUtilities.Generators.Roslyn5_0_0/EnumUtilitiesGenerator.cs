@@ -5,7 +5,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Raiqub.Generators.EnumUtilities.CodeWriters;
 using Raiqub.Generators.EnumUtilities.Common;
 using Raiqub.Generators.EnumUtilities.Models;
-using Raiqub.Generators.T4CodeWriter;
 
 namespace Raiqub.Generators.EnumUtilities;
 
@@ -16,17 +15,12 @@ public class EnumUtilitiesGenerator : IIncrementalGenerator
     private const string EnumGeneratorAttributeName = $"{BaseAttributeNamespace}.EnumGeneratorAttribute";
     private const string JsonConverterGeneratorAttribute = $"{BaseAttributeNamespace}.JsonConverterGeneratorAttribute";
 
-    private static readonly CodeWriterDispatcher<EnumToGenerate> s_dispatcher = new(
-        HandleCodeWriterException,
-        sb => new EnumValidationWriter(sb)
-    );
-
-    private static readonly InterpolationCodeWriter.CSharp.CodeWriterDispatcher<EnumToGenerate> s_dispatcher2 = new(
+    private static readonly InterpolationCodeWriter.CSharp.CodeWriterDispatcher<EnumToGenerate> s_dispatcher = new(
         HandleCodeWriterException,
         new EnumInfoWriter(),
         new EnumExtensionsWriter(),
         new EnumFactoryWriter(),
-        // EnumValidationWriter
+        new EnumValidationWriter(),
         new EnumJsonConverterWriter()
     );
 
@@ -113,7 +107,6 @@ public class EnumUtilitiesGenerator : IIncrementalGenerator
             return;
         }
 
-        s_dispatcher2.GenerateSources(enumsToGenerate, context);
         s_dispatcher.GenerateSources(enumsToGenerate, context);
     }
 

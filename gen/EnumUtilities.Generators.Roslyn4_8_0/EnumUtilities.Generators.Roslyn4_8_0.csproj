@@ -19,15 +19,13 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Polyfill" PrivateAssets="all" />
-    <PackageReference Include="Raiqub.Generators.InterpolationCodeWriter.CSharp.Sources">
+    <PackageReference Include="Polyfill">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Raiqub.Generators.T4CodeWriter.Sources">
+    <PackageReference Include="Raiqub.Generators.InterpolationCodeWriter.CSharp.Sources">
       <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; native; contentfiles; analyzers</IncludeAssets>
-      <ExcludeAssets>build; buildTransitive</ExcludeAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
 

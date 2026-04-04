@@ -1,7 +1,7 @@
 ﻿using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Raiqub.Generators.EnumUtilities.Common;
-using Raiqub.Generators.T4CodeWriter.Collections;
+using Raiqub.Generators.InterpolationCodeWriter.Collections;
 
 namespace Raiqub.Generators.EnumUtilities.Models;
 

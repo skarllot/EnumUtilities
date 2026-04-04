@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Raiqub.Generators.T4CodeWriter.Collections;
+﻿using Raiqub.Generators.InterpolationCodeWriter.Collections;
 
 namespace Raiqub.Generators.EnumUtilities.Common;
 

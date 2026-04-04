@@ -71,12 +71,6 @@
         "resolved": "2.4.1",
         "contentHash": "DqVQgXGX9cNtl6lbdRZSrX3WYY1qCMxvVkTDZ5cP4t/DRfQU5MxXfsU9Wso0AKjev2GDVBe9A2XXhEq+wefIUg=="
       },
-      "Raiqub.Generators.T4CodeWriter.Sources": {
-        "type": "Direct",
-        "requested": "[1.2.12, )",
-        "resolved": "1.2.12",
-        "contentHash": "0+hoTSGaqQMPzCYGIW8DMvdNt4n/yoHphQSZhyCLij0cfuVPX3/sdI0rIacoXUlJKnWThlwj70qAUWf0yXj7kA=="
-      },
       "Microsoft.CodeAnalysis.Common": {
         "type": "Transitive",
         "resolved": "5.0.0",
