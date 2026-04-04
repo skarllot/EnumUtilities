@@ -41,7 +41,7 @@ public sealed partial class SeasonJsonConverter : JsonConverter<Season>
         }
     }
 
-#if NET7_0_OR_GREATER
+    #if NET7_0_OR_GREATER
 
     private Season ReadFromString(ref Utf8JsonReader reader)
     {
@@ -71,7 +71,7 @@ public sealed partial class SeasonJsonConverter : JsonConverter<Season>
         }
     }
 
-#else
+    #else
 
     private Season ReadFromString(ref Utf8JsonReader reader)
     {
@@ -85,7 +85,7 @@ public sealed partial class SeasonJsonConverter : JsonConverter<Season>
         return result;
     }
 
-#endif
+    #endif
 
     private int ReadFromNumber(ref Utf8JsonReader reader)
     {

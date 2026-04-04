@@ -67,9 +67,9 @@
       },
       "Raiqub.Generators.InterpolationCodeWriter.CSharp.Sources": {
         "type": "Direct",
-        "requested": "[2.3.3, )",
-        "resolved": "2.3.3",
-        "contentHash": "J05dM+TbJWIUcfXe1PjU4lyX6Yd9eQFu/DjBdm5oVBaqpY13hAg3ObEfYP/LJW2vfxIoDnQSmp/Z84xsxLV03Q=="
+        "requested": "[2.4.1, )",
+        "resolved": "2.4.1",
+        "contentHash": "DqVQgXGX9cNtl6lbdRZSrX3WYY1qCMxvVkTDZ5cP4t/DRfQU5MxXfsU9Wso0AKjev2GDVBe9A2XXhEq+wefIUg=="
       },
       "Raiqub.Generators.T4CodeWriter.Sources": {
         "type": "Direct",

@@ -41,7 +41,7 @@ public sealed partial class Bug480JsonConverter : JsonConverter<Bug480>
         }
     }
 
-#if NET7_0_OR_GREATER
+    #if NET7_0_OR_GREATER
 
     private Bug480 ReadFromString(ref Utf8JsonReader reader)
     {
@@ -71,7 +71,7 @@ public sealed partial class Bug480JsonConverter : JsonConverter<Bug480>
         }
     }
 
-#else
+    #else
 
     private Bug480 ReadFromString(ref Utf8JsonReader reader)
     {
@@ -85,7 +85,7 @@ public sealed partial class Bug480JsonConverter : JsonConverter<Bug480>
         return result;
     }
 
-#endif
+    #endif
 
     private int ReadFromNumber(ref Utf8JsonReader reader)
     {

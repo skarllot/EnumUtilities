@@ -43,7 +43,7 @@ internal sealed partial class ErrorCodeJsonConverter : JsonConverter<ErrorCode>
         }
     }
 
-#if NET7_0_OR_GREATER
+    #if NET7_0_OR_GREATER
 
     private ErrorCode ReadFromString(ref Utf8JsonReader reader)
     {
@@ -73,7 +73,7 @@ internal sealed partial class ErrorCodeJsonConverter : JsonConverter<ErrorCode>
         }
     }
 
-#else
+    #else
 
     private ErrorCode ReadFromString(ref Utf8JsonReader reader)
     {
@@ -87,5 +87,5 @@ internal sealed partial class ErrorCodeJsonConverter : JsonConverter<ErrorCode>
         return result;
     }
 
-#endif
+    #endif
 }

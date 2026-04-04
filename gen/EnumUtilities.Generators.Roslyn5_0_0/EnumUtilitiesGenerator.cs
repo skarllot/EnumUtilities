@@ -18,15 +18,16 @@ public class EnumUtilitiesGenerator : IIncrementalGenerator
 
     private static readonly CodeWriterDispatcher<EnumToGenerate> s_dispatcher = new(
         HandleCodeWriterException,
-        sb => new EnumValidationWriter(sb),
-        sb => new EnumJsonConverterWriter(sb)
+        sb => new EnumValidationWriter(sb)
     );
 
     private static readonly InterpolationCodeWriter.CSharp.CodeWriterDispatcher<EnumToGenerate> s_dispatcher2 = new(
         HandleCodeWriterException,
         new EnumInfoWriter(),
         new EnumExtensionsWriter(),
-        new EnumFactoryWriter()
+        new EnumFactoryWriter(),
+        // EnumValidationWriter
+        new EnumJsonConverterWriter()
     );
 
     public void Initialize(IncrementalGeneratorInitializationContext context)

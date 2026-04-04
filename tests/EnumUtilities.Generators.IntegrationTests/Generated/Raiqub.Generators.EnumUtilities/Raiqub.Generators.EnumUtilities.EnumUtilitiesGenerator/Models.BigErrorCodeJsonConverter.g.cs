@@ -43,7 +43,7 @@ internal sealed partial class BigErrorCodeJsonConverter : JsonConverter<BigError
         }
     }
 
-#if NET7_0_OR_GREATER
+    #if NET7_0_OR_GREATER
 
     private BigErrorCode ReadFromString(ref Utf8JsonReader reader)
     {
@@ -73,7 +73,7 @@ internal sealed partial class BigErrorCodeJsonConverter : JsonConverter<BigError
         }
     }
 
-#else
+    #else
 
     private BigErrorCode ReadFromString(ref Utf8JsonReader reader)
     {
@@ -87,5 +87,5 @@ internal sealed partial class BigErrorCodeJsonConverter : JsonConverter<BigError
         return result;
     }
 
-#endif
+    #endif
 }
