@@ -5,7 +5,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Raiqub.Generators.EnumUtilities.CodeWriters;
 using Raiqub.Generators.EnumUtilities.Common;
 using Raiqub.Generators.EnumUtilities.Models;
-using Raiqub.Generators.T4CodeWriter;
+using Raiqub.Generators.InterpolationCodeWriter.CSharp;
 
 namespace Raiqub.Generators.EnumUtilities;
 
@@ -18,15 +18,11 @@ public class EnumUtilitiesGenerator : IIncrementalGenerator
 
     private static readonly CodeWriterDispatcher<EnumToGenerate> s_dispatcher = new(
         HandleCodeWriterException,
-        sb => new EnumValidationWriter(sb),
-        sb => new EnumJsonConverterWriter(sb)
-    );
-
-    private static readonly InterpolationCodeWriter.CSharp.CodeWriterDispatcher<EnumToGenerate> s_dispatcher2 = new(
-        HandleCodeWriterException,
         new EnumInfoWriter(),
         new EnumExtensionsWriter(),
-        new EnumFactoryWriter()
+        new EnumFactoryWriter(),
+        new EnumValidationWriter(),
+        new EnumJsonConverterWriter()
     );
 
     public void Initialize(IncrementalGeneratorInitializationContext context)
@@ -112,7 +108,6 @@ public class EnumUtilitiesGenerator : IIncrementalGenerator
             return;
         }
 
-        s_dispatcher2.GenerateSources(enumsToGenerate, context);
         s_dispatcher.GenerateSources(enumsToGenerate, context);
     }
 
