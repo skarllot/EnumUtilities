@@ -33,7 +33,7 @@ jobs:
 
     steps:
       - name: 🛡️ Harden Runner
-        uses: step-security/harden-runner@5ef0c079ce82195b2a36a210272d6b661572d83e # v2.14.2
+        uses: step-security/harden-runner@fe104658747b27e96e4f7e80cd0a94068e53901d # v2.16.1
         with:
           disable-sudo-and-containers: true
           egress-policy: block
@@ -47,7 +47,7 @@ jobs:
         with:
           fetch-depth: 0 # Not needed if lastUpdated is not enabled
       - name: 🧰 Setup Node
-        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version: 24
           cache: npm
@@ -77,7 +77,7 @@ jobs:
     name: Deploy
     steps:
       - name: 🛡️ Harden Runner
-        uses: step-security/harden-runner@5ef0c079ce82195b2a36a210272d6b661572d83e # v2.14.2
+        uses: step-security/harden-runner@fe104658747b27e96e4f7e80cd0a94068e53901d # v2.16.1
         with:
           disable-sudo-and-containers: true
           egress-policy: block
@@ -85,4 +85,4 @@ jobs:
             api.github.com:443
       - name: 🚀 Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
