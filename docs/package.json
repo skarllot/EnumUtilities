@@ -5,11 +5,11 @@
     "docs:preview": "vitepress preview"
   },
   "devDependencies": {
+    "esbuild": "^0.27.4",
     "vitepress": "^1.6.4",
     "vue": "^3.5.32"
   },
   "overrides": {
-    "esbuild": "^0.27.4",
     "rollup": "^4.60.1",
     "vite": "^8.0.3"
   }
