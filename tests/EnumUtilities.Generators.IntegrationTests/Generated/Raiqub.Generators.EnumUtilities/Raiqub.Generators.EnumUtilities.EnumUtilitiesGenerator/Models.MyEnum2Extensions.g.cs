@@ -27,8 +27,9 @@ internal static partial class MyEnum2Extensions
     /// <returns>The number of characters produced by converting the specified value to string.</returns>
     public static int GetStringLength(this NestedInClass.MyEnum2 value)
     {
-        return GetNameLengthInlined((int)value)
-            ?? EnumNumericFormatter.GetStringLength((int)value);
+        return TryGetNameLengthInlined((int)value, out int length)
+            ? length
+            : EnumNumericFormatter.GetStringLength((int)value);
     }
 
     /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
@@ -45,16 +46,16 @@ internal static partial class MyEnum2Extensions
         };
     }
 
-    private static int? GetNameLengthInlined(int value)
+    private static bool TryGetNameLengthInlined(int value, out int length)
     {
-        return value switch
+        switch (value)
         {
-            0 => 6,
-            1 => 5,
-            2 => 4,
-            3 => 6,
-            _ => null
-        };
+            case 0: length = 6; return true;
+            case 1: length = 5; return true;
+            case 2: length = 4; return true;
+            case 3: length = 6; return true;
+            default: length = 0; return false;
+        }
     }
 
     private static string? GetNameInlined(int value)
@@ -131,20 +132,21 @@ internal static partial class MyEnum2Extensions
 
     public static int GetEnumMemberValueStringLength(this NestedInClass.MyEnum2 value)
     {
-        return GetEnumMemberValueLengthInlined((int)value)
-            ?? EnumNumericFormatter.GetStringLength((int)value);
+        return TryGetEnumMemberValueLengthInlined((int)value, out int length)
+            ? length
+            : EnumNumericFormatter.GetStringLength((int)value);
     }
 
-    private static int? GetEnumMemberValueLengthInlined(int value)
+    private static bool TryGetEnumMemberValueLengthInlined(int value, out int length)
     {
-        return value switch
+        switch (value)
         {
-            0 => 11,
-            1 => 10,
-            2 => 4,
-            3 => 6,
-            _ => null
-        };
+            case 0: length = 11; return true;
+            case 1: length = 10; return true;
+            case 2: length = 4; return true;
+            case 3: length = 6; return true;
+            default: length = 0; return false;
+        }
     }
 
     private static string? GetEnumMemberValueInlined(int value)

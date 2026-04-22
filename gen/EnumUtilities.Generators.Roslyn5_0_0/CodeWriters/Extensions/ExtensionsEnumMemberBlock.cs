@@ -22,13 +22,12 @@ public sealed class ExtensionsEnumMemberBlock : ICodeWriterModule<EnumToGenerate
 
     private static void WriteToEnumMemberValue(SourceTextWriter writer, EnumToGenerate model)
     {
+        var privateMethodName = model.IsFlags ? "FormatFlagEnumMemberValues" : "GetEnumMemberValueInlined";
         writer.WriteLine(
             $$"""
             public static string ToEnumMemberValue(this {{model.RefName}} value)
             {
-                return {{(
-                model.IsFlags ? "FormatFlagEnumMemberValues" : "GetEnumMemberValueInlined"
-            )}}(({{model.UnderlyingType}})value)
+                return {{privateMethodName}}(({{model.UnderlyingType}})value)
                     ?? (({{model.UnderlyingType}})value).ToString();
             }
             """
@@ -37,14 +36,14 @@ public sealed class ExtensionsEnumMemberBlock : ICodeWriterModule<EnumToGenerate
 
     private static void WriteGetEnumMemberValueStringLength(SourceTextWriter writer, EnumToGenerate model)
     {
+        var privateMethodName = model.IsFlags ? "TryFormatFlagEnumMemberValuesLength" : "TryGetEnumMemberValueLengthInlined";
         writer.WriteLine(
             $$"""
             public static int GetEnumMemberValueStringLength(this {{model.RefName}} value)
             {
-                return {{(
-                model.IsFlags ? "FormatFlagEnumMemberValuesLength" : "GetEnumMemberValueLengthInlined"
-            )}}(({{model.UnderlyingType}})value)
-                    ?? EnumNumericFormatter.GetStringLength(({{model.UnderlyingType}})value);
+                return {{privateMethodName}}(({{model.UnderlyingType}})value, out int length)
+                    ? length
+                    : EnumNumericFormatter.GetStringLength(({{model.UnderlyingType}})value);
             }
             """
         );

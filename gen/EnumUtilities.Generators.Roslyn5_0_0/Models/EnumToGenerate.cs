@@ -19,26 +19,25 @@ public sealed record EnumToGenerate(
     string? RootNamespace = null
 )
 {
-    private List<EnumValue>? _invertedValues;
-    private string? _refName;
-    private List<EnumValue>? _uniqueValues;
-
     public string MetadataClassName => Name.Contains("Metadata") ? $"{Name}Info" : $"{Name}Metadata";
 
-    public string RefName => _refName ??= ContainingType is not null ? $"{ContainingType.Name}.{Name}" : Name;
+    public string RefName => field ??= ContainingType is not null ? $"{ContainingType.Name}.{Name}" : Name;
 
     public List<EnumValue> UniqueValues =>
-        _uniqueValues ??= Values
-            .AsEnumerable()
-            .DistinctBy(static it => it.MemberValue, StringComparer.Ordinal)
-            .ToList();
+        field ??= Values.AsEnumerable().DistinctBy(static it => it.RealMemberValue).ToList();
 
     public List<EnumValue> InvertedValues =>
-        _invertedValues ??= Values
-            .AsEnumerable()
-            .DistinctBy(x => x.RealMemberValue)
-            .OrderByDescending(x => x.RealMemberValue)
-            .ToList();
+        field ??= IsUnsigned
+            ? Values
+                .AsEnumerable()
+                .DistinctBy(static x => x.RealMemberValue)
+                .OrderByDescending(static x => x.RealMemberValue)
+                .ToList()
+            : Values
+                .AsEnumerable()
+                .DistinctBy(static x => x.RealMemberSignedValue)
+                .OrderByDescending(static x => x.RealMemberSignedValue)
+                .ToList();
 
     public IEnumerable<EnumValue> OrderedValues =>
         IsUnsigned
@@ -63,7 +62,7 @@ public sealed record EnumToGenerate(
 
     public bool IsUnsigned { get; } = UnderlyingType is "byte" or "ushort" or "uint" or "ulong";
 
-    private int BitCount { get; } =
+    public int BitCount { get; } =
         UnderlyingType switch
         {
             "byte" => 8,

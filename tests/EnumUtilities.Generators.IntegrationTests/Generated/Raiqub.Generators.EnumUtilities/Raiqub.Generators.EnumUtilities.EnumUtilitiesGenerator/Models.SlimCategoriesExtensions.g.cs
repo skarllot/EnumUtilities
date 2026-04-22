@@ -26,8 +26,9 @@ public static partial class SlimCategoriesExtensions
     /// <returns>The number of characters produced by converting the specified value to string.</returns>
     public static int GetStringLength(this SlimCategories value)
     {
-        return GetNameLengthInlined((byte)value)
-            ?? EnumNumericFormatter.GetStringLength((byte)value);
+        return TryGetNameLengthInlined((byte)value, out int length)
+            ? length
+            : EnumNumericFormatter.GetStringLength((byte)value);
     }
 
     /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
@@ -46,18 +47,18 @@ public static partial class SlimCategoriesExtensions
         };
     }
 
-    private static int? GetNameLengthInlined(byte value)
+    private static bool TryGetNameLengthInlined(byte value, out int length)
     {
-        return value switch
+        switch (value)
         {
-            0 => 11,
-            1 => 4,
-            2 => 10,
-            3 => 4,
-            4 => 10,
-            5 => 7,
-            _ => null
-        };
+            case 0: length = 11; return true;
+            case 1: length = 4; return true;
+            case 2: length = 10; return true;
+            case 3: length = 4; return true;
+            case 4: length = 10; return true;
+            case 5: length = 7; return true;
+            default: length = 0; return false;
+        }
     }
 
     private static string? GetNameInlined(byte value)

@@ -27,8 +27,9 @@ public static partial class Bug480Extensions
     /// <returns>The number of characters produced by converting the specified value to string.</returns>
     public static int GetStringLength(this Bug480 value)
     {
-        return GetNameLengthInlined((int)value)
-            ?? EnumNumericFormatter.GetStringLength((int)value);
+        return TryGetNameLengthInlined((int)value, out int length)
+            ? length
+            : EnumNumericFormatter.GetStringLength((int)value);
     }
 
     /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
@@ -92,64 +93,64 @@ public static partial class Bug480Extensions
         };
     }
 
-    private static int? GetNameLengthInlined(int value)
+    private static bool TryGetNameLengthInlined(int value, out int length)
     {
-        return value switch
+        switch (value)
         {
-            0 => 1,
-            1 => 9,
-            2 => 11,
-            3 => 11,
-            4 => 7,
-            5 => 14,
-            6 => 3,
-            7 => 4,
-            8 => 16,
-            9 => 11,
-            10 => 11,
-            11 => 8,
-            12 => 11,
-            13 => 9,
-            14 => 6,
-            15 => 15,
-            16 => 6,
-            17 => 9,
-            18 => 4,
-            19 => 7,
-            20 => 5,
-            21 => 8,
-            22 => 9,
-            23 => 8,
-            24 => 11,
-            25 => 8,
-            26 => 5,
-            27 => 11,
-            28 => 14,
-            29 => 19,
-            30 => 16,
-            31 => 17,
-            32 => 14,
-            33 => 14,
-            34 => 15,
-            35 => 13,
-            36 => 16,
-            37 => 21,
-            38 => 9,
-            39 => 13,
-            40 => 12,
-            41 => 3,
-            42 => 7,
-            43 => 12,
-            44 => 7,
-            45 => 8,
-            46 => 15,
-            47 => 11,
-            48 => 13,
-            49 => 12,
-            50 => 11,
-            51 => 15,
-            _ => null
-        };
+            case 0: length = 1; return true;
+            case 1: length = 9; return true;
+            case 2: length = 11; return true;
+            case 3: length = 11; return true;
+            case 4: length = 7; return true;
+            case 5: length = 14; return true;
+            case 6: length = 3; return true;
+            case 7: length = 4; return true;
+            case 8: length = 16; return true;
+            case 9: length = 11; return true;
+            case 10: length = 11; return true;
+            case 11: length = 8; return true;
+            case 12: length = 11; return true;
+            case 13: length = 9; return true;
+            case 14: length = 6; return true;
+            case 15: length = 15; return true;
+            case 16: length = 6; return true;
+            case 17: length = 9; return true;
+            case 18: length = 4; return true;
+            case 19: length = 7; return true;
+            case 20: length = 5; return true;
+            case 21: length = 8; return true;
+            case 22: length = 9; return true;
+            case 23: length = 8; return true;
+            case 24: length = 11; return true;
+            case 25: length = 8; return true;
+            case 26: length = 5; return true;
+            case 27: length = 11; return true;
+            case 28: length = 14; return true;
+            case 29: length = 19; return true;
+            case 30: length = 16; return true;
+            case 31: length = 17; return true;
+            case 32: length = 14; return true;
+            case 33: length = 14; return true;
+            case 34: length = 15; return true;
+            case 35: length = 13; return true;
+            case 36: length = 16; return true;
+            case 37: length = 21; return true;
+            case 38: length = 9; return true;
+            case 39: length = 13; return true;
+            case 40: length = 12; return true;
+            case 41: length = 3; return true;
+            case 42: length = 7; return true;
+            case 43: length = 12; return true;
+            case 44: length = 7; return true;
+            case 45: length = 8; return true;
+            case 46: length = 15; return true;
+            case 47: length = 11; return true;
+            case 48: length = 13; return true;
+            case 49: length = 12; return true;
+            case 50: length = 11; return true;
+            case 51: length = 15; return true;
+            default: length = 0; return false;
+        }
     }
 
     private static string? GetNameInlined(int value)
@@ -274,68 +275,69 @@ public static partial class Bug480Extensions
 
     public static int GetEnumMemberValueStringLength(this Bug480 value)
     {
-        return GetEnumMemberValueLengthInlined((int)value)
-            ?? EnumNumericFormatter.GetStringLength((int)value);
+        return TryGetEnumMemberValueLengthInlined((int)value, out int length)
+            ? length
+            : EnumNumericFormatter.GetStringLength((int)value);
     }
 
-    private static int? GetEnumMemberValueLengthInlined(int value)
+    private static bool TryGetEnumMemberValueLengthInlined(int value, out int length)
     {
-        return value switch
+        switch (value)
         {
-            0 => 1,
-            1 => 9,
-            2 => 11,
-            3 => 11,
-            4 => 7,
-            5 => 14,
-            6 => 3,
-            7 => 4,
-            8 => 16,
-            9 => 11,
-            10 => 11,
-            11 => 8,
-            12 => 11,
-            13 => 9,
-            14 => 6,
-            15 => 15,
-            16 => 6,
-            17 => 9,
-            18 => 4,
-            19 => 7,
-            20 => 5,
-            21 => 8,
-            22 => 9,
-            23 => 8,
-            24 => 11,
-            25 => 8,
-            26 => 5,
-            27 => 11,
-            28 => 14,
-            29 => 13,
-            30 => 8,
-            31 => 8,
-            32 => 14,
-            33 => 14,
-            34 => 15,
-            35 => 9,
-            36 => 16,
-            37 => 21,
-            38 => 9,
-            39 => 13,
-            40 => 12,
-            41 => 3,
-            42 => 7,
-            43 => 12,
-            44 => 7,
-            45 => 8,
-            46 => 15,
-            47 => 11,
-            48 => 13,
-            49 => 12,
-            50 => 11,
-            51 => 15,
-            _ => null
-        };
+            case 0: length = 1; return true;
+            case 1: length = 9; return true;
+            case 2: length = 11; return true;
+            case 3: length = 11; return true;
+            case 4: length = 7; return true;
+            case 5: length = 14; return true;
+            case 6: length = 3; return true;
+            case 7: length = 4; return true;
+            case 8: length = 16; return true;
+            case 9: length = 11; return true;
+            case 10: length = 11; return true;
+            case 11: length = 8; return true;
+            case 12: length = 11; return true;
+            case 13: length = 9; return true;
+            case 14: length = 6; return true;
+            case 15: length = 15; return true;
+            case 16: length = 6; return true;
+            case 17: length = 9; return true;
+            case 18: length = 4; return true;
+            case 19: length = 7; return true;
+            case 20: length = 5; return true;
+            case 21: length = 8; return true;
+            case 22: length = 9; return true;
+            case 23: length = 8; return true;
+            case 24: length = 11; return true;
+            case 25: length = 8; return true;
+            case 26: length = 5; return true;
+            case 27: length = 11; return true;
+            case 28: length = 14; return true;
+            case 29: length = 13; return true;
+            case 30: length = 8; return true;
+            case 31: length = 8; return true;
+            case 32: length = 14; return true;
+            case 33: length = 14; return true;
+            case 34: length = 15; return true;
+            case 35: length = 9; return true;
+            case 36: length = 16; return true;
+            case 37: length = 21; return true;
+            case 38: length = 9; return true;
+            case 39: length = 13; return true;
+            case 40: length = 12; return true;
+            case 41: length = 3; return true;
+            case 42: length = 7; return true;
+            case 43: length = 12; return true;
+            case 44: length = 7; return true;
+            case 45: length = 8; return true;
+            case 46: length = 15; return true;
+            case 47: length = 11; return true;
+            case 48: length = 13; return true;
+            case 49: length = 12; return true;
+            case 50: length = 11; return true;
+            case 51: length = 15; return true;
+            default: length = 0; return false;
+        }
     }
 
     private static string? GetEnumMemberValueInlined(int value)
@@ -803,67 +805,67 @@ public static partial class Bug480Extensions
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static int? GetJsonStringLength(this Bug480 value)
     {
-        return GetJsonStringLengthInlined((int)value);
+        return TryGetJsonStringLengthInlined((int)value, out int length) ? length : null;
     }
 
-    private static int? GetJsonStringLengthInlined(int value)
+    private static bool TryGetJsonStringLengthInlined(int value, out int length)
     {
-        return value switch
+        switch (value)
         {
-            0 => 1,
-            1 => 9,
-            2 => 11,
-            3 => 11,
-            4 => 7,
-            5 => 14,
-            6 => 3,
-            7 => 4,
-            8 => 16,
-            9 => 11,
-            10 => 11,
-            11 => 8,
-            12 => 11,
-            13 => 9,
-            14 => 6,
-            15 => 15,
-            16 => 6,
-            17 => 9,
-            18 => 4,
-            19 => 7,
-            20 => 5,
-            21 => 8,
-            22 => 9,
-            23 => 8,
-            24 => 11,
-            25 => 8,
-            26 => 5,
-            27 => 11,
-            28 => 14,
-            29 => 13,
-            30 => 8,
-            31 => 8,
-            32 => 11,
-            33 => 13,
-            34 => 13,
-            35 => 9,
-            36 => 16,
-            37 => 21,
-            38 => 9,
-            39 => 13,
-            40 => 12,
-            41 => 3,
-            42 => 7,
-            43 => 12,
-            44 => 7,
-            45 => 8,
-            46 => 15,
-            47 => 11,
-            48 => 13,
-            49 => 12,
-            50 => 11,
-            51 => 15,
-            _ => null
-        };
+            case 0: length = 1; return true;
+            case 1: length = 9; return true;
+            case 2: length = 11; return true;
+            case 3: length = 11; return true;
+            case 4: length = 7; return true;
+            case 5: length = 14; return true;
+            case 6: length = 3; return true;
+            case 7: length = 4; return true;
+            case 8: length = 16; return true;
+            case 9: length = 11; return true;
+            case 10: length = 11; return true;
+            case 11: length = 8; return true;
+            case 12: length = 11; return true;
+            case 13: length = 9; return true;
+            case 14: length = 6; return true;
+            case 15: length = 15; return true;
+            case 16: length = 6; return true;
+            case 17: length = 9; return true;
+            case 18: length = 4; return true;
+            case 19: length = 7; return true;
+            case 20: length = 5; return true;
+            case 21: length = 8; return true;
+            case 22: length = 9; return true;
+            case 23: length = 8; return true;
+            case 24: length = 11; return true;
+            case 25: length = 8; return true;
+            case 26: length = 5; return true;
+            case 27: length = 11; return true;
+            case 28: length = 14; return true;
+            case 29: length = 13; return true;
+            case 30: length = 8; return true;
+            case 31: length = 8; return true;
+            case 32: length = 11; return true;
+            case 33: length = 13; return true;
+            case 34: length = 13; return true;
+            case 35: length = 9; return true;
+            case 36: length = 16; return true;
+            case 37: length = 21; return true;
+            case 38: length = 9; return true;
+            case 39: length = 13; return true;
+            case 40: length = 12; return true;
+            case 41: length = 3; return true;
+            case 42: length = 7; return true;
+            case 43: length = 12; return true;
+            case 44: length = 7; return true;
+            case 45: length = 8; return true;
+            case 46: length = 15; return true;
+            case 47: length = 11; return true;
+            case 48: length = 13; return true;
+            case 49: length = 12; return true;
+            case 50: length = 11; return true;
+            case 51: length = 15; return true;
+            default: length = 0; return false;
+        }
     }
 
     private static string? GetJsonStringInlined(int value)

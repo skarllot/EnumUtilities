@@ -14,7 +14,7 @@ public sealed class ExtensionsJsonBlock : ICodeWriterModule<EnumToGenerate>
     public void Write(SourceTextWriter writer, EnumToGenerate model)
     {
         var internalStringMethodName = model.IsFlags ? "FormatFlagJsonStrings" : "GetJsonStringInlined";
-        var internalLengthMethodName = model.IsFlags ? "FormatFlagJsonStringsLength" : "GetJsonStringLengthInlined";
+        var internalLengthMethodName = model.IsFlags ? "TryFormatFlagJsonStringsLength" : "TryGetJsonStringLengthInlined";
 
         writer.WriteLine(
             $$"""
@@ -32,7 +32,7 @@ public sealed class ExtensionsJsonBlock : ICodeWriterModule<EnumToGenerate>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static int? GetJsonStringLength(this {{model.RefName}} value)
             {
-                return {{internalLengthMethodName}}(({{model.UnderlyingType}})value);
+                return {{internalLengthMethodName}}(({{model.UnderlyingType}})value, out int length) ? length : null;
             }
             """
         );

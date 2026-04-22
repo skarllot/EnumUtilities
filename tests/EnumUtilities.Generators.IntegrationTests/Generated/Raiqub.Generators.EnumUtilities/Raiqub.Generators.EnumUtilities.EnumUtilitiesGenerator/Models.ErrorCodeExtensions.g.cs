@@ -22,19 +22,19 @@ internal static partial class ErrorCodeExtensions
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static int? GetJsonStringLength(this ErrorCode value)
     {
-        return GetJsonStringLengthInlined((ushort)value);
+        return TryGetJsonStringLengthInlined((ushort)value, out int length) ? length : null;
     }
 
-    private static int? GetJsonStringLengthInlined(ushort value)
+    private static bool TryGetJsonStringLengthInlined(ushort value, out int length)
     {
-        return value switch
+        switch (value)
         {
-            0 => 3,
-            1 => 3,
-            100 => 3,
-            200 => 3,
-            _ => null
-        };
+            case 0: length = 3; return true;
+            case 1: length = 3; return true;
+            case 100: length = 3; return true;
+            case 200: length = 3; return true;
+            default: length = 0; return false;
+        }
     }
 
     private static string? GetJsonStringInlined(ushort value)

@@ -36,8 +36,9 @@ public static partial class Bug480FlagsExtensions
     /// <returns>The number of characters produced by converting the specified value to string.</returns>
     public static int GetStringLength(this Bug480Flags value)
     {
-        return FormatFlagNamesLength((int)value)
-            ?? EnumNumericFormatter.GetStringLength((int)value);
+        return TryFormatFlagNamesLength((int)value, out int length)
+            ? length
+            : EnumNumericFormatter.GetStringLength((int)value);
     }
 
     /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
@@ -58,91 +59,39 @@ public static partial class Bug480FlagsExtensions
         };
     }
 
-    private static int? FormatFlagNamesLength(int value)
-    {
-        int? fastResult = GetNameLengthInlined(value);
-        if (fastResult is not null)
-        {
-            return fastResult.Value;
-        }
-
-        if (value == 0)
-        {
-            return 1;
-        }
-
-        int count = 0, foundItemsCount = 0;
-        if (true)
-        {
-            if ((value & 128) == 128)
-            {
-                value -= 128;
-                count = checked(count + 15);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 64) == 64)
-            {
-                value -= 64;
-                count = checked(count + 14);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 32) == 32)
-            {
-                value -= 32;
-                count = checked(count + 16);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 16) == 16)
-            {
-                value -= 16;
-                count = checked(count + 19);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 8) == 8)
-            {
-                value -= 8;
-                count = checked(count + 3);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 4) == 4)
-            {
-                value -= 4;
-                count = checked(count + 7);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 2) == 2)
-            {
-                value -= 2;
-                count = checked(count + 11);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 1) == 1)
-            {
-                value -= 1;
-                count = checked(count + 9);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-        }
-
-        if (value != 0)
-        {
-            return null;
-        }
-
-    CountLength:
-        const int separatorStringLength = 2;
-        return checked(count + (separatorStringLength * (foundItemsCount - 1)));
-    }
+    private static ReadOnlySpan<byte> s_formatNameLengths => new byte[8] { 9, 11, 7, 3, 19, 16, 14, 15 };
 
     private static readonly string[] s_formatNames = new string[8] { "CombinedEscapes", "JsonNameEscape", "EnumMemberQuoted", "EnumMemberBackslash", "Tab", "Newline", "DoubleQuote", "Backslash" };
+
+    private static bool TryFormatFlagNamesLength(int value, out int length)
+    {
+        if (TryGetNameLengthInlined(value, out length))
+        {
+            return true;
+        }
+
+        int nameCharCount = 0;
+        uint remaining = (uint)value;
+
+        while (remaining != 0)
+        {
+            int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(remaining);
+
+            if ((uint)bitPos >= (uint)s_formatNameLengths.Length || s_formatNameLengths[bitPos] == 0)
+            {
+                length = 0;
+                return false;
+            }
+
+            nameCharCount += s_formatNameLengths[bitPos];
+            remaining &= remaining - 1;
+        }
+
+        const int separatorStringLength = 2;
+        int flagCount = global::System.Numerics.BitOperations.PopCount((uint)value);
+        length = nameCharCount + (separatorStringLength * (flagCount - 1));
+        return true;
+    }
 
     private static string? FormatFlagNames(int value)
     {
@@ -226,21 +175,29 @@ public static partial class Bug480FlagsExtensions
         return value == 0;
     }
 
-    private static int? GetNameLengthInlined(int value)
+    private static bool TryGetNameLengthInlined(int value, out int length)
     {
-        return value switch
+        if (value == 0) { length = 1; return true; }
+
+        if ((value & (value - 1)) == 0)
         {
-            0 => 1,
-            1 => 9,
-            2 => 11,
-            4 => 7,
-            8 => 3,
-            16 => 19,
-            32 => 16,
-            64 => 14,
-            128 => 15,
-            _ => null
-        };
+            int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(value);
+            if ((uint)bitPos < (uint)s_formatNameLengths.Length)
+            {
+                length = s_formatNameLengths[bitPos];
+                return length != 0;
+            }
+            else
+            {
+                length = 0;
+                return false;
+            }
+        }
+
+        switch (value)
+        {
+            default: length = 0; return false;
+        }
     }
 
     private static string? GetNameInlined(int value)
@@ -313,95 +270,44 @@ public static partial class Bug480FlagsExtensions
 
     public static int GetEnumMemberValueStringLength(this Bug480Flags value)
     {
-        return FormatFlagEnumMemberValuesLength((int)value)
-            ?? EnumNumericFormatter.GetStringLength((int)value);
+        return TryFormatFlagEnumMemberValuesLength((int)value, out int length)
+            ? length
+            : EnumNumericFormatter.GetStringLength((int)value);
     }
 
-    private static int? FormatFlagEnumMemberValuesLength(int value)
-    {
-        int? fastResult = GetEnumMemberValueLengthInlined(value);
-        if (fastResult is not null)
-        {
-            return fastResult.Value;
-        }
-
-        if (value == 0)
-        {
-            return 1;
-        }
-
-        int count = 0, foundItemsCount = 0;
-        if (true)
-        {
-            if ((value & 128) == 128)
-            {
-                value -= 128;
-                count = checked(count + 15);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 64) == 64)
-            {
-                value -= 64;
-                count = checked(count + 14);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 32) == 32)
-            {
-                value -= 32;
-                count = checked(count + 8);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 16) == 16)
-            {
-                value -= 16;
-                count = checked(count + 13);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 8) == 8)
-            {
-                value -= 8;
-                count = checked(count + 3);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 4) == 4)
-            {
-                value -= 4;
-                count = checked(count + 7);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 2) == 2)
-            {
-                value -= 2;
-                count = checked(count + 11);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 1) == 1)
-            {
-                value -= 1;
-                count = checked(count + 9);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-        }
-
-        if (value != 0)
-        {
-            return null;
-        }
-
-    CountLength:
-        const int separatorStringLength = 2;
-        return checked(count + (separatorStringLength * (foundItemsCount - 1)));
-    }
+    private static ReadOnlySpan<byte> s_formatEnumMemberValueLengths => new byte[8] { 9, 11, 7, 3, 13, 8, 14, 15 };
 
     private static readonly string[] s_formatEnumMemberValues = new string[8] { "combined\\escape", "JsonNameEscape", "\"quoted\"", "special\\value", "Tab", "Newline", "DoubleQuote", "Backslash" };
+
+    private static bool TryFormatFlagEnumMemberValuesLength(int value, out int length)
+    {
+        if (TryGetEnumMemberValueLengthInlined(value, out length))
+        {
+            return true;
+        }
+
+        int nameCharCount = 0;
+        uint remaining = (uint)value;
+
+        while (remaining != 0)
+        {
+            int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(remaining);
+
+            if ((uint)bitPos >= (uint)s_formatEnumMemberValueLengths.Length || s_formatEnumMemberValueLengths[bitPos] == 0)
+            {
+                length = 0;
+                return false;
+            }
+
+            nameCharCount += s_formatEnumMemberValueLengths[bitPos];
+            remaining &= remaining - 1;
+        }
+
+        const int separatorStringLength = 2;
+        int flagCount = global::System.Numerics.BitOperations.PopCount((uint)value);
+        length = nameCharCount + (separatorStringLength * (flagCount - 1));
+        return true;
+    }
 
     private static string? FormatFlagEnumMemberValues(int value)
     {
@@ -485,21 +391,29 @@ public static partial class Bug480FlagsExtensions
         return value == 0;
     }
 
-    private static int? GetEnumMemberValueLengthInlined(int value)
+    private static bool TryGetEnumMemberValueLengthInlined(int value, out int length)
     {
-        return value switch
+        if (value == 0) { length = 1; return true; }
+
+        if ((value & (value - 1)) == 0)
         {
-            0 => 1,
-            1 => 9,
-            2 => 11,
-            4 => 7,
-            8 => 3,
-            16 => 13,
-            32 => 8,
-            64 => 14,
-            128 => 15,
-            _ => null
-        };
+            int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(value);
+            if ((uint)bitPos < (uint)s_formatEnumMemberValueLengths.Length)
+            {
+                length = s_formatEnumMemberValueLengths[bitPos];
+                return length != 0;
+            }
+            else
+            {
+                length = 0;
+                return false;
+            }
+        }
+
+        switch (value)
+        {
+            default: length = 0; return false;
+        }
     }
 
     private static string? GetEnumMemberValueInlined(int value)
@@ -544,94 +458,42 @@ public static partial class Bug480FlagsExtensions
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static int? GetJsonStringLength(this Bug480Flags value)
     {
-        return FormatFlagJsonStringsLength((int)value);
+        return TryFormatFlagJsonStringsLength((int)value, out int length) ? length : null;
     }
 
-    private static int? FormatFlagJsonStringsLength(int value)
-    {
-        int? fastResult = GetJsonStringLengthInlined(value);
-        if (fastResult is not null)
-        {
-            return fastResult.Value;
-        }
-
-        if (value == 0)
-        {
-            return 1;
-        }
-
-        int count = 0, foundItemsCount = 0;
-        if (true)
-        {
-            if ((value & 128) == 128)
-            {
-                value -= 128;
-                count = checked(count + 13);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 64) == 64)
-            {
-                value -= 64;
-                count = checked(count + 11);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 32) == 32)
-            {
-                value -= 32;
-                count = checked(count + 8);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 16) == 16)
-            {
-                value -= 16;
-                count = checked(count + 13);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 8) == 8)
-            {
-                value -= 8;
-                count = checked(count + 3);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 4) == 4)
-            {
-                value -= 4;
-                count = checked(count + 7);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 2) == 2)
-            {
-                value -= 2;
-                count = checked(count + 11);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 1) == 1)
-            {
-                value -= 1;
-                count = checked(count + 9);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-        }
-
-        if (value != 0)
-        {
-            return null;
-        }
-
-    CountLength:
-        const int separatorStringLength = 2;
-        return checked(count + (separatorStringLength * (foundItemsCount - 1)));
-    }
+    private static ReadOnlySpan<byte> s_formatJsonStringLengths => new byte[8] { 9, 11, 7, 3, 13, 8, 11, 13 };
 
     private static readonly string[] s_formatJsonStrings = new string[8] { "json\\combined", "json\\escape", "\"quoted\"", "special\\value", "Tab", "Newline", "DoubleQuote", "Backslash" };
+
+    private static bool TryFormatFlagJsonStringsLength(int value, out int length)
+    {
+        if (TryGetJsonStringLengthInlined(value, out length))
+        {
+            return true;
+        }
+
+        int nameCharCount = 0;
+        uint remaining = (uint)value;
+
+        while (remaining != 0)
+        {
+            int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(remaining);
+
+            if ((uint)bitPos >= (uint)s_formatJsonStringLengths.Length || s_formatJsonStringLengths[bitPos] == 0)
+            {
+                length = 0;
+                return false;
+            }
+
+            nameCharCount += s_formatJsonStringLengths[bitPos];
+            remaining &= remaining - 1;
+        }
+
+        const int separatorStringLength = 2;
+        int flagCount = global::System.Numerics.BitOperations.PopCount((uint)value);
+        length = nameCharCount + (separatorStringLength * (flagCount - 1));
+        return true;
+    }
 
     private static string? FormatFlagJsonStrings(int value)
     {
@@ -715,21 +577,29 @@ public static partial class Bug480FlagsExtensions
         return value == 0;
     }
 
-    private static int? GetJsonStringLengthInlined(int value)
+    private static bool TryGetJsonStringLengthInlined(int value, out int length)
     {
-        return value switch
+        if (value == 0) { length = 1; return true; }
+
+        if ((value & (value - 1)) == 0)
         {
-            0 => 1,
-            1 => 9,
-            2 => 11,
-            4 => 7,
-            8 => 3,
-            16 => 13,
-            32 => 8,
-            64 => 11,
-            128 => 13,
-            _ => null
-        };
+            int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(value);
+            if ((uint)bitPos < (uint)s_formatJsonStringLengths.Length)
+            {
+                length = s_formatJsonStringLengths[bitPos];
+                return length != 0;
+            }
+            else
+            {
+                length = 0;
+                return false;
+            }
+        }
+
+        switch (value)
+        {
+            default: length = 0; return false;
+        }
     }
 
     private static string? GetJsonStringInlined(int value)
