@@ -27,8 +27,9 @@ public static partial class Bug357Extensions
     /// <returns>The number of characters produced by converting the specified value to string.</returns>
     public static int GetStringLength(this Bug357 value)
     {
-        return GetNameLengthInlined((int)value)
-            ?? EnumNumericFormatter.GetStringLength((int)value);
+        return TryGetNameLengthInlined((int)value, out int length)
+            ? length
+            : EnumNumericFormatter.GetStringLength((int)value);
     }
 
     /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
@@ -47,18 +48,18 @@ public static partial class Bug357Extensions
         };
     }
 
-    private static int? GetNameLengthInlined(int value)
+    private static bool TryGetNameLengthInlined(int value, out int length)
     {
-        return value switch
+        switch (value)
         {
-            0 => 3,
-            1 => 3,
-            2 => 3,
-            3 => 4,
-            4 => 4,
-            5 => 4,
-            _ => null
-        };
+            case 0: length = 3; return true;
+            case 1: length = 3; return true;
+            case 2: length = 3; return true;
+            case 3: length = 4; return true;
+            case 4: length = 4; return true;
+            case 5: length = 4; return true;
+            default: length = 0; return false;
+        }
     }
 
     private static string? GetNameInlined(int value)
@@ -206,21 +207,21 @@ public static partial class Bug357Extensions
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static int? GetJsonStringLength(this Bug357 value)
     {
-        return GetJsonStringLengthInlined((int)value);
+        return TryGetJsonStringLengthInlined((int)value, out int length) ? length : null;
     }
 
-    private static int? GetJsonStringLengthInlined(int value)
+    private static bool TryGetJsonStringLengthInlined(int value, out int length)
     {
-        return value switch
+        switch (value)
         {
-            0 => 3,
-            1 => 3,
-            2 => 3,
-            3 => 4,
-            4 => 4,
-            5 => 4,
-            _ => null
-        };
+            case 0: length = 3; return true;
+            case 1: length = 3; return true;
+            case 2: length = 3; return true;
+            case 3: length = 4; return true;
+            case 4: length = 4; return true;
+            case 5: length = 4; return true;
+            default: length = 0; return false;
+        }
     }
 
     private static string? GetJsonStringInlined(int value)

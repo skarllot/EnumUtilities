@@ -36,8 +36,9 @@ public static partial class UserRoleExtensions
     /// <returns>The number of characters produced by converting the specified value to string.</returns>
     public static int GetStringLength(this UserRole value)
     {
-        return FormatFlagNamesLength((ulong)value)
-            ?? EnumNumericFormatter.GetStringLength((ulong)value);
+        return TryFormatFlagNamesLength((ulong)value, out int length)
+            ? length
+            : EnumNumericFormatter.GetStringLength((ulong)value);
     }
 
     /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
@@ -49,84 +50,53 @@ public static partial class UserRoleExtensions
             0 => true,
             1 => true,
             2 => true,
-            4 => true,
-            6 => true,
-            7 => true,
+            8 => true,
+            10 => true,
+            11 => true,
             _ => false
         };
     }
 
-    private static int? FormatFlagNamesLength(ulong value)
-    {
-        int? fastResult = GetNameLengthInlined(value);
-        if (fastResult is not null)
-        {
-            return fastResult.Value;
-        }
-
-        if (value == 0)
-        {
-            return 1;
-        }
-
-        int count = 0, foundItemsCount = 0;
-        if (true)
-        {
-            if ((value & 7) == 7)
-            {
-                value -= 7;
-                count = checked(count + 3);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 6) == 6)
-            {
-                value -= 6;
-                count = checked(count + 9);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 4) == 4)
-            {
-                value -= 4;
-                count = checked(count + 7);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 2) == 2)
-            {
-                value -= 2;
-                count = checked(count + 9);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 1) == 1)
-            {
-                value -= 1;
-                count = checked(count + 10);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-        }
-
-        if (value != 0)
-        {
-            return null;
-        }
-
-    CountLength:
-        const int separatorStringLength = 2;
-        return checked(count + (separatorStringLength * (foundItemsCount - 1)));
-    }
+    private static ReadOnlySpan<byte> s_formatNameLengths => new byte[4] { 10, 9, 0, 7 };
 
     private static readonly string[] s_formatNames = new string[6] { "All", "SuperUser", "Finance", "Custodian", "NormalUser", "None" };
+
+    private static bool TryFormatFlagNamesLength(ulong value, out int length)
+    {
+        if (TryGetNameLengthInlined(value, out length))
+        {
+            return true;
+        }
+
+        int nameCharCount = 0;
+        uint remaining = (uint)value;
+
+        while (remaining != 0)
+        {
+            int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(remaining);
+
+            if ((uint)bitPos >= (uint)s_formatNameLengths.Length || s_formatNameLengths[bitPos] == 0)
+            {
+                length = 0;
+                return false;
+            }
+
+            nameCharCount += s_formatNameLengths[bitPos];
+            remaining &= remaining - 1;
+        }
+
+        const int separatorStringLength = 2;
+        int flagCount = global::System.Numerics.BitOperations.PopCount((ulong)value);
+        length = nameCharCount + (separatorStringLength * (flagCount - 1));
+        return true;
+    }
 
     private static string? FormatFlagNames(ulong value)
     {
         string? result = GetNameInlined(value);
         if (result is null)
         {
-            Span<int> foundItems = stackalloc int[3];
+            Span<int> foundItems = stackalloc int[4];
             if (TryFindFlagsNames(value, foundItems, out int foundItemsCount, out int resultLength))
             {
                 result = EnumStringFormatter.WriteMultipleFoundFlagsNames(s_formatNames, foundItems.Slice(0, foundItemsCount), resultLength);
@@ -142,23 +112,23 @@ public static partial class UserRoleExtensions
         foundItemsCount = 0;
         if (true)
         {
-            if ((value & 7) == 7)
+            if ((value & 11) == 11)
             {
-                value -= 7;
+                value -= 11;
                 resultLength = checked(resultLength + 3);
                 foundItems[foundItemsCount++] = 0;
                 if (value == 0) return true;
             }
-            if ((value & 6) == 6)
+            if ((value & 10) == 10)
             {
-                value -= 6;
+                value -= 10;
                 resultLength = checked(resultLength + 9);
                 foundItems[foundItemsCount++] = 1;
                 if (value == 0) return true;
             }
-            if ((value & 4) == 4)
+            if ((value & 8) == 8)
             {
-                value -= 4;
+                value -= 8;
                 resultLength = checked(resultLength + 7);
                 foundItems[foundItemsCount++] = 2;
                 if (value == 0) return true;
@@ -182,18 +152,31 @@ public static partial class UserRoleExtensions
         return value == 0;
     }
 
-    private static int? GetNameLengthInlined(ulong value)
+    private static bool TryGetNameLengthInlined(ulong value, out int length)
     {
-        return value switch
+        if (value == 0) { length = 4; return true; }
+
+        if ((value & (value - 1)) == 0)
         {
-            0 => 4,
-            1 => 10,
-            2 => 9,
-            4 => 7,
-            6 => 9,
-            7 => 3,
-            _ => null
-        };
+            int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(value);
+            if ((uint)bitPos < (uint)s_formatNameLengths.Length)
+            {
+                length = s_formatNameLengths[bitPos];
+                return length != 0;
+            }
+            else
+            {
+                length = 0;
+                return false;
+            }
+        }
+
+        switch (value)
+        {
+            case 10: length = 9; return true;
+            case 11: length = 3; return true;
+            default: length = 0; return false;
+        }
     }
 
     private static string? GetNameInlined(ulong value)
@@ -203,9 +186,9 @@ public static partial class UserRoleExtensions
             0 => "None",
             1 => "NormalUser",
             2 => "Custodian",
-            4 => "Finance",
-            6 => "SuperUser",
-            7 => "All",
+            8 => "Finance",
+            10 => "SuperUser",
+            11 => "All",
             _ => null
         };
     }
@@ -273,81 +256,51 @@ public static partial class UserRoleExtensions
 
     public static int GetEnumMemberValueStringLength(this UserRole value)
     {
-        return FormatFlagEnumMemberValuesLength((ulong)value)
-            ?? EnumNumericFormatter.GetStringLength((ulong)value);
+        return TryFormatFlagEnumMemberValuesLength((ulong)value, out int length)
+            ? length
+            : EnumNumericFormatter.GetStringLength((ulong)value);
     }
 
-    private static int? FormatFlagEnumMemberValuesLength(ulong value)
-    {
-        int? fastResult = GetEnumMemberValueLengthInlined(value);
-        if (fastResult is not null)
-        {
-            return fastResult.Value;
-        }
-
-        if (value == 0)
-        {
-            return 1;
-        }
-
-        int count = 0, foundItemsCount = 0;
-        if (true)
-        {
-            if ((value & 7) == 7)
-            {
-                value -= 7;
-                count = checked(count + 3);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 6) == 6)
-            {
-                value -= 6;
-                count = checked(count + 10);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 4) == 4)
-            {
-                value -= 4;
-                count = checked(count + 7);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 2) == 2)
-            {
-                value -= 2;
-                count = checked(count + 9);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 1) == 1)
-            {
-                value -= 1;
-                count = checked(count + 11);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-        }
-
-        if (value != 0)
-        {
-            return null;
-        }
-
-    CountLength:
-        const int separatorStringLength = 2;
-        return checked(count + (separatorStringLength * (foundItemsCount - 1)));
-    }
+    private static ReadOnlySpan<byte> s_formatEnumMemberValueLengths => new byte[4] { 11, 9, 0, 7 };
 
     private static readonly string[] s_formatEnumMemberValues = new string[6] { "All", "Super User", "Finance", "Custodian", "Normal User", "None" };
+
+    private static bool TryFormatFlagEnumMemberValuesLength(ulong value, out int length)
+    {
+        if (TryGetEnumMemberValueLengthInlined(value, out length))
+        {
+            return true;
+        }
+
+        int nameCharCount = 0;
+        uint remaining = (uint)value;
+
+        while (remaining != 0)
+        {
+            int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(remaining);
+
+            if ((uint)bitPos >= (uint)s_formatEnumMemberValueLengths.Length || s_formatEnumMemberValueLengths[bitPos] == 0)
+            {
+                length = 0;
+                return false;
+            }
+
+            nameCharCount += s_formatEnumMemberValueLengths[bitPos];
+            remaining &= remaining - 1;
+        }
+
+        const int separatorStringLength = 2;
+        int flagCount = global::System.Numerics.BitOperations.PopCount((ulong)value);
+        length = nameCharCount + (separatorStringLength * (flagCount - 1));
+        return true;
+    }
 
     private static string? FormatFlagEnumMemberValues(ulong value)
     {
         string? result = GetEnumMemberValueInlined(value);
         if (result is null)
         {
-            Span<int> foundItems = stackalloc int[3];
+            Span<int> foundItems = stackalloc int[4];
             if (TryFindFlagsEnumMemberValues(value, foundItems, out int foundItemsCount, out int resultLength))
             {
                 result = EnumStringFormatter.WriteMultipleFoundFlagsNames(s_formatEnumMemberValues, foundItems.Slice(0, foundItemsCount), resultLength);
@@ -363,23 +316,23 @@ public static partial class UserRoleExtensions
         foundItemsCount = 0;
         if (true)
         {
-            if ((value & 7) == 7)
+            if ((value & 11) == 11)
             {
-                value -= 7;
+                value -= 11;
                 resultLength = checked(resultLength + 3);
                 foundItems[foundItemsCount++] = 0;
                 if (value == 0) return true;
             }
-            if ((value & 6) == 6)
+            if ((value & 10) == 10)
             {
-                value -= 6;
+                value -= 10;
                 resultLength = checked(resultLength + 10);
                 foundItems[foundItemsCount++] = 1;
                 if (value == 0) return true;
             }
-            if ((value & 4) == 4)
+            if ((value & 8) == 8)
             {
-                value -= 4;
+                value -= 8;
                 resultLength = checked(resultLength + 7);
                 foundItems[foundItemsCount++] = 2;
                 if (value == 0) return true;
@@ -403,18 +356,31 @@ public static partial class UserRoleExtensions
         return value == 0;
     }
 
-    private static int? GetEnumMemberValueLengthInlined(ulong value)
+    private static bool TryGetEnumMemberValueLengthInlined(ulong value, out int length)
     {
-        return value switch
+        if (value == 0) { length = 4; return true; }
+
+        if ((value & (value - 1)) == 0)
         {
-            0 => 4,
-            1 => 11,
-            2 => 9,
-            4 => 7,
-            6 => 10,
-            7 => 3,
-            _ => null
-        };
+            int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(value);
+            if ((uint)bitPos < (uint)s_formatEnumMemberValueLengths.Length)
+            {
+                length = s_formatEnumMemberValueLengths[bitPos];
+                return length != 0;
+            }
+            else
+            {
+                length = 0;
+                return false;
+            }
+        }
+
+        switch (value)
+        {
+            case 10: length = 10; return true;
+            case 11: length = 3; return true;
+            default: length = 0; return false;
+        }
     }
 
     private static string? GetEnumMemberValueInlined(ulong value)
@@ -424,9 +390,9 @@ public static partial class UserRoleExtensions
             0 => "None",
             1 => "Normal User",
             2 => "Custodian",
-            4 => "Finance",
-            6 => "Super User",
-            7 => "All",
+            8 => "Finance",
+            10 => "Super User",
+            11 => "All",
             _ => null
         };
     }

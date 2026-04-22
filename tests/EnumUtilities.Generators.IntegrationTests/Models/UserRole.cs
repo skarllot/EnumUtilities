@@ -11,7 +11,7 @@ public enum UserRole : ulong
     [EnumMember(Value = "Normal User")]
     NormalUser = 1UL << 0,
     Custodian = 1UL << 1,
-    Finance = 1UL << 2,
+    Finance = 1UL << 3,
 
     [EnumMember(Value = "Super User")]
     SuperUser = Custodian | Finance,

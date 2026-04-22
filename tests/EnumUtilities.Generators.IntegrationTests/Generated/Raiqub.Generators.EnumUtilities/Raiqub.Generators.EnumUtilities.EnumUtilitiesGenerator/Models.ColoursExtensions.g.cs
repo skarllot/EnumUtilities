@@ -36,8 +36,9 @@ public static partial class ColoursExtensions
     /// <returns>The number of characters produced by converting the specified value to string.</returns>
     public static int GetStringLength(this Colours value)
     {
-        return FormatFlagNamesLength((int)value)
-            ?? EnumNumericFormatter.GetStringLength((int)value);
+        return TryFormatFlagNamesLength((int)value, out int length)
+            ? length
+            : EnumNumericFormatter.GetStringLength((int)value);
     }
 
     /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
@@ -53,56 +54,39 @@ public static partial class ColoursExtensions
         };
     }
 
-    private static int? FormatFlagNamesLength(int value)
-    {
-        int? fastResult = GetNameLengthInlined(value);
-        if (fastResult is not null)
-        {
-            return fastResult.Value;
-        }
-
-        if (value == 0)
-        {
-            return 1;
-        }
-
-        int count = 0, foundItemsCount = 0;
-        if (true)
-        {
-            if ((value & 4) == 4)
-            {
-                value -= 4;
-                count = checked(count + 5);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 2) == 2)
-            {
-                value -= 2;
-                count = checked(count + 4);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 1) == 1)
-            {
-                value -= 1;
-                count = checked(count + 3);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-        }
-
-        if (value != 0)
-        {
-            return null;
-        }
-
-    CountLength:
-        const int separatorStringLength = 2;
-        return checked(count + (separatorStringLength * (foundItemsCount - 1)));
-    }
+    private static ReadOnlySpan<byte> s_formatNameLengths => new byte[3] { 3, 4, 5 };
 
     private static readonly string[] s_formatNames = new string[3] { "Green", "Blue", "Red" };
+
+    private static bool TryFormatFlagNamesLength(int value, out int length)
+    {
+        if (TryGetNameLengthInlined(value, out length))
+        {
+            return true;
+        }
+
+        int nameCharCount = 0;
+        uint remaining = (uint)value;
+
+        while (remaining != 0)
+        {
+            int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(remaining);
+
+            if ((uint)bitPos >= (uint)s_formatNameLengths.Length || s_formatNameLengths[bitPos] == 0)
+            {
+                length = 0;
+                return false;
+            }
+
+            nameCharCount += s_formatNameLengths[bitPos];
+            remaining &= remaining - 1;
+        }
+
+        const int separatorStringLength = 2;
+        int flagCount = global::System.Numerics.BitOperations.PopCount((uint)value);
+        length = nameCharCount + (separatorStringLength * (flagCount - 1));
+        return true;
+    }
 
     private static string? FormatFlagNames(int value)
     {
@@ -151,16 +135,29 @@ public static partial class ColoursExtensions
         return value == 0;
     }
 
-    private static int? GetNameLengthInlined(int value)
+    private static bool TryGetNameLengthInlined(int value, out int length)
     {
-        return value switch
+        if (value == 0) { length = 1; return true; }
+
+        if ((value & (value - 1)) == 0)
         {
-            0 => 1,
-            1 => 3,
-            2 => 4,
-            4 => 5,
-            _ => null
-        };
+            int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(value);
+            if ((uint)bitPos < (uint)s_formatNameLengths.Length)
+            {
+                length = s_formatNameLengths[bitPos];
+                return length != 0;
+            }
+            else
+            {
+                length = 0;
+                return false;
+            }
+        }
+
+        switch (value)
+        {
+            default: length = 0; return false;
+        }
     }
 
     private static string? GetNameInlined(int value)

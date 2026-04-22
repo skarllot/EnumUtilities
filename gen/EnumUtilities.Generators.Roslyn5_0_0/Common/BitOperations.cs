@@ -15,6 +15,9 @@ public static class BitOperations
     };
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static bool IsPow2(ulong value) => (value & (value - 1)) == 0 && value != 0;
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static int LeadingZeroCount(uint value)
     {
         if (value == 0)

@@ -62,19 +62,19 @@ public sealed class ExtensionsDefaultBlock : ICodeWriterModule<EnumToGenerate>
 
     private static void WriteGetStringLength(SourceTextWriter writer, EnumToGenerate model)
     {
+        var methodName = model.IsFlags ? "TryFormatFlagNamesLength" : "TryGetNameLengthInlined";
         writer.WriteLine(
             $$"""
-              /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
-              /// <param name="value">The value to calculate the number of characters.</param>
-              /// <returns>The number of characters produced by converting the specified value to string.</returns>
-              public static int GetStringLength(this {{model.RefName}} value)
-              {
-                  return {{(
-                      model.IsFlags ? "FormatFlagNamesLength" : "GetNameLengthInlined"
-                  )}}(({{model.UnderlyingType}})value)
-                      ?? EnumNumericFormatter.GetStringLength(({{model.UnderlyingType}})value);
-              }
-              """
+            /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
+            /// <param name="value">The value to calculate the number of characters.</param>
+            /// <returns>The number of characters produced by converting the specified value to string.</returns>
+            public static int GetStringLength(this {{model.RefName}} value)
+            {
+                return {{methodName}}(({{model.UnderlyingType}})value, out int length)
+                    ? length
+                    : EnumNumericFormatter.GetStringLength(({{model.UnderlyingType}})value);
+            }
+            """
         );
     }
 

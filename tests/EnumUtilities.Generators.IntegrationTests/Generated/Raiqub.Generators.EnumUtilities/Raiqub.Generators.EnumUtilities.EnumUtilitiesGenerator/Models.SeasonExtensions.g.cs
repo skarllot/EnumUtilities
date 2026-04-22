@@ -22,20 +22,20 @@ public static partial class SeasonExtensions
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static int? GetJsonStringLength(this Season value)
     {
-        return GetJsonStringLengthInlined((int)value);
+        return TryGetJsonStringLengthInlined((int)value, out int length) ? length : null;
     }
 
-    private static int? GetJsonStringLengthInlined(int value)
+    private static bool TryGetJsonStringLengthInlined(int value, out int length)
     {
-        return value switch
+        switch (value)
         {
-            0 => 1,
-            1 => 2,
-            2 => 2,
-            3 => 2,
-            4 => 1,
-            _ => null
-        };
+            case 0: length = 1; return true;
+            case 1: length = 2; return true;
+            case 2: length = 2; return true;
+            case 3: length = 2; return true;
+            case 4: length = 1; return true;
+            default: length = 0; return false;
+        }
     }
 
     private static string? GetJsonStringInlined(int value)

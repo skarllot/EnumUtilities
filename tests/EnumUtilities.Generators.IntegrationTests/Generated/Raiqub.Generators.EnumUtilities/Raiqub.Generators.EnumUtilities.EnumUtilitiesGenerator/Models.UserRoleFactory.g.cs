@@ -165,7 +165,7 @@ public static partial class UserRoleFactory
                 switch (value)
                 {
                     case { } when value.Equals("All", comparisonType):
-                        result = 7;
+                        result = 11;
                         return true;
                 }
                 break;
@@ -183,7 +183,7 @@ public static partial class UserRoleFactory
                 switch (value)
                 {
                     case { } when value.Equals("Finance", comparisonType):
-                        result = 4;
+                        result = 8;
                         return true;
                 }
                 break;
@@ -204,7 +204,7 @@ public static partial class UserRoleFactory
                 switch (value)
                 {
                     case { } when value.Equals("SuperUser", comparisonType):
-                        result = 6;
+                        result = 10;
                         return true;
                 }
                 break;
@@ -364,7 +364,7 @@ public static partial class UserRoleFactory
                 switch (value)
                 {
                     case { } when value.Equals("All", comparisonType):
-                        result = 7;
+                        result = 11;
                         return true;
                 }
                 break;
@@ -382,7 +382,7 @@ public static partial class UserRoleFactory
                 switch (value)
                 {
                     case { } when value.Equals("Finance", comparisonType):
-                        result = 4;
+                        result = 8;
                         return true;
                 }
                 break;
@@ -403,7 +403,7 @@ public static partial class UserRoleFactory
                 switch (value)
                 {
                     case { } when value.Equals("Super User", comparisonType):
-                        result = 6;
+                        result = 10;
                         return true;
                 }
                 break;
@@ -422,9 +422,9 @@ public static partial class UserRoleFactory
             (UserRole)(0),
             (UserRole)(1),
             (UserRole)(2),
-            (UserRole)(4),
-            (UserRole)(6),
-            (UserRole)(7),
+            (UserRole)(8),
+            (UserRole)(10),
+            (UserRole)(11),
         };
     }
 

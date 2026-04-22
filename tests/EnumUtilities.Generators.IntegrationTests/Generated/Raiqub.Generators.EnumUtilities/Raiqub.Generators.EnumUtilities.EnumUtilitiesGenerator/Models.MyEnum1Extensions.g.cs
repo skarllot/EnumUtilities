@@ -27,8 +27,9 @@ internal static partial class MyEnum1Extensions
     /// <returns>The number of characters produced by converting the specified value to string.</returns>
     public static int GetStringLength(this NestedInClass.MyEnum1 value)
     {
-        return GetNameLengthInlined((int)value)
-            ?? EnumNumericFormatter.GetStringLength((int)value);
+        return TryGetNameLengthInlined((int)value, out int length)
+            ? length
+            : EnumNumericFormatter.GetStringLength((int)value);
     }
 
     /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
@@ -44,15 +45,15 @@ internal static partial class MyEnum1Extensions
         };
     }
 
-    private static int? GetNameLengthInlined(int value)
+    private static bool TryGetNameLengthInlined(int value, out int length)
     {
-        return value switch
+        switch (value)
         {
-            0 => 4,
-            1 => 3,
-            2 => 3,
-            _ => null
-        };
+            case 0: length = 4; return true;
+            case 1: length = 3; return true;
+            case 2: length = 3; return true;
+            default: length = 0; return false;
+        }
     }
 
     private static string? GetNameInlined(int value)

@@ -27,8 +27,9 @@ public static partial class StatusCodeExtensions
     /// <returns>The number of characters produced by converting the specified value to string.</returns>
     public static int GetStringLength(this StatusCode value)
     {
-        return GetNameLengthInlined((int)value)
-            ?? EnumNumericFormatter.GetStringLength((int)value);
+        return TryGetNameLengthInlined((int)value, out int length)
+            ? length
+            : EnumNumericFormatter.GetStringLength((int)value);
     }
 
     /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
@@ -52,23 +53,23 @@ public static partial class StatusCodeExtensions
         };
     }
 
-    private static int? GetNameLengthInlined(int value)
+    private static bool TryGetNameLengthInlined(int value, out int length)
     {
-        return value switch
+        switch (value)
         {
-            -1 => 7,
-            0 => 7,
-            -2 => 5,
-            -3 => 8,
-            -4 => 7,
-            -5 => 12,
-            -6 => 9,
-            -7 => 8,
-            -8 => 4,
-            -9 => 14,
-            -10 => 11,
-            _ => null
-        };
+            case -1: length = 7; return true;
+            case 0: length = 7; return true;
+            case -2: length = 5; return true;
+            case -3: length = 8; return true;
+            case -4: length = 7; return true;
+            case -5: length = 12; return true;
+            case -6: length = 9; return true;
+            case -7: length = 8; return true;
+            case -8: length = 4; return true;
+            case -9: length = 14; return true;
+            case -10: length = 11; return true;
+            default: length = 0; return false;
+        }
     }
 
     private static string? GetNameInlined(int value)
@@ -152,27 +153,28 @@ public static partial class StatusCodeExtensions
 
     public static int GetEnumMemberValueStringLength(this StatusCode value)
     {
-        return GetEnumMemberValueLengthInlined((int)value)
-            ?? EnumNumericFormatter.GetStringLength((int)value);
+        return TryGetEnumMemberValueLengthInlined((int)value, out int length)
+            ? length
+            : EnumNumericFormatter.GetStringLength((int)value);
     }
 
-    private static int? GetEnumMemberValueLengthInlined(int value)
+    private static bool TryGetEnumMemberValueLengthInlined(int value, out int length)
     {
-        return value switch
+        switch (value)
         {
-            -1 => 7,
-            0 => 7,
-            -2 => 5,
-            -3 => 9,
-            -4 => 7,
-            -5 => 12,
-            -6 => 9,
-            -7 => 8,
-            -8 => 4,
-            -9 => 14,
-            -10 => 11,
-            _ => null
-        };
+            case -1: length = 7; return true;
+            case 0: length = 7; return true;
+            case -2: length = 5; return true;
+            case -3: length = 9; return true;
+            case -4: length = 7; return true;
+            case -5: length = 12; return true;
+            case -6: length = 9; return true;
+            case -7: length = 8; return true;
+            case -8: length = 4; return true;
+            case -9: length = 14; return true;
+            case -10: length = 11; return true;
+            default: length = 0; return false;
+        }
     }
 
     private static string? GetEnumMemberValueInlined(int value)

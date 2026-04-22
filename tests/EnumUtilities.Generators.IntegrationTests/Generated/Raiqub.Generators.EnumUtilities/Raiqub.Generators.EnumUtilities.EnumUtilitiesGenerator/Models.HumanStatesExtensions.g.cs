@@ -27,8 +27,9 @@ public static partial class HumanStatesExtensions
     /// <returns>The number of characters produced by converting the specified value to string.</returns>
     public static int GetStringLength(this HumanStates value)
     {
-        return GetNameLengthInlined((int)value)
-            ?? EnumNumericFormatter.GetStringLength((int)value);
+        return TryGetNameLengthInlined((int)value, out int length)
+            ? length
+            : EnumNumericFormatter.GetStringLength((int)value);
     }
 
     /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
@@ -46,18 +47,18 @@ public static partial class HumanStatesExtensions
         };
     }
 
-    private static int? GetNameLengthInlined(int value)
+    private static bool TryGetNameLengthInlined(int value, out int length)
     {
-        return value switch
+        switch (value)
         {
-            0 => 1,
-            1 => 4,
-            2 => 7,
-            3 => 8,
-            4 => 6,
-            5 => 4,
-            _ => null
-        };
+            case 0: length = 1; return true;
+            case 1: length = 4; return true;
+            case 2: length = 7; return true;
+            case 3: length = 8; return true;
+            case 4: length = 6; return true;
+            case 5: length = 4; return true;
+            default: length = 0; return false;
+        }
     }
 
     private static string? GetNameInlined(int value)

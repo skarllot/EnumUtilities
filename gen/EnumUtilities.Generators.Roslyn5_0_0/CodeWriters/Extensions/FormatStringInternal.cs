@@ -15,117 +15,54 @@ public static class FormatStringInternal
     {
         if (model.IsFlags)
         {
-            WriteFormatFlagLength(writer, model, keySelector, type);
+            WriteFlagFields(writer, model, keySelector, type);
             writer.WriteLine();
-            WriteFormatFlag(writer, model, keySelector, type);
+            WriteTryFormatFlagLength(writer, model, type);
+            writer.WriteLine();
+            WriteFormatFlag(writer, model, type);
             writer.WriteLine();
             WriteTryFindFlags(writer, model, keySelector, type);
             writer.WriteLine();
         }
 
-        WriteGetLengthInlined(writer, model, keySelector, type);
+        WriteTryGetLengthInlined(writer, model, keySelector, type);
         writer.WriteLine();
         WriteGetInlined(writer, model, keySelector, type);
     }
 
-    private static void WriteFormatFlagLength(
+    private static void WriteFlagFields(
         SourceTextWriter writer,
         EnumToGenerate model,
         Func<EnumValue, string> keySelector,
         string type
     )
     {
-        var valuesRanges = model.GetEnumValueRangesByBitRange();
-        writer.WriteLine(
-            $$"""
-            private static int? FormatFlag{{type}}sLength({{model.UnderlyingType}} value)
-            {
-                int? fastResult = Get{{type}}LengthInlined(value);
-                if (fastResult is not null)
-                {
-                    return fastResult.Value;
-                }
-            """
-        );
-        writer.PushIndent();
+        var bitCount = model.GetMappedBitCount();
+        var maxLength = model
+            .Values.Where(x => BitOperations.IsPow2(x.RealMemberValue))
+            .Max(x => keySelector(x).Length);
 
-        if (model.Values.All(x => !string.Equals(keySelector(x), "0", StringComparison.Ordinal)))
+        if (maxLength <= byte.MaxValue)
         {
-            writer.WriteLine();
-            writer.WriteLine(
-                """
-                if (value == 0)
-                {
-                    return 1;
-                }
-                """
-            );
+            writer.Write($"private static ReadOnlySpan<byte> s_format{type}Lengths => new byte[{bitCount}] {{ ");
+        }
+        else
+        {
+            writer.Write($"private static readonly int[] s_format{type}Lengths = new int[{bitCount}] {{ ");
         }
 
-        writer.WriteLine();
-        writer.WriteLine("int count = 0, foundItemsCount = 0;");
-        foreach (var (i, vRange) in valuesRanges.Index())
+        for (var i = 0; i < bitCount; i++)
         {
-            if (vRange.Count == 0)
-                continue;
-
-            writer.WriteLine(
-                $$"""
-                if ({{EnumToGenerate.BitRangeConditionStrings[i]}})
-                {
-                """
-            );
-
-            writer.PushIndent();
-            foreach (var curr in vRange)
-            {
-                writer.WriteLine(
-                    $$"""
-                    if ((value & {{curr.MemberValue}}) == {{curr.MemberValue}})
-                    {
-                        value -= {{curr.MemberValue}};
-                        count = checked(count + {{keySelector(curr).Length}});
-                        foundItemsCount++;
-                        if (value == 0) goto CountLength;
-                    }
-                    """
-                );
-            }
-
-            writer.PopIndent();
-
-            writer.WriteLine('}');
+            if (i > 0)
+                writer.Write(", ");
+            var found = model.Values.FirstOrDefault(x => x.RealMemberValue == 1u << i);
+            writer.Write(found is not null ? keySelector(found).Length : 0);
         }
 
-        writer.WriteLine();
-        writer.WriteLine(
-            """
-            if (value != 0)
-            {
-                return null;
-            }
-            """
-        );
+        writer.WriteLine(" };");
 
-        writer.PopIndent();
         writer.WriteLine();
-        writer.WriteLine(
-            """
-            CountLength:
-                const int separatorStringLength = 2;
-                return checked(count + (separatorStringLength * (foundItemsCount - 1)));
-            }
-            """
-        );
-    }
 
-    private static void WriteFormatFlag(
-        SourceTextWriter writer,
-        EnumToGenerate model,
-        Func<EnumValue, string> keySelector,
-        string type
-    )
-    {
         writer.Write(
             $"private static readonly string[] s_format{type}s = new string[{model.InvertedValues.Count}] {{ "
         );
@@ -137,8 +74,56 @@ public static class FormatStringInternal
         }
 
         writer.WriteLine(" };");
+    }
+
+    private static void WriteTryFormatFlagLength(SourceTextWriter writer, EnumToGenerate model, string type)
+    {
+        writer.WriteLine(
+            $$"""
+            private static bool TryFormatFlag{{type}}sLength({{model.UnderlyingType}} value, out int length)
+            {
+                if (TryGet{{type}}LengthInlined(value, out length))
+                {
+                    return true;
+                }
+            """
+        );
+        writer.PushIndent();
 
         writer.WriteLine();
+        var popCountType = model.BitCount > 32 ? "ulong" : "uint";
+        writer.WriteLine(
+            $$"""
+            int nameCharCount = 0;
+            uint remaining = (uint)value;
+
+            while (remaining != 0)
+            {
+                int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(remaining);
+
+                if ((uint)bitPos >= (uint)s_format{{type}}Lengths.Length || s_format{{type}}Lengths[bitPos] == 0)
+                {
+                    length = 0;
+                    return false;
+                }
+
+                nameCharCount += s_format{{type}}Lengths[bitPos];
+                remaining &= remaining - 1;
+            }
+
+            const int separatorStringLength = 2;
+            int flagCount = global::System.Numerics.BitOperations.PopCount(({{popCountType}})value);
+            length = nameCharCount + (separatorStringLength * (flagCount - 1));
+            return true;
+            """
+        );
+
+        writer.PopIndent();
+        writer.WriteLine('}');
+    }
+
+    private static void WriteFormatFlag(SourceTextWriter writer, EnumToGenerate model, string type)
+    {
         writer.WriteLine(
             $$"""
             private static string? FormatFlag{{type}}s({{model.UnderlyingType}} value)
@@ -204,6 +189,7 @@ public static class FormatStringInternal
                     """
                 );
             }
+
             writer.PopIndent();
             writer.WriteLine('}');
         }
@@ -214,7 +200,7 @@ public static class FormatStringInternal
         writer.WriteLine('}');
     }
 
-    private static void WriteGetLengthInlined(
+    private static void WriteTryGetLengthInlined(
         SourceTextWriter writer,
         EnumToGenerate model,
         Func<EnumValue, string> keySelector,
@@ -223,30 +209,68 @@ public static class FormatStringInternal
     {
         writer.WriteLine(
             $$"""
-            private static int? Get{{type}}LengthInlined({{model.UnderlyingType}} value)
+            private static bool TryGet{{type}}LengthInlined({{model.UnderlyingType}} value, out int length)
             {
-                return value switch
-                {
             """
         );
+        writer.PushIndent();
 
-        writer.PushIndent(levels: 2);
-        if (!model.HasZeroMember)
+        if (model.IsFlags)
         {
-            writer.WriteLine("0 => 1,");
+            var zeroLength = model.HasZeroMember
+                ? keySelector(model.Values.First(x => x.RealMemberValue == 0)).Length
+                : 1;
+            writer.WriteLine($"if (value == 0) {{ length = {zeroLength}; return true; }}");
+            writer.WriteLine();
+
+            writer.WriteLine(
+                $$"""
+                if ((value & (value - 1)) == 0)
+                {
+                    int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(value);
+                    if ((uint)bitPos < (uint)s_format{{type}}Lengths.Length)
+                    {
+                        length = s_format{{type}}Lengths[bitPos];
+                        return length != 0;
+                    }
+                    else
+                    {
+                        length = 0;
+                        return false;
+                    }
+                }
+                """
+            );
+            writer.WriteLine();
         }
 
-        foreach (var curr in model.UniqueValues)
+        writer.WriteLine(
+            """
+            switch (value)
+            {
+            """
+        );
+        writer.PushIndent();
+
+        if (model is { IsFlags: false, HasZeroMember: false })
         {
-            writer.WriteLine($"{curr.MemberValue} => {keySelector(curr).Length},");
+            writer.WriteLine("case 0: length = 1; return true;");
         }
 
-        writer.WriteLine("_ => null");
+        var uniqueValues = model.IsFlags
+            ? model.UniqueValues.Where(x => x.RealMemberValue != 0 && !BitOperations.IsPow2(x.RealMemberValue))
+            : model.UniqueValues;
+        foreach (var curr in uniqueValues)
+        {
+            writer.WriteLine($"case {curr.MemberValue}: length = {keySelector(curr).Length}; return true;");
+        }
+
+        writer.WriteLine("default: length = 0; return false;");
 
         writer.PopIndent(levels: 2);
         writer.WriteLine(
             """
-                };
+                }
             }
             """
         );
