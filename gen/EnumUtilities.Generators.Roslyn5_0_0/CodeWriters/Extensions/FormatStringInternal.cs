@@ -103,7 +103,6 @@ public static class FormatStringInternal
 
                 if ((uint)bitPos >= (uint)s_format{{type}}Lengths.Length || s_format{{type}}Lengths[bitPos] == 0)
                 {
-                    length = 0;
                     return false;
                 }
 
@@ -217,9 +216,7 @@ public static class FormatStringInternal
 
         if (model.IsFlags)
         {
-            var zeroLength = model.HasZeroMember
-                ? keySelector(model.Values.First(x => x.RealMemberValue == 0)).Length
-                : 1;
+            var zeroLength = model.HasZeroMember ? keySelector(model.ZeroMember).Length : 1;
             writer.WriteLine($"if (value == 0) {{ length = {zeroLength}; return true; }}");
             writer.WriteLine();
 

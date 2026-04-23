@@ -79,7 +79,6 @@ public static partial class Bug480FlagsExtensions
 
             if ((uint)bitPos >= (uint)s_formatNameLengths.Length || s_formatNameLengths[bitPos] == 0)
             {
-                length = 0;
                 return false;
             }
 
@@ -295,7 +294,6 @@ public static partial class Bug480FlagsExtensions
 
             if ((uint)bitPos >= (uint)s_formatEnumMemberValueLengths.Length || s_formatEnumMemberValueLengths[bitPos] == 0)
             {
-                length = 0;
                 return false;
             }
 
@@ -481,7 +479,6 @@ public static partial class Bug480FlagsExtensions
 
             if ((uint)bitPos >= (uint)s_formatJsonStringLengths.Length || s_formatJsonStringLengths[bitPos] == 0)
             {
-                length = 0;
                 return false;
             }
 
