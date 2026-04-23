@@ -1,4 +1,5 @@
 ﻿using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.CodeAnalysis;
 using Raiqub.Generators.EnumUtilities.Common;
 using Raiqub.Generators.InterpolationCodeWriter.Collections;
@@ -58,7 +59,10 @@ public sealed record EnumToGenerate(
 
     public bool HasJsonProperty => Values.Exists(static it => it.JsonPropertyName != null);
 
-    public bool HasZeroMember { get; } = Values.AsEnumerable().Any(x => x.RealMemberValue == 0);
+    [MemberNotNullWhen(true, nameof(ZeroMember))]
+    public bool HasZeroMember => ZeroMember is not null;
+
+    public EnumValue? ZeroMember => field ??= Values.AsEnumerable().FirstOrDefault(static x => x.RealMemberValue == 0);
 
     public bool IsUnsigned { get; } = UnderlyingType is "byte" or "ushort" or "uint" or "ulong";
 

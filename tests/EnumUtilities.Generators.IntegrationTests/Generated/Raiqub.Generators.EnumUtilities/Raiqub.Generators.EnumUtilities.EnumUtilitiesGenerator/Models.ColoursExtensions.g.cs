@@ -74,7 +74,6 @@ public static partial class ColoursExtensions
 
             if ((uint)bitPos >= (uint)s_formatNameLengths.Length || s_formatNameLengths[bitPos] == 0)
             {
-                length = 0;
                 return false;
             }
 
