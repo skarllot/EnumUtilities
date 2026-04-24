@@ -23,6 +23,18 @@ public static class CSharpExtensions
         };
     }
 
+    public static string GetNumericSuffixFromCSharpKeyword(string keyword)
+    {
+        return keyword switch
+        {
+            "uint" => "u",
+            "long" => "l",
+            "ulong" => "ul",
+            "nuint" => "u",
+            _ => "",
+        };
+    }
+
     public static string GetTypeNameFromCSharpKeyword(string keyword)
     {
         return keyword switch

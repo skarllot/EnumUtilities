@@ -15,17 +15,19 @@ public static class FormatStringInternal
     {
         if (model.IsFlags)
         {
-            WriteFlagFields(writer, model, keySelector, type);
+            WriteFlagFields(writer, model, keySelector, type, out var lengthTableIsRva);
             writer.WriteLine();
-            WriteTryFormatFlagLength(writer, model, type);
+            WriteTryFormatFlagLength(writer, model, keySelector, type, lengthTableIsRva);
             writer.WriteLine();
             WriteFormatFlag(writer, model, type);
             writer.WriteLine();
             WriteTryFindFlags(writer, model, keySelector, type);
-            writer.WriteLine();
+        }
+        else
+        {
+            WriteTryGetLengthInlined(writer, model, keySelector, type);
         }
 
-        WriteTryGetLengthInlined(writer, model, keySelector, type);
         writer.WriteLine();
         WriteGetInlined(writer, model, keySelector, type);
     }
@@ -34,7 +36,8 @@ public static class FormatStringInternal
         SourceTextWriter writer,
         EnumToGenerate model,
         Func<EnumValue, string> keySelector,
-        string type
+        string type,
+        out bool lengthTableIsRva
     )
     {
         var bitCount = model.GetMappedBitCount();
@@ -42,7 +45,8 @@ public static class FormatStringInternal
             .Values.Where(x => BitOperations.IsPow2(x.RealMemberValue))
             .Max(x => keySelector(x).Length);
 
-        if (maxLength <= byte.MaxValue)
+        lengthTableIsRva = maxLength <= byte.MaxValue;
+        if (lengthTableIsRva)
         {
             writer.Write($"private static ReadOnlySpan<byte> s_format{type}Lengths => new byte[{bitCount}] {{ ");
         }
@@ -76,45 +80,80 @@ public static class FormatStringInternal
         writer.WriteLine(" };");
     }
 
-    private static void WriteTryFormatFlagLength(SourceTextWriter writer, EnumToGenerate model, string type)
+    private static void WriteTryFormatFlagLength(
+        SourceTextWriter writer,
+        EnumToGenerate model,
+        Func<EnumValue, string> keySelector,
+        string type,
+        bool lengthTableIsRva
+    )
     {
         writer.WriteLine(
             $$"""
-            private static bool TryFormatFlag{{type}}sLength({{model.UnderlyingType}} value, out int length)
-            {
-                if (TryGet{{type}}LengthInlined(value, out length))
-                {
-                    return true;
-                }
-            """
+              private static bool TryFormatFlag{{type}}sLength({{model.UnderlyingType}} value, out int length)
+              {
+              """
         );
         writer.PushIndent();
 
-        writer.WriteLine();
-        var popCountType = model.BitCount > 32 ? "ulong" : "uint";
+        var zeroLength = model.HasZeroMember ? keySelector(model.ZeroMember).Length : 1;
+        var unSigType = model.BitCount > 32 ? "ulong" : "uint";
+        var tableType = lengthTableIsRva ? "byte" : "int";
+        var compositeValues = model
+            .UniqueValues.Where(x => x.RealMemberValue != 0 && !BitOperations.IsPow2(x.RealMemberValue))
+            .ToList();
         writer.WriteLine(
             $$"""
-            int nameCharCount = 0;
-            uint remaining = (uint)value;
+              if (value == 0) { length = {{zeroLength}}; return true; }
+              if ((value & ~ValidFlagsMask) != 0) { length = 0; return false; }
 
-            while (remaining != 0)
-            {
-                int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(remaining);
+              ref {{tableType}} table = ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(s_format{{type}}Lengths);
 
-                if ((uint)bitPos >= (uint)s_format{{type}}Lengths.Length || s_format{{type}}Lengths[bitPos] == 0)
+              if ((value & (value - 1)) == 0)
+              {
+                  int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(value);
+                  length = global::System.Runtime.CompilerServices.Unsafe.Add(ref table, bitPos);
+                  return true;
+              }
+              """
+        );
+
+        if (compositeValues.Count > 0)
+        {
+            writer.WriteLine();
+            writer.WriteLine(
+                """
+                switch (value)
                 {
-                    return false;
-                }
+                """
+            );
+            writer.PushIndent();
 
-                nameCharCount += s_format{{type}}Lengths[bitPos];
-                remaining &= remaining - 1;
+            foreach (var curr in compositeValues)
+            {
+                writer.WriteLine($"case {curr.MemberValue}: length = {keySelector(curr).Length}; return true;");
             }
 
-            const int separatorStringLength = 2;
-            int flagCount = global::System.Numerics.BitOperations.PopCount(({{popCountType}})value);
-            length = nameCharCount + (separatorStringLength * (flagCount - 1));
-            return true;
-            """
+            writer.PopIndent();
+            writer.WriteLine('}');
+        }
+
+        writer.WriteLine();
+        writer.WriteLine(
+            $$"""
+              int charCount = -2;
+              {{unSigType}} remaining = ({{unSigType}})value;
+
+              do
+              {
+                  int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(remaining);
+                  charCount += global::System.Runtime.CompilerServices.Unsafe.Add(ref table, bitPos) + 2;
+                  remaining &= remaining - 1;
+              } while (remaining != 0);
+
+              length = charCount;
+              return true;
+              """
         );
 
         writer.PopIndent();
@@ -125,21 +164,21 @@ public static class FormatStringInternal
     {
         writer.WriteLine(
             $$"""
-            private static string? FormatFlag{{type}}s({{model.UnderlyingType}} value)
-            {
-                string? result = Get{{type}}Inlined(value);
-                if (result is null)
-                {
-                    Span<int> foundItems = stackalloc int[{{model.GetMappedBitCount()}}];
-                    if (TryFindFlags{{type}}s(value, foundItems, out int foundItemsCount, out int resultLength))
-                    {
-                        result = EnumStringFormatter.WriteMultipleFoundFlagsNames(s_format{{type}}s, foundItems.Slice(0, foundItemsCount), resultLength);
-                    }
-                }
+              private static string? FormatFlag{{type}}s({{model.UnderlyingType}} value)
+              {
+                  string? result = Get{{type}}Inlined(value);
+                  if (result is null)
+                  {
+                      Span<int> foundItems = stackalloc int[{{model.GetMappedBitCount()}}];
+                      if (TryFindFlags{{type}}s(value, foundItems, out int foundItemsCount, out int resultLength))
+                      {
+                          result = EnumStringFormatter.WriteMultipleFoundFlagsNames(s_format{{type}}s, foundItems.Slice(0, foundItemsCount), resultLength);
+                      }
+                  }
 
-                return result;
-            }
-            """
+                  return result;
+              }
+              """
         );
     }
 
@@ -153,11 +192,11 @@ public static class FormatStringInternal
         var valuesRanges = model.GetEnumValueRangesByBitRange();
         writer.WriteLine(
             $$"""
-            private static bool TryFindFlags{{type}}s({{model.UnderlyingType}} value, Span<int> foundItems, out int foundItemsCount, out int resultLength)
-            {
-                resultLength = 0;
-                foundItemsCount = 0;
-            """
+              private static bool TryFindFlags{{type}}s({{model.UnderlyingType}} value, Span<int> foundItems, out int foundItemsCount, out int resultLength)
+              {
+                  resultLength = 0;
+                  foundItemsCount = 0;
+              """
         );
         writer.PushIndent();
 
@@ -168,9 +207,9 @@ public static class FormatStringInternal
 
             writer.WriteLine(
                 $$"""
-                if ({{EnumToGenerate.BitRangeConditionStrings[i]}})
-                {
-                """
+                  if ({{EnumToGenerate.BitRangeConditionStrings[i]}})
+                  {
+                  """
             );
 
             writer.PushIndent();
@@ -178,14 +217,14 @@ public static class FormatStringInternal
             {
                 writer.WriteLine(
                     $$"""
-                    if ((value & {{curr.MemberValue}}) == {{curr.MemberValue}})
-                    {
-                        value -= {{curr.MemberValue}};
-                        resultLength = checked(resultLength + {{keySelector(curr).Length}});
-                        foundItems[foundItemsCount++] = {{model.InvertedValues.IndexOf(curr)}};
-                        if (value == 0) return true;
-                    }
-                    """
+                      if ((value & {{curr.MemberValue}}) == {{curr.MemberValue}})
+                      {
+                          value -= {{curr.MemberValue}};
+                          resultLength = checked(resultLength + {{keySelector(curr).Length}});
+                          foundItems[foundItemsCount++] = {{model.InvertedValues.IndexOf(curr)}};
+                          if (value == 0) return true;
+                      }
+                      """
                 );
             }
 
@@ -208,38 +247,11 @@ public static class FormatStringInternal
     {
         writer.WriteLine(
             $$"""
-            private static bool TryGet{{type}}LengthInlined({{model.UnderlyingType}} value, out int length)
-            {
-            """
+              private static bool TryGet{{type}}LengthInlined({{model.UnderlyingType}} value, out int length)
+              {
+              """
         );
         writer.PushIndent();
-
-        if (model.IsFlags)
-        {
-            var zeroLength = model.HasZeroMember ? keySelector(model.ZeroMember).Length : 1;
-            writer.WriteLine($"if (value == 0) {{ length = {zeroLength}; return true; }}");
-            writer.WriteLine();
-
-            writer.WriteLine(
-                $$"""
-                if ((value & (value - 1)) == 0)
-                {
-                    int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(value);
-                    if ((uint)bitPos < (uint)s_format{{type}}Lengths.Length)
-                    {
-                        length = s_format{{type}}Lengths[bitPos];
-                        return length != 0;
-                    }
-                    else
-                    {
-                        length = 0;
-                        return false;
-                    }
-                }
-                """
-            );
-            writer.WriteLine();
-        }
 
         writer.WriteLine(
             """
@@ -249,15 +261,12 @@ public static class FormatStringInternal
         );
         writer.PushIndent();
 
-        if (model is { IsFlags: false, HasZeroMember: false })
+        if (!model.HasZeroMember)
         {
             writer.WriteLine("case 0: length = 1; return true;");
         }
 
-        var uniqueValues = model.IsFlags
-            ? model.UniqueValues.Where(x => x.RealMemberValue != 0 && !BitOperations.IsPow2(x.RealMemberValue))
-            : model.UniqueValues;
-        foreach (var curr in uniqueValues)
+        foreach (var curr in model.UniqueValues)
         {
             writer.WriteLine($"case {curr.MemberValue}: length = {keySelector(curr).Length}; return true;");
         }
@@ -282,11 +291,11 @@ public static class FormatStringInternal
     {
         writer.WriteLine(
             $$"""
-            private static string? Get{{type}}Inlined({{model.UnderlyingType}} value)
-            {
-                return value switch
-                {
-            """
+              private static string? Get{{type}}Inlined({{model.UnderlyingType}} value)
+              {
+                  return value switch
+                  {
+              """
         );
 
         writer.PushIndent(levels: 2);

@@ -14,6 +14,8 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
 public static partial class ColoursExtensions
 {
+    private const int ValidFlagsMask = 7;
+
     /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
     /// <returns>The string representation of the value of this instance.</returns>
     public static string ToStringFast(this Colours value)
@@ -60,30 +62,29 @@ public static partial class ColoursExtensions
 
     private static bool TryFormatFlagNamesLength(int value, out int length)
     {
-        if (TryGetNameLengthInlined(value, out length))
+        if (value == 0) { length = 1; return true; }
+        if ((value & ~ValidFlagsMask) != 0) { length = 0; return false; }
+
+        ref byte table = ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(s_formatNameLengths);
+
+        if ((value & (value - 1)) == 0)
         {
+            int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(value);
+            length = global::System.Runtime.CompilerServices.Unsafe.Add(ref table, bitPos);
             return true;
         }
 
-        int nameCharCount = 0;
+        int charCount = -2;
         uint remaining = (uint)value;
 
-        while (remaining != 0)
+        do
         {
             int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(remaining);
-
-            if ((uint)bitPos >= (uint)s_formatNameLengths.Length || s_formatNameLengths[bitPos] == 0)
-            {
-                return false;
-            }
-
-            nameCharCount += s_formatNameLengths[bitPos];
+            charCount += global::System.Runtime.CompilerServices.Unsafe.Add(ref table, bitPos) + 2;
             remaining &= remaining - 1;
-        }
+        } while (remaining != 0);
 
-        const int separatorStringLength = 2;
-        int flagCount = global::System.Numerics.BitOperations.PopCount((uint)value);
-        length = nameCharCount + (separatorStringLength * (flagCount - 1));
+        length = charCount;
         return true;
     }
 
@@ -132,31 +133,6 @@ public static partial class ColoursExtensions
         }
 
         return value == 0;
-    }
-
-    private static bool TryGetNameLengthInlined(int value, out int length)
-    {
-        if (value == 0) { length = 1; return true; }
-
-        if ((value & (value - 1)) == 0)
-        {
-            int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(value);
-            if ((uint)bitPos < (uint)s_formatNameLengths.Length)
-            {
-                length = s_formatNameLengths[bitPos];
-                return length != 0;
-            }
-            else
-            {
-                length = 0;
-                return false;
-            }
-        }
-
-        switch (value)
-        {
-            default: length = 0; return false;
-        }
     }
 
     private static string? GetNameInlined(int value)
