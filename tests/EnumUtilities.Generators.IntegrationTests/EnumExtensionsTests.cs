@@ -5,15 +5,16 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests;
 public class EnumExtensionsTests
 {
     [Theory]
-    [InlineData(Colours.Red, 3)]
-    [InlineData(Colours.Green, 5)]
-    [InlineData(Colours.Green | Colours.Blue, 11)]
-    [InlineData(Colours.Green | Colours.Blue | Colours.Red, 16)]
-    [InlineData((Colours)10, 2)]
-    [InlineData((Colours)15, 2)]
-    [InlineData((Colours)0, 1)]
-    public void GetStringLengthForFlagEnumReturnsExpectedLength(Colours value, int expected)
+    [InlineData(Colours.Red)]
+    [InlineData(Colours.Green)]
+    [InlineData(Colours.Green | Colours.Blue)]
+    [InlineData(Colours.Green | Colours.Blue | Colours.Red)]
+    [InlineData((Colours)10)]
+    [InlineData((Colours)15)]
+    [InlineData((Colours)0)]
+    public void GetStringLengthForFlagEnumReturnsExpectedLength(Colours value)
     {
+        var expected = value.ToString().Length;
         var actual = value.GetStringLength();
 
         Assert.Equal(expected, actual);
@@ -36,18 +37,19 @@ public class EnumExtensionsTests
     }
 
     [Theory]
-    [InlineData(UserRole.None, 4)]
-    [InlineData(UserRole.NormalUser, 10)]
-    [InlineData(UserRole.Custodian, 9)]
-    [InlineData(UserRole.Finance, 7)]
-    [InlineData(UserRole.SuperUser, 9)]
-    [InlineData(UserRole.All, 3)]
-    [InlineData(UserRole.NormalUser | UserRole.Finance, 19)]
-    [InlineData(UserRole.NormalUser | UserRole.Custodian, 21)]
-    [InlineData((UserRole)10, 2)]
-    [InlineData((UserRole)15, 2)]
-    public void GetToStringLengthForFlagEnumWithZeroReturnsExpectedLength(UserRole value, int expected)
+    [InlineData(UserRole.None)]
+    [InlineData(UserRole.NormalUser)]
+    [InlineData(UserRole.Custodian)]
+    [InlineData(UserRole.Finance)]
+    [InlineData(UserRole.SuperUser)]
+    [InlineData(UserRole.All)]
+    [InlineData(UserRole.NormalUser | UserRole.Finance)]
+    [InlineData(UserRole.NormalUser | UserRole.Custodian)]
+    [InlineData((UserRole)12)]
+    [InlineData((UserRole)15)]
+    public void GetToStringLengthForFlagEnumWithZeroReturnsExpectedLength(UserRole value)
     {
+        var expected = value.ToString().Length;
         var actual = value.GetStringLength();
 
         Assert.Equal(expected, actual);
