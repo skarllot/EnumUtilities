@@ -16,9 +16,17 @@ public static class FormatStringInternal
     {
         if (model.IsFlags)
         {
-            WriteFlagFields(writer, model, keySelector, type, out var lengthTableIsRva);
+            WriteFlagFields(writer, model, keySelector, type, out var lengthTableIsRva, out var compositeIsRva);
             writer.WriteLine();
-            WriteTryFormatFlagLength(writer, model, keySelector, type, lengthTableIsRva);
+            if (lengthTableIsRva && model.FlagsInfo!.HasFewCombinations)
+            {
+                WriteTryFormatFlagLengthForAllCombinations(writer, model, type);
+            }
+            else
+            {
+                WriteTryFormatFlagLength(writer, model, keySelector, type, lengthTableIsRva, compositeIsRva);
+            }
+
             writer.WriteLine();
             WriteFormatFlag(writer, model, type);
             writer.WriteLine();
@@ -38,52 +46,32 @@ public static class FormatStringInternal
         EnumToGenerate model,
         Func<EnumValue, string> keySelector,
         string type,
-        out bool lengthTableIsRva
+        out bool lengthTableIsRva,
+        out bool compositeIsRva
     )
     {
-        var bitCount = model.GetMappedBitCount();
         var maxLength = model.FlagsInfo!.BitValues.Max(x => keySelector(x).Length);
         lengthTableIsRva = maxLength <= byte.MaxValue;
-        var tableLength =
-            lengthTableIsRva && model.FlagsInfo.HasFewCombinations ? (uint)Math.Pow(2, bitCount) : (uint)bitCount;
-
-        if (lengthTableIsRva)
-        {
-            writer.Write($"private static ReadOnlySpan<byte> s_format{type}Lengths => new byte[{tableLength}] {{ ");
-        }
-        else
-        {
-            writer.Write($"private static readonly int[] s_format{type}Lengths = new int[{bitCount}] {{ ");
-        }
 
         if (lengthTableIsRva && model.FlagsInfo.HasFewCombinations)
         {
-            var zeroLength = model.HasZeroMember ? keySelector(model.ZeroMember).Length : 1;
-            writer.Write(zeroLength);
-            for (var i = 1u; i < tableLength; i++)
-            {
-                writer.Write(", ");
-                var len = model
-                    .FlagsInfo.GetMatchingValues(i)
-                    .Aggregate(
-                        0,
-                        (agg, value) => agg == 0 ? keySelector(value).Length : agg + keySelector(value).Length + 2
-                    );
-                writer.Write(len > 0 ? len : EnumNumericFormatter.GetStringLength(i));
-            }
+            WriteFlagLengthsWithAllCombinations(writer, model, keySelector, type);
+            compositeIsRva = false;
         }
         else
         {
-            for (var i = 0; i < bitCount; i++)
+            WriteFlagLengthsWithDefinedBits(writer, model, keySelector, type, lengthTableIsRva);
+
+            if (model.FlagsInfo!.InvertedCompositeValues.Count > 0)
             {
-                if (i > 0)
-                    writer.Write(", ");
-                var found = model.Values.FirstOrDefault(x => x.RealMemberValue == 1u << i);
-                writer.Write(found is not null ? keySelector(found).Length : 0);
+                writer.WriteLine();
+                WriteFlagLengthsForCompositeValues(writer, model, keySelector, type, out compositeIsRva);
+            }
+            else
+            {
+                compositeIsRva = false;
             }
         }
-
-        writer.WriteLine(" };");
 
         writer.WriteLine();
 
@@ -100,7 +88,35 @@ public static class FormatStringInternal
         writer.WriteLine(" };");
     }
 
-    private static void WriteTryFormatFlagLength(
+    private static void WriteFlagLengthsWithAllCombinations(
+        SourceTextWriter writer,
+        EnumToGenerate model,
+        Func<EnumValue, string> keySelector,
+        string type
+    )
+    {
+        var bitCount = model.GetMappedBitCount();
+        var tableLength = (uint)Math.Pow(2, bitCount);
+        writer.Write($"private static ReadOnlySpan<byte> s_format{type}Lengths => new byte[{tableLength}] {{ ");
+
+        var zeroLength = model.HasZeroMember ? keySelector(model.ZeroMember).Length : 1;
+        writer.Write(zeroLength);
+        for (var i = 1u; i < tableLength; i++)
+        {
+            writer.Write(", ");
+            var len = model
+                .FlagsInfo!.GetMatchingValues(i)
+                .Aggregate(
+                    0,
+                    (agg, value) => agg == 0 ? keySelector(value).Length : agg + keySelector(value).Length + 2
+                );
+            writer.Write(len > 0 ? len : EnumNumericFormatter.GetStringLength(i));
+        }
+
+        writer.WriteLine(" };");
+    }
+
+    private static void WriteFlagLengthsWithDefinedBits(
         SourceTextWriter writer,
         EnumToGenerate model,
         Func<EnumValue, string> keySelector,
@@ -108,20 +124,82 @@ public static class FormatStringInternal
         bool lengthTableIsRva
     )
     {
+        var bitCount = model.GetMappedBitCount();
+
+        if (lengthTableIsRva)
+        {
+            writer.Write($"private static ReadOnlySpan<byte> s_format{type}Lengths => new byte[{bitCount}] {{ ");
+        }
+        else
+        {
+            writer.Write($"private static readonly int[] s_format{type}Lengths = new int[{bitCount}] {{ ");
+        }
+
+        for (var i = 0; i < bitCount; i++)
+        {
+            if (i > 0)
+                writer.Write(", ");
+            var found = model.Values.FirstOrDefault(x => x.RealMemberValue == 1u << i);
+            writer.Write(found is not null ? keySelector(found).Length : 0);
+        }
+
+        writer.WriteLine(" };");
+    }
+
+    private static void WriteFlagLengthsForCompositeValues(
+        SourceTextWriter writer,
+        EnumToGenerate model,
+        Func<EnumValue, string> keySelector,
+        string type,
+        out bool compositeIsRva
+    )
+    {
+        var compositeValuesCount = model.FlagsInfo!.InvertedCompositeValues.Count;
+        writer.Write(
+            $"private static readonly {model.UnderlyingType}[] s_composite{type}Values = new {model.UnderlyingType}[{compositeValuesCount}] {{ "
+        );
+
+        for (var i = 0; i < model.FlagsInfo.InvertedCompositeValues.Count; i++)
+        {
+            if (i > 0)
+                writer.Write(", ");
+            writer.Write(model.FlagsInfo.InvertedCompositeValues[i].MemberValue);
+        }
+
+        writer.WriteLine(" };");
+
+        compositeIsRva = model.FlagsInfo.InvertedCompositeValues.Max(x => keySelector(x).Length) <= byte.MaxValue;
+        if (compositeIsRva)
+            writer.Write(
+                $"private static ReadOnlySpan<byte> s_composite{type}Lengths => new byte[{compositeValuesCount}] {{ "
+            );
+        else
+            writer.Write(
+                $"private static readonly int[] s_composite{type}Lengths = new int[{compositeValuesCount}] {{ "
+            );
+
+        for (var i = 0; i < model.FlagsInfo.InvertedCompositeValues.Count; i++)
+        {
+            if (i > 0)
+                writer.Write(", ");
+            writer.Write(keySelector(model.FlagsInfo.InvertedCompositeValues[i]).Length);
+        }
+
+        writer.WriteLine(" };");
+    }
+
+    private static void WriteTryFormatFlagLengthForAllCombinations(
+        SourceTextWriter writer,
+        EnumToGenerate model,
+        string type
+    )
+    {
+        var bitCount = model.GetMappedBitCount();
+        var tableLength = (uint)Math.Pow(2, bitCount);
         writer.WriteLine(
             $$"""
             private static bool TryFormatFlag{{type}}sLength({{model.UnderlyingType}} value, out int length)
             {
-            """
-        );
-        writer.PushIndent();
-
-        if (lengthTableIsRva && model.FlagsInfo!.HasFewCombinations)
-        {
-            var bitCount = model.GetMappedBitCount();
-            var tableLength = (uint)Math.Pow(2, bitCount);
-            writer.WriteLine(
-                $$"""
                 if (value < {{tableLength}})
                 {
                     length = global::System.Runtime.CompilerServices.Unsafe.Add(
@@ -132,22 +210,35 @@ public static class FormatStringInternal
 
                 length = 0;
                 return false;
-                """
-            );
+            }
+            """
+        );
+    }
 
-            writer.PopIndent();
-            writer.WriteLine('}');
-            return;
-        }
+    private static void WriteTryFormatFlagLength(
+        SourceTextWriter writer,
+        EnumToGenerate model,
+        Func<EnumValue, string> keySelector,
+        string type,
+        bool lengthTableIsRva,
+        bool compositeIsRva
+    )
+    {
+        writer.WriteLine(
+            $$"""
+            private static bool TryFormatFlag{{type}}sLength({{model.UnderlyingType}} value, out int length)
+            {
+            """
+        );
+        writer.PushIndent();
 
         var zeroLength = model.HasZeroMember ? keySelector(model.ZeroMember).Length : 1;
         var unSigType = model.BitCount > 32 ? "ulong" : "uint";
         var tableType = lengthTableIsRva ? "byte" : "int";
-        var compositeValues = model.FlagsInfo!.CompositeValues;
 
         writer.WriteLine($"if (value == 0) {{ length = {zeroLength}; return true; }}");
 
-        if (!model.FlagsInfo.IsAllBitsDefined)
+        if (!model.FlagsInfo!.IsAllBitsDefined)
         {
             writer.WriteLine("if ((value & ~ValidFlagsMask) != 0) { length = 0; return false; }");
         }
@@ -166,32 +257,42 @@ public static class FormatStringInternal
             """
         );
 
-        if (compositeValues.Count > 0)
-        {
-            writer.WriteLine();
-            writer.WriteLine(
-                """
-                switch (value)
-                {
-                """
-            );
-            writer.PushIndent();
-
-            foreach (var curr in compositeValues)
-            {
-                writer.WriteLine($"case {curr.MemberValue}: length = {keySelector(curr).Length}; return true;");
-            }
-
-            writer.PopIndent();
-            writer.WriteLine('}');
-        }
-
         writer.WriteLine();
         writer.WriteLine(
             $$"""
             int charCount = -2;
             {{unSigType}} remaining = ({{unSigType}})value;
+            """
+        );
 
+        if (model.FlagsInfo.InvertedCompositeValues.Count > 0)
+        {
+            var compositeTableType = compositeIsRva ? "byte" : "int";
+            writer.WriteLine();
+            writer.WriteLine(
+                $$"""
+                ref {{model.UnderlyingType}} cv = ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(s_composite{{type}}Values);
+                ref {{compositeTableType}} cl = ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(s_composite{{type}}Lengths);
+                int n = s_composite{{type}}Values.Length;
+                for (int i = 0; i < n; i++)
+                {
+                    {{unSigType}} c = ({{unSigType}})global::System.Runtime.CompilerServices.Unsafe.Add(ref cv, i);
+                    if ((remaining & c) == c)
+                    {
+                        charCount += global::System.Runtime.CompilerServices.Unsafe.Add(ref cl, i) + 2;
+                        remaining &= ~c;
+                        if ((remaining & (remaining - 1)) == 0) break;
+                    }
+                }
+
+                if (remaining == 0) { length = charCount; return true; }
+                """
+            );
+        }
+
+        writer.WriteLine();
+        writer.WriteLine(
+            """
             do
             {
                 int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(remaining);

@@ -21,6 +21,21 @@ public class EnumExtensionsTests
     }
 
     [Theory]
+    [InlineData(RgbColors.Red)]
+    [InlineData(RgbColors.Green)]
+    [InlineData(RgbColors.Green | RgbColors.Blue)]
+    [InlineData(RgbColors.Green | RgbColors.Blue | RgbColors.Red)]
+    [InlineData(RgbColors.Saffron | RgbColors.Cyan)]
+    [InlineData((RgbColors)10_300)]
+    public void GetStringLengthForBigFlagEnumReturnsExpectedLength(RgbColors value)
+    {
+        var expected = value.ToString().Length;
+        var actual = value.GetStringLength();
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
     [InlineData(Colours.Red)]
     [InlineData(Colours.Green)]
     [InlineData(Colours.Green | Colours.Blue)]
@@ -32,6 +47,21 @@ public class EnumExtensionsTests
     {
         string expected = value.ToString();
         string actual = value.ToStringFast();
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
+    [InlineData(RgbColors.Red)]
+    [InlineData(RgbColors.Green)]
+    [InlineData(RgbColors.Green | RgbColors.Blue)]
+    [InlineData(RgbColors.Green | RgbColors.Blue | RgbColors.Red)]
+    [InlineData(RgbColors.Saffron | RgbColors.Cyan)]
+    [InlineData((RgbColors)10_300)]
+    public void FastToStringIsSameAsToStringUsingBigFlagEnum(RgbColors value)
+    {
+        var expected = value.ToString();
+        var actual = value.ToStringFast();
 
         Assert.Equal(expected, actual);
     }

@@ -7,8 +7,11 @@ public sealed class EnumFlagsInfo(EnumToGenerate model)
     public List<EnumValue> BitValues =>
         field ??= model.UniqueValues.Where(x => BitOperations.IsPow2(x.RealMemberValue)).ToList();
 
-    public List<EnumValue> CompositeValues =>
-        field ??= model.UniqueValues.Where(x => (x.RealMemberValue & (x.RealMemberValue - 1)) != 0).ToList();
+    public List<EnumValue> InvertedCompositeValues =>
+        field ??= model
+            .UniqueValues.Where(static x => (x.RealMemberValue & (x.RealMemberValue - 1)) != 0)
+            .OrderByDescending(static x => x.RealMemberValue)
+            .ToList();
 
     public bool HasFewCombinations => model.GetMappedBitCount() <= 8;
 
@@ -25,15 +28,31 @@ public sealed class EnumFlagsInfo(EnumToGenerate model)
 
     public IEnumerable<EnumValue> GetMatchingValues(ulong value)
     {
-        var composite = CompositeValues.Find(x => x.RealMemberValue == value);
+        var composite = model.UniqueValues.Find(x => x.RealMemberValue == value);
         if (composite is not null)
+        {
             return [composite];
+        }
 
-        var popCount = BitOperations.PopCount(value);
-        var matchingValues = BitValues
-            .Where(x => x.RealMemberValue > 0 && (value & x.RealMemberValue) == x.RealMemberValue)
-            .ToList();
+        var remaining = value;
+        var found = new List<EnumValue>(model.UniqueValues.Count);
+        foreach (var item in model.InvertedValues)
+        {
+            if (item.RealMemberValue <= 0 || (value & item.RealMemberValue) != item.RealMemberValue)
+            {
+                continue;
+            }
 
-        return matchingValues.Count == popCount ? matchingValues : [];
+            remaining -= item.RealMemberValue;
+            found.Add(item);
+
+            if (remaining == 0)
+            {
+                break;
+            }
+        }
+
+        found.Reverse();
+        return remaining == 0 ? found : [];
     }
 }
