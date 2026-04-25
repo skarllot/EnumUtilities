@@ -78,7 +78,7 @@ public class EnumExtensionsWriter : ICodeWriter<EnumToGenerate>
 
     private static void WriteFlagsFields(SourceTextWriter writer, EnumToGenerate model)
     {
-        var validFlags = model.Values.Aggregate(0ul, (acc, cur) => acc | cur.RealMemberValue);
+        var validFlags = model.FlagsInfo!.ValidFlagsMask;
         var numSuffix = CSharpExtensions.GetNumericSuffixFromCSharpKeyword(model.UnderlyingType);
         writer.WriteLine($"private const {model.UnderlyingType} ValidFlagsMask = {validFlags}{numSuffix};");
     }
