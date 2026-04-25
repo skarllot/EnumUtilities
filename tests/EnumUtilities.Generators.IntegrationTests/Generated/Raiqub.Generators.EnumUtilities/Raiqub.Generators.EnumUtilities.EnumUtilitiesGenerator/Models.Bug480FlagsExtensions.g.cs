@@ -61,36 +61,22 @@ public static partial class Bug480FlagsExtensions
         };
     }
 
-    private static ReadOnlySpan<byte> s_formatNameLengths => new byte[8] { 9, 11, 7, 3, 19, 16, 14, 15 };
+    private static ReadOnlySpan<byte> s_formatNameLengths => new byte[256] { 1, 9, 11, 22, 7, 18, 20, 31, 3, 14, 16, 27, 12, 23, 25, 36, 19, 30, 32, 43, 28, 39, 41, 52, 24, 35, 37, 48, 33, 44, 46, 57, 16, 27, 29, 40, 25, 36, 38, 49, 21, 32, 34, 45, 30, 41, 43, 54, 37, 48, 50, 61, 46, 57, 59, 70, 42, 53, 55, 66, 51, 62, 64, 75, 14, 25, 27, 38, 23, 34, 36, 47, 19, 30, 32, 43, 28, 39, 41, 52, 35, 46, 48, 59, 44, 55, 57, 68, 40, 51, 53, 64, 49, 60, 62, 73, 32, 43, 45, 56, 41, 52, 54, 65, 37, 48, 50, 61, 46, 57, 59, 70, 53, 64, 66, 77, 62, 73, 75, 86, 58, 69, 71, 82, 67, 78, 80, 91, 15, 26, 28, 39, 24, 35, 37, 48, 20, 31, 33, 44, 29, 40, 42, 53, 36, 47, 49, 60, 45, 56, 58, 69, 41, 52, 54, 65, 50, 61, 63, 74, 33, 44, 46, 57, 42, 53, 55, 66, 38, 49, 51, 62, 47, 58, 60, 71, 54, 65, 67, 78, 63, 74, 76, 87, 59, 70, 72, 83, 68, 79, 81, 92, 31, 42, 44, 55, 40, 51, 53, 64, 36, 47, 49, 60, 45, 56, 58, 69, 52, 63, 65, 76, 61, 72, 74, 85, 57, 68, 70, 81, 66, 77, 79, 90, 49, 60, 62, 73, 58, 69, 71, 82, 54, 65, 67, 78, 63, 74, 76, 87, 70, 81, 83, 94, 79, 90, 92, 103, 75, 86, 88, 99, 84, 95, 97, 108 };
 
     private static readonly string[] s_formatNames = new string[8] { "CombinedEscapes", "JsonNameEscape", "EnumMemberQuoted", "EnumMemberBackslash", "Tab", "Newline", "DoubleQuote", "Backslash" };
 
     private static bool TryFormatFlagNamesLength(int value, out int length)
     {
-        if (value == 0) { length = 1; return true; }
-        if ((value & ~ValidFlagsMask) != 0) { length = 0; return false; }
-
-        ref byte table = ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(s_formatNameLengths);
-
-        if ((value & (value - 1)) == 0)
+        if (value < 256)
         {
-            int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(value);
-            length = global::System.Runtime.CompilerServices.Unsafe.Add(ref table, bitPos);
+            length = global::System.Runtime.CompilerServices.Unsafe.Add(
+                ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(s_formatNameLengths),
+                (int)value);
             return true;
         }
 
-        int charCount = -2;
-        uint remaining = (uint)value;
-
-        do
-        {
-            int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(remaining);
-            charCount += global::System.Runtime.CompilerServices.Unsafe.Add(ref table, bitPos) + 2;
-            remaining &= remaining - 1;
-        } while (remaining != 0);
-
-        length = charCount;
-        return true;
+        length = 0;
+        return false;
     }
 
     private static string? FormatFlagNames(int value)
@@ -250,36 +236,22 @@ public static partial class Bug480FlagsExtensions
             : EnumNumericFormatter.GetStringLength((int)value);
     }
 
-    private static ReadOnlySpan<byte> s_formatEnumMemberValueLengths => new byte[8] { 9, 11, 7, 3, 13, 8, 14, 15 };
+    private static ReadOnlySpan<byte> s_formatEnumMemberValueLengths => new byte[256] { 1, 9, 11, 22, 7, 18, 20, 31, 3, 14, 16, 27, 12, 23, 25, 36, 13, 24, 26, 37, 22, 33, 35, 46, 18, 29, 31, 42, 27, 38, 40, 51, 8, 19, 21, 32, 17, 28, 30, 41, 13, 24, 26, 37, 22, 33, 35, 46, 23, 34, 36, 47, 32, 43, 45, 56, 28, 39, 41, 52, 37, 48, 50, 61, 14, 25, 27, 38, 23, 34, 36, 47, 19, 30, 32, 43, 28, 39, 41, 52, 29, 40, 42, 53, 38, 49, 51, 62, 34, 45, 47, 58, 43, 54, 56, 67, 24, 35, 37, 48, 33, 44, 46, 57, 29, 40, 42, 53, 38, 49, 51, 62, 39, 50, 52, 63, 48, 59, 61, 72, 44, 55, 57, 68, 53, 64, 66, 77, 15, 26, 28, 39, 24, 35, 37, 48, 20, 31, 33, 44, 29, 40, 42, 53, 30, 41, 43, 54, 39, 50, 52, 63, 35, 46, 48, 59, 44, 55, 57, 68, 25, 36, 38, 49, 34, 45, 47, 58, 30, 41, 43, 54, 39, 50, 52, 63, 40, 51, 53, 64, 49, 60, 62, 73, 45, 56, 58, 69, 54, 65, 67, 78, 31, 42, 44, 55, 40, 51, 53, 64, 36, 47, 49, 60, 45, 56, 58, 69, 46, 57, 59, 70, 55, 66, 68, 79, 51, 62, 64, 75, 60, 71, 73, 84, 41, 52, 54, 65, 50, 61, 63, 74, 46, 57, 59, 70, 55, 66, 68, 79, 56, 67, 69, 80, 65, 76, 78, 89, 61, 72, 74, 85, 70, 81, 83, 94 };
 
     private static readonly string[] s_formatEnumMemberValues = new string[8] { "combined\\escape", "JsonNameEscape", "\"quoted\"", "special\\value", "Tab", "Newline", "DoubleQuote", "Backslash" };
 
     private static bool TryFormatFlagEnumMemberValuesLength(int value, out int length)
     {
-        if (value == 0) { length = 1; return true; }
-        if ((value & ~ValidFlagsMask) != 0) { length = 0; return false; }
-
-        ref byte table = ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(s_formatEnumMemberValueLengths);
-
-        if ((value & (value - 1)) == 0)
+        if (value < 256)
         {
-            int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(value);
-            length = global::System.Runtime.CompilerServices.Unsafe.Add(ref table, bitPos);
+            length = global::System.Runtime.CompilerServices.Unsafe.Add(
+                ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(s_formatEnumMemberValueLengths),
+                (int)value);
             return true;
         }
 
-        int charCount = -2;
-        uint remaining = (uint)value;
-
-        do
-        {
-            int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(remaining);
-            charCount += global::System.Runtime.CompilerServices.Unsafe.Add(ref table, bitPos) + 2;
-            remaining &= remaining - 1;
-        } while (remaining != 0);
-
-        length = charCount;
-        return true;
+        length = 0;
+        return false;
     }
 
     private static string? FormatFlagEnumMemberValues(int value)
@@ -409,36 +381,22 @@ public static partial class Bug480FlagsExtensions
         return TryFormatFlagJsonStringsLength((int)value, out int length) ? length : null;
     }
 
-    private static ReadOnlySpan<byte> s_formatJsonStringLengths => new byte[8] { 9, 11, 7, 3, 13, 8, 11, 13 };
+    private static ReadOnlySpan<byte> s_formatJsonStringLengths => new byte[256] { 1, 9, 11, 22, 7, 18, 20, 31, 3, 14, 16, 27, 12, 23, 25, 36, 13, 24, 26, 37, 22, 33, 35, 46, 18, 29, 31, 42, 27, 38, 40, 51, 8, 19, 21, 32, 17, 28, 30, 41, 13, 24, 26, 37, 22, 33, 35, 46, 23, 34, 36, 47, 32, 43, 45, 56, 28, 39, 41, 52, 37, 48, 50, 61, 11, 22, 24, 35, 20, 31, 33, 44, 16, 27, 29, 40, 25, 36, 38, 49, 26, 37, 39, 50, 35, 46, 48, 59, 31, 42, 44, 55, 40, 51, 53, 64, 21, 32, 34, 45, 30, 41, 43, 54, 26, 37, 39, 50, 35, 46, 48, 59, 36, 47, 49, 60, 45, 56, 58, 69, 41, 52, 54, 65, 50, 61, 63, 74, 13, 24, 26, 37, 22, 33, 35, 46, 18, 29, 31, 42, 27, 38, 40, 51, 28, 39, 41, 52, 37, 48, 50, 61, 33, 44, 46, 57, 42, 53, 55, 66, 23, 34, 36, 47, 32, 43, 45, 56, 28, 39, 41, 52, 37, 48, 50, 61, 38, 49, 51, 62, 47, 58, 60, 71, 43, 54, 56, 67, 52, 63, 65, 76, 26, 37, 39, 50, 35, 46, 48, 59, 31, 42, 44, 55, 40, 51, 53, 64, 41, 52, 54, 65, 50, 61, 63, 74, 46, 57, 59, 70, 55, 66, 68, 79, 36, 47, 49, 60, 45, 56, 58, 69, 41, 52, 54, 65, 50, 61, 63, 74, 51, 62, 64, 75, 60, 71, 73, 84, 56, 67, 69, 80, 65, 76, 78, 89 };
 
     private static readonly string[] s_formatJsonStrings = new string[8] { "json\\combined", "json\\escape", "\"quoted\"", "special\\value", "Tab", "Newline", "DoubleQuote", "Backslash" };
 
     private static bool TryFormatFlagJsonStringsLength(int value, out int length)
     {
-        if (value == 0) { length = 1; return true; }
-        if ((value & ~ValidFlagsMask) != 0) { length = 0; return false; }
-
-        ref byte table = ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(s_formatJsonStringLengths);
-
-        if ((value & (value - 1)) == 0)
+        if (value < 256)
         {
-            int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(value);
-            length = global::System.Runtime.CompilerServices.Unsafe.Add(ref table, bitPos);
+            length = global::System.Runtime.CompilerServices.Unsafe.Add(
+                ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(s_formatJsonStringLengths),
+                (int)value);
             return true;
         }
 
-        int charCount = -2;
-        uint remaining = (uint)value;
-
-        do
-        {
-            int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(remaining);
-            charCount += global::System.Runtime.CompilerServices.Unsafe.Add(ref table, bitPos) + 2;
-            remaining &= remaining - 1;
-        } while (remaining != 0);
-
-        length = charCount;
-        return true;
+        length = 0;
+        return false;
     }
 
     private static string? FormatFlagJsonStrings(int value)

@@ -56,36 +56,22 @@ public static partial class ColoursExtensions
         };
     }
 
-    private static ReadOnlySpan<byte> s_formatNameLengths => new byte[3] { 3, 4, 5 };
+    private static ReadOnlySpan<byte> s_formatNameLengths => new byte[8] { 1, 3, 4, 9, 5, 10, 11, 16 };
 
     private static readonly string[] s_formatNames = new string[3] { "Green", "Blue", "Red" };
 
     private static bool TryFormatFlagNamesLength(int value, out int length)
     {
-        if (value == 0) { length = 1; return true; }
-        if ((value & ~ValidFlagsMask) != 0) { length = 0; return false; }
-
-        ref byte table = ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(s_formatNameLengths);
-
-        if ((value & (value - 1)) == 0)
+        if (value < 8)
         {
-            int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(value);
-            length = global::System.Runtime.CompilerServices.Unsafe.Add(ref table, bitPos);
+            length = global::System.Runtime.CompilerServices.Unsafe.Add(
+                ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(s_formatNameLengths),
+                (int)value);
             return true;
         }
 
-        int charCount = -2;
-        uint remaining = (uint)value;
-
-        do
-        {
-            int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(remaining);
-            charCount += global::System.Runtime.CompilerServices.Unsafe.Add(ref table, bitPos) + 2;
-            remaining &= remaining - 1;
-        } while (remaining != 0);
-
-        length = charCount;
-        return true;
+        length = 0;
+        return false;
     }
 
     private static string? FormatFlagNames(int value)

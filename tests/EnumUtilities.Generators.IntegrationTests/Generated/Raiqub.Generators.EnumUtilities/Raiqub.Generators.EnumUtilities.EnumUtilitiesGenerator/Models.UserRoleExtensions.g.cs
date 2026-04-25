@@ -59,42 +59,22 @@ public static partial class UserRoleExtensions
         };
     }
 
-    private static ReadOnlySpan<byte> s_formatNameLengths => new byte[4] { 10, 9, 0, 7 };
+    private static ReadOnlySpan<byte> s_formatNameLengths => new byte[16] { 4, 10, 9, 21, 1, 1, 1, 1, 7, 19, 9, 3, 2, 2, 2, 2 };
 
     private static readonly string[] s_formatNames = new string[6] { "All", "SuperUser", "Finance", "Custodian", "NormalUser", "None" };
 
     private static bool TryFormatFlagNamesLength(ulong value, out int length)
     {
-        if (value == 0) { length = 4; return true; }
-        if ((value & ~ValidFlagsMask) != 0) { length = 0; return false; }
-
-        ref byte table = ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(s_formatNameLengths);
-
-        if ((value & (value - 1)) == 0)
+        if (value < 16)
         {
-            int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(value);
-            length = global::System.Runtime.CompilerServices.Unsafe.Add(ref table, bitPos);
+            length = global::System.Runtime.CompilerServices.Unsafe.Add(
+                ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(s_formatNameLengths),
+                (int)value);
             return true;
         }
 
-        switch (value)
-        {
-            case 10: length = 9; return true;
-            case 11: length = 3; return true;
-        }
-
-        int charCount = -2;
-        ulong remaining = (ulong)value;
-
-        do
-        {
-            int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(remaining);
-            charCount += global::System.Runtime.CompilerServices.Unsafe.Add(ref table, bitPos) + 2;
-            remaining &= remaining - 1;
-        } while (remaining != 0);
-
-        length = charCount;
-        return true;
+        length = 0;
+        return false;
     }
 
     private static string? FormatFlagNames(ulong value)
@@ -240,42 +220,22 @@ public static partial class UserRoleExtensions
             : EnumNumericFormatter.GetStringLength((ulong)value);
     }
 
-    private static ReadOnlySpan<byte> s_formatEnumMemberValueLengths => new byte[4] { 11, 9, 0, 7 };
+    private static ReadOnlySpan<byte> s_formatEnumMemberValueLengths => new byte[16] { 4, 11, 9, 22, 1, 1, 1, 1, 7, 20, 10, 3, 2, 2, 2, 2 };
 
     private static readonly string[] s_formatEnumMemberValues = new string[6] { "All", "Super User", "Finance", "Custodian", "Normal User", "None" };
 
     private static bool TryFormatFlagEnumMemberValuesLength(ulong value, out int length)
     {
-        if (value == 0) { length = 4; return true; }
-        if ((value & ~ValidFlagsMask) != 0) { length = 0; return false; }
-
-        ref byte table = ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(s_formatEnumMemberValueLengths);
-
-        if ((value & (value - 1)) == 0)
+        if (value < 16)
         {
-            int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(value);
-            length = global::System.Runtime.CompilerServices.Unsafe.Add(ref table, bitPos);
+            length = global::System.Runtime.CompilerServices.Unsafe.Add(
+                ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(s_formatEnumMemberValueLengths),
+                (int)value);
             return true;
         }
 
-        switch (value)
-        {
-            case 10: length = 10; return true;
-            case 11: length = 3; return true;
-        }
-
-        int charCount = -2;
-        ulong remaining = (ulong)value;
-
-        do
-        {
-            int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(remaining);
-            charCount += global::System.Runtime.CompilerServices.Unsafe.Add(ref table, bitPos) + 2;
-            remaining &= remaining - 1;
-        } while (remaining != 0);
-
-        length = charCount;
-        return true;
+        length = 0;
+        return false;
     }
 
     private static string? FormatFlagEnumMemberValues(ulong value)

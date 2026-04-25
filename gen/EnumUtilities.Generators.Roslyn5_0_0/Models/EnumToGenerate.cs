@@ -12,7 +12,7 @@ public sealed record EnumToGenerate(
     string? Namespace,
     ContainingType? ContainingType,
     bool IsPublic,
-    bool IsFlags,
+    [property: MemberNotNullWhen(true, "FlagsInfo")] bool IsFlags,
     string Name,
     string UnderlyingType,
     EquatableArray<EnumValue> Values,
@@ -61,6 +61,8 @@ public sealed record EnumToGenerate(
 
     [MemberNotNullWhen(true, nameof(ZeroMember))]
     public bool HasZeroMember => ZeroMember is not null;
+
+    public EnumFlagsInfo? FlagsInfo => field ??= IsFlags ? new EnumFlagsInfo(this) : null;
 
     public EnumValue? ZeroMember => field ??= Values.AsEnumerable().FirstOrDefault(static x => x.RealMemberValue == 0);
 
