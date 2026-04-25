@@ -10,9 +10,9 @@
       },
       "Microsoft.NET.ILLink.Tasks": {
         "type": "Direct",
-        "requested": "[10.0.5, )",
-        "resolved": "10.0.5",
-        "contentHash": "A+5ZuQ0f449tM+MQrhf6R9ZX7lYpjk/ODEwLYKrnF6111rtARx8fVsm4YznUnQiKnnXfaXNBqgxmil6RW3L3SA=="
+        "requested": "[10.0.7, )",
+        "resolved": "10.0.7",
+        "contentHash": "AA/yhzFHNtQZXLdqjzujPy25G8EWwGWsAnxOE2zYSBoT/8QHP6ketN3CToD3DFreO653ipUwnKHo22B8AlBMCw=="
       },
       "Nerdbank.GitVersioning": {
         "type": "Direct",
@@ -44,9 +44,9 @@
       },
       "Microsoft.NET.ILLink.Tasks": {
         "type": "Direct",
-        "requested": "[8.0.25, )",
-        "resolved": "8.0.25",
-        "contentHash": "sqX4nmBft05ivqKvUT4nxaN8rT3apCLt9SWFkfRrQPwra1zPwFknQAw1lleuMCKOCLvVmOWwrC2iPSm9RiXZUg=="
+        "requested": "[8.0.26, )",
+        "resolved": "8.0.26",
+        "contentHash": "o7/yVssM2r9Wyln2s9edBd5ANZXqdSdBI+g7JqXkyJmXrhs2WsJp25K5yPnYrTgdKBCjKB8bg+O2oew4sgzFaA=="
       },
       "Nerdbank.GitVersioning": {
         "type": "Direct",
@@ -64,9 +64,9 @@
       },
       "Microsoft.NET.ILLink.Tasks": {
         "type": "Direct",
-        "requested": "[9.0.14, )",
-        "resolved": "9.0.14",
-        "contentHash": "+MeWjj5sGq6Oj/l0E9RPMgXDyCIPxczzCbGuvuVTZFEGiy2S/atsfoAoKUnkEin/GeGpN+HenCzRmiQKSc99eQ=="
+        "requested": "[9.0.15, )",
+        "resolved": "9.0.15",
+        "contentHash": "EejcbfCMR77Dthy77qxRbEShmzLApHZUPqXMBVQK+A0pNrRThkaHoGGMGvbq/gTkC/waKcDEgjBkbaejB58Wtw=="
       },
       "Nerdbank.GitVersioning": {
         "type": "Direct",
