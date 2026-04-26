@@ -7,7 +7,7 @@
   "devDependencies": {
     "esbuild": "^0.28.0",
     "vitepress": "^1.6.4",
-    "vue": "^3.5.32"
+    "vue": "^3.5.33"
   },
   "overrides": {
     "rollup": "^4.60.2",
