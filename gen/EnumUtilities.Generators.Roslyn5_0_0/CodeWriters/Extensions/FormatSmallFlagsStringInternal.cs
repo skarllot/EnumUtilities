@@ -19,7 +19,6 @@ public static class FormatSmallFlagsStringInternal
         var lengthTableIsRva = maxLength <= byte.MaxValue;
 
         WriteLengthField(writer, model, keySelector, type, lengthTableIsRva);
-        writer.WriteLine();
         WriteNameField(writer, model, keySelector, type);
         writer.WriteLine();
         WriteTryFormatFlagLength(writer, model, type);

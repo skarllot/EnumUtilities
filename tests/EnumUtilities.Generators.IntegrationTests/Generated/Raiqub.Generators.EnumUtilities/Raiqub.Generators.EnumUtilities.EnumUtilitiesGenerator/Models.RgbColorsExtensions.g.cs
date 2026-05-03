@@ -85,11 +85,11 @@ public static partial class RgbColorsExtensions
     }
 
     private static ReadOnlySpan<byte> s_formatNameLengths => new byte[10] { 3, 6, 6, 4, 5, 4, 4, 4, 6, 6 };
+    private static readonly string?[] s_formatNames = new string?[10] { "Red", "Orange", "Yellow", "Lime", "Green", "Teal", "Cyan", "Blue", "Indigo", "Violet" };
 
     private static readonly int[] s_compositeNameValues = new int[20] { 896, 769, 768, 515, 513, 448, 384, 224, 192, 112, 96, 56, 48, 28, 24, 14, 12, 7, 6, 3 };
     private static ReadOnlySpan<byte> s_compositeNameLengths => new byte[20] { 6, 7, 8, 10, 7, 8, 10, 7, 5, 6, 9, 4, 7, 7, 4, 6, 10, 4, 7, 5 };
-
-    private static readonly string[] s_formatNames = new string[31] { "Purple", "Crimson", "Lavender", "Vermillion", "Magenta", "Violet", "Cerulean", "Periwinkle", "Indigo", "SkyBlue", "Azure", "Blue", "Marine", "Turquoise", "Cyan", "Jade", "Emerald", "Teal", "Peridot", "Fern", "Green", "Citrus", "Chartreuse", "Lime", "Gold", "Saffron", "Yellow", "Amber", "Orange", "Red", "None" };
+    private static readonly string[] s_compositeNames = new string[20] { "Purple", "Crimson", "Lavender", "Vermillion", "Magenta", "Cerulean", "Periwinkle", "SkyBlue", "Azure", "Marine", "Turquoise", "Jade", "Emerald", "Peridot", "Fern", "Citrus", "Chartreuse", "Gold", "Saffron", "Amber" };
 
     private static bool TryFormatFlagNamesLength(int value, out int length)
     {
@@ -137,277 +137,52 @@ public static partial class RgbColorsExtensions
 
     private static string? FormatFlagNames(int value)
     {
-        string? result = GetNameInlined(value);
-        if (result is null)
+        if (value == 0) { return "None"; }
+        if ((value & ~ValidFlagsMask) != 0) { return null; }
+
+        if ((value & (value - 1)) == 0)
         {
-            Span<int> foundItems = stackalloc int[10];
-            if (TryFindFlagsNames(value, foundItems, out int foundItemsCount, out int resultLength))
+            return global::System.Runtime.CompilerServices.Unsafe.Add(
+                ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(s_formatNames),
+                global::System.Numerics.BitOperations.TrailingZeroCount(value));
+        }
+
+        int charCount = 0;
+        uint remaining = (uint)value;
+        Span<FoundMember> foundItems = stackalloc FoundMember[10];
+        int foundItemsCount = 0;
+
+        ref int cv = ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(s_compositeNameValues);
+        ref byte cl = ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(s_compositeNameLengths);
+        int n = s_compositeNameValues.Length;
+        for (int i = 0; i < n; i++)
+        {
+            uint c = (uint)global::System.Runtime.CompilerServices.Unsafe.Add(ref cv, i);
+            if ((remaining & c) == c)
             {
-                result = EnumStringFormatter.WriteMultipleFoundFlagsNames(s_formatNames, foundItems.Slice(0, foundItemsCount), resultLength);
+                foundItems[foundItemsCount++] = new FoundMember(true, i);
+                charCount += global::System.Runtime.CompilerServices.Unsafe.Add(ref cl, i);
+                remaining &= ~c;
+                if ((remaining & (remaining - 1)) == 0) break;
             }
         }
 
-        return result;
-    }
-
-    private static bool TryFindFlagsNames(int value, Span<int> foundItems, out int foundItemsCount, out int resultLength)
-    {
-        resultLength = 0;
-        foundItemsCount = 0;
-        if (true)
+        if (remaining == 0)
         {
-            if ((value & 896) == 896)
-            {
-                value -= 896;
-                resultLength = checked(resultLength + 6);
-                foundItems[foundItemsCount++] = 0;
-                if (value == 0) return true;
-            }
-            if ((value & 769) == 769)
-            {
-                value -= 769;
-                resultLength = checked(resultLength + 7);
-                foundItems[foundItemsCount++] = 1;
-                if (value == 0) return true;
-            }
-            if ((value & 768) == 768)
-            {
-                value -= 768;
-                resultLength = checked(resultLength + 8);
-                foundItems[foundItemsCount++] = 2;
-                if (value == 0) return true;
-            }
-            if ((value & 515) == 515)
-            {
-                value -= 515;
-                resultLength = checked(resultLength + 10);
-                foundItems[foundItemsCount++] = 3;
-                if (value == 0) return true;
-            }
-            if ((value & 513) == 513)
-            {
-                value -= 513;
-                resultLength = checked(resultLength + 7);
-                foundItems[foundItemsCount++] = 4;
-                if (value == 0) return true;
-            }
-            if ((value & 512) == 512)
-            {
-                value -= 512;
-                resultLength = checked(resultLength + 6);
-                foundItems[foundItemsCount++] = 5;
-                if (value == 0) return true;
-            }
-            if ((value & 448) == 448)
-            {
-                value -= 448;
-                resultLength = checked(resultLength + 8);
-                foundItems[foundItemsCount++] = 6;
-                if (value == 0) return true;
-            }
-            if ((value & 384) == 384)
-            {
-                value -= 384;
-                resultLength = checked(resultLength + 10);
-                foundItems[foundItemsCount++] = 7;
-                if (value == 0) return true;
-            }
-            if ((value & 256) == 256)
-            {
-                value -= 256;
-                resultLength = checked(resultLength + 6);
-                foundItems[foundItemsCount++] = 8;
-                if (value == 0) return true;
-            }
-            if ((value & 224) == 224)
-            {
-                value -= 224;
-                resultLength = checked(resultLength + 7);
-                foundItems[foundItemsCount++] = 9;
-                if (value == 0) return true;
-            }
-            if ((value & 192) == 192)
-            {
-                value -= 192;
-                resultLength = checked(resultLength + 5);
-                foundItems[foundItemsCount++] = 10;
-                if (value == 0) return true;
-            }
-            if ((value & 128) == 128)
-            {
-                value -= 128;
-                resultLength = checked(resultLength + 4);
-                foundItems[foundItemsCount++] = 11;
-                if (value == 0) return true;
-            }
-            if ((value & 112) == 112)
-            {
-                value -= 112;
-                resultLength = checked(resultLength + 6);
-                foundItems[foundItemsCount++] = 12;
-                if (value == 0) return true;
-            }
-            if ((value & 96) == 96)
-            {
-                value -= 96;
-                resultLength = checked(resultLength + 9);
-                foundItems[foundItemsCount++] = 13;
-                if (value == 0) return true;
-            }
-            if ((value & 64) == 64)
-            {
-                value -= 64;
-                resultLength = checked(resultLength + 4);
-                foundItems[foundItemsCount++] = 14;
-                if (value == 0) return true;
-            }
-            if ((value & 56) == 56)
-            {
-                value -= 56;
-                resultLength = checked(resultLength + 4);
-                foundItems[foundItemsCount++] = 15;
-                if (value == 0) return true;
-            }
-            if ((value & 48) == 48)
-            {
-                value -= 48;
-                resultLength = checked(resultLength + 7);
-                foundItems[foundItemsCount++] = 16;
-                if (value == 0) return true;
-            }
-            if ((value & 32) == 32)
-            {
-                value -= 32;
-                resultLength = checked(resultLength + 4);
-                foundItems[foundItemsCount++] = 17;
-                if (value == 0) return true;
-            }
-            if ((value & 28) == 28)
-            {
-                value -= 28;
-                resultLength = checked(resultLength + 7);
-                foundItems[foundItemsCount++] = 18;
-                if (value == 0) return true;
-            }
-            if ((value & 24) == 24)
-            {
-                value -= 24;
-                resultLength = checked(resultLength + 4);
-                foundItems[foundItemsCount++] = 19;
-                if (value == 0) return true;
-            }
-            if ((value & 16) == 16)
-            {
-                value -= 16;
-                resultLength = checked(resultLength + 5);
-                foundItems[foundItemsCount++] = 20;
-                if (value == 0) return true;
-            }
-            if ((value & 14) == 14)
-            {
-                value -= 14;
-                resultLength = checked(resultLength + 6);
-                foundItems[foundItemsCount++] = 21;
-                if (value == 0) return true;
-            }
-            if ((value & 12) == 12)
-            {
-                value -= 12;
-                resultLength = checked(resultLength + 10);
-                foundItems[foundItemsCount++] = 22;
-                if (value == 0) return true;
-            }
-            if ((value & 8) == 8)
-            {
-                value -= 8;
-                resultLength = checked(resultLength + 4);
-                foundItems[foundItemsCount++] = 23;
-                if (value == 0) return true;
-            }
-            if ((value & 7) == 7)
-            {
-                value -= 7;
-                resultLength = checked(resultLength + 4);
-                foundItems[foundItemsCount++] = 24;
-                if (value == 0) return true;
-            }
-            if ((value & 6) == 6)
-            {
-                value -= 6;
-                resultLength = checked(resultLength + 7);
-                foundItems[foundItemsCount++] = 25;
-                if (value == 0) return true;
-            }
-            if ((value & 4) == 4)
-            {
-                value -= 4;
-                resultLength = checked(resultLength + 6);
-                foundItems[foundItemsCount++] = 26;
-                if (value == 0) return true;
-            }
-            if ((value & 3) == 3)
-            {
-                value -= 3;
-                resultLength = checked(resultLength + 5);
-                foundItems[foundItemsCount++] = 27;
-                if (value == 0) return true;
-            }
-            if ((value & 2) == 2)
-            {
-                value -= 2;
-                resultLength = checked(resultLength + 6);
-                foundItems[foundItemsCount++] = 28;
-                if (value == 0) return true;
-            }
-            if ((value & 1) == 1)
-            {
-                value -= 1;
-                resultLength = checked(resultLength + 3);
-                foundItems[foundItemsCount++] = 29;
-                if (value == 0) return true;
-            }
+            return EnumStringFormatter.WriteMultipleFoundFlagsNames(s_formatNames, s_compositeNames, foundItems.Slice(0, foundItemsCount), charCount);
         }
 
-        return value == 0;
-    }
+        ref byte table = ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(s_formatNameLengths);
 
-    private static string? GetNameInlined(int value)
-    {
-        return value switch
+        do
         {
-            0 => "None",
-            1 => "Red",
-            2 => "Orange",
-            4 => "Yellow",
-            8 => "Lime",
-            16 => "Green",
-            32 => "Teal",
-            64 => "Cyan",
-            128 => "Blue",
-            256 => "Indigo",
-            512 => "Violet",
-            3 => "Amber",
-            6 => "Saffron",
-            12 => "Chartreuse",
-            24 => "Fern",
-            48 => "Emerald",
-            96 => "Turquoise",
-            192 => "Azure",
-            384 => "Periwinkle",
-            768 => "Lavender",
-            513 => "Magenta",
-            7 => "Gold",
-            14 => "Citrus",
-            28 => "Peridot",
-            56 => "Jade",
-            112 => "Marine",
-            224 => "SkyBlue",
-            448 => "Cerulean",
-            896 => "Purple",
-            769 => "Crimson",
-            515 => "Vermillion",
-            _ => null
-        };
+            int bitPos = global::System.Numerics.BitOperations.Log2(remaining);
+            foundItems[foundItemsCount++] = new FoundMember(false, bitPos);
+            charCount += global::System.Runtime.CompilerServices.Unsafe.Add(ref table, bitPos);
+            remaining ^= 1u << bitPos;
+        } while (remaining != 0);
+
+        return EnumStringFormatter.WriteMultipleFoundFlagsNames(s_formatNames, s_compositeNames, foundItems.Slice(0, foundItemsCount), charCount);
     }
 
     /// <summary>Bitwise "ands" two enumerations and replaces the first value with the result, as an atomic operation.</summary>

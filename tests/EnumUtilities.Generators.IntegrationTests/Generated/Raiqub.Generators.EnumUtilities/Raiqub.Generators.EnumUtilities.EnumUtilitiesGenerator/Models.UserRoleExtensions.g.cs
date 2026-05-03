@@ -60,7 +60,6 @@ public static partial class UserRoleExtensions
     }
 
     private static ReadOnlySpan<byte> s_formatNameLengths => new byte[16] { 4, 10, 9, 21, 1, 1, 1, 1, 7, 19, 9, 3, 2, 2, 2, 2 };
-
     private static readonly string[] s_formatNames = new string[16] { "None", "NormalUser", "Custodian", "NormalUser, Custodian", "4", "5", "6", "7", "Finance", "NormalUser, Finance", "SuperUser", "All", "12", "13", "14", "15" };
 
     private static bool TryFormatFlagNamesLength(ulong value, out int length)
@@ -158,7 +157,6 @@ public static partial class UserRoleExtensions
     }
 
     private static ReadOnlySpan<byte> s_formatEnumMemberValueLengths => new byte[16] { 4, 11, 9, 22, 1, 1, 1, 1, 7, 20, 10, 3, 2, 2, 2, 2 };
-
     private static readonly string[] s_formatEnumMemberValues = new string[16] { "None", "Normal User", "Custodian", "Normal User, Custodian", "4", "5", "6", "7", "Finance", "Normal User, Finance", "Super User", "All", "12", "13", "14", "15" };
 
     private static bool TryFormatFlagEnumMemberValuesLength(ulong value, out int length)

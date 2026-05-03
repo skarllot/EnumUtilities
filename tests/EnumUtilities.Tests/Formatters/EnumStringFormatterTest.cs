@@ -10,12 +10,12 @@ public class EnumStringFormatterTest
     {
         // Arrange
         var names = new[] { "Green", "Blue", "Red" };
-        Span<int> foundItems = stackalloc int[1];
-        foundItems[0] = 1; // "Blue"
+        Span<FoundMember> foundItems = stackalloc FoundMember[1];
+        foundItems[0] = new FoundMember(false, 1); // "Blue"
         var count = names[1].Length;
 
         // Act
-        var result = EnumStringFormatter.WriteMultipleFoundFlagsNames(names, foundItems, count);
+        var result = EnumStringFormatter.WriteMultipleFoundFlagsNames(names, [], foundItems, count);
 
         // Assert
         result.Should().Be("Blue");
@@ -26,14 +26,14 @@ public class EnumStringFormatterTest
     {
         // Arrange
         var names = new[] { "Green", "Blue", "Red" };
-        Span<int> foundItems = stackalloc int[3];
-        foundItems[0] = 0; // "Green"
-        foundItems[1] = 1; // "Blue"
-        foundItems[2] = 2; // "Red"
+        Span<FoundMember> foundItems = stackalloc FoundMember[3];
+        foundItems[0] = new FoundMember(false, 0); // "Green"
+        foundItems[1] = new FoundMember(false, 1); // "Blue"
+        foundItems[2] = new FoundMember(false, 2); // "Red"
         var count = names[0].Length + names[1].Length + names[2].Length;
 
         // Act
-        var result = EnumStringFormatter.WriteMultipleFoundFlagsNames(names, foundItems, count);
+        var result = EnumStringFormatter.WriteMultipleFoundFlagsNames(names, [], foundItems, count);
 
         // Assert
         result.Should().Be("Red, Blue, Green"); // Note: reverse order of write
@@ -44,13 +44,13 @@ public class EnumStringFormatterTest
     {
         // Arrange
         var names = new[] { "Green", "Blue", "Red" };
-        Span<int> foundItems = stackalloc int[2];
-        foundItems[0] = 1; // "Blue"
-        foundItems[1] = 2; // "Red"
+        Span<FoundMember> foundItems = stackalloc FoundMember[2];
+        foundItems[0] = new FoundMember(false, 1); // "Blue"
+        foundItems[1] = new FoundMember(false, 2); // "Red"
         var count = names[1].Length + names[2].Length;
 
         // Act
-        var result = EnumStringFormatter.WriteMultipleFoundFlagsNames(names, foundItems, count);
+        var result = EnumStringFormatter.WriteMultipleFoundFlagsNames(names, [], foundItems, count);
 
         // Assert
         result.Should().Be("Red, Blue");
@@ -63,13 +63,66 @@ public class EnumStringFormatterTest
 
         Assert.Throws<OverflowException>(() =>
         {
-            Span<int> foundItems = stackalloc int[2];
-            foundItems[0] = 0;
-            foundItems[1] = 1;
+            Span<FoundMember> foundItems = stackalloc FoundMember[2];
+            foundItems[0] = new FoundMember(false, 0);
+            foundItems[1] = new FoundMember(false, 1);
 
             var count = int.MaxValue; // Force overflow in `checked`
 
-            EnumStringFormatter.WriteMultipleFoundFlagsNames(names, foundItems, count);
+            EnumStringFormatter.WriteMultipleFoundFlagsNames(names, [], foundItems, count);
         });
+    }
+
+    [Fact]
+    public void WriteMultipleFoundFlagsNames_ShouldFormatSingleCompositeItemCorrectly()
+    {
+        // Arrange
+        var singleNames = new string?[] { "Green", "Blue", "Red" };
+        var compositeNames = new[] { "GreenBlue" };
+        Span<FoundMember> foundItems = stackalloc FoundMember[1];
+        foundItems[0] = new FoundMember(true, 0);
+        var count = compositeNames[0].Length;
+
+        // Act
+        var result = EnumStringFormatter.WriteMultipleFoundFlagsNames(singleNames, compositeNames, foundItems, count);
+
+        // Assert
+        result.Should().Be("GreenBlue");
+    }
+
+    [Fact]
+    public void WriteMultipleFoundFlagsNames_ShouldUseCompositeNameWhenItIsFirstInFoundItems()
+    {
+        // Arrange
+        var singleNames = new string?[] { "Green", "Blue", "Red" };
+        var compositeNames = new[] { "GreenBlue" };
+        Span<FoundMember> foundItems = stackalloc FoundMember[2];
+        foundItems[0] = new FoundMember(true, 0);  // composite "GreenBlue"
+        foundItems[1] = new FoundMember(false, 2); // single "Red"
+        var count = compositeNames[0].Length + singleNames[2]!.Length;
+
+        // Act
+        var result = EnumStringFormatter.WriteMultipleFoundFlagsNames(singleNames, compositeNames, foundItems, count);
+
+        // Assert
+        result.Should().Be("GreenBlue, Red");
+    }
+
+    [Fact]
+    public void WriteMultipleFoundFlagsNames_ShouldUseCompositeNameWhenItIsLastInFoundItems()
+    {
+        // Arrange
+        var singleNames = new string?[] { "Green", "Blue", "Red" };
+        var compositeNames = new[] { "GreenBlue" };
+        Span<FoundMember> foundItems = stackalloc FoundMember[2];
+        foundItems[0] = new FoundMember(false, 2); // single "Red"
+        foundItems[1] = new FoundMember(true, 0);  // composite "GreenBlue"
+        var count = singleNames[2]!.Length + compositeNames[0].Length;
+
+        // Act
+        var result = EnumStringFormatter.WriteMultipleFoundFlagsNames(singleNames, compositeNames, foundItems, count);
+
+        // Assert
+        result.Should().Be("Red, GreenBlue");
     }
 }

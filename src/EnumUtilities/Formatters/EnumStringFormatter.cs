@@ -11,34 +11,43 @@ public static class EnumStringFormatter
     /// <summary>
     /// Writes the names of multiple found flags into a single string, separated by commas.
     /// </summary>
-    /// <param name="names">A span containing all enumeration names.</param>
-    /// <param name="foundItems">A span containing the indices of found enum values.</param>
-    /// <param name="count">The total length of the resulting string, excluding separators.</param>
+    /// <param name="singleNames">A span containing the names of single (non-composite) enumeration members.</param>
+    /// <param name="compositeNames">A span containing the names of composite enumeration members.</param>
+    /// <param name="foundItems">A span containing the found members, each indicating whether it is composite and its index within the respective names span.</param>
+    /// <param name="stringLength">The total length of the resulting string, excluding separators.</param>
     /// <returns>A string that represents the names of the found flags, separated by commas.</returns>
     /// <exception cref="OverflowException">Thrown if the computed string length exceeds the capacity of an <see cref="int"/>.</exception>
     public static string WriteMultipleFoundFlagsNames(
-        ReadOnlySpan<string> names,
-        ReadOnlySpan<int> foundItems,
-        int count
+        ReadOnlySpan<string?> singleNames,
+        ReadOnlySpan<string> compositeNames,
+        ReadOnlySpan<FoundMember> foundItems,
+        int stringLength
     )
     {
         Debug.Assert(!foundItems.IsEmpty, "foundItems must not be empty");
-        Debug.Assert(count > 0, "count must be greater than zero");
+        Debug.Assert(stringLength > 0, "stringLength must be greater than zero");
+
+        if (foundItems.Length == 1)
+        {
+            var item = foundItems[0];
+            return item.IsComposite ? compositeNames[item.MemberIndex] : singleNames[item.MemberIndex]!;
+        }
 
         const int separatorStringLength = 2;
-        var strlen = checked(count + (separatorStringLength * (foundItems.Length - 1)));
+        var strlen = checked(stringLength + (separatorStringLength * (foundItems.Length - 1)));
 
 #if NET9_0_OR_GREATER
         var result = string.Create(
             length: strlen,
-            state: new FlagsNamesStringCreationContext(names, foundItems),
+            state: new FlagsNamesStringCreationContext(singleNames, compositeNames, foundItems),
             action: FlagsNamesStringCreationContext.Fill
         );
 #else
         var result = string.Create(strlen, 0, static (_, _) => { });
         FlagsNamesStringCreationContext.Fill(
             MemoryMarshal.CreateSpan(ref MemoryMarshal.GetReference(result.AsSpan()), strlen),
-            names,
+            singleNames,
+            compositeNames,
             foundItems
         );
 #endif
@@ -46,16 +55,15 @@ public static class EnumStringFormatter
         return result;
     }
 
-    private readonly ref struct FlagsNamesStringCreationContext
+    private readonly ref struct FlagsNamesStringCreationContext(
+        ReadOnlySpan<string?> singleNames,
+        ReadOnlySpan<string> compositeNames,
+        ReadOnlySpan<FoundMember> foundItems
+    )
     {
-        private readonly ReadOnlySpan<string> _names;
-        private readonly ReadOnlySpan<int> _foundItems;
-
-        public FlagsNamesStringCreationContext(ReadOnlySpan<string> names, ReadOnlySpan<int> foundItems)
-        {
-            _names = names;
-            _foundItems = foundItems;
-        }
+        private readonly ReadOnlySpan<string?> _singleNames = singleNames;
+        private readonly ReadOnlySpan<string> _compositeNames = compositeNames;
+        private readonly ReadOnlySpan<FoundMember> _foundItems = foundItems;
 
 #if NET9_0_OR_GREATER
         public static void Fill(Span<char> destination, FlagsNamesStringCreationContext context)
@@ -63,16 +71,22 @@ public static class EnumStringFormatter
             context.Fill(destination);
         }
 #else
-        public static void Fill(Span<char> destination, ReadOnlySpan<string> names, ReadOnlySpan<int> foundItems)
+        public static void Fill(
+            Span<char> destination,
+            ReadOnlySpan<string?> singleNames,
+            ReadOnlySpan<string> compositeNames,
+            ReadOnlySpan<FoundMember> foundItems
+        )
         {
-            new FlagsNamesStringCreationContext(names, foundItems).Fill(destination);
+            new FlagsNamesStringCreationContext(singleNames, compositeNames, foundItems).Fill(destination);
         }
 #endif
 
         private void Fill(Span<char> destination)
         {
             var foundItemsCount = _foundItems.Length;
-            var name = _names[_foundItems[--foundItemsCount]];
+            var item = _foundItems[--foundItemsCount];
+            var name = item.IsComposite ? _compositeNames[item.MemberIndex] : _singleNames[item.MemberIndex]!;
             name.AsSpan().CopyTo(destination);
             destination = destination.Slice(name.Length);
             while (--foundItemsCount >= 0)
@@ -81,7 +95,8 @@ public static class EnumStringFormatter
                 destination[1] = ' ';
                 destination = destination.Slice(2);
 
-                name = _names[_foundItems[foundItemsCount]];
+                item = _foundItems[foundItemsCount];
+                name = item.IsComposite ? _compositeNames[item.MemberIndex] : _singleNames[item.MemberIndex]!;
                 name.AsSpan().CopyTo(destination);
                 destination = destination.Slice(name.Length);
             }

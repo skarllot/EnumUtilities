@@ -57,7 +57,6 @@ public static partial class ColoursExtensions
     }
 
     private static ReadOnlySpan<byte> s_formatNameLengths => new byte[8] { 1, 3, 4, 9, 5, 10, 11, 16 };
-
     private static readonly string[] s_formatNames = new string[8] { "0", "Red", "Blue", "Red, Blue", "Green", "Red, Green", "Blue, Green", "Red, Blue, Green" };
 
     private static bool TryFormatFlagNamesLength(int value, out int length)

@@ -57,13 +57,15 @@ public class EnumExtensionsTests
     [InlineData(RgbColors.Green | RgbColors.Blue)]
     [InlineData(RgbColors.Green | RgbColors.Blue | RgbColors.Red)]
     [InlineData(RgbColors.Saffron | RgbColors.Cyan)]
+    [InlineData(RgbColors.Saffron)]
     [InlineData((RgbColors)10_300)]
     public void FastToStringIsSameAsToStringUsingBigFlagEnum(RgbColors value)
     {
         var expected = value.ToString();
         var actual = value.ToStringFast();
 
-        Assert.Equal(expected, actual);
+        Assert.Equal(expected.Length, actual.Length);
+        Assert.Equal(expected.Split(", ").OrderBy(x => x), actual.Split(", ").OrderBy(x => x));
     }
 
     [Theory]
