@@ -58,11 +58,11 @@ public static partial class ColoursExtensions
 
     private static ReadOnlySpan<byte> s_formatNameLengths => new byte[8] { 1, 3, 4, 9, 5, 10, 11, 16 };
 
-    private static readonly string[] s_formatNames = new string[3] { "Green", "Blue", "Red" };
+    private static readonly string[] s_formatNames = new string[8] { "0", "Red", "Blue", "Red, Blue", "Green", "Red, Green", "Blue, Green", "Red, Blue, Green" };
 
     private static bool TryFormatFlagNamesLength(int value, out int length)
     {
-        if (value < 8)
+        if ((uint)value < 8)
         {
             length = global::System.Runtime.CompilerServices.Unsafe.Add(
                 ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(s_formatNameLengths),
@@ -76,61 +76,14 @@ public static partial class ColoursExtensions
 
     private static string? FormatFlagNames(int value)
     {
-        string? result = GetNameInlined(value);
-        if (result is null)
+        if ((uint)value < 8)
         {
-            Span<int> foundItems = stackalloc int[3];
-            if (TryFindFlagsNames(value, foundItems, out int foundItemsCount, out int resultLength))
-            {
-                result = EnumStringFormatter.WriteMultipleFoundFlagsNames(s_formatNames, foundItems.Slice(0, foundItemsCount), resultLength);
-            }
+            return global::System.Runtime.CompilerServices.Unsafe.Add(
+                ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(s_formatNames),
+                (int)value);
         }
 
-        return result;
-    }
-
-    private static bool TryFindFlagsNames(int value, Span<int> foundItems, out int foundItemsCount, out int resultLength)
-    {
-        resultLength = 0;
-        foundItemsCount = 0;
-        if (true)
-        {
-            if ((value & 4) == 4)
-            {
-                value -= 4;
-                resultLength = checked(resultLength + 5);
-                foundItems[foundItemsCount++] = 0;
-                if (value == 0) return true;
-            }
-            if ((value & 2) == 2)
-            {
-                value -= 2;
-                resultLength = checked(resultLength + 4);
-                foundItems[foundItemsCount++] = 1;
-                if (value == 0) return true;
-            }
-            if ((value & 1) == 1)
-            {
-                value -= 1;
-                resultLength = checked(resultLength + 3);
-                foundItems[foundItemsCount++] = 2;
-                if (value == 0) return true;
-            }
-        }
-
-        return value == 0;
-    }
-
-    private static string? GetNameInlined(int value)
-    {
-        return value switch
-        {
-            0 => "0",
-            1 => "Red",
-            2 => "Blue",
-            4 => "Green",
-            _ => null
-        };
+        return null;
     }
 
     /// <summary>Bitwise "ands" two enumerations and replaces the first value with the result, as an atomic operation.</summary>

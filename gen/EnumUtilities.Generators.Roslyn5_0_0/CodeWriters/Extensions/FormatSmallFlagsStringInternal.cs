@@ -1,4 +1,5 @@
-﻿using Raiqub.Generators.EnumUtilities.Common;
+﻿using System.Text;
+using Raiqub.Generators.EnumUtilities.Common;
 using Raiqub.Generators.EnumUtilities.Formatters;
 using Raiqub.Generators.EnumUtilities.Models;
 using Raiqub.Generators.InterpolationCodeWriter;
@@ -17,43 +18,16 @@ public static class FormatSmallFlagsStringInternal
         var maxLength = model.FlagsInfo!.BitValues.Max(x => keySelector(x).Length);
         var lengthTableIsRva = maxLength <= byte.MaxValue;
 
-        WriteFlagFields(writer, model, keySelector, type, lengthTableIsRva);
+        WriteLengthField(writer, model, keySelector, type, lengthTableIsRva);
+        writer.WriteLine();
+        WriteNameField(writer, model, keySelector, type);
         writer.WriteLine();
         WriteTryFormatFlagLength(writer, model, type);
         writer.WriteLine();
         WriteFormatFlag(writer, model, type);
-        writer.WriteLine();
-        WriteTryFindFlags(writer, model, keySelector, type);
-        writer.WriteLine();
-        WriteGetInlined(writer, model, keySelector, type);
     }
 
-    private static void WriteFlagFields(
-        SourceTextWriter writer,
-        EnumToGenerate model,
-        Func<EnumValue, string> keySelector,
-        string type,
-        bool lengthTableIsRva
-    )
-    {
-        WriteFlagFieldsLengths(writer, model, keySelector, type, lengthTableIsRva);
-
-        writer.WriteLine();
-
-        writer.Write(
-            $"private static readonly string[] s_format{type}s = new string[{model.InvertedValues.Count}] {{ "
-        );
-        foreach (var (index, curr) in model.InvertedValues.Index())
-        {
-            if (index > 0)
-                writer.Write(", ");
-            writer.Write(keySelector(curr).ToQuotedStringLiteral());
-        }
-
-        writer.WriteLine(" };");
-    }
-
-    private static void WriteFlagFieldsLengths(
+    private static void WriteLengthField(
         SourceTextWriter writer,
         EnumToGenerate model,
         Func<EnumValue, string> keySelector,
@@ -90,15 +64,44 @@ public static class FormatSmallFlagsStringInternal
         writer.WriteLine(" };");
     }
 
+    private static void WriteNameField(
+        SourceTextWriter writer,
+        EnumToGenerate model,
+        Func<EnumValue, string> keySelector,
+        string type
+    )
+    {
+        var bitCount = model.GetMappedBitCount();
+        var tableLength = (uint)Math.Pow(2, bitCount);
+
+        writer.Write($"private static readonly string[] s_format{type}s = new string[{tableLength}] {{ ");
+        writer.Write(model.HasZeroMember ? keySelector(model.ZeroMember).ToQuotedStringLiteral() : "\"0\"");
+        for (var i = 1u; i < tableLength; i++)
+        {
+            writer.Write(", ");
+            var sb = model
+                .FlagsInfo!.GetMatchingValues(i)
+                .Aggregate(
+                    new StringBuilder(),
+                    (agg, value) =>
+                        agg.Length == 0 ? agg.Append(keySelector(value)) : agg.Append(", ").Append(keySelector(value))
+                );
+            writer.Write(sb.Length > 0 ? sb.ToString().ToQuotedStringLiteral() : $"\"{i}\"");
+        }
+
+        writer.WriteLine(" };");
+    }
+
     private static void WriteTryFormatFlagLength(SourceTextWriter writer, EnumToGenerate model, string type)
     {
         var bitCount = model.GetMappedBitCount();
         var tableLength = (uint)Math.Pow(2, bitCount);
+        var unSigType = model.BitCount > 32 ? "ulong" : "uint";
         writer.WriteLine(
             $$"""
             private static bool TryFormatFlag{{type}}sLength({{model.UnderlyingType}} value, out int length)
             {
-                if (value < {{tableLength}})
+                if (({{unSigType}})value < {{tableLength}})
                 {
                     length = global::System.Runtime.CompilerServices.Unsafe.Add(
                         ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(s_format{{type}}Lengths),
@@ -115,115 +118,21 @@ public static class FormatSmallFlagsStringInternal
 
     private static void WriteFormatFlag(SourceTextWriter writer, EnumToGenerate model, string type)
     {
+        var bitCount = model.GetMappedBitCount();
+        var tableLength = (uint)Math.Pow(2, bitCount);
+        var unSigType = model.BitCount > 32 ? "ulong" : "uint";
         writer.WriteLine(
             $$"""
             private static string? FormatFlag{{type}}s({{model.UnderlyingType}} value)
             {
-                string? result = Get{{type}}Inlined(value);
-                if (result is null)
+                if (({{unSigType}})value < {{tableLength}})
                 {
-                    Span<int> foundItems = stackalloc int[{{model.GetMappedBitCount()}}];
-                    if (TryFindFlags{{type}}s(value, foundItems, out int foundItemsCount, out int resultLength))
-                    {
-                        result = EnumStringFormatter.WriteMultipleFoundFlagsNames(s_format{{type}}s, foundItems.Slice(0, foundItemsCount), resultLength);
-                    }
+                    return global::System.Runtime.CompilerServices.Unsafe.Add(
+                        ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(s_format{{type}}s),
+                        (int)value);
                 }
 
-                return result;
-            }
-            """
-        );
-    }
-
-    private static void WriteTryFindFlags(
-        SourceTextWriter writer,
-        EnumToGenerate model,
-        Func<EnumValue, string> keySelector,
-        string type
-    )
-    {
-        var valuesRanges = model.GetEnumValueRangesByBitRange();
-        writer.WriteLine(
-            $$"""
-            private static bool TryFindFlags{{type}}s({{model.UnderlyingType}} value, Span<int> foundItems, out int foundItemsCount, out int resultLength)
-            {
-                resultLength = 0;
-                foundItemsCount = 0;
-            """
-        );
-        writer.PushIndent();
-
-        foreach (var (i, vRange) in valuesRanges.Index())
-        {
-            if (vRange.Count == 0)
-                continue;
-
-            writer.WriteLine(
-                $$"""
-                if ({{EnumToGenerate.BitRangeConditionStrings[i]}})
-                {
-                """
-            );
-
-            writer.PushIndent();
-            foreach (var curr in vRange)
-            {
-                writer.WriteLine(
-                    $$"""
-                    if ((value & {{curr.MemberValue}}) == {{curr.MemberValue}})
-                    {
-                        value -= {{curr.MemberValue}};
-                        resultLength = checked(resultLength + {{keySelector(curr).Length}});
-                        foundItems[foundItemsCount++] = {{model.InvertedValues.IndexOf(curr)}};
-                        if (value == 0) return true;
-                    }
-                    """
-                );
-            }
-
-            writer.PopIndent();
-            writer.WriteLine('}');
-        }
-
-        writer.WriteLine();
-        writer.WriteLine("return value == 0;");
-        writer.PopIndent();
-        writer.WriteLine('}');
-    }
-
-    private static void WriteGetInlined(
-        SourceTextWriter writer,
-        EnumToGenerate model,
-        Func<EnumValue, string> keySelector,
-        string type
-    )
-    {
-        writer.WriteLine(
-            $$"""
-            private static string? Get{{type}}Inlined({{model.UnderlyingType}} value)
-            {
-                return value switch
-                {
-            """
-        );
-
-        writer.PushIndent(levels: 2);
-        if (!model.HasZeroMember)
-        {
-            writer.WriteLine("""0 => "0",""");
-        }
-
-        foreach (var curr in model.UniqueValues)
-        {
-            writer.WriteLine($"{curr.MemberValue} => {keySelector(curr).ToQuotedStringLiteral()},");
-        }
-
-        writer.WriteLine("_ => null");
-
-        writer.PopIndent(levels: 2);
-        writer.WriteLine(
-            """
-                };
+                return null;
             }
             """
         );
