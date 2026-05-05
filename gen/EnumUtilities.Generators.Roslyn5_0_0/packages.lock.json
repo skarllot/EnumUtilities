@@ -61,9 +61,9 @@
       },
       "Polyfill": {
         "type": "Direct",
-        "requested": "[7.33.0, )",
-        "resolved": "7.33.0",
-        "contentHash": "szDcLt4Xu8LLTUXlAq7Q6vq/pAcH0WgU9ldB3GF0XNpI48g9JaZUDNUIJS6h5VQA22cSzVIoc3laHhjOXKorfw=="
+        "requested": "[10.0.0, )",
+        "resolved": "10.0.0",
+        "contentHash": "HX4+jlB3OTAn+CiNLzuen/I7jgYLfNxDTsX3A7Ij285WYEbNwXPh1haHgeDinDum+m/pviBb8idK4JNUz1qS0Q=="
       },
       "Raiqub.Generators.InterpolationCodeWriter.CSharp.Sources": {
         "type": "Direct",
