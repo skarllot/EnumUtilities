@@ -14,21 +14,46 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
 public static partial class StatusCodeExtensions
 {
-    /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
-    /// <returns>The string representation of the value of this instance.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.ToStringFast(TEnum)"/>
     public static string ToStringFast(this StatusCode value)
     {
-        return GetNameInlined((int)value)
-            ?? ((int)value).ToString();
+        int v = (int)value;
+        return v switch
+        {
+            -1 => "Unknown",
+            0 => "Success",
+            -2 => "Error",
+            -3 => "NotFound",
+            -4 => "Timeout",
+            -5 => "Unauthorized",
+            -6 => "Forbidden",
+            -7 => "Conflict",
+            -8 => "Gone",
+            -9 => "InvalidRequest",
+            -10 => "ServerError",
+            _ => v.ToString()
+        };
     }
 
-    /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
-    /// <param name="value">The value to calculate the number of characters.</param>
-    /// <returns>The number of characters produced by converting the specified value to string.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.GetStringLength(TEnum)"/>
     public static int GetStringLength(this StatusCode value)
     {
-        return GetNameLengthInlined((int)value)
-            ?? EnumNumericFormatter.GetStringLength((int)value);
+        int v = (int)value;
+        return v switch
+        {
+            -1 => 7,
+            0 => 7,
+            -2 => 5,
+            -3 => 8,
+            -4 => 7,
+            -5 => 12,
+            -6 => 9,
+            -7 => 8,
+            -8 => 4,
+            -9 => 14,
+            -10 => 11,
+            _ => global::Raiqub.Generators.EnumUtilities.Formatters.EnumNumericFormatter.GetStringLength(v)
+        };
     }
 
     /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
@@ -49,44 +74,6 @@ public static partial class StatusCodeExtensions
             -9 => true,
             -10 => true,
             _ => false
-        };
-    }
-
-    private static int? GetNameLengthInlined(int value)
-    {
-        return value switch
-        {
-            -1 => 7,
-            0 => 7,
-            -2 => 5,
-            -3 => 8,
-            -4 => 7,
-            -5 => 12,
-            -6 => 9,
-            -7 => 8,
-            -8 => 4,
-            -9 => 14,
-            -10 => 11,
-            _ => null
-        };
-    }
-
-    private static string? GetNameInlined(int value)
-    {
-        return value switch
-        {
-            -1 => "Unknown",
-            0 => "Success",
-            -2 => "Error",
-            -3 => "NotFound",
-            -4 => "Timeout",
-            -5 => "Unauthorized",
-            -6 => "Forbidden",
-            -7 => "Conflict",
-            -8 => "Gone",
-            -9 => "InvalidRequest",
-            -10 => "ServerError",
-            _ => null
         };
     }
 
@@ -144,40 +131,11 @@ public static partial class StatusCodeExtensions
         return Unsafe.As<int, StatusCode>(ref resultRaw);
     }
 
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.ToEnumMemberValue(TEnum)"/>
     public static string ToEnumMemberValue(this StatusCode value)
     {
-        return GetEnumMemberValueInlined((int)value)
-            ?? ((int)value).ToString();
-    }
-
-    public static int GetEnumMemberValueStringLength(this StatusCode value)
-    {
-        return GetEnumMemberValueLengthInlined((int)value)
-            ?? EnumNumericFormatter.GetStringLength((int)value);
-    }
-
-    private static int? GetEnumMemberValueLengthInlined(int value)
-    {
-        return value switch
-        {
-            -1 => 7,
-            0 => 7,
-            -2 => 5,
-            -3 => 9,
-            -4 => 7,
-            -5 => 12,
-            -6 => 9,
-            -7 => 8,
-            -8 => 4,
-            -9 => 14,
-            -10 => 11,
-            _ => null
-        };
-    }
-
-    private static string? GetEnumMemberValueInlined(int value)
-    {
-        return value switch
+        int v = (int)value;
+        return v switch
         {
             -1 => "Unknown",
             0 => "Success",
@@ -190,7 +148,28 @@ public static partial class StatusCodeExtensions
             -8 => "Gone",
             -9 => "InvalidRequest",
             -10 => "ServerError",
-            _ => null
+            _ => v.ToString()
+        };
+    }
+
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.GetEnumMemberValueStringLength(TEnum)"/>
+    public static int GetEnumMemberValueStringLength(this StatusCode value)
+    {
+        int v = (int)value;
+        return v switch
+        {
+            -1 => 7,
+            0 => 7,
+            -2 => 5,
+            -3 => 9,
+            -4 => 7,
+            -5 => 12,
+            -6 => 9,
+            -7 => 8,
+            -8 => 4,
+            -9 => 14,
+            -10 => 11,
+            _ => global::Raiqub.Generators.EnumUtilities.Formatters.EnumNumericFormatter.GetStringLength(v)
         };
     }
 

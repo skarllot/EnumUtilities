@@ -13,38 +13,32 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
 internal static partial class BigErrorCodeExtensions
 {
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.ToJsonString(TEnum)"/>
+    [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     public static string? ToJsonString(this BigErrorCode value)
     {
-        return GetJsonStringInlined((ulong)value);
-    }
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int? GetJsonStringLength(this BigErrorCode value)
-    {
-        return GetJsonStringLengthInlined((ulong)value);
-    }
-
-    private static int? GetJsonStringLengthInlined(ulong value)
-    {
-        return value switch
-        {
-            0 => 3,
-            1 => 3,
-            100 => 3,
-            200000000000 => 3,
-            _ => null
-        };
-    }
-
-    private static string? GetJsonStringInlined(ulong value)
-    {
-        return value switch
+        ulong v = (ulong)value;
+        return v switch
         {
             0 => "NON",
             1 => "UNK",
             100 => "CNX",
             200000000000 => "OUT",
+            _ => null
+        };
+    }
+
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.GetJsonStringLength(TEnum)"/>
+    [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    public static int? GetJsonStringLength(this BigErrorCode value)
+    {
+        ulong v = (ulong)value;
+        return v switch
+        {
+            0 => 3,
+            1 => 3,
+            100 => 3,
+            200000000000 => 3,
             _ => null
         };
     }

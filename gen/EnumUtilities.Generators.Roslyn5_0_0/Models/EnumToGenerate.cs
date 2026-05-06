@@ -1,4 +1,5 @@
 ﻿using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.CodeAnalysis;
 using Raiqub.Generators.EnumUtilities.Common;
 using Raiqub.Generators.InterpolationCodeWriter.Collections;
@@ -7,11 +8,12 @@ namespace Raiqub.Generators.EnumUtilities.Models;
 
 public sealed record EnumToGenerate(
     SelectedGenerators SelectedGenerators,
+    EnumGeneratorOptions? EnumGeneratorOptions,
     JsonConverterGeneratorOptions? JsonConverterGeneratorOptions,
     string? Namespace,
     ContainingType? ContainingType,
     bool IsPublic,
-    bool IsFlags,
+    [property: MemberNotNullWhen(true, "FlagsInfo")] bool IsFlags,
     string Name,
     string UnderlyingType,
     EquatableArray<EnumValue> Values,
@@ -19,26 +21,25 @@ public sealed record EnumToGenerate(
     string? RootNamespace = null
 )
 {
-    private List<EnumValue>? _invertedValues;
-    private string? _refName;
-    private List<EnumValue>? _uniqueValues;
-
     public string MetadataClassName => Name.Contains("Metadata") ? $"{Name}Info" : $"{Name}Metadata";
 
-    public string RefName => _refName ??= ContainingType is not null ? $"{ContainingType.Name}.{Name}" : Name;
+    public string RefName => field ??= ContainingType is not null ? $"{ContainingType.Name}.{Name}" : Name;
 
     public List<EnumValue> UniqueValues =>
-        _uniqueValues ??= Values
-            .AsEnumerable()
-            .DistinctBy(static it => it.MemberValue, StringComparer.Ordinal)
-            .ToList();
+        field ??= Values.AsEnumerable().DistinctBy(static it => it.RealMemberValue).ToList();
 
     public List<EnumValue> InvertedValues =>
-        _invertedValues ??= Values
-            .AsEnumerable()
-            .DistinctBy(x => x.RealMemberValue)
-            .OrderByDescending(x => x.RealMemberValue)
-            .ToList();
+        field ??= IsUnsigned
+            ? Values
+                .AsEnumerable()
+                .DistinctBy(static x => x.RealMemberValue)
+                .OrderByDescending(static x => x.RealMemberValue)
+                .ToList()
+            : Values
+                .AsEnumerable()
+                .DistinctBy(static x => x.RealMemberSignedValue)
+                .OrderByDescending(static x => x.RealMemberSignedValue)
+                .ToList();
 
     public IEnumerable<EnumValue> OrderedValues =>
         IsUnsigned
@@ -59,11 +60,16 @@ public sealed record EnumToGenerate(
 
     public bool HasJsonProperty => Values.Exists(static it => it.JsonPropertyName != null);
 
-    public bool HasZeroMember { get; } = Values.AsEnumerable().Any(x => x.RealMemberValue == 0);
+    [MemberNotNullWhen(true, nameof(ZeroMember))]
+    public bool HasZeroMember => ZeroMember is not null;
+
+    public EnumFlagsInfo? FlagsInfo => field ??= IsFlags ? new EnumFlagsInfo(this) : null;
+
+    public EnumValue? ZeroMember => field ??= Values.AsEnumerable().FirstOrDefault(static x => x.RealMemberValue == 0);
 
     public bool IsUnsigned { get; } = UnderlyingType is "byte" or "ushort" or "uint" or "ulong";
 
-    private int BitCount { get; } =
+    public int BitCount { get; } =
         UnderlyingType switch
         {
             "byte" => 8,
@@ -102,6 +108,7 @@ public sealed record EnumToGenerate(
 
         return new EnumToGenerate(
             SelectedGenerators: ResolveSelectedGenerators(attributes),
+            EnumGeneratorOptions: EnumGeneratorOptions.FromSymbol(typeSymbol),
             JsonConverterGeneratorOptions: JsonConverterGeneratorOptions.FromSymbol(typeSymbol),
             Namespace: string.IsNullOrWhiteSpace(ns) ? null : ns,
             ContainingType: typeSymbol.ContainingType is not null
@@ -116,34 +123,6 @@ public sealed record EnumToGenerate(
             Values: EquatableArray<EnumValue>.FromArrayWithoutCopy(enumValues),
             DefaultLocations: typeSymbol.GetDefaultLocation()
         );
-    }
-
-    public static string[] BitRangeConditionStrings { get; } =
-    ["value > 0xffff_ffff_ffff", "value > 0xffff_ffff", "value > 0xffff", "true"];
-
-    public List<EnumValue>[] GetEnumValueRangesByBitRange()
-    {
-        var h2Values =
-            BitCount == 64 ? InvertedValues.Where(x => x.RealMemberValue > 0x0000_ffff_ffff_ffffUL).ToList() : [];
-        var h1Values =
-            BitCount == 64
-                ? InvertedValues
-                    .Where(x => x.RealMemberValue is > 0x0000_0000_ffff_ffffUL and <= 0x0000_ffff_ffff_ffffUL)
-                    .ToList()
-                : [];
-        var l2Values =
-            BitCount >= 32
-                ? InvertedValues
-                    .Where(x => x.RealMemberValue is > 0x0000_0000_0000_ffffUL and <= 0x0000_0000_ffff_ffffUL)
-                    .ToList()
-                : [];
-        var l1Values =
-            BitCount >= 16
-                ? InvertedValues
-                    .Where(x => x.RealMemberValue is > 0x0000_0000_0000_0000UL and <= 0x0000_0000_0000_ffffUL)
-                    .ToList()
-                : [];
-        return [h2Values, h1Values, l2Values, l1Values];
     }
 
     public int GetMappedBitCount()
