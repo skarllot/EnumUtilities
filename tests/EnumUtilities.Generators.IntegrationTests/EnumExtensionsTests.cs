@@ -26,6 +26,15 @@ public class EnumExtensionsTests
     [InlineData(RgbColors.Green | RgbColors.Blue)]
     [InlineData(RgbColors.Green | RgbColors.Blue | RgbColors.Red)]
     [InlineData(RgbColors.Saffron | RgbColors.Cyan)]
+    [InlineData(RgbColors.Amber)]                          // named secondary composite
+    [InlineData(RgbColors.Lavender)]                       // named secondary composite at high bit range
+    [InlineData(RgbColors.Magenta)]                        // named secondary composite wrapping wheel (Violet|Red)
+    [InlineData(RgbColors.Gold)]                           // named tertiary composite
+    [InlineData(RgbColors.Vermillion)]                     // named tertiary composite wrapping wheel (Violet|Red|Orange)
+    [InlineData(RgbColors.Purple)]                         // named tertiary composite at high bit range
+    [InlineData(RgbColors.Amber | RgbColors.Green)]        // secondary composite + extra primary bit
+    [InlineData(RgbColors.Gold | RgbColors.Indigo)]        // tertiary composite + extra primary bit
+    [InlineData(RgbColors.Saffron | RgbColors.Lavender)]   // two secondary composites with no shared bits
     [InlineData((RgbColors)10_300)]
     public void GetStringLengthForBigFlagEnumReturnsExpectedLength(RgbColors value)
     {
@@ -58,6 +67,15 @@ public class EnumExtensionsTests
     [InlineData(RgbColors.Green | RgbColors.Blue | RgbColors.Red)]
     [InlineData(RgbColors.Saffron | RgbColors.Cyan)]
     [InlineData(RgbColors.Saffron)]
+    [InlineData(RgbColors.Amber)]                          // named secondary composite
+    [InlineData(RgbColors.Lavender)]                       // named secondary composite at high bit range
+    [InlineData(RgbColors.Magenta)]                        // named secondary composite wrapping wheel (Violet|Red)
+    [InlineData(RgbColors.Gold)]                           // named tertiary composite
+    [InlineData(RgbColors.Vermillion)]                     // named tertiary composite wrapping wheel (Violet|Red|Orange)
+    [InlineData(RgbColors.Purple)]                         // named tertiary composite at high bit range
+    [InlineData(RgbColors.Amber | RgbColors.Green)]        // secondary composite + extra primary bit
+    [InlineData(RgbColors.Gold | RgbColors.Indigo)]        // tertiary composite + extra primary bit
+    [InlineData(RgbColors.Saffron | RgbColors.Lavender)]   // two secondary composites with no shared bits
     [InlineData((RgbColors)10_300)]
     public void FastToStringIsSameAsToStringUsingBigFlagEnum(RgbColors value)
     {
