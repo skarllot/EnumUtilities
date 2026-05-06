@@ -14,21 +14,38 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
 public static partial class HumanStatesExtensions
 {
-    /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
-    /// <returns>The string representation of the value of this instance.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.ToStringFast(TEnum)"/>
+    [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     public static string ToStringFast(this HumanStates value)
     {
-        return GetNameInlined((int)value)
-            ?? ((int)value).ToString();
+        int v = (int)value;
+        return v switch
+        {
+            0 => "0",
+            1 => "Idle",
+            2 => "Working",
+            3 => "Sleeping",
+            4 => "Eating",
+            5 => "Dead",
+            _ => v.ToString()
+        };
     }
 
-    /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
-    /// <param name="value">The value to calculate the number of characters.</param>
-    /// <returns>The number of characters produced by converting the specified value to string.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.GetStringLength(TEnum)"/>
+    [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     public static int GetStringLength(this HumanStates value)
     {
-        return GetNameLengthInlined((int)value)
-            ?? EnumNumericFormatter.GetStringLength((int)value);
+        int v = (int)value;
+        return v switch
+        {
+            0 => 1,
+            1 => 4,
+            2 => 7,
+            3 => 8,
+            4 => 6,
+            5 => 4,
+            _ => global::Raiqub.Generators.EnumUtilities.Formatters.EnumNumericFormatter.GetStringLength(v)
+        };
     }
 
     /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
@@ -43,34 +60,6 @@ public static partial class HumanStatesExtensions
             4 => true,
             5 => true,
             _ => false
-        };
-    }
-
-    private static int? GetNameLengthInlined(int value)
-    {
-        return value switch
-        {
-            0 => 1,
-            1 => 4,
-            2 => 7,
-            3 => 8,
-            4 => 6,
-            5 => 4,
-            _ => null
-        };
-    }
-
-    private static string? GetNameInlined(int value)
-    {
-        return value switch
-        {
-            0 => "0",
-            1 => "Idle",
-            2 => "Working",
-            3 => "Sleeping",
-            4 => "Eating",
-            5 => "Dead",
-            _ => null
         };
     }
 
