@@ -26,25 +26,23 @@ public sealed record EnumToGenerate(
     public string RefName => field ??= ContainingType is not null ? $"{ContainingType.Name}.{Name}" : Name;
 
     public List<EnumValue> UniqueValues =>
-        field ??= Values.AsEnumerable().DistinctBy(static it => it.RealMemberValue).ToList();
+        field ??= Values.AsEnumerable().DistinctBy(static it => it.BinaryValue).ToList();
 
     public List<EnumValue> InvertedValues =>
         field ??= IsUnsigned
             ? Values
                 .AsEnumerable()
-                .DistinctBy(static x => x.RealMemberValue)
-                .OrderByDescending(static x => x.RealMemberValue)
+                .DistinctBy(static x => x.AsUInt64())
+                .OrderByDescending(static x => x.AsUInt64())
                 .ToList()
             : Values
                 .AsEnumerable()
-                .DistinctBy(static x => x.RealMemberSignedValue)
-                .OrderByDescending(static x => x.RealMemberSignedValue)
+                .DistinctBy(static x => x.AsInt64())
+                .OrderByDescending(static x => x.AsInt64())
                 .ToList();
 
     public IEnumerable<EnumValue> OrderedValues =>
-        IsUnsigned
-            ? Values.AsEnumerable().OrderBy(x => x.RealMemberValue)
-            : Values.AsEnumerable().OrderBy(x => x.RealMemberSignedValue);
+        IsUnsigned ? Values.AsEnumerable().OrderBy(x => x.AsUInt64()) : Values.AsEnumerable().OrderBy(x => x.AsInt64());
 
     public bool HasSerializationValue => Values.Exists(static it => it.SerializationValue != null);
 
@@ -65,7 +63,8 @@ public sealed record EnumToGenerate(
 
     public EnumFlagsInfo? FlagsInfo => field ??= IsFlags ? new EnumFlagsInfo(this) : null;
 
-    public EnumValue? ZeroMember => field ??= Values.AsEnumerable().FirstOrDefault(static x => x.RealMemberValue == 0);
+    public EnumValue? ZeroMember =>
+        field ??= Values.AsEnumerable().FirstOrDefault(static x => x.MatchAs64Bit(u => u == 0, s => s == 0));
 
     public bool IsUnsigned { get; } = UnderlyingType is "byte" or "ushort" or "uint" or "ulong";
 
@@ -132,8 +131,7 @@ public sealed record EnumToGenerate(
 
         return BitCount
             - (
-                BitOperations.LeadingZeroCount(Values.AsEnumerable().Select(x => x.RealMemberValue).Max())
-                - (64 - BitCount)
+                BitOperations.LeadingZeroCount(Values.AsEnumerable().Select(x => x.BinaryValue).Max()) - (64 - BitCount)
             );
     }
 

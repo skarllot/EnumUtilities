@@ -85,15 +85,13 @@ public class EnumExtensionsWriter : ICodeWriter<EnumToGenerate>
 
     private static string FormatValidFlagsMask(EnumToGenerate model)
     {
-        if (model.IsUnsigned)
+        if (!model.IsUnsigned)
         {
-            var validFlags = model.Values.Aggregate(0ul, static (acc, cur) => acc | cur.RealMemberValue);
-            var numSuffix = CSharpExtensions.GetNumericSuffixFromCSharpKeyword(model.UnderlyingType);
-            return $"{validFlags}{numSuffix}";
+            return model.FlagsInfo!.ValidFlagsMaskSigned.ToString(CultureInfo.InvariantCulture);
         }
 
-        return model
-            .Values.Aggregate(0L, static (acc, cur) => acc | cur.RealMemberSignedValue)
-            .ToString(CultureInfo.InvariantCulture);
+        var validFlags = model.FlagsInfo!.ValidFlagsMaskUnsigned;
+        var numSuffix = CSharpExtensions.GetNumericSuffixFromCSharpKeyword(model.UnderlyingType);
+        return $"{validFlags}{numSuffix}";
     }
 }

@@ -9,7 +9,7 @@ namespace Raiqub.Generators.EnumUtilities.Generators.Tests.CodeWriters.Extension
 public class FormatStringInternalTest
 {
     [Fact]
-    public void Write_WithPlainEnum_WritesSwitchBasedFormatter()
+    public async Task Write_WithPlainEnum_WritesSwitchBasedFormatter()
     {
         const string source = """
             using Raiqub.Generators.EnumUtilities;
@@ -23,7 +23,7 @@ public class FormatStringInternalTest
             }
             """;
 
-        var output = WriteFormatString(source, DefaultFormatDefinition);
+        var output = await WriteFormatString(source, DefaultFormatDefinition);
 
         Assert.Contains("public static string ToStringFast(this Status value)", output);
         Assert.Contains("int v = (int)value;", output);
@@ -35,7 +35,7 @@ public class FormatStringInternalTest
     }
 
     [Fact]
-    public void Write_WithSmallFlagsEnum_WritesLookupTableFormatter()
+    public async Task Write_WithSmallFlagsEnum_WritesLookupTableFormatter()
     {
         const string source = """
             using System;
@@ -51,7 +51,7 @@ public class FormatStringInternalTest
             }
             """;
 
-        var output = WriteFormatString(source, DefaultFormatDefinition);
+        var output = await WriteFormatString(source, DefaultFormatDefinition);
 
         Assert.Contains("private static ReadOnlySpan<byte> s_formatDefaultLengths => new byte[8]", output);
         Assert.Contains("private static readonly string[] s_formatDefaults = new string[8]", output);
@@ -61,7 +61,7 @@ public class FormatStringInternalTest
     }
 
     [Fact]
-    public void Write_WithLookupTableDisabled_WritesMultipleFlagsFormatter()
+    public async Task Write_WithLookupTableDisabled_WritesMultipleFlagsFormatter()
     {
         const string source = """
             using System;
@@ -80,7 +80,7 @@ public class FormatStringInternalTest
             }
             """;
 
-        var output = WriteFormatString(source, DefaultFormatDefinition);
+        var output = await WriteFormatString(source, DefaultFormatDefinition);
 
         Assert.Contains("private static ReadOnlySpan<byte> s_formatDefaultLengths => new byte[6]", output);
         Assert.Contains("private static readonly string?[] s_formatDefaults = new string?[6]", output);
@@ -92,7 +92,7 @@ public class FormatStringInternalTest
     }
 
     [Fact]
-    public void Write_WithLargeFlagsEnum_WritesHighBitNameIntoTable()
+    public async Task Write_WithLargeFlagsEnum_WritesHighBitNameIntoTable()
     {
         const string source = """
             using System;
@@ -107,7 +107,7 @@ public class FormatStringInternalTest
             }
             """;
 
-        var output = WriteFormatString(source, DefaultFormatDefinition);
+        var output = await WriteFormatString(source, DefaultFormatDefinition);
 
         Assert.Contains("s_formatDefaultLengths => new byte[41]", output);
         Assert.Contains("s_formatDefaults = new string?[41]", output);
@@ -115,7 +115,7 @@ public class FormatStringInternalTest
     }
 
     [Fact]
-    public void Write_WithEnumMemberValues_WritesFormatterWithStringFallback()
+    public async Task Write_WithEnumMemberValues_WritesFormatterWithStringFallback()
     {
         const string source = """
             using System.Runtime.Serialization;
@@ -132,7 +132,7 @@ public class FormatStringInternalTest
             }
             """;
 
-        var model = CreateModel(source);
+        var model = await CreateModel(source);
         var block = new ExtensionsEnumMemberBlock();
         var writer = new SourceTextWriter();
 
@@ -148,7 +148,7 @@ public class FormatStringInternalTest
     }
 
     [Fact]
-    public void EnumExtensionsWriter_WithUnsignedFlags_WritesValidFlagsMaskWithSuffix()
+    public async Task EnumExtensionsWriter_WithUnsignedFlags_WritesValidFlagsMaskWithSuffix()
     {
         const string source = """
             using System;
@@ -164,7 +164,7 @@ public class FormatStringInternalTest
             }
             """;
 
-        var model = CreateModel(source);
+        var model = await CreateModel(source);
         var writer = new SourceTextWriter();
 
         new EnumExtensionsWriter().Write(writer, model);
@@ -173,7 +173,7 @@ public class FormatStringInternalTest
     }
 
     [Fact]
-    public void EnumExtensionsWriter_WithSignedNegativeFlags_DoesNotEmitUnsignedValidFlagsMaskLiteral()
+    public async Task EnumExtensionsWriter_WithSignedNegativeFlags_DoesNotEmitUnsignedValidFlagsMaskLiteral()
     {
         const string source = """
             using System;
@@ -187,7 +187,7 @@ public class FormatStringInternalTest
             }
             """;
 
-        var model = CreateModel(source);
+        var model = await CreateModel(source);
         var writer = new SourceTextWriter();
 
         new EnumExtensionsWriter().Write(writer, model);
@@ -207,9 +207,9 @@ public class FormatStringInternalTest
             AllowNumbers = true,
         };
 
-    private static string WriteFormatString(string source, EnumFormatDefinition formatDefinition)
+    private static async Task<string> WriteFormatString(string source, EnumFormatDefinition formatDefinition)
     {
-        var model = CreateModel(source);
+        var model = await CreateModel(source);
         var writer = new SourceTextWriter();
 
         FormatStringInternal.Write(writer, model, formatDefinition);
@@ -217,9 +217,9 @@ public class FormatStringInternalTest
         return writer.ToString();
     }
 
-    private static EnumToGenerate CreateModel(string source)
+    private static async Task<EnumToGenerate> CreateModel(string source)
     {
-        var symbol = CompilationSymbolFactory.GetEnumSymbol(source);
+        var symbol = await CompilationSymbolFactory.GetEnumSymbol(source);
         return EnumToGenerate.FromSymbol(symbol) ?? throw new InvalidOperationException("Enum model not found");
     }
 }

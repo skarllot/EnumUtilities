@@ -1,5 +1,4 @@
-﻿using Raiqub.Generators.EnumUtilities.CodeWriters.Extensions;
-using Raiqub.Generators.EnumUtilities.Common;
+﻿using Raiqub.Generators.EnumUtilities.Common;
 using Raiqub.Generators.EnumUtilities.Models;
 using Raiqub.Generators.InterpolationCodeWriter;
 
@@ -12,13 +11,9 @@ public static class FormatPlainStringInternal
         var caseCount = model.UniqueValues.Count;
         var additionalCases = 1 + (model.HasZeroMember ? 0 : 1);
         var range = model.IsUnsigned
-            ? (
-                model.UniqueValues.Max(static x => x.RealMemberValue)
-                - model.UniqueValues.Min(static x => x.RealMemberValue)
-            )
+            ? (model.UniqueValues.Max(static x => x.AsUInt64()) - model.UniqueValues.Min(static x => x.AsUInt64()))
             : (ulong)(
-                model.UniqueValues.Max(static x => x.RealMemberSignedValue)
-                - model.UniqueValues.Min(static x => x.RealMemberSignedValue)
+                model.UniqueValues.Max(static x => x.AsInt64()) - model.UniqueValues.Min(static x => x.AsInt64())
             );
         var isDense = range <= (ulong)caseCount;
         var isInlining = caseCount + additionalCases <= 10 && (isDense || caseCount + additionalCases <= 5);

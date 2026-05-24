@@ -14,7 +14,7 @@ public static partial class SignedNegativePermissionsValidation
 {
     /// <summary>Returns a boolean telling whether the value of <see cref="SignedNegativePermissions"/> instance exists in the enumeration.</summary>
     /// <returns><c>true</c> if the value of <see cref="SignedNegativePermissions"/> instance exists in the enumeration; <c>false</c> otherwise.</returns>
-    public static bool IsDefined(SignedNegativePermissions value)
+    public static bool IsDefined(SignedFlagsCompilationTests.SignedNegativePermissions value)
     {
         return (int)value switch
         {

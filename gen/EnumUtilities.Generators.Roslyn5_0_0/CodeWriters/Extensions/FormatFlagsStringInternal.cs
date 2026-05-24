@@ -1,5 +1,4 @@
-﻿using Raiqub.Generators.EnumUtilities.CodeWriters.Extensions;
-using Raiqub.Generators.EnumUtilities.Common;
+﻿using Raiqub.Generators.EnumUtilities.Common;
 using Raiqub.Generators.EnumUtilities.Models;
 using Raiqub.Generators.InterpolationCodeWriter;
 
@@ -18,9 +17,9 @@ public static class FormatFlagsStringInternal
         writer.WriteLine();
         WriteGetStringLength(writer, model, formatDefinition, lengthTableIsRva);
         writer.WriteLine();
-        WriteFormatMultipleFlags(writer, model, formatDefinition.Type, lengthTableIsRva);
+        WriteFormatMultipleFlags(writer, model, formatDefinition, lengthTableIsRva);
         writer.WriteLine();
-        WriteGetStringLengthForMultipleFlags(writer, model, formatDefinition.Type, lengthTableIsRva);
+        WriteGetStringLengthForMultipleFlags(writer, model, formatDefinition, lengthTableIsRva);
     }
 
     private static void WriteFlagFields(
@@ -69,7 +68,7 @@ public static class FormatFlagsStringInternal
         {
             if (i > 0)
                 writer.Write(", ");
-            var found = bitValues.Find(x => x.RealMemberValue == 1ul << i);
+            var found = bitValues.Find(x => x.BinaryValue == 1ul << i);
             writer.Write(found is not null ? keySelector(found).Length : 0);
         }
 
@@ -93,9 +92,10 @@ public static class FormatFlagsStringInternal
     {
         var bitCount = model.GetMappedBitCount();
         var compositeValuesCount = model.FlagsInfo!.InvertedCompositeValues.Count;
+        var nullableSign = model.FlagsInfo.IsAllSingleBitsDefined ? "" : "?";
 
         writer.Write(
-            $"private static readonly string?[] s_format{type}s = new string?[{bitCount + compositeValuesCount}] {{ "
+            $"private static readonly string{nullableSign}[] s_format{type}s = new string{nullableSign}[{bitCount + compositeValuesCount}] {{ "
         );
 
         var bitValues = model.FlagsInfo!.BitValues;
@@ -103,7 +103,7 @@ public static class FormatFlagsStringInternal
         {
             if (i > 0)
                 writer.Write(", ");
-            var found = bitValues.Find(x => x.RealMemberValue == 1ul << i);
+            var found = bitValues.Find(x => x.BinaryValue == 1ul << i);
             writer.Write(found is not null ? keySelector(found).ToQuotedStringLiteral() : "null");
         }
 
@@ -141,7 +141,7 @@ public static class FormatFlagsStringInternal
         EnumFormatDefinition formatDefinition
     )
     {
-        var nullableSign = formatDefinition.AllowNumbers || model.FlagsInfo!.IsAllBitsDefined ? "" : "?";
+        var nullableSign = formatDefinition.AllowNumbers || model.FlagsInfo!.IsAllSingleBitsDefined ? "" : "?";
         writer.WriteLine(
             $$"""
             /// <inheritdoc cref="{{formatDefinition.XmlRefType}}.{{formatDefinition.ToStringMethodName}}(TEnum)"/>
@@ -167,6 +167,12 @@ public static class FormatFlagsStringInternal
             writer.WriteLine($"if ((v & ~ValidFlagsMask) != 0) {{ return {resultValue}; }}");
         }
 
+        var fallbackValue = (model.FlagsInfo.IsAllSingleBitsDefined, formatDefinition.AllowNumbers) switch
+        {
+            (true, _) => "",
+            (false, true) => " ?? v.ToString()",
+            (false, false) => "",
+        };
         writer.WriteLine();
         writer.WriteLine(
             $$"""
@@ -174,7 +180,7 @@ public static class FormatFlagsStringInternal
             {
                 return global::System.Runtime.CompilerServices.Unsafe.Add(
                     ref global::System.Runtime.InteropServices.MemoryMarshal.GetArrayDataReference(s_format{{formatDefinition.Type}}s),
-                    global::System.Numerics.BitOperations.TrailingZeroCount(v))!;
+                    global::System.Numerics.BitOperations.TrailingZeroCount(v)){{fallbackValue}};
             }
 
             return Format{{formatDefinition.Type}}MultipleFlags(v);
@@ -193,7 +199,7 @@ public static class FormatFlagsStringInternal
     )
     {
         var tableType = lengthTableIsRva ? "byte" : "int";
-        var nullableSign = formatDefinition.AllowNumbers || model.FlagsInfo!.IsAllBitsDefined ? "" : "?";
+        var nullableSign = formatDefinition.AllowNumbers || model.FlagsInfo!.IsAllSingleBitsDefined ? "" : "?";
         writer.WriteLine(
             $$"""
             /// <inheritdoc cref="{{formatDefinition.XmlRefType}}.{{formatDefinition.GetStringLengthMethodName}}(TEnum)"/>
@@ -221,6 +227,13 @@ public static class FormatFlagsStringInternal
             writer.WriteLine($"if ((v & ~ValidFlagsMask) != 0) {{ return {resultValue}; }}");
         }
 
+        var fallbackValue = (model.FlagsInfo.IsAllSingleBitsDefined, formatDefinition.AllowNumbers) switch
+        {
+            (true, _) => "ret",
+            (false, true) =>
+                "ret != 0 ? ret : global::Raiqub.Generators.EnumUtilities.Formatters.EnumNumericFormatter.GetStringLength(v)",
+            (false, false) => "ret != 0 ? ret : null",
+        };
         writer.WriteLine();
         writer.WriteLine(
             $$"""
@@ -229,7 +242,8 @@ public static class FormatFlagsStringInternal
             if ((v & (v - 1)) == 0)
             {
                 int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(v);
-                return global::System.Runtime.CompilerServices.Unsafe.Add(ref table, bitPos);
+                int ret = global::System.Runtime.CompilerServices.Unsafe.Add(ref table, bitPos);
+                return {{fallbackValue}};
             }
 
             return Get{{formatDefinition.Type}}StringLengthForMultipleFlags(v);
@@ -243,13 +257,14 @@ public static class FormatFlagsStringInternal
     private static void WriteFormatMultipleFlags(
         SourceTextWriter writer,
         EnumToGenerate model,
-        string type,
+        EnumFormatDefinition formatDefinition,
         bool lengthTableIsRva
     )
     {
+        var nullableSign = formatDefinition.AllowNumbers || model.FlagsInfo!.IsAllSingleBitsDefined ? "" : "?";
         writer.WriteLine(
             $$"""
-            private static string Format{{type}}MultipleFlags({{model.UnderlyingType}} value)
+            private static string{{nullableSign}} Format{{formatDefinition.Type}}MultipleFlags({{model.UnderlyingType}} value)
             {
             """
         );
@@ -267,7 +282,7 @@ public static class FormatFlagsStringInternal
             {{unSigType}} remaining = ({{unSigType}})value;
             Span<int> foundItems = stackalloc int[{{model.GetMappedBitCount()}}];
             int foundItemsCount = 0;
-            ref {{tableType}} table = ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(s_format{{type}}Lengths);
+            ref {{tableType}} table = ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(s_format{{formatDefinition.Type}}Lengths);
             """
         );
 
@@ -276,7 +291,7 @@ public static class FormatFlagsStringInternal
             writer.WriteLine();
             writer.WriteLine(
                 $$"""
-                ref {{model.UnderlyingType}} cv = ref global::System.Runtime.InteropServices.MemoryMarshal.GetArrayDataReference(s_composite{{type}}Values);
+                ref {{model.UnderlyingType}} cv = ref global::System.Runtime.InteropServices.MemoryMarshal.GetArrayDataReference(s_composite{{formatDefinition.Type}}Values);
                 ref {{tableType}} cl = ref global::System.Runtime.CompilerServices.Unsafe.Add(ref table, {{bitCount}});
                 for (int i = 0; i < {{compositeValuesCount}}; i++)
                 {
@@ -292,26 +307,48 @@ public static class FormatFlagsStringInternal
 
                 if (remaining == 0)
                 {
-                    return global::Raiqub.Generators.EnumUtilities.Formatters.EnumStringFormatter.WriteMultipleFoundFlagsNames(s_format{{type}}s, foundItems.Slice(0, foundItemsCount), charCount);
+                    return global::Raiqub.Generators.EnumUtilities.Formatters.EnumStringFormatter.WriteMultipleFoundFlagsNames(s_format{{formatDefinition.Type}}s, foundItems.Slice(0, foundItemsCount), charCount);
                 }
                 """
             );
         }
 
         writer.WriteLine();
-        writer.WriteLine(
-            $$"""
-            do
-            {
-                int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(remaining);
-                foundItems[foundItemsCount++] = bitPos;
-                charCount += global::System.Runtime.CompilerServices.Unsafe.Add(ref table, bitPos);
-                remaining &= remaining - 1;
-            } while (remaining != 0);
+        if (model.FlagsInfo.IsAllSingleBitsDefined)
+        {
+            writer.WriteLine(
+                $$"""
+                do
+                {
+                    int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(remaining);
+                    foundItems[foundItemsCount++] = bitPos;
+                    charCount += global::System.Runtime.CompilerServices.Unsafe.Add(ref table, bitPos);
+                    remaining &= remaining - 1;
+                } while (remaining != 0);
 
-            return global::Raiqub.Generators.EnumUtilities.Formatters.EnumStringFormatter.WriteMultipleFoundFlagsNames(s_format{{type}}s, foundItems.Slice(0, foundItemsCount), charCount);
-            """
-        );
+                return global::Raiqub.Generators.EnumUtilities.Formatters.EnumStringFormatter.WriteMultipleFoundFlagsNames(s_format{{formatDefinition.Type}}s, foundItems.Slice(0, foundItemsCount), charCount);
+                """
+            );
+        }
+        else
+        {
+            var fallbackValue = formatDefinition.AllowNumbers ? "value.ToString()" : "null";
+            writer.WriteLine(
+                $$"""
+                do
+                {
+                    int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(remaining);
+                    {{tableType}} lenValue = global::System.Runtime.CompilerServices.Unsafe.Add(ref table, bitPos);
+                    if (lenValue == 0) return {{fallbackValue}};
+                    foundItems[foundItemsCount++] = bitPos;
+                    charCount += lenValue;
+                    remaining &= remaining - 1;
+                } while (remaining != 0);
+
+                return global::Raiqub.Generators.EnumUtilities.Formatters.EnumStringFormatter.WriteMultipleFoundFlagsNames(s_format{{formatDefinition.Type}}s, foundItems.Slice(0, foundItemsCount), charCount);
+                """
+            );
+        }
 
         writer.PopIndent();
         writer.WriteLine('}');
@@ -320,13 +357,14 @@ public static class FormatFlagsStringInternal
     private static void WriteGetStringLengthForMultipleFlags(
         SourceTextWriter writer,
         EnumToGenerate model,
-        string type,
+        EnumFormatDefinition formatDefinition,
         bool lengthTableIsRva
     )
     {
+        var nullableSign = formatDefinition.AllowNumbers || model.FlagsInfo!.IsAllSingleBitsDefined ? "" : "?";
         writer.WriteLine(
             $$"""
-            private static int Get{{type}}StringLengthForMultipleFlags({{model.UnderlyingType}} value)
+            private static int{{nullableSign}} Get{{formatDefinition.Type}}StringLengthForMultipleFlags({{model.UnderlyingType}} value)
             {
             """
         );
@@ -342,7 +380,7 @@ public static class FormatFlagsStringInternal
             $$"""
             int charCount = -2;
             {{unSigType}} remaining = ({{unSigType}})value;
-            ref {{tableType}} table = ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(s_format{{type}}Lengths);
+            ref {{tableType}} table = ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(s_format{{formatDefinition.Type}}Lengths);
             """
         );
 
@@ -351,7 +389,7 @@ public static class FormatFlagsStringInternal
             writer.WriteLine();
             writer.WriteLine(
                 $$"""
-                ref {{model.UnderlyingType}} cv = ref global::System.Runtime.InteropServices.MemoryMarshal.GetArrayDataReference(s_composite{{type}}Values);
+                ref {{model.UnderlyingType}} cv = ref global::System.Runtime.InteropServices.MemoryMarshal.GetArrayDataReference(s_composite{{formatDefinition.Type}}Values);
                 ref {{tableType}} cl = ref global::System.Runtime.CompilerServices.Unsafe.Add(ref table, {{bitCount}});
                 for (int i = 0; i < {{compositeValuesCount}}; i++)
                 {
@@ -370,18 +408,41 @@ public static class FormatFlagsStringInternal
         }
 
         writer.WriteLine();
-        writer.WriteLine(
-            """
-            do
-            {
-                int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(remaining);
-                charCount += global::System.Runtime.CompilerServices.Unsafe.Add(ref table, bitPos) + 2;
-                remaining &= remaining - 1;
-            } while (remaining != 0);
+        if (model.FlagsInfo.IsAllSingleBitsDefined)
+        {
+            writer.WriteLine(
+                """
+                do
+                {
+                    int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(remaining);
+                    charCount += global::System.Runtime.CompilerServices.Unsafe.Add(ref table, bitPos) + 2;
+                    remaining &= remaining - 1;
+                } while (remaining != 0);
 
-            return charCount;
-            """
-        );
+                return charCount;
+                """
+            );
+        }
+        else
+        {
+            var fallbackValue = formatDefinition.AllowNumbers
+                ? "global::Raiqub.Generators.EnumUtilities.Formatters.EnumNumericFormatter.GetStringLength(value)"
+                : "null";
+            writer.WriteLine(
+                $$"""
+                do
+                {
+                    int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(remaining);
+                    {{tableType}} lenValue = global::System.Runtime.CompilerServices.Unsafe.Add(ref table, bitPos);
+                    if (lenValue == 0) return {{fallbackValue}};
+                    charCount += lenValue + 2;
+                    remaining &= remaining - 1;
+                } while (remaining != 0);
+
+                return charCount;
+                """
+            );
+        }
 
         writer.PopIndent();
         writer.WriteLine('}');

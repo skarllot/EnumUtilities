@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Runtime.CompilerServices;
+using System.Text;
 using Raiqub.Generators.EnumUtilities.Common;
 using Raiqub.Generators.EnumUtilities.Formatters;
 using Raiqub.Generators.EnumUtilities.Models;
@@ -52,7 +53,19 @@ public static class FormatSmallFlagsStringInternal
                     0,
                     (agg, value) => agg == 0 ? keySelector(value).Length : agg + keySelector(value).Length + 2
                 );
-            writer.Write(len > 0 ? len : EnumNumericFormatter.GetStringLength(i));
+
+            if (len > 0)
+            {
+                writer.Write(len);
+            }
+            else if (model.IsUnsigned)
+            {
+                writer.Write(EnumNumericFormatter.GetStringLength(i));
+            }
+            else
+            {
+                writer.Write(EnumNumericFormatter.GetStringLength(Unsafe.As<uint, int>(ref i)));
+            }
         }
 
         writer.WriteLine(" };");
@@ -80,7 +93,18 @@ public static class FormatSmallFlagsStringInternal
                     (agg, value) =>
                         agg.Length == 0 ? agg.Append(keySelector(value)) : agg.Append(", ").Append(keySelector(value))
                 );
-            writer.Write(sb.Length > 0 ? sb.ToString().ToQuotedStringLiteral() : $"\"{i}\"");
+            if (sb.Length > 0)
+            {
+                writer.Write(sb.ToString().ToQuotedStringLiteral());
+            }
+            else if (model.IsUnsigned)
+            {
+                writer.Write($"\"{i}\"");
+            }
+            else
+            {
+                writer.Write($"\"{Unsafe.As<uint, int>(ref i)}\"");
+            }
         }
 
         writer.WriteLine(" };");

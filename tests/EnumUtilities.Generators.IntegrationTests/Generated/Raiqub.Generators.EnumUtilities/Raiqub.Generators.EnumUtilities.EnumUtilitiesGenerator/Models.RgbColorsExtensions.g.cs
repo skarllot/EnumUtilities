@@ -17,7 +17,7 @@ public static partial class RgbColorsExtensions
     private const int ValidFlagsMask = 1023;
 
     private static ReadOnlySpan<byte> s_formatNameLengths => new byte[30] { 3, 6, 6, 4, 5, 4, 4, 4, 6, 6, 6, 7, 8, 10, 7, 8, 10, 7, 5, 6, 9, 4, 7, 7, 4, 6, 10, 4, 7, 5 };
-    private static readonly string?[] s_formatNames = new string?[30] { "Red", "Orange", "Yellow", "Lime", "Green", "Teal", "Cyan", "Blue", "Indigo", "Violet", "Purple", "Crimson", "Lavender", "Vermillion", "Magenta", "Cerulean", "Periwinkle", "SkyBlue", "Azure", "Marine", "Turquoise", "Jade", "Emerald", "Peridot", "Fern", "Citrus", "Chartreuse", "Gold", "Saffron", "Amber" };
+    private static readonly string[] s_formatNames = new string[30] { "Red", "Orange", "Yellow", "Lime", "Green", "Teal", "Cyan", "Blue", "Indigo", "Violet", "Purple", "Crimson", "Lavender", "Vermillion", "Magenta", "Cerulean", "Periwinkle", "SkyBlue", "Azure", "Marine", "Turquoise", "Jade", "Emerald", "Peridot", "Fern", "Citrus", "Chartreuse", "Gold", "Saffron", "Amber" };
     private static readonly int[] s_compositeNameValues = new int[20] { 896, 769, 768, 515, 513, 448, 384, 224, 192, 112, 96, 56, 48, 28, 24, 14, 12, 7, 6, 3 };
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.ToStringFast(TEnum)"/>
@@ -32,7 +32,7 @@ public static partial class RgbColorsExtensions
         {
             return global::System.Runtime.CompilerServices.Unsafe.Add(
                 ref global::System.Runtime.InteropServices.MemoryMarshal.GetArrayDataReference(s_formatNames),
-                global::System.Numerics.BitOperations.TrailingZeroCount(v))!;
+                global::System.Numerics.BitOperations.TrailingZeroCount(v));
         }
 
         return FormatNameMultipleFlags(v);
@@ -51,7 +51,8 @@ public static partial class RgbColorsExtensions
         if ((v & (v - 1)) == 0)
         {
             int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(v);
-            return global::System.Runtime.CompilerServices.Unsafe.Add(ref table, bitPos);
+            int ret = global::System.Runtime.CompilerServices.Unsafe.Add(ref table, bitPos);
+            return ret;
         }
 
         return GetNameStringLengthForMultipleFlags(v);

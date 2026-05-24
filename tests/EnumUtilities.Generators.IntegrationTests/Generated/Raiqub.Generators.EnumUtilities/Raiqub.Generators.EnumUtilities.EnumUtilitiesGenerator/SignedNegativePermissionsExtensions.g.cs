@@ -22,17 +22,16 @@ public static partial class SignedNegativePermissionsExtensions
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.ToStringFast(TEnum)"/>
     [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    public static string ToStringFast(this SignedNegativePermissions value)
+    public static string ToStringFast(this SignedFlagsCompilationTests.SignedNegativePermissions value)
     {
         int v = (int)value;
         if (v == 0) { return "0"; }
-        if ((v & ~ValidFlagsMask) != 0) { return v.ToString(); }
 
         if ((v & (v - 1)) == 0)
         {
             return global::System.Runtime.CompilerServices.Unsafe.Add(
                 ref global::System.Runtime.InteropServices.MemoryMarshal.GetArrayDataReference(s_formatNames),
-                global::System.Numerics.BitOperations.TrailingZeroCount(v))!;
+                global::System.Numerics.BitOperations.TrailingZeroCount(v)) ?? v.ToString();
         }
 
         return FormatNameMultipleFlags(v);
@@ -40,18 +39,18 @@ public static partial class SignedNegativePermissionsExtensions
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.GetStringLength(TEnum)"/>
     [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    public static int GetStringLength(this SignedNegativePermissions value)
+    public static int GetStringLength(this SignedFlagsCompilationTests.SignedNegativePermissions value)
     {
         int v = (int)value;
         if (v == 0) { return 1; }
-        if ((v & ~ValidFlagsMask) != 0) { return global::Raiqub.Generators.EnumUtilities.Formatters.EnumNumericFormatter.GetStringLength(v); }
 
         ref byte table = ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(s_formatNameLengths);
 
         if ((v & (v - 1)) == 0)
         {
             int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(v);
-            return global::System.Runtime.CompilerServices.Unsafe.Add(ref table, bitPos);
+            int ret = global::System.Runtime.CompilerServices.Unsafe.Add(ref table, bitPos);
+            return ret != 0 ? ret : global::Raiqub.Generators.EnumUtilities.Formatters.EnumNumericFormatter.GetStringLength(v);
         }
 
         return GetNameStringLengthForMultipleFlags(v);
@@ -87,8 +86,10 @@ public static partial class SignedNegativePermissionsExtensions
         do
         {
             int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(remaining);
+            byte lenValue = global::System.Runtime.CompilerServices.Unsafe.Add(ref table, bitPos);
+            if (lenValue == 0) return value.ToString();
             foundItems[foundItemsCount++] = bitPos;
-            charCount += global::System.Runtime.CompilerServices.Unsafe.Add(ref table, bitPos);
+            charCount += lenValue;
             remaining &= remaining - 1;
         } while (remaining != 0);
 
@@ -119,7 +120,9 @@ public static partial class SignedNegativePermissionsExtensions
         do
         {
             int bitPos = global::System.Numerics.BitOperations.TrailingZeroCount(remaining);
-            charCount += global::System.Runtime.CompilerServices.Unsafe.Add(ref table, bitPos) + 2;
+            byte lenValue = global::System.Runtime.CompilerServices.Unsafe.Add(ref table, bitPos);
+            if (lenValue == 0) return global::Raiqub.Generators.EnumUtilities.Formatters.EnumNumericFormatter.GetStringLength(value);
+            charCount += lenValue + 2;
             remaining &= remaining - 1;
         } while (remaining != 0);
 
@@ -130,14 +133,14 @@ public static partial class SignedNegativePermissionsExtensions
     /// <param name="flag">An enumeration value.</param>
     /// <returns><see langword="true"/> if the bit field or bit fields that are set in flag are also set in the current instance; otherwise, <see langword="false"/>.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool HasFlagFast(this SignedNegativePermissions value, SignedNegativePermissions flag)
+    public static bool HasFlagFast(this SignedFlagsCompilationTests.SignedNegativePermissions value, SignedFlagsCompilationTests.SignedNegativePermissions flag)
     {
         return (value & flag) == flag;
     }
 
     /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
     /// <returns><c>true</c> if the value of this instance exists in the enumeration; <c>false</c> otherwise.</returns>
-    public static bool IsDefined(this SignedNegativePermissions value)
+    public static bool IsDefined(this SignedFlagsCompilationTests.SignedNegativePermissions value)
     {
         return (int)value switch
         {
@@ -150,22 +153,22 @@ public static partial class SignedNegativePermissionsExtensions
     /// <param name="location">A variable containing the first value to be combined.</param>
     /// <param name="value">The value to be combined with the value at <paramref name="location" />.</param>
     /// <returns>The original value in <paramref name="location" />.</returns>
-    public static SignedNegativePermissions InterlockedAnd(this ref SignedNegativePermissions location, SignedNegativePermissions value)
+    public static SignedFlagsCompilationTests.SignedNegativePermissions InterlockedAnd(this ref SignedFlagsCompilationTests.SignedNegativePermissions location, SignedFlagsCompilationTests.SignedNegativePermissions value)
     {
-        ref int locationRaw = ref Unsafe.As<SignedNegativePermissions, int>(ref location);
-        int resultRaw = Interlocked.And(ref locationRaw, Unsafe.As<SignedNegativePermissions, int>(ref value));
-        return Unsafe.As<int, SignedNegativePermissions>(ref resultRaw);
+        ref int locationRaw = ref Unsafe.As<SignedFlagsCompilationTests.SignedNegativePermissions, int>(ref location);
+        int resultRaw = Interlocked.And(ref locationRaw, Unsafe.As<SignedFlagsCompilationTests.SignedNegativePermissions, int>(ref value));
+        return Unsafe.As<int, SignedFlagsCompilationTests.SignedNegativePermissions>(ref resultRaw);
     }
 
     /// <summary>Bitwise "ors" two enumerations and replaces the first value with the result, as an atomic operation.</summary>
     /// <param name="location">A variable containing the first value to be combined.</param>
     /// <param name="value">The value to be combined with the value at <paramref name="location" />.</param>
     /// <returns>The original value in <paramref name="location" />.</returns>
-    public static SignedNegativePermissions InterlockedOr(this ref SignedNegativePermissions location, SignedNegativePermissions value)
+    public static SignedFlagsCompilationTests.SignedNegativePermissions InterlockedOr(this ref SignedFlagsCompilationTests.SignedNegativePermissions location, SignedFlagsCompilationTests.SignedNegativePermissions value)
     {
-        ref int locationRaw = ref Unsafe.As<SignedNegativePermissions, int>(ref location);
-        int resultRaw = Interlocked.Or(ref locationRaw, Unsafe.As<SignedNegativePermissions, int>(ref value));
-        return Unsafe.As<int, SignedNegativePermissions>(ref resultRaw);
+        ref int locationRaw = ref Unsafe.As<SignedFlagsCompilationTests.SignedNegativePermissions, int>(ref location);
+        int resultRaw = Interlocked.Or(ref locationRaw, Unsafe.As<SignedFlagsCompilationTests.SignedNegativePermissions, int>(ref value));
+        return Unsafe.As<int, SignedFlagsCompilationTests.SignedNegativePermissions>(ref resultRaw);
     }
 
     /// <summary>Compares two enumerations for equality and, if they are equal, replaces the first value.</summary>
@@ -173,21 +176,21 @@ public static partial class SignedNegativePermissionsExtensions
     /// <param name="value">The value that replaces the destination value if the comparison results in equality.</param>
     /// <param name="comparand">The value that is compared to the value at <paramref name="location" />.</param>
     /// <returns>The original value in <paramref name="location" />.</returns>
-    public static SignedNegativePermissions InterlockedCompareExchange(this ref SignedNegativePermissions location, SignedNegativePermissions value, SignedNegativePermissions comparand)
+    public static SignedFlagsCompilationTests.SignedNegativePermissions InterlockedCompareExchange(this ref SignedFlagsCompilationTests.SignedNegativePermissions location, SignedFlagsCompilationTests.SignedNegativePermissions value, SignedFlagsCompilationTests.SignedNegativePermissions comparand)
     {
-        ref int locationRaw = ref Unsafe.As<SignedNegativePermissions, int>(ref location);
-        int resultRaw = Interlocked.CompareExchange(ref locationRaw, Unsafe.As<SignedNegativePermissions, int>(ref value), Unsafe.As<SignedNegativePermissions, int>(ref comparand));
-        return Unsafe.As<int, SignedNegativePermissions>(ref resultRaw);
+        ref int locationRaw = ref Unsafe.As<SignedFlagsCompilationTests.SignedNegativePermissions, int>(ref location);
+        int resultRaw = Interlocked.CompareExchange(ref locationRaw, Unsafe.As<SignedFlagsCompilationTests.SignedNegativePermissions, int>(ref value), Unsafe.As<SignedFlagsCompilationTests.SignedNegativePermissions, int>(ref comparand));
+        return Unsafe.As<int, SignedFlagsCompilationTests.SignedNegativePermissions>(ref resultRaw);
     }
 
     /// <summary>Sets an enumeration value to a specified value and returns the original value, as an atomic operation.</summary>
     /// <param name="location">The variable to set to the specified value.</param>
     /// <param name="value">The value to which the <paramref name="location" /> parameter is set.</param>
     /// <returns>The original value of <paramref name="location" />.</returns>
-    public static SignedNegativePermissions InterlockedExchange(this ref SignedNegativePermissions location, SignedNegativePermissions value)
+    public static SignedFlagsCompilationTests.SignedNegativePermissions InterlockedExchange(this ref SignedFlagsCompilationTests.SignedNegativePermissions location, SignedFlagsCompilationTests.SignedNegativePermissions value)
     {
-        ref int locationRaw = ref Unsafe.As<SignedNegativePermissions, int>(ref location);
-        int resultRaw = Interlocked.Exchange(ref locationRaw, Unsafe.As<SignedNegativePermissions, int>(ref value));
-        return Unsafe.As<int, SignedNegativePermissions>(ref resultRaw);
+        ref int locationRaw = ref Unsafe.As<SignedFlagsCompilationTests.SignedNegativePermissions, int>(ref location);
+        int resultRaw = Interlocked.Exchange(ref locationRaw, Unsafe.As<SignedFlagsCompilationTests.SignedNegativePermissions, int>(ref value));
+        return Unsafe.As<int, SignedFlagsCompilationTests.SignedNegativePermissions>(ref resultRaw);
     }
 }

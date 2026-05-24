@@ -16,67 +16,67 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests;
 public static partial class SignedNegativePermissionsFactory
 {
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.Parse(string, bool)"/>
-    public static SignedNegativePermissions Parse(string value, bool ignoreCase = false)
+    public static SignedFlagsCompilationTests.SignedNegativePermissions Parse(string value, bool ignoreCase = false)
     {
         if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
         TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
-        return (SignedNegativePermissions)result;
+        return (SignedFlagsCompilationTests.SignedNegativePermissions)result;
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.Parse(System.ReadOnlySpan{char}, bool)"/>
-    public static SignedNegativePermissions Parse(ReadOnlySpan<char> value, bool ignoreCase = false)
+    public static SignedFlagsCompilationTests.SignedNegativePermissions Parse(ReadOnlySpan<char> value, bool ignoreCase = false)
     {
         TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
-        return (SignedNegativePermissions)result;
+        return (SignedFlagsCompilationTests.SignedNegativePermissions)result;
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.ParseOrNull(string, bool)"/>
     [return: NotNullIfNotNull("value")]
-    public static SignedNegativePermissions? ParseOrNull(string? value, bool ignoreCase = false)
+    public static SignedFlagsCompilationTests.SignedNegativePermissions? ParseOrNull(string? value, bool ignoreCase = false)
     {
         if (value is null) return null;
         TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
-        return (SignedNegativePermissions)result;
+        return (SignedFlagsCompilationTests.SignedNegativePermissions)result;
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.TryParse(string, bool, out TEnum)"/>
-    public static bool TryParse([NotNullWhen(true)] string? value, bool ignoreCase, out SignedNegativePermissions result)
+    public static bool TryParse([NotNullWhen(true)] string? value, bool ignoreCase, out SignedFlagsCompilationTests.SignedNegativePermissions result)
     {
         Unsafe.SkipInit(out result);
-        return TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<SignedNegativePermissions, int>(ref result));
+        return TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<SignedFlagsCompilationTests.SignedNegativePermissions, int>(ref result));
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.TryParse(string, out TEnum)"/>
-    public static bool TryParse([NotNullWhen(true)] string? value, out SignedNegativePermissions result)
+    public static bool TryParse([NotNullWhen(true)] string? value, out SignedFlagsCompilationTests.SignedNegativePermissions result)
     {
         Unsafe.SkipInit(out result);
-        return TryParseName(value.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<SignedNegativePermissions, int>(ref result));
+        return TryParseName(value.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<SignedFlagsCompilationTests.SignedNegativePermissions, int>(ref result));
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.TryParse(string, bool)"/>
-    public static SignedNegativePermissions? TryParse(string? value, bool ignoreCase = false)
+    public static SignedFlagsCompilationTests.SignedNegativePermissions? TryParse(string? value, bool ignoreCase = false)
     {
-        return TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (SignedNegativePermissions?)result : null;
+        return TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (SignedFlagsCompilationTests.SignedNegativePermissions?)result : null;
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.TryParse(System.ReadOnlySpan{char}, bool, out TEnum)"/>
-    public static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, out SignedNegativePermissions result)
+    public static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, out SignedFlagsCompilationTests.SignedNegativePermissions result)
     {
         Unsafe.SkipInit(out result);
-        return TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<SignedNegativePermissions, int>(ref result));
+        return TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<SignedFlagsCompilationTests.SignedNegativePermissions, int>(ref result));
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.TryParse(System.ReadOnlySpan{char}, out TEnum)"/>
-    public static bool TryParse(ReadOnlySpan<char> value, out SignedNegativePermissions result)
+    public static bool TryParse(ReadOnlySpan<char> value, out SignedFlagsCompilationTests.SignedNegativePermissions result)
     {
         Unsafe.SkipInit(out result);
-        return TryParseName(value, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<SignedNegativePermissions, int>(ref result));
+        return TryParseName(value, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<SignedFlagsCompilationTests.SignedNegativePermissions, int>(ref result));
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.TryParse(System.ReadOnlySpan{char}, bool)"/>
-    public static SignedNegativePermissions? TryParse(ReadOnlySpan<char> value, bool ignoreCase = false)
+    public static SignedFlagsCompilationTests.SignedNegativePermissions? TryParse(ReadOnlySpan<char> value, bool ignoreCase = false)
     {
-        return TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (SignedNegativePermissions?)result : null;
+        return TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (SignedFlagsCompilationTests.SignedNegativePermissions?)result : null;
     }
 
     private static bool TryParseName(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out int result)
@@ -177,11 +177,11 @@ public static partial class SignedNegativePermissionsFactory
 
     /// <summary>Retrieves an array of the values of the constants in the SignedNegativePermissions enumeration.</summary>
     /// <returns>An array that contains the values of the constants in SignedNegativePermissions.</returns>
-    public static SignedNegativePermissions[] GetValues()
+    public static SignedFlagsCompilationTests.SignedNegativePermissions[] GetValues()
     {
         return new[]
         {
-            (SignedNegativePermissions)(-1),
+            (SignedFlagsCompilationTests.SignedNegativePermissions)(-1),
         };
     }
 
