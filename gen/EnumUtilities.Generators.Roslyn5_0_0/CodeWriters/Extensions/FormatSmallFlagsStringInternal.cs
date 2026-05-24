@@ -30,8 +30,7 @@ public static class FormatSmallFlagsStringInternal
         bool lengthTableIsRva
     )
     {
-        var bitCount = model.GetMappedBitCount();
-        var tableLength = (uint)Math.Pow(2, bitCount);
+        var tableLength = 1u << model.GetMappedBitCount();
 
         if (lengthTableIsRva)
         {
@@ -78,8 +77,7 @@ public static class FormatSmallFlagsStringInternal
         string type
     )
     {
-        var bitCount = model.GetMappedBitCount();
-        var tableLength = (uint)Math.Pow(2, bitCount);
+        var tableLength = 1u << model.GetMappedBitCount();
 
         writer.Write($"private static readonly string[] s_format{type}s = new string[{tableLength}] {{ ");
         writer.Write(model.HasZeroMember ? keySelector(model.ZeroMember).ToQuotedStringLiteral() : "\"0\"");
@@ -116,8 +114,7 @@ public static class FormatSmallFlagsStringInternal
         EnumFormatDefinition formatDefinition
     )
     {
-        var bitCount = model.GetMappedBitCount();
-        var tableLength = (uint)Math.Pow(2, bitCount);
+        var tableLength = 1u << model.GetMappedBitCount();
         var unSigType = model.BitCount > 32 ? "ulong" : "uint";
         var nullableSign = formatDefinition.AllowNumbers ? "" : "?";
         TextSegment returnValue = formatDefinition.AllowNumbers
@@ -149,8 +146,7 @@ public static class FormatSmallFlagsStringInternal
         EnumFormatDefinition formatDefinition
     )
     {
-        var bitCount = model.GetMappedBitCount();
-        var tableLength = (uint)Math.Pow(2, bitCount);
+        var tableLength = 1u << model.GetMappedBitCount();
         var unSigType = model.BitCount > 32 ? "ulong" : "uint";
         var nullableSign = formatDefinition.AllowNumbers ? "" : "?";
         TextSegment returnValue = formatDefinition.AllowNumbers
