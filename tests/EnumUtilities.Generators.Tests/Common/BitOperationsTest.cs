@@ -5,6 +5,30 @@ namespace Raiqub.Generators.EnumUtilities.Generators.Tests.Common;
 public class BitOperationsTest
 {
     [Theory]
+    [InlineData(0ul, false)]
+    [InlineData(1ul, true)]
+    [InlineData(2ul, true)]
+    [InlineData(3ul, false)]
+    [InlineData(4ul, true)]
+    [InlineData(ulong.MaxValue, false)]
+    public static void BitOpsIsPow2(ulong n, bool expected)
+    {
+        bool actual = BitOperations.IsPow2(n);
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
+    [InlineData(0ul, 0)]
+    [InlineData(1ul, 1)]
+    [InlineData(0b1011ul, 3)]
+    [InlineData(ulong.MaxValue, 64)]
+    public static void BitOpsPopCount(ulong n, int expected)
+    {
+        int actual = BitOperations.PopCount(n);
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
     [InlineData(0u, 32)]
     [InlineData(0b1u, 31)]
     [InlineData(0b10u, 30)]
