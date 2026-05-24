@@ -1,5 +1,7 @@
-﻿using System.Reflection;
+﻿using System.Globalization;
+using System.Reflection;
 using Raiqub.Generators.EnumUtilities.CodeWriters.Extensions;
+using Raiqub.Generators.EnumUtilities.Common;
 using Raiqub.Generators.EnumUtilities.Models;
 using Raiqub.Generators.InterpolationCodeWriter;
 
@@ -63,9 +65,33 @@ public class EnumExtensionsWriter : ICodeWriter<EnumToGenerate>
 
         writer.PushIndent();
 
+        if (model.IsFlags)
+        {
+            WriteFlagsFields(writer, model);
+            writer.WriteLine();
+        }
+
         writer.WriteAll(s_modules, model, static w => w.WriteLine());
 
         writer.PopIndent();
         writer.WriteLine('}');
+    }
+
+    private static void WriteFlagsFields(SourceTextWriter writer, EnumToGenerate model)
+    {
+        var validFlags = FormatValidFlagsMask(model);
+        writer.WriteLine($"private const {model.UnderlyingType} ValidFlagsMask = {validFlags};");
+    }
+
+    private static string FormatValidFlagsMask(EnumToGenerate model)
+    {
+        if (!model.IsUnsigned)
+        {
+            return model.FlagsInfo!.ValidFlagsMaskSigned.ToString(CultureInfo.InvariantCulture);
+        }
+
+        var validFlags = model.FlagsInfo!.ValidFlagsMaskUnsigned;
+        var numSuffix = CSharpExtensions.GetNumericSuffixFromCSharpKeyword(model.UnderlyingType);
+        return $"{validFlags}{numSuffix}";
     }
 }

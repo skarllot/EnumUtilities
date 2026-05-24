@@ -1,27 +1,23 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Testing;
 
 namespace Raiqub.Generators.EnumUtilities.Generators.Tests.Common;
 
 public static class CompilationSymbolFactory
 {
-    public static INamedTypeSymbol GetEnumSymbol(string enumSourceCode)
+    public static async Task<INamedTypeSymbol> GetEnumSymbol(string enumSourceCode)
     {
         var compilation = CSharpCompilation.Create(
             "TestAssembly",
             syntaxTrees: [CSharpSyntaxTree.ParseText(enumSourceCode)],
-            references: AppDomain
-                .CurrentDomain.GetAssemblies()
-                .Append(typeof(EnumGeneratorAttribute).Assembly)
-                .Where(a => !a.IsDynamic && !string.IsNullOrWhiteSpace(a.Location))
-                .Select(a => MetadataReference.CreateFromFile(a.Location))
+            references: await ResolveReferenceAssemblies()
         );
 
         var syntaxTree = compilation.SyntaxTrees.First();
         var semanticModel = compilation.GetSemanticModel(syntaxTree);
 
-        var enumDeclaration = syntaxTree
-            .GetRoot()
+        var enumDeclaration = (await syntaxTree.GetRootAsync())
             .DescendantNodes()
             .OfType<Microsoft.CodeAnalysis.CSharp.Syntax.EnumDeclarationSyntax>()
             .First();
@@ -29,4 +25,10 @@ public static class CompilationSymbolFactory
         return semanticModel.GetDeclaredSymbol(enumDeclaration)
             ?? throw new InvalidOperationException("Enum symbol not found");
     }
+
+    private static async Task<IEnumerable<MetadataReference>> ResolveReferenceAssemblies() =>
+        [
+            .. await ReferenceAssemblies.Net.Net80.ResolveAsync(LanguageNames.CSharp, CancellationToken.None),
+            MetadataReference.CreateFromFile(typeof(EnumGeneratorAttribute).Assembly.Location),
+        ];
 }

@@ -12,7 +12,18 @@ public sealed class ExtensionsDefaultBlock : ICodeWriterModule<EnumToGenerate>
 
     public void Write(SourceTextWriter writer, EnumToGenerate model)
     {
-        WriteToStringFast(writer, model);
+        FormatStringInternal.Write(
+            writer: writer,
+            model: model,
+            new EnumFormatDefinition
+            {
+                XmlRefType = "Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}",
+                ToStringMethodName = "ToStringFast",
+                GetStringLengthMethodName = "GetStringLength",
+                Type = "Name",
+                KeySelector = static x => x.MemberName,
+            }
+        );
 
         if (model.IsFlags)
         {
@@ -21,27 +32,7 @@ public sealed class ExtensionsDefaultBlock : ICodeWriterModule<EnumToGenerate>
         }
 
         writer.WriteLine();
-        WriteGetStringLength(writer, model);
-        writer.WriteLine();
         WriteIsDefined(writer, model);
-
-        writer.WriteLine();
-        FormatStringInternal.Write(writer, model, static x => x.MemberName, "Name");
-    }
-
-    private static void WriteToStringFast(SourceTextWriter writer, EnumToGenerate model)
-    {
-        writer.WriteLine(
-            $$"""
-            /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
-            /// <returns>The string representation of the value of this instance.</returns>
-            public static string ToStringFast(this {{model.RefName}} value)
-            {
-                return {{(model.IsFlags ? "FormatFlagNames" : "GetNameInlined")}}(({{model.UnderlyingType}})value)
-                    ?? (({{model.UnderlyingType}})value).ToString();
-            }
-            """
-        );
     }
 
     private static void WriteHasFlagFast(SourceTextWriter writer, EnumToGenerate model)
@@ -57,24 +48,6 @@ public sealed class ExtensionsDefaultBlock : ICodeWriterModule<EnumToGenerate>
                 return (value & flag) == flag;
             }
             """
-        );
-    }
-
-    private static void WriteGetStringLength(SourceTextWriter writer, EnumToGenerate model)
-    {
-        writer.WriteLine(
-            $$"""
-              /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
-              /// <param name="value">The value to calculate the number of characters.</param>
-              /// <returns>The number of characters produced by converting the specified value to string.</returns>
-              public static int GetStringLength(this {{model.RefName}} value)
-              {
-                  return {{(
-                      model.IsFlags ? "FormatFlagNamesLength" : "GetNameLengthInlined"
-                  )}}(({{model.UnderlyingType}})value)
-                      ?? EnumNumericFormatter.GetStringLength(({{model.UnderlyingType}})value);
-              }
-              """
         );
     }
 

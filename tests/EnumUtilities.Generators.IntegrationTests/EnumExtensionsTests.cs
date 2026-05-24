@@ -12,10 +12,95 @@ public class EnumExtensionsTests
     [InlineData((Colours)10)]
     [InlineData((Colours)15)]
     [InlineData((Colours)0)]
+    public void GetStringLengthForFlagEnumReturnsExpectedLength(Colours value)
+    {
+        var expected = value.ToString().Length;
+        var actual = value.GetStringLength();
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
+    [InlineData(RgbColors.Red)]
+    [InlineData(RgbColors.Green)]
+    [InlineData(RgbColors.Green | RgbColors.Blue)]
+    [InlineData(RgbColors.Green | RgbColors.Blue | RgbColors.Red)]
+    [InlineData(RgbColors.Saffron | RgbColors.Cyan)]
+    [InlineData(RgbColors.Amber)] // named secondary composite
+    [InlineData(RgbColors.Lavender)] // named secondary composite at high bit range
+    [InlineData(RgbColors.Magenta)] // named secondary composite wrapping wheel (Violet|Red)
+    [InlineData(RgbColors.Gold)] // named tertiary composite
+    [InlineData(RgbColors.Vermillion)] // named tertiary composite wrapping wheel (Violet|Red|Orange)
+    [InlineData(RgbColors.Purple)] // named tertiary composite at high bit range
+    [InlineData(RgbColors.Amber | RgbColors.Green)] // secondary composite + extra primary bit
+    [InlineData(RgbColors.Gold | RgbColors.Indigo)] // tertiary composite + extra primary bit
+    [InlineData(RgbColors.Saffron | RgbColors.Lavender)] // two secondary composites with no shared bits
+    [InlineData((RgbColors)10_300)]
+    public void GetStringLengthForBigFlagEnumReturnsExpectedLength(RgbColors value)
+    {
+        var expected = value.ToString().Length;
+        var actual = value.GetStringLength();
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
+    [InlineData(Colours.Red)]
+    [InlineData(Colours.Green)]
+    [InlineData(Colours.Green | Colours.Blue)]
+    [InlineData(Colours.Green | Colours.Blue | Colours.Red)]
+    [InlineData((Colours)10)]
+    [InlineData((Colours)15)]
+    [InlineData((Colours)0)]
     public void FastToStringIsSameAsToStringUsingFlagEnum(Colours value)
     {
         string expected = value.ToString();
         string actual = value.ToStringFast();
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
+    [InlineData(RgbColors.Red)]
+    [InlineData(RgbColors.Green)]
+    [InlineData(RgbColors.Green | RgbColors.Blue)]
+    [InlineData(RgbColors.Green | RgbColors.Blue | RgbColors.Red)]
+    [InlineData(RgbColors.Saffron | RgbColors.Cyan)]
+    [InlineData(RgbColors.Saffron)]
+    [InlineData(RgbColors.Amber)] // named secondary composite
+    [InlineData(RgbColors.Lavender)] // named secondary composite at high bit range
+    [InlineData(RgbColors.Magenta)] // named secondary composite wrapping wheel (Violet|Red)
+    [InlineData(RgbColors.Gold)] // named tertiary composite
+    [InlineData(RgbColors.Vermillion)] // named tertiary composite wrapping wheel (Violet|Red|Orange)
+    [InlineData(RgbColors.Purple)] // named tertiary composite at high bit range
+    [InlineData(RgbColors.Amber | RgbColors.Green)] // secondary composite + extra primary bit
+    [InlineData(RgbColors.Gold | RgbColors.Indigo)] // tertiary composite + extra primary bit
+    [InlineData(RgbColors.Saffron | RgbColors.Lavender)] // two secondary composites with no shared bits
+    [InlineData((RgbColors)10_300)]
+    public void FastToStringIsSameAsToStringUsingBigFlagEnum(RgbColors value)
+    {
+        var expected = value.ToString();
+        var actual = value.ToStringFast();
+
+        Assert.Equal(expected.Length, actual.Length);
+        Assert.Equal(expected.Split(", ").OrderBy(x => x), actual.Split(", ").OrderBy(x => x));
+    }
+
+    [Theory]
+    [InlineData(UserRole.None)]
+    [InlineData(UserRole.NormalUser)]
+    [InlineData(UserRole.Custodian)]
+    [InlineData(UserRole.Finance)]
+    [InlineData(UserRole.SuperUser)]
+    [InlineData(UserRole.All)]
+    [InlineData(UserRole.NormalUser | UserRole.Finance)]
+    [InlineData(UserRole.NormalUser | UserRole.Custodian)]
+    [InlineData((UserRole)12)]
+    [InlineData((UserRole)15)]
+    public void GetToStringLengthForFlagEnumWithZeroReturnsExpectedLength(UserRole value)
+    {
+        var expected = value.ToString().Length;
+        var actual = value.GetStringLength();
 
         Assert.Equal(expected, actual);
     }
@@ -29,7 +114,7 @@ public class EnumExtensionsTests
     [InlineData(UserRole.All)]
     [InlineData(UserRole.NormalUser | UserRole.Finance)]
     [InlineData(UserRole.NormalUser | UserRole.Custodian)]
-    [InlineData((UserRole)10)]
+    [InlineData((UserRole)12)]
     [InlineData((UserRole)15)]
     public void FastToStringWithZeroIsSameAsToStringUsingFlagEnum(UserRole value)
     {
@@ -80,7 +165,7 @@ public class EnumExtensionsTests
     [InlineData(UserRole.All)]
     [InlineData(UserRole.NormalUser | UserRole.Finance)]
     [InlineData(UserRole.NormalUser | UserRole.Custodian)]
-    [InlineData((UserRole)10)]
+    [InlineData((UserRole)12)]
     [InlineData((UserRole)15)]
     public void GetStringLengthWithZeroIsSameAsToStringUsingFlagEnum(UserRole value)
     {
