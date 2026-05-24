@@ -61,7 +61,7 @@ public sealed class EnumFlagsInfo(EnumToGenerate model)
         var found = new List<EnumValue>(model.UniqueValues.Count);
         foreach (var item in model.InvertedValues)
         {
-            if (item.BinaryValue <= 0 || (value & item.BinaryValue) != item.BinaryValue)
+            if (item.BinaryValue <= 0 || (remaining & item.BinaryValue) != item.BinaryValue)
             {
                 continue;
             }
