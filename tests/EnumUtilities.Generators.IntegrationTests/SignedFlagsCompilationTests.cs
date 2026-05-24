@@ -3,21 +3,17 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests;
 public class SignedFlagsCompilationTests
 {
     [Fact]
-    public void ToStringFastForSignedNegativeFlagsEnumReturnsName()
+    public void SignedNegativeFlagsEnumCanBeGenerated()
     {
-        Assert.Equal("All", SignedNegativePermissions.All.ToStringFast());
+        var value = SignedNegativePermissions.All;
+        Assert.Equal(value.ToString(), value.ToStringFast());
+        Assert.Equal(value.ToString().Length, value.GetStringLength());
     }
 
     [Fact]
     public void ToStringFastForSignedNegativeFlagsEnumZeroReturnsNumeric()
     {
         Assert.Equal("0", ((SignedNegativePermissions)0).ToStringFast());
-    }
-
-    [Fact]
-    public void GetStringLengthForSignedNegativeFlagsEnumReturnsNameLength()
-    {
-        Assert.Equal("All".Length, SignedNegativePermissions.All.GetStringLength());
     }
 
     [Fact]
