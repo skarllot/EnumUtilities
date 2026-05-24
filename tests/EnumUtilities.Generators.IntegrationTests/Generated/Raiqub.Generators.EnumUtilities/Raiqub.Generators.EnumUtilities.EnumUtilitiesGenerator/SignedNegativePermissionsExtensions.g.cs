@@ -80,7 +80,7 @@ public static partial class SignedNegativePermissionsExtensions
 
         if (remaining == 0)
         {
-            return global::Raiqub.Generators.EnumUtilities.Formatters.EnumStringFormatter.WriteMultipleFoundFlagsNames(s_formatNames, foundItems.Slice(0, foundItemsCount), charCount);
+            return global::Raiqub.Generators.EnumUtilities.Formatters.EnumStringFormatter.WriteMultipleFoundFlagsNames(s_formatNames!, foundItems.Slice(0, foundItemsCount), charCount);
         }
 
         do
@@ -93,7 +93,7 @@ public static partial class SignedNegativePermissionsExtensions
             remaining &= remaining - 1;
         } while (remaining != 0);
 
-        return global::Raiqub.Generators.EnumUtilities.Formatters.EnumStringFormatter.WriteMultipleFoundFlagsNames(s_formatNames, foundItems.Slice(0, foundItemsCount), charCount);
+        return global::Raiqub.Generators.EnumUtilities.Formatters.EnumStringFormatter.WriteMultipleFoundFlagsNames(s_formatNames!, foundItems.Slice(0, foundItemsCount), charCount);
     }
 
     private static int GetNameStringLengthForMultipleFlags(int value)

@@ -307,7 +307,7 @@ public static class FormatFlagsStringInternal
 
                 if (remaining == 0)
                 {
-                    return global::Raiqub.Generators.EnumUtilities.Formatters.EnumStringFormatter.WriteMultipleFoundFlagsNames(s_format{{formatDefinition.Type}}s, foundItems.Slice(0, foundItemsCount), charCount);
+                    return global::Raiqub.Generators.EnumUtilities.Formatters.EnumStringFormatter.WriteMultipleFoundFlagsNames(s_format{{formatDefinition.Type}}s!, foundItems.Slice(0, foundItemsCount), charCount);
                 }
                 """
             );
@@ -326,7 +326,7 @@ public static class FormatFlagsStringInternal
                     remaining &= remaining - 1;
                 } while (remaining != 0);
 
-                return global::Raiqub.Generators.EnumUtilities.Formatters.EnumStringFormatter.WriteMultipleFoundFlagsNames(s_format{{formatDefinition.Type}}s, foundItems.Slice(0, foundItemsCount), charCount);
+                return global::Raiqub.Generators.EnumUtilities.Formatters.EnumStringFormatter.WriteMultipleFoundFlagsNames(s_format{{formatDefinition.Type}}s!, foundItems.Slice(0, foundItemsCount), charCount);
                 """
             );
         }
@@ -345,7 +345,7 @@ public static class FormatFlagsStringInternal
                     remaining &= remaining - 1;
                 } while (remaining != 0);
 
-                return global::Raiqub.Generators.EnumUtilities.Formatters.EnumStringFormatter.WriteMultipleFoundFlagsNames(s_format{{formatDefinition.Type}}s, foundItems.Slice(0, foundItemsCount), charCount);
+                return global::Raiqub.Generators.EnumUtilities.Formatters.EnumStringFormatter.WriteMultipleFoundFlagsNames(s_format{{formatDefinition.Type}}s!, foundItems.Slice(0, foundItemsCount), charCount);
                 """
             );
         }

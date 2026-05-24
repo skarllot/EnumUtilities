@@ -17,7 +17,7 @@ public static class EnumStringFormatter
     /// <returns>A string that represents the names of the found flags, separated by commas.</returns>
     /// <exception cref="OverflowException">Thrown if the computed string length exceeds the capacity of an <see cref="int"/>.</exception>
     public static string WriteMultipleFoundFlagsNames(
-        ReadOnlySpan<string?> names,
+        ReadOnlySpan<string> names,
         ReadOnlySpan<int> foundItems,
         int stringLength
     )
@@ -27,7 +27,7 @@ public static class EnumStringFormatter
 
         if (foundItems.Length == 1)
         {
-            return names[foundItems[0]]!;
+            return names[foundItems[0]];
         }
 
         const int separatorStringLength = 2;
@@ -52,11 +52,11 @@ public static class EnumStringFormatter
     }
 
     private readonly ref struct FlagsNamesStringCreationContext(
-        ReadOnlySpan<string?> names,
+        ReadOnlySpan<string> names,
         ReadOnlySpan<int> foundItems
     )
     {
-        private readonly ReadOnlySpan<string?> _names = names;
+        private readonly ReadOnlySpan<string> _names = names;
         private readonly ReadOnlySpan<int> _foundItems = foundItems;
 
 #if NET9_0_OR_GREATER
@@ -65,16 +65,16 @@ public static class EnumStringFormatter
             context.Fill(destination);
         }
 #else
-        public static void Fill(Span<char> destination, ReadOnlySpan<string?> singleNames, ReadOnlySpan<int> foundItems)
+        public static void Fill(Span<char> destination, ReadOnlySpan<string> names, ReadOnlySpan<int> foundItems)
         {
-            new FlagsNamesStringCreationContext(singleNames, foundItems).Fill(destination);
+            new FlagsNamesStringCreationContext(names, foundItems).Fill(destination);
         }
 #endif
 
         private void Fill(Span<char> destination)
         {
             var foundItemsCount = _foundItems.Length;
-            var name = _names[_foundItems[--foundItemsCount]]!;
+            var name = _names[_foundItems[--foundItemsCount]];
             name.AsSpan().CopyTo(destination);
             destination = destination.Slice(name.Length);
             while (--foundItemsCount >= 0)
@@ -83,7 +83,7 @@ public static class EnumStringFormatter
                 destination[1] = ' ';
                 destination = destination.Slice(2);
 
-                name = _names[_foundItems[foundItemsCount]]!;
+                name = _names[_foundItems[foundItemsCount]];
                 name.AsSpan().CopyTo(destination);
                 destination = destination.Slice(name.Length);
             }
