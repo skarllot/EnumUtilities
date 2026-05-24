@@ -1,10 +1,10 @@
 ```
 
-BenchmarkDotNet v0.14.0, Windows 11 (10.0.22631.4169/23H2/2023Update/SunValley3)
-AMD Ryzen 5 1600, 1 CPU, 12 logical and 6 physical cores
-.NET SDK 8.0.402
-  [Host]    : .NET 8.0.8 (8.0.824.36612), X64 RyuJIT AVX2
-  MediumRun : .NET 8.0.8 (8.0.824.36612), X64 RyuJIT AVX2
+BenchmarkDotNet v0.15.8, Windows 11 (10.0.26200.8246/25H2/2025Update/HudsonValley2)
+AMD Ryzen 5 1600 3.20GHz, 1 CPU, 12 logical and 6 physical cores
+.NET SDK 10.0.203
+  [Host]    : .NET 10.0.7 (10.0.7, 10.0.726.21808), X64 RyuJIT x86-64-v3
+  MediumRun : .NET 10.0.7 (10.0.7, 10.0.726.21808), X64 RyuJIT x86-64-v3
 
 Job=MediumRun  Arguments=Default  NuGetReferences=Default  
 IterationCount=15  LaunchCount=2  WarmupCount=10  
@@ -12,32 +12,32 @@ IterationCount=15  LaunchCount=2  WarmupCount=10
 ```
 | Method               | Permissions          | Mean          | Error      | StdDev     | Median        | Ratio | RatioSD | Gen0   | Allocated | Alloc Ratio |
 |--------------------- |--------------------- |--------------:|-----------:|-----------:|--------------:|------:|--------:|-------:|----------:|------------:|
-| **BuiltInToString**      | **None**                 |    **17.4106 ns** |  **0.5216 ns** |  **0.7807 ns** |    **17.2003 ns** |  **1.00** |    **0.06** | **0.0057** |      **24 B** |        **1.00** |
-| FastEnumToString     | None                 |     1.7633 ns |  0.0314 ns |  0.0461 ns |     1.7427 ns |  0.10 |    0.00 |      - |         - |        0.00 |
-| EnumsNetAsString     | None                 |    10.7569 ns |  0.1239 ns |  0.1816 ns |    10.8469 ns |  0.62 |    0.03 |      - |         - |        0.00 |
-| NetEscapadesToString | None                 |     0.8065 ns |  0.0080 ns |  0.0109 ns |     0.8033 ns |  0.05 |    0.00 |      - |         - |        0.00 |
-| RaiqubToString       | None                 |     4.9437 ns |  0.0668 ns |  0.0936 ns |     4.8902 ns |  0.28 |    0.01 |      - |         - |        0.00 |
+| **BuiltInToString**      | **None**                 |    **17.4874 ns** |  **0.0998 ns** |  **0.1366 ns** |    **17.4121 ns** | **1.000** |    **0.01** | **0.0057** |      **24 B** |        **1.00** |
+| FastEnumToString     | None                 |     1.4744 ns |  0.0868 ns |  0.1299 ns |     1.4988 ns | 0.084 |    0.01 |      - |         - |        0.00 |
+| EnumsNetAsString     | None                 |     5.5647 ns |  0.2225 ns |  0.3119 ns |     5.4315 ns | 0.318 |    0.02 |      - |         - |        0.00 |
+| NetEscapadesToString | None                 |     1.1471 ns |  0.1974 ns |  0.2894 ns |     0.8762 ns | 0.066 |    0.02 |      - |         - |        0.00 |
+| RaiqubToString       | None                 |     0.0332 ns |  0.0012 ns |  0.0017 ns |     0.0341 ns | 0.002 |    0.00 |      - |         - |        0.00 |
 |                      |                      |               |            |            |               |       |         |        |           |             |
-| **BuiltInToString**      | **Read, Write**          |    **54.7734 ns** |  **0.5244 ns** |  **0.7849 ns** |    **54.8739 ns** |  **1.00** |    **0.02** | **0.0172** |      **72 B** |        **1.00** |
-| FastEnumToString     | Read, Write          |     3.3109 ns |  0.0182 ns |  0.0249 ns |     3.3064 ns |  0.06 |    0.00 |      - |         - |        0.00 |
-| EnumsNetAsString     | Read, Write          |    60.5186 ns |  0.6323 ns |  0.8864 ns |    60.3551 ns |  1.11 |    0.02 | 0.0362 |     152 B |        2.11 |
-| NetEscapadesToString | Read, Write          |    59.1108 ns |  0.9027 ns |  1.2655 ns |    59.0186 ns |  1.08 |    0.03 | 0.0172 |      72 B |        1.00 |
-| RaiqubToString       | Read, Write          |    32.8484 ns |  0.4131 ns |  0.6055 ns |    32.6146 ns |  0.60 |    0.01 | 0.0114 |      48 B |        0.67 |
+| **BuiltInToString**      | **Read, Write**          |    **46.7411 ns** |  **0.2301 ns** |  **0.3300 ns** |    **46.7614 ns** |  **1.00** |    **0.01** | **0.0172** |      **72 B** |        **1.00** |
+| FastEnumToString     | Read, Write          |     2.2687 ns |  0.0045 ns |  0.0065 ns |     2.2678 ns |  0.05 |    0.00 |      - |         - |        0.00 |
+| EnumsNetAsString     | Read, Write          |    47.7228 ns |  0.0789 ns |  0.1156 ns |    47.6890 ns |  1.02 |    0.01 | 0.0363 |     152 B |        2.11 |
+| NetEscapadesToString | Read, Write          |    48.1987 ns |  0.0930 ns |  0.1363 ns |    48.1500 ns |  1.03 |    0.01 | 0.0172 |      72 B |        1.00 |
+| RaiqubToString       | Read, Write          |    31.1593 ns |  0.0223 ns |  0.0305 ns |    31.1624 ns |  0.67 |    0.00 | 0.0114 |      48 B |        0.67 |
 |                      |                      |               |            |            |               |       |         |        |           |             |
-| **BuiltInToString**      | **Delet(...) Move [39]** |    **79.4866 ns** |  **0.9360 ns** |  **1.3719 ns** |    **79.3398 ns** |  **1.00** |    **0.02** | **0.0305** |     **128 B** |        **1.00** |
-| FastEnumToString     | Delet(...) Move [39] |    12.5736 ns |  0.2004 ns |  0.2676 ns |    12.5551 ns |  0.16 |    0.00 | 0.0076 |      32 B |        0.25 |
-| EnumsNetAsString     | Delet(...) Move [39] |   192.3880 ns |  1.7609 ns |  2.4104 ns |   192.2929 ns |  2.42 |    0.05 | 0.1070 |     448 B |        3.50 |
-| NetEscapadesToString | Delet(...) Move [39] |    79.8912 ns |  2.4930 ns |  3.5754 ns |    80.3421 ns |  1.01 |    0.05 | 0.0305 |     128 B |        1.00 |
-| RaiqubToString       | Delet(...) Move [39] |    72.0406 ns |  3.3867 ns |  5.0690 ns |    73.7853 ns |  0.91 |    0.06 | 0.0248 |     104 B |        0.81 |
+| **BuiltInToString**      | **Delet(...) Move [39]** |    **73.0326 ns** |  **0.3251 ns** |  **0.4866 ns** |    **72.9973 ns** |  **1.00** |    **0.01** | **0.0305** |     **128 B** |        **1.00** |
+| FastEnumToString     | Delet(...) Move [39] |     8.7676 ns |  0.0338 ns |  0.0463 ns |     8.7739 ns |  0.12 |    0.00 | 0.0076 |      32 B |        0.25 |
+| EnumsNetAsString     | Delet(...) Move [39] |   206.9221 ns |  2.0908 ns |  3.0647 ns |   208.4672 ns |  2.83 |    0.05 | 0.1070 |     448 B |        3.50 |
+| NetEscapadesToString | Delet(...) Move [39] |    74.6500 ns |  0.2434 ns |  0.3568 ns |    74.6921 ns |  1.02 |    0.01 | 0.0305 |     128 B |        1.00 |
+| RaiqubToString       | Delet(...) Move [39] |    61.4850 ns |  0.4252 ns |  0.6099 ns |    61.7614 ns |  0.84 |    0.01 | 0.0248 |     104 B |        0.81 |
 |                      |                      |               |            |            |               |       |         |        |           |             |
-| **BuiltInToString**      | **Restore**              |    **31.8871 ns** |  **0.2496 ns** |  **0.3499 ns** |    **31.9096 ns** |  **1.00** |    **0.02** | **0.0057** |      **24 B** |        **1.00** |
-| FastEnumToString     | Restore              |    10.1447 ns |  0.0447 ns |  0.0641 ns |    10.1164 ns |  0.32 |    0.00 |      - |         - |        0.00 |
-| EnumsNetAsString     | Restore              |    17.8343 ns |  0.1750 ns |  0.2396 ns |    17.8997 ns |  0.56 |    0.01 |      - |         - |        0.00 |
-| NetEscapadesToString | Restore              |     0.8086 ns |  0.0115 ns |  0.0165 ns |     0.8011 ns |  0.03 |    0.00 |      - |         - |        0.00 |
-| RaiqubToString       | Restore              |     5.2155 ns |  0.0503 ns |  0.0688 ns |     5.1904 ns |  0.16 |    0.00 |      - |         - |        0.00 |
+| **BuiltInToString**      | **Restore**              |    **25.3401 ns** |  **0.0445 ns** |  **0.0639 ns** |    **25.3393 ns** | **1.000** |    **0.00** | **0.0057** |      **24 B** |        **1.00** |
+| FastEnumToString     | Restore              |     8.9716 ns |  0.0613 ns |  0.0898 ns |     8.9854 ns | 0.354 |    0.00 |      - |         - |        0.00 |
+| EnumsNetAsString     | Restore              |    14.3311 ns |  0.1197 ns |  0.1754 ns |    14.4213 ns | 0.566 |    0.01 |      - |         - |        0.00 |
+| NetEscapadesToString | Restore              |     0.8710 ns |  0.0066 ns |  0.0097 ns |     0.8721 ns | 0.034 |    0.00 |      - |         - |        0.00 |
+| RaiqubToString       | Restore              |     0.0630 ns |  0.0641 ns |  0.0919 ns |     0.0397 ns | 0.002 |    0.00 |      - |         - |        0.00 |
 |                      |                      |               |            |            |               |       |         |        |           |             |
-| **BuiltInToString**      | **Read(...)lock [245]**  |   **294.0483 ns** | **19.8665 ns** | **29.7352 ns** |   **298.3516 ns** |  **1.01** |    **0.14** | **0.1278** |     **536 B** |        **1.00** |
-| FastEnumToString     | Read(...)lock [245]  |    16.9184 ns |  0.3611 ns |  0.5405 ns |    16.7432 ns |  0.06 |    0.01 | 0.0115 |      48 B |        0.09 |
-| EnumsNetAsString     | Read(...)lock [245]  | 1,214.1650 ns | 16.6086 ns | 23.8195 ns | 1,214.4279 ns |  4.17 |    0.43 | 0.3300 |    1384 B |        2.58 |
-| NetEscapadesToString | Read(...)lock [245]  |   315.3307 ns | 17.9389 ns | 26.8501 ns |   321.4061 ns |  1.08 |    0.14 | 0.1278 |     536 B |        1.00 |
-| RaiqubToString       | Read(...)lock [245]  |   394.1485 ns |  3.4109 ns |  5.1053 ns |   394.7210 ns |  1.35 |    0.14 | 0.1221 |     512 B |        0.96 |
+| **BuiltInToString**      | **Read(...)lock [245]**  |   **333.3677 ns** |  **7.9372 ns** | **11.8800 ns** |   **336.0245 ns** |  **1.00** |    **0.05** | **0.1278** |     **536 B** |        **1.00** |
+| FastEnumToString     | Read(...)lock [245]  |    12.8933 ns |  0.0400 ns |  0.0535 ns |    12.9064 ns |  0.04 |    0.00 | 0.0115 |      48 B |        0.09 |
+| EnumsNetAsString     | Read(...)lock [245]  | 1,194.8865 ns |  9.9490 ns | 14.5831 ns | 1,197.1256 ns |  3.59 |    0.15 | 0.3300 |    1384 B |        2.58 |
+| NetEscapadesToString | Read(...)lock [245]  |   315.3248 ns | 12.8657 ns | 18.4515 ns |   320.0297 ns |  0.95 |    0.07 | 0.1278 |     536 B |        1.00 |
+| RaiqubToString       | Read(...)lock [245]  |   253.7561 ns |  9.8678 ns | 14.7696 ns |   251.8161 ns |  0.76 |    0.05 | 0.1221 |     512 B |        0.96 |

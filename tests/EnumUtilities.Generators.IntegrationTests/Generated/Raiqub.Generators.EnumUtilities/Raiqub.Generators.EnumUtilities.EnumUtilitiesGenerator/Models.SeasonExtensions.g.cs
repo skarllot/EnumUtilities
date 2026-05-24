@@ -13,40 +13,34 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
 public static partial class SeasonExtensions
 {
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.ToJsonString(TEnum)"/>
+    [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     public static string? ToJsonString(this Season value)
     {
-        return GetJsonStringInlined((int)value);
-    }
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int? GetJsonStringLength(this Season value)
-    {
-        return GetJsonStringLengthInlined((int)value);
-    }
-
-    private static int? GetJsonStringLengthInlined(int value)
-    {
-        return value switch
+        int v = (int)value;
+        return v switch
         {
-            0 => 1,
-            1 => 2,
-            2 => 2,
-            3 => 2,
-            4 => 1,
-            _ => null
-        };
-    }
-
-    private static string? GetJsonStringInlined(int value)
-    {
-        return value switch
-        {
-            0 => "0",
+            0 => null,
             1 => "🌱",
             2 => "☀️",
             3 => "🍂",
             4 => "⛄",
+            _ => null
+        };
+    }
+
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.GetJsonStringLength(TEnum)"/>
+    [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    public static int? GetJsonStringLength(this Season value)
+    {
+        int v = (int)value;
+        return v switch
+        {
+            0 => null,
+            1 => 2,
+            2 => 2,
+            3 => 2,
+            4 => 1,
             _ => null
         };
     }
