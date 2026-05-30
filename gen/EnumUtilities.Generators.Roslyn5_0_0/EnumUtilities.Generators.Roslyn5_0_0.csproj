@@ -33,5 +33,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\src\EnumUtilities\*Attribute.cs" LinkBase="Attributes" />
+    <Compile Include="..\..\src\EnumUtilities\Formatters\EnumNumericFormatter.cs" LinkBase="Common" />
   </ItemGroup>
 </Project>

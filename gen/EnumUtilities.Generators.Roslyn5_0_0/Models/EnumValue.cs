@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 using Microsoft.CodeAnalysis;
 using Raiqub.Generators.EnumUtilities.Common;
 
@@ -8,7 +7,7 @@ namespace Raiqub.Generators.EnumUtilities.Models;
 public sealed record EnumValue(
     string MemberName,
     string MemberValue,
-    ulong RealMemberValue,
+    object ConstantValue,
     int Index,
     string? SerializationValue,
     string? Description,
@@ -19,14 +18,27 @@ public sealed record EnumValue(
     public string ResolvedSerializedValue => SerializationValue ?? MemberName;
     public string ResolvedJsonValue => JsonPropertyName ?? SerializationValue ?? MemberName;
 
-    public long RealMemberSignedValue
-    {
-        get
+    public ulong BinaryValue => MatchAs64Bit(u => u, s => Unsafe.As<long, ulong>(ref s));
+
+    public ulong AsUInt64() =>
+        MatchAs64Bit(u => u, _ => throw new InvalidOperationException("The constant value is signed."));
+
+    public long AsInt64() =>
+        MatchAs64Bit(_ => throw new InvalidOperationException("The constant value is unsigned."), s => s);
+
+    public T MatchAs64Bit<T>(Func<ulong, T> unsigned, Func<long, T> signed) =>
+        ConstantValue switch
         {
-            var tmp = RealMemberValue;
-            return Unsafe.As<ulong, long>(ref tmp);
-        }
-    }
+            byte n => unsigned(n),
+            sbyte n => signed(n),
+            short n => signed(n),
+            ushort n => unsigned(n),
+            int n => signed(n),
+            uint n => unsigned(n),
+            long n => signed(n),
+            ulong n => unsigned(n),
+            _ => throw new InvalidOperationException($"Unexpected constant value type: {ConstantValue.GetType()}"),
+        };
 
     public static EnumValue? FromSymbol(ISymbol symbol, int index)
     {
@@ -58,41 +70,12 @@ public sealed record EnumValue(
         return new EnumValue(
             MemberName: field.Name,
             MemberValue: field.ConstantValue.ToString(),
-            RealMemberValue: ConvertToUInt64(field.ConstantValue),
+            ConstantValue: field.ConstantValue,
             Index: index,
             SerializationValue: serializationValue,
             Description: description,
             Display: display,
             JsonPropertyName: jsonPropertyName
         );
-    }
-
-    private static ulong ConvertToUInt64(object realMemberValue)
-    {
-        long tmp;
-        switch (realMemberValue)
-        {
-            case int v:
-                tmp = v;
-                return Unsafe.As<long, ulong>(ref tmp);
-            case uint v:
-                return v;
-            case long v:
-                return Unsafe.As<long, ulong>(ref v);
-            case ulong v:
-                return v;
-            case byte v:
-                return v;
-            case sbyte v:
-                tmp = v;
-                return Unsafe.As<long, ulong>(ref tmp);
-            case short v:
-                tmp = v;
-                return Unsafe.As<long, ulong>(ref tmp);
-            case ushort v:
-                return v;
-            default:
-                return Convert.ToUInt64(realMemberValue, CultureInfo.InvariantCulture);
-        }
     }
 }
