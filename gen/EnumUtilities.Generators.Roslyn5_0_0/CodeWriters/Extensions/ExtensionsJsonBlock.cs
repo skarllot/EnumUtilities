@@ -13,31 +13,18 @@ public sealed class ExtensionsJsonBlock : ICodeWriterModule<EnumToGenerate>
 
     public void Write(SourceTextWriter writer, EnumToGenerate model)
     {
-        var internalStringMethodName = model.IsFlags ? "FormatFlagJsonStrings" : "GetJsonStringInlined";
-        var internalLengthMethodName = model.IsFlags ? "FormatFlagJsonStringsLength" : "GetJsonStringLengthInlined";
-
-        writer.WriteLine(
-            $$"""
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static string? ToJsonString(this {{model.RefName}} value)
+        FormatStringInternal.Write(
+            writer: writer,
+            model: model,
+            new EnumFormatDefinition
             {
-                return {{internalStringMethodName}}(({{model.UnderlyingType}})value);
+                XmlRefType = "Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}",
+                ToStringMethodName = "ToJsonString",
+                GetStringLengthMethodName = "GetJsonStringLength",
+                Type = "JsonString",
+                KeySelector = static x => x.ResolvedJsonValue,
+                AllowNumbers = false,
             }
-            """
         );
-
-        writer.WriteLine();
-        writer.WriteLine(
-            $$"""
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static int? GetJsonStringLength(this {{model.RefName}} value)
-            {
-                return {{internalLengthMethodName}}(({{model.UnderlyingType}})value);
-            }
-            """
-        );
-
-        writer.WriteLine();
-        FormatStringInternal.Write(writer, model, static x => x.ResolvedJsonValue, "JsonString");
     }
 }

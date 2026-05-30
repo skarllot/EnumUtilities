@@ -14,12 +14,37 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
 public static partial class UserRoleExtensions
 {
-    /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
-    /// <returns>The string representation of the value of this instance.</returns>
+    private const ulong ValidFlagsMask = 11ul;
+
+    private static ReadOnlySpan<byte> s_formatNameLengths => new byte[16] { 4, 10, 9, 21, 1, 1, 1, 1, 7, 19, 9, 3, 2, 2, 2, 2 };
+    private static readonly string[] s_formatNames = new string[16] { "None", "NormalUser", "Custodian", "NormalUser, Custodian", "4", "5", "6", "7", "Finance", "NormalUser, Finance", "SuperUser", "All", "12", "13", "14", "15" };
+
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.ToStringFast(TEnum)"/>
+    [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     public static string ToStringFast(this UserRole value)
     {
-        return FormatFlagNames((ulong)value)
-            ?? ((ulong)value).ToString();
+        if ((ulong)value < 16)
+        {
+            return global::System.Runtime.CompilerServices.Unsafe.Add(
+                ref global::System.Runtime.InteropServices.MemoryMarshal.GetArrayDataReference(s_formatNames),
+                (int)value);
+        }
+
+        return ((ulong)value).ToString();
+    }
+
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.GetStringLength(TEnum)"/>
+    [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    public static int GetStringLength(this UserRole value)
+    {
+        if ((ulong)value < 16)
+        {
+            return global::System.Runtime.CompilerServices.Unsafe.Add(
+                ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(s_formatNameLengths),
+                (int)value);
+        }
+
+        return global::Raiqub.Generators.EnumUtilities.Formatters.EnumNumericFormatter.GetStringLength((ulong)value);
     }
 
     /// <summary>Determines whether one or more bit fields are set in the current instance.</summary>
@@ -31,15 +56,6 @@ public static partial class UserRoleExtensions
         return (value & flag) == flag;
     }
 
-    /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
-    /// <param name="value">The value to calculate the number of characters.</param>
-    /// <returns>The number of characters produced by converting the specified value to string.</returns>
-    public static int GetStringLength(this UserRole value)
-    {
-        return FormatFlagNamesLength((ulong)value)
-            ?? EnumNumericFormatter.GetStringLength((ulong)value);
-    }
-
     /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
     /// <returns><c>true</c> if the value of this instance exists in the enumeration; <c>false</c> otherwise.</returns>
     public static bool IsDefined(this UserRole value)
@@ -49,164 +65,10 @@ public static partial class UserRoleExtensions
             0 => true,
             1 => true,
             2 => true,
-            4 => true,
-            6 => true,
-            7 => true,
+            8 => true,
+            10 => true,
+            11 => true,
             _ => false
-        };
-    }
-
-    private static int? FormatFlagNamesLength(ulong value)
-    {
-        int? fastResult = GetNameLengthInlined(value);
-        if (fastResult is not null)
-        {
-            return fastResult.Value;
-        }
-
-        if (value == 0)
-        {
-            return 1;
-        }
-
-        int count = 0, foundItemsCount = 0;
-        if (true)
-        {
-            if ((value & 7) == 7)
-            {
-                value -= 7;
-                count = checked(count + 3);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 6) == 6)
-            {
-                value -= 6;
-                count = checked(count + 9);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 4) == 4)
-            {
-                value -= 4;
-                count = checked(count + 7);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 2) == 2)
-            {
-                value -= 2;
-                count = checked(count + 9);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 1) == 1)
-            {
-                value -= 1;
-                count = checked(count + 10);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-        }
-
-        if (value != 0)
-        {
-            return null;
-        }
-
-    CountLength:
-        const int separatorStringLength = 2;
-        return checked(count + (separatorStringLength * (foundItemsCount - 1)));
-    }
-
-    private static readonly string[] s_formatNames = new string[6] { "All", "SuperUser", "Finance", "Custodian", "NormalUser", "None" };
-
-    private static string? FormatFlagNames(ulong value)
-    {
-        string? result = GetNameInlined(value);
-        if (result is null)
-        {
-            Span<int> foundItems = stackalloc int[3];
-            if (TryFindFlagsNames(value, foundItems, out int foundItemsCount, out int resultLength))
-            {
-                result = EnumStringFormatter.WriteMultipleFoundFlagsNames(s_formatNames, foundItems.Slice(0, foundItemsCount), resultLength);
-            }
-        }
-
-        return result;
-    }
-
-    private static bool TryFindFlagsNames(ulong value, Span<int> foundItems, out int foundItemsCount, out int resultLength)
-    {
-        resultLength = 0;
-        foundItemsCount = 0;
-        if (true)
-        {
-            if ((value & 7) == 7)
-            {
-                value -= 7;
-                resultLength = checked(resultLength + 3);
-                foundItems[foundItemsCount++] = 0;
-                if (value == 0) return true;
-            }
-            if ((value & 6) == 6)
-            {
-                value -= 6;
-                resultLength = checked(resultLength + 9);
-                foundItems[foundItemsCount++] = 1;
-                if (value == 0) return true;
-            }
-            if ((value & 4) == 4)
-            {
-                value -= 4;
-                resultLength = checked(resultLength + 7);
-                foundItems[foundItemsCount++] = 2;
-                if (value == 0) return true;
-            }
-            if ((value & 2) == 2)
-            {
-                value -= 2;
-                resultLength = checked(resultLength + 9);
-                foundItems[foundItemsCount++] = 3;
-                if (value == 0) return true;
-            }
-            if ((value & 1) == 1)
-            {
-                value -= 1;
-                resultLength = checked(resultLength + 10);
-                foundItems[foundItemsCount++] = 4;
-                if (value == 0) return true;
-            }
-        }
-
-        return value == 0;
-    }
-
-    private static int? GetNameLengthInlined(ulong value)
-    {
-        return value switch
-        {
-            0 => 4,
-            1 => 10,
-            2 => 9,
-            4 => 7,
-            6 => 9,
-            7 => 3,
-            _ => null
-        };
-    }
-
-    private static string? GetNameInlined(ulong value)
-    {
-        return value switch
-        {
-            0 => "None",
-            1 => "NormalUser",
-            2 => "Custodian",
-            4 => "Finance",
-            6 => "SuperUser",
-            7 => "All",
-            _ => null
         };
     }
 
@@ -265,169 +127,34 @@ public static partial class UserRoleExtensions
         return Unsafe.As<long, UserRole>(ref resultRaw);
     }
 
+    private static ReadOnlySpan<byte> s_formatEnumMemberValueLengths => new byte[16] { 4, 11, 9, 22, 1, 1, 1, 1, 7, 20, 10, 3, 2, 2, 2, 2 };
+    private static readonly string[] s_formatEnumMemberValues = new string[16] { "None", "Normal User", "Custodian", "Normal User, Custodian", "4", "5", "6", "7", "Finance", "Normal User, Finance", "Super User", "All", "12", "13", "14", "15" };
+
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.ToEnumMemberValue(TEnum)"/>
+    [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     public static string ToEnumMemberValue(this UserRole value)
     {
-        return FormatFlagEnumMemberValues((ulong)value)
-            ?? ((ulong)value).ToString();
+        if ((ulong)value < 16)
+        {
+            return global::System.Runtime.CompilerServices.Unsafe.Add(
+                ref global::System.Runtime.InteropServices.MemoryMarshal.GetArrayDataReference(s_formatEnumMemberValues),
+                (int)value);
+        }
+
+        return ((ulong)value).ToString();
     }
 
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.GetEnumMemberValueStringLength(TEnum)"/>
+    [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     public static int GetEnumMemberValueStringLength(this UserRole value)
     {
-        return FormatFlagEnumMemberValuesLength((ulong)value)
-            ?? EnumNumericFormatter.GetStringLength((ulong)value);
-    }
-
-    private static int? FormatFlagEnumMemberValuesLength(ulong value)
-    {
-        int? fastResult = GetEnumMemberValueLengthInlined(value);
-        if (fastResult is not null)
+        if ((ulong)value < 16)
         {
-            return fastResult.Value;
+            return global::System.Runtime.CompilerServices.Unsafe.Add(
+                ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(s_formatEnumMemberValueLengths),
+                (int)value);
         }
 
-        if (value == 0)
-        {
-            return 1;
-        }
-
-        int count = 0, foundItemsCount = 0;
-        if (true)
-        {
-            if ((value & 7) == 7)
-            {
-                value -= 7;
-                count = checked(count + 3);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 6) == 6)
-            {
-                value -= 6;
-                count = checked(count + 10);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 4) == 4)
-            {
-                value -= 4;
-                count = checked(count + 7);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 2) == 2)
-            {
-                value -= 2;
-                count = checked(count + 9);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-            if ((value & 1) == 1)
-            {
-                value -= 1;
-                count = checked(count + 11);
-                foundItemsCount++;
-                if (value == 0) goto CountLength;
-            }
-        }
-
-        if (value != 0)
-        {
-            return null;
-        }
-
-    CountLength:
-        const int separatorStringLength = 2;
-        return checked(count + (separatorStringLength * (foundItemsCount - 1)));
-    }
-
-    private static readonly string[] s_formatEnumMemberValues = new string[6] { "All", "Super User", "Finance", "Custodian", "Normal User", "None" };
-
-    private static string? FormatFlagEnumMemberValues(ulong value)
-    {
-        string? result = GetEnumMemberValueInlined(value);
-        if (result is null)
-        {
-            Span<int> foundItems = stackalloc int[3];
-            if (TryFindFlagsEnumMemberValues(value, foundItems, out int foundItemsCount, out int resultLength))
-            {
-                result = EnumStringFormatter.WriteMultipleFoundFlagsNames(s_formatEnumMemberValues, foundItems.Slice(0, foundItemsCount), resultLength);
-            }
-        }
-
-        return result;
-    }
-
-    private static bool TryFindFlagsEnumMemberValues(ulong value, Span<int> foundItems, out int foundItemsCount, out int resultLength)
-    {
-        resultLength = 0;
-        foundItemsCount = 0;
-        if (true)
-        {
-            if ((value & 7) == 7)
-            {
-                value -= 7;
-                resultLength = checked(resultLength + 3);
-                foundItems[foundItemsCount++] = 0;
-                if (value == 0) return true;
-            }
-            if ((value & 6) == 6)
-            {
-                value -= 6;
-                resultLength = checked(resultLength + 10);
-                foundItems[foundItemsCount++] = 1;
-                if (value == 0) return true;
-            }
-            if ((value & 4) == 4)
-            {
-                value -= 4;
-                resultLength = checked(resultLength + 7);
-                foundItems[foundItemsCount++] = 2;
-                if (value == 0) return true;
-            }
-            if ((value & 2) == 2)
-            {
-                value -= 2;
-                resultLength = checked(resultLength + 9);
-                foundItems[foundItemsCount++] = 3;
-                if (value == 0) return true;
-            }
-            if ((value & 1) == 1)
-            {
-                value -= 1;
-                resultLength = checked(resultLength + 11);
-                foundItems[foundItemsCount++] = 4;
-                if (value == 0) return true;
-            }
-        }
-
-        return value == 0;
-    }
-
-    private static int? GetEnumMemberValueLengthInlined(ulong value)
-    {
-        return value switch
-        {
-            0 => 4,
-            1 => 11,
-            2 => 9,
-            4 => 7,
-            6 => 10,
-            7 => 3,
-            _ => null
-        };
-    }
-
-    private static string? GetEnumMemberValueInlined(ulong value)
-    {
-        return value switch
-        {
-            0 => "None",
-            1 => "Normal User",
-            2 => "Custodian",
-            4 => "Finance",
-            6 => "Super User",
-            7 => "All",
-            _ => null
-        };
+        return global::Raiqub.Generators.EnumUtilities.Formatters.EnumNumericFormatter.GetStringLength((ulong)value);
     }
 }
