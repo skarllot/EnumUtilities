@@ -1,10 +1,10 @@
 ```
 
-BenchmarkDotNet v0.14.0, Windows 11 (10.0.22631.4169/23H2/2023Update/SunValley3)
-AMD Ryzen 5 1600, 1 CPU, 12 logical and 6 physical cores
-.NET SDK 8.0.402
-  [Host]    : .NET 8.0.8 (8.0.824.36612), X64 RyuJIT AVX2
-  MediumRun : .NET 8.0.8 (8.0.824.36612), X64 RyuJIT AVX2
+BenchmarkDotNet v0.15.8, Windows 11 (10.0.26200.8246/25H2/2025Update/HudsonValley2)
+AMD Ryzen 5 1600 3.20GHz, 1 CPU, 12 logical and 6 physical cores
+.NET SDK 10.0.203
+  [Host]    : .NET 10.0.7 (10.0.7, 10.0.726.21808), X64 RyuJIT x86-64-v3
+  MediumRun : .NET 10.0.7 (10.0.7, 10.0.726.21808), X64 RyuJIT x86-64-v3
 
 Job=MediumRun  Arguments=Default  NuGetReferences=Default  
 IterationCount=15  LaunchCount=2  WarmupCount=10  
@@ -12,26 +12,26 @@ IterationCount=15  LaunchCount=2  WarmupCount=10
 ```
 | Method               | Elf       | Mean       | Error     | StdDev    | Median     | Ratio | RatioSD | Gen0   | Allocated | Alloc Ratio |
 |--------------------- |---------- |-----------:|----------:|----------:|-----------:|------:|--------:|-------:|----------:|------------:|
-| **BuiltInToString**      | **0**         | **22.5497 ns** | **0.5939 ns** | **0.8705 ns** | **22.2127 ns** |  **1.00** |    **0.05** | **0.0057** |      **24 B** |        **1.00** |
-| FastEnumToString     | 0         |  2.8814 ns | 0.0507 ns | 0.0711 ns |  2.8769 ns |  0.13 |    0.01 |      - |         - |        0.00 |
-| EnumsNetAsString     | 0         |  3.2005 ns | 0.0897 ns | 0.1343 ns |  3.1692 ns |  0.14 |    0.01 |      - |         - |        0.00 |
-| NetEscapadesToString | 0         | 23.6147 ns | 0.6926 ns | 1.0366 ns | 23.3105 ns |  1.05 |    0.06 | 0.0057 |      24 B |        1.00 |
-| RaiqubToString       | 0         |  1.1136 ns | 0.0399 ns | 0.0585 ns |  1.1042 ns |  0.05 |    0.00 |      - |         - |        0.00 |
+| **BuiltInToString**      | **0**         | **20.7477 ns** | **0.2299 ns** | **0.3440 ns** | **20.6757 ns** |  **1.00** |    **0.02** | **0.0057** |      **24 B** |        **1.00** |
+| FastEnumToString     | 0         |  3.5168 ns | 0.0081 ns | 0.0108 ns |  3.5263 ns |  0.17 |    0.00 |      - |         - |        0.00 |
+| EnumsNetAsString     | 0         |  3.6667 ns | 0.0007 ns | 0.0010 ns |  3.6667 ns |  0.18 |    0.00 |      - |         - |        0.00 |
+| NetEscapadesToString | 0         | 26.3042 ns | 3.1106 ns | 4.4612 ns | 25.5509 ns |  1.27 |    0.21 | 0.0057 |      24 B |        1.00 |
+| RaiqubToString       | 0         |  0.8265 ns | 0.2134 ns | 0.2992 ns |  1.0820 ns |  0.04 |    0.01 |      - |         - |        0.00 |
 |                      |           |            |           |           |            |       |         |        |           |             |
-| **BuiltInToString**      | **Galadriel** | **17.8062 ns** | **0.4506 ns** | **0.6744 ns** | **17.9230 ns** |  **1.00** |    **0.05** | **0.0057** |      **24 B** |        **1.00** |
-| FastEnumToString     | Galadriel |  1.1964 ns | 0.0613 ns | 0.0838 ns |  1.1702 ns |  0.07 |    0.01 |      - |         - |        0.00 |
-| EnumsNetAsString     | Galadriel |  1.3942 ns | 0.0218 ns | 0.0292 ns |  1.3933 ns |  0.08 |    0.00 |      - |         - |        0.00 |
-| NetEscapadesToString | Galadriel |  0.5302 ns | 0.0167 ns | 0.0235 ns |  0.5234 ns |  0.03 |    0.00 |      - |         - |        0.00 |
-| RaiqubToString       | Galadriel |  1.0603 ns | 0.0301 ns | 0.0441 ns |  1.0709 ns |  0.06 |    0.00 |      - |         - |        0.00 |
+| **BuiltInToString**      | **Galadriel** | **16.7456 ns** | **0.3517 ns** | **0.4930 ns** | **16.8754 ns** |  **1.00** |    **0.04** | **0.0057** |      **24 B** |        **1.00** |
+| FastEnumToString     | Galadriel |  1.2510 ns | 0.0252 ns | 0.0370 ns |  1.2342 ns |  0.07 |    0.00 |      - |         - |        0.00 |
+| EnumsNetAsString     | Galadriel |  1.2313 ns | 0.0293 ns | 0.0429 ns |  1.2185 ns |  0.07 |    0.00 |      - |         - |        0.00 |
+| NetEscapadesToString | Galadriel |  0.5991 ns | 0.0068 ns | 0.0097 ns |  0.5943 ns |  0.04 |    0.00 |      - |         - |        0.00 |
+| RaiqubToString       | Galadriel |  0.5249 ns | 0.0054 ns | 0.0079 ns |  0.5228 ns |  0.03 |    0.00 |      - |         - |        0.00 |
 |                      |           |            |           |           |            |       |         |        |           |             |
-| **BuiltInToString**      | **Aredhel**   | **19.4398 ns** | **0.5728 ns** | **0.8215 ns** | **19.1657 ns** |  **1.00** |    **0.06** | **0.0057** |      **24 B** |        **1.00** |
-| FastEnumToString     | Aredhel   |  1.1834 ns | 0.0423 ns | 0.0606 ns |  1.1547 ns |  0.06 |    0.00 |      - |         - |        0.00 |
-| EnumsNetAsString     | Aredhel   |  1.4383 ns | 0.0378 ns | 0.0554 ns |  1.4201 ns |  0.07 |    0.00 |      - |         - |        0.00 |
-| NetEscapadesToString | Aredhel   |  0.8025 ns | 0.1880 ns | 0.2696 ns |  0.6311 ns |  0.04 |    0.01 |      - |         - |        0.00 |
-| RaiqubToString       | Aredhel   |  1.0795 ns | 0.0120 ns | 0.0160 ns |  1.0742 ns |  0.06 |    0.00 |      - |         - |        0.00 |
+| **BuiltInToString**      | **Aredhel**   | **18.7110 ns** | **0.2231 ns** | **0.3199 ns** | **18.7415 ns** |  **1.00** |    **0.02** | **0.0057** |      **24 B** |        **1.00** |
+| FastEnumToString     | Aredhel   |  1.2241 ns | 0.0075 ns | 0.0105 ns |  1.2236 ns |  0.07 |    0.00 |      - |         - |        0.00 |
+| EnumsNetAsString     | Aredhel   |  1.2231 ns | 0.0132 ns | 0.0193 ns |  1.2252 ns |  0.07 |    0.00 |      - |         - |        0.00 |
+| NetEscapadesToString | Aredhel   |  0.5767 ns | 0.0295 ns | 0.0442 ns |  0.5930 ns |  0.03 |    0.00 |      - |         - |        0.00 |
+| RaiqubToString       | Aredhel   |  0.5232 ns | 0.0007 ns | 0.0009 ns |  0.5235 ns |  0.03 |    0.00 |      - |         - |        0.00 |
 |                      |           |            |           |           |            |       |         |        |           |             |
-| **BuiltInToString**      | **1000**      | **30.5595 ns** | **0.7356 ns** | **1.0783 ns** | **30.5367 ns** |  **1.00** |    **0.05** | **0.0134** |      **56 B** |        **1.00** |
-| FastEnumToString     | 1000      | 10.5993 ns | 0.2819 ns | 0.4219 ns | 10.4117 ns |  0.35 |    0.02 | 0.0076 |      32 B |        0.57 |
-| EnumsNetAsString     | 1000      | 12.8773 ns | 0.2627 ns | 0.3683 ns | 12.7960 ns |  0.42 |    0.02 | 0.0076 |      32 B |        0.57 |
-| NetEscapadesToString | 1000      | 31.9137 ns | 0.4518 ns | 0.6479 ns | 31.7924 ns |  1.05 |    0.04 | 0.0134 |      56 B |        1.00 |
-| RaiqubToString       | 1000      | 15.8590 ns | 0.3727 ns | 0.5578 ns | 15.7718 ns |  0.52 |    0.03 | 0.0076 |      32 B |        0.57 |
+| **BuiltInToString**      | **1000**      | **27.2108 ns** | **0.0231 ns** | **0.0317 ns** | **27.2060 ns** |  **1.00** |    **0.00** | **0.0134** |      **56 B** |        **1.00** |
+| FastEnumToString     | 1000      | 11.8960 ns | 0.0537 ns | 0.0736 ns | 11.8715 ns |  0.44 |    0.00 | 0.0076 |      32 B |        0.57 |
+| EnumsNetAsString     | 1000      |  9.7946 ns | 0.1025 ns | 0.1437 ns |  9.7795 ns |  0.36 |    0.01 | 0.0076 |      32 B |        0.57 |
+| NetEscapadesToString | 1000      | 28.4338 ns | 0.0882 ns | 0.1208 ns | 28.4311 ns |  1.04 |    0.00 | 0.0134 |      56 B |        1.00 |
+| RaiqubToString       | 1000      |  8.9448 ns | 0.0300 ns | 0.0440 ns |  8.9267 ns |  0.33 |    0.00 | 0.0076 |      32 B |        0.57 |

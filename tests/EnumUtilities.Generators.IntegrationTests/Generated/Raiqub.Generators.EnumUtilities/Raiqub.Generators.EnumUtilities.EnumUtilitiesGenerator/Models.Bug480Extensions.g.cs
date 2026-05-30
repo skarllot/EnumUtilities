@@ -14,21 +14,128 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
 public static partial class Bug480Extensions
 {
-    /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
-    /// <returns>The string representation of the value of this instance.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.ToStringFast(TEnum)"/>
     public static string ToStringFast(this Bug480 value)
     {
-        return GetNameInlined((int)value)
-            ?? ((int)value).ToString();
+        int v = (int)value;
+        return v switch
+        {
+            0 => "0",
+            1 => "Backslash",
+            2 => "DoubleQuote",
+            3 => "SingleQuote",
+            4 => "Newline",
+            5 => "CarriageReturn",
+            6 => "Tab",
+            7 => "CrLf",
+            8 => "MultipleNewlines",
+            9 => "WindowsPath",
+            10 => "MixedQuotes",
+            11 => "LessThan",
+            12 => "GreaterThan",
+            13 => "Ampersand",
+            14 => "XmlTag",
+            15 => "XmlSpecialChars",
+            16 => "Degree",
+            17 => "Copyright",
+            18 => "Euro",
+            19 => "Unicode",
+            20 => "Emoji",
+            21 => "NullChar",
+            22 => "Backspace",
+            23 => "FormFeed",
+            24 => "VerticalTab",
+            25 => "JsonLike",
+            26 => "CData",
+            27 => "CodeComment",
+            28 => "VerbatimString",
+            29 => "EnumMemberBackslash",
+            30 => "EnumMemberQuoted",
+            31 => "EnumMemberNewline",
+            32 => "JsonNameEscape",
+            33 => "JsonNameQuoted",
+            34 => "CombinedEscapes",
+            35 => "EnumMemberTab",
+            36 => "EmptyDescription",
+            37 => "WhitespaceDescription",
+            38 => "EmptyLine",
+            39 => "TrailingSpace",
+            40 => "LeadingSpace",
+            41 => "Url",
+            42 => "SqlLike",
+            43 => "RegexPattern",
+            44 => "UncPath",
+            45 => "UnixPath",
+            46 => "DoubleBackslash",
+            47 => "TripleQuote",
+            48 => "TripleNewline",
+            49 => "ComplexError",
+            50 => "EscapedJson",
+            51 => "NullDescription",
+            _ => v.ToString()
+        };
     }
 
-    /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
-    /// <param name="value">The value to calculate the number of characters.</param>
-    /// <returns>The number of characters produced by converting the specified value to string.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.GetStringLength(TEnum)"/>
     public static int GetStringLength(this Bug480 value)
     {
-        return GetNameLengthInlined((int)value)
-            ?? EnumNumericFormatter.GetStringLength((int)value);
+        int v = (int)value;
+        return v switch
+        {
+            0 => 1,
+            1 => 9,
+            2 => 11,
+            3 => 11,
+            4 => 7,
+            5 => 14,
+            6 => 3,
+            7 => 4,
+            8 => 16,
+            9 => 11,
+            10 => 11,
+            11 => 8,
+            12 => 11,
+            13 => 9,
+            14 => 6,
+            15 => 15,
+            16 => 6,
+            17 => 9,
+            18 => 4,
+            19 => 7,
+            20 => 5,
+            21 => 8,
+            22 => 9,
+            23 => 8,
+            24 => 11,
+            25 => 8,
+            26 => 5,
+            27 => 11,
+            28 => 14,
+            29 => 19,
+            30 => 16,
+            31 => 17,
+            32 => 14,
+            33 => 14,
+            34 => 15,
+            35 => 13,
+            36 => 16,
+            37 => 21,
+            38 => 9,
+            39 => 13,
+            40 => 12,
+            41 => 3,
+            42 => 7,
+            43 => 12,
+            44 => 7,
+            45 => 8,
+            46 => 15,
+            47 => 11,
+            48 => 13,
+            49 => 12,
+            50 => 11,
+            51 => 15,
+            _ => global::Raiqub.Generators.EnumUtilities.Formatters.EnumNumericFormatter.GetStringLength(v)
+        };
     }
 
     /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
@@ -92,126 +199,6 @@ public static partial class Bug480Extensions
         };
     }
 
-    private static int? GetNameLengthInlined(int value)
-    {
-        return value switch
-        {
-            0 => 1,
-            1 => 9,
-            2 => 11,
-            3 => 11,
-            4 => 7,
-            5 => 14,
-            6 => 3,
-            7 => 4,
-            8 => 16,
-            9 => 11,
-            10 => 11,
-            11 => 8,
-            12 => 11,
-            13 => 9,
-            14 => 6,
-            15 => 15,
-            16 => 6,
-            17 => 9,
-            18 => 4,
-            19 => 7,
-            20 => 5,
-            21 => 8,
-            22 => 9,
-            23 => 8,
-            24 => 11,
-            25 => 8,
-            26 => 5,
-            27 => 11,
-            28 => 14,
-            29 => 19,
-            30 => 16,
-            31 => 17,
-            32 => 14,
-            33 => 14,
-            34 => 15,
-            35 => 13,
-            36 => 16,
-            37 => 21,
-            38 => 9,
-            39 => 13,
-            40 => 12,
-            41 => 3,
-            42 => 7,
-            43 => 12,
-            44 => 7,
-            45 => 8,
-            46 => 15,
-            47 => 11,
-            48 => 13,
-            49 => 12,
-            50 => 11,
-            51 => 15,
-            _ => null
-        };
-    }
-
-    private static string? GetNameInlined(int value)
-    {
-        return value switch
-        {
-            0 => "0",
-            1 => "Backslash",
-            2 => "DoubleQuote",
-            3 => "SingleQuote",
-            4 => "Newline",
-            5 => "CarriageReturn",
-            6 => "Tab",
-            7 => "CrLf",
-            8 => "MultipleNewlines",
-            9 => "WindowsPath",
-            10 => "MixedQuotes",
-            11 => "LessThan",
-            12 => "GreaterThan",
-            13 => "Ampersand",
-            14 => "XmlTag",
-            15 => "XmlSpecialChars",
-            16 => "Degree",
-            17 => "Copyright",
-            18 => "Euro",
-            19 => "Unicode",
-            20 => "Emoji",
-            21 => "NullChar",
-            22 => "Backspace",
-            23 => "FormFeed",
-            24 => "VerticalTab",
-            25 => "JsonLike",
-            26 => "CData",
-            27 => "CodeComment",
-            28 => "VerbatimString",
-            29 => "EnumMemberBackslash",
-            30 => "EnumMemberQuoted",
-            31 => "EnumMemberNewline",
-            32 => "JsonNameEscape",
-            33 => "JsonNameQuoted",
-            34 => "CombinedEscapes",
-            35 => "EnumMemberTab",
-            36 => "EmptyDescription",
-            37 => "WhitespaceDescription",
-            38 => "EmptyLine",
-            39 => "TrailingSpace",
-            40 => "LeadingSpace",
-            41 => "Url",
-            42 => "SqlLike",
-            43 => "RegexPattern",
-            44 => "UncPath",
-            45 => "UnixPath",
-            46 => "DoubleBackslash",
-            47 => "TripleQuote",
-            48 => "TripleNewline",
-            49 => "ComplexError",
-            50 => "EscapedJson",
-            51 => "NullDescription",
-            _ => null
-        };
-    }
-
     /// <summary>Adds two enumerations and replaces the first integer with the sum, as an atomic operation.</summary>
     /// <param name="location">A variable containing the first value to be added.</param>
     /// <param name="value">The value to be added to the enumeration at <paramref name="location" />.</param>
@@ -266,81 +253,11 @@ public static partial class Bug480Extensions
         return Unsafe.As<int, Bug480>(ref resultRaw);
     }
 
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.ToEnumMemberValue(TEnum)"/>
     public static string ToEnumMemberValue(this Bug480 value)
     {
-        return GetEnumMemberValueInlined((int)value)
-            ?? ((int)value).ToString();
-    }
-
-    public static int GetEnumMemberValueStringLength(this Bug480 value)
-    {
-        return GetEnumMemberValueLengthInlined((int)value)
-            ?? EnumNumericFormatter.GetStringLength((int)value);
-    }
-
-    private static int? GetEnumMemberValueLengthInlined(int value)
-    {
-        return value switch
-        {
-            0 => 1,
-            1 => 9,
-            2 => 11,
-            3 => 11,
-            4 => 7,
-            5 => 14,
-            6 => 3,
-            7 => 4,
-            8 => 16,
-            9 => 11,
-            10 => 11,
-            11 => 8,
-            12 => 11,
-            13 => 9,
-            14 => 6,
-            15 => 15,
-            16 => 6,
-            17 => 9,
-            18 => 4,
-            19 => 7,
-            20 => 5,
-            21 => 8,
-            22 => 9,
-            23 => 8,
-            24 => 11,
-            25 => 8,
-            26 => 5,
-            27 => 11,
-            28 => 14,
-            29 => 13,
-            30 => 8,
-            31 => 8,
-            32 => 14,
-            33 => 14,
-            34 => 15,
-            35 => 9,
-            36 => 16,
-            37 => 21,
-            38 => 9,
-            39 => 13,
-            40 => 12,
-            41 => 3,
-            42 => 7,
-            43 => 12,
-            44 => 7,
-            45 => 8,
-            46 => 15,
-            47 => 11,
-            48 => 13,
-            49 => 12,
-            50 => 11,
-            51 => 15,
-            _ => null
-        };
-    }
-
-    private static string? GetEnumMemberValueInlined(int value)
-    {
-        return value switch
+        int v = (int)value;
+        return v switch
         {
             0 => "0",
             1 => "Backslash",
@@ -394,7 +311,69 @@ public static partial class Bug480Extensions
             49 => "ComplexError",
             50 => "EscapedJson",
             51 => "NullDescription",
-            _ => null
+            _ => v.ToString()
+        };
+    }
+
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.GetEnumMemberValueStringLength(TEnum)"/>
+    public static int GetEnumMemberValueStringLength(this Bug480 value)
+    {
+        int v = (int)value;
+        return v switch
+        {
+            0 => 1,
+            1 => 9,
+            2 => 11,
+            3 => 11,
+            4 => 7,
+            5 => 14,
+            6 => 3,
+            7 => 4,
+            8 => 16,
+            9 => 11,
+            10 => 11,
+            11 => 8,
+            12 => 11,
+            13 => 9,
+            14 => 6,
+            15 => 15,
+            16 => 6,
+            17 => 9,
+            18 => 4,
+            19 => 7,
+            20 => 5,
+            21 => 8,
+            22 => 9,
+            23 => 8,
+            24 => 11,
+            25 => 8,
+            26 => 5,
+            27 => 11,
+            28 => 14,
+            29 => 13,
+            30 => 8,
+            31 => 8,
+            32 => 14,
+            33 => 14,
+            34 => 15,
+            35 => 9,
+            36 => 16,
+            37 => 21,
+            38 => 9,
+            39 => 13,
+            40 => 12,
+            41 => 3,
+            42 => 7,
+            43 => 12,
+            44 => 7,
+            45 => 8,
+            46 => 15,
+            47 => 11,
+            48 => 13,
+            49 => 12,
+            50 => 11,
+            51 => 15,
+            _ => global::Raiqub.Generators.EnumUtilities.Formatters.EnumNumericFormatter.GetStringLength(v)
         };
     }
 
@@ -794,83 +773,13 @@ public static partial class Bug480Extensions
         };
     }
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.ToJsonString(TEnum)"/>
     public static string? ToJsonString(this Bug480 value)
     {
-        return GetJsonStringInlined((int)value);
-    }
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int? GetJsonStringLength(this Bug480 value)
-    {
-        return GetJsonStringLengthInlined((int)value);
-    }
-
-    private static int? GetJsonStringLengthInlined(int value)
-    {
-        return value switch
+        int v = (int)value;
+        return v switch
         {
-            0 => 1,
-            1 => 9,
-            2 => 11,
-            3 => 11,
-            4 => 7,
-            5 => 14,
-            6 => 3,
-            7 => 4,
-            8 => 16,
-            9 => 11,
-            10 => 11,
-            11 => 8,
-            12 => 11,
-            13 => 9,
-            14 => 6,
-            15 => 15,
-            16 => 6,
-            17 => 9,
-            18 => 4,
-            19 => 7,
-            20 => 5,
-            21 => 8,
-            22 => 9,
-            23 => 8,
-            24 => 11,
-            25 => 8,
-            26 => 5,
-            27 => 11,
-            28 => 14,
-            29 => 13,
-            30 => 8,
-            31 => 8,
-            32 => 11,
-            33 => 13,
-            34 => 13,
-            35 => 9,
-            36 => 16,
-            37 => 21,
-            38 => 9,
-            39 => 13,
-            40 => 12,
-            41 => 3,
-            42 => 7,
-            43 => 12,
-            44 => 7,
-            45 => 8,
-            46 => 15,
-            47 => 11,
-            48 => 13,
-            49 => 12,
-            50 => 11,
-            51 => 15,
-            _ => null
-        };
-    }
-
-    private static string? GetJsonStringInlined(int value)
-    {
-        return value switch
-        {
-            0 => "0",
+            0 => null,
             1 => "Backslash",
             2 => "DoubleQuote",
             3 => "SingleQuote",
@@ -922,6 +831,68 @@ public static partial class Bug480Extensions
             49 => "ComplexError",
             50 => "EscapedJson",
             51 => "NullDescription",
+            _ => null
+        };
+    }
+
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.GetJsonStringLength(TEnum)"/>
+    public static int? GetJsonStringLength(this Bug480 value)
+    {
+        int v = (int)value;
+        return v switch
+        {
+            0 => null,
+            1 => 9,
+            2 => 11,
+            3 => 11,
+            4 => 7,
+            5 => 14,
+            6 => 3,
+            7 => 4,
+            8 => 16,
+            9 => 11,
+            10 => 11,
+            11 => 8,
+            12 => 11,
+            13 => 9,
+            14 => 6,
+            15 => 15,
+            16 => 6,
+            17 => 9,
+            18 => 4,
+            19 => 7,
+            20 => 5,
+            21 => 8,
+            22 => 9,
+            23 => 8,
+            24 => 11,
+            25 => 8,
+            26 => 5,
+            27 => 11,
+            28 => 14,
+            29 => 13,
+            30 => 8,
+            31 => 8,
+            32 => 11,
+            33 => 13,
+            34 => 13,
+            35 => 9,
+            36 => 16,
+            37 => 21,
+            38 => 9,
+            39 => 13,
+            40 => 12,
+            41 => 3,
+            42 => 7,
+            43 => 12,
+            44 => 7,
+            45 => 8,
+            46 => 15,
+            47 => 11,
+            48 => 13,
+            49 => 12,
+            50 => 11,
+            51 => 15,
             _ => null
         };
     }

@@ -11,22 +11,27 @@ public static class EnumStringFormatter
     /// <summary>
     /// Writes the names of multiple found flags into a single string, separated by commas.
     /// </summary>
-    /// <param name="names">A span containing all enumeration names.</param>
-    /// <param name="foundItems">A span containing the indices of found enum values.</param>
-    /// <param name="count">The total length of the resulting string, excluding separators.</param>
+    /// <param name="names">A span containing the names of enumeration members.</param>
+    /// <param name="foundItems">A span containing the indices of the found members within <paramref name="names"/>.</param>
+    /// <param name="stringLength">The total length of the resulting string, excluding separators.</param>
     /// <returns>A string that represents the names of the found flags, separated by commas.</returns>
     /// <exception cref="OverflowException">Thrown if the computed string length exceeds the capacity of an <see cref="int"/>.</exception>
     public static string WriteMultipleFoundFlagsNames(
         ReadOnlySpan<string> names,
         ReadOnlySpan<int> foundItems,
-        int count
+        int stringLength
     )
     {
         Debug.Assert(!foundItems.IsEmpty, "foundItems must not be empty");
-        Debug.Assert(count > 0, "count must be greater than zero");
+        Debug.Assert(stringLength > 0, "stringLength must be greater than zero");
+
+        if (foundItems.Length == 1)
+        {
+            return names[foundItems[0]];
+        }
 
         const int separatorStringLength = 2;
-        var strlen = checked(count + (separatorStringLength * (foundItems.Length - 1)));
+        var strlen = checked(stringLength + (separatorStringLength * (foundItems.Length - 1)));
 
 #if NET9_0_OR_GREATER
         var result = string.Create(
@@ -46,16 +51,13 @@ public static class EnumStringFormatter
         return result;
     }
 
-    private readonly ref struct FlagsNamesStringCreationContext
+    private readonly ref struct FlagsNamesStringCreationContext(
+        ReadOnlySpan<string> names,
+        ReadOnlySpan<int> foundItems
+    )
     {
-        private readonly ReadOnlySpan<string> _names;
-        private readonly ReadOnlySpan<int> _foundItems;
-
-        public FlagsNamesStringCreationContext(ReadOnlySpan<string> names, ReadOnlySpan<int> foundItems)
-        {
-            _names = names;
-            _foundItems = foundItems;
-        }
+        private readonly ReadOnlySpan<string> _names = names;
+        private readonly ReadOnlySpan<int> _foundItems = foundItems;
 
 #if NET9_0_OR_GREATER
         public static void Fill(Span<char> destination, FlagsNamesStringCreationContext context)
