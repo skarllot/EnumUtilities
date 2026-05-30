@@ -14,21 +14,38 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
 public static partial class CategoriesExtensions
 {
-    /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
-    /// <returns>The string representation of the value of this instance.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.ToStringFast(TEnum)"/>
+    [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     public static string ToStringFast(this Categories value)
     {
-        return GetNameInlined((int)value)
-            ?? ((int)value).ToString();
+        int v = (int)value;
+        return v switch
+        {
+            0 => "Electronics",
+            1 => "Food",
+            2 => "Automotive",
+            3 => "Arts",
+            4 => "BeautyCare",
+            5 => "Fashion",
+            _ => v.ToString()
+        };
     }
 
-    /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
-    /// <param name="value">The value to calculate the number of characters.</param>
-    /// <returns>The number of characters produced by converting the specified value to string.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.GetStringLength(TEnum)"/>
+    [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     public static int GetStringLength(this Categories value)
     {
-        return GetNameLengthInlined((int)value)
-            ?? EnumNumericFormatter.GetStringLength((int)value);
+        int v = (int)value;
+        return v switch
+        {
+            0 => 11,
+            1 => 4,
+            2 => 10,
+            3 => 4,
+            4 => 10,
+            5 => 7,
+            _ => global::Raiqub.Generators.EnumUtilities.Formatters.EnumNumericFormatter.GetStringLength(v)
+        };
     }
 
     /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
@@ -44,34 +61,6 @@ public static partial class CategoriesExtensions
             4 => true,
             5 => true,
             _ => false
-        };
-    }
-
-    private static int? GetNameLengthInlined(int value)
-    {
-        return value switch
-        {
-            0 => 11,
-            1 => 4,
-            2 => 10,
-            3 => 4,
-            4 => 10,
-            5 => 7,
-            _ => null
-        };
-    }
-
-    private static string? GetNameInlined(int value)
-    {
-        return value switch
-        {
-            0 => "Electronics",
-            1 => "Food",
-            2 => "Automotive",
-            3 => "Arts",
-            4 => "BeautyCare",
-            5 => "Fashion",
-            _ => null
         };
     }
 

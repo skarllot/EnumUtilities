@@ -14,21 +14,34 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
 internal static partial class MyEnum2Extensions
 {
-    /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
-    /// <returns>The string representation of the value of this instance.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.ToStringFast(TEnum)"/>
+    [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     public static string ToStringFast(this NestedInClass.MyEnum2 value)
     {
-        return GetNameInlined((int)value)
-            ?? ((int)value).ToString();
+        int v = (int)value;
+        return v switch
+        {
+            0 => "Credit",
+            1 => "Debit",
+            2 => "Cash",
+            3 => "Cheque",
+            _ => v.ToString()
+        };
     }
 
-    /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
-    /// <param name="value">The value to calculate the number of characters.</param>
-    /// <returns>The number of characters produced by converting the specified value to string.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.GetStringLength(TEnum)"/>
+    [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     public static int GetStringLength(this NestedInClass.MyEnum2 value)
     {
-        return GetNameLengthInlined((int)value)
-            ?? EnumNumericFormatter.GetStringLength((int)value);
+        int v = (int)value;
+        return v switch
+        {
+            0 => 6,
+            1 => 5,
+            2 => 4,
+            3 => 6,
+            _ => global::Raiqub.Generators.EnumUtilities.Formatters.EnumNumericFormatter.GetStringLength(v)
+        };
     }
 
     /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
@@ -42,30 +55,6 @@ internal static partial class MyEnum2Extensions
             2 => true,
             3 => true,
             _ => false
-        };
-    }
-
-    private static int? GetNameLengthInlined(int value)
-    {
-        return value switch
-        {
-            0 => 6,
-            1 => 5,
-            2 => 4,
-            3 => 6,
-            _ => null
-        };
-    }
-
-    private static string? GetNameInlined(int value)
-    {
-        return value switch
-        {
-            0 => "Credit",
-            1 => "Debit",
-            2 => "Cash",
-            3 => "Cheque",
-            _ => null
         };
     }
 
@@ -123,39 +112,33 @@ internal static partial class MyEnum2Extensions
         return Unsafe.As<int, NestedInClass.MyEnum2>(ref resultRaw);
     }
 
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.ToEnumMemberValue(TEnum)"/>
+    [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     public static string ToEnumMemberValue(this NestedInClass.MyEnum2 value)
     {
-        return GetEnumMemberValueInlined((int)value)
-            ?? ((int)value).ToString();
-    }
-
-    public static int GetEnumMemberValueStringLength(this NestedInClass.MyEnum2 value)
-    {
-        return GetEnumMemberValueLengthInlined((int)value)
-            ?? EnumNumericFormatter.GetStringLength((int)value);
-    }
-
-    private static int? GetEnumMemberValueLengthInlined(int value)
-    {
-        return value switch
-        {
-            0 => 11,
-            1 => 10,
-            2 => 4,
-            3 => 6,
-            _ => null
-        };
-    }
-
-    private static string? GetEnumMemberValueInlined(int value)
-    {
-        return value switch
+        int v = (int)value;
+        return v switch
         {
             0 => "Credit card",
             1 => "Debit card",
             2 => "Cash",
             3 => "Cheque",
-            _ => null
+            _ => v.ToString()
+        };
+    }
+
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.GetEnumMemberValueStringLength(TEnum)"/>
+    [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    public static int GetEnumMemberValueStringLength(this NestedInClass.MyEnum2 value)
+    {
+        int v = (int)value;
+        return v switch
+        {
+            0 => 11,
+            1 => 10,
+            2 => 4,
+            3 => 6,
+            _ => global::Raiqub.Generators.EnumUtilities.Formatters.EnumNumericFormatter.GetStringLength(v)
         };
     }
 

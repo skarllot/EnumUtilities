@@ -31,6 +31,7 @@
 
   <ItemGroup>
     <Compile Include="..\..\src\EnumUtilities\*Attribute.cs" LinkBase="Attributes" />
+    <Compile Include="..\..\src\EnumUtilities\Formatters\EnumNumericFormatter.cs" LinkBase="Common" />
     <Compile Include="..\EnumUtilities.Generators.Roslyn5_0_0\*\*.cs" Exclude="**\obj\**" LinkBase="." />
     <Compile Include="..\EnumUtilities.Generators.Roslyn5_0_0\CodeWriters\*\*.cs" />
     <Compile Include="..\EnumUtilities.Generators.Roslyn5_0_0\DiagnosticDescriptors.cs" />

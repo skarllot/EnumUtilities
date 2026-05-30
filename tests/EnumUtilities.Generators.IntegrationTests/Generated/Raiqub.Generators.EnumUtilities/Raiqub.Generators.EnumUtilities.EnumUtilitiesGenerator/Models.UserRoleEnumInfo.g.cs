@@ -19,7 +19,7 @@ public static partial class UserRoleMetadata
     public const ulong MinimumValue = 0;
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumMetadata.MaximumValue" />
-    public const ulong MaximumValue = 7;
+    public const ulong MaximumValue = 11;
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumMetadata.ValueCount" />
     public const int ValueCount = 6;

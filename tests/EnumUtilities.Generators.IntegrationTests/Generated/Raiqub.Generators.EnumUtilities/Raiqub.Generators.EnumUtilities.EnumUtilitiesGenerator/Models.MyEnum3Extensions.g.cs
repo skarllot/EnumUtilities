@@ -14,21 +14,40 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
 public static partial class MyEnum3Extensions
 {
-    /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
-    /// <returns>The string representation of the value of this instance.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.ToStringFast(TEnum)"/>
+    [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     public static string ToStringFast(this NestedInClass.MyEnum3 value)
     {
-        return GetNameInlined((int)value)
-            ?? ((int)value).ToString();
+        int v = (int)value;
+        return v switch
+        {
+            0 => "Monday",
+            1 => "Tuesday",
+            2 => "Wednesday",
+            3 => "Thursday",
+            4 => "Friday",
+            5 => "Saturday",
+            6 => "Sunday",
+            _ => v.ToString()
+        };
     }
 
-    /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
-    /// <param name="value">The value to calculate the number of characters.</param>
-    /// <returns>The number of characters produced by converting the specified value to string.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.GetStringLength(TEnum)"/>
+    [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     public static int GetStringLength(this NestedInClass.MyEnum3 value)
     {
-        return GetNameLengthInlined((int)value)
-            ?? EnumNumericFormatter.GetStringLength((int)value);
+        int v = (int)value;
+        return v switch
+        {
+            0 => 6,
+            1 => 7,
+            2 => 9,
+            3 => 8,
+            4 => 6,
+            5 => 8,
+            6 => 6,
+            _ => global::Raiqub.Generators.EnumUtilities.Formatters.EnumNumericFormatter.GetStringLength(v)
+        };
     }
 
     /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
@@ -45,36 +64,6 @@ public static partial class MyEnum3Extensions
             5 => true,
             6 => true,
             _ => false
-        };
-    }
-
-    private static int? GetNameLengthInlined(int value)
-    {
-        return value switch
-        {
-            0 => 6,
-            1 => 7,
-            2 => 9,
-            3 => 8,
-            4 => 6,
-            5 => 8,
-            6 => 6,
-            _ => null
-        };
-    }
-
-    private static string? GetNameInlined(int value)
-    {
-        return value switch
-        {
-            0 => "Monday",
-            1 => "Tuesday",
-            2 => "Wednesday",
-            3 => "Thursday",
-            4 => "Friday",
-            5 => "Saturday",
-            6 => "Sunday",
-            _ => null
         };
     }
 
