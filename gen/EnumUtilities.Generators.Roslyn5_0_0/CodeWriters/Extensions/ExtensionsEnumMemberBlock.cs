@@ -13,40 +13,17 @@ public sealed class ExtensionsEnumMemberBlock : ICodeWriterModule<EnumToGenerate
 
     public void Write(SourceTextWriter writer, EnumToGenerate model)
     {
-        WriteToEnumMemberValue(writer, model);
-        writer.WriteLine();
-        WriteGetEnumMemberValueStringLength(writer, model);
-        writer.WriteLine();
-        FormatStringInternal.Write(writer, model, static x => x.ResolvedSerializedValue, "EnumMemberValue");
-    }
-
-    private static void WriteToEnumMemberValue(SourceTextWriter writer, EnumToGenerate model)
-    {
-        writer.WriteLine(
-            $$"""
-            public static string ToEnumMemberValue(this {{model.RefName}} value)
+        FormatStringInternal.Write(
+            writer: writer,
+            model: model,
+            new EnumFormatDefinition
             {
-                return {{(
-                model.IsFlags ? "FormatFlagEnumMemberValues" : "GetEnumMemberValueInlined"
-            )}}(({{model.UnderlyingType}})value)
-                    ?? (({{model.UnderlyingType}})value).ToString();
+                XmlRefType = "Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}",
+                ToStringMethodName = "ToEnumMemberValue",
+                GetStringLengthMethodName = "GetEnumMemberValueStringLength",
+                Type = "EnumMemberValue",
+                KeySelector = static x => x.ResolvedSerializedValue,
             }
-            """
-        );
-    }
-
-    private static void WriteGetEnumMemberValueStringLength(SourceTextWriter writer, EnumToGenerate model)
-    {
-        writer.WriteLine(
-            $$"""
-            public static int GetEnumMemberValueStringLength(this {{model.RefName}} value)
-            {
-                return {{(
-                model.IsFlags ? "FormatFlagEnumMemberValuesLength" : "GetEnumMemberValueLengthInlined"
-            )}}(({{model.UnderlyingType}})value)
-                    ?? EnumNumericFormatter.GetStringLength(({{model.UnderlyingType}})value);
-            }
-            """
         );
     }
 }

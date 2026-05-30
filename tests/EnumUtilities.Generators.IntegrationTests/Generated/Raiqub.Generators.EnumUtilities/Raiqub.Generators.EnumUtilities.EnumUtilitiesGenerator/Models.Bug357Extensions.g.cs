@@ -14,21 +14,38 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
 public static partial class Bug357Extensions
 {
-    /// <summary>Converts the value of this instance to its equivalent string representation.</summary>
-    /// <returns>The string representation of the value of this instance.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.ToStringFast(TEnum)"/>
+    [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     public static string ToStringFast(this Bug357 value)
     {
-        return GetNameInlined((int)value)
-            ?? ((int)value).ToString();
+        int v = (int)value;
+        return v switch
+        {
+            0 => "Py1",
+            1 => "pay",
+            2 => "PAY",
+            3 => "John",
+            4 => "john",
+            5 => "JOHN",
+            _ => v.ToString()
+        };
     }
 
-    /// <summary>Calculates the number of characters produced by converting the specified value to string.</summary>
-    /// <param name="value">The value to calculate the number of characters.</param>
-    /// <returns>The number of characters produced by converting the specified value to string.</returns>
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.GetStringLength(TEnum)"/>
+    [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     public static int GetStringLength(this Bug357 value)
     {
-        return GetNameLengthInlined((int)value)
-            ?? EnumNumericFormatter.GetStringLength((int)value);
+        int v = (int)value;
+        return v switch
+        {
+            0 => 3,
+            1 => 3,
+            2 => 3,
+            3 => 4,
+            4 => 4,
+            5 => 4,
+            _ => global::Raiqub.Generators.EnumUtilities.Formatters.EnumNumericFormatter.GetStringLength(v)
+        };
     }
 
     /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
@@ -44,34 +61,6 @@ public static partial class Bug357Extensions
             4 => true,
             5 => true,
             _ => false
-        };
-    }
-
-    private static int? GetNameLengthInlined(int value)
-    {
-        return value switch
-        {
-            0 => 3,
-            1 => 3,
-            2 => 3,
-            3 => 4,
-            4 => 4,
-            5 => 4,
-            _ => null
-        };
-    }
-
-    private static string? GetNameInlined(int value)
-    {
-        return value switch
-        {
-            0 => "Py1",
-            1 => "pay",
-            2 => "PAY",
-            3 => "John",
-            4 => "john",
-            5 => "JOHN",
-            _ => null
         };
     }
 
@@ -197,35 +186,12 @@ public static partial class Bug357Extensions
         };
     }
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.ToJsonString(TEnum)"/>
+    [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     public static string? ToJsonString(this Bug357 value)
     {
-        return GetJsonStringInlined((int)value);
-    }
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int? GetJsonStringLength(this Bug357 value)
-    {
-        return GetJsonStringLengthInlined((int)value);
-    }
-
-    private static int? GetJsonStringLengthInlined(int value)
-    {
-        return value switch
-        {
-            0 => 3,
-            1 => 3,
-            2 => 3,
-            3 => 4,
-            4 => 4,
-            5 => 4,
-            _ => null
-        };
-    }
-
-    private static string? GetJsonStringInlined(int value)
-    {
-        return value switch
+        int v = (int)value;
+        return v switch
         {
             0 => "Py1",
             1 => "pay",
@@ -233,6 +199,23 @@ public static partial class Bug357Extensions
             3 => "John",
             4 => "john",
             5 => "JOHN",
+            _ => null
+        };
+    }
+
+    /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.GetJsonStringLength(TEnum)"/>
+    [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    public static int? GetJsonStringLength(this Bug357 value)
+    {
+        int v = (int)value;
+        return v switch
+        {
+            0 => 3,
+            1 => 3,
+            2 => 3,
+            3 => 4,
+            4 => 4,
+            5 => 4,
             _ => null
         };
     }

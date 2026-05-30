@@ -6,7 +6,7 @@ namespace Raiqub.Generators.EnumUtilities.Generators.Tests.Models;
 public class EnumToGenerateTest
 {
     [Fact]
-    public void IsFlags_WithFlagsAttribute_ShouldBeTrue()
+    public async Task IsFlags_WithFlagsAttribute_ShouldBeTrue()
     {
         const string source = """
             using System;
@@ -22,7 +22,7 @@ public class EnumToGenerateTest
             }
             """;
 
-        var symbol = CompilationSymbolFactory.GetEnumSymbol(source);
+        var symbol = await CompilationSymbolFactory.GetEnumSymbol(source);
         var result = EnumToGenerate.FromSymbol(symbol);
 
         Assert.NotNull(result);
@@ -30,7 +30,7 @@ public class EnumToGenerateTest
     }
 
     [Fact]
-    public void OrderedValues_WithSignedEnum_ShouldOrderBySignedValue()
+    public async Task OrderedValues_WithSignedEnum_ShouldOrderBySignedValue()
     {
         const string source = """
             using Raiqub.Generators.EnumUtilities;
@@ -46,7 +46,7 @@ public class EnumToGenerateTest
             }
             """;
 
-        var symbol = CompilationSymbolFactory.GetEnumSymbol(source);
+        var symbol = await CompilationSymbolFactory.GetEnumSymbol(source);
         var result = EnumToGenerate.FromSymbol(symbol);
 
         Assert.NotNull(result);
@@ -62,15 +62,15 @@ public class EnumToGenerateTest
         Assert.Equal("Hot", orderedValues[4].MemberName);
 
         // Verify signed values are in ascending order
-        Assert.Equal(-20, orderedValues[0].RealMemberSignedValue);
-        Assert.Equal(-5, orderedValues[1].RealMemberSignedValue);
-        Assert.Equal(10, orderedValues[2].RealMemberSignedValue);
-        Assert.Equal(25, orderedValues[3].RealMemberSignedValue);
-        Assert.Equal(40, orderedValues[4].RealMemberSignedValue);
+        Assert.Equal(-20, orderedValues[0].AsInt64());
+        Assert.Equal(-5, orderedValues[1].AsInt64());
+        Assert.Equal(10, orderedValues[2].AsInt64());
+        Assert.Equal(25, orderedValues[3].AsInt64());
+        Assert.Equal(40, orderedValues[4].AsInt64());
     }
 
     [Fact]
-    public void OrderedValues_WithUnsignedEnum_ShouldOrderByUnsignedValue()
+    public async Task OrderedValues_WithUnsignedEnum_ShouldOrderByUnsignedValue()
     {
         const string source = """
             using Raiqub.Generators.EnumUtilities;
@@ -86,7 +86,7 @@ public class EnumToGenerateTest
             }
             """;
 
-        var symbol = CompilationSymbolFactory.GetEnumSymbol(source);
+        var symbol = await CompilationSymbolFactory.GetEnumSymbol(source);
         var result = EnumToGenerate.FromSymbol(symbol);
 
         Assert.NotNull(result);
@@ -102,10 +102,10 @@ public class EnumToGenerateTest
         Assert.Equal("Emergency", orderedValues[4].MemberName);
 
         // Verify unsigned values are in ascending order
-        Assert.Equal(100UL, orderedValues[0].RealMemberValue);
-        Assert.Equal(500UL, orderedValues[1].RealMemberValue);
-        Assert.Equal(1000UL, orderedValues[2].RealMemberValue);
-        Assert.Equal(5000UL, orderedValues[3].RealMemberValue);
-        Assert.Equal(uint.MaxValue, orderedValues[4].RealMemberValue);
+        Assert.Equal(100UL, orderedValues[0].AsUInt64());
+        Assert.Equal(500UL, orderedValues[1].AsUInt64());
+        Assert.Equal(1000UL, orderedValues[2].AsUInt64());
+        Assert.Equal(5000UL, orderedValues[3].AsUInt64());
+        Assert.Equal(uint.MaxValue, orderedValues[4].AsUInt64());
     }
 }
