@@ -12,6 +12,11 @@
 
   <ItemGroup>
     <ProjectReference
+      Include="..\..\gen\EnumUtilities.Generators.Roslyn4_3_1\EnumUtilities.Generators.Roslyn4_3_1.csproj"
+      PackAsAnalyzer="true"
+      ReferenceOutputAssembly="false"
+    />
+    <ProjectReference
       Include="..\..\gen\EnumUtilities.Generators.Roslyn4_8_0\EnumUtilities.Generators.Roslyn4_8_0.csproj"
       PackAsAnalyzer="true"
       ReferenceOutputAssembly="false"
