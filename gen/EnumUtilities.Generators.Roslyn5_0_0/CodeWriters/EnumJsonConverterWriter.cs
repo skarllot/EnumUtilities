@@ -38,6 +38,17 @@ public sealed class EnumJsonConverterWriter : ICodeWriter<EnumToGenerate>
             writer.WriteLine();
         }
 
+        if (model.ContainingType is not null)
+        {
+            writer.WriteLine(
+                $$"""
+                partial {{model.ContainingType.Kind}} {{model.ContainingType.Name}}
+                {
+                """
+            );
+            writer.PushIndent();
+        }
+
         CodeWriterHelper.WriteGeneratedCodeAttributes(writer);
 
         writer.WriteLine(
@@ -68,6 +79,12 @@ public sealed class EnumJsonConverterWriter : ICodeWriter<EnumToGenerate>
 
         writer.PopIndent();
         writer.WriteLine('}');
+
+        if (model.ContainingType is not null)
+        {
+            writer.PopIndent();
+            writer.WriteLine('}');
+        }
     }
 
     private static void WriteRead(SourceTextWriter writer, EnumToGenerate model)

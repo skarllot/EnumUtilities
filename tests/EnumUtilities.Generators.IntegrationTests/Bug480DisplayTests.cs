@@ -6,7 +6,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests;
 /// Tests for Bug480Display: Verifies that special characters and escape sequences in Display attribute properties
 /// (Name, ShortName, Description) are correctly escaped in generated code.
 /// </summary>
-public class Bug480DisplayTests
+public partial class Bug480DisplayTests
 {
     [Theory]
     [InlineData(Bug480Display.Backslash, "\\")]

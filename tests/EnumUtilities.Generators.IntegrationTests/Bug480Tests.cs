@@ -8,7 +8,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests;
 /// Tests for Bug480: Verifies that special characters and escape sequences in enum descriptions,
 /// EnumMember values, and JsonPropertyName attributes are correctly escaped in generated code.
 /// </summary>
-public class Bug480Tests
+public partial class Bug480Tests
 {
     [Theory]
     [InlineData(Bug480.Backslash, "\\")]

@@ -12,48 +12,72 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 
 namespace Raiqub.Generators.EnumUtilities.IntegrationTests;
 
-[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
-public sealed partial class Bug480FlagsJsonConverter : JsonConverter<Bug480FlagsTests.Bug480Flags>
+partial class Bug480FlagsTests
 {
-    private const int MaxCharStack = 256;
-
-    public override Bug480FlagsTests.Bug480Flags Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
+    public sealed partial class Bug480FlagsJsonConverter : JsonConverter<Bug480FlagsTests.Bug480Flags>
     {
-        if (reader.TokenType == JsonTokenType.String)
-            return ReadFromString(ref reader);
-        if (reader.TokenType == JsonTokenType.Number)
-            return (Bug480FlagsTests.Bug480Flags)ReadFromNumber(ref reader);
+        private const int MaxCharStack = 256;
 
-        throw new JsonException();
-    }
-
-    public override void Write(Utf8JsonWriter writer, Bug480FlagsTests.Bug480Flags value, JsonSerializerOptions options)
-    {
-        string? jsonString = value.ToJsonString();
-        if (jsonString is not null)
+        public override Bug480FlagsTests.Bug480Flags Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            writer.WriteStringValue(jsonString);
+            if (reader.TokenType == JsonTokenType.String)
+                return ReadFromString(ref reader);
+            if (reader.TokenType == JsonTokenType.Number)
+                return (Bug480FlagsTests.Bug480Flags)ReadFromNumber(ref reader);
+
+            throw new JsonException();
         }
-        else
+
+        public override void Write(Utf8JsonWriter writer, Bug480FlagsTests.Bug480Flags value, JsonSerializerOptions options)
         {
-            writer.WriteNumberValue((int)value);
+            string? jsonString = value.ToJsonString();
+            if (jsonString is not null)
+            {
+                writer.WriteStringValue(jsonString);
+            }
+            else
+            {
+                writer.WriteNumberValue((int)value);
+            }
         }
-    }
 
-    #if NET7_0_OR_GREATER
+        #if NET7_0_OR_GREATER
 
-    private Bug480FlagsTests.Bug480Flags ReadFromString(ref Utf8JsonReader reader)
-    {
-        int length = reader.HasValueSequence ? checked((int)reader.ValueSequence.Length) : reader.ValueSpan.Length;
-
-        char[]? rented = null;
-        Span<char> name = length <= MaxCharStack ? stackalloc char[MaxCharStack] : (rented = ArrayPool<char>.Shared.Rent(length));
-        try
+        private Bug480FlagsTests.Bug480Flags ReadFromString(ref Utf8JsonReader reader)
         {
-            int charsWritten = reader.CopyString(name);
-            name = name.Slice(0, charsWritten);
+            int length = reader.HasValueSequence ? checked((int)reader.ValueSequence.Length) : reader.ValueSpan.Length;
 
+            char[]? rented = null;
+            Span<char> name = length <= MaxCharStack ? stackalloc char[MaxCharStack] : (rented = ArrayPool<char>.Shared.Rent(length));
+            try
+            {
+                int charsWritten = reader.CopyString(name);
+                name = name.Slice(0, charsWritten);
+
+                bool isParsed = Bug480FlagsFactory.TryParseJsonString(name, ignoreCase: false, out Bug480FlagsTests.Bug480Flags result);
+                if (!isParsed)
+                {
+                    throw new JsonException();
+                }
+
+                return result;
+            }
+            finally
+            {
+                if (rented != null)
+                {
+                    ArrayPool<char>.Shared.Return(rented);
+                }
+            }
+        }
+
+        #else
+
+        private Bug480FlagsTests.Bug480Flags ReadFromString(ref Utf8JsonReader reader)
+        {
+            var name = reader.GetString();
             bool isParsed = Bug480FlagsFactory.TryParseJsonString(name, ignoreCase: false, out Bug480FlagsTests.Bug480Flags result);
             if (!isParsed)
             {
@@ -62,35 +86,14 @@ public sealed partial class Bug480FlagsJsonConverter : JsonConverter<Bug480Flags
 
             return result;
         }
-        finally
+
+        #endif
+
+        private int ReadFromNumber(ref Utf8JsonReader reader)
         {
-            if (rented != null)
-            {
-                ArrayPool<char>.Shared.Return(rented);
-            }
+            return reader.TryGetInt32(out int value)
+                ? value
+                : throw new JsonException();
         }
-    }
-
-    #else
-
-    private Bug480FlagsTests.Bug480Flags ReadFromString(ref Utf8JsonReader reader)
-    {
-        var name = reader.GetString();
-        bool isParsed = Bug480FlagsFactory.TryParseJsonString(name, ignoreCase: false, out Bug480FlagsTests.Bug480Flags result);
-        if (!isParsed)
-        {
-            throw new JsonException();
-        }
-
-        return result;
-    }
-
-    #endif
-
-    private int ReadFromNumber(ref Utf8JsonReader reader)
-    {
-        return reader.TryGetInt32(out int value)
-            ? value
-            : throw new JsonException();
     }
 }
