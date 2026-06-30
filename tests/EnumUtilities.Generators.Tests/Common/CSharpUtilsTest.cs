@@ -50,10 +50,10 @@ public class CSharpUtilsTest
     [InlineData("public System.Int32? Value { get; set; }", "int?")]
     [InlineData(
         "public System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<int?>> Value { get; set; }",
-        "Dictionary<string, List<int?>>"
+        "global::System.Collections.Generic.Dictionary<string, global::System.Collections.Generic.List<int?>>"
     )]
-    [InlineData("public Outer.Inner Value { get; set; }", "Inner")]
-    [InlineData("public Outer.@event Value { get; set; }", "@event")]
+    [InlineData("public Outer.Inner Value { get; set; }", "global::Outer.Inner")]
+    [InlineData("public Outer.@event Value { get; set; }", "global::Outer.@event")]
     public async Task ToCSharpTypeName_ReturnsExpectedTypeName(string propertyDeclaration, string expected)
     {
         var typeSymbol = await GetPropertyTypeSymbol(propertyDeclaration);

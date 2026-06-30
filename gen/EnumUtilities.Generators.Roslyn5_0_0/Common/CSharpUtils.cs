@@ -6,7 +6,7 @@ namespace Raiqub.Generators.EnumUtilities.Common;
 public static class CSharpUtils
 {
     private static readonly SymbolDisplayFormat s_cSharpTypeFormat =
-        SymbolDisplayFormat.MinimallyQualifiedFormat.WithMiscellaneousOptions(
+        SymbolDisplayFormat.FullyQualifiedFormat.WithMiscellaneousOptions(
             SymbolDisplayMiscellaneousOptions.UseSpecialTypes
                 | SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
                 | SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
