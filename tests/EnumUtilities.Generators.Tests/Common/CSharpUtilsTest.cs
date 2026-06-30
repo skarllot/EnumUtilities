@@ -48,7 +48,10 @@ public class CSharpUtilsTest
     [InlineData("public System.String? Value { get; set; }", "string?")]
     [InlineData("public int? Value { get; set; }", "int?")]
     [InlineData("public System.Int32? Value { get; set; }", "int?")]
-    [InlineData("public System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<int?>> Value { get; set; }", "Dictionary<string, List<int?>>")]
+    [InlineData(
+        "public System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<int?>> Value { get; set; }",
+        "Dictionary<string, List<int?>>"
+    )]
     [InlineData("public Outer.Inner Value { get; set; }", "Inner")]
     [InlineData("public Outer.@event Value { get; set; }", "@event")]
     public async Task ToCSharpTypeName_ReturnsExpectedTypeName(string propertyDeclaration, string expected)
