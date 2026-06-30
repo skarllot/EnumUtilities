@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+    <IsRoslynComponent>true</IsRoslynComponent>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AnalyzerLanguage>cs</AnalyzerLanguage>
+    <AnalyzerRoslynVersion>4.3.1</AnalyzerRoslynVersion>
+    <DefineConstants>$(DefineConstants);Roslyn_431;AllowUnsafeBlocks;FeatureMemory;NO_RAIQUB_SOURCEGENERATORS_POLYFILL</DefineConstants>
+    <RootNamespace>Raiqub.Generators.EnumUtilities</RootNamespace>
+    <AssemblyName>Raiqub.Generators.EnumUtilities</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" VersionOverride="4.3.1" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.PerformanceSensitiveAnalyzers">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Polyfill">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Raiqub.Generators.InterpolationCodeWriter.CSharp.Sources">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\src\EnumUtilities\*Attribute.cs" LinkBase="Attributes" />
+    <Compile Include="..\..\src\EnumUtilities\Formatters\EnumNumericFormatter.cs" LinkBase="Common" />
+    <Compile Include="..\EnumUtilities.Generators.Roslyn5_0_0\*\*.cs" Exclude="**\obj\**" LinkBase="." />
+    <Compile Include="..\EnumUtilities.Generators.Roslyn5_0_0\CodeWriters\*\*.cs" />
+    <Compile Include="..\EnumUtilities.Generators.Roslyn5_0_0\DiagnosticDescriptors.cs" />
+    <Compile Include="..\EnumUtilities.Generators.Roslyn5_0_0\EnumUtilitiesGenerator.cs" />
+    <Compile Include="..\EnumUtilities.Generators.Roslyn5_0_0\TrackingNames.cs" />
+    <AdditionalFiles Include="..\EnumUtilities.Generators.Roslyn5_0_0\AnalyzerReleases.*.md" />
+  </ItemGroup>
+</Project>
