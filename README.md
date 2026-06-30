@@ -19,7 +19,7 @@ A source generator for C# that uses Roslyn to create extensions and parsers for 
 Raiqub.Generators.EnumUtilities runs with Roslyn compiler so does not introduce a new dependency to your project besides
 a library containing the EnumGenerator attribute.
 
-It requires at least the .NET 6 SDK to run, but you can target earlier frameworks.
+It requires the .NET 6 SDK or later, and consuming projects must target .NET 6 or later.
 
 ## Documentation
 This README aims to give a quick overview of some Raiqub Enum Utilities features. For deeper detail of available features, be sure also to check out [Documentation Page](https://fgodoy.me/EnumUtilities/).
