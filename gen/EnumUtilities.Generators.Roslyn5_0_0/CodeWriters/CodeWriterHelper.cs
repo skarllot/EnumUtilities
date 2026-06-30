@@ -19,6 +19,7 @@ public static class CodeWriterHelper
 
     public static string GetFileName(EnumToGenerate model, string generatorName)
     {
+        var typeName = model.ContainingType != null ? $"{model.ContainingType.Name}+{model.Name}" : model.Name;
         if (
             model is { RootNamespace: not null, Namespace: not null }
             && model.Namespace.Length >= model.RootNamespace.Length
@@ -26,17 +27,17 @@ public static class CodeWriterHelper
         {
             if (string.Equals(model.RootNamespace, model.Namespace, StringComparison.Ordinal))
             {
-                return $"{model.Name}{generatorName}.g.cs";
+                return $"{typeName}{generatorName}.g.cs";
             }
 
             var index = model.Namespace.IndexOf(model.RootNamespace, StringComparison.Ordinal);
             if (index == 0)
             {
-                return $"{model.Namespace.AsSpan(model.RootNamespace.Length + 1)}.{model.Name}{generatorName}.g.cs";
+                return $"{model.Namespace.AsSpan(model.RootNamespace.Length + 1)}.{typeName}{generatorName}.g.cs";
             }
         }
 
-        return $"{model.Namespace ?? "_"}.{model.Name}{generatorName}.g.cs";
+        return $"{model.Namespace ?? "_"}.{typeName}{generatorName}.g.cs";
     }
 
     public static void WriteGeneratedCodeAttributes(SourceTextWriter writer)

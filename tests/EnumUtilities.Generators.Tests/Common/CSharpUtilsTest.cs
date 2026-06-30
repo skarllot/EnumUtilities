@@ -2,7 +2,7 @@ using Raiqub.Generators.EnumUtilities.Common;
 
 namespace Raiqub.Generators.EnumUtilities.Generators.Tests.Common;
 
-public class CSharpExtensionsTest
+public class CSharpUtilsTest
 {
     [Theory]
     [InlineData("int", "")]
@@ -12,7 +12,7 @@ public class CSharpExtensionsTest
     [InlineData("nuint", "u")]
     public void GetNumericSuffixFromCSharpKeyword_ReturnsExpectedSuffix(string keyword, string expected)
     {
-        var actual = CSharpExtensions.GetNumericSuffixFromCSharpKeyword(keyword);
+        var actual = CSharpUtils.GetNumericSuffixFromCSharpKeyword(keyword);
 
         Assert.Equal(expected, actual);
     }
@@ -31,7 +31,7 @@ public class CSharpExtensionsTest
     [InlineData("CustomType", "CustomType")]
     public void GetTypeNameFromCSharpKeyword_ReturnsExpectedTypeName(string keyword, string expected)
     {
-        var actual = CSharpExtensions.GetTypeNameFromCSharpKeyword(keyword);
+        var actual = CSharpUtils.GetTypeNameFromCSharpKeyword(keyword);
 
         Assert.Equal(expected, actual);
     }
@@ -39,7 +39,7 @@ public class CSharpExtensionsTest
     [Fact]
     public void LiteralHelpers_ReturnExpectedCSharpLiterals()
     {
-        Assert.Equal("null", CSharpExtensions.ToQuotedStringOrNullLiteral(null));
+        Assert.Equal("null", CSharpUtils.ToQuotedStringOrNullLiteral(null));
         Assert.Equal("\"text\"", "text".ToQuotedStringOrNullLiteral());
         Assert.Equal("\"quoted\"", "quoted".ToQuotedStringLiteral());
         Assert.Equal("'x'", 'x'.ToQuotedCharLiteral());

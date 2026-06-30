@@ -10,25 +10,25 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
-namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
+namespace Raiqub.Generators.EnumUtilities.IntegrationTests;
 
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
-public sealed partial class Bug480JsonConverter : JsonConverter<Bug480>
+public sealed partial class Bug480FlagsJsonConverter : JsonConverter<Bug480FlagsTests.Bug480Flags>
 {
     private const int MaxCharStack = 256;
 
-    public override Bug480 Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override Bug480FlagsTests.Bug480Flags Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         if (reader.TokenType == JsonTokenType.String)
             return ReadFromString(ref reader);
         if (reader.TokenType == JsonTokenType.Number)
-            return (Bug480)ReadFromNumber(ref reader);
+            return (Bug480FlagsTests.Bug480Flags)ReadFromNumber(ref reader);
 
         throw new JsonException();
     }
 
-    public override void Write(Utf8JsonWriter writer, Bug480 value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, Bug480FlagsTests.Bug480Flags value, JsonSerializerOptions options)
     {
         string? jsonString = value.ToJsonString();
         if (jsonString is not null)
@@ -43,7 +43,7 @@ public sealed partial class Bug480JsonConverter : JsonConverter<Bug480>
 
     #if NET7_0_OR_GREATER
 
-    private Bug480 ReadFromString(ref Utf8JsonReader reader)
+    private Bug480FlagsTests.Bug480Flags ReadFromString(ref Utf8JsonReader reader)
     {
         int length = reader.HasValueSequence ? checked((int)reader.ValueSequence.Length) : reader.ValueSpan.Length;
 
@@ -54,7 +54,7 @@ public sealed partial class Bug480JsonConverter : JsonConverter<Bug480>
             int charsWritten = reader.CopyString(name);
             name = name.Slice(0, charsWritten);
 
-            bool isParsed = Bug480Factory.TryParseJsonString(name, ignoreCase: false, out Bug480 result);
+            bool isParsed = Bug480FlagsFactory.TryParseJsonString(name, ignoreCase: false, out Bug480FlagsTests.Bug480Flags result);
             if (!isParsed)
             {
                 throw new JsonException();
@@ -73,10 +73,10 @@ public sealed partial class Bug480JsonConverter : JsonConverter<Bug480>
 
     #else
 
-    private Bug480 ReadFromString(ref Utf8JsonReader reader)
+    private Bug480FlagsTests.Bug480Flags ReadFromString(ref Utf8JsonReader reader)
     {
         var name = reader.GetString();
-        bool isParsed = Bug480Factory.TryParseJsonString(name, ignoreCase: false, out Bug480 result);
+        bool isParsed = Bug480FlagsFactory.TryParseJsonString(name, ignoreCase: false, out Bug480FlagsTests.Bug480Flags result);
         if (!isParsed)
         {
             throw new JsonException();

@@ -8,6 +8,7 @@
     <AssemblyName>Raiqub.Generators.EnumUtilities.Abstractions</AssemblyName>
     <PackageId>Raiqub.Generators.EnumUtilities</PackageId>
     <IsAotCompatible>true</IsAotCompatible>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
