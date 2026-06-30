@@ -3,34 +3,28 @@ using Microsoft.CodeAnalysis.CSharp;
 
 namespace Raiqub.Generators.EnumUtilities.Common;
 
-public static class CSharpExtensions
+public static class CSharpUtils
 {
-    public static string GetNumericCSharpKeyword(this INamedTypeSymbol typeSymbol)
+    private static readonly SymbolDisplayFormat s_cSharpTypeFormat =
+        SymbolDisplayFormat.FullyQualifiedFormat.WithMiscellaneousOptions(
+            SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                | SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
+                | SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
+        );
+
+    public static string ToCSharpTypeName(this ITypeSymbol typeSymbol)
     {
-        return typeSymbol.Name switch
-        {
-            "SByte" => "sbyte",
-            "Byte" => "byte",
-            "Int16" => "short",
-            "UInt16" => "ushort",
-            "Int32" => "int",
-            "UInt32" => "uint",
-            "Int64" => "long",
-            "UInt64" => "ulong",
-            "IntPtr" => "nint",
-            "UIntPtr" => "nuint",
-            _ => typeSymbol.Name,
-        };
+        return typeSymbol.ToDisplayString(s_cSharpTypeFormat);
     }
 
     public static string GetNumericSuffixFromCSharpKeyword(string keyword)
     {
         return keyword switch
         {
-            "uint" => "u",
-            "long" => "l",
-            "ulong" => "ul",
-            "nuint" => "u",
+            "uint" => "U",
+            "long" => "L",
+            "ulong" => "UL",
+            "nuint" => "U",
             _ => "",
         };
     }

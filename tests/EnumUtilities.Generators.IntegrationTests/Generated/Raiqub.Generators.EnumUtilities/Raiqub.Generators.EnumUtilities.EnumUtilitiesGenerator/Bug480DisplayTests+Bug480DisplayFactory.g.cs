@@ -9,74 +9,74 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
-namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
+namespace Raiqub.Generators.EnumUtilities.IntegrationTests;
 
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
 public static partial class Bug480DisplayFactory
 {
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.Parse(string, bool)"/>
-    public static Bug480Display Parse(string value, bool ignoreCase = false)
+    public static Bug480DisplayTests.Bug480Display Parse(string value, bool ignoreCase = false)
     {
         if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
         TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
-        return (Bug480Display)result;
+        return (Bug480DisplayTests.Bug480Display)result;
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.Parse(System.ReadOnlySpan{char}, bool)"/>
-    public static Bug480Display Parse(ReadOnlySpan<char> value, bool ignoreCase = false)
+    public static Bug480DisplayTests.Bug480Display Parse(ReadOnlySpan<char> value, bool ignoreCase = false)
     {
         TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
-        return (Bug480Display)result;
+        return (Bug480DisplayTests.Bug480Display)result;
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.ParseOrNull(string, bool)"/>
     [return: NotNullIfNotNull("value")]
-    public static Bug480Display? ParseOrNull(string? value, bool ignoreCase = false)
+    public static Bug480DisplayTests.Bug480Display? ParseOrNull(string? value, bool ignoreCase = false)
     {
         if (value is null) return null;
         TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
-        return (Bug480Display)result;
+        return (Bug480DisplayTests.Bug480Display)result;
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.TryParse(string, bool, out TEnum)"/>
-    public static bool TryParse([NotNullWhen(true)] string? value, bool ignoreCase, out Bug480Display result)
+    public static bool TryParse([NotNullWhen(true)] string? value, bool ignoreCase, out Bug480DisplayTests.Bug480Display result)
     {
         Unsafe.SkipInit(out result);
-        return TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Display, int>(ref result));
+        return TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480DisplayTests.Bug480Display, int>(ref result));
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.TryParse(string, out TEnum)"/>
-    public static bool TryParse([NotNullWhen(true)] string? value, out Bug480Display result)
+    public static bool TryParse([NotNullWhen(true)] string? value, out Bug480DisplayTests.Bug480Display result)
     {
         Unsafe.SkipInit(out result);
-        return TryParseName(value.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Display, int>(ref result));
+        return TryParseName(value.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480DisplayTests.Bug480Display, int>(ref result));
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.TryParse(string, bool)"/>
-    public static Bug480Display? TryParse(string? value, bool ignoreCase = false)
+    public static Bug480DisplayTests.Bug480Display? TryParse(string? value, bool ignoreCase = false)
     {
-        return TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480Display?)result : null;
+        return TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480DisplayTests.Bug480Display?)result : null;
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.TryParse(System.ReadOnlySpan{char}, bool, out TEnum)"/>
-    public static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, out Bug480Display result)
+    public static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, out Bug480DisplayTests.Bug480Display result)
     {
         Unsafe.SkipInit(out result);
-        return TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Display, int>(ref result));
+        return TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480DisplayTests.Bug480Display, int>(ref result));
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.TryParse(System.ReadOnlySpan{char}, out TEnum)"/>
-    public static bool TryParse(ReadOnlySpan<char> value, out Bug480Display result)
+    public static bool TryParse(ReadOnlySpan<char> value, out Bug480DisplayTests.Bug480Display result)
     {
         Unsafe.SkipInit(out result);
-        return TryParseName(value, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Display, int>(ref result));
+        return TryParseName(value, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480DisplayTests.Bug480Display, int>(ref result));
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.TryParse(System.ReadOnlySpan{char}, bool)"/>
-    public static Bug480Display? TryParse(ReadOnlySpan<char> value, bool ignoreCase = false)
+    public static Bug480DisplayTests.Bug480Display? TryParse(ReadOnlySpan<char> value, bool ignoreCase = false)
     {
-        return TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480Display?)result : null;
+        return TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480DisplayTests.Bug480Display?)result : null;
     }
 
     private static bool TryParseName(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out int result)
@@ -418,7 +418,7 @@ public static partial class Bug480DisplayFactory
     public static bool TryCreateFromDisplayShortName(
         [NotNullWhen(true)] string? displayShortName,
         StringComparison comparisonType,
-        out Bug480Display result)
+        out Bug480DisplayTests.Bug480Display result)
     {
         int numValue;
         switch (displayShortName)
@@ -442,29 +442,29 @@ public static partial class Bug480DisplayFactory
                 return TryCreateFromDisplayName(displayShortName, comparisonType, out result);
         }
 
-        result = (Bug480Display)numValue;
+        result = (Bug480DisplayTests.Bug480Display)numValue;
         return true;
     }
 
-    public static bool TryCreateFromDisplayShortName([NotNullWhen(true)] string? displayShortName, out Bug480Display result)
+    public static bool TryCreateFromDisplayShortName([NotNullWhen(true)] string? displayShortName, out Bug480DisplayTests.Bug480Display result)
     {
         return TryCreateFromDisplayShortName(displayShortName, StringComparison.Ordinal, out result);
     }
 
-    public static Bug480Display? TryCreateFromDisplayShortName(string? displayShortName, StringComparison comparisonType)
+    public static Bug480DisplayTests.Bug480Display? TryCreateFromDisplayShortName(string? displayShortName, StringComparison comparisonType)
     {
-        return TryCreateFromDisplayShortName(displayShortName, comparisonType, out Bug480Display result) ? result : null;
+        return TryCreateFromDisplayShortName(displayShortName, comparisonType, out Bug480DisplayTests.Bug480Display result) ? result : null;
     }
 
-    public static Bug480Display? TryCreateFromDisplayShortName(string? displayShortName)
+    public static Bug480DisplayTests.Bug480Display? TryCreateFromDisplayShortName(string? displayShortName)
     {
-        return TryCreateFromDisplayShortName(displayShortName, StringComparison.Ordinal, out Bug480Display result) ? result : null;
+        return TryCreateFromDisplayShortName(displayShortName, StringComparison.Ordinal, out Bug480DisplayTests.Bug480Display result) ? result : null;
     }
 
     public static bool TryCreateFromDisplayName(
         [NotNullWhen(true)] string? displayName,
         StringComparison comparisonType,
-        out Bug480Display result)
+        out Bug480DisplayTests.Bug480Display result)
     {
         int numValue;
         switch (displayName)
@@ -630,29 +630,29 @@ public static partial class Bug480DisplayFactory
                 return false;
         }
 
-        result = (Bug480Display)numValue;
+        result = (Bug480DisplayTests.Bug480Display)numValue;
         return true;
     }
 
-    public static bool TryCreateFromDisplayName([NotNullWhen(true)] string? displayName, out Bug480Display result)
+    public static bool TryCreateFromDisplayName([NotNullWhen(true)] string? displayName, out Bug480DisplayTests.Bug480Display result)
     {
         return TryCreateFromDisplayName(displayName, StringComparison.Ordinal, out result);
     }
 
-    public static Bug480Display? TryCreateFromDisplayName(string? displayName, StringComparison comparisonType)
+    public static Bug480DisplayTests.Bug480Display? TryCreateFromDisplayName(string? displayName, StringComparison comparisonType)
     {
-        return TryCreateFromDisplayName(displayName, comparisonType, out Bug480Display result) ? result : null;
+        return TryCreateFromDisplayName(displayName, comparisonType, out Bug480DisplayTests.Bug480Display result) ? result : null;
     }
 
-    public static Bug480Display? TryCreateFromDisplayName(string? displayName)
+    public static Bug480DisplayTests.Bug480Display? TryCreateFromDisplayName(string? displayName)
     {
-        return TryCreateFromDisplayName(displayName, StringComparison.Ordinal, out Bug480Display result) ? result : null;
+        return TryCreateFromDisplayName(displayName, StringComparison.Ordinal, out Bug480DisplayTests.Bug480Display result) ? result : null;
     }
 
     public static bool TryCreateFromDescription(
         [NotNullWhen(true)] string? description,
         StringComparison comparisonType,
-        out Bug480Display result)
+        out Bug480DisplayTests.Bug480Display result)
     {
         int numValue;
         switch (description)
@@ -815,83 +815,83 @@ public static partial class Bug480DisplayFactory
                 return false;
         }
 
-        result = (Bug480Display)numValue;
+        result = (Bug480DisplayTests.Bug480Display)numValue;
         return true;
     }
 
-    public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, out Bug480Display result)
+    public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, out Bug480DisplayTests.Bug480Display result)
     {
         return TryCreateFromDescription(description, StringComparison.Ordinal, out result);
     }
 
-    public static Bug480Display? TryCreateFromDescription(string? description, StringComparison comparisonType)
+    public static Bug480DisplayTests.Bug480Display? TryCreateFromDescription(string? description, StringComparison comparisonType)
     {
-        return TryCreateFromDescription(description, comparisonType, out Bug480Display result) ? result : null;
+        return TryCreateFromDescription(description, comparisonType, out Bug480DisplayTests.Bug480Display result) ? result : null;
     }
 
-    public static Bug480Display? TryCreateFromDescription(string? description)
+    public static Bug480DisplayTests.Bug480Display? TryCreateFromDescription(string? description)
     {
-        return TryCreateFromDescription(description, StringComparison.Ordinal, out Bug480Display result) ? result : null;
+        return TryCreateFromDescription(description, StringComparison.Ordinal, out Bug480DisplayTests.Bug480Display result) ? result : null;
     }
 
     /// <summary>Retrieves an array of the values of the constants in the Bug480Display enumeration.</summary>
     /// <returns>An array that contains the values of the constants in Bug480Display.</returns>
-    public static Bug480Display[] GetValues()
+    public static Bug480DisplayTests.Bug480Display[] GetValues()
     {
         return new[]
         {
-            (Bug480Display)(1),
-            (Bug480Display)(2),
-            (Bug480Display)(3),
-            (Bug480Display)(4),
-            (Bug480Display)(5),
-            (Bug480Display)(6),
-            (Bug480Display)(7),
-            (Bug480Display)(8),
-            (Bug480Display)(9),
-            (Bug480Display)(10),
-            (Bug480Display)(11),
-            (Bug480Display)(12),
-            (Bug480Display)(13),
-            (Bug480Display)(14),
-            (Bug480Display)(15),
-            (Bug480Display)(16),
-            (Bug480Display)(17),
-            (Bug480Display)(18),
-            (Bug480Display)(19),
-            (Bug480Display)(20),
-            (Bug480Display)(21),
-            (Bug480Display)(22),
-            (Bug480Display)(23),
-            (Bug480Display)(24),
-            (Bug480Display)(25),
-            (Bug480Display)(26),
-            (Bug480Display)(27),
-            (Bug480Display)(28),
-            (Bug480Display)(29),
-            (Bug480Display)(30),
-            (Bug480Display)(31),
-            (Bug480Display)(32),
-            (Bug480Display)(33),
-            (Bug480Display)(34),
-            (Bug480Display)(35),
-            (Bug480Display)(36),
-            (Bug480Display)(37),
-            (Bug480Display)(38),
-            (Bug480Display)(39),
-            (Bug480Display)(40),
-            (Bug480Display)(41),
-            (Bug480Display)(42),
-            (Bug480Display)(43),
-            (Bug480Display)(44),
-            (Bug480Display)(45),
-            (Bug480Display)(46),
-            (Bug480Display)(47),
-            (Bug480Display)(48),
-            (Bug480Display)(49),
-            (Bug480Display)(50),
-            (Bug480Display)(51),
-            (Bug480Display)(52),
+            (Bug480DisplayTests.Bug480Display)(1),
+            (Bug480DisplayTests.Bug480Display)(2),
+            (Bug480DisplayTests.Bug480Display)(3),
+            (Bug480DisplayTests.Bug480Display)(4),
+            (Bug480DisplayTests.Bug480Display)(5),
+            (Bug480DisplayTests.Bug480Display)(6),
+            (Bug480DisplayTests.Bug480Display)(7),
+            (Bug480DisplayTests.Bug480Display)(8),
+            (Bug480DisplayTests.Bug480Display)(9),
+            (Bug480DisplayTests.Bug480Display)(10),
+            (Bug480DisplayTests.Bug480Display)(11),
+            (Bug480DisplayTests.Bug480Display)(12),
+            (Bug480DisplayTests.Bug480Display)(13),
+            (Bug480DisplayTests.Bug480Display)(14),
+            (Bug480DisplayTests.Bug480Display)(15),
+            (Bug480DisplayTests.Bug480Display)(16),
+            (Bug480DisplayTests.Bug480Display)(17),
+            (Bug480DisplayTests.Bug480Display)(18),
+            (Bug480DisplayTests.Bug480Display)(19),
+            (Bug480DisplayTests.Bug480Display)(20),
+            (Bug480DisplayTests.Bug480Display)(21),
+            (Bug480DisplayTests.Bug480Display)(22),
+            (Bug480DisplayTests.Bug480Display)(23),
+            (Bug480DisplayTests.Bug480Display)(24),
+            (Bug480DisplayTests.Bug480Display)(25),
+            (Bug480DisplayTests.Bug480Display)(26),
+            (Bug480DisplayTests.Bug480Display)(27),
+            (Bug480DisplayTests.Bug480Display)(28),
+            (Bug480DisplayTests.Bug480Display)(29),
+            (Bug480DisplayTests.Bug480Display)(30),
+            (Bug480DisplayTests.Bug480Display)(31),
+            (Bug480DisplayTests.Bug480Display)(32),
+            (Bug480DisplayTests.Bug480Display)(33),
+            (Bug480DisplayTests.Bug480Display)(34),
+            (Bug480DisplayTests.Bug480Display)(35),
+            (Bug480DisplayTests.Bug480Display)(36),
+            (Bug480DisplayTests.Bug480Display)(37),
+            (Bug480DisplayTests.Bug480Display)(38),
+            (Bug480DisplayTests.Bug480Display)(39),
+            (Bug480DisplayTests.Bug480Display)(40),
+            (Bug480DisplayTests.Bug480Display)(41),
+            (Bug480DisplayTests.Bug480Display)(42),
+            (Bug480DisplayTests.Bug480Display)(43),
+            (Bug480DisplayTests.Bug480Display)(44),
+            (Bug480DisplayTests.Bug480Display)(45),
+            (Bug480DisplayTests.Bug480Display)(46),
+            (Bug480DisplayTests.Bug480Display)(47),
+            (Bug480DisplayTests.Bug480Display)(48),
+            (Bug480DisplayTests.Bug480Display)(49),
+            (Bug480DisplayTests.Bug480Display)(50),
+            (Bug480DisplayTests.Bug480Display)(51),
+            (Bug480DisplayTests.Bug480Display)(52),
         };
     }
 
@@ -957,67 +957,67 @@ public static partial class Bug480DisplayFactory
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.ParseJsonString(string, bool)"/>
-    public static Bug480Display ParseJsonString(string value, bool ignoreCase = false)
+    public static Bug480DisplayTests.Bug480Display ParseJsonString(string value, bool ignoreCase = false)
     {
         if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
         TryParseJsonString(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
-        return (Bug480Display)result;
+        return (Bug480DisplayTests.Bug480Display)result;
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.ParseJsonString(System.ReadOnlySpan{char}, bool)"/>
-    public static Bug480Display ParseJsonString(ReadOnlySpan<char> value, bool ignoreCase = false)
+    public static Bug480DisplayTests.Bug480Display ParseJsonString(ReadOnlySpan<char> value, bool ignoreCase = false)
     {
         TryParseJsonString(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
-        return (Bug480Display)result;
+        return (Bug480DisplayTests.Bug480Display)result;
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.ParseJsonStringOrNull(string, bool)"/>
     [return: NotNullIfNotNull("value")]
-    public static Bug480Display? ParseJsonStringOrNull(string? value, bool ignoreCase = false)
+    public static Bug480DisplayTests.Bug480Display? ParseJsonStringOrNull(string? value, bool ignoreCase = false)
     {
         if (value is null) return null;
         TryParseJsonString(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
-        return (Bug480Display)result;
+        return (Bug480DisplayTests.Bug480Display)result;
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.TryParseJsonString(string, bool, out TEnum)"/>
-    public static bool TryParseJsonString([NotNullWhen(true)] string? value, bool ignoreCase, out Bug480Display result)
+    public static bool TryParseJsonString([NotNullWhen(true)] string? value, bool ignoreCase, out Bug480DisplayTests.Bug480Display result)
     {
         Unsafe.SkipInit(out result);
-        return TryParseJsonString(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Display, int>(ref result));
+        return TryParseJsonString(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480DisplayTests.Bug480Display, int>(ref result));
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.TryParseJsonString(string, out TEnum)"/>
-    public static bool TryParseJsonString([NotNullWhen(true)] string? value, out Bug480Display result)
+    public static bool TryParseJsonString([NotNullWhen(true)] string? value, out Bug480DisplayTests.Bug480Display result)
     {
         Unsafe.SkipInit(out result);
-        return TryParseJsonString(value.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Display, int>(ref result));
+        return TryParseJsonString(value.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480DisplayTests.Bug480Display, int>(ref result));
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.TryParseJsonString(string, bool)"/>
-    public static Bug480Display? TryParseJsonString(string? value, bool ignoreCase = false)
+    public static Bug480DisplayTests.Bug480Display? TryParseJsonString(string? value, bool ignoreCase = false)
     {
-        return TryParseJsonString(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480Display?)result : null;
+        return TryParseJsonString(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480DisplayTests.Bug480Display?)result : null;
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.TryParseJsonString(System.ReadOnlySpan{char}, bool, out TEnum)"/>
-    public static bool TryParseJsonString(ReadOnlySpan<char> value, bool ignoreCase, out Bug480Display result)
+    public static bool TryParseJsonString(ReadOnlySpan<char> value, bool ignoreCase, out Bug480DisplayTests.Bug480Display result)
     {
         Unsafe.SkipInit(out result);
-        return TryParseJsonString(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Display, int>(ref result));
+        return TryParseJsonString(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480DisplayTests.Bug480Display, int>(ref result));
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.TryParseJsonString(System.ReadOnlySpan{char}, out TEnum)"/>
-    public static bool TryParseJsonString(ReadOnlySpan<char> value, out Bug480Display result)
+    public static bool TryParseJsonString(ReadOnlySpan<char> value, out Bug480DisplayTests.Bug480Display result)
     {
         Unsafe.SkipInit(out result);
-        return TryParseJsonString(value, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Display, int>(ref result));
+        return TryParseJsonString(value, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480DisplayTests.Bug480Display, int>(ref result));
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.TryParseJsonString(System.ReadOnlySpan{char}, bool)"/>
-    public static Bug480Display? TryParseJsonString(ReadOnlySpan<char> value, bool ignoreCase = false)
+    public static Bug480DisplayTests.Bug480Display? TryParseJsonString(ReadOnlySpan<char> value, bool ignoreCase = false)
     {
-        return TryParseJsonString(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480Display?)result : null;
+        return TryParseJsonString(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480DisplayTests.Bug480Display?)result : null;
     }
 
     private static bool TryParseJsonString(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out int result)

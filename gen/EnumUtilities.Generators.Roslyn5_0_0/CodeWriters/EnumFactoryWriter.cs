@@ -1,4 +1,5 @@
-﻿using Raiqub.Generators.EnumUtilities.CodeWriters.Factory;
+﻿using Microsoft.CodeAnalysis.CSharp;
+using Raiqub.Generators.EnumUtilities.CodeWriters.Factory;
 using Raiqub.Generators.EnumUtilities.Models;
 using Raiqub.Generators.InterpolationCodeWriter;
 
@@ -49,7 +50,7 @@ public class EnumFactoryWriter : ICodeWriter<EnumToGenerate>
         CodeWriterHelper.WriteGeneratedCodeAttributes(writer);
         writer.WriteLine(
             $$"""
-            {{(model.IsPublic ? "public" : "internal")}} static partial class {{model.Name}}Factory
+            {{SyntaxFacts.GetText(model.AccessModifier)}} static partial class {{model.Name}}Factory
             {
             """
         );

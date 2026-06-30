@@ -1,4 +1,5 @@
-﻿using Raiqub.Generators.EnumUtilities.Models;
+﻿using Microsoft.CodeAnalysis.CSharp;
+using Raiqub.Generators.EnumUtilities.Models;
 using Raiqub.Generators.InterpolationCodeWriter;
 
 namespace Raiqub.Generators.EnumUtilities.CodeWriters;
@@ -35,7 +36,7 @@ public sealed class EnumValidationWriter : ICodeWriter<EnumToGenerate>
 
         writer.WriteLine(
             $$"""
-            {{(model.IsPublic ? "public" : "internal")}} static partial class {{model.Name}}Validation
+            {{SyntaxFacts.GetText(model.AccessModifier)}} static partial class {{model.Name}}Validation
             {
             """
         );

@@ -8,7 +8,7 @@ using Raiqub.Generators.EnumUtilities.Formatters;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
-namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
+namespace Raiqub.Generators.EnumUtilities.IntegrationTests;
 
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
@@ -21,7 +21,7 @@ public static partial class Bug480FlagsExtensions
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.ToStringFast(TEnum)"/>
     [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    public static string ToStringFast(this Bug480Flags value)
+    public static string ToStringFast(this Bug480FlagsTests.Bug480Flags value)
     {
         if ((uint)value < 256)
         {
@@ -35,7 +35,7 @@ public static partial class Bug480FlagsExtensions
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.GetStringLength(TEnum)"/>
     [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    public static int GetStringLength(this Bug480Flags value)
+    public static int GetStringLength(this Bug480FlagsTests.Bug480Flags value)
     {
         if ((uint)value < 256)
         {
@@ -51,14 +51,14 @@ public static partial class Bug480FlagsExtensions
     /// <param name="flag">An enumeration value.</param>
     /// <returns><see langword="true"/> if the bit field or bit fields that are set in flag are also set in the current instance; otherwise, <see langword="false"/>.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool HasFlagFast(this Bug480Flags value, Bug480Flags flag)
+    public static bool HasFlagFast(this Bug480FlagsTests.Bug480Flags value, Bug480FlagsTests.Bug480Flags flag)
     {
         return (value & flag) == flag;
     }
 
     /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
     /// <returns><c>true</c> if the value of this instance exists in the enumeration; <c>false</c> otherwise.</returns>
-    public static bool IsDefined(this Bug480Flags value)
+    public static bool IsDefined(this Bug480FlagsTests.Bug480Flags value)
     {
         return (int)value switch
         {
@@ -78,22 +78,22 @@ public static partial class Bug480FlagsExtensions
     /// <param name="location">A variable containing the first value to be combined.</param>
     /// <param name="value">The value to be combined with the value at <paramref name="location" />.</param>
     /// <returns>The original value in <paramref name="location" />.</returns>
-    public static Bug480Flags InterlockedAnd(this ref Bug480Flags location, Bug480Flags value)
+    public static Bug480FlagsTests.Bug480Flags InterlockedAnd(this ref Bug480FlagsTests.Bug480Flags location, Bug480FlagsTests.Bug480Flags value)
     {
-        ref int locationRaw = ref Unsafe.As<Bug480Flags, int>(ref location);
-        int resultRaw = Interlocked.And(ref locationRaw, Unsafe.As<Bug480Flags, int>(ref value));
-        return Unsafe.As<int, Bug480Flags>(ref resultRaw);
+        ref int locationRaw = ref Unsafe.As<Bug480FlagsTests.Bug480Flags, int>(ref location);
+        int resultRaw = Interlocked.And(ref locationRaw, Unsafe.As<Bug480FlagsTests.Bug480Flags, int>(ref value));
+        return Unsafe.As<int, Bug480FlagsTests.Bug480Flags>(ref resultRaw);
     }
 
     /// <summary>Bitwise "ors" two enumerations and replaces the first value with the result, as an atomic operation.</summary>
     /// <param name="location">A variable containing the first value to be combined.</param>
     /// <param name="value">The value to be combined with the value at <paramref name="location" />.</param>
     /// <returns>The original value in <paramref name="location" />.</returns>
-    public static Bug480Flags InterlockedOr(this ref Bug480Flags location, Bug480Flags value)
+    public static Bug480FlagsTests.Bug480Flags InterlockedOr(this ref Bug480FlagsTests.Bug480Flags location, Bug480FlagsTests.Bug480Flags value)
     {
-        ref int locationRaw = ref Unsafe.As<Bug480Flags, int>(ref location);
-        int resultRaw = Interlocked.Or(ref locationRaw, Unsafe.As<Bug480Flags, int>(ref value));
-        return Unsafe.As<int, Bug480Flags>(ref resultRaw);
+        ref int locationRaw = ref Unsafe.As<Bug480FlagsTests.Bug480Flags, int>(ref location);
+        int resultRaw = Interlocked.Or(ref locationRaw, Unsafe.As<Bug480FlagsTests.Bug480Flags, int>(ref value));
+        return Unsafe.As<int, Bug480FlagsTests.Bug480Flags>(ref resultRaw);
     }
 
     /// <summary>Compares two enumerations for equality and, if they are equal, replaces the first value.</summary>
@@ -101,22 +101,22 @@ public static partial class Bug480FlagsExtensions
     /// <param name="value">The value that replaces the destination value if the comparison results in equality.</param>
     /// <param name="comparand">The value that is compared to the value at <paramref name="location" />.</param>
     /// <returns>The original value in <paramref name="location" />.</returns>
-    public static Bug480Flags InterlockedCompareExchange(this ref Bug480Flags location, Bug480Flags value, Bug480Flags comparand)
+    public static Bug480FlagsTests.Bug480Flags InterlockedCompareExchange(this ref Bug480FlagsTests.Bug480Flags location, Bug480FlagsTests.Bug480Flags value, Bug480FlagsTests.Bug480Flags comparand)
     {
-        ref int locationRaw = ref Unsafe.As<Bug480Flags, int>(ref location);
-        int resultRaw = Interlocked.CompareExchange(ref locationRaw, Unsafe.As<Bug480Flags, int>(ref value), Unsafe.As<Bug480Flags, int>(ref comparand));
-        return Unsafe.As<int, Bug480Flags>(ref resultRaw);
+        ref int locationRaw = ref Unsafe.As<Bug480FlagsTests.Bug480Flags, int>(ref location);
+        int resultRaw = Interlocked.CompareExchange(ref locationRaw, Unsafe.As<Bug480FlagsTests.Bug480Flags, int>(ref value), Unsafe.As<Bug480FlagsTests.Bug480Flags, int>(ref comparand));
+        return Unsafe.As<int, Bug480FlagsTests.Bug480Flags>(ref resultRaw);
     }
 
     /// <summary>Sets an enumeration value to a specified value and returns the original value, as an atomic operation.</summary>
     /// <param name="location">The variable to set to the specified value.</param>
     /// <param name="value">The value to which the <paramref name="location" /> parameter is set.</param>
     /// <returns>The original value of <paramref name="location" />.</returns>
-    public static Bug480Flags InterlockedExchange(this ref Bug480Flags location, Bug480Flags value)
+    public static Bug480FlagsTests.Bug480Flags InterlockedExchange(this ref Bug480FlagsTests.Bug480Flags location, Bug480FlagsTests.Bug480Flags value)
     {
-        ref int locationRaw = ref Unsafe.As<Bug480Flags, int>(ref location);
-        int resultRaw = Interlocked.Exchange(ref locationRaw, Unsafe.As<Bug480Flags, int>(ref value));
-        return Unsafe.As<int, Bug480Flags>(ref resultRaw);
+        ref int locationRaw = ref Unsafe.As<Bug480FlagsTests.Bug480Flags, int>(ref location);
+        int resultRaw = Interlocked.Exchange(ref locationRaw, Unsafe.As<Bug480FlagsTests.Bug480Flags, int>(ref value));
+        return Unsafe.As<int, Bug480FlagsTests.Bug480Flags>(ref resultRaw);
     }
 
     private static ReadOnlySpan<byte> s_formatEnumMemberValueLengths => new byte[256] { 1, 9, 11, 22, 7, 18, 20, 31, 3, 14, 16, 27, 12, 23, 25, 36, 13, 24, 26, 37, 22, 33, 35, 46, 18, 29, 31, 42, 27, 38, 40, 51, 8, 19, 21, 32, 17, 28, 30, 41, 13, 24, 26, 37, 22, 33, 35, 46, 23, 34, 36, 47, 32, 43, 45, 56, 28, 39, 41, 52, 37, 48, 50, 61, 14, 25, 27, 38, 23, 34, 36, 47, 19, 30, 32, 43, 28, 39, 41, 52, 29, 40, 42, 53, 38, 49, 51, 62, 34, 45, 47, 58, 43, 54, 56, 67, 24, 35, 37, 48, 33, 44, 46, 57, 29, 40, 42, 53, 38, 49, 51, 62, 39, 50, 52, 63, 48, 59, 61, 72, 44, 55, 57, 68, 53, 64, 66, 77, 15, 26, 28, 39, 24, 35, 37, 48, 20, 31, 33, 44, 29, 40, 42, 53, 30, 41, 43, 54, 39, 50, 52, 63, 35, 46, 48, 59, 44, 55, 57, 68, 25, 36, 38, 49, 34, 45, 47, 58, 30, 41, 43, 54, 39, 50, 52, 63, 40, 51, 53, 64, 49, 60, 62, 73, 45, 56, 58, 69, 54, 65, 67, 78, 31, 42, 44, 55, 40, 51, 53, 64, 36, 47, 49, 60, 45, 56, 58, 69, 46, 57, 59, 70, 55, 66, 68, 79, 51, 62, 64, 75, 60, 71, 73, 84, 41, 52, 54, 65, 50, 61, 63, 74, 46, 57, 59, 70, 55, 66, 68, 79, 56, 67, 69, 80, 65, 76, 78, 89, 61, 72, 74, 85, 70, 81, 83, 94 };
@@ -124,7 +124,7 @@ public static partial class Bug480FlagsExtensions
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.ToEnumMemberValue(TEnum)"/>
     [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    public static string ToEnumMemberValue(this Bug480Flags value)
+    public static string ToEnumMemberValue(this Bug480FlagsTests.Bug480Flags value)
     {
         if ((uint)value < 256)
         {
@@ -138,7 +138,7 @@ public static partial class Bug480FlagsExtensions
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.GetEnumMemberValueStringLength(TEnum)"/>
     [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    public static int GetEnumMemberValueStringLength(this Bug480Flags value)
+    public static int GetEnumMemberValueStringLength(this Bug480FlagsTests.Bug480Flags value)
     {
         if ((uint)value < 256)
         {
@@ -150,7 +150,7 @@ public static partial class Bug480FlagsExtensions
         return global::Raiqub.Generators.EnumUtilities.Formatters.EnumNumericFormatter.GetStringLength((int)value);
     }
 
-    public static string? GetDescription(this Bug480Flags value)
+    public static string? GetDescription(this Bug480FlagsTests.Bug480Flags value)
     {
         return (int)value switch
         {
@@ -171,7 +171,7 @@ public static partial class Bug480FlagsExtensions
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.ToJsonString(TEnum)"/>
     [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    public static string? ToJsonString(this Bug480Flags value)
+    public static string? ToJsonString(this Bug480FlagsTests.Bug480Flags value)
     {
         if ((uint)value < 256)
         {
@@ -185,7 +185,7 @@ public static partial class Bug480FlagsExtensions
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.GetJsonStringLength(TEnum)"/>
     [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    public static int? GetJsonStringLength(this Bug480Flags value)
+    public static int? GetJsonStringLength(this Bug480FlagsTests.Bug480Flags value)
     {
         if ((uint)value < 256)
         {
