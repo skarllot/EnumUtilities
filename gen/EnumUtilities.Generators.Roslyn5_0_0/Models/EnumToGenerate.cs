@@ -12,7 +12,7 @@ public sealed record EnumToGenerate(
     JsonConverterGeneratorOptions? JsonConverterGeneratorOptions,
     string? Namespace,
     ContainingType? ContainingType,
-    bool IsPublic,
+    Accessibility AccessModifier,
     [property: MemberNotNullWhen(true, "FlagsInfo")] bool IsFlags,
     string Name,
     string UnderlyingType,
@@ -113,12 +113,12 @@ public sealed record EnumToGenerate(
             ContainingType: typeSymbol.ContainingType is not null
                 ? ContainingType.FromSymbol(typeSymbol.ContainingType)
                 : null,
-            IsPublic: typeSymbol.DeclaredAccessibility == Accessibility.Public,
+            AccessModifier: typeSymbol.DeclaredAccessibility,
             IsFlags: attributes.Any(x =>
                 string.Equals(x.AttributeClass?.Name, nameof(FlagsAttribute), StringComparison.Ordinal)
             ),
             Name: typeSymbol.Name,
-            UnderlyingType: typeSymbol.EnumUnderlyingType?.GetNumericCSharpKeyword() ?? "int",
+            UnderlyingType: typeSymbol.EnumUnderlyingType?.ToCSharpTypeName() ?? "int",
             Values: EquatableArray<EnumValue>.FromArrayWithoutCopy(enumValues),
             DefaultLocations: typeSymbol.GetDefaultLocation()
         );

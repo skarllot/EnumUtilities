@@ -8,14 +8,14 @@ using Raiqub.Generators.EnumUtilities.Formatters;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
-namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
+namespace Raiqub.Generators.EnumUtilities.IntegrationTests;
 
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
 public static partial class Bug480Extensions
 {
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.ToStringFast(TEnum)"/>
-    public static string ToStringFast(this Bug480 value)
+    public static string ToStringFast(this Bug480Tests.Bug480 value)
     {
         int v = (int)value;
         return v switch
@@ -77,7 +77,7 @@ public static partial class Bug480Extensions
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.GetStringLength(TEnum)"/>
-    public static int GetStringLength(this Bug480 value)
+    public static int GetStringLength(this Bug480Tests.Bug480 value)
     {
         int v = (int)value;
         return v switch
@@ -140,7 +140,7 @@ public static partial class Bug480Extensions
 
     /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
     /// <returns><c>true</c> if the value of this instance exists in the enumeration; <c>false</c> otherwise.</returns>
-    public static bool IsDefined(this Bug480 value)
+    public static bool IsDefined(this Bug480Tests.Bug480 value)
     {
         return (int)value switch
         {
@@ -203,31 +203,31 @@ public static partial class Bug480Extensions
     /// <param name="location">A variable containing the first value to be added.</param>
     /// <param name="value">The value to be added to the enumeration at <paramref name="location" />.</param>
     /// <returns>The new value that was stored at <paramref name="location" /> by this operation.</returns>
-    public static Bug480 InterlockedAdd(this ref Bug480 location, int value)
+    public static Bug480Tests.Bug480 InterlockedAdd(this ref Bug480Tests.Bug480 location, int value)
     {
-        ref int locationRaw = ref Unsafe.As<Bug480, int>(ref location);
+        ref int locationRaw = ref Unsafe.As<Bug480Tests.Bug480, int>(ref location);
         int resultRaw = Interlocked.Add(ref locationRaw, value);
-        return Unsafe.As<int, Bug480>(ref resultRaw);
+        return Unsafe.As<int, Bug480Tests.Bug480>(ref resultRaw);
     }
 
     /// <summary>Decrements enumeration and stores the result, as an atomic operation.</summary>
     /// <param name="location">The variable whose value is to be decremented.</param>
     /// <returns>The value of the variable immediately after the decrement operation finished.</returns>
-    public static Bug480 InterlockedDecrement(this ref Bug480 location)
+    public static Bug480Tests.Bug480 InterlockedDecrement(this ref Bug480Tests.Bug480 location)
     {
-        ref int locationRaw = ref Unsafe.As<Bug480, int>(ref location);
+        ref int locationRaw = ref Unsafe.As<Bug480Tests.Bug480, int>(ref location);
         int resultRaw = Interlocked.Decrement(ref locationRaw);
-        return Unsafe.As<int, Bug480>(ref resultRaw);
+        return Unsafe.As<int, Bug480Tests.Bug480>(ref resultRaw);
     }
 
     /// <summary>Increments enumeration and stores the result, as an atomic operation.</summary>
     /// <param name="location">The variable whose value is to be incremented.</param>
     /// <returns>The value of the variable immediately after the increment operation finished.</returns>
-    public static Bug480 InterlockedIncrement(this ref Bug480 location)
+    public static Bug480Tests.Bug480 InterlockedIncrement(this ref Bug480Tests.Bug480 location)
     {
-        ref int locationRaw = ref Unsafe.As<Bug480, int>(ref location);
+        ref int locationRaw = ref Unsafe.As<Bug480Tests.Bug480, int>(ref location);
         int resultRaw = Interlocked.Increment(ref locationRaw);
-        return Unsafe.As<int, Bug480>(ref resultRaw);
+        return Unsafe.As<int, Bug480Tests.Bug480>(ref resultRaw);
     }
 
     /// <summary>Compares two enumerations for equality and, if they are equal, replaces the first value.</summary>
@@ -235,26 +235,26 @@ public static partial class Bug480Extensions
     /// <param name="value">The value that replaces the destination value if the comparison results in equality.</param>
     /// <param name="comparand">The value that is compared to the value at <paramref name="location" />.</param>
     /// <returns>The original value in <paramref name="location" />.</returns>
-    public static Bug480 InterlockedCompareExchange(this ref Bug480 location, Bug480 value, Bug480 comparand)
+    public static Bug480Tests.Bug480 InterlockedCompareExchange(this ref Bug480Tests.Bug480 location, Bug480Tests.Bug480 value, Bug480Tests.Bug480 comparand)
     {
-        ref int locationRaw = ref Unsafe.As<Bug480, int>(ref location);
-        int resultRaw = Interlocked.CompareExchange(ref locationRaw, Unsafe.As<Bug480, int>(ref value), Unsafe.As<Bug480, int>(ref comparand));
-        return Unsafe.As<int, Bug480>(ref resultRaw);
+        ref int locationRaw = ref Unsafe.As<Bug480Tests.Bug480, int>(ref location);
+        int resultRaw = Interlocked.CompareExchange(ref locationRaw, Unsafe.As<Bug480Tests.Bug480, int>(ref value), Unsafe.As<Bug480Tests.Bug480, int>(ref comparand));
+        return Unsafe.As<int, Bug480Tests.Bug480>(ref resultRaw);
     }
 
     /// <summary>Sets an enumeration value to a specified value and returns the original value, as an atomic operation.</summary>
     /// <param name="location">The variable to set to the specified value.</param>
     /// <param name="value">The value to which the <paramref name="location" /> parameter is set.</param>
     /// <returns>The original value of <paramref name="location" />.</returns>
-    public static Bug480 InterlockedExchange(this ref Bug480 location, Bug480 value)
+    public static Bug480Tests.Bug480 InterlockedExchange(this ref Bug480Tests.Bug480 location, Bug480Tests.Bug480 value)
     {
-        ref int locationRaw = ref Unsafe.As<Bug480, int>(ref location);
-        int resultRaw = Interlocked.Exchange(ref locationRaw, Unsafe.As<Bug480, int>(ref value));
-        return Unsafe.As<int, Bug480>(ref resultRaw);
+        ref int locationRaw = ref Unsafe.As<Bug480Tests.Bug480, int>(ref location);
+        int resultRaw = Interlocked.Exchange(ref locationRaw, Unsafe.As<Bug480Tests.Bug480, int>(ref value));
+        return Unsafe.As<int, Bug480Tests.Bug480>(ref resultRaw);
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.ToEnumMemberValue(TEnum)"/>
-    public static string ToEnumMemberValue(this Bug480 value)
+    public static string ToEnumMemberValue(this Bug480Tests.Bug480 value)
     {
         int v = (int)value;
         return v switch
@@ -316,7 +316,7 @@ public static partial class Bug480Extensions
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.GetEnumMemberValueStringLength(TEnum)"/>
-    public static int GetEnumMemberValueStringLength(this Bug480 value)
+    public static int GetEnumMemberValueStringLength(this Bug480Tests.Bug480 value)
     {
         int v = (int)value;
         return v switch
@@ -377,7 +377,7 @@ public static partial class Bug480Extensions
         };
     }
 
-    public static string? GetDescription(this Bug480 value)
+    public static string? GetDescription(this Bug480Tests.Bug480 value)
     {
         return (int)value switch
         {
@@ -436,10 +436,10 @@ public static partial class Bug480Extensions
     }
 
     /// <summary>
-    /// Provides pattern matching functionality for the <see cref="Bug480"/> enum by returning the corresponding value based on the enum value.
+    /// Provides pattern matching functionality for the <see cref="Bug480Tests.Bug480"/> enum by returning the corresponding value based on the enum value.
     /// </summary>
     /// <typeparam name="TResult">The type of the result to return for each member match.</typeparam>
-    /// <param name="value">The <see cref="Bug480"/> enum value to match against.</param>
+    /// <param name="value">The <see cref="Bug480Tests.Bug480"/> enum value to match against.</param>
     /// <param name="Backslash">The value to return when the enum value is Backslash.</param>
     /// <param name="DoubleQuote">The value to return when the enum value is DoubleQuote.</param>
     /// <param name="SingleQuote">The value to return when the enum value is SingleQuote.</param>
@@ -494,7 +494,7 @@ public static partial class Bug480Extensions
     /// <returns>The corresponding result value based on the enum value.</returns>
     /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected member values.</exception>
     public static TResult Match<TResult>(
-        this Bug480 value,
+        this Bug480Tests.Bug480 value,
         TResult Backslash,
         TResult DoubleQuote,
         TResult SingleQuote,
@@ -605,10 +605,10 @@ public static partial class Bug480Extensions
     }
 
     /// <summary>
-    /// Provides pattern matching functionality for the <see cref="Bug480"/> enum by executing the corresponding function based on the enum value.
+    /// Provides pattern matching functionality for the <see cref="Bug480Tests.Bug480"/> enum by executing the corresponding function based on the enum value.
     /// </summary>
     /// <typeparam name="TResult">The type of the result to return from the executed function.</typeparam>
-    /// <param name="value">The <see cref="Bug480"/> enum value to match against.</param>
+    /// <param name="value">The <see cref="Bug480Tests.Bug480"/> enum value to match against.</param>
     /// <param name="Backslash">The function to execute when the enum value is Backslash.</param>
     /// <param name="DoubleQuote">The function to execute when the enum value is DoubleQuote.</param>
     /// <param name="SingleQuote">The function to execute when the enum value is SingleQuote.</param>
@@ -661,120 +661,120 @@ public static partial class Bug480Extensions
     /// <param name="EscapedJson">The function to execute when the enum value is EscapedJson.</param>
     /// <param name="NullDescription">The function to execute when the enum value is NullDescription.</param>
     /// <returns>The result of executing the corresponding function based on the enum value.</returns>
-    /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected <see cref="Bug480"/> values.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected <see cref="Bug480Tests.Bug480"/> values.</exception>
     public static TResult Match<TResult>(
-        this Bug480 value,
-        Func<Bug480, TResult> Backslash,
-        Func<Bug480, TResult> DoubleQuote,
-        Func<Bug480, TResult> SingleQuote,
-        Func<Bug480, TResult> Newline,
-        Func<Bug480, TResult> CarriageReturn,
-        Func<Bug480, TResult> Tab,
-        Func<Bug480, TResult> CrLf,
-        Func<Bug480, TResult> MultipleNewlines,
-        Func<Bug480, TResult> WindowsPath,
-        Func<Bug480, TResult> MixedQuotes,
-        Func<Bug480, TResult> LessThan,
-        Func<Bug480, TResult> GreaterThan,
-        Func<Bug480, TResult> Ampersand,
-        Func<Bug480, TResult> XmlTag,
-        Func<Bug480, TResult> XmlSpecialChars,
-        Func<Bug480, TResult> Degree,
-        Func<Bug480, TResult> Copyright,
-        Func<Bug480, TResult> Euro,
-        Func<Bug480, TResult> Unicode,
-        Func<Bug480, TResult> Emoji,
-        Func<Bug480, TResult> NullChar,
-        Func<Bug480, TResult> Backspace,
-        Func<Bug480, TResult> FormFeed,
-        Func<Bug480, TResult> VerticalTab,
-        Func<Bug480, TResult> JsonLike,
-        Func<Bug480, TResult> CData,
-        Func<Bug480, TResult> CodeComment,
-        Func<Bug480, TResult> VerbatimString,
-        Func<Bug480, TResult> EnumMemberBackslash,
-        Func<Bug480, TResult> EnumMemberQuoted,
-        Func<Bug480, TResult> EnumMemberNewline,
-        Func<Bug480, TResult> JsonNameEscape,
-        Func<Bug480, TResult> JsonNameQuoted,
-        Func<Bug480, TResult> CombinedEscapes,
-        Func<Bug480, TResult> EnumMemberTab,
-        Func<Bug480, TResult> EmptyDescription,
-        Func<Bug480, TResult> WhitespaceDescription,
-        Func<Bug480, TResult> EmptyLine,
-        Func<Bug480, TResult> TrailingSpace,
-        Func<Bug480, TResult> LeadingSpace,
-        Func<Bug480, TResult> Url,
-        Func<Bug480, TResult> SqlLike,
-        Func<Bug480, TResult> RegexPattern,
-        Func<Bug480, TResult> UncPath,
-        Func<Bug480, TResult> UnixPath,
-        Func<Bug480, TResult> DoubleBackslash,
-        Func<Bug480, TResult> TripleQuote,
-        Func<Bug480, TResult> TripleNewline,
-        Func<Bug480, TResult> ComplexError,
-        Func<Bug480, TResult> EscapedJson,
-        Func<Bug480, TResult> NullDescription)
+        this Bug480Tests.Bug480 value,
+        Func<Bug480Tests.Bug480, TResult> Backslash,
+        Func<Bug480Tests.Bug480, TResult> DoubleQuote,
+        Func<Bug480Tests.Bug480, TResult> SingleQuote,
+        Func<Bug480Tests.Bug480, TResult> Newline,
+        Func<Bug480Tests.Bug480, TResult> CarriageReturn,
+        Func<Bug480Tests.Bug480, TResult> Tab,
+        Func<Bug480Tests.Bug480, TResult> CrLf,
+        Func<Bug480Tests.Bug480, TResult> MultipleNewlines,
+        Func<Bug480Tests.Bug480, TResult> WindowsPath,
+        Func<Bug480Tests.Bug480, TResult> MixedQuotes,
+        Func<Bug480Tests.Bug480, TResult> LessThan,
+        Func<Bug480Tests.Bug480, TResult> GreaterThan,
+        Func<Bug480Tests.Bug480, TResult> Ampersand,
+        Func<Bug480Tests.Bug480, TResult> XmlTag,
+        Func<Bug480Tests.Bug480, TResult> XmlSpecialChars,
+        Func<Bug480Tests.Bug480, TResult> Degree,
+        Func<Bug480Tests.Bug480, TResult> Copyright,
+        Func<Bug480Tests.Bug480, TResult> Euro,
+        Func<Bug480Tests.Bug480, TResult> Unicode,
+        Func<Bug480Tests.Bug480, TResult> Emoji,
+        Func<Bug480Tests.Bug480, TResult> NullChar,
+        Func<Bug480Tests.Bug480, TResult> Backspace,
+        Func<Bug480Tests.Bug480, TResult> FormFeed,
+        Func<Bug480Tests.Bug480, TResult> VerticalTab,
+        Func<Bug480Tests.Bug480, TResult> JsonLike,
+        Func<Bug480Tests.Bug480, TResult> CData,
+        Func<Bug480Tests.Bug480, TResult> CodeComment,
+        Func<Bug480Tests.Bug480, TResult> VerbatimString,
+        Func<Bug480Tests.Bug480, TResult> EnumMemberBackslash,
+        Func<Bug480Tests.Bug480, TResult> EnumMemberQuoted,
+        Func<Bug480Tests.Bug480, TResult> EnumMemberNewline,
+        Func<Bug480Tests.Bug480, TResult> JsonNameEscape,
+        Func<Bug480Tests.Bug480, TResult> JsonNameQuoted,
+        Func<Bug480Tests.Bug480, TResult> CombinedEscapes,
+        Func<Bug480Tests.Bug480, TResult> EnumMemberTab,
+        Func<Bug480Tests.Bug480, TResult> EmptyDescription,
+        Func<Bug480Tests.Bug480, TResult> WhitespaceDescription,
+        Func<Bug480Tests.Bug480, TResult> EmptyLine,
+        Func<Bug480Tests.Bug480, TResult> TrailingSpace,
+        Func<Bug480Tests.Bug480, TResult> LeadingSpace,
+        Func<Bug480Tests.Bug480, TResult> Url,
+        Func<Bug480Tests.Bug480, TResult> SqlLike,
+        Func<Bug480Tests.Bug480, TResult> RegexPattern,
+        Func<Bug480Tests.Bug480, TResult> UncPath,
+        Func<Bug480Tests.Bug480, TResult> UnixPath,
+        Func<Bug480Tests.Bug480, TResult> DoubleBackslash,
+        Func<Bug480Tests.Bug480, TResult> TripleQuote,
+        Func<Bug480Tests.Bug480, TResult> TripleNewline,
+        Func<Bug480Tests.Bug480, TResult> ComplexError,
+        Func<Bug480Tests.Bug480, TResult> EscapedJson,
+        Func<Bug480Tests.Bug480, TResult> NullDescription)
     {
         return (int)value switch
         {
-            1 => Backslash((Bug480)value),
-            2 => DoubleQuote((Bug480)value),
-            3 => SingleQuote((Bug480)value),
-            4 => Newline((Bug480)value),
-            5 => CarriageReturn((Bug480)value),
-            6 => Tab((Bug480)value),
-            7 => CrLf((Bug480)value),
-            8 => MultipleNewlines((Bug480)value),
-            9 => WindowsPath((Bug480)value),
-            10 => MixedQuotes((Bug480)value),
-            11 => LessThan((Bug480)value),
-            12 => GreaterThan((Bug480)value),
-            13 => Ampersand((Bug480)value),
-            14 => XmlTag((Bug480)value),
-            15 => XmlSpecialChars((Bug480)value),
-            16 => Degree((Bug480)value),
-            17 => Copyright((Bug480)value),
-            18 => Euro((Bug480)value),
-            19 => Unicode((Bug480)value),
-            20 => Emoji((Bug480)value),
-            21 => NullChar((Bug480)value),
-            22 => Backspace((Bug480)value),
-            23 => FormFeed((Bug480)value),
-            24 => VerticalTab((Bug480)value),
-            25 => JsonLike((Bug480)value),
-            26 => CData((Bug480)value),
-            27 => CodeComment((Bug480)value),
-            28 => VerbatimString((Bug480)value),
-            29 => EnumMemberBackslash((Bug480)value),
-            30 => EnumMemberQuoted((Bug480)value),
-            31 => EnumMemberNewline((Bug480)value),
-            32 => JsonNameEscape((Bug480)value),
-            33 => JsonNameQuoted((Bug480)value),
-            34 => CombinedEscapes((Bug480)value),
-            35 => EnumMemberTab((Bug480)value),
-            36 => EmptyDescription((Bug480)value),
-            37 => WhitespaceDescription((Bug480)value),
-            38 => EmptyLine((Bug480)value),
-            39 => TrailingSpace((Bug480)value),
-            40 => LeadingSpace((Bug480)value),
-            41 => Url((Bug480)value),
-            42 => SqlLike((Bug480)value),
-            43 => RegexPattern((Bug480)value),
-            44 => UncPath((Bug480)value),
-            45 => UnixPath((Bug480)value),
-            46 => DoubleBackslash((Bug480)value),
-            47 => TripleQuote((Bug480)value),
-            48 => TripleNewline((Bug480)value),
-            49 => ComplexError((Bug480)value),
-            50 => EscapedJson((Bug480)value),
-            51 => NullDescription((Bug480)value),
+            1 => Backslash((Bug480Tests.Bug480)value),
+            2 => DoubleQuote((Bug480Tests.Bug480)value),
+            3 => SingleQuote((Bug480Tests.Bug480)value),
+            4 => Newline((Bug480Tests.Bug480)value),
+            5 => CarriageReturn((Bug480Tests.Bug480)value),
+            6 => Tab((Bug480Tests.Bug480)value),
+            7 => CrLf((Bug480Tests.Bug480)value),
+            8 => MultipleNewlines((Bug480Tests.Bug480)value),
+            9 => WindowsPath((Bug480Tests.Bug480)value),
+            10 => MixedQuotes((Bug480Tests.Bug480)value),
+            11 => LessThan((Bug480Tests.Bug480)value),
+            12 => GreaterThan((Bug480Tests.Bug480)value),
+            13 => Ampersand((Bug480Tests.Bug480)value),
+            14 => XmlTag((Bug480Tests.Bug480)value),
+            15 => XmlSpecialChars((Bug480Tests.Bug480)value),
+            16 => Degree((Bug480Tests.Bug480)value),
+            17 => Copyright((Bug480Tests.Bug480)value),
+            18 => Euro((Bug480Tests.Bug480)value),
+            19 => Unicode((Bug480Tests.Bug480)value),
+            20 => Emoji((Bug480Tests.Bug480)value),
+            21 => NullChar((Bug480Tests.Bug480)value),
+            22 => Backspace((Bug480Tests.Bug480)value),
+            23 => FormFeed((Bug480Tests.Bug480)value),
+            24 => VerticalTab((Bug480Tests.Bug480)value),
+            25 => JsonLike((Bug480Tests.Bug480)value),
+            26 => CData((Bug480Tests.Bug480)value),
+            27 => CodeComment((Bug480Tests.Bug480)value),
+            28 => VerbatimString((Bug480Tests.Bug480)value),
+            29 => EnumMemberBackslash((Bug480Tests.Bug480)value),
+            30 => EnumMemberQuoted((Bug480Tests.Bug480)value),
+            31 => EnumMemberNewline((Bug480Tests.Bug480)value),
+            32 => JsonNameEscape((Bug480Tests.Bug480)value),
+            33 => JsonNameQuoted((Bug480Tests.Bug480)value),
+            34 => CombinedEscapes((Bug480Tests.Bug480)value),
+            35 => EnumMemberTab((Bug480Tests.Bug480)value),
+            36 => EmptyDescription((Bug480Tests.Bug480)value),
+            37 => WhitespaceDescription((Bug480Tests.Bug480)value),
+            38 => EmptyLine((Bug480Tests.Bug480)value),
+            39 => TrailingSpace((Bug480Tests.Bug480)value),
+            40 => LeadingSpace((Bug480Tests.Bug480)value),
+            41 => Url((Bug480Tests.Bug480)value),
+            42 => SqlLike((Bug480Tests.Bug480)value),
+            43 => RegexPattern((Bug480Tests.Bug480)value),
+            44 => UncPath((Bug480Tests.Bug480)value),
+            45 => UnixPath((Bug480Tests.Bug480)value),
+            46 => DoubleBackslash((Bug480Tests.Bug480)value),
+            47 => TripleQuote((Bug480Tests.Bug480)value),
+            48 => TripleNewline((Bug480Tests.Bug480)value),
+            49 => ComplexError((Bug480Tests.Bug480)value),
+            50 => EscapedJson((Bug480Tests.Bug480)value),
+            51 => NullDescription((Bug480Tests.Bug480)value),
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
         };
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.ToJsonString(TEnum)"/>
-    public static string? ToJsonString(this Bug480 value)
+    public static string? ToJsonString(this Bug480Tests.Bug480 value)
     {
         int v = (int)value;
         return v switch
@@ -836,7 +836,7 @@ public static partial class Bug480Extensions
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.GetJsonStringLength(TEnum)"/>
-    public static int? GetJsonStringLength(this Bug480 value)
+    public static int? GetJsonStringLength(this Bug480Tests.Bug480 value)
     {
         int v = (int)value;
         return v switch

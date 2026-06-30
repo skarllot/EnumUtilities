@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Microsoft.CodeAnalysis.CSharp;
 using Raiqub.Generators.EnumUtilities.CodeWriters.EnumInfo;
 using Raiqub.Generators.EnumUtilities.Models;
 using Raiqub.Generators.InterpolationCodeWriter;
@@ -40,7 +41,7 @@ public class EnumInfoWriter : ICodeWriter<EnumToGenerate>
             /// <summary>Provides metadata for <see cref="{{model.Name}}" /> enumeration.</summary>
             [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("{{CurrentAssemblyName.Name}}", "{{CurrentAssemblyName.Version}}")]
-            {{(model.IsPublic ? "public" : "internal")}} static partial class {{model.MetadataClassName}}
+            {{SyntaxFacts.GetText(model.AccessModifier)}} static partial class {{model.MetadataClassName}}
             {
                 /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumMetadata.MinimumValue" />
                 public const {{model.UnderlyingType}} MinimumValue = {{model.OrderedValues.First().MemberValue}};

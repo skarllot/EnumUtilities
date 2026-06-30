@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
-namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
+namespace Raiqub.Generators.EnumUtilities.IntegrationTests;
 
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
@@ -14,7 +14,7 @@ public static partial class Bug480FlagsValidation
 {
     /// <summary>Returns a boolean telling whether the value of <see cref="Bug480Flags"/> instance exists in the enumeration.</summary>
     /// <returns><c>true</c> if the value of <see cref="Bug480Flags"/> instance exists in the enumeration; <c>false</c> otherwise.</returns>
-    public static bool IsDefined(Bug480Flags value)
+    public static bool IsDefined(Bug480FlagsTests.Bug480Flags value)
     {
         return (int)value switch
         {

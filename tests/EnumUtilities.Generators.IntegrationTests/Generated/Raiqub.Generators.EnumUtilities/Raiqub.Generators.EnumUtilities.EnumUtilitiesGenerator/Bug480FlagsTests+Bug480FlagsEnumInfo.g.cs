@@ -8,7 +8,7 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
-namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
+namespace Raiqub.Generators.EnumUtilities.IntegrationTests;
 
 /// <summary>Provides metadata for <see cref="Bug480Flags" /> enumeration.</summary>
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]

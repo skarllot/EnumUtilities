@@ -9,74 +9,74 @@ using Raiqub.Generators.EnumUtilities.Parsers;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
-namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
+namespace Raiqub.Generators.EnumUtilities.IntegrationTests;
 
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
 public static partial class Bug480FlagsFactory
 {
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.Parse(string, bool)"/>
-    public static Bug480Flags Parse(string value, bool ignoreCase = false)
+    public static Bug480FlagsTests.Bug480Flags Parse(string value, bool ignoreCase = false)
     {
         if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
         TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
-        return (Bug480Flags)result;
+        return (Bug480FlagsTests.Bug480Flags)result;
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.Parse(System.ReadOnlySpan{char}, bool)"/>
-    public static Bug480Flags Parse(ReadOnlySpan<char> value, bool ignoreCase = false)
+    public static Bug480FlagsTests.Bug480Flags Parse(ReadOnlySpan<char> value, bool ignoreCase = false)
     {
         TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
-        return (Bug480Flags)result;
+        return (Bug480FlagsTests.Bug480Flags)result;
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.ParseOrNull(string, bool)"/>
     [return: NotNullIfNotNull("value")]
-    public static Bug480Flags? ParseOrNull(string? value, bool ignoreCase = false)
+    public static Bug480FlagsTests.Bug480Flags? ParseOrNull(string? value, bool ignoreCase = false)
     {
         if (value is null) return null;
         TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
-        return (Bug480Flags)result;
+        return (Bug480FlagsTests.Bug480Flags)result;
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.TryParse(string, bool, out TEnum)"/>
-    public static bool TryParse([NotNullWhen(true)] string? value, bool ignoreCase, out Bug480Flags result)
+    public static bool TryParse([NotNullWhen(true)] string? value, bool ignoreCase, out Bug480FlagsTests.Bug480Flags result)
     {
         Unsafe.SkipInit(out result);
-        return TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
+        return TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480FlagsTests.Bug480Flags, int>(ref result));
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.TryParse(string, out TEnum)"/>
-    public static bool TryParse([NotNullWhen(true)] string? value, out Bug480Flags result)
+    public static bool TryParse([NotNullWhen(true)] string? value, out Bug480FlagsTests.Bug480Flags result)
     {
         Unsafe.SkipInit(out result);
-        return TryParseName(value.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
+        return TryParseName(value.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480FlagsTests.Bug480Flags, int>(ref result));
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.TryParse(string, bool)"/>
-    public static Bug480Flags? TryParse(string? value, bool ignoreCase = false)
+    public static Bug480FlagsTests.Bug480Flags? TryParse(string? value, bool ignoreCase = false)
     {
-        return TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480Flags?)result : null;
+        return TryParseName(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480FlagsTests.Bug480Flags?)result : null;
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.TryParse(System.ReadOnlySpan{char}, bool, out TEnum)"/>
-    public static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, out Bug480Flags result)
+    public static bool TryParse(ReadOnlySpan<char> value, bool ignoreCase, out Bug480FlagsTests.Bug480Flags result)
     {
         Unsafe.SkipInit(out result);
-        return TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
+        return TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480FlagsTests.Bug480Flags, int>(ref result));
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.TryParse(System.ReadOnlySpan{char}, out TEnum)"/>
-    public static bool TryParse(ReadOnlySpan<char> value, out Bug480Flags result)
+    public static bool TryParse(ReadOnlySpan<char> value, out Bug480FlagsTests.Bug480Flags result)
     {
         Unsafe.SkipInit(out result);
-        return TryParseName(value, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
+        return TryParseName(value, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480FlagsTests.Bug480Flags, int>(ref result));
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactory{TEnum}.TryParse(System.ReadOnlySpan{char}, bool)"/>
-    public static Bug480Flags? TryParse(ReadOnlySpan<char> value, bool ignoreCase = false)
+    public static Bug480FlagsTests.Bug480Flags? TryParse(ReadOnlySpan<char> value, bool ignoreCase = false)
     {
-        return TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480Flags?)result : null;
+        return TryParseName(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480FlagsTests.Bug480Flags?)result : null;
     }
 
     private static bool TryParseName(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out int result)
@@ -233,67 +233,67 @@ public static partial class Bug480FlagsFactory
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryEnumMember{TEnum}.ParseFromEnumMemberValue(string, bool)"/>
-    public static Bug480Flags ParseFromEnumMemberValue(string value, bool ignoreCase = false)
+    public static Bug480FlagsTests.Bug480Flags ParseFromEnumMemberValue(string value, bool ignoreCase = false)
     {
         if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
         TryParseEnumMemberValue(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
-        return (Bug480Flags)result;
+        return (Bug480FlagsTests.Bug480Flags)result;
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryEnumMember{TEnum}.ParseFromEnumMemberValue(System.ReadOnlySpan{char}, bool)"/>
-    public static Bug480Flags ParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase = false)
+    public static Bug480FlagsTests.Bug480Flags ParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase = false)
     {
         TryParseEnumMemberValue(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
-        return (Bug480Flags)result;
+        return (Bug480FlagsTests.Bug480Flags)result;
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryEnumMember{TEnum}.ParseFromEnumMemberValueOrNull(string, bool)"/>
     [return: NotNullIfNotNull("value")]
-    public static Bug480Flags? ParseFromEnumMemberValueOrNull(string? value, bool ignoreCase = false)
+    public static Bug480FlagsTests.Bug480Flags? ParseFromEnumMemberValueOrNull(string? value, bool ignoreCase = false)
     {
         if (value is null) return null;
         TryParseEnumMemberValue(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
-        return (Bug480Flags)result;
+        return (Bug480FlagsTests.Bug480Flags)result;
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryEnumMember{TEnum}.TryParseFromEnumMemberValue(string, bool, out TEnum)"/>
-    public static bool TryParseFromEnumMemberValue([NotNullWhen(true)] string? value, bool ignoreCase, out Bug480Flags result)
+    public static bool TryParseFromEnumMemberValue([NotNullWhen(true)] string? value, bool ignoreCase, out Bug480FlagsTests.Bug480Flags result)
     {
         Unsafe.SkipInit(out result);
-        return TryParseEnumMemberValue(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
+        return TryParseEnumMemberValue(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480FlagsTests.Bug480Flags, int>(ref result));
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryEnumMember{TEnum}.TryParseFromEnumMemberValue(string, out TEnum)"/>
-    public static bool TryParseFromEnumMemberValue([NotNullWhen(true)] string? value, out Bug480Flags result)
+    public static bool TryParseFromEnumMemberValue([NotNullWhen(true)] string? value, out Bug480FlagsTests.Bug480Flags result)
     {
         Unsafe.SkipInit(out result);
-        return TryParseEnumMemberValue(value.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
+        return TryParseEnumMemberValue(value.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480FlagsTests.Bug480Flags, int>(ref result));
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryEnumMember{TEnum}.TryParseFromEnumMemberValue(string, bool)"/>
-    public static Bug480Flags? TryParseFromEnumMemberValue(string? value, bool ignoreCase = false)
+    public static Bug480FlagsTests.Bug480Flags? TryParseFromEnumMemberValue(string? value, bool ignoreCase = false)
     {
-        return TryParseEnumMemberValue(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480Flags?)result : null;
+        return TryParseEnumMemberValue(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480FlagsTests.Bug480Flags?)result : null;
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryEnumMember{TEnum}.TryParseFromEnumMemberValue(System.ReadOnlySpan{char}, bool, out TEnum)"/>
-    public static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase, out Bug480Flags result)
+    public static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase, out Bug480FlagsTests.Bug480Flags result)
     {
         Unsafe.SkipInit(out result);
-        return TryParseEnumMemberValue(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
+        return TryParseEnumMemberValue(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480FlagsTests.Bug480Flags, int>(ref result));
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryEnumMember{TEnum}.TryParseFromEnumMemberValue(System.ReadOnlySpan{char}, out TEnum)"/>
-    public static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, out Bug480Flags result)
+    public static bool TryParseFromEnumMemberValue(ReadOnlySpan<char> value, out Bug480FlagsTests.Bug480Flags result)
     {
         Unsafe.SkipInit(out result);
-        return TryParseEnumMemberValue(value, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
+        return TryParseEnumMemberValue(value, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480FlagsTests.Bug480Flags, int>(ref result));
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryEnumMember{TEnum}.TryParseFromEnumMemberValue(System.ReadOnlySpan{char}, bool)"/>
-    public static Bug480Flags? TryParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase = false)
+    public static Bug480FlagsTests.Bug480Flags? TryParseFromEnumMemberValue(ReadOnlySpan<char> value, bool ignoreCase = false)
     {
-        return TryParseEnumMemberValue(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480Flags?)result : null;
+        return TryParseEnumMemberValue(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480FlagsTests.Bug480Flags?)result : null;
     }
 
     private static bool TryParseEnumMemberValue(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out int result)
@@ -455,67 +455,67 @@ public static partial class Bug480FlagsFactory
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryDescription{TEnum}.CreateFromDescription(string, StringComparison)"/>
-    public static Bug480Flags CreateFromDescription(string description, StringComparison comparisonType = StringComparison.Ordinal)
+    public static Bug480FlagsTests.Bug480Flags CreateFromDescription(string description, StringComparison comparisonType = StringComparison.Ordinal)
     {
         if (description is null) ThrowHelper.ThrowArgumentNullException(nameof(description));
         TryParseDescription(description.AsSpan(), comparisonType, throwOnFailure: true, out var result);
-        return (Bug480Flags)result;
+        return (Bug480FlagsTests.Bug480Flags)result;
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryDescription{TEnum}.CreateFromDescription(System.ReadOnlySpan{char}, StringComparison)"/>
-    public static Bug480Flags CreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType = StringComparison.Ordinal)
+    public static Bug480FlagsTests.Bug480Flags CreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType = StringComparison.Ordinal)
     {
         TryParseDescription(description, comparisonType, throwOnFailure: true, out var result);
-        return (Bug480Flags)result;
+        return (Bug480FlagsTests.Bug480Flags)result;
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryDescription{TEnum}.CreateFromDescriptionOrNull(string, StringComparison)"/>
     [return: NotNullIfNotNull("description")]
-    public static Bug480Flags? CreateFromDescriptionOrNull(string? description, StringComparison comparisonType = StringComparison.Ordinal)
+    public static Bug480FlagsTests.Bug480Flags? CreateFromDescriptionOrNull(string? description, StringComparison comparisonType = StringComparison.Ordinal)
     {
         if (description is null) return null;
         TryParseDescription(description.AsSpan(), comparisonType, throwOnFailure: true, out var result);
-        return (Bug480Flags)result;
+        return (Bug480FlagsTests.Bug480Flags)result;
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryDescription{TEnum}.TryCreateFromDescription(string, StringComparison, out TEnum)"/>
-    public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, StringComparison comparisonType, out Bug480Flags result)
+    public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, StringComparison comparisonType, out Bug480FlagsTests.Bug480Flags result)
     {
         Unsafe.SkipInit(out result);
-        return TryParseDescription(description.AsSpan(), comparisonType, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
+        return TryParseDescription(description.AsSpan(), comparisonType, throwOnFailure: false, out Unsafe.As<Bug480FlagsTests.Bug480Flags, int>(ref result));
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryDescription{TEnum}.TryCreateFromDescription(string, out TEnum)"/>
-    public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, out Bug480Flags result)
+    public static bool TryCreateFromDescription([NotNullWhen(true)] string? description, out Bug480FlagsTests.Bug480Flags result)
     {
         Unsafe.SkipInit(out result);
-        return TryParseDescription(description.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
+        return TryParseDescription(description.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480FlagsTests.Bug480Flags, int>(ref result));
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryDescription{TEnum}.TryCreateFromDescription(string, StringComparison)"/>
-    public static Bug480Flags? TryCreateFromDescription(string? description, StringComparison comparisonType = StringComparison.Ordinal)
+    public static Bug480FlagsTests.Bug480Flags? TryCreateFromDescription(string? description, StringComparison comparisonType = StringComparison.Ordinal)
     {
-        return TryParseDescription(description.AsSpan(), comparisonType, throwOnFailure: false, out var result) ? (Bug480Flags?)result : null;
+        return TryParseDescription(description.AsSpan(), comparisonType, throwOnFailure: false, out var result) ? (Bug480FlagsTests.Bug480Flags?)result : null;
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryDescription{TEnum}.TryCreateFromDescription(System.ReadOnlySpan{char}, StringComparison, out TEnum)"/>
-    public static bool TryCreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType, out Bug480Flags result)
+    public static bool TryCreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType, out Bug480FlagsTests.Bug480Flags result)
     {
         Unsafe.SkipInit(out result);
-        return TryParseDescription(description, comparisonType, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
+        return TryParseDescription(description, comparisonType, throwOnFailure: false, out Unsafe.As<Bug480FlagsTests.Bug480Flags, int>(ref result));
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryDescription{TEnum}.TryCreateFromDescription(System.ReadOnlySpan{char}, out TEnum)"/>
-    public static bool TryCreateFromDescription(ReadOnlySpan<char> description, out Bug480Flags result)
+    public static bool TryCreateFromDescription(ReadOnlySpan<char> description, out Bug480FlagsTests.Bug480Flags result)
     {
         Unsafe.SkipInit(out result);
-        return TryParseDescription(description, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
+        return TryParseDescription(description, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480FlagsTests.Bug480Flags, int>(ref result));
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryDescription{TEnum}.TryCreateFromDescription(System.ReadOnlySpan{char}, StringComparison)"/>
-    public static Bug480Flags? TryCreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType = StringComparison.Ordinal)
+    public static Bug480FlagsTests.Bug480Flags? TryCreateFromDescription(ReadOnlySpan<char> description, StringComparison comparisonType = StringComparison.Ordinal)
     {
-        return TryParseDescription(description, comparisonType, throwOnFailure: false, out var result) ? (Bug480Flags?)result : null;
+        return TryParseDescription(description, comparisonType, throwOnFailure: false, out var result) ? (Bug480FlagsTests.Bug480Flags?)result : null;
     }
 
     private static bool TryParseDescription(ReadOnlySpan<char> description, StringComparison comparisonType, bool throwOnFailure, out int result)
@@ -636,18 +636,18 @@ public static partial class Bug480FlagsFactory
 
     /// <summary>Retrieves an array of the values of the constants in the Bug480Flags enumeration.</summary>
     /// <returns>An array that contains the values of the constants in Bug480Flags.</returns>
-    public static Bug480Flags[] GetValues()
+    public static Bug480FlagsTests.Bug480Flags[] GetValues()
     {
         return new[]
         {
-            (Bug480Flags)(1),
-            (Bug480Flags)(2),
-            (Bug480Flags)(4),
-            (Bug480Flags)(8),
-            (Bug480Flags)(16),
-            (Bug480Flags)(32),
-            (Bug480Flags)(64),
-            (Bug480Flags)(128),
+            (Bug480FlagsTests.Bug480Flags)(1),
+            (Bug480FlagsTests.Bug480Flags)(2),
+            (Bug480FlagsTests.Bug480Flags)(4),
+            (Bug480FlagsTests.Bug480Flags)(8),
+            (Bug480FlagsTests.Bug480Flags)(16),
+            (Bug480FlagsTests.Bug480Flags)(32),
+            (Bug480FlagsTests.Bug480Flags)(64),
+            (Bug480FlagsTests.Bug480Flags)(128),
         };
     }
 
@@ -669,67 +669,67 @@ public static partial class Bug480FlagsFactory
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.ParseJsonString(string, bool)"/>
-    public static Bug480Flags ParseJsonString(string value, bool ignoreCase = false)
+    public static Bug480FlagsTests.Bug480Flags ParseJsonString(string value, bool ignoreCase = false)
     {
         if (value is null) ThrowHelper.ThrowArgumentNullException(nameof(value));
         TryParseJsonString(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
-        return (Bug480Flags)result;
+        return (Bug480FlagsTests.Bug480Flags)result;
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.ParseJsonString(System.ReadOnlySpan{char}, bool)"/>
-    public static Bug480Flags ParseJsonString(ReadOnlySpan<char> value, bool ignoreCase = false)
+    public static Bug480FlagsTests.Bug480Flags ParseJsonString(ReadOnlySpan<char> value, bool ignoreCase = false)
     {
         TryParseJsonString(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
-        return (Bug480Flags)result;
+        return (Bug480FlagsTests.Bug480Flags)result;
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.ParseJsonStringOrNull(string, bool)"/>
     [return: NotNullIfNotNull("value")]
-    public static Bug480Flags? ParseJsonStringOrNull(string? value, bool ignoreCase = false)
+    public static Bug480FlagsTests.Bug480Flags? ParseJsonStringOrNull(string? value, bool ignoreCase = false)
     {
         if (value is null) return null;
         TryParseJsonString(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: true, out var result);
-        return (Bug480Flags)result;
+        return (Bug480FlagsTests.Bug480Flags)result;
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.TryParseJsonString(string, bool, out TEnum)"/>
-    public static bool TryParseJsonString([NotNullWhen(true)] string? value, bool ignoreCase, out Bug480Flags result)
+    public static bool TryParseJsonString([NotNullWhen(true)] string? value, bool ignoreCase, out Bug480FlagsTests.Bug480Flags result)
     {
         Unsafe.SkipInit(out result);
-        return TryParseJsonString(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
+        return TryParseJsonString(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480FlagsTests.Bug480Flags, int>(ref result));
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.TryParseJsonString(string, out TEnum)"/>
-    public static bool TryParseJsonString([NotNullWhen(true)] string? value, out Bug480Flags result)
+    public static bool TryParseJsonString([NotNullWhen(true)] string? value, out Bug480FlagsTests.Bug480Flags result)
     {
         Unsafe.SkipInit(out result);
-        return TryParseJsonString(value.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
+        return TryParseJsonString(value.AsSpan(), StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480FlagsTests.Bug480Flags, int>(ref result));
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.TryParseJsonString(string, bool)"/>
-    public static Bug480Flags? TryParseJsonString(string? value, bool ignoreCase = false)
+    public static Bug480FlagsTests.Bug480Flags? TryParseJsonString(string? value, bool ignoreCase = false)
     {
-        return TryParseJsonString(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480Flags?)result : null;
+        return TryParseJsonString(value.AsSpan(), ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480FlagsTests.Bug480Flags?)result : null;
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.TryParseJsonString(System.ReadOnlySpan{char}, bool, out TEnum)"/>
-    public static bool TryParseJsonString(ReadOnlySpan<char> value, bool ignoreCase, out Bug480Flags result)
+    public static bool TryParseJsonString(ReadOnlySpan<char> value, bool ignoreCase, out Bug480FlagsTests.Bug480Flags result)
     {
         Unsafe.SkipInit(out result);
-        return TryParseJsonString(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
+        return TryParseJsonString(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480FlagsTests.Bug480Flags, int>(ref result));
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.TryParseJsonString(System.ReadOnlySpan{char}, out TEnum)"/>
-    public static bool TryParseJsonString(ReadOnlySpan<char> value, out Bug480Flags result)
+    public static bool TryParseJsonString(ReadOnlySpan<char> value, out Bug480FlagsTests.Bug480Flags result)
     {
         Unsafe.SkipInit(out result);
-        return TryParseJsonString(value, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480Flags, int>(ref result));
+        return TryParseJsonString(value, StringComparison.Ordinal, throwOnFailure: false, out Unsafe.As<Bug480FlagsTests.Bug480Flags, int>(ref result));
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumFactoryJson{TEnum}.TryParseJsonString(System.ReadOnlySpan{char}, bool)"/>
-    public static Bug480Flags? TryParseJsonString(ReadOnlySpan<char> value, bool ignoreCase = false)
+    public static Bug480FlagsTests.Bug480Flags? TryParseJsonString(ReadOnlySpan<char> value, bool ignoreCase = false)
     {
-        return TryParseJsonString(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480Flags?)result : null;
+        return TryParseJsonString(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal, throwOnFailure: false, out var result) ? (Bug480FlagsTests.Bug480Flags?)result : null;
     }
 
     private static bool TryParseJsonString(ReadOnlySpan<char> value, StringComparison comparisonType, bool throwOnFailure, out int result)

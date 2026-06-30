@@ -14,7 +14,7 @@ namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
 public static partial class UserRoleExtensions
 {
-    private const ulong ValidFlagsMask = 11ul;
+    private const ulong ValidFlagsMask = 11UL;
 
     private static ReadOnlySpan<byte> s_formatNameLengths => new byte[16] { 4, 10, 9, 21, 1, 1, 1, 1, 7, 19, 9, 3, 2, 2, 2, 2 };
     private static readonly string[] s_formatNames = new string[16] { "None", "NormalUser", "Custodian", "NormalUser, Custodian", "4", "5", "6", "7", "Finance", "NormalUser, Finance", "SuperUser", "All", "12", "13", "14", "15" };
