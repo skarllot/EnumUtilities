@@ -8,14 +8,14 @@ using Raiqub.Generators.EnumUtilities.Formatters;
 
 #pragma warning disable CS1591 // publicly visible type or member must be documented
 
-namespace Raiqub.Generators.EnumUtilities.IntegrationTests.Models;
+namespace Raiqub.Generators.EnumUtilities.IntegrationTests;
 
 [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Raiqub.Generators.EnumUtilities", "2.0.0.0")]
 public static partial class Bug480DisplayExtensions
 {
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.ToStringFast(TEnum)"/>
-    public static string ToStringFast(this Bug480Display value)
+    public static string ToStringFast(this Bug480DisplayTests.Bug480Display value)
     {
         int v = (int)value;
         return v switch
@@ -78,7 +78,7 @@ public static partial class Bug480DisplayExtensions
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.GetStringLength(TEnum)"/>
-    public static int GetStringLength(this Bug480Display value)
+    public static int GetStringLength(this Bug480DisplayTests.Bug480Display value)
     {
         int v = (int)value;
         return v switch
@@ -142,7 +142,7 @@ public static partial class Bug480DisplayExtensions
 
     /// <summary>Returns a boolean telling whether the value of this instance exists in the enumeration.</summary>
     /// <returns><c>true</c> if the value of this instance exists in the enumeration; <c>false</c> otherwise.</returns>
-    public static bool IsDefined(this Bug480Display value)
+    public static bool IsDefined(this Bug480DisplayTests.Bug480Display value)
     {
         return (int)value switch
         {
@@ -206,31 +206,31 @@ public static partial class Bug480DisplayExtensions
     /// <param name="location">A variable containing the first value to be added.</param>
     /// <param name="value">The value to be added to the enumeration at <paramref name="location" />.</param>
     /// <returns>The new value that was stored at <paramref name="location" /> by this operation.</returns>
-    public static Bug480Display InterlockedAdd(this ref Bug480Display location, int value)
+    public static Bug480DisplayTests.Bug480Display InterlockedAdd(this ref Bug480DisplayTests.Bug480Display location, int value)
     {
-        ref int locationRaw = ref Unsafe.As<Bug480Display, int>(ref location);
+        ref int locationRaw = ref Unsafe.As<Bug480DisplayTests.Bug480Display, int>(ref location);
         int resultRaw = Interlocked.Add(ref locationRaw, value);
-        return Unsafe.As<int, Bug480Display>(ref resultRaw);
+        return Unsafe.As<int, Bug480DisplayTests.Bug480Display>(ref resultRaw);
     }
 
     /// <summary>Decrements enumeration and stores the result, as an atomic operation.</summary>
     /// <param name="location">The variable whose value is to be decremented.</param>
     /// <returns>The value of the variable immediately after the decrement operation finished.</returns>
-    public static Bug480Display InterlockedDecrement(this ref Bug480Display location)
+    public static Bug480DisplayTests.Bug480Display InterlockedDecrement(this ref Bug480DisplayTests.Bug480Display location)
     {
-        ref int locationRaw = ref Unsafe.As<Bug480Display, int>(ref location);
+        ref int locationRaw = ref Unsafe.As<Bug480DisplayTests.Bug480Display, int>(ref location);
         int resultRaw = Interlocked.Decrement(ref locationRaw);
-        return Unsafe.As<int, Bug480Display>(ref resultRaw);
+        return Unsafe.As<int, Bug480DisplayTests.Bug480Display>(ref resultRaw);
     }
 
     /// <summary>Increments enumeration and stores the result, as an atomic operation.</summary>
     /// <param name="location">The variable whose value is to be incremented.</param>
     /// <returns>The value of the variable immediately after the increment operation finished.</returns>
-    public static Bug480Display InterlockedIncrement(this ref Bug480Display location)
+    public static Bug480DisplayTests.Bug480Display InterlockedIncrement(this ref Bug480DisplayTests.Bug480Display location)
     {
-        ref int locationRaw = ref Unsafe.As<Bug480Display, int>(ref location);
+        ref int locationRaw = ref Unsafe.As<Bug480DisplayTests.Bug480Display, int>(ref location);
         int resultRaw = Interlocked.Increment(ref locationRaw);
-        return Unsafe.As<int, Bug480Display>(ref resultRaw);
+        return Unsafe.As<int, Bug480DisplayTests.Bug480Display>(ref resultRaw);
     }
 
     /// <summary>Compares two enumerations for equality and, if they are equal, replaces the first value.</summary>
@@ -238,25 +238,25 @@ public static partial class Bug480DisplayExtensions
     /// <param name="value">The value that replaces the destination value if the comparison results in equality.</param>
     /// <param name="comparand">The value that is compared to the value at <paramref name="location" />.</param>
     /// <returns>The original value in <paramref name="location" />.</returns>
-    public static Bug480Display InterlockedCompareExchange(this ref Bug480Display location, Bug480Display value, Bug480Display comparand)
+    public static Bug480DisplayTests.Bug480Display InterlockedCompareExchange(this ref Bug480DisplayTests.Bug480Display location, Bug480DisplayTests.Bug480Display value, Bug480DisplayTests.Bug480Display comparand)
     {
-        ref int locationRaw = ref Unsafe.As<Bug480Display, int>(ref location);
-        int resultRaw = Interlocked.CompareExchange(ref locationRaw, Unsafe.As<Bug480Display, int>(ref value), Unsafe.As<Bug480Display, int>(ref comparand));
-        return Unsafe.As<int, Bug480Display>(ref resultRaw);
+        ref int locationRaw = ref Unsafe.As<Bug480DisplayTests.Bug480Display, int>(ref location);
+        int resultRaw = Interlocked.CompareExchange(ref locationRaw, Unsafe.As<Bug480DisplayTests.Bug480Display, int>(ref value), Unsafe.As<Bug480DisplayTests.Bug480Display, int>(ref comparand));
+        return Unsafe.As<int, Bug480DisplayTests.Bug480Display>(ref resultRaw);
     }
 
     /// <summary>Sets an enumeration value to a specified value and returns the original value, as an atomic operation.</summary>
     /// <param name="location">The variable to set to the specified value.</param>
     /// <param name="value">The value to which the <paramref name="location" /> parameter is set.</param>
     /// <returns>The original value of <paramref name="location" />.</returns>
-    public static Bug480Display InterlockedExchange(this ref Bug480Display location, Bug480Display value)
+    public static Bug480DisplayTests.Bug480Display InterlockedExchange(this ref Bug480DisplayTests.Bug480Display location, Bug480DisplayTests.Bug480Display value)
     {
-        ref int locationRaw = ref Unsafe.As<Bug480Display, int>(ref location);
-        int resultRaw = Interlocked.Exchange(ref locationRaw, Unsafe.As<Bug480Display, int>(ref value));
-        return Unsafe.As<int, Bug480Display>(ref resultRaw);
+        ref int locationRaw = ref Unsafe.As<Bug480DisplayTests.Bug480Display, int>(ref location);
+        int resultRaw = Interlocked.Exchange(ref locationRaw, Unsafe.As<Bug480DisplayTests.Bug480Display, int>(ref value));
+        return Unsafe.As<int, Bug480DisplayTests.Bug480Display>(ref resultRaw);
     }
 
-    public static string GetDisplayShortName(this Bug480Display value)
+    public static string GetDisplayShortName(this Bug480DisplayTests.Bug480Display value)
     {
         return (int)value switch
         {
@@ -269,7 +269,7 @@ public static partial class Bug480DisplayExtensions
         };
     }
 
-    public static string GetDisplayName(this Bug480Display value)
+    public static string GetDisplayName(this Bug480DisplayTests.Bug480Display value)
     {
         return (int)value switch
         {
@@ -329,7 +329,7 @@ public static partial class Bug480DisplayExtensions
         };
     }
 
-    public static string? GetDescription(this Bug480Display value)
+    public static string? GetDescription(this Bug480DisplayTests.Bug480Display value)
     {
         return (int)value switch
         {
@@ -389,10 +389,10 @@ public static partial class Bug480DisplayExtensions
     }
 
     /// <summary>
-    /// Provides pattern matching functionality for the <see cref="Bug480Display"/> enum by returning the corresponding value based on the enum value.
+    /// Provides pattern matching functionality for the <see cref="Bug480DisplayTests.Bug480Display"/> enum by returning the corresponding value based on the enum value.
     /// </summary>
     /// <typeparam name="TResult">The type of the result to return for each member match.</typeparam>
-    /// <param name="value">The <see cref="Bug480Display"/> enum value to match against.</param>
+    /// <param name="value">The <see cref="Bug480DisplayTests.Bug480Display"/> enum value to match against.</param>
     /// <param name="Backslash">The value to return when the enum value is Backslash.</param>
     /// <param name="DoubleQuote">The value to return when the enum value is DoubleQuote.</param>
     /// <param name="SingleQuote">The value to return when the enum value is SingleQuote.</param>
@@ -448,7 +448,7 @@ public static partial class Bug480DisplayExtensions
     /// <returns>The corresponding result value based on the enum value.</returns>
     /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected member values.</exception>
     public static TResult Match<TResult>(
-        this Bug480Display value,
+        this Bug480DisplayTests.Bug480Display value,
         TResult Backslash,
         TResult DoubleQuote,
         TResult SingleQuote,
@@ -561,10 +561,10 @@ public static partial class Bug480DisplayExtensions
     }
 
     /// <summary>
-    /// Provides pattern matching functionality for the <see cref="Bug480Display"/> enum by executing the corresponding function based on the enum value.
+    /// Provides pattern matching functionality for the <see cref="Bug480DisplayTests.Bug480Display"/> enum by executing the corresponding function based on the enum value.
     /// </summary>
     /// <typeparam name="TResult">The type of the result to return from the executed function.</typeparam>
-    /// <param name="value">The <see cref="Bug480Display"/> enum value to match against.</param>
+    /// <param name="value">The <see cref="Bug480DisplayTests.Bug480Display"/> enum value to match against.</param>
     /// <param name="Backslash">The function to execute when the enum value is Backslash.</param>
     /// <param name="DoubleQuote">The function to execute when the enum value is DoubleQuote.</param>
     /// <param name="SingleQuote">The function to execute when the enum value is SingleQuote.</param>
@@ -618,122 +618,122 @@ public static partial class Bug480DisplayExtensions
     /// <param name="AllPropertiesEscaped">The function to execute when the enum value is AllPropertiesEscaped.</param>
     /// <param name="NoDescription">The function to execute when the enum value is NoDescription.</param>
     /// <returns>The result of executing the corresponding function based on the enum value.</returns>
-    /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected <see cref="Bug480Display"/> values.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when the enum value does not match any of the expected <see cref="Bug480DisplayTests.Bug480Display"/> values.</exception>
     public static TResult Match<TResult>(
-        this Bug480Display value,
-        Func<Bug480Display, TResult> Backslash,
-        Func<Bug480Display, TResult> DoubleQuote,
-        Func<Bug480Display, TResult> SingleQuote,
-        Func<Bug480Display, TResult> Newline,
-        Func<Bug480Display, TResult> CarriageReturn,
-        Func<Bug480Display, TResult> Tab,
-        Func<Bug480Display, TResult> CrLf,
-        Func<Bug480Display, TResult> MultipleNewlines,
-        Func<Bug480Display, TResult> WindowsPath,
-        Func<Bug480Display, TResult> MixedQuotes,
-        Func<Bug480Display, TResult> LessThan,
-        Func<Bug480Display, TResult> GreaterThan,
-        Func<Bug480Display, TResult> Ampersand,
-        Func<Bug480Display, TResult> XmlTag,
-        Func<Bug480Display, TResult> XmlSpecialChars,
-        Func<Bug480Display, TResult> Degree,
-        Func<Bug480Display, TResult> Copyright,
-        Func<Bug480Display, TResult> Euro,
-        Func<Bug480Display, TResult> Unicode,
-        Func<Bug480Display, TResult> Emoji,
-        Func<Bug480Display, TResult> NullChar,
-        Func<Bug480Display, TResult> Backspace,
-        Func<Bug480Display, TResult> FormFeed,
-        Func<Bug480Display, TResult> VerticalTab,
-        Func<Bug480Display, TResult> JsonLike,
-        Func<Bug480Display, TResult> CData,
-        Func<Bug480Display, TResult> CodeComment,
-        Func<Bug480Display, TResult> VerbatimString,
-        Func<Bug480Display, TResult> NameBackslash,
-        Func<Bug480Display, TResult> NameQuoted,
-        Func<Bug480Display, TResult> NameNewline,
-        Func<Bug480Display, TResult> ShortNameEscape,
-        Func<Bug480Display, TResult> ShortNameQuoted,
-        Func<Bug480Display, TResult> DisplayWithQuotes,
-        Func<Bug480Display, TResult> DisplayMixed,
-        Func<Bug480Display, TResult> EmptyDescription,
-        Func<Bug480Display, TResult> WhitespaceDescription,
-        Func<Bug480Display, TResult> EmptyLine,
-        Func<Bug480Display, TResult> TrailingSpace,
-        Func<Bug480Display, TResult> LeadingSpace,
-        Func<Bug480Display, TResult> Url,
-        Func<Bug480Display, TResult> SqlLike,
-        Func<Bug480Display, TResult> RegexPattern,
-        Func<Bug480Display, TResult> UncPath,
-        Func<Bug480Display, TResult> UnixPath,
-        Func<Bug480Display, TResult> DoubleBackslash,
-        Func<Bug480Display, TResult> TripleQuote,
-        Func<Bug480Display, TResult> TripleNewline,
-        Func<Bug480Display, TResult> ComplexError,
-        Func<Bug480Display, TResult> EscapedJson,
-        Func<Bug480Display, TResult> AllPropertiesEscaped,
-        Func<Bug480Display, TResult> NoDescription)
+        this Bug480DisplayTests.Bug480Display value,
+        Func<Bug480DisplayTests.Bug480Display, TResult> Backslash,
+        Func<Bug480DisplayTests.Bug480Display, TResult> DoubleQuote,
+        Func<Bug480DisplayTests.Bug480Display, TResult> SingleQuote,
+        Func<Bug480DisplayTests.Bug480Display, TResult> Newline,
+        Func<Bug480DisplayTests.Bug480Display, TResult> CarriageReturn,
+        Func<Bug480DisplayTests.Bug480Display, TResult> Tab,
+        Func<Bug480DisplayTests.Bug480Display, TResult> CrLf,
+        Func<Bug480DisplayTests.Bug480Display, TResult> MultipleNewlines,
+        Func<Bug480DisplayTests.Bug480Display, TResult> WindowsPath,
+        Func<Bug480DisplayTests.Bug480Display, TResult> MixedQuotes,
+        Func<Bug480DisplayTests.Bug480Display, TResult> LessThan,
+        Func<Bug480DisplayTests.Bug480Display, TResult> GreaterThan,
+        Func<Bug480DisplayTests.Bug480Display, TResult> Ampersand,
+        Func<Bug480DisplayTests.Bug480Display, TResult> XmlTag,
+        Func<Bug480DisplayTests.Bug480Display, TResult> XmlSpecialChars,
+        Func<Bug480DisplayTests.Bug480Display, TResult> Degree,
+        Func<Bug480DisplayTests.Bug480Display, TResult> Copyright,
+        Func<Bug480DisplayTests.Bug480Display, TResult> Euro,
+        Func<Bug480DisplayTests.Bug480Display, TResult> Unicode,
+        Func<Bug480DisplayTests.Bug480Display, TResult> Emoji,
+        Func<Bug480DisplayTests.Bug480Display, TResult> NullChar,
+        Func<Bug480DisplayTests.Bug480Display, TResult> Backspace,
+        Func<Bug480DisplayTests.Bug480Display, TResult> FormFeed,
+        Func<Bug480DisplayTests.Bug480Display, TResult> VerticalTab,
+        Func<Bug480DisplayTests.Bug480Display, TResult> JsonLike,
+        Func<Bug480DisplayTests.Bug480Display, TResult> CData,
+        Func<Bug480DisplayTests.Bug480Display, TResult> CodeComment,
+        Func<Bug480DisplayTests.Bug480Display, TResult> VerbatimString,
+        Func<Bug480DisplayTests.Bug480Display, TResult> NameBackslash,
+        Func<Bug480DisplayTests.Bug480Display, TResult> NameQuoted,
+        Func<Bug480DisplayTests.Bug480Display, TResult> NameNewline,
+        Func<Bug480DisplayTests.Bug480Display, TResult> ShortNameEscape,
+        Func<Bug480DisplayTests.Bug480Display, TResult> ShortNameQuoted,
+        Func<Bug480DisplayTests.Bug480Display, TResult> DisplayWithQuotes,
+        Func<Bug480DisplayTests.Bug480Display, TResult> DisplayMixed,
+        Func<Bug480DisplayTests.Bug480Display, TResult> EmptyDescription,
+        Func<Bug480DisplayTests.Bug480Display, TResult> WhitespaceDescription,
+        Func<Bug480DisplayTests.Bug480Display, TResult> EmptyLine,
+        Func<Bug480DisplayTests.Bug480Display, TResult> TrailingSpace,
+        Func<Bug480DisplayTests.Bug480Display, TResult> LeadingSpace,
+        Func<Bug480DisplayTests.Bug480Display, TResult> Url,
+        Func<Bug480DisplayTests.Bug480Display, TResult> SqlLike,
+        Func<Bug480DisplayTests.Bug480Display, TResult> RegexPattern,
+        Func<Bug480DisplayTests.Bug480Display, TResult> UncPath,
+        Func<Bug480DisplayTests.Bug480Display, TResult> UnixPath,
+        Func<Bug480DisplayTests.Bug480Display, TResult> DoubleBackslash,
+        Func<Bug480DisplayTests.Bug480Display, TResult> TripleQuote,
+        Func<Bug480DisplayTests.Bug480Display, TResult> TripleNewline,
+        Func<Bug480DisplayTests.Bug480Display, TResult> ComplexError,
+        Func<Bug480DisplayTests.Bug480Display, TResult> EscapedJson,
+        Func<Bug480DisplayTests.Bug480Display, TResult> AllPropertiesEscaped,
+        Func<Bug480DisplayTests.Bug480Display, TResult> NoDescription)
     {
         return (int)value switch
         {
-            1 => Backslash((Bug480Display)value),
-            2 => DoubleQuote((Bug480Display)value),
-            3 => SingleQuote((Bug480Display)value),
-            4 => Newline((Bug480Display)value),
-            5 => CarriageReturn((Bug480Display)value),
-            6 => Tab((Bug480Display)value),
-            7 => CrLf((Bug480Display)value),
-            8 => MultipleNewlines((Bug480Display)value),
-            9 => WindowsPath((Bug480Display)value),
-            10 => MixedQuotes((Bug480Display)value),
-            11 => LessThan((Bug480Display)value),
-            12 => GreaterThan((Bug480Display)value),
-            13 => Ampersand((Bug480Display)value),
-            14 => XmlTag((Bug480Display)value),
-            15 => XmlSpecialChars((Bug480Display)value),
-            16 => Degree((Bug480Display)value),
-            17 => Copyright((Bug480Display)value),
-            18 => Euro((Bug480Display)value),
-            19 => Unicode((Bug480Display)value),
-            20 => Emoji((Bug480Display)value),
-            21 => NullChar((Bug480Display)value),
-            22 => Backspace((Bug480Display)value),
-            23 => FormFeed((Bug480Display)value),
-            24 => VerticalTab((Bug480Display)value),
-            25 => JsonLike((Bug480Display)value),
-            26 => CData((Bug480Display)value),
-            27 => CodeComment((Bug480Display)value),
-            28 => VerbatimString((Bug480Display)value),
-            29 => NameBackslash((Bug480Display)value),
-            30 => NameQuoted((Bug480Display)value),
-            31 => NameNewline((Bug480Display)value),
-            32 => ShortNameEscape((Bug480Display)value),
-            33 => ShortNameQuoted((Bug480Display)value),
-            34 => DisplayWithQuotes((Bug480Display)value),
-            35 => DisplayMixed((Bug480Display)value),
-            36 => EmptyDescription((Bug480Display)value),
-            37 => WhitespaceDescription((Bug480Display)value),
-            38 => EmptyLine((Bug480Display)value),
-            39 => TrailingSpace((Bug480Display)value),
-            40 => LeadingSpace((Bug480Display)value),
-            41 => Url((Bug480Display)value),
-            42 => SqlLike((Bug480Display)value),
-            43 => RegexPattern((Bug480Display)value),
-            44 => UncPath((Bug480Display)value),
-            45 => UnixPath((Bug480Display)value),
-            46 => DoubleBackslash((Bug480Display)value),
-            47 => TripleQuote((Bug480Display)value),
-            48 => TripleNewline((Bug480Display)value),
-            49 => ComplexError((Bug480Display)value),
-            50 => EscapedJson((Bug480Display)value),
-            51 => AllPropertiesEscaped((Bug480Display)value),
-            52 => NoDescription((Bug480Display)value),
+            1 => Backslash((Bug480DisplayTests.Bug480Display)value),
+            2 => DoubleQuote((Bug480DisplayTests.Bug480Display)value),
+            3 => SingleQuote((Bug480DisplayTests.Bug480Display)value),
+            4 => Newline((Bug480DisplayTests.Bug480Display)value),
+            5 => CarriageReturn((Bug480DisplayTests.Bug480Display)value),
+            6 => Tab((Bug480DisplayTests.Bug480Display)value),
+            7 => CrLf((Bug480DisplayTests.Bug480Display)value),
+            8 => MultipleNewlines((Bug480DisplayTests.Bug480Display)value),
+            9 => WindowsPath((Bug480DisplayTests.Bug480Display)value),
+            10 => MixedQuotes((Bug480DisplayTests.Bug480Display)value),
+            11 => LessThan((Bug480DisplayTests.Bug480Display)value),
+            12 => GreaterThan((Bug480DisplayTests.Bug480Display)value),
+            13 => Ampersand((Bug480DisplayTests.Bug480Display)value),
+            14 => XmlTag((Bug480DisplayTests.Bug480Display)value),
+            15 => XmlSpecialChars((Bug480DisplayTests.Bug480Display)value),
+            16 => Degree((Bug480DisplayTests.Bug480Display)value),
+            17 => Copyright((Bug480DisplayTests.Bug480Display)value),
+            18 => Euro((Bug480DisplayTests.Bug480Display)value),
+            19 => Unicode((Bug480DisplayTests.Bug480Display)value),
+            20 => Emoji((Bug480DisplayTests.Bug480Display)value),
+            21 => NullChar((Bug480DisplayTests.Bug480Display)value),
+            22 => Backspace((Bug480DisplayTests.Bug480Display)value),
+            23 => FormFeed((Bug480DisplayTests.Bug480Display)value),
+            24 => VerticalTab((Bug480DisplayTests.Bug480Display)value),
+            25 => JsonLike((Bug480DisplayTests.Bug480Display)value),
+            26 => CData((Bug480DisplayTests.Bug480Display)value),
+            27 => CodeComment((Bug480DisplayTests.Bug480Display)value),
+            28 => VerbatimString((Bug480DisplayTests.Bug480Display)value),
+            29 => NameBackslash((Bug480DisplayTests.Bug480Display)value),
+            30 => NameQuoted((Bug480DisplayTests.Bug480Display)value),
+            31 => NameNewline((Bug480DisplayTests.Bug480Display)value),
+            32 => ShortNameEscape((Bug480DisplayTests.Bug480Display)value),
+            33 => ShortNameQuoted((Bug480DisplayTests.Bug480Display)value),
+            34 => DisplayWithQuotes((Bug480DisplayTests.Bug480Display)value),
+            35 => DisplayMixed((Bug480DisplayTests.Bug480Display)value),
+            36 => EmptyDescription((Bug480DisplayTests.Bug480Display)value),
+            37 => WhitespaceDescription((Bug480DisplayTests.Bug480Display)value),
+            38 => EmptyLine((Bug480DisplayTests.Bug480Display)value),
+            39 => TrailingSpace((Bug480DisplayTests.Bug480Display)value),
+            40 => LeadingSpace((Bug480DisplayTests.Bug480Display)value),
+            41 => Url((Bug480DisplayTests.Bug480Display)value),
+            42 => SqlLike((Bug480DisplayTests.Bug480Display)value),
+            43 => RegexPattern((Bug480DisplayTests.Bug480Display)value),
+            44 => UncPath((Bug480DisplayTests.Bug480Display)value),
+            45 => UnixPath((Bug480DisplayTests.Bug480Display)value),
+            46 => DoubleBackslash((Bug480DisplayTests.Bug480Display)value),
+            47 => TripleQuote((Bug480DisplayTests.Bug480Display)value),
+            48 => TripleNewline((Bug480DisplayTests.Bug480Display)value),
+            49 => ComplexError((Bug480DisplayTests.Bug480Display)value),
+            50 => EscapedJson((Bug480DisplayTests.Bug480Display)value),
+            51 => AllPropertiesEscaped((Bug480DisplayTests.Bug480Display)value),
+            52 => NoDescription((Bug480DisplayTests.Bug480Display)value),
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
         };
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.ToJsonString(TEnum)"/>
-    public static string? ToJsonString(this Bug480Display value)
+    public static string? ToJsonString(this Bug480DisplayTests.Bug480Display value)
     {
         int v = (int)value;
         return v switch
@@ -796,7 +796,7 @@ public static partial class Bug480DisplayExtensions
     }
 
     /// <inheritdoc cref="Raiqub.Generators.EnumUtilities.Contracts.IEnumExtensions{TEnum}.GetJsonStringLength(TEnum)"/>
-    public static int? GetJsonStringLength(this Bug480Display value)
+    public static int? GetJsonStringLength(this Bug480DisplayTests.Bug480Display value)
     {
         int v = (int)value;
         return v switch

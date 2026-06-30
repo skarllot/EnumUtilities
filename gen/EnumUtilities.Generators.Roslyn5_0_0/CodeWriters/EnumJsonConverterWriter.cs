@@ -1,4 +1,5 @@
-﻿using Raiqub.Generators.EnumUtilities.Common;
+﻿using Microsoft.CodeAnalysis.CSharp;
+using Raiqub.Generators.EnumUtilities.Common;
 using Raiqub.Generators.EnumUtilities.Models;
 using Raiqub.Generators.InterpolationCodeWriter;
 
@@ -37,16 +38,27 @@ public sealed class EnumJsonConverterWriter : ICodeWriter<EnumToGenerate>
             writer.WriteLine();
         }
 
+        if (model.ContainingType is not null)
+        {
+            writer.WriteLine(
+                $$"""
+                partial {{model.ContainingType.Kind}} {{model.ContainingType.Name}}
+                {
+                """
+            );
+            writer.PushIndent();
+        }
+
         CodeWriterHelper.WriteGeneratedCodeAttributes(writer);
 
         writer.WriteLine(
             $$"""
-              {{(
-                  model.IsPublic ? "public" : "internal"
-              )}} sealed partial class {{model.Name}}JsonConverter : JsonConverter<{{model.Name}}>
-              {
-                  private const int MaxCharStack = 256;
-              """
+            {{SyntaxFacts.GetText(
+                model.AccessModifier
+            )}} sealed partial class {{model.Name}}JsonConverter : JsonConverter<{{model.RefName}}>
+            {
+                private const int MaxCharStack = 256;
+            """
         );
         writer.PushIndent();
 
@@ -67,6 +79,12 @@ public sealed class EnumJsonConverterWriter : ICodeWriter<EnumToGenerate>
 
         writer.PopIndent();
         writer.WriteLine('}');
+
+        if (model.ContainingType is not null)
+        {
+            writer.PopIndent();
+            writer.WriteLine('}');
+        }
     }
 
     private static void WriteRead(SourceTextWriter writer, EnumToGenerate model)
@@ -211,7 +229,7 @@ public sealed class EnumJsonConverterWriter : ICodeWriter<EnumToGenerate>
 
     private static void WriteReadFromNumber(SourceTextWriter writer, EnumToGenerate model)
     {
-        var underlyingTypeName = CSharpExtensions.GetTypeNameFromCSharpKeyword(model.UnderlyingType);
+        var underlyingTypeName = CSharpUtils.GetTypeNameFromCSharpKeyword(model.UnderlyingType);
         writer.WriteLine(
             $$"""
             private {{model.UnderlyingType}} ReadFromNumber(ref Utf8JsonReader reader)

@@ -2,7 +2,7 @@
 
 namespace Raiqub.Generators.EnumUtilities.Models;
 
-public sealed record ContainingType(string Kind, string Name)
+public sealed record ContainingType(string Kind, bool IsStatic, string Name)
 {
     public static ContainingType FromSymbol(INamedTypeSymbol typeSymbol)
     {
@@ -11,6 +11,7 @@ public sealed record ContainingType(string Kind, string Name)
                 : typeSymbol.IsReferenceType ? "class"
                 : typeSymbol.IsValueType ? "struct"
                 : "unknown",
+            typeSymbol.IsStatic,
             typeSymbol.Name
         );
     }

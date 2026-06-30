@@ -169,7 +169,7 @@ public class FormatStringInternalTest
 
         new EnumExtensionsWriter().Write(writer, model);
 
-        Assert.Contains("private const uint ValidFlagsMask = 7u;", writer.ToString());
+        Assert.Contains("private const uint ValidFlagsMask = 7U;", writer.ToString());
     }
 
     [Fact]

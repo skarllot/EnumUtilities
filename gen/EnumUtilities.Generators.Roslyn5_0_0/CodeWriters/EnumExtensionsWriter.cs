@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using System.Reflection;
+using Microsoft.CodeAnalysis.CSharp;
 using Raiqub.Generators.EnumUtilities.CodeWriters.Extensions;
 using Raiqub.Generators.EnumUtilities.Common;
 using Raiqub.Generators.EnumUtilities.Models;
@@ -58,7 +59,7 @@ public class EnumExtensionsWriter : ICodeWriter<EnumToGenerate>
             $$"""
             [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("{{CurrentAssemblyName.Name}}", "{{CurrentAssemblyName.Version}}")]
-            {{(model.IsPublic ? "public" : "internal")}} static partial class {{model.Name}}Extensions
+            {{SyntaxFacts.GetText(model.AccessModifier)}} static partial class {{model.Name}}Extensions
             {
             """
         );
@@ -83,7 +84,7 @@ public class EnumExtensionsWriter : ICodeWriter<EnumToGenerate>
         writer.WriteLine($"private const {model.UnderlyingType} ValidFlagsMask = {validFlags};");
     }
 
-    private static string FormatValidFlagsMask(EnumToGenerate model)
+    private static TextSegment FormatValidFlagsMask(EnumToGenerate model)
     {
         if (!model.IsUnsigned)
         {
@@ -91,7 +92,7 @@ public class EnumExtensionsWriter : ICodeWriter<EnumToGenerate>
         }
 
         var validFlags = model.FlagsInfo!.ValidFlagsMaskUnsigned;
-        var numSuffix = CSharpExtensions.GetNumericSuffixFromCSharpKeyword(model.UnderlyingType);
+        var numSuffix = CSharpUtils.GetNumericSuffixFromCSharpKeyword(model.UnderlyingType);
         return $"{validFlags}{numSuffix}";
     }
 }

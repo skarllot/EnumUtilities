@@ -89,8 +89,14 @@ public class EnumUtilitiesGenerator : IIncrementalGenerator
 
     private static bool IsSyntaxTargetForGeneration(SyntaxNode node, CancellationToken cancellationToken)
     {
+#if !Roslyn_431
+        return node is EnumDeclarationSyntax { AttributeLists.Count: > 0 } enumNode
+            && !enumNode.Modifiers.Any(SyntaxKind.PrivateKeyword)
+            && !enumNode.Modifiers.Any(SyntaxKind.FileKeyword);
+#else
         return node is EnumDeclarationSyntax { AttributeLists.Count: > 0 } enumNode
             && !enumNode.Modifiers.Any(SyntaxKind.PrivateKeyword);
+#endif
     }
 
     private static EnumToGenerate? GetSemanticTargetForGeneration(
