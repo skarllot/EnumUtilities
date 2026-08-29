@@ -38,9 +38,13 @@
       },
       "NetEscapades.EnumGenerators": {
         "type": "Direct",
-        "requested": "[1.0.0-beta11, )",
-        "resolved": "1.0.0-beta11",
-        "contentHash": "37btDZQX5OzwUmF6xvqxDb0mRTXi3O/h3nVKjvri2XEwyUnHsY5g43jbPJo8Sp2gxbfJd2lto7fLLQujw5aT5Q=="
+        "requested": "[1.0.0-beta21, )",
+        "resolved": "1.0.0-beta21",
+        "contentHash": "GVhHFXkDBqzD96oc6sJGh9LQh+f50KvbwGxy+k5JuzIS8BHuTANo34tlJrv9T7jmofbucnE4pPhvPMu8dS0QUg==",
+        "dependencies": {
+          "NetEscapades.EnumGenerators.Generators": "1.0.0-beta21",
+          "NetEscapades.EnumGenerators.RuntimeDependencies": "1.0.0-beta21"
+        }
       },
       "BenchmarkDotNet.Annotations": {
         "type": "Transitive",
@@ -166,6 +170,16 @@
         "type": "Transitive",
         "resolved": "6.0.0",
         "contentHash": "9+PnzmQFfEFNR9J2aDTfJGGupShHjOuGw4VUv+JB044biSHrnmCIMD+mJHmb2H7YryrfBEXDurxQ47gJZdCKNQ=="
+      },
+      "NetEscapades.EnumGenerators.Generators": {
+        "type": "Transitive",
+        "resolved": "1.0.0-beta21",
+        "contentHash": "hztPmuEjHzLqDM4gvXfRuaBAQt3EpRaduQoLW8jDxIk1lXuJwTGl+L5NTERx5WKyV3vDzQK9mDPwzA+E/R2xHA=="
+      },
+      "NetEscapades.EnumGenerators.RuntimeDependencies": {
+        "type": "Transitive",
+        "resolved": "1.0.0-beta21",
+        "contentHash": "BYUQMIv1MFaFurVlxfyVFTTwwgMsfmGJLn2wiP77ZmegZ9WJbcRD+n62v4q2FOrBMPuP0W1bESASM1Wye/8sCw=="
       },
       "Perfolizer": {
         "type": "Transitive",
